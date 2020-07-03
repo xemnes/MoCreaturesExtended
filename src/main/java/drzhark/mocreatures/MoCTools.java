@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures;
 
 import drzhark.mocreatures.entity.IMoCEntity;
@@ -274,7 +277,7 @@ public class MoCTools {
 
                     if (blockstate.getBlock() != Blocks.AIR) {
                         String nameToCheck = "";
-                        nameToCheck = blockstate.getBlock().getUnlocalizedName();//.getBlockName();
+                        nameToCheck = blockstate.getBlock().getTranslationKey();//.getBlockName();
                         if (nameToCheck != null && nameToCheck != "") {
                             if (nameToCheck.equals(blockName)) {
                                 return true;
@@ -919,7 +922,7 @@ public class MoCTools {
                     // pass explosion instance to fix BlockTNT NPE's
                     Explosion explosion =
                             new Explosion(entity.world, null, chunkposition.getX(), chunkposition.getY(), chunkposition.getZ(), 3f, false, false);
-                    blockstate.getBlock().onBlockDestroyedByExplosion(entity.world, chunkposition, explosion);
+                    blockstate.getBlock().onBlockExploded(entity.world, chunkposition, explosion);
                 }
             }
         }

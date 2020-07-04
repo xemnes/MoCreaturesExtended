@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures;
 
+import drzhark.customspawner.CustomSpawner;
 import drzhark.customspawner.utils.CMSUtils;
 import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.util.MoCLog;
@@ -53,7 +54,14 @@ public class MoCEventHooks {
         // make sure doMobSpawning is on if CMS is not installed
         GameRules gameRule = event.getWorld().getGameRules();
         if (gameRule != null && !MoCreatures.isCustomSpawnerLoaded) {
+            MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was not loaded!");
             gameRule.setOrCreateGameRule("doMobSpawning", "true");
+        }
+        if (gameRule != null && MoCreatures.isCustomSpawnerLoaded) {
+            if (!CustomSpawner.eventListeners) {
+                MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was loaded but Event Listeners are disabled!");
+                gameRule.setOrCreateGameRule("doMobSpawning", "true");
+            }
         }
     }
 

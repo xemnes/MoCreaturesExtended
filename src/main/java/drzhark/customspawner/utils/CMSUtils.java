@@ -22,6 +22,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
+import net.minecraftforge.fml.common.Loader;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -147,6 +148,12 @@ public class CMSUtils {
             environment.updateSettings(); // refresh settings
             return true;
             //CustomSpawner.worldEnvironmentMap.put(worldEnvironment, )
+        }
+        if (Loader.isModLoaded("terraincontrol")) {
+            EnvironmentSettings environment = CustomSpawner.environmentMap.get(worldProviderClass);
+            CustomSpawner.globalLog.logger.info("Initializing additional TerrainControl biomes...");
+            environment.initializeBiomes();
+            return true;
         }
         return false;
     }

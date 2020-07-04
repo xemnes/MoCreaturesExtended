@@ -516,6 +516,7 @@ public class EnvironmentSettings {
     }
 
     public void initializeBiomes() {
+        int count = 0;
         Iterator<Biome> iterator = Biome.REGISTRY.iterator();
         Set<Biome> biomeList = Sets.newHashSet(iterator);
         biomeList.addAll(Biome.REGISTRY.inverseObjectRegistry.keySet());
@@ -529,9 +530,9 @@ public class EnvironmentSettings {
             Set<Type> types = BiomeDictionary.getTypes(biome);
             this.biomeTypes.addAll(types);
             biomeData.setTypes(types);
+            count++;
             if (this.debug) {
-                this.envLog.logger.info("Detected Biome " + biomeName + " with class " + biomeClass + " with biomeID " + Biome.getIdForBiome(biome)
-                        + " with types " + types);
+                this.envLog.logger.info("Detected Biome " + biomeName + " with class " + biomeClass + " with biomeID " + Biome.getIdForBiome(biome) + " with types " + types);
             }
             boolean found = false;
             for (Map.Entry<String, BiomeModData> modEntry : this.biomeModMap.entrySet()) {
@@ -605,6 +606,7 @@ public class EnvironmentSettings {
                                 + "For example, 'twilightforest=TL:TwilightForest.cfg' may be changed to 'twilightforest=TWL:TWL.cfg' but may NOT be changed to 'twilight=TWL:TWL.cfg'");
         // update tags in our defaults if necessary
         this.CMSEnvironmentConfig.save();
+        this.envLog.logger.info("Initialized " + count + " biomes.");
         initDefaultGroups();
     }
 
@@ -657,8 +659,7 @@ public class EnvironmentSettings {
                     String biomeGroupName = biomeGroups.get(i);
                     List<Biome> spawnBiomes = new ArrayList<Biome>();
                     // check default entity biome config
-                    if (this.CMSEntityBiomeGroupsConfig.getCategory(CATEGORY_BIOMEGROUP_DEFAULTS).containsKey(
-                            entityData.getEntityMod().getModTag().toUpperCase() + "_" + biomeGroupName)) {
+                    if (this.CMSEntityBiomeGroupsConfig.getCategory(CATEGORY_BIOMEGROUP_DEFAULTS).containsKey(entityData.getEntityMod().getModTag().toUpperCase() + "_" + biomeGroupName)) {
                         biomeGroupName = entityData.getEntityMod().getModTag().toUpperCase() + "_" + biomeGroups.get(i);
                         CMSProperty biomeProps = this.CMSEntityBiomeGroupsConfig.getCategory(CATEGORY_BIOMEGROUP_DEFAULTS).get(biomeGroupName);
                         for (int j = 0; j < biomeProps.valueList.size(); j++) {
@@ -674,8 +675,7 @@ public class EnvironmentSettings {
                             }
                         }
                         entityData.addBiomeGroupSpawnMap(biomeGroupName, spawnBiomes);
-                    } else // search for group in biome mod configs
-                    {
+                    } else {
                         for (Map.Entry<String, BiomeModData> modEntry : this.biomeModMap.entrySet()) {
                             BiomeModData biomeModData = modEntry.getValue();
                             CMSConfigCategory cat = biomeModData.getModConfig().getCategory("biomegroups");
@@ -899,9 +899,8 @@ public class EnvironmentSettings {
                             CREATURES_FILE_PATH + "Farlanders.cfg"))));
         }
         if (Loader.isModLoaded("terraincontrol")) {
-            this.biomeModMap.put("terraincontrol", new BiomeModData("terraincontrol", "TC", new CMSConfiguration(
-                            new File(this.CMSEnvironmentConfig.file.getParent(), BIOMES_FILE_PATH
-                                    + ("terraincontrol.cfg")))));
+            // Note: this isn't needed for TC because TC controls the Biome Types.  InitializeBiomes() is called on each world load.
+            //this.biomeModMap.put("terraincontrol", new BiomeModData("terraincontrol", "TC", new CMSConfiguration(new File(this.CMSEnvironmentConfig.file.getParent(), BIOMES_FILE_PATH + ("terraincontrol.cfg")))));
         }
 
         // generate default key mappings
@@ -909,37 +908,32 @@ public class EnvironmentSettings {
             List<String> values =
                     new ArrayList<String>(Arrays.asList(modEntry.getValue().getModTag(), modEntry.getValue().getModConfig().getFileName() + ".cfg"));
             modMapCat.put(modEntry.getKey(), new CMSProperty(modEntry.getKey(), values, CMSProperty.Type.STRING));
-            this.biomeModMap.put(modEntry.getKey(), new BiomeModData(modEntry.getKey(), modEntry.getValue().getModTag(), new CMSConfiguration(
-                    new File(this.CMSEnvironmentConfig.file.getParent(), BIOMES_FILE_PATH
-                            + (modEntry.getValue().getModConfig().getFileName() + ".cfg")))));
-            this.entityModMap.put(modEntry.getKey(), new EntityModData(modEntry.getKey(), modEntry.getValue().getModTag(), new CMSConfiguration(
-                    new File(this.CMSEnvironmentConfig.file.getParent(), CREATURES_FILE_PATH
-                            + (modEntry.getValue().getModConfig().getFileName() + ".cfg")))));
+            this.biomeModMap.put(modEntry.getKey(), new BiomeModData(modEntry.getKey(), modEntry.getValue().getModTag(), new CMSConfiguration(new File(this.CMSEnvironmentConfig.file.getParent(), BIOMES_FILE_PATH + (modEntry.getValue().getModConfig().getFileName() + ".cfg")))));
+            this.entityModMap.put(modEntry.getKey(), new EntityModData(modEntry.getKey(), modEntry.getValue().getModTag(), new CMSConfiguration(new File(this.CMSEnvironmentConfig.file.getParent(), CREATURES_FILE_PATH + (modEntry.getValue().getModConfig().getFileName() + ".cfg")))));
             if (this.debug) {
-                this.envLog.logger.info("Added Mod Entity Mapping " + modEntry.getKey() + " to file "
-                        + (modEntry.getValue().getModConfig().getFileName() + ".cfg"));
+                this.envLog.logger.info("Added Mod Entity Mapping " + modEntry.getKey() + " to file " + (modEntry.getValue().getModConfig().getFileName() + ".cfg"));
             }
             if (this.debug) {
                 this.envLog.logger.info("Added Mod Biome Mapping " + modEntry.getKey() + " with tag " + modEntry.getValue().getModTag() + " to file "
                         + (modEntry.getValue().getModConfig().getFileName() + ".cfg"));
             }
         }
+
+
         // handle custom tag to config mappings
         for (Map.Entry<String, CMSProperty> propEntry : modMapCat.entrySet()) {
             CMSProperty prop = propEntry.getValue();
             if (prop != null && !this.biomeModMap.containsKey(propEntry.getKey())) {
                 if (prop.valueList.size() == 2) {
-                    this.biomeModMap.put(propEntry.getKey(), new BiomeModData(propEntry.getKey(), prop.valueList.get(0), new CMSConfiguration(
-                            new File(this.CMSEnvironmentConfig.file.getParent(), BIOMES_FILE_PATH + prop.valueList.get(1)))));
+                    this.biomeModMap.put(propEntry.getKey(), new BiomeModData(propEntry.getKey(), prop.valueList.get(0), new CMSConfiguration(new File(this.CMSEnvironmentConfig.file.getParent(), BIOMES_FILE_PATH + prop.valueList.get(1)))));
+
                     if (this.debug) {
-                        this.envLog.logger.info("Added Custom Mod Biome Mapping " + propEntry.getKey() + " with tag " + prop.valueList.get(0)
-                                + " to file " + prop.valueList.get(1));
+                        this.envLog.logger.info("Added Custom Mod Biome Mapping " + propEntry.getKey() + " with tag " + prop.valueList.get(0) + " to file " + prop.valueList.get(1));
                     }
-                    this.entityModMap.put(propEntry.getKey(), new EntityModData(propEntry.getKey(), prop.valueList.get(0), new CMSConfiguration(
-                            new File(this.CMSEnvironmentConfig.file.getParent(), CREATURES_FILE_PATH + prop.valueList.get(1)))));
+                    this.entityModMap.put(propEntry.getKey(), new EntityModData(propEntry.getKey(), prop.valueList.get(0), new CMSConfiguration(new File(this.CMSEnvironmentConfig.file.getParent(), CREATURES_FILE_PATH + prop.valueList.get(1)))));
+
                     if (this.debug) {
-                        this.envLog.logger.info("Added Custom Mod Entity Mapping " + propEntry.getKey() + " with tag " + prop.valueList.get(0)
-                                + " to file " + prop.valueList.get(1));
+                        this.envLog.logger.info("Added Custom Mod Entity Mapping " + propEntry.getKey() + " with tag " + prop.valueList.get(0) + " to file " + prop.valueList.get(1));
                     }
                 }
             }

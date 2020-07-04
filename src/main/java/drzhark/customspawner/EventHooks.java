@@ -172,12 +172,10 @@ public class EventHooks {
     // this triggers before serverStarting
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
-        if (CustomSpawner.eventListeners) {
-            CMSUtils.addWorldEnvironment(event.getWorld().provider.getClass());
-            GameRules gameRule = event.getWorld().getGameRules();
-            if (gameRule != null) {
-                gameRule.setOrCreateGameRule("doMobSpawning", new Boolean(CustomSpawner.doMobSpawning).toString());
-            }
+        CMSUtils.addWorldEnvironment(event.getWorld().provider.getClass());
+        GameRules gameRule = event.getWorld().getGameRules();
+        if (gameRule != null) {
+            gameRule.setOrCreateGameRule("doMobSpawning", new Boolean(CustomSpawner.doMobSpawning).toString());
         }
     }
 

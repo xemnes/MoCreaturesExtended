@@ -46,7 +46,8 @@ public class EventHooks {
             int par2 = event.getChunkZ() * 16;
             int x = event.getChunkX() * 16 + 8 + event.getWorld().rand.nextInt(16);
             int z = event.getChunkZ() * 16 + 8 + event.getWorld().rand.nextInt(16);
-            CMSUtils.addWorldEnvironment(event.getWorld().provider.getClass()); // make sure world environment has been created
+            //Todo:  this shouldn't be needed, if it is, something else is wrong elsewhere.
+            //CMSUtils.addWorldEnvironment(event.getWorld().provider.getClass()); // make sure world environment has been created
             EnvironmentSettings environment = CMSUtils.getEnvironment(event.getWorld());
             for (EntitySpawnType entitySpawnType : environment.entitySpawnTypes.values()) {
                 if (entitySpawnType.getChunkSpawnChance() > 0 && entitySpawnType.getSpawnCap() > 0) {
@@ -172,10 +173,12 @@ public class EventHooks {
     // this triggers before serverStarting
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
-        CMSUtils.addWorldEnvironment(event.getWorld().provider.getClass());
-        GameRules gameRule = event.getWorld().getGameRules();
-        if (gameRule != null) {
-            gameRule.setOrCreateGameRule("doMobSpawning", new Boolean(CustomSpawner.doMobSpawning).toString());
+        if (!event.getWorld().isRemote) {
+            CMSUtils.addWorldEnvironment(event.getWorld().provider.getClass());
+            GameRules gameRule = event.getWorld().getGameRules();
+            if (gameRule != null) {
+                gameRule.setOrCreateGameRule("doMobSpawning", new Boolean(CustomSpawner.doMobSpawning).toString());
+            }
         }
     }
 

@@ -142,17 +142,27 @@ public class CMSUtils {
             if (CustomSpawner.debug) {
                 CustomSpawner.globalLog.logger.info("Copying spawn list data from all biomes...");
             }
+            // The following is disable to satisfy Almura 3.0's requirement of keeping MoCreatures and MoCreatures utilities but disable the spawning overwrite.
+
+            /*
             CustomSpawner.copyVanillaSpawnData();
             environment.initializeBiomes();
             environment.initializeEntities();
             environment.updateSettings(); // refresh settings
+             */
+
             return true;
-            //CustomSpawner.worldEnvironmentMap.put(worldEnvironment, )
         }
         if (Loader.isModLoaded("terraincontrol")) {
+            // The following is disable to satisfy Almura 3.0's requirement of keeping MoCreatures and MoCreatures utilities but disable the spawning overwrite.
+            // Additionally MoCreatures doesn't utilize additional terraincontrol.cfg files as it should, thus using the biome configs spawn settings.
+
+            /*
             EnvironmentSettings environment = CustomSpawner.environmentMap.get(worldProviderClass);
             CustomSpawner.globalLog.logger.info("Initializing additional TerrainControl biomes...");
             environment.initializeBiomes();
+            */
+
             return true;
         }
         return false;

@@ -138,7 +138,11 @@ public class MoCEntityInsect extends MoCEntityAmbient {
 
     @Override
     public boolean getCanSpawnHere() {
-        return super.getCanSpawnHereAnimal() && super.getCanSpawnHereCreature();
+        boolean willSpawn = super.getCanSpawnHereAnimal() && super.getCanSpawnHereCreature();
+        boolean debug = false;
+        if (willSpawn && debug)
+            System.out.println("Insect: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " spawned: " + willSpawn + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
+        return willSpawn;
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.List;
 public class MoCEntityData {
 
     private EnumCreatureType typeOfCreature;
-    private SpawnListEntry spawnListEntry;
+    public SpawnListEntry spawnListEntry;
     private String entityName;
     private boolean canSpawn = true;
     private int entityId;

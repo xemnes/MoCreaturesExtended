@@ -13,6 +13,19 @@ import drzhark.mocreatures.command.CommandMoCTP;
 import drzhark.mocreatures.command.CommandMoCreatures;
 import drzhark.mocreatures.datafixer.EntityDataWalker;
 import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
+import drzhark.mocreatures.entity.MoCEntityAmbient;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
+import drzhark.mocreatures.entity.MoCEntityAquatic;
+import drzhark.mocreatures.entity.MoCEntityInsect;
+import drzhark.mocreatures.entity.MoCEntityMob;
+import drzhark.mocreatures.entity.MoCEntityTameableAmbient;
+import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
+import drzhark.mocreatures.entity.aquatic.MoCEntityMediumFish;
+import drzhark.mocreatures.entity.aquatic.MoCEntitySmallFish;
+import drzhark.mocreatures.entity.monster.MoCEntityOgre;
+import drzhark.mocreatures.entity.passive.MoCEntityBear;
+import drzhark.mocreatures.entity.passive.MoCEntityBigCat;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
@@ -67,6 +80,29 @@ public class MoCreatures {
         if (isServer()) {
             FMLCommonHandler.instance().getMinecraftServerInstance().getDataFixer().registerWalker(FixTypes.ENTITY, new EntityDataWalker());
         }
+
+        // AlmuraDev's attempt to correct the datamanager load position issue....
+        // 1st.
+        MoCEntityAmbient.class.getSimpleName();
+        MoCEntityAnimal.class.getSimpleName();
+        MoCEntityAquatic.class.getSimpleName();
+        MoCEntityMob.class.getSimpleName();
+
+        // 2nd.
+        MoCEntityInsect.class.getSimpleName();
+        MoCEntityTameableAmbient.class.getSimpleName();
+        MoCEntityTameableAnimal.class.getSimpleName();
+        MoCEntityTameableAquatic.class.getSimpleName();
+
+        // 3rd.
+        MoCEntitySmallFish.class.getSimpleName();
+        MoCEntityMediumFish.class.getSimpleName();
+        MoCEntityOgre.class.getSimpleName();
+        MoCEntityBear.class.getSimpleName();
+        MoCEntityBigCat.class.getSimpleName();
+
+        // End Ductape.
+
         MoCMessageHandler.init();
         MinecraftForge.EVENT_BUS.register(new MoCEventHooks());
         proxy.ConfigInit(event);

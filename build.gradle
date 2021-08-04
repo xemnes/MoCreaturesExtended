@@ -5,11 +5,11 @@ buildscript {
         jcenter()        
         maven {
             name 'Sponge API repo'
-            url 'http://repo.spongepowered.org/maven'
+            url 'https://repo.spongepowered.org/maven'
         }
         maven {
             name = 'forge'
-            url = 'http://files.minecraftforge.net/maven/'
+            url = 'https://maven.minecraftforge.net/'
         }
         maven {
             name = 'oss-sonatype-public'
@@ -17,9 +17,6 @@ buildscript {
         }
         maven {
             url = 'https://plugins.gradle.org/m2/'
-        }
-        maven {
-            url = 'http://titania.fs.uni-saarland.de/nexus/content/repositories/stchair/'
         }
         flatDir {
             dirs "lib"
@@ -58,6 +55,7 @@ deobfMcMCP { failOnAtError = false }
 deobfMcSRG { failOnAtError = false }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
         // location of the maven that hosts JEI files
@@ -68,9 +66,6 @@ repositories {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "modmaven.k-4u.nl"
-    }
-    maven {
-            url = 'http://titania.fs.uni-saarland.de/nexus/content/repositories/stchair/'
     }
     flatDir {
         dirs "lib"
@@ -158,7 +153,7 @@ shadowJar {
     dependsOn reobfJar
 
     classifier ''
-
+    archiveName = "Almura-MoCreatures-1.12.2.jar"
     exclude 'dummyThing'
     relocate 'com.typesafe.config', 'configurate.typesafe.config'
     dependencies {

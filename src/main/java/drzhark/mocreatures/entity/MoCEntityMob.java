@@ -57,10 +57,10 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
     protected PathNavigate navigatorFlyer;
     protected EntityAIWanderMoC2 wander;
 
-    protected static final DataParameter<Boolean> ADULT = EntityDataManager.<Boolean>createKey(EntityCreature.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(EntityCreature.class, DataSerializers.VARINT);
-    protected static final DataParameter<Integer> AGE = EntityDataManager.<Integer>createKey(EntityCreature.class, DataSerializers.VARINT);
-    protected static final DataParameter<String> NAME_STR = EntityDataManager.<String>createKey(EntityCreature.class, DataSerializers.STRING);
+    protected static final DataParameter<Boolean> ADULT = EntityDataManager.<Boolean>createKey(MoCEntityMob.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(MoCEntityMob.class, DataSerializers.VARINT);
+    protected static final DataParameter<Integer> AGE = EntityDataManager.<Integer>createKey(MoCEntityMob.class, DataSerializers.VARINT);
+    protected static final DataParameter<String> NAME_STR = EntityDataManager.<String>createKey(MoCEntityMob.class, DataSerializers.STRING);
     
     public MoCEntityMob(World world) {
         super(world);

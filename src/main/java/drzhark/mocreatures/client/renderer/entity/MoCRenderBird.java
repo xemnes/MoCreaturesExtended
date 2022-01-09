@@ -27,7 +27,6 @@ public class MoCRenderBird extends MoCRenderMoC<MoCEntityBird> {
     @Override
     public void doRender(MoCEntityBird entitybird, double d, double d1, double d2, float f, float f1) {
         super.doRender(entitybird, d, d1, d2, f, f1);
-
     }
 
     @Override

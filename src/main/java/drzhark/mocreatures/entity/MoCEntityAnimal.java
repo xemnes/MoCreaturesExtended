@@ -136,6 +136,10 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         return this.dataManager.get(TYPE);
     }
 
+    public boolean isMale() {
+        return (this.getType() == 1);
+    }
+
     public void setDisplayName(boolean flag) {
     }
 
@@ -148,6 +152,11 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     @Override
     public boolean getIsAdult() {
         return this.dataManager.get(ADULT);
+    }
+
+    @Override
+    public void resetInLove() {
+        this.inLove = 0;
     }
 
     @Override
@@ -322,7 +331,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public void onLivingUpdate() {
-        if (!this.world.isRemote) {
+        if (!this.world.isRemote) {  // Server Side
             if (rideableEntity() && this.isBeingRidden()) {
                 Riding();
             }
@@ -330,7 +339,9 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
             if (isMovementCeased()) {
                 this.getNavigator().clearPath();
             }
-            if (getEdad() == 0) setEdad(getMaxEdad() - 10); //fixes tiny creatures spawned by error
+            if (getEdad() == 0) {
+                setEdad(getMaxEdad() - 10); //fixes tiny creatures spawned by error
+            }
             if (!getIsAdult() && (this.rand.nextInt(300) == 0) && getEdad() <= getMaxEdad()) {
                 setEdad(getEdad() + 1);
                 if (getEdad() >= getMaxEdad()) {
@@ -358,7 +369,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         }
 
         if (this.canRidePlayer() && this.isRiding()) MoCTools.dismountSneakingPlayer(this);
-        this.resetInLove(); 
+        //this.resetInLove();
         super.onLivingUpdate();
     }
 

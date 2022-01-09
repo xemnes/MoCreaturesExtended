@@ -6,6 +6,7 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.passive.MoCEntityTurkey;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -101,30 +102,54 @@ public class MoCModelTurkey extends ModelBase {
         super.render(entity, f, f1, f2, f3, f4, f5);
         this.male = ((MoCEntityTurkey) entity).getType() == 1;
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        this.Beak.render(f5);
-        this.Head.render(f5);
-        this.Neck.render(f5);
-        this.RWing.render(f5);
-        this.LWing.render(f5);
-        this.Tail.render(f5);
-        this.RLeg.render(f5);
-        this.RFoot.render(f5);
-        this.LLeg.render(f5);
-        this.LFoot.render(f5);
-        if (male) {
-            this.UBody.render(f5);
-            this.Body.render(f5);
-            this.Chest.render(f5);
-
-        } else {
+        if (this.isChild) {
+            // All children rendered as Female
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(0.0F, 5.0F * f5, 2.0F * f5);
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(0.5F, 0.5F, 0.5F);
+            GlStateManager.translate(0.0F, 24.0F * f5, 0.0F);
+            this.Beak.render(f5);
+            this.Head.render(f5);
+            this.Neck.render(f5);
+            this.RWing.render(f5);
+            this.LWing.render(f5);
+            this.Tail.render(f5);
+            this.RLeg.render(f5);
+            this.RFoot.render(f5);
+            this.LLeg.render(f5);
+            this.LFoot.render(f5);
             GL11.glPushMatrix();
             GL11.glScalef(0.8F, 0.8F, 1F);
             this.Body.render(f5);
             this.Chest.render(f5);
-
             GL11.glPopMatrix();
-        }
+            GlStateManager.popMatrix();
+        } else {
+            this.Beak.render(f5);
+            this.Head.render(f5);
+            this.Neck.render(f5);
+            this.RWing.render(f5);
+            this.LWing.render(f5);
+            this.Tail.render(f5);
+            this.RLeg.render(f5);
+            this.RFoot.render(f5);
+            this.LLeg.render(f5);
+            this.LFoot.render(f5);
+            if (male) {
+                this.UBody.render(f5);
+                this.Body.render(f5);
+                this.Chest.render(f5);
 
+            } else {
+                GL11.glPushMatrix();
+                GL11.glScalef(0.8F, 0.8F, 1F);
+                this.Body.render(f5);
+                this.Chest.render(f5);
+                GL11.glPopMatrix();
+            }
+        }
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

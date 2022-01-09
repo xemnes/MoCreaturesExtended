@@ -108,6 +108,21 @@ jar {
     classifier = 'original'
 }
 
+jar {
+    classifier 'original'
+
+    manifest {
+        attributes(
+                'Built-By': System.properties['user.name'],
+                'Created-By': System.properties['java.vm.version'] + ' (' + System.properties['java.vm.vendor'] + ')',
+                'Implementation-Title': project.name,
+                'Implementation-Version': version,
+                'Implementation-Vendor': url,
+                'FMLAT': "mocreatures_at.cfg"
+        )
+    }
+}
+
 if (JavaVersion.current().isJava8Compatible() || JavaVersion.current().isJava9Compatible()) {
     tasks.withType(Javadoc) {
         // disable the crazy super-strict doclint tool in Java 8

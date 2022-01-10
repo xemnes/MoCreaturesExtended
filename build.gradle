@@ -168,7 +168,7 @@ shadowJar {
     dependsOn reobfJar
 
     classifier ''
-    archiveName = "Almura-MoCreatures-1.12.2.jar"
+    archiveName = "Almura-MoCreatures-1.12.2-"+version+".jar"
     exclude 'dummyThing'
     relocate 'com.typesafe.config', 'configurate.typesafe.config'
     dependencies {

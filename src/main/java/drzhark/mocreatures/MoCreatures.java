@@ -81,28 +81,6 @@ public class MoCreatures {
             FMLCommonHandler.instance().getMinecraftServerInstance().getDataFixer().registerWalker(FixTypes.ENTITY, new EntityDataWalker());
         }
 
-        // AlmuraDev's attempt to correct the datamanager load position issue....
-        // 1st.
-        MoCEntityAmbient.class.getSimpleName();
-        MoCEntityAnimal.class.getSimpleName();
-        MoCEntityAquatic.class.getSimpleName();
-        MoCEntityMob.class.getSimpleName();
-
-        // 2nd.
-        MoCEntityInsect.class.getSimpleName();
-        MoCEntityTameableAmbient.class.getSimpleName();
-        MoCEntityTameableAnimal.class.getSimpleName();
-        MoCEntityTameableAquatic.class.getSimpleName();
-
-        // 3rd.
-        MoCEntitySmallFish.class.getSimpleName();
-        MoCEntityMediumFish.class.getSimpleName();
-        MoCEntityOgre.class.getSimpleName();
-        MoCEntityBear.class.getSimpleName();
-        MoCEntityBigCat.class.getSimpleName();
-
-        // End Ductape.
-
         MoCMessageHandler.init();
         MinecraftForge.EVENT_BUS.register(new MoCEventHooks());
         proxy.ConfigInit(event);

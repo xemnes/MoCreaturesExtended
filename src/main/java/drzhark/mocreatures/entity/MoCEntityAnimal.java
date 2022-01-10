@@ -369,6 +369,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         }
 
         if (this.canRidePlayer() && this.isRiding()) MoCTools.dismountSneakingPlayer(this);
+        // Don't reset this any longer...
         //this.resetInLove();
         super.onLivingUpdate();
     }

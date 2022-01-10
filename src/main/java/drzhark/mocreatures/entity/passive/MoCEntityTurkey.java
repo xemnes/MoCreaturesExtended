@@ -21,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -42,6 +43,14 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
         this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+
+        Item soyBeanItem = GameRegistry.makeItemStack("almura:food/food/soybean", 0, 1, null).getItem();
+        Item cornItem = GameRegistry.makeItemStack("almura:food/food/corn", 0, 1, null).getItem();
+
+        if (soyBeanItem != ItemStack.EMPTY.getItem())
+            TEMPTATION_ITEMS.add(soyBeanItem);
+        if (cornItem != ItemStack.EMPTY.getItem())
+            TEMPTATION_ITEMS.add(cornItem);
     }
 
     @Override
@@ -96,7 +105,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     @Override
     protected Item getDropItem() {
         boolean flag = (this.rand.nextInt(2) == 0);
-        if (flag  && this.getIsAdult()) {
+        if (flag  && !this.isChild()) {
             return MoCItems.rawTurkey;
         }
         return Items.FEATHER;
@@ -158,11 +167,6 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if (!this.world.isRemote) {
-            if (this.getType() == 1 && !this.isChild()) {
-                System.out.println("Male: " + this.inLove);
-            }
-        }
 
         if (!this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.8D;

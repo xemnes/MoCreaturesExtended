@@ -123,6 +123,7 @@ public class EntityAIMateMoC extends EntityAIBase {
                 this.animal.resetInLove();
             }
 
+            // Exclude Males from the reset.
             if (this.targetMate.getType() != 1) {
                 this.targetMate.setGrowingAge(6000);
                 this.targetMate.resetInLove();

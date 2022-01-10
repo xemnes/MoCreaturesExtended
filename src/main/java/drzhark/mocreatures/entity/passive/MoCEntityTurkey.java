@@ -82,7 +82,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
 
     @Override
     public ResourceLocation getTexture() {
-        if (getType() == 1) {
+        if (getType() == 1 && !this.isChild()) {
             return MoCreatures.proxy.getTexture("turkey.png");
         } else {
             return MoCreatures.proxy.getTexture("turkeyfemale.png");

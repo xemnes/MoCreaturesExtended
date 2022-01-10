@@ -131,6 +131,11 @@ public class EntityAIMateMoC extends EntityAIBase {
 
             entityageable.setGrowingAge(-24000);
             entityageable.setLocationAndAngles(this.animal.posX, this.animal.posY, this.animal.posZ, 0.0F, 0.0F);
+            if (entityageable instanceof MoCEntityTurkey) {
+                // Randomly select sex of spawn.
+                ((MoCEntityTurkey)entityageable).selectType();
+            }
+
             this.world.spawnEntity(entityageable);
             Random random = this.animal.getRNG();
 

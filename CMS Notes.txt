@@ -1,9 +1,0 @@
-TerrainControl & CMS -> Things to know.
-
-1. CMS will not work well when TC is generating a world using "BeforeGroups" biome mode.
-2. MoCreatures will work with TC, it works better if you fillin the spawnTypes in each biome vs. using BiomeGroups from CMS.
-3. MoCreatures will NOT spawn in a world that TC generated using "BeforeGroups" unless you fill in the spawnTypes in the Biome config.
-4. MoCreatures WILL spawn in TC worlds that use Normal biome mode because it will attempt to fill in the DefaultGroups.
-5. When TerrainControl loads if you use the biome more than once across multiple worlds it will only populate the biome spawn types once which is fine.
-
-When using SpongeForge with CMS,  SpongeForge global, dimensionType and World settings for Spawns are completely ignored.

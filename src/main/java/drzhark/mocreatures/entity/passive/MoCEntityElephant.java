@@ -602,22 +602,19 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
         Biome currentbiome = MoCTools.Biomekind(this.world, pos);
 
-        if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
-            setType(3 + this.rand.nextInt(2));
-            return true;
-        }
+        // African
         if (BiomeDictionary.hasType(currentbiome, Type.SANDY)) {
             setType(1);
             return true;
         }
-
+        // Indian
         if (BiomeDictionary.hasType(currentbiome, Type.JUNGLE)) {
             setType(2);
             return true;
         }
-
-        if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) || BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
-            setType(1 + this.rand.nextInt(2));
+        // Mammoth
+        if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
+            setType(3 + this.rand.nextInt(2));
             return true;
         }
 

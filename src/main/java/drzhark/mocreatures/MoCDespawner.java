@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures;
 
-import drzhark.customspawner.utils.CMSUtils;
+import drzhark.mocreatures.util.CMSUtils;
 import drzhark.mocreatures.util.MoCLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

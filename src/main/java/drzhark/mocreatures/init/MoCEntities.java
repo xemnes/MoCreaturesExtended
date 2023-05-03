@@ -247,7 +247,7 @@ public class MoCEntities {
     public static EntityEntry LITTERBOX = createEntityEntry(MoCEntityLitterBox.class, "LitterBox");
     public static EntityEntry TROCK = createEntityEntry(MoCEntityThrowableRock.class, "TRock");
 
-    public static boolean registerDefaultBiomeListEntries = false;
+    public static boolean registerDefaultBiomeListEntries = true;
     public static boolean clearAllBiomeSpawnLists = true;
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)

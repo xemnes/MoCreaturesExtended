@@ -3,19 +3,11 @@
  */
 package drzhark.mocreatures;
 
-import drzhark.customspawner.CustomSpawner;
-import drzhark.customspawner.utils.CMSUtils;
-import drzhark.mocreatures.entity.IMoCTameable;
-import drzhark.mocreatures.util.MoCLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityTameable;
+import net.minecraft.entity.passive.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
@@ -26,6 +18,10 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.util.CMSUtils;
+import drzhark.mocreatures.util.MoCLog;
 
 public class MoCEventHooks {
 
@@ -57,12 +53,12 @@ public class MoCEventHooks {
             MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was not loaded!");
             gameRule.setOrCreateGameRule("doMobSpawning", "true");
         }
-        if (gameRule != null && MoCreatures.isCustomSpawnerLoaded) {
-            if (!CustomSpawner.eventListeners) {
-                MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was loaded but Event Listeners are disabled!");
-                gameRule.setOrCreateGameRule("doMobSpawning", "true");
-            }
-        }
+        //if (gameRule != null && MoCreatures.isCustomSpawnerLoaded) {
+        //    if (!CustomSpawner.eventListeners) {
+        //        MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was loaded but Event Listeners are disabled!");
+        //        gameRule.setOrCreateGameRule("doMobSpawning", "true");
+        //    }
+        //}
     }
 
     @SubscribeEvent

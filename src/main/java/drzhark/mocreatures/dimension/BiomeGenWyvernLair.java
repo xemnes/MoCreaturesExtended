@@ -29,6 +29,8 @@ public class BiomeGenWyvernLair extends Biome {
         this.spawnableCreatureList.clear();
         this.spawnableMonsterList.clear();
         this.spawnableWaterCreatureList.clear();
+        this.spawnableCaveCreatureList.clear();
+        this.modSpawnableLists.clear();
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityBunny.class, 6, 2, 3));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 8, 2, 3));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 2));

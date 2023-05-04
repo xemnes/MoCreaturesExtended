@@ -41,10 +41,12 @@ public class GuiAPI {
             return;
         }
 
-        ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
-        int width = scaledresolution.getScaledWidth();
-        int height = scaledresolution.getScaledHeight();
-        controlList.add(new GuiApiButton(300, width / 2 - 155, height / 6 + 12, 150, 20, "Global Mod Options"));
+        //ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
+        //int width = scaledresolution.getScaledWidth();
+        //int height = scaledresolution.getScaledHeight();
+        //controlList.add(new GuiApiButton(300, width / 2 - 155, height / 6 + 12, 150, 20, "Global Mod Options"));
+
+        controlList.add(new GuiApiButton(0, 0, 0, 0, 0, ""));
 
         // set the cache!
         this.cacheCheck = controlList.get(0);

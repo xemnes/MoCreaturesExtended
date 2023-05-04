@@ -3,6 +3,10 @@
  */
 package drzhark.mocreatures.entity.monster;
 
+import java.util.List;
+
+import com.google.common.primitives.Ints;
+
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -380,6 +384,10 @@ public class MoCEntityScorpion extends MoCEntityMob {
 
     @Override
     public boolean getCanSpawnHere() {
+        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            return false;
+        }
         return (isValidLightLevel() && MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0) && getCanSpawnHereLiving()
                 && getCanSpawnHereCreature();
     }

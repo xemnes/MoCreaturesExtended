@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MoCProxy implements IGuiHandler {
@@ -213,6 +214,11 @@ public class MoCProxy implements IGuiHandler {
         if (MoCreatures.mocEntityMap != null && !MoCreatures.mocEntityMap.isEmpty()) {
             for (MoCEntityData entityData : MoCreatures.mocEntityMap.values()) {
                 MoCConfigCategory cat = this.mocEntityConfig.getCategory(entityData.getEntityName().toLowerCase());
+                if (!cat.containsKey("dimensions")) {
+                    cat.put("dimensions", new MoCProperty("dimensions", Arrays.toString(entityData.getDimensions()), MoCProperty.Type.STRING));
+                } else {
+                    entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll("\\[","").replaceAll("]","").split(", ")).mapToInt(Integer::parseInt).toArray());
+                }
                 if (!cat.containsKey("frequency")) {
                     cat.put("frequency", new MoCProperty("frequency", Integer.toString(entityData.getFrequency()), MoCProperty.Type.INTEGER));
                 } else {

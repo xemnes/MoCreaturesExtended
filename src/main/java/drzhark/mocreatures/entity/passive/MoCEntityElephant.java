@@ -49,6 +49,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
 
+import com.google.common.primitives.Ints;
+
 public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
     public int sprintCounter;
@@ -909,6 +911,10 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
     @Override
     public boolean getCanSpawnHere() {
+        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            return false;
+        }
         return (MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0) && getCanSpawnHereCreature() && getCanSpawnHereLiving();
     }
 

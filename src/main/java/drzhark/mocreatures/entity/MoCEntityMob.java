@@ -46,6 +46,8 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import com.google.common.primitives.Ints;
+
 public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IEntityAdditionalSpawnData
 {
 
@@ -190,6 +192,10 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
 
     @Override
     public boolean getCanSpawnHere() {
+        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            return false;
+        }
         boolean willSpawn = (MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0 && super.getCanSpawnHere());
         boolean debug = false;
         if (willSpawn && debug)

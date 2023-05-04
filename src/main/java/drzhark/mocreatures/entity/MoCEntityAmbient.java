@@ -46,6 +46,8 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.UUID;
 
+import com.google.common.primitives.Ints;
+
 public abstract class MoCEntityAmbient extends EntityAnimal implements IMoCEntity {
 
     protected static final DataParameter<Boolean> ADULT = EntityDataManager.<Boolean>createKey(MoCEntityAmbient.class, DataSerializers.BOOLEAN);
@@ -431,6 +433,10 @@ public abstract class MoCEntityAmbient extends EntityAnimal implements IMoCEntit
     @Override
     public boolean getCanSpawnHere() {
         boolean debug = false;
+        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            return false;
+        }
         if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
             return false;
         }

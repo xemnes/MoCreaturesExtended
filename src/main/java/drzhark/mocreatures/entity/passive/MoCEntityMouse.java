@@ -3,6 +3,10 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import java.util.List;
+
+import com.google.common.primitives.Ints;
+
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
@@ -100,6 +104,10 @@ public class MoCEntityMouse extends MoCEntityAnimal {
 
     @Override
     public boolean getCanSpawnHere() {
+        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            return false;
+        }
         int i = MathHelper.floor(this.posX);
         int j = MathHelper.floor(getEntityBoundingBox().minY);
         int k = MathHelper.floor(this.posZ);

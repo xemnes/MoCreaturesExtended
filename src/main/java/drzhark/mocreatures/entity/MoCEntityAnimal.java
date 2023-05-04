@@ -52,6 +52,8 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import com.google.common.primitives.Ints;
+
 public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity {
 
     protected boolean divePending;
@@ -608,6 +610,10 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public boolean getCanSpawnHere() {
+        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            return false;
+        }
         if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
             return false;
         }

@@ -32,7 +32,7 @@ public class MoCBiomes {
         @SubscribeEvent
         public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
             final IForgeRegistry<Biome> registry = event.getRegistry();
-            registerBiome(registry, WyvernLairBiome, "wyvernbiome", BiomeManager.BiomeType.WARM, 1000, Type.FOREST, Type.END);
+            registerBiome(registry, WyvernLairBiome, "wyvernbiome", BiomeManager.BiomeType.WARM, 1000, Type.MAGICAL);
         }
 
         private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeManager.BiomeType biomeType, final int weight, final BiomeDictionary.Type... types) {

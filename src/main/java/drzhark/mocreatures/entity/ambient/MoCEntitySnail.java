@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 
 public class MoCEntitySnail extends MoCEntityAmbient {
 
-    private static final DataParameter<Boolean> IS_HIDDING = EntityDataManager.<Boolean>createKey(MoCEntitySnail.class, DataSerializers.BOOLEAN);
-    
+    private static final DataParameter<Boolean> IS_HIDING = EntityDataManager.createKey(MoCEntitySnail.class, DataSerializers.BOOLEAN);
+
     public MoCEntitySnail(World world) {
         super(world);
         setSize(0.2F, 0.2F);
@@ -29,11 +29,11 @@ public class MoCEntitySnail extends MoCEntityAmbient {
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAIWanderMoC2(this, 0.8D));
     }
-    
+
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_HIDDING, Boolean.valueOf(false));
+        this.dataManager.register(IS_HIDING, Boolean.FALSE);
     }
 
     @Override
@@ -58,8 +58,6 @@ public class MoCEntitySnail extends MoCEntityAmbient {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("snaila.png");
             case 2:
                 return MoCreatures.proxy.getTexture("snailb.png");
             case 3:
@@ -76,11 +74,11 @@ public class MoCEntitySnail extends MoCEntityAmbient {
     }
 
     public boolean getIsHiding() {
-        return ((Boolean)this.dataManager.get(IS_HIDDING)).booleanValue();
+        return this.dataManager.get(IS_HIDING);
     }
 
     public void setIsHiding(boolean flag) {
-        this.dataManager.set(IS_HIDDING, Boolean.valueOf(flag));
+        this.dataManager.set(IS_HIDING, flag);
     }
 
     @Override
@@ -97,17 +95,13 @@ public class MoCEntitySnail extends MoCEntityAmbient {
             } else {
                 setIsHiding(false);
             }
-            /**
+            /*
              * snails without a shell won't hide
              */
             if (getIsHiding() && this.getType() > 4) {
                 setIsHiding(false);
             }
         }
-    }
-
-    @Override
-    public void fall(float f, float f1) {
     }
 
     @Override

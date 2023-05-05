@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAmbient;
@@ -12,7 +11,6 @@ import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCItems;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
@@ -21,9 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class MoCEntityCrab extends MoCEntityTameableAmbient
-
-{
+public class MoCEntityCrab extends MoCEntityTameableAmbient {
 
     public MoCEntityCrab(World world) {
         super(world);
@@ -34,12 +30,7 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.0D));
-        this.tasks.addTask(1, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-
-            public boolean apply(Entity entity) {
-                return !(entity instanceof MoCEntityCrab) && (entity.height > 0.3F || entity.width > 0.3F);
-            }
-        }, 6.0F, 0.6D, 1D));
+        this.tasks.addTask(1, new EntityAIFleeFromEntityMoC(this, entity -> !(entity instanceof MoCEntityCrab) && (entity.height > 0.3F || entity.width > 0.3F), 6.0F, 0.6D, 1D));
         this.tasks.addTask(3, new EntityAIFollowOwnerPlayer(this, 0.8D, 6F, 5F));
         this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
     }
@@ -62,8 +53,6 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("craba.png");
             case 2:
                 return MoCreatures.proxy.getTexture("crabb.png");
             case 3:
@@ -72,14 +61,9 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient
                 return MoCreatures.proxy.getTexture("crabd.png");
             case 5:
                 return MoCreatures.proxy.getTexture("crabe.png");
-
             default:
                 return MoCreatures.proxy.getTexture("craba.png");
         }
-    }
-
-    @Override
-    public void fall(float f, float f1) {
     }
 
     @Override

@@ -47,14 +47,4 @@ public class MoCEntityFirefly extends MoCEntityInsect {
         }
         return 0.10F;
     }
-
-    /* @Override
-     protected float getFlyingSpeed() {
-         return 0.3F;
-     }
-
-     @Override
-     protected float getWalkingSpeed() {
-         return 0.2F;
-     }*/
 }

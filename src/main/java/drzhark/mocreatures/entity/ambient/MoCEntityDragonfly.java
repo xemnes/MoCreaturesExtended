@@ -36,9 +36,6 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
                 return MoCreatures.proxy.getTexture("dragonflyb.png");
             case 3:
                 return MoCreatures.proxy.getTexture("dragonflyc.png");
-            case 4:
-                return MoCreatures.proxy.getTexture("dragonflyd.png");
-
             default:
                 return MoCreatures.proxy.getTexture("dragonflyd.png");
         }
@@ -72,9 +69,5 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
             return 0.25F;
         }
         return 0.12F;
-    }
-
-    public int maxFlyingHeight() {
-        return 4;
     }
 }

@@ -13,12 +13,12 @@ import net.minecraft.world.World;
 
 public class MoCEntityFly extends MoCEntityInsect {
 
+    private int soundCount;// = 50;
+
     public MoCEntityFly(World world) {
         super(world);
         this.texture = "fly.png";
     }
-
-    private int soundCount;// = 50;
 
     @Override
     public void onLivingUpdate() {

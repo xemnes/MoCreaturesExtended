@@ -17,21 +17,17 @@ public class MoCEntityMaggot extends MoCEntityAmbient {
         setSize(0.2F, 0.2F);
         this.texture = "maggot.png";
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAIWanderMoC2(this, 0.8D));
     }
-    
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
-    }
-
-    @Override
-    public void fall(float f, float f1) {
     }
 
     @Override

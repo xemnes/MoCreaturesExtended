@@ -20,8 +20,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class MoCEntityBee extends MoCEntityInsect
-{
+public class MoCEntityBee extends MoCEntityInsect {
 
     private int soundCount;
 
@@ -77,17 +76,15 @@ public class MoCEntityBee extends MoCEntityInsect
                 }
                 return true;
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
     public boolean isMyFavoriteFood(ItemStack stack) {
         return !stack.isEmpty()
                 && (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER) || stack.getItem() == Item
-                        .getItemFromBlock(Blocks.YELLOW_FLOWER));
+                .getItemFromBlock(Blocks.YELLOW_FLOWER));
     }
 
     @Override

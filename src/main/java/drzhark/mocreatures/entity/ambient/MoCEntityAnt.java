@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 
 public class MoCEntityAnt extends MoCEntityInsect {
 
-    private static final DataParameter<Boolean> FOUND_FOOD = EntityDataManager.<Boolean>createKey(MoCEntityAnt.class, DataSerializers.BOOLEAN);
-    
+    private static final DataParameter<Boolean> FOUND_FOOD = EntityDataManager.createKey(MoCEntityAnt.class, DataSerializers.BOOLEAN);
+
     public MoCEntityAnt(World world) {
         super(world);
         this.texture = "ant.png";
@@ -28,11 +28,11 @@ public class MoCEntityAnt extends MoCEntityInsect {
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAIWanderMoC2(this, 1.2D));
     }
-    
+
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(FOUND_FOOD, Boolean.valueOf(false));
+        this.dataManager.register(FOUND_FOOD, Boolean.FALSE);
     }
 
     @Override
@@ -42,11 +42,11 @@ public class MoCEntityAnt extends MoCEntityInsect {
     }
 
     public boolean getHasFood() {
-        return ((Boolean)this.dataManager.get(FOUND_FOOD)).booleanValue();
+        return this.dataManager.get(FOUND_FOOD);
     }
 
     public void setHasFood(boolean flag) {
-        this.dataManager.set(FOUND_FOOD, Boolean.valueOf(flag));
+        this.dataManager.set(FOUND_FOOD, flag);
     }
 
     @Override
@@ -112,11 +112,6 @@ public class MoCEntityAnt extends MoCEntityInsect {
     @Override
     public boolean isMyFavoriteFood(ItemStack stack) {
         return !stack.isEmpty() && MoCTools.isItemEdible(stack.getItem());
-    }
-
-    @Override
-    public boolean isFlyer() {
-        return false;
     }
 
     @Override

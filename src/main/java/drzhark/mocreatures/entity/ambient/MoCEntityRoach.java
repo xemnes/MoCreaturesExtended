@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import net.minecraft.entity.Entity;
@@ -11,9 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class MoCEntityRoach extends MoCEntityInsect
-
-{
+public class MoCEntityRoach extends MoCEntityInsect {
 
     public MoCEntityRoach(World world) {
         super(world);
@@ -22,12 +19,7 @@ public class MoCEntityRoach extends MoCEntityInsect
 
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(3, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-
-            public boolean apply(Entity entity) {
-                return !(entity instanceof MoCEntityCrab) && (entity.height > 0.3F || entity.width > 0.3F);
-            }
-        }, 6.0F, 0.8D, 1.3D));
+        this.tasks.addTask(3, new EntityAIFleeFromEntityMoC(this, entity -> !(entity instanceof MoCEntityCrab) && (entity.height > 0.3F || entity.width > 0.3F), 6.0F, 0.8D, 1.3D));
     }
 
     @Override
@@ -35,17 +27,9 @@ public class MoCEntityRoach extends MoCEntityInsect
         super.onLivingUpdate();
 
         if (!this.world.isRemote) {
-
             if (getIsFlying() && this.rand.nextInt(50) == 0) {
                 setIsFlying(false);
             }
-
-            /*if (!getIsFlying() && this.rand.nextInt(10) == 0) {
-                EntityLivingBase entityliving = getBoogey(3D);
-                if (entityliving != null) {
-                    MoCTools.runLikeHell(this, entityliving);
-                }
-            }*/
         }
     }
 

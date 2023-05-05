@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 
 public class MoCEntityButterfly extends MoCEntityInsect {
 
+    private int fCounter;
+
     public MoCEntityButterfly(World world) {
         super(world);
     }
-
-    private int fCounter;
 
     @Override
     public void onLivingUpdate() {
@@ -53,8 +53,6 @@ public class MoCEntityButterfly extends MoCEntityInsect {
                 return MoCreatures.proxy.getTexture("bfmorphopeleides.png");
             case 6:
                 return MoCreatures.proxy.getTexture("bfvanessaatalanta.png");
-            case 7:
-                return MoCreatures.proxy.getTexture("bfpierisrapae.png");
             case 8:
                 return MoCreatures.proxy.getTexture("mothcamptogrammabilineata.png");
             case 9:
@@ -89,7 +87,7 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     public boolean isMyFavoriteFood(ItemStack stack) {
         return !stack.isEmpty()
                 && (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER) || stack.getItem() == Item
-                        .getItemFromBlock(Blocks.YELLOW_FLOWER));
+                .getItemFromBlock(Blocks.YELLOW_FLOWER));
     }
 
     @Override

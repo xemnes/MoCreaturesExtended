@@ -12,9 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-public class MoCEntityCricket extends MoCEntityInsect
-
-{
+public class MoCEntityCricket extends MoCEntityInsect {
 
     private int jumpCounter;
     private int soundCounter;
@@ -78,8 +76,7 @@ public class MoCEntityCricket extends MoCEntityInsect
         super.onUpdate();
         if (!this.world.isRemote) {
             if (onGround && ((motionX > 0.05D) || (motionZ > 0.05D) || (motionX < -0.05D) || (motionZ < -0.05D)))
-                if (this.jumpCounter == 0 && this.onGround
-                        && ((this.motionX > 0.05D) || (this.motionZ > 0.05D) || (this.motionX < -0.05D) || (this.motionZ < -0.05D))) {
+                if (this.jumpCounter == 0) {
                     this.motionY = 0.45D;
                     this.motionX *= 5D;
                     this.motionZ *= 5D;

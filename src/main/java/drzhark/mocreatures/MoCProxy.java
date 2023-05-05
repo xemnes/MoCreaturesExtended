@@ -224,11 +224,11 @@ public class MoCProxy implements IGuiHandler {
                 } else {
                     entityData.setMaxSpawn(Integer.parseInt(cat.get("maxspawn").value));
                 }
-                if (!cat.containsKey("maxchunk")) {
-                    cat.put("maxchunk", new MoCProperty("maxchunk", Integer.toString(entityData.getMaxInChunk()), MoCProperty.Type.INTEGER));
-                } else {
-                    entityData.setMaxInChunk(Integer.parseInt(cat.get("maxchunk").value));
-                }
+                //if (!cat.containsKey("maxchunk")) {
+                //    cat.put("maxchunk", new MoCProperty("maxchunk", Integer.toString(entityData.getMaxInChunk()), MoCProperty.Type.INTEGER));
+                //} else {
+                //    entityData.setMaxInChunk(Integer.parseInt(cat.get("maxchunk").value));
+                //}
                 if (!cat.containsKey("canspawn")) {
                     cat.put("canspawn", new MoCProperty("canspawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
                 } else {

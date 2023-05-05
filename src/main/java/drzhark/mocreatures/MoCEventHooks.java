@@ -49,7 +49,7 @@ public class MoCEventHooks {
         }
         // make sure doMobSpawning is on if CMS is not installed
         GameRules gameRule = event.getWorld().getGameRules();
-        if (gameRule != null && !MoCreatures.isCustomSpawnerLoaded) {
+        if (!MoCreatures.isCustomSpawnerLoaded) {
             MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was not loaded!");
             gameRule.setOrCreateGameRule("doMobSpawning", "true");
         }

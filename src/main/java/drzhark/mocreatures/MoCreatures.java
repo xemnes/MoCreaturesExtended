@@ -3,30 +3,13 @@
  */
 package drzhark.mocreatures;
 
-import com.mojang.authlib.GameProfile;
-import drzhark.mocreatures.client.MoCClientTickHandler;
-import drzhark.mocreatures.client.MoCCreativeTabs;
-import drzhark.mocreatures.client.handlers.MoCKeyHandler;
-import drzhark.mocreatures.command.CommandMoCPets;
-import drzhark.mocreatures.command.CommandMoCSpawn;
-import drzhark.mocreatures.command.CommandMoCTP;
-import drzhark.mocreatures.command.CommandMoCreatures;
-import drzhark.mocreatures.datafixer.EntityDataWalker;
-import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
-import drzhark.mocreatures.entity.MoCEntityAmbient;
-import drzhark.mocreatures.entity.MoCEntityAnimal;
-import drzhark.mocreatures.entity.MoCEntityAquatic;
-import drzhark.mocreatures.entity.MoCEntityInsect;
-import drzhark.mocreatures.entity.MoCEntityMob;
-import drzhark.mocreatures.entity.MoCEntityTameableAmbient;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
-import drzhark.mocreatures.entity.aquatic.MoCEntityMediumFish;
-import drzhark.mocreatures.entity.aquatic.MoCEntitySmallFish;
-import drzhark.mocreatures.entity.monster.MoCEntityOgre;
-import drzhark.mocreatures.entity.passive.MoCEntityBear;
-import drzhark.mocreatures.entity.passive.MoCEntityBigCat;
-import drzhark.mocreatures.network.MoCMessageHandler;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,20 +29,25 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.UUID;
+import com.mojang.authlib.GameProfile;
+import drzhark.mocreatures.client.MoCClientTickHandler;
+import drzhark.mocreatures.client.MoCCreativeTabs;
+import drzhark.mocreatures.client.handlers.MoCKeyHandler;
+import drzhark.mocreatures.command.CommandMoCPets;
+import drzhark.mocreatures.command.CommandMoCSpawn;
+import drzhark.mocreatures.command.CommandMoCTP;
+import drzhark.mocreatures.command.CommandMoCreatures;
+import drzhark.mocreatures.datafixer.EntityDataWalker;
+import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
+import drzhark.mocreatures.init.MoCEntities;
+import drzhark.mocreatures.network.MoCMessageHandler;
 
 @Mod(modid = MoCConstants.MOD_ID, name = MoCConstants.MOD_NAME, version = MoCConstants.MOD_VERSION, acceptableRemoteVersions = MoCConstants.MOD_ACCEPTED_VERSIONS)
 public class MoCreatures {
 
     @Instance(MoCConstants.MOD_ID)
     public static MoCreatures instance;
-
     @SidedProxy(clientSide = "drzhark.mocreatures.client.MoCClientProxy", serverSide = "drzhark.mocreatures.MoCProxy")
     public static MoCProxy proxy;
     public static final Logger LOGGER = LogManager.getLogger(MoCConstants.MOD_ID);
@@ -68,11 +56,10 @@ public class MoCreatures {
     public static boolean isCustomSpawnerLoaded = false;
     public static GameProfile MOCFAKEPLAYER = new GameProfile(UUID.fromString("6E379B45-1111-2222-3333-2FE1A88BCD66"), "[MoCreatures]");
     public static DimensionType WYVERN_LAIR;
-    public static int WyvernLairDimensionID; //17;
-
-    public static Map<String, MoCEntityData> mocEntityMap = new TreeMap<String, MoCEntityData>(String.CASE_INSENSITIVE_ORDER);
-    public static Map<Class<? extends EntityLiving>, MoCEntityData> entityMap = new HashMap<Class<? extends EntityLiving>, MoCEntityData>();
-    public static Map<Integer, Class<? extends EntityLiving>> instaSpawnerMap = new HashMap<Integer, Class<? extends EntityLiving>>();
+    public static int WyvernLairDimensionID; // -17
+    public static Map<String, MoCEntityData> mocEntityMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    public static Map<Class<? extends EntityLiving>, MoCEntityData> entityMap = new HashMap<>();
+    public static Map<Integer, Class<? extends EntityLiving>> instaSpawnerMap = new HashMap<>();
     public static final String MOC_LOGO = TextFormatting.WHITE + "[" + TextFormatting.AQUA + "Mo'Creatures" + TextFormatting.WHITE + "]";
 
     @EventHandler
@@ -80,7 +67,6 @@ public class MoCreatures {
         if (isServer()) {
             FMLCommonHandler.instance().getMinecraftServerInstance().getDataFixer().registerWalker(FixTypes.ENTITY, new EntityDataWalker());
         }
-
         MoCMessageHandler.init();
         MinecraftForge.EVENT_BUS.register(new MoCEventHooks());
         proxy.ConfigInit(event);
@@ -101,6 +87,7 @@ public class MoCreatures {
         proxy.registerRenderInformation();
         WYVERN_LAIR = DimensionType.register("Wyvern Lair", "_wyvern_lair", WyvernLairDimensionID, WorldProviderWyvernEnd.class, false);
         DimensionManager.registerDimension(WyvernLairDimensionID, WYVERN_LAIR);
+        MoCEntities.registerSpawns();
     }
 
     @EventHandler

@@ -103,23 +103,6 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos pos = new BlockPos(i, j, k);
-        Block block = this.world.getBlockState(pos.down()).getBlock();
-        return ((MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0) && this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && (this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0)
-                && !this.world.containsAnyLiquid(this.getEntityBoundingBox()) && ((block == Blocks.COBBLESTONE) || (block == Blocks.PLANKS)
-                || (block == Blocks.DIRT) || (block == Blocks.STONE) || (block == Blocks.GRASS)));
-    }
-
-    @Override
     protected Item getDropItem() {
         return Items.WHEAT_SEEDS;
     }

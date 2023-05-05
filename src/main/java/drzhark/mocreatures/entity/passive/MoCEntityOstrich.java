@@ -853,12 +853,6 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        //spawns in deserts and plains
-        return getCanSpawnHereCreature() && getCanSpawnHereLiving();
-    }
-
-    @Override
     public int nameYOffset() {
         if (getType() > 1) {
             return -105;

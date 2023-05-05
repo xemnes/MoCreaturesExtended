@@ -554,11 +554,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        return getCanSpawnHereCreature() && getCanSpawnHereLiving(); //&& checkSpawningBiome()
-    }
-
-    @Override
     public boolean checkSpawningBiome() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
         /**

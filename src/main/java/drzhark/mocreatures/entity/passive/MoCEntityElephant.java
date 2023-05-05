@@ -910,15 +910,6 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        return (MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0) && getCanSpawnHereCreature() && getCanSpawnHereLiving();
-    }
-
-    @Override
     public void dropMyStuff() {
         if (!this.world.isRemote) {
             dropTusks();

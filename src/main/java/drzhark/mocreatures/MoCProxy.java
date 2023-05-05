@@ -9,6 +9,7 @@ import drzhark.mocreatures.configuration.MoCProperty;
 import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
+import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.util.MoCLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -125,7 +126,7 @@ public class MoCProxy implements IGuiHandler {
         this.configFile = event.getSuggestedConfigurationFile();
         this.mocSettingsConfig.load();
         this.mocEntityConfig.load();
-        //registerEntities();
+        MoCEntities.registerEntities();
         this.readGlobalConfigValues();
         if (this.debug) {
             MoCLog.logger.info("Initializing MoCreatures Config File at " + event.getSuggestedConfigurationFile().getParent() + "MoCSettings.cfg");

@@ -21,12 +21,12 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
 
-public class MoCEntityInsect extends MoCEntityAmbient {
+public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
     private int climbCounter;
     protected EntityAIWanderMoC2 wander;
 
-    private static final DataParameter<Boolean> IS_FLYING = EntityDataManager.<Boolean>createKey(MoCEntityInsect.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_FLYING = EntityDataManager.createKey(MoCEntityInsect.class, DataSerializers.BOOLEAN);
     
     public MoCEntityInsect(World world) {
         super(world);
@@ -44,12 +44,7 @@ public class MoCEntityInsect extends MoCEntityAmbient {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_FLYING, Boolean.valueOf(false));
-    }
-
-    @Override
-    public boolean isFlyer() {
-        return false;
+        this.dataManager.register(IS_FLYING, false);
     }
 
     @Override
@@ -58,11 +53,11 @@ public class MoCEntityInsect extends MoCEntityAmbient {
     }
 
     public boolean getIsFlying() {
-        return ((Boolean)this.dataManager.get(IS_FLYING)).booleanValue();
+        return this.dataManager.get(IS_FLYING);
     }
 
     public void setIsFlying(boolean flag) {
-        this.dataManager.set(IS_FLYING, Boolean.valueOf(flag));
+        this.dataManager.set(IS_FLYING, flag);
     }
 
     @Override
@@ -77,12 +72,9 @@ public class MoCEntityInsect extends MoCEntityAmbient {
 
             if (isFlyer() && !getIsFlying() && this.rand.nextInt(getFlyingFreq()) == 0) {
                 List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 4D, 4D));
-                for (int i = 0; i < list.size(); i++) {
-                    Entity entity1 = list.get(i);
-                    if (!(entity1 instanceof EntityLivingBase)) {
-                        continue;
-                    }
-                    if (((EntityLivingBase) entity1).width >= 0.4F && ((EntityLivingBase) entity1).height >= 0.4F && canEntityBeSeen(entity1)) {
+                for (Entity entity1 : list) {
+                    if (!(entity1 instanceof EntityLivingBase)) continue;
+                    if (entity1.width >= 0.4F && entity1.height >= 0.4F && canEntityBeSeen(entity1)) {
                         setIsFlying(true);
                         this.wander.makeUpdate();
                     }
@@ -95,7 +87,7 @@ public class MoCEntityInsect extends MoCEntityAmbient {
             }
 
             if (isAttractedToLight() && this.rand.nextInt(50) == 0) {
-                int ai[] = MoCTools.ReturnNearestBlockCoord(this, Blocks.TORCH, 8D);
+                int[] ai = MoCTools.ReturnNearestBlockCoord(this, Blocks.TORCH, 8D);
                 if (ai[0] > -1000) {
                     this.getNavigator().tryMoveToXYZ(ai[0], ai[1], ai[2], 1.0D);//
                 }
@@ -116,8 +108,6 @@ public class MoCEntityInsect extends MoCEntityAmbient {
 
     /**
      * Is this insect attracted to light?
-     *
-     * @return
      */
     public boolean isAttractedToLight() {
         return false;
@@ -133,29 +123,6 @@ public class MoCEntityInsect extends MoCEntityAmbient {
     }
 
     @Override
-    public void fall(float f, float f1) {
-    }
-
-    @Override
-    public boolean getCanSpawnHere() {
-        boolean willSpawn = super.getCanSpawnHereAnimal() && super.getCanSpawnHereCreature();
-        boolean debug = false;
-        if (willSpawn && debug)
-            System.out.println("Insect: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " spawned: " + willSpawn + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
-        return willSpawn;
-    }
-
-    @Override
-    public float getSizeFactor() {
-        return 1.0F;
-    }
-
-    @Override
-    public int getMaxSpawnedInChunk() {
-        return 4;
-    }
-
-    @Override
     public boolean isOnLadder() {
         return this.collidedHorizontally;
     }
@@ -168,18 +135,8 @@ public class MoCEntityInsect extends MoCEntityAmbient {
     protected void jump() {
     }
 
-    @Override
-    protected boolean canTriggerWalking() {
-        return false;
-    }
-
     protected int getFlyingFreq() {
         return 20;
-    }
-
-    @Override
-    public float rollRotationOffset() {
-        return 0F;
     }
 
     /**

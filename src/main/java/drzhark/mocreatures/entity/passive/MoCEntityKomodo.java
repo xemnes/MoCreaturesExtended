@@ -96,11 +96,6 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        return getCanSpawnHereCreature() && getCanSpawnHereLiving();
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         openmouth();
         return MoCSoundEvents.ENTITY_SNAKE_DEATH;

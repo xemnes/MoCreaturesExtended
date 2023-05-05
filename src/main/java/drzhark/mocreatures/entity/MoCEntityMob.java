@@ -3,28 +3,14 @@
  */
 package drzhark.mocreatures.entity;
 
-import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
-import drzhark.mocreatures.entity.item.MoCEntityEgg;
-import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
-import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
-import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.network.MoCMessageHandler;
-import drzhark.mocreatures.network.message.MoCMessageHealth;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import java.util.List;
+import java.util.UUID;
+import javax.annotation.Nullable;
+
+import com.google.common.primitives.Ints;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityWolf;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -41,12 +27,16 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
-import com.google.common.primitives.Ints;
+import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;
+import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
+import drzhark.mocreatures.entity.item.MoCEntityEgg;
+import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
+import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
+import drzhark.mocreatures.entity.passive.MoCEntityHorse;
+import drzhark.mocreatures.network.MoCMessageHandler;
+import drzhark.mocreatures.network.message.MoCMessageHealth;
 
 public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IEntityAdditionalSpawnData
 {
@@ -59,10 +49,10 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
     protected PathNavigate navigatorFlyer;
     protected EntityAIWanderMoC2 wander;
 
-    protected static final DataParameter<Boolean> ADULT = EntityDataManager.<Boolean>createKey(MoCEntityMob.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(MoCEntityMob.class, DataSerializers.VARINT);
-    protected static final DataParameter<Integer> AGE = EntityDataManager.<Integer>createKey(MoCEntityMob.class, DataSerializers.VARINT);
-    protected static final DataParameter<String> NAME_STR = EntityDataManager.<String>createKey(MoCEntityMob.class, DataSerializers.STRING);
+    protected static final DataParameter<Boolean> ADULT = EntityDataManager.createKey(MoCEntityMob.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Integer> TYPE = EntityDataManager.createKey(MoCEntityMob.class, DataSerializers.VARINT);
+    protected static final DataParameter<Integer> AGE = EntityDataManager.createKey(MoCEntityMob.class, DataSerializers.VARINT);
+    protected static final DataParameter<String> NAME_STR = EntityDataManager.createKey(MoCEntityMob.class, DataSerializers.STRING);
     
     public MoCEntityMob(World world) {
         super(world);
@@ -108,30 +98,30 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(ADULT, Boolean.valueOf(false));
-        this.dataManager.register(TYPE, Integer.valueOf(0));
-        this.dataManager.register(AGE, Integer.valueOf(45));
+        this.dataManager.register(ADULT, false);
+        this.dataManager.register(TYPE, 0);
+        this.dataManager.register(AGE, 45);
         this.dataManager.register(NAME_STR, "");
     }
 
     @Override
     public void setType(int i) {
-        this.dataManager.set(TYPE, Integer.valueOf(i));
+        this.dataManager.set(TYPE, i);
     }
 
     @Override
     public int getType() {
-        return ((Integer)this.dataManager.get(TYPE)).intValue();
+        return this.dataManager.get(TYPE);
     }
 
     @Override
     public boolean getIsAdult() {
-        return ((Boolean)this.dataManager.get(ADULT)).booleanValue();
+        return this.dataManager.get(ADULT);
     }
 
     @Override
     public void setAdult(boolean flag) {
-        this.dataManager.set(ADULT, Boolean.valueOf(flag));
+        this.dataManager.set(ADULT, flag);
     }
     
     @Override
@@ -141,12 +131,12 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
 
     @Override
     public String getPetName() {
-        return ((String)this.dataManager.get(NAME_STR)).toString();
+        return this.dataManager.get(NAME_STR);
     }
 
     @Override
     public int getEdad() {
-        return ((Integer)this.dataManager.get(AGE)).intValue();
+        return this.dataManager.get(AGE);
     }
 
     @Nullable
@@ -169,25 +159,12 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
 
     @Override
     public void setEdad(int i) {
-        this.dataManager.set(AGE, Integer.valueOf(i));
+        this.dataManager.set(AGE, i);
     }
 
     @Override
     public void setPetName(String name) {
         this.dataManager.set(NAME_STR, String.valueOf(name));
-    }
-
-    public boolean getCanSpawnHereLiving() {
-        return this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0
-                && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
-    }
-
-    public boolean getCanSpawnHereCreature() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        return getBlockPathWeight(new BlockPos(i, j, k)) >= 0.0F;
     }
 
     @Override
@@ -196,29 +173,14 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
         if (!dimensionIDs.contains(world.provider.getDimension())) {
             return false;
         }
-        boolean willSpawn = (MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0 && super.getCanSpawnHere());
+        if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
+            return false;
+        }
+        boolean willSpawn = super.getCanSpawnHere();
         boolean debug = false;
         if (willSpawn && debug)
             System.out.println("Mob: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " spawned: " + willSpawn + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
         return willSpawn;
-    }
-
-    public boolean getCanSpawnHereMob() {
-        int i = MathHelper.floor(this.posX);
-        int j = MathHelper.floor(getEntityBoundingBox().minY);
-        int k = MathHelper.floor(this.posZ);
-        BlockPos pos = new BlockPos(i, j, k);
-        if (this.world.getLightFor(EnumSkyBlock.SKY, pos) > this.rand.nextInt(32)) {
-            return false;
-        }
-        int l = this.world.getLightFromNeighbors(pos);
-        if (this.world.isThundering()) {
-            int i1 = this.world.getSkylightSubtracted();
-            this.world.setSkylightSubtracted(10);
-            l = this.world.getLightFromNeighbors(pos);
-            this.world.setSkylightSubtracted(i1);
-        }
-        return l <= this.rand.nextInt(8);
     }
 
     // TODO move this to a class accessible by MocEntityMob and MoCentityAnimals
@@ -226,29 +188,21 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
         double d1 = -1D;
         EntityLivingBase entityliving = null;
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
-        for (int i = 0; i < list.size(); i++) {
-            Entity entity1 = list.get(i);
-
-            if (entitiesToIgnore(entity1)) {
-                continue;
-            }
+        for (Entity entity1 : list) {
+            if (entitiesToIgnore(entity1)) continue;
             double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
             if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1)) && ((EntityLivingBase) entity1).canEntityBeSeen(entity)) {
                 d1 = d2;
                 entityliving = (EntityLivingBase) entity1;
             }
         }
-
         return entityliving;
     }
 
     //TODO REMOVE
     public boolean entitiesToIgnore(Entity entity) {
-        return ((!(entity instanceof EntityLiving)) || (entity instanceof EntityMob) || (entity instanceof MoCEntityEgg)
-                || (entity instanceof EntityPlayer && this.getIsTamed()) || (entity instanceof MoCEntityKittyBed)
-                || (entity instanceof MoCEntityLitterBox)
-                || (this.getIsTamed() && (entity instanceof MoCEntityAnimal && ((MoCEntityAnimal) entity).getIsTamed()))
-                || ((entity instanceof EntityWolf) && !(MoCreatures.proxy.attackWolves)) || ((entity instanceof MoCEntityHorse) && !(MoCreatures.proxy.attackHorses)));
+        if ((!(entity instanceof EntityLiving)) || (entity instanceof EntityMob) || (entity instanceof MoCEntityEgg)) return true;
+        return entity instanceof MoCEntityKittyBed || entity instanceof MoCEntityLitterBox || this.getIsTamed() && entity instanceof MoCEntityAnimal && ((MoCEntityAnimal) entity).getIsTamed() || entity instanceof EntityWolf && !MoCreatures.proxy.attackWolves || entity instanceof MoCEntityHorse && !MoCreatures.proxy.attackHorses;
     }
 
     @Override
@@ -315,8 +269,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
 
     /**
      * Boolean used to select pathfinding behavior
-     *
-     * @return
      */
     public boolean isFlyer() {
         return false;
@@ -386,8 +338,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
 
     /**
      * Used to synchronize the attack animation between server and client
-     *
-     * @param attackType
      */
     @Override
     public void performAnimation(int attackType) {
@@ -399,7 +349,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
 
     @Override
     public int nameYOffset() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -606,11 +555,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity//, IE
      */
     @Override
     public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
-        if (type == EnumCreatureType.MONSTER) {
-            return true;
-        } else {
-            return false;
-        }
+        return type == EnumCreatureType.MONSTER;
     }
 
     @Override

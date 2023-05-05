@@ -128,13 +128,6 @@ public class MoCEntityWWolf extends MoCEntityMob {
         return true;
     }
 
-    @Override
-    public boolean getCanSpawnHere() {
-        return checkSpawningBiome()
-                && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper
-                        .floor(this.posZ))) && super.getCanSpawnHere();
-    }
-
     //TODO move this
     public EntityLivingBase getClosestTarget(Entity entity, double d) {
         double d1 = -1D;

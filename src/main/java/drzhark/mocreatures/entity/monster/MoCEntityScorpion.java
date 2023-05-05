@@ -383,16 +383,6 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     @Override
-    public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        return (isValidLightLevel() && MoCreatures.entityMap.get(this.getClass()).getFrequency() > 0) && getCanSpawnHereLiving()
-                && getCanSpawnHereCreature();
-    }
-
-    @Override
     public boolean checkSpawningBiome() {
         if (this.world.provider.doesWaterVaporize()) {
             setType(3);

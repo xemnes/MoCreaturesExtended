@@ -3,27 +3,14 @@
  */
 package drzhark.mocreatures.entity;
 
-import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;
-import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
-import drzhark.mocreatures.entity.item.MoCEntityEgg;
-import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
-import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
-import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.init.MoCBlocks;
-import net.minecraft.block.Block;
+import java.util.List;
+import java.util.UUID;
+import javax.annotation.Nullable;
+
+import com.google.common.primitives.Ints;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -47,12 +34,14 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
-import com.google.common.primitives.Ints;
+import drzhark.mocreatures.MoCTools;
+import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;
+import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
+import drzhark.mocreatures.entity.item.MoCEntityEgg;
+import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
+import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
+import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 
 public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity {
 
@@ -72,10 +61,10 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     private double divingDepth;
     private boolean randomAttributesUpdated; //used to update divingDepth on world load 
 
-    protected static final DataParameter<Boolean> ADULT = EntityDataManager.<Boolean>createKey(MoCEntityAnimal.class, DataSerializers.BOOLEAN);
-    protected static final DataParameter<Integer> TYPE = EntityDataManager.<Integer>createKey(MoCEntityAnimal.class, DataSerializers.VARINT);
-    protected static final DataParameter<Integer> AGE = EntityDataManager.<Integer>createKey(MoCEntityAnimal.class, DataSerializers.VARINT);
-    protected static final DataParameter<String> NAME_STR = EntityDataManager.<String>createKey(MoCEntityAnimal.class, DataSerializers.STRING);
+    protected static final DataParameter<Boolean> ADULT = EntityDataManager.createKey(MoCEntityAnimal.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Integer> TYPE = EntityDataManager.createKey(MoCEntityAnimal.class, DataSerializers.VARINT);
+    protected static final DataParameter<Integer> AGE = EntityDataManager.createKey(MoCEntityAnimal.class, DataSerializers.VARINT);
+    protected static final DataParameter<String> NAME_STR = EntityDataManager.createKey(MoCEntityAnimal.class, DataSerializers.STRING);
 
     public MoCEntityAnimal(World world) {
         super(world);
@@ -85,6 +74,12 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         this.navigatorWater = new PathNavigateSwimmer(this, world);
         this.moveHelper = new EntityAIMoverHelperMoC(this);
         this.navigatorFlyer = new PathNavigateFlyer(this, world);
+    }
+
+    @Nullable
+    @Override
+    public EntityAgeable createChild(EntityAgeable ageable) {
+        return null;
     }
 
     @Override
@@ -112,11 +107,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     @Override
     public void selectType() {
         setType(1);
-    }
-
-    @Override
-    public EntityAgeable createChild(EntityAgeable var1) {
-        return null;
     }
 
     @Override
@@ -154,11 +144,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     @Override
     public boolean getIsAdult() {
         return this.dataManager.get(ADULT);
-    }
-
-    @Override
-    public void resetInLove() {
-        this.inLove = 0;
     }
 
     @Override
@@ -514,7 +499,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         float var4;
 
         for (var4 = par2 - par1; var4 < -180.0F; var4 += 360.0F) {
-            ;
         }
 
         while (var4 >= 180.0F) {
@@ -591,23 +575,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         }
     }
 
-    public MoCEntityAnimal spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
-        return null;
-    }
-
-    public boolean getCanSpawnHereCreature() {
-        BlockPos pos =
-                new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY),
-                        MathHelper.floor(this.posZ));
-        return this.getBlockPathWeight(pos) >= 0.0F;
-    }
-
-    public boolean getCanSpawnHereLiving() {
-        return this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty()
-                && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
-    }
-
     @Override
     public boolean getCanSpawnHere() {
         List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
@@ -617,69 +584,20 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
             return false;
         }
-        boolean willSpawn = false;
-        boolean debug = false;
-
-        if (this.world.provider.getDimensionType().getId() != 0) {
-            willSpawn = getCanSpawnHereCreature() && getCanSpawnHereLiving();
-            if (willSpawn && debug)
-                System.out.println("Animal 1: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
-            return willSpawn;
-        }
-        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
-
-        String s = MoCTools.biomeName(this.world, pos);
-
-        if (s.toLowerCase().contains("jungle")) {
-
-            willSpawn = getCanSpawnHereJungle();
-            if (willSpawn && debug)
-                System.out.println("Animal 2: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
-            return willSpawn;
-        }
-        if (s.equals("WyvernBiome")) {
-
-            willSpawn = getCanSpawnHereMoCBiome();
-            if (willSpawn && debug)
-                System.out.println("Animal 3: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
-            return willSpawn;
-        }
-
-        willSpawn = super.getCanSpawnHere();
-        if (willSpawn && debug)
-            System.out.println("Animal 4: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
-        return willSpawn;
-    }
-
-    private boolean getCanSpawnHereMoCBiome() {
-        if (this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty()
-                && !this.world.containsAnyLiquid(this.getEntityBoundingBox())) {
-            BlockPos pos =
-                    new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY),
-                            MathHelper.floor(this.posZ));
-
-            if (pos.getY() < 50) {
-                return false;
-            }
-
-            IBlockState blockstate = this.world.getBlockState(pos.down());
-            final Block block = blockstate.getBlock();
-
-            if (block == MoCBlocks.mocDirt || block == MoCBlocks.mocGrass
-                    || (block != null && block.isLeaves(blockstate, this.world, pos.down()))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean getCanSpawnHereJungle() {
-        if (this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty()) {
+        if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
             return true;
         }
-        return false;
+        boolean willSpawn;
+        boolean debug = false;
+        int x = MathHelper.floor(this.posX);
+        int y = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int z = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(x, y, z);
+        IBlockState iblockstate = this.world.getBlockState((new BlockPos(this)).down());
+        iblockstate.canEntitySpawn(this);
+        willSpawn = this.world.getLight(blockpos) > 8 && iblockstate.canEntitySpawn(this);
+        if (debug && willSpawn) System.out.println("Animal: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()).toString() + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
+        return willSpawn;
     }
 
     @Override
@@ -726,14 +644,14 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
             {
                 super.travel(strafe, vertical, forward);
             }
-        
+
     }
 
     /**
      ** Riding Code
      * @param strafe
      * @param forward
-     * @param passenger 
+     * @param passenger
      */
     public void moveWithRider(float strafe, float vertical, float forward, EntityLivingBase passenger) {
         if (passenger == null)
@@ -1023,7 +941,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
         ItemStack itemstack1 = entityplayer1.inventory.getCurrentItem();
         if (itemstack1 != null && isMyFavoriteFood(itemstack1)) {
-            this.getNavigator().tryMoveToEntityLiving(entityplayer1, 1D); 
+            this.getNavigator().tryMoveToEntityLiving(entityplayer1, 1D);
         }
     }
 
@@ -1299,13 +1217,9 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
      */
     @Override
     public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
-        if (type == EnumCreatureType.CREATURE) {
-            return true;
-        } else {
-            return false;
-        }
+        return type == EnumCreatureType.CREATURE;
     }
-    
+
     /**
      * For vehicles, the first passenger is generally considered the controller and "drives" the vehicle. For example,
      * Pigs, Horses, and Boats are generally "steered" by the controlling passenger.
@@ -1313,9 +1227,9 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     @Nullable
     public Entity getControllingPassenger()
     {
-        return this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
+        return this.getPassengers().isEmpty() ? null : this.getPassengers().get(0);
     }
-    
+
     /***
      * Used to select Animals that can 'ride' the player. Like mice, snakes, turtles, birds
      * @return

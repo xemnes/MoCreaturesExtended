@@ -6,12 +6,7 @@ package drzhark.mocreatures.entity.passive;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
-import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIHunt;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
@@ -41,12 +36,7 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
         super(world);
         setSize(0.6F, 0.7F);
         setEdad(this.rand.nextInt(15) + 50);
-        if (this.rand.nextInt(3) == 0) {
-            setAdult(false);
-
-        } else {
-            setAdult(true);
-        }
+        setAdult(this.rand.nextInt(3) != 0);
     }
 
     @Override
@@ -89,22 +79,17 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
             }
             return MoCreatures.proxy.getTexture("foxcub.png");
         }
-        switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("fox.png");
-            case 2:
-                return MoCreatures.proxy.getTexture("foxsnow.png");
-
-            default:
-                return MoCreatures.proxy.getTexture("fox.png");
+        if (getType() == 2) {
+            return MoCreatures.proxy.getTexture("foxsnow.png");
         }
+        return MoCreatures.proxy.getTexture("fox.png");
     }
 
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if (entity != this && this.isNotScared() && entity instanceof EntityLivingBase && super.shouldAttackPlayers()) {
@@ -161,7 +146,7 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
                 setType(2);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return true;
     }

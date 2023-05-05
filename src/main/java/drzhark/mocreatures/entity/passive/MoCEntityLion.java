@@ -25,13 +25,11 @@ public class MoCEntityLion extends MoCEntityBigCat {
     public void selectType() {
 
         if (getType() == 0) {
-            if (rand.nextInt(20) == 0)
-            {
-                setType(rand.nextInt(2)+6);//white lions
-            }else
-            {
-            setType(this.rand.nextInt(2) + 1);
-        }
+            if (rand.nextInt(20) == 0) {
+                setType(rand.nextInt(2) + 6);//white lions
+            } else {
+                setType(this.rand.nextInt(2) + 1);
+            }
         }
         super.selectType();
     }
@@ -39,25 +37,14 @@ public class MoCEntityLion extends MoCEntityBigCat {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("bcfemalelion.png");//lioness
             case 2:
-                return MoCreatures.proxy.getTexture("bcmalelion.png");//lion
             case 3:
-                return MoCreatures.proxy.getTexture("bcmalelion.png");//winged lion
-            /*case 4:
-                return MoCreatures.proxy.getTexture("bcliger.png");//liger
-            case 5:
-                return MoCreatures.proxy.getTexture("bcliger.png");//winged liger
-            */case 6:
-                return MoCreatures.proxy.getTexture("bcwhitelion.png");//female white
+                return MoCreatures.proxy.getTexture("bcmalelion.png");
+            case 6:
             case 7:
-                return MoCreatures.proxy.getTexture("bcwhitelion.png");//male white
             case 8:
-                return MoCreatures.proxy.getTexture("bcwhitelion.png");//winged male white
-            /*case 9:
-                return MoCreatures.proxy.getTexture("bcliard.png");// Male Lion X leopard
-            */default:
+                return MoCreatures.proxy.getTexture("bcwhitelion.png");
+            default:
                 return MoCreatures.proxy.getTexture("bcfemalelion.png");
         }
     }
@@ -107,13 +94,13 @@ public class MoCEntityLion extends MoCEntityBigCat {
 
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
-        if (mate instanceof MoCEntityTiger && ((MoCEntityTiger) mate).getType() < 3) {
+        if (mate instanceof MoCEntityTiger && mate.getType() < 3) {
             return "Liger";//return 4; //liger"
         }
-        if (getType() == 2 && mate instanceof MoCEntityLeopard && ((MoCEntityLeopard) mate).getType() == 1) {
+        if (getType() == 2 && mate instanceof MoCEntityLeopard && mate.getType() == 1) {
             return "Liard";//return 9; //liard
         }
-        if (getType() == 2 && mate instanceof MoCEntityPanther && ((MoCEntityPanther) mate).getType() == 1) {
+        if (getType() == 2 && mate instanceof MoCEntityPanther && mate.getType() == 1) {
             return "Lither";//return 5; //lither
         }
         return "Lion";
@@ -122,17 +109,17 @@ public class MoCEntityLion extends MoCEntityBigCat {
     @Override
     public int getOffspringTypeInt(IMoCTameable mate) {
         int x = 0;
-        if (mate instanceof MoCEntityTiger && ((MoCEntityTiger) mate).getType() < 3) {
+        if (mate instanceof MoCEntityTiger && mate.getType() < 3) {
             return 1;//4; //liger
         }
-        if (getType() == 2 && mate instanceof MoCEntityLeopard && ((MoCEntityLeopard) mate).getType() == 1) {
+        if (getType() == 2 && mate instanceof MoCEntityLeopard && mate.getType() == 1) {
             return 1;//9; //liard
         }
-        if (getType() == 2 && mate instanceof MoCEntityPanther && ((MoCEntityPanther) mate).getType() == 1) {
+        if (getType() == 2 && mate instanceof MoCEntityPanther && mate.getType() == 1) {
             return 1;//5; //lither
         }
         if (mate instanceof MoCEntityLion) {
-            int lionMateType = ((MoCEntityLion) mate).getType();
+            int lionMateType = mate.getType();
             if (this.getType() == 1 && lionMateType == 2) {
                 x = this.rand.nextInt(2) + 1;
             }

@@ -43,7 +43,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         setSize(1.4F, 7F);
         this.stepHeight = 2F;
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -70,14 +70,10 @@ public class MoCEntityEnt extends MoCEntityAnimal {
 
     @Override
     public ResourceLocation getTexture() {
-        switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("ent_oak.png");
-            case 2:
-                return MoCreatures.proxy.getTexture("ent_birch.png");
-            default:
-                return MoCreatures.proxy.getTexture("ent_oak.png");
+        if (getType() == 2) {
+            return MoCreatures.proxy.getTexture("ent_birch.png");
         }
+        return MoCreatures.proxy.getTexture("ent_oak.png");
     }
 
     @Override
@@ -85,16 +81,14 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         if (damagesource.getTrueSource() != null && damagesource.getTrueSource() instanceof EntityPlayer) {
             EntityPlayer ep = (EntityPlayer) damagesource.getTrueSource();
             ItemStack currentItem = ep.inventory.getCurrentItem();
-            if (currentItem != null) {
-                Item itemheld = currentItem.getItem();
-                if (itemheld != null && itemheld instanceof ItemAxe) {
-                    this.world.getDifficulty();
-                    if (super.shouldAttackPlayers()) {
-                        setAttackTarget(ep);
+            Item itemheld = currentItem.getItem();
+            if (itemheld instanceof ItemAxe) {
+                this.world.getDifficulty();
+                if (super.shouldAttackPlayers()) {
+                    setAttackTarget(ep);
 
-                    }
-                    return super.attackEntityFrom(damagesource, i);
                 }
+                return super.attackEntityFrom(damagesource, i);
             }
         }
         if (damagesource.isFireDamage()) {
@@ -160,8 +154,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(8D, 3D, 8D));
         int n = this.rand.nextInt(3) + 1;
         int j = 0;
-        for (int k = 0; k < list.size(); k++) {
-            Entity entity = list.get(k);
+        for (Entity entity : list) {
             if (entity instanceof EntityAnimal && entity.width < 0.6F && entity.height < 0.6F) {
                 EntityAnimal entityanimal = (EntityAnimal) entity;
                 if (entityanimal.getAttackTarget() == null && !MoCTools.isTamed(entityanimal)) {
@@ -178,7 +171,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         }
     }
 
-    private boolean plantOnFertileGround() {
+    private void plantOnFertileGround() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
         Block blockUnderFeet = this.world.getBlockState(pos.down()).getBlock();
         Block blockOnFeet = this.world.getBlockState(pos).getBlock();
@@ -193,9 +186,9 @@ public class MoCEntityEnt extends MoCEntityAnimal {
             }
             if (event != null && !event.isCanceled()) {
                 this.world.setBlockState(pos.down(), block.getDefaultState(), 3);
-                return true;
+                return;
             }
-            return false;
+            return;
         }
 
         if (blockUnderFeet == Blocks.GRASS && blockOnFeet == Blocks.AIR) {
@@ -223,10 +216,8 @@ public class MoCEntityEnt extends MoCEntityAnimal {
                     }
                 }
             }
-            return true;
         }
 
-        return false;
     }
 
     /**
@@ -235,7 +226,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
      * @return Any of the flowers, mushrooms, grass and saplings
      */
     private IBlockState getBlockStateToBePlanted() {
-        int blockID = 0;
+        int blockID;
         int metaData = 0;
         switch (this.rand.nextInt(20)) {
             case 0:

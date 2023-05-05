@@ -22,7 +22,7 @@ public class MoCEntityLeoger extends MoCEntityBigCat {
     public void selectType() {
         if (getType() == 0) {
             setType(1);
-    }
+        }
         super.selectType();
     }
 
@@ -50,7 +50,7 @@ public class MoCEntityLeoger extends MoCEntityBigCat {
 
         return super.processInteract(player, hand);
     }
-    
+
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         return "Leoger";

@@ -48,8 +48,12 @@ import java.util.List;
 
 public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
-    private int eggCounter;
-    private int hidingCounter;
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> EGG_WATCH = EntityDataManager.createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHESTED = EntityDataManager.createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_HIDING = EntityDataManager.createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> HELMET_TYPE = EntityDataManager.createKey(MoCEntityOstrich.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> FLAG_COLOR = EntityDataManager.createKey(MoCEntityOstrich.class, DataSerializers.VARINT);
     public int mouthCounter;
     public int wingCounter;
     public int sprintCounter;
@@ -57,16 +61,11 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     public int transformCounter;
     public int transformType;
     public boolean canLayEggs;
-
     public MoCAnimalChest localchest;
     public ItemStack localstack;
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> EGG_WATCH = EntityDataManager.<Boolean>createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CHESTED = EntityDataManager.<Boolean>createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> IS_HIDING = EntityDataManager.<Boolean>createKey(MoCEntityOstrich.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> HELMET_TYPE = EntityDataManager.<Integer>createKey(MoCEntityOstrich.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> FLAG_COLOR = EntityDataManager.<Integer>createKey(MoCEntityOstrich.class, DataSerializers.VARINT);
-    
+    private int eggCounter;
+    private int hidingCounter;
+
 
     public MoCEntityOstrich(World world) {
         super(world);
@@ -76,7 +75,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         this.stepHeight = 1.0F;
         this.canLayEggs = false;
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -98,62 +97,62 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(EGG_WATCH, Boolean.valueOf(false));
-        this.dataManager.register(CHESTED, Boolean.valueOf(false));
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false));
-        this.dataManager.register(IS_HIDING, Boolean.valueOf(false));
-        this.dataManager.register(HELMET_TYPE, Integer.valueOf(0));
-        this.dataManager.register(FLAG_COLOR, Integer.valueOf(0));
+        this.dataManager.register(EGG_WATCH, Boolean.FALSE);
+        this.dataManager.register(CHESTED, Boolean.FALSE);
+        this.dataManager.register(RIDEABLE, Boolean.FALSE);
+        this.dataManager.register(IS_HIDING, Boolean.FALSE);
+        this.dataManager.register(HELMET_TYPE, 0);
+        this.dataManager.register(FLAG_COLOR, 0);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
+        return this.dataManager.get(RIDEABLE);
     }
 
     @Override
     public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
+        this.dataManager.set(RIDEABLE, flag);
     }
 
     public boolean getEggWatching() {
-        return ((Boolean)this.dataManager.get(EGG_WATCH)).booleanValue();
+        return this.dataManager.get(EGG_WATCH);
     }
 
     public void setEggWatching(boolean flag) {
-        this.dataManager.set(EGG_WATCH, Boolean.valueOf(flag));
+        this.dataManager.set(EGG_WATCH, flag);
     }
 
     public boolean getHiding() {
-        return ((Boolean)this.dataManager.get(IS_HIDING)).booleanValue();
+        return this.dataManager.get(IS_HIDING);
     }
 
     public void setHiding(boolean flag) {
-        this.dataManager.set(IS_HIDING, Boolean.valueOf(flag));
+        this.dataManager.set(IS_HIDING, flag);
     }
 
     public int getHelmet() {
-        return ((Integer)this.dataManager.get(HELMET_TYPE)).intValue();
+        return this.dataManager.get(HELMET_TYPE);
     }
 
     public void setHelmet(int i) {
-        this.dataManager.set(HELMET_TYPE, Integer.valueOf(i));
+        this.dataManager.set(HELMET_TYPE, i);
     }
 
     public int getFlagColor() {
-        return ((Integer)this.dataManager.get(FLAG_COLOR)).intValue();
+        return this.dataManager.get(FLAG_COLOR);
     }
 
     public void setFlagColor(int i) {
-        this.dataManager.set(FLAG_COLOR, Integer.valueOf(i));
+        this.dataManager.set(FLAG_COLOR, i);
     }
 
     public boolean getIsChested() {
-        return ((Boolean)this.dataManager.get(CHESTED)).booleanValue();
+        return this.dataManager.get(CHESTED);
     }
 
     public void setIsChested(boolean flag) {
-        this.dataManager.set(CHESTED, Boolean.valueOf(flag));
+        this.dataManager.set(CHESTED, flag);
     }
 
     @Override
@@ -236,14 +235,10 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         switch (getType()) {
             case 1:
                 return 10;
-            case 2:
-                return 20;
             case 3:
-                return 25;
             case 4:
                 return 25;
             case 5:
-                return 35;
             case 6:
                 return 35;
             default:
@@ -259,7 +254,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     @Override
     public void selectType() {
         if (getType() == 0) {
-            /**
+            /*
              * 1 = chick /2 = female /3 = male /4 = albino male /5 = nether ostrich /6 = wyvern
              */
             int j = this.rand.nextInt(100);
@@ -308,21 +303,19 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("ostrichc.png"); //chick
+                return MoCreatures.proxy.getTexture("ostrichc.png");
             case 2:
-                return MoCreatures.proxy.getTexture("ostrichb.png"); //female
-            case 3:
-                return MoCreatures.proxy.getTexture("ostricha.png"); //male
+                return MoCreatures.proxy.getTexture("ostrichb.png");
             case 4:
-                return MoCreatures.proxy.getTexture("ostrichd.png"); //albino
+                return MoCreatures.proxy.getTexture("ostrichd.png");
             case 5:
-                return MoCreatures.proxy.getTexture("ostriche.png"); //nether
+                return MoCreatures.proxy.getTexture("ostriche.png");
             case 6:
-                return MoCreatures.proxy.getTexture("ostrichf.png"); //black wyvern
+                return MoCreatures.proxy.getTexture("ostrichf.png");
             case 7:
-                return MoCreatures.proxy.getTexture("ostrichg.png"); //undead
+                return MoCreatures.proxy.getTexture("ostrichg.png");
             case 8:
-                return MoCreatures.proxy.getTexture("ostrichh.png"); //unicorned
+                return MoCreatures.proxy.getTexture("ostrichh.png");
             default:
                 return MoCreatures.proxy.getTexture("ostricha.png");
         }
@@ -331,11 +324,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     @Override
     public double getCustomSpeed() {
         double OstrichSpeed = 0.8D;
-        if (getType() == 1) {
-            OstrichSpeed = 0.8;
-        } else if (getType() == 2) {
-            OstrichSpeed = 0.8D;
-        } else if (getType() == 3) {
+        if (getType() == 3) {
             OstrichSpeed = 1.1D;
         } else if (getType() == 4) {
             OstrichSpeed = 1.3D;
@@ -476,9 +465,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
                             if (!this.getIsTamed()) {
                                 setEggWatching(true);
-                                if (maleOstrich != null) {
-                                    maleOstrich.setEggWatching(true);
-                                }
+                                maleOstrich.setEggWatching(true);
                                 openMouth();
                             }
 
@@ -522,9 +509,8 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         double d1 = -1D;
         MoCEntityOstrich entityliving = null;
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().expand(d, d, d));
-        for (int i = 0; i < list.size(); i++) {
-            Entity entity1 = list.get(i);
-            if (!(entity1 instanceof MoCEntityOstrich) || ((entity1 instanceof MoCEntityOstrich) && ((MoCEntityOstrich) entity1).getType() < 3)) {
+        for (Entity entity1 : list) {
+            if (!(entity1 instanceof MoCEntityOstrich) || ((MoCEntityOstrich) entity1).getType() < 3) {
                 continue;
             }
 
@@ -820,7 +806,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             for (int i = 0; i < nbttaglist.tagCount(); i++) {
                 NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
                 int j = nbttagcompound1.getByte("Slot") & 0xff;
-                if ((j >= 0) && j < this.localchest.getSizeInventory()) {
+                if (j < this.localchest.getSizeInventory()) {
                     this.localchest.setInventorySlotContents(j, new ItemStack(nbttagcompound1));
                 }
             }
@@ -841,7 +827,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             NBTTagList nbttaglist = new NBTTagList();
             for (int i = 0; i < this.localchest.getSizeInventory(); i++) {
                 this.localstack = this.localchest.getStackInSlot(i);
-                if (this.localstack != null && !this.localstack.isEmpty()) {
+                if (!this.localstack.isEmpty()) {
                     NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                     nbttagcompound1.setByte("Slot", (byte) i);
                     this.localstack.writeToNBT(nbttagcompound1);
@@ -900,10 +886,8 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             final ItemStack itemStack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
             if (!itemStack.isEmpty() && itemStack.getItem() instanceof ItemArmor) {
                 final EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, itemStack.copy());
-                if (entityitem != null) {
-                    entityitem.setPickupDelay(10);
-                    this.world.spawnEntity(entityitem);
-                }
+                entityitem.setPickupDelay(10);
+                this.world.spawnEntity(entityitem);
             }
             setHelmet((byte) 0);
         }

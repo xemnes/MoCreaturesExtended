@@ -43,15 +43,14 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
-    public static final String scorpionNames[] = {"Dirt", "Cave", "Nether", "Frost", "Undead"};
-    private boolean isPoisoning;
-    private int poisontimer;
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_SITTING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     public int mouthCounter;
     public int armCounter;
+    private boolean isPoisoning;
+    private int poisontimer;
     private int transformCounter;
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.<Boolean>createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> IS_SITTING = EntityDataManager.<Boolean>createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
 
     public MoCEntityPetScorpion(World world) {
         super(world);
@@ -142,23 +141,27 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(HAS_BABIES, Boolean.valueOf(false));
-        this.dataManager.register(IS_SITTING, Boolean.valueOf(false));
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false));
+        this.dataManager.register(HAS_BABIES, Boolean.FALSE);
+        this.dataManager.register(IS_SITTING, Boolean.FALSE);
+        this.dataManager.register(RIDEABLE, Boolean.FALSE);
     }
-    
+
     @Override
     public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
+        this.dataManager.set(RIDEABLE, flag);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
+        return this.dataManager.get(RIDEABLE);
     }
-    
+
     public boolean getHasBabies() {
-        return getIsAdult() && ((Boolean)this.dataManager.get(HAS_BABIES)).booleanValue();
+        return getIsAdult() && this.dataManager.get(HAS_BABIES);
+    }
+
+    public void setHasBabies(boolean flag) {
+        this.dataManager.set(HAS_BABIES, flag);
     }
 
     public boolean getIsPoisoning() {
@@ -167,15 +170,11 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
     @Override
     public boolean getIsSitting() {
-        return ((Boolean)this.dataManager.get(IS_SITTING)).booleanValue();
+        return this.dataManager.get(IS_SITTING);
     }
 
     public void setSitting(boolean flag) {
-        this.dataManager.set(IS_SITTING, Boolean.valueOf(flag));
-    }
-
-    public void setHasBabies(boolean flag) {
-        this.dataManager.set(HAS_BABIES, Boolean.valueOf(flag));
+        this.dataManager.set(IS_SITTING, flag);
     }
 
     public void setPoisoning(boolean flag) {
@@ -260,11 +259,10 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (!(entity instanceof EntityLivingBase) || ((entity != null) && (entity instanceof EntityPlayer) && getIsTamed())) {
+            if (!(entity instanceof EntityLivingBase) || entity instanceof EntityPlayer && getIsTamed()) {
                 return false;
             }
-
-            if ((entity != null) && (entity != this) && (super.shouldAttackPlayers()) && getIsAdult()) {
+            if (entity != this && super.shouldAttackPlayers() && getIsAdult()) {
                 setAttackTarget((EntityLivingBase) entity);
             }
             return true;
@@ -295,7 +293,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             {
                 if (flag && !this.world.isRemote && !this.world.provider.doesWaterVaporize()) {
                     MoCreatures.burnPlayer((EntityPlayer) entityIn);
-                    ((EntityLivingBase) entityIn).setFire(15);
+                    entityIn.setFire(15);
                 }
             }
         } else {

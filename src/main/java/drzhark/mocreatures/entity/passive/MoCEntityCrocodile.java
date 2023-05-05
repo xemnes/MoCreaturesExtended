@@ -30,14 +30,14 @@ import net.minecraft.world.World;
 
 public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
 
+    private static final DataParameter<Boolean> IS_RESTING = EntityDataManager.createKey(MoCEntityCrocodile.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> EATING_PREY = EntityDataManager.createKey(MoCEntityCrocodile.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_BITING = EntityDataManager.createKey(MoCEntityCrocodile.class, DataSerializers.BOOLEAN);
     public float biteProgress;
     public float spin;
     public int spinInt;
     private boolean waterbound;
-    private static final DataParameter<Boolean> IS_RESTING = EntityDataManager.<Boolean>createKey(MoCEntityCrocodile.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> EATING_PREY = EntityDataManager.<Boolean>createKey(MoCEntityCrocodile.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> IS_BITING = EntityDataManager.<Boolean>createKey(MoCEntityCrocodile.class, DataSerializers.BOOLEAN);
-    
+
     public MoCEntityCrocodile(World world) {
         super(world);
         this.texture = "crocodile.png";
@@ -69,33 +69,33 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_RESTING, Boolean.valueOf(false));
-        this.dataManager.register(EATING_PREY, Boolean.valueOf(false));
-        this.dataManager.register(IS_BITING, Boolean.valueOf(false));
+        this.dataManager.register(IS_RESTING, Boolean.FALSE);
+        this.dataManager.register(EATING_PREY, Boolean.FALSE);
+        this.dataManager.register(IS_BITING, Boolean.FALSE);
     }
 
     public boolean getIsBiting() {
-        return ((Boolean)this.dataManager.get(IS_BITING)).booleanValue();
+        return this.dataManager.get(IS_BITING);
     }
 
     public boolean getIsSitting() {
-        return ((Boolean)this.dataManager.get(IS_RESTING)).booleanValue();
-    }
-
-    public boolean getHasCaughtPrey() {
-        return ((Boolean)this.dataManager.get(EATING_PREY)).booleanValue();
-    }
-
-    public void setBiting(boolean flag) {
-        this.dataManager.set(IS_BITING, Boolean.valueOf(flag));
+        return this.dataManager.get(IS_RESTING);
     }
 
     public void setIsSitting(boolean flag) {
-        this.dataManager.set(IS_RESTING, Boolean.valueOf(flag));
+        this.dataManager.set(IS_RESTING, flag);
+    }
+
+    public boolean getHasCaughtPrey() {
+        return this.dataManager.get(EATING_PREY);
     }
 
     public void setHasCaughtPrey(boolean flag) {
-        this.dataManager.set(EATING_PREY, Boolean.valueOf(flag));
+        this.dataManager.set(EATING_PREY, flag);
+    }
+
+    public void setBiting(boolean flag) {
+        this.dataManager.set(IS_BITING, flag);
     }
 
     @Override
@@ -191,15 +191,13 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
                 if (this.spinInt > 80) {
                     this.spinInt = 0;
                     this.getRidingEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 4); //TODO ADJUST
-
                 }
 
+                //TODO 4FIX
                 //the following if to be removed from SMP
-
-                if (!this.world.isRemote && this.isBeingRidden() && this.getRidingEntity() instanceof EntityPlayer) {
-                    //TODO 4FIX
-                    //MoCreatures.mc.gameSettings.thirdPersonView = 1;
-                }
+                //if (!this.world.isRemote && this.isBeingRidden() && this.getRidingEntity() instanceof EntityPlayer) {
+                //MoCreatures.mc.gameSettings.thirdPersonView = 1;
+                //}
             }
         }
 
@@ -292,7 +290,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         if (!this.isBeingRidden()) {
             return;
         }
-        int direction = 1;
+        int direction;
 
         double dist = getEdad() * 0.01F + passenger.width - 0.4D;
         double newPosX = this.posX - (dist * Math.cos((MoCTools.realAngle(this.rotationYaw - 90F)) / 57.29578F));

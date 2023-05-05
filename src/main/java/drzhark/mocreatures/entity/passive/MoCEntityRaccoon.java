@@ -5,12 +5,7 @@ package drzhark.mocreatures.entity.passive;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
-import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIHunt;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
@@ -36,14 +31,9 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
         this.texture = "raccoon.png";
         setEdad(50 + this.rand.nextInt(15));
 
-        if (this.rand.nextInt(3) == 0) {
-            setAdult(false);
-
-        } else {
-            setAdult(true);
-        }
+        setAdult(this.rand.nextInt(3) != 0);
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -70,7 +60,7 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if (entity != this && this.isNotScared() && entity instanceof EntityLivingBase && super.shouldAttackPlayers()) {

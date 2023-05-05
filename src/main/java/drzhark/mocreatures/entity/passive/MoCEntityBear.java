@@ -5,12 +5,7 @@ package drzhark.mocreatures.entity.passive;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
-import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIHunt;
-import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.inventory.MoCAnimalChest;
@@ -43,28 +38,24 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class MoCEntityBear extends MoCEntityTameableAnimal {
 
+    private static final DataParameter<Integer> BEAR_STATE = EntityDataManager.createKey(MoCEntityBear.class, DataSerializers.VARINT);
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityBear.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHESTED = EntityDataManager.createKey(MoCEntityBear.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> GHOST = EntityDataManager.createKey(MoCEntityBear.class, DataSerializers.BOOLEAN);
     public int mouthCounter;
-    private int attackCounter;
-    private int standingCounter;
-    private static final DataParameter<Integer> BEAR_STATE = EntityDataManager.<Integer>createKey(MoCEntityBear.class, DataSerializers.VARINT);
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityBear.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CHESTED = EntityDataManager.<Boolean>createKey(MoCEntityBear.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> GHOST = EntityDataManager.<Boolean>createKey(MoCEntityBear.class, DataSerializers.BOOLEAN);
     public MoCAnimalChest localchest;
     public ItemStack localstack;
-    
+    private int attackCounter;
+    private int standingCounter;
+
     public MoCEntityBear(World world) {
         super(world);
         setSize(1.2F, 1.5F);
         setEdad(55);
-        if (this.rand.nextInt(4) == 0) {
-            setAdult(false);
-        } else {
-            setAdult(true);
-        }
+        setAdult(this.rand.nextInt(4) != 0);
         this.stepHeight = 1.0F;
     }
- 
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -77,7 +68,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.targetTasks.addTask(1, new EntityAIHunt(this, EntityAnimal.class, true));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTargetMoC(this, EntityPlayer.class, true));
     }
-    
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -94,50 +85,48 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(BEAR_STATE, Integer.valueOf(0));
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false)); 
-        this.dataManager.register(CHESTED, Boolean.valueOf(false)); 
-        this.dataManager.register(GHOST, Boolean.valueOf(false));
+        this.dataManager.register(BEAR_STATE, 0);
+        this.dataManager.register(RIDEABLE, Boolean.FALSE);
+        this.dataManager.register(CHESTED, Boolean.FALSE);
+        this.dataManager.register(GHOST, Boolean.FALSE);
     }
 
     /**
      * 0 - bear is on fours 1 - standing 2 - sitting
-     *
-     * @return
      */
     public int getBearState() {
-        return ((Integer)this.dataManager.get(BEAR_STATE)).intValue();
+        return this.dataManager.get(BEAR_STATE);
     }
 
     public void setBearState(int i) {
-        this.dataManager.set(BEAR_STATE, Integer.valueOf(i));
+        this.dataManager.set(BEAR_STATE, i);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
+        return this.dataManager.get(RIDEABLE);
     }
 
     public boolean getIsChested() {
-        return ((Boolean)this.dataManager.get(CHESTED)).booleanValue();
-    }
-
-    public boolean getIsGhost() {
-        return ((Boolean)this.dataManager.get(GHOST)).booleanValue();
+        return this.dataManager.get(CHESTED);
     }
 
     public void setIsChested(boolean flag) {
-        this.dataManager.set(CHESTED, Boolean.valueOf(flag));
+        this.dataManager.set(CHESTED, flag);
     }
 
-    public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
+    public boolean getIsGhost() {
+        return this.dataManager.get(GHOST);
     }
 
     public void setIsGhost(boolean flag) {
-        this.dataManager.set(GHOST, Boolean.valueOf(flag));
+        this.dataManager.set(GHOST, flag);
     }
-    
+
+    public void setRideable(boolean flag) {
+        this.dataManager.set(RIDEABLE, flag);
+    }
+
     @Override
     public void selectType() {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
@@ -152,33 +141,27 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     /**
      * Returns the factor size for the bear, polars are bigger and pandas
      * smaller
-     *
-     * @return
      */
     public float getBearSize() {
-                return 1.0F;
+        return 1.0F;
     }
 
     public float calculateMaxHealth() {
-                  return 30;
+        return 30;
     }
 
     /**
      * Returns the distance at which the bear attacks prey
-     *
-     * @return
      */
     public double getAttackRange() {
-              return 8D;
+        return 8D;
     }
 
     /**
      * The damage the bear does
-     *
-     * @return
      */
     public int getAttackStrength() {
-                   return 2;
+        return 2;
     }
 
     @Override
@@ -199,7 +182,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if (entity != this && entity instanceof EntityLivingBase && super.shouldAttackPlayers()) {
@@ -228,7 +211,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (!this.world.isRemote && !getIsAdult() && getEdad() < 80 && (this.rand.nextInt(300) == 0)) {
             setBearState(2);
         }
-        /**
+        /*
          * Sitting non tamed bears will resume on fours stance every now and then
          */
         if (!this.world.isRemote && getBearState() == 2 && !getIsTamed() && this.rand.nextInt(800) == 0) {
@@ -241,10 +224,10 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
             this.standingCounter = 0;
             setBearState(0);
         }
-        /**\
+        /*
          * Standing if close to a vulnerable player
          */
-        if (!this.world.isRemote && !getIsTamed() && getIsStanding() 
+        if (!this.world.isRemote && !getIsTamed() && getIsStanding()
                 && getBearState() != 2 && getIsAdult() && (this.rand.nextInt(200) == 0) && shouldAttackPlayers()) {
             EntityPlayer entityplayer1 = this.world.getClosestPlayerToEntity(this, 4D);
             if ((entityplayer1 != null && this.canEntityBeSeen(entityplayer1) && !entityplayer1.capabilities.disableDamage)) {
@@ -261,7 +244,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
                 if (f > 2.0F) {
                     getMyOwnPath(entityitem, f);
                 }
-                if ((f < 2.0F) && (entityitem != null) && (this.deathTime == 0)) {
+                if (f < 2.0F && this.deathTime == 0) {
                     entityitem.setDead();
                     MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
                     this.setHealth(getMaxHealth());
@@ -305,11 +288,11 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     public float getAttackSwing() {
         if (attackCounter == 0)
             return 0;
-        return 1.5F + ((float) (attackCounter / 10F) - 10F) * 5F;
+        return 1.5F + ((attackCounter / 10F) - 10F) * 5F;
     }
 
     private void startAttack() {
-       if (!this.world.isRemote && this.attackCounter == 0 && getBearState() == 1) {
+        if (!this.world.isRemote && this.attackCounter == 0 && getBearState() == 1) {
             MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 0),
                     new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
             this.attackCounter = 1;
@@ -338,15 +321,15 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     public boolean isReadyToHunt() {
         return this.getIsAdult() && !this.isMovementCeased();
     }
-    
-    public boolean getIsStanding(){
+
+    public boolean getIsStanding() {
         return this.standingCounter != 0;
     }
-    
-    public void setStand(){
+
+    public void setStand() {
         this.standingCounter = 1;
     }
-    
+
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final Boolean tameResult = this.processTameInteract(player, hand);
@@ -389,7 +372,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
                 this.localchest = new MoCAnimalChest("BigBearChest", 18);
             }
             if (!this.world.isRemote) {
-               player.displayGUIChest(this.localchest);
+                player.displayGUIChest(this.localchest);
             }
             return true;
         }
@@ -402,22 +385,22 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         double Yfactor = ((0.086D * this.getEdad()) - 2.5D) / 10D;
         return this.height * Yfactor;
     }
-    
+
     @Override
     public int nameYOffset() {
         return (int) (((0.445D * this.getEdad()) + 15D) * -1);
     }
-    
+
     @Override
     public boolean rideableEntity() {
         return true;
     }
-    
+
     @Override
     public float getSizeFactor() {
         return getEdad() * 0.01F;
     }
-    
+
     @Override
     public void updatePassenger(Entity passenger) {
         double dist = getSizeFactor() * (0.1D);
@@ -447,7 +430,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
             }
         }
     }
-    
+
     @Override
     public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
         super.writeEntityToNBT(nbttagcompound);
@@ -460,7 +443,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
             for (int i = 0; i < this.localchest.getSizeInventory(); i++) {
                 // grab the current item stack
                 this.localstack = this.localchest.getStackInSlot(i);
-                if (this.localstack != null && !this.localstack.isEmpty()) {
+                if (!this.localstack.isEmpty()) {
                     NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                     nbttagcompound1.setByte("Slot", (byte) i);
                     this.localstack.writeToNBT(nbttagcompound1);
@@ -471,7 +454,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         }
 
     }
-    
+
     @Override
     public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
         super.readEntityFromNBT(nbttagcompound);
@@ -485,7 +468,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
             for (int i = 0; i < nbttaglist.tagCount(); i++) {
                 NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
                 int j = nbttagcompound1.getByte("Slot") & 0xff;
-                if ((j >= 0) && j < this.localchest.getSizeInventory()) {
+                if (j < this.localchest.getSizeInventory()) {
                     this.localchest.setInventorySlotContents(j, new ItemStack(nbttagcompound1));
                 }
             }

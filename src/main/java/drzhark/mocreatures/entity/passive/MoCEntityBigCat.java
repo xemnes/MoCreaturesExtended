@@ -3,16 +3,11 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCPetData;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
-import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIHunt;
-import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.inventory.MoCAnimalChest;
@@ -22,11 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.item.EntityItem;
@@ -53,6 +44,11 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAS_AMULET = EntityDataManager.createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SITTING = EntityDataManager.createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> GHOST = EntityDataManager.createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHESTED = EntityDataManager.createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
     public int mouthCounter;
     public int tailCounter;
     public int wingFlapCounter;
@@ -61,24 +57,15 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     protected String chestName = "BigCatChest";
     private int tCounter;
     private float fTransparency;
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAS_AMULET = EntityDataManager.<Boolean>createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SITTING = EntityDataManager.<Boolean>createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> GHOST = EntityDataManager.<Boolean>createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CHESTED = EntityDataManager.<Boolean>createKey(MoCEntityBigCat.class, DataSerializers.BOOLEAN);
 
     public MoCEntityBigCat(World world) {
         super(world);
         setEdad(45);
         setSize(1.4F, 1.3F);
-        if (this.rand.nextInt(4) == 0) {
-            setAdult(false);
-        } else {
-            setAdult(true);
-        }
+        setAdult(this.rand.nextInt(4) != 0);
         this.stepHeight = 1.0F;
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -142,54 +129,54 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false)); 
-        this.dataManager.register(SITTING, Boolean.valueOf(false));
-        this.dataManager.register(GHOST, Boolean.valueOf(false)); 
-        this.dataManager.register(HAS_AMULET, Boolean.valueOf(false)); 
-        this.dataManager.register(CHESTED, Boolean.valueOf(false));
+        this.dataManager.register(RIDEABLE, Boolean.FALSE);
+        this.dataManager.register(SITTING, Boolean.FALSE);
+        this.dataManager.register(GHOST, Boolean.FALSE);
+        this.dataManager.register(HAS_AMULET, Boolean.FALSE);
+        this.dataManager.register(CHESTED, Boolean.FALSE);
     }
 
     public boolean getHasAmulet() {
-        return ((Boolean)this.dataManager.get(HAS_AMULET)).booleanValue();
+        return this.dataManager.get(HAS_AMULET);
+    }
+
+    public void setHasAmulet(boolean flag) {
+        this.dataManager.set(HAS_AMULET, flag);
     }
 
     @Override
     public boolean getIsSitting() {
-        return ((Boolean)this.dataManager.get(SITTING)).booleanValue();
+        return this.dataManager.get(SITTING);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
+        return this.dataManager.get(RIDEABLE);
     }
 
     public boolean getIsChested() {
-        return ((Boolean)this.dataManager.get(CHESTED)).booleanValue();
+        return this.dataManager.get(CHESTED);
+    }
+
+    public void setIsChested(boolean flag) {
+        this.dataManager.set(CHESTED, flag);
     }
 
     @Override
     public boolean getIsGhost() {
-        return ((Boolean)this.dataManager.get(GHOST)).booleanValue();
-    }
-
-    public void setHasAmulet(boolean flag) {
-        this.dataManager.set(HAS_AMULET, Boolean.valueOf(flag));
-    }
-
-    public void setSitting(boolean flag) {
-        this.dataManager.set(SITTING, Boolean.valueOf(flag));
-    }
-
-    public void setIsChested(boolean flag) {
-        this.dataManager.set(CHESTED, Boolean.valueOf(flag));
-    }
-
-    public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
+        return this.dataManager.get(GHOST);
     }
 
     public void setIsGhost(boolean flag) {
-        this.dataManager.set(GHOST, Boolean.valueOf(flag));
+        this.dataManager.set(GHOST, flag);
+    }
+
+    public void setSitting(boolean flag) {
+        this.dataManager.set(SITTING, flag);
+    }
+
+    public void setRideable(boolean flag) {
+        this.dataManager.set(RIDEABLE, flag);
     }
 
     // Method used for receiving damage from another source
@@ -212,7 +199,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             return false;
         }
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         openMouth();
@@ -252,8 +239,8 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     public void onDeath(DamageSource damagesource) {
         if (!this.world.isRemote) {
             if (getHasAmulet()) {
-                    MoCTools.dropCustomItem(this, this.world, new ItemStack(MoCItems.medallion, 1));
-                    setHasAmulet(false);
+                MoCTools.dropCustomItem(this, this.world, new ItemStack(MoCItems.medallion, 1));
+                setHasAmulet(false);
             }
 
             if (getIsTamed() && !getIsGhost() && this.rand.nextInt(4) == 0) {
@@ -266,7 +253,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     public void spawnGhost() {
         try {
             EntityLiving templiving = (EntityLiving) EntityList.createEntityByIDFromName(new ResourceLocation(this.getClazzString().toLowerCase()), this.world);
-            if (templiving != null && templiving instanceof MoCEntityBigCat) {
+            if (templiving instanceof MoCEntityBigCat) {
                 MoCEntityBigCat ghost = (MoCEntityBigCat) templiving;
                 ghost.setPosition(this.posX, this.posY, this.posZ);
                 this.world.spawnEntity(ghost);
@@ -285,7 +272,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 ghost.setIsGhost(true);
 
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
 
     }
@@ -296,13 +283,9 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         super.onLivingUpdate();
 
         if (!this.world.isRemote) {
-            if (this.getAttackTarget() == null) {
-                setSprinting(false);
-            } else {
-                setSprinting(true);
-            }
+            setSprinting(this.getAttackTarget() != null);
         }
-        
+
         if (this.world.isRemote) //animation counters
         {
             if (this.mouthCounter > 0 && ++this.mouthCounter > 30) {
@@ -326,8 +309,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (!getIsGhost() && getEdad() <10)
-            {
+            if (!getIsGhost() && getEdad() < 10) {
                 this.setDead();
             }
             /*if (getHasEaten() && rand.nextInt(300) == 0)
@@ -367,7 +349,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 if (f > 2.0F) {
                     getMyOwnPath(entityitem, f);
                 }
-                if ((f < 2.0F) && (entityitem != null) && (this.deathTime == 0)) {
+                if (f < 2.0F && this.deathTime == 0) {
                     entityitem.setDead();
                     this.setHealth(getMaxHealth());
                     setHasEaten(true);
@@ -425,7 +407,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             for (int i = 0; i < this.localchest.getSizeInventory(); i++) {
                 // grab the current item stack
                 this.localstack = this.localchest.getStackInSlot(i);
-                if (this.localstack != null && !this.localstack.isEmpty()) {
+                if (!this.localstack.isEmpty()) {
                     NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                     nbttagcompound1.setByte("Slot", (byte) i);
                     this.localstack.writeToNBT(nbttagcompound1);
@@ -451,7 +433,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             for (int i = 0; i < nbttaglist.tagCount(); i++) {
                 NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
                 int j = nbttagcompound1.getByte("Slot") & 0xff;
-                if ((j >= 0) && j < this.localchest.getSizeInventory()) {
+                if (j < this.localchest.getSizeInventory()) {
                     this.localchest.setInventorySlotContents(j, new ItemStack(nbttagcompound1));
                 }
             }
@@ -488,10 +470,10 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
                 return true;
-        }
+            }
             return true;
         }
-        
+
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
             setSitting(!getIsSitting());
             return true;
@@ -574,18 +556,16 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 attackEntityFrom(DamageSource.FALL, i);
             }
             if ((this.isBeingRidden()) && (i > 1F)) {
-                for (Entity entity : this.getRecursivePassengers())
-                {
-                    entity.attackEntityFrom(DamageSource.FALL, (float)i);
+                for (Entity entity : this.getRecursivePassengers()) {
+                    entity.attackEntityFrom(DamageSource.FALL, i);
                 }
             }
-            IBlockState iblockstate = this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.2D - (double)this.prevRotationYaw, this.posZ));
+            IBlockState iblockstate = this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ));
             Block block = iblockstate.getBlock();
 
-            if (iblockstate.getMaterial() != Material.AIR && !this.isSilent())
-            {
-                SoundType soundtype = block.getSoundType(iblockstate, world, new BlockPos(this.posX, this.posY - 0.2D - (double)this.prevRotationYaw, this.posZ), this);
-                this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
+            if (iblockstate.getMaterial() != Material.AIR && !this.isSilent()) {
+                SoundType soundtype = block.getSoundType(iblockstate, world, new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ), this);
+                this.world.playSound(null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
             }
         }
     }
@@ -671,12 +651,12 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     public int nameYOffset() {
         return (int) (((0.445D * this.getEdad()) + 15D) * -1);
     }
-    
+
     @Override
     public boolean rideableEntity() {
         return true;
     }
-    
+
     @Override
     public float getAIMoveSpeed() {
         if (isSprinting()) {

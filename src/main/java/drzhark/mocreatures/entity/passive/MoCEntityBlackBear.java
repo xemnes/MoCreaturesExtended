@@ -27,27 +27,22 @@ public class MoCEntityBlackBear extends MoCEntityBear {
         }
         super.selectType();
     }
-    
+
     @Override
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getTexture("bearblack.png");
     }
-    
+
     @Override
     public float getBearSize() {
         return 0.9F;
     }
-    
+
     @Override
     public int getMaxEdad() {
         return 90;
     }
-    
-    @Override
-    public float calculateMaxHealth() {
-        return 30;
-    }
-    
+
     public double getAttackRange() {
         int factor = 1;
         if (this.world.getDifficulty().getId() > 1) {
@@ -61,12 +56,12 @@ public class MoCEntityBlackBear extends MoCEntityBear {
         int factor = (this.world.getDifficulty().getId());
         return 2 * factor;
     }
-    
+
     @Override
     public boolean shouldAttackPlayers() {
         return false;
     }
-    
+
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final Boolean tameResult = this.processTameInteract(player, hand);
@@ -96,7 +91,7 @@ public class MoCEntityBlackBear extends MoCEntityBear {
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
             if (getBearState() == 0) {
                 setBearState(2);
-            }else {
+            } else {
                 setBearState(0);
             }
             return true;
@@ -113,7 +108,7 @@ public class MoCEntityBlackBear extends MoCEntityBear {
 
         return super.processInteract(player, hand);
     }
-    
+
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         return "BlackBear";

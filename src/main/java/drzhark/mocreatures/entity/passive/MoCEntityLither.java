@@ -22,7 +22,7 @@ public class MoCEntityLither extends MoCEntityBigCat {
     public void selectType() {
         if (getType() == 0) {
             setType(1);
-    }
+        }
         super.selectType();
     }
 
@@ -50,7 +50,7 @@ public class MoCEntityLither extends MoCEntityBigCat {
 
         return super.processInteract(player, hand);
     }
-    
+
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         return "Lither";
@@ -95,10 +95,5 @@ public class MoCEntityLither extends MoCEntityBigCat {
             return false;
         }
         return entity.height < 1.5F && entity.width < 1.5F;
-    }
-    
-    @Override
-    public float getMoveSpeed() {
-            return 1.6F;
     }
 }

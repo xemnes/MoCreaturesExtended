@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -18,8 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class MoCEntityDuck extends MoCEntityAnimal//EntityChicken
-{
+public class MoCEntityDuck extends MoCEntityAnimal {
 
     public boolean field_70885_d = false;
     public float field_70886_e = 0.0F;
@@ -62,15 +60,6 @@ public class MoCEntityDuck extends MoCEntityAnimal//EntityChicken
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_DUCK_AMBIENT;
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
-        }
     }
 
     @Override

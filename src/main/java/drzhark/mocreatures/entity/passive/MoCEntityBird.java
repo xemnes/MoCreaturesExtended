@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -39,19 +38,18 @@ import java.util.List;
 
 public class MoCEntityBird extends MoCEntityTameableAnimal {
 
-    private boolean fleeing;
+    private static final DataParameter<Boolean> PRE_TAMED = EntityDataManager.createKey(MoCEntityBird.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_FLYING = EntityDataManager.createKey(MoCEntityBird.class, DataSerializers.BOOLEAN);
     public float wingb;
     public float wingc;
     public float wingd;
     public float winge;
     public float wingh;
     public boolean textureSet;
-    private int jumpTimer;
     protected EntityAIWanderMoC2 wander;
-    public static final String birdNames[] = {"Dove", "Crow", "Parrot", "Blue", "Canary", "Red"};
-    private static final DataParameter<Boolean> PRE_TAMED = EntityDataManager.<Boolean>createKey(MoCEntityBird.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> IS_FLYING = EntityDataManager.<Boolean>createKey(MoCEntityBird.class, DataSerializers.BOOLEAN);
-    
+    private boolean fleeing;
+    private int jumpTimer;
+
     public MoCEntityBird(World world) {
         super(world);
         setSize(0.4F, 0.3F);
@@ -64,16 +62,11 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
         setTamed(false);
         this.stepHeight = 1.0F;
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-
-            public boolean apply(Entity entity) {
-                return !(entity instanceof MoCEntityBird) && (entity.height > 0.4F || entity.width > 0.4F);
-            }
-        }, 6.0F, 1.D, 1.3D));
+        this.tasks.addTask(2, new EntityAIFleeFromEntityMoC(this, entity -> !(entity instanceof MoCEntityBird) && (entity.height > 0.4F || entity.width > 0.4F), 6.0F, 1.D, 1.3D));
         this.tasks.addTask(3, new EntityAIFollowOwnerPlayer(this, 0.8D, 2F, 10F));
         this.tasks.addTask(4, this.wander = new EntityAIWanderMoC2(this, 1.0D, 80));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -103,13 +96,10 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getTexture("birdblack.png");
             case 3:
                 return MoCreatures.proxy.getTexture("birdgreen.png");
-            case 4:
-                return MoCreatures.proxy.getTexture("birdblue.png");
             case 5:
                 return MoCreatures.proxy.getTexture("birdyellow.png");
             case 6:
                 return MoCreatures.proxy.getTexture("birdred.png");
-
             default:
                 return MoCreatures.proxy.getTexture("birdblue.png");
         }
@@ -118,24 +108,24 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(PRE_TAMED, Boolean.valueOf(false));
-        this.dataManager.register(IS_FLYING, Boolean.valueOf(false));
+        this.dataManager.register(PRE_TAMED, Boolean.FALSE);
+        this.dataManager.register(IS_FLYING, Boolean.FALSE);
     }
 
     public boolean getPreTamed() {
-        return ((Boolean)this.dataManager.get(PRE_TAMED)).booleanValue();
+        return this.dataManager.get(PRE_TAMED);
     }
 
     public void setPreTamed(boolean flag) {
-        this.dataManager.set(PRE_TAMED, Boolean.valueOf(flag));
+        this.dataManager.set(PRE_TAMED, flag);
     }
 
     public boolean getIsFlying() {
-        return ((Boolean)this.dataManager.get(IS_FLYING)).booleanValue();
+        return this.dataManager.get(IS_FLYING);
     }
 
     public void setIsFlying(boolean flag) {
-        this.dataManager.set(IS_FLYING, Boolean.valueOf(flag));
+        this.dataManager.set(IS_FLYING, flag);
     }
 
     @Override
@@ -149,7 +139,8 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
         int k1 = j + 7;
         int l1 = k + 5;
         for (int i2 = l; i2 < j1; i2++) {
-            label0: for (int j2 = i1; j2 < l1; j2++) {
+            label0:
+            for (int j2 = i1; j2 < l1; j2++) {
                 BlockPos pos = new BlockPos(i2, j, j2);
                 IBlockState blockstate = this.world.getBlockState(pos);
                 if (blockstate.getBlock().isAir(blockstate, this.world, pos) || (blockstate.getMaterial() != Material.WOOD)) {
@@ -163,7 +154,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
                     BlockPos pos1 = new BlockPos(i2, l2, j2);
                     IBlockState blockstate1 = this.world.getBlockState(pos1);
                     if (blockstate1.getBlock().isAir(blockstate1, this.world, pos1)) {
-                        return (new int[] {i2, l2 + 2, j2});
+                        return (new int[]{i2, l2 + 2, j2});
                     }
                     l2++;
                 } while (true);
@@ -171,10 +162,10 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
         }
 
-        return (new int[] {0, 0, 0});
+        return (new int[]{0, 0, 0});
     }
 
-    private boolean FlyToNextEntity(Entity entity) {
+    private void FlyToNextEntity(Entity entity) {
         if (entity != null) {
             int i = MathHelper.floor(entity.posX);
             int j = MathHelper.floor(entity.posY);
@@ -205,16 +196,13 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
                     this.motionZ -= 0.050000000000000003D;
                 }
             }
-            return true;
-        } else {
-            return false;
         }
     }
 
     @SuppressWarnings("unused")
     private boolean FlyToNextTree() {
-        int ai[] = ReturnNearestMaterialCoord(this, Material.LEAVES, Double.valueOf(20D));
-        int ai1[] = FindTreeTop(ai[0], ai[1], ai[2]);
+        int[] ai = ReturnNearestMaterialCoord(this, Material.LEAVES, 20D);
+        int[] ai1 = FindTreeTop(ai[0], ai[1], ai[2]);
         if (ai1[1] != 0) {
             int i = ai1[0];
             int j = ai1[1];
@@ -223,8 +211,8 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             if ((j - MathHelper.floor(this.posY)) > 2) {
                 this.motionY += 0.14999999999999999D;
             }
-            int l = 0;
-            int i1 = 0;
+            int l;
+            int i1;
             if (this.posX < i) {
                 l = i - MathHelper.floor(this.posX);
                 this.motionX += 0.050000000000000003D;
@@ -240,9 +228,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
                 this.motionZ -= 0.050000000000000003D;
             }
             double d = l + i1;
-            if (d < 3D) {
-                return true;
-            }
+            return d < 3D;
         }
         return false;
     }
@@ -286,7 +272,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     @Override
     public double getYOffset() {
         if (this.getRidingEntity() instanceof EntityPlayer) {
-            return ((EntityPlayer) this.getRidingEntity()).isSneaking() ? 0.2 : 0.45F;
+            return this.getRidingEntity().isSneaking() ? 0.2 : 0.45F;
         }
 
         return super.getYOffset();
@@ -360,12 +346,11 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
             if (!getIsFlying() && !getIsTamed() && this.rand.nextInt(10) == 0) {
                 List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 4D, 4D));
-                for (int i = 0; i < list.size(); i++) {
-                    Entity entity1 = list.get(i);
+                for (Entity entity1 : list) {
                     if (!(entity1 instanceof EntityLivingBase) || entity1 instanceof MoCEntityBird) {
                         continue;
                     }
-                    if (((EntityLivingBase) entity1).width >= 0.4F && ((EntityLivingBase) entity1).height >= 0.4F && canEntityBeSeen(entity1)) {
+                    if (entity1.width >= 0.4F && entity1.height >= 0.4F && canEntityBeSeen(entity1)) {
                         setIsFlying(true);
                         this.fleeing = true;
                         this.wander.makeUpdate();
@@ -433,7 +418,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     }
 
     public int[] ReturnNearestMaterialCoord(Entity entity, Material material, Double double1) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(double1.doubleValue(), double1.doubleValue(), double1.doubleValue());
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(double1, double1, double1);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);
@@ -445,9 +430,9 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
                 for (int i2 = i1; i2 < j1; i2++) {
                     BlockPos pos = new BlockPos(k1, l1, i2);
                     IBlockState blockstate = this.world.getBlockState(pos);
-                    if (blockstate.getBlock() != null && !blockstate.getBlock().isAir(blockstate, this.world, pos)
-                            && blockstate.getMaterial() == material) {
-                        return (new int[] {k1, l1, i2});
+                    blockstate.getBlock();
+                    if (!blockstate.getBlock().isAir(blockstate, this.world, pos) && blockstate.getMaterial() == material) {
+                        return (new int[]{k1, l1, i2});
                     }
                 }
 
@@ -455,16 +440,14 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
         }
 
-        return (new int[] {-1, 0, 0});
+        return (new int[]{-1, 0, 0});
     }
 
     @Override
     public void setDead() {
         if (!this.world.isRemote && getIsTamed() && (this.getHealth() > 0)) {
-            return;
         } else {
             super.setDead();
-            return;
         }
     }
 
@@ -515,10 +498,9 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     public int minFlyingHeight() {
         return 2;
     }
-    
+
     @Override
-    public boolean canRidePlayer()
-    {
+    public boolean canRidePlayer() {
         return true;
     }
 }

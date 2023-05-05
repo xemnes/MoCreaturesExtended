@@ -13,7 +13,10 @@ import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -25,7 +28,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Set;
 
 public class MoCEntityTurkey extends MoCEntityTameableAnimal {
@@ -63,8 +65,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean isBreedingItem(ItemStack stack)
-    {
+    public boolean isBreedingItem(ItemStack stack) {
         return TEMPTATION_ITEMS.contains(stack.getItem());
     }
 
@@ -107,7 +108,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     @Override
     protected Item getDropItem() {
         boolean flag = (this.rand.nextInt(2) == 0);
-        if (flag  && !this.isChild()) {
+        if (flag && !this.isChild()) {
             return MoCItems.rawTurkey;
         }
         return Items.FEATHER;
@@ -119,7 +120,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
             return false;
         } else if (otherAnimal.getClass() != this.getClass()) {
             return false;
-        } else if (this.isMale() == ((MoCEntityTurkey)otherAnimal).isMale()) {
+        } else if (this.isMale() == ((MoCEntityTurkey) otherAnimal).isMale()) {
             return false;
         } else {
             return this.isInLove() && otherAnimal.isInLove();
@@ -144,7 +145,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
 
             if (this.isChild() && this.isBreedingItem(itemstack)) {
                 this.consumeItemFromStack(player, itemstack);
-                this.ageUp((int)((float)(-this.getGrowingAge() / 20) * 0.1F), true);
+                this.ageUp((int) ((float) (-this.getGrowingAge() / 20) * 0.1F), true);
                 return true;
             }
         }
@@ -184,7 +185,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
                 double d0 = this.rand.nextGaussian() * 0.02D;
                 double d1 = this.rand.nextGaussian() * 0.02D;
                 double d2 = this.rand.nextGaussian() * 0.02D;
-                this.world.spawnParticle(EnumParticleTypes.HEART, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+                this.world.spawnParticle(EnumParticleTypes.HEART, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
             }
         }
     }
@@ -217,7 +218,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
                 double d0 = this.rand.nextGaussian() * 0.02D;
                 double d1 = this.rand.nextGaussian() * 0.02D;
                 double d2 = this.rand.nextGaussian() * 0.02D;
-                this.world.spawnParticle(EnumParticleTypes.HEART, this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, d0, d1, d2);
+                this.world.spawnParticle(EnumParticleTypes.HEART, this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY + 0.5D + (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
             }
         } else {
             super.handleStatusUpdate(id);

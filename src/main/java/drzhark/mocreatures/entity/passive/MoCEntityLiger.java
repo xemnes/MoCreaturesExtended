@@ -25,7 +25,7 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     public void selectType() {
         if (getType() == 0) {
             setType(1);
-    }
+        }
         super.selectType();
     }
 
@@ -65,6 +65,7 @@ public class MoCEntityLiger extends MoCEntityBigCat {
 
         return super.processInteract(player, hand);
     }
+
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         return "Liger";
@@ -110,7 +111,7 @@ public class MoCEntityLiger extends MoCEntityBigCat {
         }
         return entity.height < 2F && entity.width < 2F;
     }
-    
+
     @Override
     public boolean isFlyer() {
         return this.getType() == 2;

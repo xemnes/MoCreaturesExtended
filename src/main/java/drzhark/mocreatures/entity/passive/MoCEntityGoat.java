@@ -34,6 +34,9 @@ import net.minecraft.world.World;
 
 public class MoCEntityGoat extends MoCEntityTameableAnimal {
 
+    private static final DataParameter<Boolean> IS_CHARGING = EntityDataManager.createKey(MoCEntityGoat.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_UPSET = EntityDataManager.createKey(MoCEntityGoat.class, DataSerializers.BOOLEAN);
+    public int movecount;
     private boolean hungry;
     private boolean swingLeg;
     private boolean swingEar;
@@ -42,14 +45,11 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     private boolean eating;
     private int bleatcount;
     private int attacking;
-    public int movecount;
     private int chargecount;
     private int tailcount; // 90 to -45
     private int earcount; // 20 to 40 default = 30
     private int eatcount;
-    private static final DataParameter<Boolean> IS_CHARGING = EntityDataManager.<Boolean>createKey(MoCEntityGoat.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> IS_UPSET = EntityDataManager.<Boolean>createKey(MoCEntityGoat.class, DataSerializers.BOOLEAN);
-    
+
     public MoCEntityGoat(World world) {
         super(world);
         setSize(0.8F, 1F);
@@ -78,24 +78,24 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_CHARGING, Boolean.valueOf(false));
-        this.dataManager.register(IS_UPSET, Boolean.valueOf(false));
+        this.dataManager.register(IS_CHARGING, Boolean.FALSE);
+        this.dataManager.register(IS_UPSET, Boolean.FALSE);
     }
 
     public boolean getUpset() {
-        return ((Boolean)this.dataManager.get(IS_UPSET)).booleanValue();
-    }
-
-    public boolean getCharging() {
-        return ((Boolean)this.dataManager.get(IS_CHARGING)).booleanValue();
+        return this.dataManager.get(IS_UPSET);
     }
 
     public void setUpset(boolean flag) {
-        this.dataManager.set(IS_UPSET, Boolean.valueOf(flag));
+        this.dataManager.set(IS_UPSET, flag);
+    }
+
+    public boolean getCharging() {
+        return this.dataManager.get(IS_CHARGING);
     }
 
     public void setCharging(boolean flag) {
-        this.dataManager.set(IS_CHARGING, Boolean.valueOf(flag));
+        this.dataManager.set(IS_CHARGING, flag);
     }
 
     @Override
@@ -135,8 +135,6 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("goat1.png");
             case 2:
                 return MoCreatures.proxy.getTexture("goat2.png");
             case 3:
@@ -147,9 +145,6 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getTexture("goat5.png");
             case 6:
                 return MoCreatures.proxy.getTexture("goat6.png");
-            case 7:
-                return MoCreatures.proxy.getTexture("goat1.png");
-
             default:
                 return MoCreatures.proxy.getTexture("goat1.png");
         }
@@ -276,7 +271,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
                         getMyOwnPath(entityitem, f);
                         return;
                     }
-                    if ((f < 2.0F) && (entityitem != null) && (this.deathTime == 0) && this.rand.nextInt(50) == 0) {
+                    if (f < 2.0F && this.deathTime == 0 && this.rand.nextInt(50) == 0) {
                         MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
                         setEating(true);
 

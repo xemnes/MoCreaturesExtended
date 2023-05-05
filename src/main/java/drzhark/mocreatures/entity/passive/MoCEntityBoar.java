@@ -32,14 +32,9 @@ public class MoCEntityBoar extends MoCEntityAnimal {
         super(world);
         setSize(0.9F, 0.8F);
         setEdad(this.rand.nextInt(15) + 45);
-        if (this.rand.nextInt(4) == 0) {
-            setAdult(false);
-
-        } else {
-            setAdult(true);
-        }
+        setAdult(this.rand.nextInt(4) != 0);
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -70,19 +65,10 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     }
 
     @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if (entity != this && entity instanceof EntityLivingBase && super.shouldAttackPlayers() && getIsAdult()) {

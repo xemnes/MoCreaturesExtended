@@ -6,11 +6,7 @@ package drzhark.mocreatures.entity.passive;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
-import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -38,11 +34,11 @@ import java.util.List;
 
 public class MoCEntityBunny extends MoCEntityTameableAnimal {
 
+    private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.createKey(MoCEntityBunny.class, DataSerializers.BOOLEAN);
     private int bunnyReproduceTickerA;
     private int bunnyReproduceTickerB;
     private int jumpTimer;
-    private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.<Boolean>createKey(MoCEntityBunny.class, DataSerializers.BOOLEAN);
-    
+
     public MoCEntityBunny(World world) {
         super(world);
         setAdult(true);
@@ -77,15 +73,15 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(HAS_EATEN, Boolean.valueOf(false));
+        this.dataManager.register(HAS_EATEN, Boolean.FALSE);
     }
 
     public boolean getHasEaten() {
-        return ((Boolean)this.dataManager.get(HAS_EATEN)).booleanValue();
+        return this.dataManager.get(HAS_EATEN);
     }
 
     public void setHasEaten(boolean flag) {
-        this.dataManager.set(HAS_EATEN, Boolean.valueOf(flag));
+        this.dataManager.set(HAS_EATEN, flag);
     }
 
     @Override
@@ -108,10 +104,10 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
         Biome currentbiome = MoCTools.Biomekind(this.world, pos);
         try {
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
-                setType(3); //snow white bunnies!
+                setType(3); //snow-white bunnies!
                 return true;
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return true;
     }
@@ -119,8 +115,6 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("bunny.png");
             case 2:
                 return MoCreatures.proxy.getTexture("bunnyb.png");
             case 3:
@@ -129,7 +123,6 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getTexture("bunnyd.png");
             case 5:
                 return MoCreatures.proxy.getTexture("bunnye.png");
-
             default:
                 return MoCreatures.proxy.getTexture("bunny.png");
         }
@@ -209,8 +202,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
                 this.bunnyReproduceTickerB++;
             } else {
                 List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4.0D, 4.0D, 4.0D));
-                for (int i1 = 0; i1 < list1.size(); i1++) {
-                    Entity entity1 = (Entity) list1.get(i1);
+                for (Entity entity1 : list1) {
                     if (!(entity1 instanceof MoCEntityBunny) || (entity1 == this)) {
                         continue;
                     }
@@ -272,7 +264,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     @Override
     public double getYOffset() {
         if (this.getRidingEntity() instanceof EntityPlayer) {
-            return ((EntityPlayer) this.getRidingEntity()).isSneaking() ? 0.25 : 0.5F;
+            return this.getRidingEntity().isSneaking() ? 0.25 : 0.5F;
         }
 
         return super.getYOffset();
@@ -282,10 +274,9 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     public float getAdjustedYOffset() {
         return 0.2F;
     }
-    
+
     @Override
-    public boolean canRidePlayer()
-    {
+    public boolean canRidePlayer() {
         return true;
     }
 }

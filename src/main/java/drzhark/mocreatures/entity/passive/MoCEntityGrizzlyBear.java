@@ -14,12 +14,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class MoCEntityGrizzlyBear extends MoCEntityBear{
+public class MoCEntityGrizzlyBear extends MoCEntityBear {
 
     public MoCEntityGrizzlyBear(World world) {
         super(world);
     }
-    
+
     @Override
     public void selectType() {
         if (getType() == 0) {
@@ -27,7 +27,7 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear{
         }
         super.selectType();
     }
-    
+
     @Override
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getTexture("bearbrown.png");
@@ -37,17 +37,17 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear{
     public float getBearSize() {
         return 1.2F;
     }
-    
+
     @Override
     public int getMaxEdad() {
         return 120;
     }
-    
+
     @Override
     public float calculateMaxHealth() {
         return 40;
     }
-    
+
     public double getAttackRange() {
         int factor = 1;
         if (this.world.getDifficulty().getId() > 1) {
@@ -55,18 +55,18 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear{
         }
         return 6D * factor;
     }
-    
+
     @Override
     public int getAttackStrength() {
         int factor = (this.world.getDifficulty().getId());
         return 3 * factor;
     }
-    
+
     @Override
     public boolean shouldAttackPlayers() {
         return (this.getBrightness() < 0.4F) && super.shouldAttackPlayers();
     }
-    
+
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final Boolean tameResult = this.processTameInteract(player, hand);
@@ -95,7 +95,7 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear{
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
             if (getBearState() == 0) {
                 setBearState(2);
-            }else {
+            } else {
                 setBearState(0);
             }
             return true;
@@ -111,7 +111,7 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear{
 
         return super.processInteract(player, hand);
     }
-    
+
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         return "GrizzlyBear";

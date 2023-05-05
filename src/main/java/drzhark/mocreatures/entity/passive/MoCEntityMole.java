@@ -29,13 +29,13 @@ import net.minecraft.world.World;
 
 public class MoCEntityMole extends MoCEntityTameableAnimal {
 
-    private static final DataParameter<Integer> MOLE_STATE = EntityDataManager.<Integer>createKey(MoCEntityMole.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> MOLE_STATE = EntityDataManager.createKey(MoCEntityMole.class, DataSerializers.VARINT);
 
     public MoCEntityMole(World world) {
         super(world);
         setSize(1F, 0.5F);
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -58,7 +58,7 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(MOLE_STATE, Integer.valueOf(0)); // state - 0 outside / 1 digging / 2 underground / 3 pick-a-boo
+        this.dataManager.register(MOLE_STATE, 0); // state - 0 outside / 1 digging / 2 underground / 3 pick-a-boo
 
     }
 
@@ -90,7 +90,7 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
                 coordZ + Math.sin((MoCTools.realAngle(this.rotationYaw - 90F) / 57.29578F)) * (Math.sin((this.rotationPitch - 90F) / 57.29578F) * x);
         Block block =
                 this.world.getBlockState(
-                        new BlockPos(MathHelper.floor(newPosX), MathHelper.floor(newPosY), MathHelper.floor(newPosZ)))
+                                new BlockPos(MathHelper.floor(newPosX), MathHelper.floor(newPosY), MathHelper.floor(newPosZ)))
                         .getBlock();
         if (isDiggableBlock(Block.getIdFromBlock(block))) {
             this.setPosition(newPosX, newPosY, newPosZ);
@@ -103,16 +103,15 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
      * @return 0 outside / 1 digging / 2 underground / 3 pick-a-boo
      */
     public int getState() {
-        return ((Integer)this.dataManager.get(MOLE_STATE)).intValue();
+        return this.dataManager.get(MOLE_STATE);
     }
 
     /**
      * Changes the state
-     *
-     * @param b 0 outside / 1 digging / 2 underground / 3 pick-a-boo
+     * 0 outside / 1 digging / 2 underground / 3 pick-a-boo
      */
     public void setState(int i) {
-        this.dataManager.set(MOLE_STATE, Integer.valueOf(i));
+        this.dataManager.set(MOLE_STATE, i);
     }
 
     @Override
@@ -120,12 +119,8 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
 
         int i = getState();
         switch (i) {
-            case 0:
-                return 0F;
             case 1:
                 return -45F;
-            case 2:
-                return 0F;
             case 3:
                 return 60F;
             default:
@@ -137,8 +132,6 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
     public float getAdjustedYOffset() {
         int i = getState();
         switch (i) {
-            case 0:
-                return 0F;
             case 1:
                 return 0.3F;
             case 2:
@@ -187,11 +180,7 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
              */
 
             //digging fx
-            if ((getState() == 1 || getState() == 2)) {
-                setSprinting(true);
-            } else {
-                setSprinting(false);
-            }
+            setSprinting(getState() == 1 || getState() == 2);
         }
     }
 

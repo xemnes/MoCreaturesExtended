@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -35,15 +34,11 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
         setAdult(true);
         setTamed(false);
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-            public boolean apply(Entity entity) {
-                return !(entity instanceof MoCEntityDeer) && (entity.height > 0.8F || entity.width > 0.8F);
-            }
-        }, 6.0F, this.getMyAISpeed(), this.getMyAISpeed() * 1.2D));
+        this.tasks.addTask(1, new EntityAIFleeFromEntityMoC(this, entity -> !(entity instanceof MoCEntityDeer) && (entity.height > 0.8F || entity.width > 0.8F), 6.0F, this.getMyAISpeed(), this.getMyAISpeed() * 1.2D));
         this.tasks.addTask(2, new EntityAIPanic(this, this.getMyAISpeed() * 1.2D));
         this.tasks.addTask(4, new EntityAIFollowAdult(this, getMyAISpeed()));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, getMyAISpeed()));
@@ -76,14 +71,11 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
 
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("deer.png");
             case 2:
                 return MoCreatures.proxy.getTexture("deerf.png");
             case 3:
                 setAdult(false);
                 return MoCreatures.proxy.getTexture("deerb.png");
-
             default:
                 return MoCreatures.proxy.getTexture("deer.png");
         }

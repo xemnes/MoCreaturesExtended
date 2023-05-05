@@ -16,12 +16,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class MoCEntityPandaBear extends MoCEntityBear{
+public class MoCEntityPandaBear extends MoCEntityBear {
 
     public MoCEntityPandaBear(World world) {
         super(world);
     }
-    
+
     @Override
     public void selectType() {
         if (getType() == 0) {
@@ -29,27 +29,27 @@ public class MoCEntityPandaBear extends MoCEntityBear{
         }
         super.selectType();
     }
-    
+
     @Override
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getTexture("bearpanda.png");
     }
-    
+
     @Override
     public float getBearSize() {
         return 0.8F;
     }
-    
+
     @Override
     public int getMaxEdad() {
         return 80;
     }
-        
+
     @Override
     public float calculateMaxHealth() {
         return 20;
     }
-    
+
     @Override
     public boolean isReadyToHunt() {
         return false;
@@ -59,21 +59,17 @@ public class MoCEntityPandaBear extends MoCEntityBear{
     public int getAttackStrength() {
         return 1;
     }
-    
+
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
-        if (super.attackEntityFrom(damagesource, i)) {
-            return true;
-        } else {
-            return false;
-        }
+        return super.attackEntityFrom(damagesource, i);
     }
-    
+
     @Override
     public boolean shouldAttackPlayers() {
         return false;
     }
-    
+
     @Override
     public boolean isMyFavoriteFood(ItemStack stack) {
         return this.getType() == 3 && !stack.isEmpty() && stack.getItem() == Items.REEDS;
@@ -83,7 +79,7 @@ public class MoCEntityPandaBear extends MoCEntityBear{
     public boolean isMyHealFood(ItemStack stack) {
         return this.getType() == 3 && !stack.isEmpty() && stack.getItem() == Items.REEDS;
     }
-    
+
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final Boolean tameResult = this.processTameInteract(player, hand);
@@ -113,7 +109,7 @@ public class MoCEntityPandaBear extends MoCEntityBear{
         if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.whip) {
             if (getBearState() == 0) {
                 setBearState(2);
-            }else {
+            } else {
                 setBearState(0);
             }
             return true;
@@ -130,12 +126,12 @@ public class MoCEntityPandaBear extends MoCEntityBear{
 
         return super.processInteract(player, hand);
     }
-    
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        /**
-         * panda bears and cubs will sit down every now and then
+        /*
+         * panda bears and cubs will sit down sometimes
          */
         if (!this.world.isRemote && !getIsTamed() && this.rand.nextInt(300) == 0) {
             setBearState(2);

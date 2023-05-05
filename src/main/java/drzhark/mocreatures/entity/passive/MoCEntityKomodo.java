@@ -6,11 +6,7 @@ package drzhark.mocreatures.entity.passive;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIHunt;
-import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -38,12 +34,12 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
-    private int sitCounter;
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityKomodo.class, DataSerializers.BOOLEAN);
     public int tailCounter;
     public int tongueCounter;
     public int mouthCounter;
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityKomodo.class, DataSerializers.BOOLEAN);
-    
+    private int sitCounter;
+
     public MoCEntityKomodo(World world) {
         super(world);
         setSize(1.6F, 0.5F);
@@ -58,7 +54,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
             setEdad(90 + this.rand.nextInt(20));
         }
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.1D));
@@ -82,17 +78,18 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false));; // rideable: 0 nothing, 1 saddle
+        this.dataManager.register(RIDEABLE, Boolean.FALSE);
+        // rideable: 0 nothing, 1 saddle
     }
 
     @Override
     public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
+        this.dataManager.set(RIDEABLE, flag);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
+        return this.dataManager.get(RIDEABLE);
     }
 
     @Override
@@ -266,14 +263,10 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     public double getMountedYOffset() {
         double yOff = 0.15F;
-        boolean sit = (this.sitCounter != 0);
-        if (sit) {
-            //yOff = -0.5F;
-        }
         if (getIsAdult()) {
             return yOff + (this.height);
         }
-        return this.height * (120 / getEdad());
+        return this.height * ((double) 120 / getEdad());
     }
 
     @Override

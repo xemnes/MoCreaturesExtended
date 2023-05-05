@@ -4,7 +4,6 @@
 package drzhark.mocreatures.entity.passive;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
@@ -30,8 +29,6 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("bcmanticore.png");
             case 2:
                 return MoCreatures.proxy.getTexture("bcmanticoredark.png");
             case 3:
@@ -71,16 +68,6 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
         }
 
         return super.processInteract(player, hand);
-    }
-
-    @Override
-    public String getOffspringClazz(IMoCTameable mate) {
-        return "";
-    }
-
-    @Override
-    public int getOffspringTypeInt(IMoCTameable mate) {
-        return 0;
     }
 
     @Override

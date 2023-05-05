@@ -22,7 +22,7 @@ public class MoCEntityLiard extends MoCEntityBigCat {
     public void selectType() {
         if (getType() == 0) {
             setType(1);
-    }
+        }
         super.selectType();
     }
 
@@ -50,7 +50,7 @@ public class MoCEntityLiard extends MoCEntityBigCat {
 
         return super.processInteract(player, hand);
     }
-    
+
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         return "Liard";
@@ -79,11 +79,6 @@ public class MoCEntityLiard extends MoCEntityBigCat {
     @Override
     public double getAttackRange() {
         return 8D;
-    }
-
-    @Override
-    public int getMaxEdad() {
-        return 100;
     }
 
     @Override

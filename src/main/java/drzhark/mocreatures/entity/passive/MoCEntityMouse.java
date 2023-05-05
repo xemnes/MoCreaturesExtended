@@ -3,23 +3,17 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import java.util.List;
-
-import com.google.common.primitives.Ints;
-
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -68,13 +62,10 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("miceg.png");
             case 2:
                 return MoCreatures.proxy.getTexture("miceb.png");
             case 3:
                 return MoCreatures.proxy.getTexture("micew.png");
-
             default:
                 return MoCreatures.proxy.getTexture("miceg.png");
         }
@@ -89,7 +80,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
                 setType(3); //white mice!
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return true;
     }
@@ -163,16 +154,15 @@ public class MoCEntityMouse extends MoCEntityAnimal {
         if (!this.onGround && (this.getRidingEntity() != null)) {
             this.rotationYaw = this.getRidingEntity().rotationYaw;
         }
-        
+
     }
 
     public boolean upsideDown() {
         return getIsPicked();
     }
-    
+
     @Override
-    public boolean canRidePlayer()
-    {
+    public boolean canRidePlayer() {
         return true;
     }
 }

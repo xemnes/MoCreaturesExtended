@@ -20,11 +20,7 @@ import net.minecraft.block.BlockJukebox.TileEntityJukebox;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
@@ -43,11 +39,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -61,21 +53,19 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
+import java.util.UUID;
 
 public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
-    private int gestationtime;
-    private int countEating;
-    private int textCounter;
-    private int fCounter;
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHESTED = EntityDataManager.createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SITTING = EntityDataManager.createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> BRED = EntityDataManager.createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> ARMOR_TYPE = EntityDataManager.createKey(MoCEntityHorse.class, DataSerializers.VARINT);
     public int shuffleCounter;
     public int wingFlapCounter;
-    private float transFloat = 0.2F;
-
     public MoCAnimalChest localchest;
     public boolean eatenpumpkin;
-    private boolean hasReproduced;
-    private int nightmareInt;
     public ItemStack localstack;
     public int mouthCounter;
     public int standCounter;
@@ -85,11 +75,13 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     public int transformType;
     public int transformCounter;
     protected EntityAIWanderMoC2 wander;
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CHESTED = EntityDataManager.<Boolean>createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SITTING = EntityDataManager.<Boolean>createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> BRED = EntityDataManager.<Boolean>createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> ARMOR_TYPE = EntityDataManager.<Integer>createKey(MoCEntityHorse.class, DataSerializers.VARINT);
+    private int gestationtime;
+    private int countEating;
+    private int textCounter;
+    private int fCounter;
+    private float transFloat = 0.2F;
+    private boolean hasReproduced;
+    private int nightmareInt;
 
     public MoCEntityHorse(World world) {
         super(world);
@@ -103,11 +95,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         this.stepHeight = 1.0F;
 
         if (!this.world.isRemote) {
-            if (this.rand.nextInt(5) == 0) {
-                setAdult(false);
-            } else {
-                setAdult(true);
-            }
+            setAdult(this.rand.nextInt(5) != 0);
         }
     }
 
@@ -129,57 +117,58 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false)); // rideable: 0 nothing, 1 saddle
-        this.dataManager.register(SITTING, Boolean.valueOf(false)); // rideable: 0 nothing, 1 saddle
-        this.dataManager.register(CHESTED, Boolean.valueOf(false));
-        this.dataManager.register(BRED, Boolean.valueOf(false));
-        this.dataManager.register(ARMOR_TYPE, Integer.valueOf(0));
+        this.dataManager.register(RIDEABLE, Boolean.FALSE); // rideable: 0 nothing, 1 saddle
+        this.dataManager.register(SITTING, Boolean.FALSE); // rideable: 0 nothing, 1 saddle
+        this.dataManager.register(CHESTED, Boolean.FALSE);
+        this.dataManager.register(BRED, Boolean.FALSE);
+        this.dataManager.register(ARMOR_TYPE, 0);
     }
 
     @Override
     public int getArmorType() {
-        return ((Integer)this.dataManager.get(ARMOR_TYPE)).intValue();
+        return this.dataManager.get(ARMOR_TYPE);
+    }
+
+    @Override
+    public void setArmorType(int i) {
+        this.dataManager.set(ARMOR_TYPE, i);
     }
 
     public boolean getIsChested() {
-        return ((Boolean)this.dataManager.get(CHESTED)).booleanValue();
+        return this.dataManager.get(CHESTED);
     }
-    
+
+    public void setIsChested(boolean flag) {
+        this.dataManager.set(CHESTED, flag);
+    }
+
     @Override
     public boolean getIsSitting() {
-        return ((Boolean)this.dataManager.get(SITTING)).booleanValue();
+        return this.dataManager.get(SITTING);
     }
 
     public boolean getHasBred() {
-        return ((Boolean)this.dataManager.get(BRED)).booleanValue();
+        return this.dataManager.get(BRED);
     }
 
     public void setBred(boolean flag) {
-        this.dataManager.set(BRED, Boolean.valueOf(flag));
+        this.dataManager.set(BRED, flag);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
-    }
-    @Override
-    public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
-    }
-    
-    @Override
-    public void setArmorType(int i) {
-        this.dataManager.set(ARMOR_TYPE, Integer.valueOf(i));
+        return this.dataManager.get(RIDEABLE);
     }
 
-    public void setIsChested(boolean flag) {
-        this.dataManager.set(CHESTED, Boolean.valueOf(flag));
+    @Override
+    public void setRideable(boolean flag) {
+        this.dataManager.set(RIDEABLE, flag);
     }
 
     public void setSitting(boolean flag) {
-        this.dataManager.set(SITTING, Boolean.valueOf(flag));
+        this.dataManager.set(SITTING, flag);
     }
-    
+
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         Entity entity = damagesource.getTrueSource();
@@ -224,7 +213,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             {
                 setType(this.rand.nextInt(5) + 1);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return true;
     }
@@ -232,11 +221,10 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     /**
      * returns one of the RGB color codes
      *
-     * @param sColor : 1 will return the Red component, 2 will return the Green
-     *        and 3 the blue
+     * @param sColor  : 1 will return the Red component, 2 will return the Green
+     *                and 3 the blue
      * @param typeInt : which set of colors to inquiry about, corresponds with
-     *        the horse types.
-     * @return
+     *                the horse types.
      */
     public float colorFX(int sColor, int typeInt) {
         if (typeInt == 48) // yellow
@@ -477,18 +465,16 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 attackEntityFrom(DamageSource.FALL, i);
             }
             if ((this.isBeingRidden()) && (i > 1F)) {
-                for (Entity entity : this.getRecursivePassengers())
-                {
-                    entity.attackEntityFrom(DamageSource.FALL, (float)i);
+                for (Entity entity : this.getRecursivePassengers()) {
+                    entity.attackEntityFrom(DamageSource.FALL, i);
                 }
             }
-            IBlockState iblockstate = this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.2D - (double)this.prevRotationYaw, this.posZ));
+            IBlockState iblockstate = this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ));
             Block block = iblockstate.getBlock();
 
-            if (iblockstate.getMaterial() != Material.AIR && !this.isSilent())
-            {
-                SoundType soundtype = block.getSoundType(iblockstate, world, new BlockPos(this.posX, this.posY - 0.2D - (double)this.prevRotationYaw, this.posZ), this);
-                this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
+            if (iblockstate.getMaterial() != Material.AIR && !this.isSilent()) {
+                SoundType soundtype = block.getSoundType(iblockstate, world, new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ), this);
+                this.world.playSound(null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
             }
         }
     }
@@ -517,9 +503,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         } else if (getType() > 15 && getType() < 21) // tier 4
         {
             HorseJump = 0.50D;
-        }
-
-        else if (getType() > 20 && getType() < 26) // ghost and undead
+        } else if (getType() > 20 && getType() < 26) // ghost and undead
         {
             HorseJump = 0.45D;
         } else if (getType() > 25 && getType() < 30) // skely
@@ -553,9 +537,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         } else if (getType() > 15 && getType() < 21) // tier 4
         {
             HorseSpeed = 1.2D;
-        }
-
-        else if (getType() > 20 && getType() < 26) // ghost and undead
+        } else if (getType() > 20 && getType() < 26) // ghost and undead
         {
             HorseSpeed = 0.8D;
         } else if (getType() > 25 && getType() < 30) // skely
@@ -565,7 +547,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         {
             HorseSpeed = 1.2D;
         } else if (getType() >= 40 && getType() < 60) // black pegasus and
-                                                      // fairies
+        // fairies
         {
             HorseSpeed = 1.3D;
         } else if (getType() == 60 || getType() == 61) // zebras and zorse
@@ -741,9 +723,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         } else if (getType() > 15 && getType() < 21) // tier 4
         {
             maximumHealth = 40;
-        }
-
-        else if (getType() > 20 && getType() < 26) // ghost and undead
+        } else if (getType() > 20 && getType() < 26) // ghost and undead
         {
             maximumHealth = 35;
         } else if (getType() > 25 && getType() < 30) // skely
@@ -781,6 +761,10 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     public int getNightmareInt() {
         return this.nightmareInt;
+    }
+
+    public void setNightmareInt(int i) {
+        this.nightmareInt = i;
     }
 
     @Override
@@ -843,7 +827,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             case 17:
                 tempTexture = "horsecow.png";
                 break;
-
             case 21:
                 tempTexture = "horseghost.png";
                 break;
@@ -867,9 +850,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 break;
             case 28:
                 tempTexture = "horsepegasusskeleton.png";
-                break;
-            case 30:
-                tempTexture = "horsebug.png";
                 break;
             case 32:
                 tempTexture = "horsebat.png";
@@ -930,7 +910,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             case 59:
                 tempTexture = "horsefairyorange.png";
                 break;
-
             case 60:
                 tempTexture = "horsezebra.png";
                 break;
@@ -946,7 +925,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             case 67:
                 tempTexture = "horsezonky.png";
                 break;
-
             default:
                 tempTexture = "horsebug.png";
         }
@@ -994,11 +972,11 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 if (this.textCounter > max) {
                     this.textCounter = 10;
                 }
-                iteratorTex = "" + this.textCounter;
+                iteratorTex = String.valueOf(this.textCounter);
                 iteratorTex = iteratorTex.substring(0, 1);
             }
 
-            String decayTex = "" + (getEdad() / 100);
+            String decayTex = String.valueOf(getEdad() / 100);
             decayTex = decayTex.substring(0, 1);
             return MoCreatures.proxy.getTexture(baseTex + decayTex + iteratorTex + ".png");
         }
@@ -1009,9 +987,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         if (this.isNightmare()) {
-            if (this.rand.nextInt(1) == 0) {
-                this.textCounter++;
-            }
+            this.rand.nextInt(1);
+            this.textCounter++;
             if (this.textCounter < 10) {
                 this.textCounter = 10;
             }
@@ -1019,7 +996,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 this.textCounter = 10;
             }
             String NTA = "horsenightmare";
-            String NTB = "" + this.textCounter;
+            String NTB = String.valueOf(this.textCounter);
             NTB = NTB.substring(0, 1);
             String NTC = ".png";
 
@@ -1111,19 +1088,20 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     /**
      * New networked to fix SMP issues
-     *
-     * @return
      */
     public byte getVanishC() {
         return (byte) this.vanishCounter;
     }
 
     /**
+     * New networked to fix SMP issues
+     */
+    public void setVanishC(byte i) {
+        this.vanishCounter = i;
+    }
+
+    /**
      * Breeding rules for the horses
-     *
-     * @param entityhorse
-     * @param entityhorse1
-     * @return
      */
     //private int HorseGenetics(MoCEntityHorse entityhorse, MoCEntityHorse entityhorse1)
     private int HorseGenetics(int typeA, int typeB) {
@@ -1153,10 +1131,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         if (typeA > 20 && typeB < 21 || typeB > 20 && typeA < 21) // rare horses plus  ordinary horse always returns ordinary horse
         {
-            if (typeA < typeB) {
-                return typeA;
-            }
-            return typeB;
+            return Math.min(typeA, typeB);
         }
 
         // unicorn plus white pegasus (they will both vanish!)
@@ -1170,7 +1145,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         // rare horse mixture: produces a regular horse 1-5
-        if (typeA > 20 && typeB > 20 && (typeA != typeB)) {
+        if (typeA > 20) {
             return (this.rand.nextInt(5)) + 1;
         }
 
@@ -1398,8 +1373,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             return 9;
         }
 
-        return typeA; // breed is not in the table so it will return the first
-                      // parent type
+        return typeA; // breed is not in the table, so it will return the first
+        // parent type
     }
 
     @Override
@@ -1690,9 +1665,9 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (!stack.isEmpty()
                 && (this.getType() == 60)
                 && ((stack.getItem() == Items.RECORD_11) || (stack.getItem() == Items.RECORD_13) || (stack.getItem() == Items.RECORD_CAT)
-                        || (stack.getItem() == Items.RECORD_CHIRP) || (stack.getItem() == Items.RECORD_FAR)
-                        || (stack.getItem() == Items.RECORD_MALL) || (stack.getItem() == Items.RECORD_MELLOHI)
-                        || (stack.getItem() == Items.RECORD_STAL) || (stack.getItem() == Items.RECORD_STRAD) || (stack.getItem() == Items.RECORD_WARD))) {
+                || (stack.getItem() == Items.RECORD_CHIRP) || (stack.getItem() == Items.RECORD_FAR)
+                || (stack.getItem() == Items.RECORD_MALL) || (stack.getItem() == Items.RECORD_MELLOHI)
+                || (stack.getItem() == Items.RECORD_STAL) || (stack.getItem() == Items.RECORD_STRAD) || (stack.getItem() == Items.RECORD_WARD))) {
             player.setHeldItem(hand, ItemStack.EMPTY);
             if (!this.world.isRemote) {
                 EntityItem entityitem1 = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(MoCItems.recordshuffle, 1));
@@ -1828,7 +1803,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty()
                 && ((stack.getItem() == Item.getItemFromBlock(Blocks.PUMPKIN)) || (stack.getItem() == Items.MUSHROOM_STEW)
-                        || (stack.getItem() == Items.CAKE) || (stack.getItem() == Items.GOLDEN_CARROT))) {
+                || (stack.getItem() == Items.CAKE) || (stack.getItem() == Items.GOLDEN_CARROT))) {
             if (!getIsAdult() || isMagicHorse() || isUndead()) {
                 return false;
             }
@@ -1885,8 +1860,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     /**
      * able to carry bags
-     *
-     * @return
      */
     public boolean isBagger() {
         return (this.getType() == 66) // mule
@@ -1897,7 +1870,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 || (this.getType() == 25) // undead pegasi
                 || (this.getType() == 28) // skely pegasi
                 || (this.getType() >= 45 && this.getType() < 60) // fairy
-        ;
+                ;
     }
 
     /**
@@ -1924,8 +1897,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     /**
      * Is this a ghost horse?
-     *
-     * @return
      */
     @Override
     public boolean getIsGhost() {
@@ -1939,8 +1910,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     public boolean isMagicHorse() {
         return
 
-        this.getType() == 39 || this.getType() == 36 || this.getType() == 32 || this.getType() == 40 || (this.getType() >= 45 && this.getType() < 60) //fairy
-                || this.getType() == 21 || this.getType() == 22;
+                this.getType() == 39 || this.getType() == 36 || this.getType() == 32 || this.getType() == 40 || (this.getType() >= 45 && this.getType() < 60) //fairy
+                        || this.getType() == 21 || this.getType() == 22;
     }
 
     @Override
@@ -1968,8 +1939,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     /**
      * Mobs don't attack you if you're riding one of these they won't reproduce
      * either
-     *
-     * @return
      */
     public boolean isUndead() {
         return (this.getType() == 23) || (this.getType() == 24) || (this.getType() == 25) || (this.getType() == 26) // skely
@@ -1978,9 +1947,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     }
 
     /**
-     * Has an unicorn? to render it and buckle entities!
-     *
-     * @return
+     * Has a unicorn? to render it and buckle entities!
      */
     public boolean isUnicorned() {
 
@@ -2035,7 +2002,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         boolean flag = false;
         TileEntityJukebox jukebox = MoCTools.nearJukeBoxRecord(this, 6D);
-        if (jukebox != null && jukebox.getRecord() != null) {
+        if (jukebox != null) {
             Item record = jukebox.getRecord().getItem();
             Item shuffleRecord = MoCItems.recordshuffle;
             if (record == shuffleRecord) {
@@ -2069,7 +2036,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 event =
                         new BlockEvent.BreakEvent(this.world, pos, blockstate, FakePlayerFactory.get(
                                 DimensionManager.getWorld(this.world.provider.getDimensionType().getId()), MoCreatures.MOCFAKEPLAYER));
-            } catch (Throwable t) {
+            } catch (Throwable ignored) {
             }
 
         }
@@ -2118,7 +2085,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     @Override
     public void onLivingUpdate() {
-        /**
+        /*
          * slow falling
          */
         if (isFlyer() || isFloater()) {
@@ -2179,7 +2146,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         super.onLivingUpdate();
 
         if (!this.world.isRemote) {
-            /**
+            /*
              * Shuffling LMFAO!
              */
             if (this.getType() == 60 && getIsTamed() && this.rand.nextInt(50) == 0 && nearMusicBox() && shuffleCounter == 0) {
@@ -2208,7 +2175,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 NightmareEffect();
             }
 
-            /**
+            /*
              * zebras on the run!
              */
             /*
@@ -2216,7 +2183,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 boolean flag = isZebraRunning();
             }*/
 
-            /**
+            /*
              * foal following mommy!
              */
             /*if (!getIsAdult() && (this.rand.nextInt(200) == 0)) {
@@ -2231,7 +2198,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 }
             }*/
 
-            /**
+            /*
              * Buckling
              */
             if ((this.sprintCounter > 0 && this.sprintCounter < 150) && isUnicorned() && (this.isBeingRidden())) {
@@ -2249,8 +2216,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             int i = 0;
 
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(8D, 3D, 8D));
-            for (int j = 0; j < list.size(); j++) {
-                Entity entity = list.get(j);
+            for (Entity entity : list) {
                 if (entity instanceof MoCEntityHorse || entity instanceof EntityHorse) {
                     i++;
                 }
@@ -2260,8 +2226,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 return;
             }
             List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
-            for (int k = 0; k < list1.size(); k++) {
-                Entity horsemate = list1.get(k);
+            for (Entity horsemate : list1) {
                 boolean flag = (horsemate instanceof EntityHorse);
                 if (!(horsemate instanceof MoCEntityHorse || flag) || (horsemate == this)) {
                     continue;
@@ -2318,7 +2283,11 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 baby.setTamed(true);
                 //baby.setBred(true);
                 baby.setAdult(false);
-                EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.getOwnerId());
+                UUID ownerId = this.getOwnerId();
+                EntityPlayer entityplayer = null;
+                if (ownerId != null) {
+                    entityplayer = this.world.getPlayerEntityByUUID(this.getOwnerId());
+                }
                 if (entityplayer != null) {
                     MoCTools.tameWithName(entityplayer, baby);
                 }
@@ -2331,9 +2300,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     /**
      * Obtains the 'Type' of vanilla horse for inbreeding with MoC Horses
-     *
-     * @param horse
-     * @return
      */
     private int TranslateVanillaHorseType(AbstractHorse horse) {
         if (horse instanceof EntityDonkey) {
@@ -2372,7 +2338,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 double var4 = this.rand.nextGaussian() * -0.1D;
                 double var6 = this.rand.nextGaussian() * 0.02D;
                 this.world.spawnParticle(EnumParticleTypes.NOTE, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY
-                        + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var2, var4,
+                                + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var2, var4,
                         var6);
             }
 
@@ -2482,35 +2448,35 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     /**
      * Horse Types
-     *
+     * <p>
      * 1 White . 2 Creamy. 3 Brown. 4 Dark Brown. 5 Black.
-     *
+     * <p>
      * 6 Bright Creamy. 7 Speckled. 8 Pale Brown. 9 Grey. 10 11 Pinto . 12
      * Bright Pinto . 13 Pale Speckles.
-     *
+     * <p>
      * 16 Spotted 17 Cow.
-     *
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
+     * <p>
      * 21 Ghost (winged) 22 Ghost B
-     *
+     * <p>
      * 23 Undead 24 Undead Unicorn 25 Undead Pegasus
-     *
+     * <p>
      * 26 skeleton 27 skeleton unicorn 28 skeleton pegasus
-     *
+     * <p>
      * 30 bug horse
-     *
+     * <p>
      * 32 Bat Horse
-     *
+     * <p>
      * 36 Unicorn
-     *
+     * <p>
      * 38 Nightmare? 39 White Pegasus 40 Black Pegasus
-     *
+     * <p>
      * 50 fairy white 51 fairy blue 52 fairy pink 53 fairy light green
-     *
+     * <p>
      * 60 Zebra 61 Zorse
-     *
+     * <p>
      * 65 Donkey 66 Mule 67 Zonky
      */
 
@@ -2535,21 +2501,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
     }
 
-    public void setNightmareInt(int i) {
-        this.nightmareInt = i;
-    }
-
     public void setReproduced(boolean var1) {
         this.hasReproduced = var1;
-    }
-
-    /**
-     * New networked to fix SMP issues
-     *
-     * @return
-     */
-    public void setVanishC(byte i) {
-        this.vanishCounter = i;
     }
 
     private void stand() {
@@ -2564,8 +2517,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     /**
      * Used to flicker ghosts
-     *
-     * @return
      */
     public float tFloat() {
         if (++this.fCounter > 60) {
@@ -2656,7 +2607,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             for (int i = 0; i < this.localchest.getSizeInventory(); i++) {
                 // grab the current item stack
                 this.localstack = this.localchest.getStackInSlot(i);
-                if (this.localstack != null && !this.localstack.isEmpty()) {
+                if (!this.localstack.isEmpty()) {
                     NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                     nbttagcompound1.setByte("Slot", (byte) i);
                     this.localstack.writeToNBT(nbttagcompound1);
@@ -2682,7 +2633,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             for (int i = 0; i < nbttaglist.tagCount(); i++) {
                 NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
                 int j = nbttagcompound1.getByte("Slot") & 0xff;
-                if ((j >= 0) && j < this.localchest.getSizeInventory()) {
+                if (j < this.localchest.getSizeInventory()) {
                     this.localchest.setInventorySlotContents(j, new ItemStack(nbttagcompound1));
                 }
             }
@@ -2722,11 +2673,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     @Override
     protected boolean canBeTrappedInNet() {
         return getIsTamed() && !isAmuletHorse();
-    }
-
-    @Override
-    public int getMaxSpawnedInChunk() {
-        return 4;
     }
 
     @Override

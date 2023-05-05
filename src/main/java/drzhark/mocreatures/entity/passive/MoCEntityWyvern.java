@@ -47,25 +47,22 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
+    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CHESTED = EntityDataManager.createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SITTING = EntityDataManager.createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> GHOST = EntityDataManager.createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FLYING = EntityDataManager.createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Integer> ARMOR_TYPE = EntityDataManager.createKey(MoCEntityWyvern.class, DataSerializers.VARINT);
     public MoCAnimalChest localchest;
     public ItemStack localstack;
     public int mouthCounter;
     public int wingFlapCounter;
     public int diveCounter;
-    public static final String wyvernNames[] = {"Jungle", "Swamp", "Savanna", "Sand", "Mother", "Undead", "Light", "Dark", "Arctic", "Cave",
-            "Mountain", "Sea"};
-
     protected EntityAIWanderMoC2 wander;
     private int transformType;
     private int transformCounter;
     private int tCounter;
     private float fTransparency;
-    private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.<Boolean>createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CHESTED = EntityDataManager.<Boolean>createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> SITTING = EntityDataManager.<Boolean>createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> GHOST = EntityDataManager.<Boolean>createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> FLYING = EntityDataManager.<Boolean>createKey(MoCEntityWyvern.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> ARMOR_TYPE = EntityDataManager.<Integer>createKey(MoCEntityWyvern.class, DataSerializers.VARINT);
 
 
     public MoCEntityWyvern(World world) {
@@ -104,65 +101,65 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(RIDEABLE, Boolean.valueOf(false)); // rideable: 0 nothing, 1 saddle
-        this.dataManager.register(SITTING, Boolean.valueOf(false)); // rideable: 0 nothing, 1 saddle
-        this.dataManager.register(CHESTED, Boolean.valueOf(false));
-        this.dataManager.register(FLYING, Boolean.valueOf(false));
-        this.dataManager.register(GHOST, Boolean.valueOf(false));
-        this.dataManager.register(ARMOR_TYPE, Integer.valueOf(0));// armor 0 by default, 1 metal, 2 gold, 3 diamond, 4 crystaline
+        this.dataManager.register(RIDEABLE, Boolean.FALSE); // rideable: 0 nothing, 1 saddle
+        this.dataManager.register(SITTING, Boolean.FALSE); // rideable: 0 nothing, 1 saddle
+        this.dataManager.register(CHESTED, Boolean.FALSE);
+        this.dataManager.register(FLYING, Boolean.FALSE);
+        this.dataManager.register(GHOST, Boolean.FALSE);
+        this.dataManager.register(ARMOR_TYPE, 0);// armor 0 by default, 1 metal, 2 gold, 3 diamond, 4 crystaline
     }
 
     public boolean getIsFlying() {
-        return ((Boolean)this.dataManager.get(FLYING)).booleanValue();
+        return this.dataManager.get(FLYING);
     }
 
     public void setIsFlying(boolean flag) {
-        this.dataManager.set(FLYING, Boolean.valueOf(flag));
+        this.dataManager.set(FLYING, flag);
     }
 
     @Override
     public int getArmorType() {
-        return ((Integer)this.dataManager.get(ARMOR_TYPE)).intValue();
+        return this.dataManager.get(ARMOR_TYPE);
     }
 
     @Override
     public void setArmorType(int i) {
-        this.dataManager.set(ARMOR_TYPE, Integer.valueOf(i));
+        this.dataManager.set(ARMOR_TYPE, i);
     }
 
     @Override
     public boolean getIsRideable() {
-        return ((Boolean)this.dataManager.get(RIDEABLE)).booleanValue();
+        return this.dataManager.get(RIDEABLE);
     }
 
     @Override
     public void setRideable(boolean flag) {
-        this.dataManager.set(RIDEABLE, Boolean.valueOf(flag));
+        this.dataManager.set(RIDEABLE, flag);
     }
 
     public boolean getIsChested() {
-        return ((Boolean)this.dataManager.get(CHESTED)).booleanValue();
+        return this.dataManager.get(CHESTED);
     }
 
     public void setIsChested(boolean flag) {
-        this.dataManager.set(CHESTED, Boolean.valueOf(flag));
+        this.dataManager.set(CHESTED, flag);
     }
 
     @Override
     public boolean getIsSitting() {
-        return ((Boolean)this.dataManager.get(SITTING)).booleanValue();
+        return this.dataManager.get(SITTING);
     }
 
     public void setSitting(boolean flag) {
-        this.dataManager.set(SITTING, Boolean.valueOf(flag));
+        this.dataManager.set(SITTING, flag);
     }
 
     public boolean getIsGhost() {
-        return ((Boolean)this.dataManager.get(GHOST)).booleanValue();
+        return this.dataManager.get(GHOST);
     }
 
     public void setIsGhost(boolean flag) {
-        this.dataManager.set(GHOST, Boolean.valueOf(flag));
+        this.dataManager.set(GHOST, flag);
     }
 
     @Override
@@ -227,13 +224,13 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     }
 
     /**
-    * 1-4 regular wyverns
-    * 5 mother wyvern
-    * 6 undead
-    * 7 light
-    * 8 darkness
-    * 9-12 extra wyverns
-    */
+     * 1-4 regular wyverns
+     * 5 mother wyvern
+     * 6 undead
+     * 7 light
+     * 8 darkness
+     * 9-12 extra wyverns
+     */
     @Override
     public ResourceLocation getTexture() {
         if (this.transformCounter != 0 && this.transformType > 5) {
@@ -267,8 +264,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getTexture("wyvernmix.png");
             case 3:
                 return MoCreatures.proxy.getTexture("wyvernsand.png");
-            case 4:
-                return MoCreatures.proxy.getTexture("wyvernsun.png");
             case 5:
                 return MoCreatures.proxy.getTexture("wyvernmother.png");
             case 6:
@@ -285,8 +280,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getTexture("wyvernmountain.png");
             case 12:
                 return MoCreatures.proxy.getTexture("wyvernsea.png");
-                //case 13:
-                //    return MoCreatures.proxy.getTexture("wyvernghost.png");
             default:
                 return MoCreatures.proxy.getTexture("wyvernsun.png");
         }
@@ -406,11 +399,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         if (getIsTamed())
             return 5;
         return 18;
-    }
-
-    @Override
-    public int minFlyingHeight() {
-        return 1;
     }
 
     @Override
@@ -698,7 +686,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         Entity entity = damagesource.getTrueSource();
-        if (this.isRidingOrBeingRiddenBy(entity)) {
+        if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
             return false;
         }
         if (super.attackEntityFrom(damagesource, i)) {
@@ -731,7 +719,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             NBTTagList nbttaglist = new NBTTagList();
             for (int i = 0; i < this.localchest.getSizeInventory(); i++) {
                 this.localstack = this.localchest.getStackInSlot(i);
-                if (this.localstack != null && !this.localstack.isEmpty()) {
+                if (!this.localstack.isEmpty()) {
                     NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                     nbttagcompound1.setByte("Slot", (byte) i);
                     this.localstack.writeToNBT(nbttagcompound1);
@@ -756,7 +744,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             for (int i = 0; i < nbttaglist.tagCount(); i++) {
                 NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
                 int j = nbttagcompound1.getByte("Slot") & 0xff;
-                if ((j >= 0) && j < this.localchest.getSizeInventory()) {
+                if (j < this.localchest.getSizeInventory()) {
                     this.localchest.setInventorySlotContents(j, new ItemStack(nbttagcompound1));
                 }
             }

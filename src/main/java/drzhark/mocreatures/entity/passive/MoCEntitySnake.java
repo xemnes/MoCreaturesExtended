@@ -6,11 +6,7 @@ package drzhark.mocreatures.entity.passive;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
-import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIHunt;
-import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -42,27 +38,23 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 /**
  * Biome - specific Forest Desert plains Swamp Jungle Tundra Taiga Extreme Hills
  * Ocean
- *
+ * <p>
  * swamp: python, bright green, #1 plains: coral, cobra #1, #2, #3, #4 desert:
  * rattlesnake , #2 jungle: all except rattlesnake hills: all except python,
  * bright green, bright orange tundra-taiga: none ocean: leave alone
- *
  */
 
 public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
+    public float bodyswing;
     private float fTongue;
     private float fMouth;
     private boolean isBiting;
     private float fRattle;
     private boolean isPissed;
     private int hissCounter;
-
     private int movInt;
     private boolean isNearPlayer;
-    public float bodyswing;
-
-    public static final String snakeNames[] = {"Dark", "Spotted", "Orange", "Green", "Coral", "Cobra", "Rattle", "Python"};
 
     public MoCEntitySnake(World world) {
         super(world);
@@ -103,7 +95,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         // 5 coral (aggressive - venomous) small / plains, forest
         // 6 cobra (aggressive - venomous - spitting) plains, forest
         // 7 rattlesnake (aggressive - venomous) desert
-        // 8 python (aggressive - non venomous) big - swamp
+        // 8 python (aggressive - non-venomous) big - swamp
         // 9 sea snake (aggressive - venomous)
         if (getType() == 0) {
             setType(this.rand.nextInt(8) + 1);
@@ -113,8 +105,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("snake1.png");
             case 2:
                 return MoCreatures.proxy.getTexture("snake2.png");
             case 3:
@@ -145,19 +135,9 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
     @Override
     // snakes can't jump
-            protected
-            void jump() {
+    protected void jump() {
         if (this.isInWater()) {
             super.jump();
-        }
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
         }
     }
 
@@ -189,16 +169,11 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
     @Override
     public boolean isNotScared() {
-        if (getType() > 2 && getEdad() > 50) {
-            return true;
-        }
-        return false;
+        return getType() > 2 && getEdad() > 50;
     }
 
     /**
      * returns true when is climbing up
-     *
-     * @return
      */
     public boolean isClimbing() {
         return isOnLadder() && this.motionY > 0.01F;
@@ -212,22 +187,17 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         return (this.isNearPlayer || this.isBiting());
     }
 
+    public void setNearPlayer(boolean flag) {
+        this.isNearPlayer = flag;
+    }
+
     public int getMovInt() {
         return this.movInt;
     }
 
     @Override
-    public boolean swimmerEntity() {
-        return false;
-    }
-
-    @Override
     public boolean canBreatheUnderwater() {
         return true;
-    }
-
-    public void setNearPlayer(boolean flag) {
-        this.isNearPlayer = flag;
     }
 
     @Override
@@ -295,21 +265,21 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
-            /**
+            /*
              * stick tongue
              */
             if (this.rand.nextInt(50) == 0 && getfTongue() == 0.0F) {
                 setfTongue(0.1F);
             }
 
-            /**
+            /*
              * Open mouth
              */
             if (this.rand.nextInt(100) == 0 && getfMouth() == 0.0F) {
                 setfMouth(0.1F);
             }
             if (getType() == 7) {
-                int chance = 0;
+                int chance;
                 if (getNearPlayer()) {
                     chance = 30;
                 } else {
@@ -320,14 +290,14 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setfRattle(0.1F);
                 }
             }
-            /**
+            /*
              * change in movement pattern
              */
             if (!isResting() && !pickedUp() && this.rand.nextInt(50) == 0) {
                 this.movInt = this.rand.nextInt(10);
             }
 
-            /**
+            /*
              * Biting animation
              */
             if (isBiting()) {
@@ -386,8 +356,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     /**
      * from 0.0 to 4.0F 0.0 = inside mouth 2.0 = completely stuck out 3.0 =
      * returning 4.0 = in.
-     *
-     * @return
      */
     public float getfTongue() {
         return this.fTongue;
@@ -417,7 +385,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        /**
+        /*
          * this stops chasing the target randomly
          */
         if (getAttackTarget() != null && this.rand.nextInt(300) == 0) {
@@ -428,11 +396,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         if (entityplayer1 != null) {
             double distP = MoCTools.getSqDistanceTo(entityplayer1, this.posX, this.posY, this.posZ);
             if (isNotScared()) {
-                if (distP < 5D) {
-                    setNearPlayer(true);
-                } else {
-                    setNearPlayer(false);
-                }
+                setNearPlayer(distP < 5D);
 
                 /*if (entityplayer1.isBeingRidden()
                         && (entityplayer1.riddenByEntity instanceof MoCEntityMouse || entityplayer1.riddenByEntity instanceof MoCEntityBird)) {
@@ -497,7 +461,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if ((entity != this) && entity instanceof EntityLivingBase && (super.shouldAttackPlayers())) {
@@ -556,7 +520,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     @Override
     public boolean checkSpawningBiome() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
-        /**
+        /*
          * swamp: python, bright green, #1 (done) plains: coral, cobra #1, #2,
          * #3, #4 (everyone but 7) desert: rattlesnake , #2 jungle: all except
          * rattlesnake forest: all except rattlesnake hills: all except python,
@@ -564,7 +528,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
          * leave alone
          */
 
-        /**
+        /*
          * Biome lists: Ocean Plains Desert Extreme Hills Forest Taiga Swampland
          * River Frozen Ocean Frozen River Ice Plains Ice Mountains Mushroom
          * Island Mushroom Island Shore Beach DesertHills ForestHills TaigaHills
@@ -609,7 +573,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setType(1);
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         return true;
     }
@@ -665,14 +629,12 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean canRidePlayer()
-    {
+    public boolean canRidePlayer() {
         return true;
     }
 
-     @Override
-     protected double maxDivingDepth()
-     {
-         return 1D * (this.getEdad()/100D);
-     }
+    @Override
+    protected double maxDivingDepth() {
+        return (this.getEdad() / 100D);
+    }
 }

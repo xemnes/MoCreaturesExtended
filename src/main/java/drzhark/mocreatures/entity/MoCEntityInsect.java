@@ -23,11 +23,10 @@ import java.util.List;
 
 public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
-    private int climbCounter;
-    protected EntityAIWanderMoC2 wander;
-
     private static final DataParameter<Boolean> IS_FLYING = EntityDataManager.createKey(MoCEntityInsect.class, DataSerializers.BOOLEAN);
-    
+    protected EntityAIWanderMoC2 wander;
+    private int climbCounter;
+
     public MoCEntityInsect(World world) {
         super(world);
         setSize(0.2F, 0.2F);
@@ -152,7 +151,8 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
         /*if (this.isInWater() && this.isAmphibian()) {
             return this.navigatorWater;
         }
-        */if (this.getIsFlying()) {
+        */
+        if (this.getIsFlying()) {
             return this.navigatorFlyer;
         }
         return this.navigator;

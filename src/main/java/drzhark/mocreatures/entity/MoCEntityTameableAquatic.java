@@ -37,20 +37,19 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
 public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTameable {
 
-    protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(MoCEntityTameableAquatic.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-    protected static final DataParameter<Integer> PET_ID = EntityDataManager.<Integer>createKey(MoCEntityTameableAquatic.class, DataSerializers.VARINT);
-    protected static final DataParameter<Boolean> TAMED = EntityDataManager.<Boolean>createKey(MoCEntityTameableAquatic.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.createKey(MoCEntityTameableAquatic.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    protected static final DataParameter<Integer> PET_ID = EntityDataManager.createKey(MoCEntityTameableAquatic.class, DataSerializers.VARINT);
+    protected static final DataParameter<Boolean> TAMED = EntityDataManager.createKey(MoCEntityTameableAquatic.class, DataSerializers.BOOLEAN);
 
     private boolean hasEaten;
     private int gestationtime;
-    
+
     public MoCEntityTameableAquatic(World world) {
         super(world);
     }
@@ -58,7 +57,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(OWNER_UNIQUE_ID, Optional.<UUID>absent());
+        this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
         this.dataManager.register(PET_ID, -1);
         this.dataManager.register(TAMED, false);
     }
@@ -91,16 +90,13 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
     public boolean getIsTamed() {
         return this.dataManager.get(TAMED);
     }
-    
+
     @Nullable
     public EntityLivingBase getOwner() {
-        try
-        {
+        try {
             UUID uuid = this.getOwnerId();
             return uuid == null ? null : this.world.getPlayerEntityByUUID(uuid);
-        }
-        catch (IllegalArgumentException var2)
-        {
+        } catch (IllegalArgumentException var2) {
             return null;
         }
     }
@@ -116,8 +112,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         //this avoids damage done by Players to a tamed creature that is not theirs
-        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && entity != null
-                && entity instanceof EntityPlayer && !((EntityPlayer) entity).getUniqueID().equals(this.getOwnerId())
+        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && entity instanceof EntityPlayer && !entity.getUniqueID().equals(this.getOwnerId())
                 && !MoCTools.isThisPlayerAnOP((EntityPlayer) entity)) {
             return false;
         }
@@ -193,10 +188,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         //changes name
         if (!this.world.isRemote && !stack.isEmpty() && getIsTamed()
                 && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK || stack.getItem() == Items.NAME_TAG)) {
-            if (MoCTools.tameWithName(player, this)) {
-                return true;
-            }
-            return false;
+            return MoCTools.tameWithName(player, this);
         }
 
         //sets it free, untamed
@@ -307,7 +299,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         if (getOwnerPetId() != -1) {
             nbttagcompound.setInteger("PetId", this.getOwnerPetId());
         }
-        if (this instanceof IMoCTameable && getIsTamed() && MoCreatures.instance.mapData != null) {
+        if (getIsTamed() && MoCreatures.instance.mapData != null) {
             MoCreatures.instance.mapData.updateOwnerPet(this);
         }
     }
@@ -317,12 +309,10 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         super.readEntityFromNBT(nbttagcompound);
         setTamed(nbttagcompound.getBoolean("Tamed"));
         String s = "";
-        if (nbttagcompound.hasKey("OwnerUUID", 8))
-        {
+        if (nbttagcompound.hasKey("OwnerUUID", 8)) {
             s = nbttagcompound.getString("OwnerUUID");
         }
-        if (!s.isEmpty())
-        {
+        if (!s.isEmpty()) {
             this.setOwnerId(UUID.fromString(s));
         }
         if (nbttagcompound.hasKey("PetId")) {
@@ -346,7 +336,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
                         }
                     }
                 }
-            } else // no pet data was found, mocreatures.dat could of been deleted so reset petId to -1
+            } else // no pet data was found, mocreatures.dat could have been deleted so reset petId to -1
             {
                 this.setOwnerPetId(-1);
             }
@@ -355,10 +345,10 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
 
     /**
      * If the rider should be dismounted from the entity when the entity goes
-     * under water
+     * underwater
      *
      * @param rider The entity that is riding
-     * @return if the entity should be dismounted when under water
+     * @return if the entity should be dismounted when underwater
      */
     @Override
     public boolean shouldDismountInWater(Entity rider) {
@@ -437,7 +427,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
     public boolean compatibleMate(Entity mate) {
         return mate instanceof IMoCTameable;
     }
-    
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
@@ -466,8 +456,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         int i = 0;
 
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(8D, 3D, 8D));
-        for (int j = 0; j < list.size(); j++) {
-            Entity entity = list.get(j);
+        for (Entity entity : list) {
             if (compatibleMate(entity)) {
                 i++;
             }
@@ -478,8 +467,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
-        for (int k = 0; k < list1.size(); k++) {
-            Entity mate = list1.get(k);
+        for (Entity mate : list1) {
             if (!(compatibleMate(mate)) || (mate == this)) {
                 continue;
             }
@@ -492,7 +480,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
                 return;
             }
 
-            setGestationTime(getGestationTime()+1);
+            setGestationTime(getGestationTime() + 1);
             if (!this.world.isRemote) {
                 MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHeart(this.getEntityId()),
                         new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
@@ -507,7 +495,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
                 String offspringName = this.getOffspringClazz((IMoCTameable) mate);
 
                 EntityLiving offspring = (EntityLiving) EntityList.createEntityByIDFromName(new ResourceLocation(MoCConstants.MOD_PREFIX + offspringName.toLowerCase()), this.world);
-                if (offspring != null && offspring instanceof IMoCTameable) {
+                if (offspring instanceof IMoCTameable) {
                     IMoCTameable baby = (IMoCTameable) offspring;
                     ((EntityLiving) baby).setPosition(this.posX, this.posY, this.posZ);
                     this.world.spawnEntity((EntityLiving) baby);
@@ -517,14 +505,18 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
                     baby.setOwnerId(this.getOwnerId());
                     baby.setType(getOffspringTypeInt((IMoCTameable) mate));
 
-                    EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.getOwnerId());
+                    UUID ownerId = this.getOwnerId();
+                    EntityPlayer entityplayer = null;
+                    if (ownerId != null) {
+                        entityplayer = this.world.getPlayerEntityByUUID(this.getOwnerId());
+                    }
                     if (entityplayer != null) {
                         MoCTools.tameWithName(entityplayer, baby);
                     }
                 }
                 MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
 
             this.setHasEaten(false);
@@ -533,11 +525,6 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
             ((IMoCTameable) mate).setGestationTime(0);
             break;
         }
-    }
-
-    @Override
-    public void setHasEaten(boolean flag) {
-        hasEaten = flag;
     }
 
     /**
@@ -549,8 +536,8 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
     }
 
     @Override
-    public void setGestationTime(int time) {
-        gestationtime = time;
+    public void setHasEaten(boolean flag) {
+        hasEaten = flag;
     }
 
     /**
@@ -559,5 +546,10 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
     @Override
     public int getGestationTime() {
         return gestationtime;
+    }
+
+    @Override
+    public void setGestationTime(int time) {
+        gestationtime = time;
     }
 }

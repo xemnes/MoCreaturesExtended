@@ -3,10 +3,14 @@
  */
 package drzhark.mocreatures.entity;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.google.common.primitives.Ints;
+import drzhark.mocreatures.MoCTools;
+import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
+import drzhark.mocreatures.entity.item.MoCEntityEgg;
+import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
+import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
+import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
@@ -29,13 +33,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
-import drzhark.mocreatures.entity.item.MoCEntityEgg;
-import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
-import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
-import drzhark.mocreatures.entity.passive.MoCEntityHorse;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEntity {
 
@@ -88,16 +87,13 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     @Override
-    public void setType(int i) {
-        this.dataManager.set(TYPE, i);
-    }
-
-    @Override
     public int getType() {
         return this.dataManager.get(TYPE);
     }
 
-    public void setDisplayName(boolean flag) {
+    @Override
+    public void setType(int i) {
+        this.dataManager.set(TYPE, i);
     }
 
     @Override
@@ -205,7 +201,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     public boolean isSwimming() {
-        return ((isInsideOfMaterial(Material.WATER)));
+        return isInsideOfMaterial(Material.WATER);
     }
 
     /**
@@ -327,7 +323,9 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
                 entity.onCollideWithPlayer(entityplayer);
                 if (!(entity instanceof EntityMob)) continue;
                 float f = getDistance(entity);
-                if ((f < 2.0F)) {this.rand.nextInt(10);}
+                if ((f < 2.0F)) {
+                    this.rand.nextInt(10);
+                }
             }
             if (entityplayer.isSneaking()) {
                 if (!this.world.isRemote) {
@@ -374,8 +372,8 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         boolean willSpawn;
         boolean debug = false;
         willSpawn = this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-            && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0
-            && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
+                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0
+                && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
         if (willSpawn && debug)
             System.out.println("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
         return willSpawn;
@@ -402,8 +400,8 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     /**
-    * Used for flyer mounts, to calculate fall speed
-    */
+     * Used for flyer mounts, to calculate fall speed
+     */
     protected double myFallSpeed() {
         return 0.6D;
     }
@@ -653,7 +651,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     /**
      * Returns true if the entity is of the @link{EnumCreatureType} provided
      *
-     * @param type The EnumCreatureType type this entity is evaluating
+     * @param type          The EnumCreatureType type this entity is evaluating
      * @param forSpawnCount If this is being invoked to check spawn count caps.
      * @return If the creature is of the type provided
      */

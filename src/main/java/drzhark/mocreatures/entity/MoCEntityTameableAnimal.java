@@ -12,11 +12,7 @@ import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageHeart;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -38,19 +34,18 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
 public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTameable, IEntityOwnable {
 
-    protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.<Optional<UUID>>createKey(MoCEntityTameableAnimal.class, DataSerializers.OPTIONAL_UNIQUE_ID);
-    protected static final DataParameter<Integer> PET_ID = EntityDataManager.<Integer>createKey(MoCEntityTameableAnimal.class, DataSerializers.VARINT);
-    protected static final DataParameter<Boolean> TAMED = EntityDataManager.<Boolean>createKey(MoCEntityTameableAnimal.class, DataSerializers.BOOLEAN);
+    protected static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.createKey(MoCEntityTameableAnimal.class, DataSerializers.OPTIONAL_UNIQUE_ID);
+    protected static final DataParameter<Integer> PET_ID = EntityDataManager.createKey(MoCEntityTameableAnimal.class, DataSerializers.VARINT);
+    protected static final DataParameter<Boolean> TAMED = EntityDataManager.createKey(MoCEntityTameableAnimal.class, DataSerializers.BOOLEAN);
     private boolean hasEaten;
     private int gestationtime;
-    
+
     public MoCEntityTameableAnimal(World world) {
         super(world);
     }
@@ -58,7 +53,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(OWNER_UNIQUE_ID, Optional.<UUID>absent());
+        this.dataManager.register(OWNER_UNIQUE_ID, Optional.absent());
         this.dataManager.register(PET_ID, -1);
         this.dataManager.register(TAMED, false);
     }
@@ -81,7 +76,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
     public void setOwnerId(@Nullable UUID uniqueId) {
         this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(uniqueId));
     }
-    
+
     @Override
     public void setTamed(boolean tamed) {
         this.dataManager.set(TAMED, tamed);
@@ -94,13 +89,10 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
 
     @Nullable
     public EntityLivingBase getOwner() {
-        try
-        {
+        try {
             UUID uuid = this.getOwnerId();
             return uuid == null ? null : this.world.getPlayerEntityByUUID(uuid);
-        }
-        catch (IllegalArgumentException var2)
-        {
+        } catch (IllegalArgumentException var2) {
             return null;
         }
     }
@@ -113,8 +105,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         //this avoids damage done by Players to a tamed creature that is not theirs
-        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && entity != null
-                && entity instanceof EntityPlayer && !((EntityPlayer) entity).getUniqueID().equals(this.getOwnerId())
+        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && entity instanceof EntityPlayer && !entity.getUniqueID().equals(this.getOwnerId())
                 && !MoCTools.isThisPlayerAnOP((EntityPlayer) entity)) {
             return false;
         }
@@ -183,10 +174,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         //changes name
         if (!this.world.isRemote && !stack.isEmpty() && getIsTamed()
                 && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK || stack.getItem() == Items.NAME_TAG)) {
-            if (MoCTools.tameWithName(player, this)) {
-                return true;
-            }
-            return false;
+            return MoCTools.tameWithName(player, this);
         }
         //sets it free, untamed
         if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollFreedom))) {
@@ -313,7 +301,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         if (getOwnerPetId() != -1) {
             nbttagcompound.setInteger("PetId", this.getOwnerPetId());
         }
-        if (this instanceof IMoCTameable && getIsTamed() && MoCreatures.instance.mapData != null) {
+        if (getIsTamed() && MoCreatures.instance.mapData != null) {
             MoCreatures.instance.mapData.updateOwnerPet(this);
         }
     }
@@ -323,12 +311,10 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         super.readEntityFromNBT(nbttagcompound);
         setTamed(nbttagcompound.getBoolean("Tamed"));
         String s = "";
-        if (nbttagcompound.hasKey("OwnerUUID", 8))
-        {
+        if (nbttagcompound.hasKey("OwnerUUID", 8)) {
             s = nbttagcompound.getString("OwnerUUID");
         }
-        if (!s.isEmpty())
-        {
+        if (!s.isEmpty()) {
             this.setOwnerId(UUID.fromString(s));
         }
         if (nbttagcompound.hasKey("PetId")) {
@@ -432,7 +418,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
     public boolean compatibleMate(Entity mate) {
         return mate instanceof IMoCTameable;
     }
-    
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
@@ -454,7 +440,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             }
         }
     }
-    
+
     /**
      * Breeding code
      */
@@ -462,8 +448,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         int i = 0;
 
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(8D, 3D, 8D));
-        for (int j = 0; j < list.size(); j++) {
-            Entity entity = list.get(j);
+        for (Entity entity : list) {
             if (compatibleMate(entity)) {
                 i++;
             }
@@ -474,8 +459,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
-        for (int k = 0; k < list1.size(); k++) {
-            Entity mate = list1.get(k);
+        for (Entity mate : list1) {
             if (!(compatibleMate(mate)) || (mate == this)) {
                 continue;
             }
@@ -488,7 +472,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
                 return;
             }
 
-            setGestationTime(getGestationTime()+1);
+            setGestationTime(getGestationTime() + 1);
             if (!this.world.isRemote) {
                 MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHeart(this.getEntityId()),
                         new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
@@ -503,7 +487,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
                 String offspringName = this.getOffspringClazz((IMoCTameable) mate);
 
                 EntityLiving offspring = (EntityLiving) EntityList.createEntityByIDFromName(new ResourceLocation(MoCConstants.MOD_PREFIX + offspringName.toLowerCase()), this.world);
-                if (offspring != null && offspring instanceof IMoCTameable) {
+                if (offspring instanceof IMoCTameable) {
                     IMoCTameable baby = (IMoCTameable) offspring;
                     ((EntityLiving) baby).setPosition(this.posX, this.posY, this.posZ);
                     this.world.spawnEntity((EntityLiving) baby);
@@ -513,14 +497,18 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
                     baby.setOwnerId(this.getOwnerId());
                     baby.setType(getOffspringTypeInt((IMoCTameable) mate));
 
-                    EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.getOwnerId());
+                    UUID ownerId = this.getOwnerId();
+                    EntityPlayer entityplayer = null;
+                    if (ownerId != null) {
+                        entityplayer = this.world.getPlayerEntityByUUID(this.getOwnerId());
+                    }
                     if (entityplayer != null) {
                         MoCTools.tameWithName(entityplayer, baby);
                     }
                 }
                 MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
 
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
 
             this.setHasEaten(false);
@@ -529,11 +517,6 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             ((IMoCTameable) mate).setGestationTime(0);
             break;
         }
-    }
-
-    @Override
-    public void setHasEaten(boolean flag) {
-        hasEaten = flag;
     }
 
     /**
@@ -545,8 +528,8 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
     }
 
     @Override
-    public void setGestationTime(int time) {
-        gestationtime = time;
+    public void setHasEaten(boolean flag) {
+        hasEaten = flag;
     }
 
     /**
@@ -558,7 +541,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
     }
 
     @Override
-    public boolean getIsGhost() {
-        return false;
+    public void setGestationTime(int time) {
+        gestationtime = time;
     }
 }

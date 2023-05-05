@@ -20,8 +20,6 @@ import net.minecraft.world.World;
 
 public class MoCEntityPiranha extends MoCEntitySmallFish {
 
-    public static final String fishNames[] = {"Piranha"};
-
     public MoCEntityPiranha(World world) {
         super(world);
     }
@@ -51,15 +49,15 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
         return MoCreatures.proxy.getTexture("smallfish_piranha.png");
     }
 
-    /* protected Entity findPlayerToAttack() {
-         if ((this.world.getDifficulty().getId() > 0)) {
-             EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 12D);
-             if ((entityplayer != null) && entityplayer.isInWater() && !getIsTamed()) {
-                 return entityplayer;
-             }
-         }
-         return null;
-     }*/
+    protected Entity findPlayerToAttack() {
+        if ((this.world.getDifficulty().getId() > 0)) {
+            EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 12D);
+            if ((entityplayer != null) && entityplayer.isInWater() && !getIsTamed()) {
+                return entityplayer;
+            }
+        }
+        return null;
+    }
 
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
@@ -74,10 +72,8 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
                 }
                 return true;
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override

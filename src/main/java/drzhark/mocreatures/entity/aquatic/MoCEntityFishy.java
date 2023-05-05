@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
@@ -31,11 +30,10 @@ import java.util.List;
 
 public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
+    public static final String[] fishNames = {"Blue", "Orange", "Cyan", "Greeny", "Green", "Purple", "Yellow", "Striped", "Yellowy", "Red"};
+    private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.createKey(MoCEntityFishy.class, DataSerializers.BOOLEAN);
     public int gestationtime;
 
-    public static final String fishNames[] = {"Blue", "Orange", "Cyan", "Greeny", "Green", "Purple", "Yellow", "Striped", "Yellowy", "Red"};
-    private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.<Boolean>createKey(MoCEntityFishy.class, DataSerializers.BOOLEAN);
-    
     public MoCEntityFishy(World world) {
         super(world);
         setSize(0.3F, 0.3F);
@@ -45,12 +43,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.3D));
-        this.tasks.addTask(3, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-
-            public boolean apply(Entity entity) {
-                return (entity.height > 0.3F || entity.width > 0.3F);
-            }
-        }, 2.0F, 0.6D, 1.5D));
+        this.tasks.addTask(3, new EntityAIFleeFromEntityMoC(this, entity -> (entity.height > 0.3F || entity.width > 0.3F), 2.0F, 0.6D, 1.5D));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 1.0D, 80));
     }
 
@@ -71,8 +64,6 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("fishy1.png");
             case 2:
                 return MoCreatures.proxy.getTexture("fishy2.png");
             case 3:
@@ -99,17 +90,17 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(HAS_EATEN, Boolean.valueOf(false));
+        this.dataManager.register(HAS_EATEN, Boolean.FALSE);
     }
 
     public boolean getHasEaten() {
-        return ((Boolean)this.dataManager.get(HAS_EATEN)).booleanValue();
+        return this.dataManager.get(HAS_EATEN);
     }
 
     public void setHasEaten(boolean flag) {
-        this.dataManager.set(HAS_EATEN, Boolean.valueOf(flag));
+        this.dataManager.set(HAS_EATEN, flag);
     }
-    
+
     @Override
     protected void dropFewItems(boolean flag, int x) {
         int i = this.rand.nextInt(100);
@@ -144,8 +135,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
             }
             int i = 0;
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 3D, 4D));
-            for (int j = 0; j < list.size(); j++) {
-                Entity entity = list.get(j);
+            for (Entity entity : list) {
                 if (entity instanceof MoCEntityFishy) {
                     i++;
                 }
@@ -244,11 +234,6 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     }
 
     @Override
-    protected double minDivingDepth() {
-        return 0.2D;
-    }
-
-    @Override
     protected double maxDivingDepth() {
         return 2.0D;
     }
@@ -256,11 +241,6 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     @Override
     public float getSizeFactor() {
         return getEdad() * 0.01F;
-    }
-    
-    @Override
-    public float getAdjustedZOffset() {
-        return 0F;
     }
 
     @Override
@@ -270,7 +250,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
         }
         return 0F;
     }
-    
+
     @Override
     public float getAdjustedYOffset() {
         if (!this.isInsideOfMaterial(Material.WATER)) {

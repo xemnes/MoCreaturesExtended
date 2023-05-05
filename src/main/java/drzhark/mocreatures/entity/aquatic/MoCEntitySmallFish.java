@@ -3,14 +3,12 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCItems;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -21,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
 
-    public static final String fishNames[] = {"Anchovy", "Angelfish", "Angler", "Clownfish", "Goldfish", "Hippotang", "Manderin"};
+    public static final String[] fishNames = {"Anchovy", "Angelfish", "Angler", "Clownfish", "Goldfish", "Hippotang", "Manderin"};
 
     public MoCEntitySmallFish(World world) {
         super(world);
@@ -58,12 +56,7 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAIPanicMoC(this, 1.3D));
-        this.tasks.addTask(2, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-
-            public boolean apply(Entity entity) {
-                return (entity.height > 0.3F || entity.width > 0.3F);
-            }
-        }, 2.0F, 0.6D, 1.5D));
+        this.tasks.addTask(2, new EntityAIFleeFromEntityMoC(this, entity -> (entity.height > 0.3F || entity.width > 0.3F), 2.0F, 0.6D, 1.5D));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 1.0D, 80));
     }
 
@@ -92,8 +85,6 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
                 return MoCreatures.proxy.getTexture("smallfish_angelfish.png");
             case 3:
                 return MoCreatures.proxy.getTexture("smallfish_angler.png");
-            case 4:
-                return MoCreatures.proxy.getTexture("smallfish_clownfish.png");
             case 5:
                 return MoCreatures.proxy.getTexture("smallfish_goldfish.png");
             case 6:
@@ -180,11 +171,6 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
     }
 
     @Override
-    public float getAdjustedXOffset() {
-        return 0F;
-    }
-
-    @Override
     protected boolean usesNewAI() {
         return true;
     }
@@ -197,11 +183,6 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
     @Override
     public boolean isMovementCeased() {
         return !isInWater();
-    }
-
-    @Override
-    protected double minDivingDepth() {
-        return 0.2D;
     }
 
     @Override
@@ -218,7 +199,7 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
     public boolean isNotScared() {
         return getIsTamed();
     }
-    
+
     @Override
     public float getAdjustedZOffset() {
         if (!isInWater()) {
@@ -226,7 +207,7 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
         }
         return 0F;
     }
-    
+
     protected int getEggNumber() {
         return 80;
     }

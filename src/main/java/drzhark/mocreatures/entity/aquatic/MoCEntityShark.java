@@ -3,19 +3,26 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.MoCEntityAquatic;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.item.MoCEntityEgg;
+import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class MoCEntityShark extends MoCEntityTameableAquatic {
 
@@ -51,7 +58,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i) && (this.world.getDifficulty().getId() > 0)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if (entity != this && entity instanceof EntityLivingBase) {
@@ -81,7 +88,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         }
     }
 
-    /*protected Entity findPlayerToAttack() {
+    protected Entity findPlayerToAttack() {
         if ((this.world.getDifficulty().getId() > 0) && (getEdad() >= 100)) {
             EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 16D);
             if ((entityplayer != null) && entityplayer.isInWater() && !getIsTamed()) {
@@ -89,28 +96,30 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
             }
         }
         return null;
-    }*/
+    }
 
-    /* public EntityLivingBase FindTarget(Entity entity, double d) {
-         double d1 = -1D;
-         EntityLivingBase entityliving = null;
-         List list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
-         for (int i = 0; i < list.size(); i++) {
-             Entity entity1 = (Entity) list.get(i);
-             if (!(entity1 instanceof EntityLivingBase) || (entity1 instanceof MoCEntityAquatic) || (entity1 instanceof MoCEntityEgg)
-                     || (entity1 instanceof EntityPlayer) || ((entity1 instanceof EntityWolf) && !(MoCreatures.proxy.attackWolves))
-                     || ((entity1 instanceof MoCEntityHorse) && !(MoCreatures.proxy.attackHorses))
-                     || ((entity1 instanceof MoCEntityDolphin) && (getIsTamed() || !(MoCreatures.proxy.attackDolphins)))) {
-                 continue;
-             }
-             double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-             if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1)) && ((EntityLivingBase) entity1).canEntityBeSeen(entity)) {
-                 d1 = d2;
-                 entityliving = (EntityLivingBase) entity1;
-             }
-         }
-         return entityliving;
-     }*/
+    public EntityLivingBase FindTarget(Entity entity, double d) {
+        double d1 = -1D;
+        EntityLivingBase entityliving = null;
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        for (Entity o : list) {
+            if (!(o instanceof EntityLivingBase) || (o instanceof MoCEntityAquatic) || (o instanceof MoCEntityEgg)
+                    || (o instanceof EntityPlayer) || ((o instanceof EntityWolf) && !(MoCreatures.proxy.attackWolves))
+                    || ((o instanceof MoCEntityHorse) && !(MoCreatures.proxy.attackHorses))) {
+                continue;
+            } else {
+                if ((o instanceof MoCEntityDolphin)) {
+                    getIsTamed();
+                }
+            }
+            double d2 = o.getDistanceSq(entity.posX, entity.posY, entity.posZ);
+            if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1)) && ((EntityLivingBase) o).canEntityBeSeen(entity)) {
+                d1 = d2;
+                entityliving = (EntityLivingBase) o;
+            }
+        }
+        return entityliving;
+    }
 
     @Override
     public void onLivingUpdate() {
@@ -128,10 +137,8 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     @Override
     public void setDead() {
         if (!this.world.isRemote && getIsTamed() && (getHealth() > 0)) {
-            return;
         } else {
             super.setDead();
-            return;
         }
     }
 

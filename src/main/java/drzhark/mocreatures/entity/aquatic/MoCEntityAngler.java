@@ -7,13 +7,13 @@ import drzhark.mocreatures.MoCreatures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class MoCEntityAngler extends MoCEntitySmallFish{
+public class MoCEntityAngler extends MoCEntitySmallFish {
 
     public MoCEntityAngler(World world) {
         super(world);
         this.setType(3);
     }
-    
+
     @Override
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getTexture("smallfish_angler.png");

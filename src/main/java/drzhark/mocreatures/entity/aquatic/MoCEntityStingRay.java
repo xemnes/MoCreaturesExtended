@@ -82,9 +82,7 @@ public class MoCEntityStingRay extends MoCEntityRay {
                 }
                 return true;
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 }

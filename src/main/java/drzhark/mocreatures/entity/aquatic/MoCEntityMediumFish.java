@@ -3,13 +3,11 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import com.google.common.base.Predicate;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -19,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
 
-    public static final String fishNames[] = {"Salmon", "Cod", "Bass"};
+    public static final String[] fishNames = {"Salmon", "Cod", "Bass"};
 
     public MoCEntityMediumFish(World world) {
         super(world);
@@ -43,12 +41,7 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
 
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(3, new EntityAIFleeFromEntityMoC(this, new Predicate<Entity>() {
-
-            public boolean apply(Entity entity) {
-                return (entity.height > 0.6F && entity.width > 0.3F);
-            }
-        }, 2.0F, 0.6D, 1.5D));
+        this.tasks.addTask(3, new EntityAIFleeFromEntityMoC(this, entity -> (entity.height > 0.6F && entity.width > 0.3F), 2.0F, 0.6D, 1.5D));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 1.0D, 50));
     }
 
@@ -144,11 +137,6 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
         if (!isInWater()) {
             return 0.2F;
         }
-        return 0F;
-    }
-
-    @Override
-    public float getAdjustedXOffset() {
         return 0F;
     }
 

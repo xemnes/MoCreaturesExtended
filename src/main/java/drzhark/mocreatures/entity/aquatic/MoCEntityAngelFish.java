@@ -7,7 +7,7 @@ import drzhark.mocreatures.MoCreatures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class MoCEntityAngelFish extends MoCEntitySmallFish{
+public class MoCEntityAngelFish extends MoCEntitySmallFish {
 
     public MoCEntityAngelFish(World world) {
         super(world);

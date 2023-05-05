@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 
 public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
+    private static final DataParameter<Boolean> GLOWS = EntityDataManager.createKey(MoCEntityJellyFish.class, DataSerializers.BOOLEAN);
     private int poisoncounter;
-    private static final DataParameter<Boolean> GLOWS = EntityDataManager.<Boolean>createKey(MoCEntityJellyFish.class, DataSerializers.BOOLEAN);
-    
+
     public MoCEntityJellyFish(World world) {
         super(world);
         setSize(0.3F, 0.5F);
@@ -32,7 +32,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     protected void initEntityAI() {
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 0.5D, 120));
     }
-    
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -50,15 +50,15 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(GLOWS, Boolean.valueOf(false));
-    }
-
-    public void setGlowing(boolean flag) {
-        this.dataManager.set(GLOWS, Boolean.valueOf(flag));
+        this.dataManager.register(GLOWS, Boolean.FALSE);
     }
 
     public boolean isGlowing() {
-        return (((Boolean)this.dataManager.get(GLOWS)).booleanValue());
+        return (this.dataManager.get(GLOWS));
+    }
+
+    public void setGlowing(boolean flag) {
+        this.dataManager.set(GLOWS, flag);
     }
 
     @Override
@@ -69,8 +69,6 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("jellyfisha.png");
             case 2:
                 return MoCreatures.proxy.getTexture("jellyfishb.png");
             case 3:
@@ -93,7 +91,6 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
                 return MoCreatures.proxy.getTexture("jellyfishk.png");
             case 12:
                 return MoCreatures.proxy.getTexture("jellyfishl.png");
-
             default:
                 return MoCreatures.proxy.getTexture("jellyfisha.png");
         }
@@ -135,8 +132,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
     @Override
     public int nameYOffset() {
-        int yOff = (int) (getEdad() * -1 / 2.3);
-        return yOff;
+        return (int) (getEdad() * -1 / 2.3);
     }
 
     @Override
@@ -152,10 +148,5 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     @Override
     protected boolean canBeTrappedInNet() {
         return true;
-    }
-
-    @Override
-    public int getMaxEdad() {
-        return 100;
     }
 }

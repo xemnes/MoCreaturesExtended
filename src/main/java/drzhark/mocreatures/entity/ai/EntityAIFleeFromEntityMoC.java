@@ -18,6 +18,14 @@ import java.util.List;
 
 public class EntityAIFleeFromEntityMoC extends EntityAIBase {
 
+    private final double farSpeed;
+    private final double nearSpeed;
+    private final float avoidDistance;
+    private final Predicate<Entity> avoidTargetSelector;
+    /**
+     * The entity we are attached to
+     */
+    protected EntityCreature entity;
     public final Predicate<Entity> canBeSeenSelector = new Predicate<Entity>() {
 
         public boolean isApplicable(Entity entityIn) {
@@ -29,14 +37,7 @@ public class EntityAIFleeFromEntityMoC extends EntityAIBase {
             return this.isApplicable(p_apply_1_);
         }
     };
-    /** The entity we are attached to */
-    protected EntityCreature entity;
-    private double farSpeed;
-    private double nearSpeed;
     protected Entity closestLivingEntity;
-    private float avoidDistance;
-    private Predicate<Entity> avoidTargetSelector;
-
     private double randPosX;
     private double randPosY;
     private double randPosZ;
@@ -66,8 +67,8 @@ public class EntityAIFleeFromEntityMoC extends EntityAIBase {
 
         List<Entity> list =
                 this.entity.world.getEntitiesInAABBexcluding(this.entity,
-                        this.entity.getEntityBoundingBox().expand((double) this.avoidDistance, 3.0D, (double) this.avoidDistance),
-                        Predicates.and(new Predicate[] {EntitySelectors.NOT_SPECTATING, this.canBeSeenSelector, this.avoidTargetSelector}));
+                        this.entity.getEntityBoundingBox().expand(this.avoidDistance, 3.0D, this.avoidDistance),
+                        Predicates.and(EntitySelectors.NOT_SPECTATING, this.canBeSeenSelector, this.avoidTargetSelector));
 
         if (list.isEmpty()) {
             return false;

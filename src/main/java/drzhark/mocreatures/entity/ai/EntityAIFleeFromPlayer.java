@@ -12,7 +12,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class EntityAIFleeFromPlayer extends EntityAIBase {
 
-    private EntityCreature entityCreature;
+    private final EntityCreature entityCreature;
     protected double speed;
     protected double distance;
     private double randPosX;
@@ -56,10 +56,7 @@ public class EntityAIFleeFromPlayer extends EntityAIBase {
 
     protected boolean IsNearPlayer(double d) {
         EntityPlayer entityplayer1 = this.entityCreature.world.getClosestPlayerToEntity(this.entityCreature, d);
-        if (entityplayer1 != null) {
-            return true;
-        }
-        return false;
+        return entityplayer1 != null;
     }
 
     /**

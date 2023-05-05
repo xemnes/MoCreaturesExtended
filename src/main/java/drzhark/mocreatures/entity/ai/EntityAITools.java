@@ -11,10 +11,7 @@ public class EntityAITools {
 
     protected static boolean IsNearPlayer(EntityLiving entityliving, double d) {
         EntityPlayer entityplayer1 = entityliving.world.getClosestPlayerToEntity(entityliving, d);
-        if (entityplayer1 != null) {
-            return true;
-        }
-        return false;
+        return entityplayer1 != null;
     }
 
     protected static EntityPlayer getIMoCTameableOwner(IMoCTameable pet) {
@@ -23,7 +20,7 @@ public class EntityAITools {
         }
 
         for (int i = 0; i < ((EntityLiving) pet).world.playerEntities.size(); ++i) {
-            EntityPlayer entityplayer = (EntityPlayer) ((EntityLiving) pet).world.playerEntities.get(i);
+            EntityPlayer entityplayer = ((EntityLiving) pet).world.playerEntities.get(i);
 
             if (pet.getOwnerId().equals(entityplayer.getUniqueID())) {
                 return entityplayer;

@@ -65,9 +65,8 @@ public class PathNavigateFlyer extends PathNavigate {
      * pos1, pos2, entityXSize, entityYSize, entityZSize
      */
     @Override
-    protected boolean isDirectPathBetweenPoints(Vec3d posVec31, Vec3d posVec32, int sizeX, int sizeY, int sizeZ)
-    {
-        RayTraceResult raytraceresult = this.world.rayTraceBlocks(posVec31, new Vec3d(posVec32.x, posVec32.y + (double)this.entity.height * 0.5D, posVec32.z), false, true, false);
+    protected boolean isDirectPathBetweenPoints(Vec3d posVec31, Vec3d posVec32, int sizeX, int sizeY, int sizeZ) {
+        RayTraceResult raytraceresult = this.world.rayTraceBlocks(posVec31, new Vec3d(posVec32.x, posVec32.y + (double) this.entity.height * 0.5D, posVec32.z), false, true, false);
         return raytraceresult == null || raytraceresult.typeOfHit == RayTraceResult.Type.MISS;
     }
 }

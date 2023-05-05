@@ -7,12 +7,13 @@ import drzhark.mocreatures.entity.IMoCEntity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityAIFollowHerd extends EntityAIBase {
 
-    /** The child that is following its parent. */
+    /**
+     * The child that is following its parent.
+     */
     EntityLiving theAnimal;
     EntityLiving herdAnimal;
     double moveSpeed;
@@ -48,10 +49,8 @@ public class EntityAIFollowHerd extends EntityAIBase {
                         this.theAnimal.getEntityBoundingBox().expand(this.maxRange, 4.0D, this.maxRange));
         EntityLiving entityliving = null;
         double d0 = Double.MAX_VALUE;
-        Iterator<EntityLiving> iterator = list.iterator();
 
-        while (iterator.hasNext()) {
-            EntityLiving entityliving1 = iterator.next();
+        for (EntityLiving entityliving1 : list) {
             double d1 = this.theAnimal.getDistanceSq(entityliving1);
             if (d1 >= this.minRange && this.theAnimal != entityliving1) {
                 d0 = d1;

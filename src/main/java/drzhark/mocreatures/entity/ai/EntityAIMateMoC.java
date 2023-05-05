@@ -1,35 +1,38 @@
 package drzhark.mocreatures.entity.ai;
 
-import java.util.List;
-import java.util.Random;
-
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.passive.MoCEntityTurkey;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
+import java.util.List;
+import java.util.Random;
+
 public class EntityAIMateMoC extends EntityAIBase {
     private final MoCEntityTameableAnimal animal;
-    private final Class <? extends MoCEntityTameableAnimal> mateClass;
+    private final Class<? extends MoCEntityTameableAnimal> mateClass;
     World world;
-    private MoCEntityTameableAnimal targetMate;
-    /** Delay preventing a baby from spawning immediately when two mate-able animals find each other. */
+    /**
+     * Delay preventing a baby from spawning immediately when two mate-able animals find each other.
+     */
     int spawnBabyDelay;
-    /** The speed the creature moves at during mating behavior. */
+    /**
+     * The speed the creature moves at during mating behavior.
+     */
     double moveSpeed;
+    private MoCEntityTameableAnimal targetMate;
 
     public EntityAIMateMoC(MoCEntityTameableAnimal animal, double speedIn) {
         this(animal, speedIn, animal.getClass());
     }
 
-    public EntityAIMateMoC(MoCEntityTameableAnimal p_i47306_1_, double p_i47306_2_, Class <? extends MoCEntityTameableAnimal > p_i47306_4_) {
+    public EntityAIMateMoC(MoCEntityTameableAnimal p_i47306_1_, double p_i47306_2_, Class<? extends MoCEntityTameableAnimal> p_i47306_4_) {
         this.animal = p_i47306_1_;
         this.world = p_i47306_1_.world;
         this.mateClass = p_i47306_4_;
@@ -68,7 +71,7 @@ public class EntityAIMateMoC extends EntityAIBase {
      * Keep ticking a continuous task that has already been started
      */
     public void updateTask() {
-        this.animal.getLookHelper().setLookPositionWithEntity(this.targetMate, 10.0F, (float)this.animal.getVerticalFaceSpeed());
+        this.animal.getLookHelper().setLookPositionWithEntity(this.targetMate, 10.0F, (float) this.animal.getVerticalFaceSpeed());
         this.animal.getNavigator().tryMoveToEntityLiving(this.targetMate, this.moveSpeed);
         ++this.spawnBabyDelay;
 
@@ -81,16 +84,13 @@ public class EntityAIMateMoC extends EntityAIBase {
      * Loops through nearby animals and finds another animal of the same type that can be mated with. Returns the first
      * valid mate found.
      */
-    private MoCEntityTameableAnimal getNearbyMate()
-    {
-        List<MoCEntityTameableAnimal> list = this.world.<MoCEntityTameableAnimal>getEntitiesWithinAABB(mateClass, this.animal.getEntityBoundingBox().grow(8.0D));
+    private MoCEntityTameableAnimal getNearbyMate() {
+        List<MoCEntityTameableAnimal> list = this.world.getEntitiesWithinAABB(mateClass, this.animal.getEntityBoundingBox().grow(8.0D));
         double d0 = Double.MAX_VALUE;
         MoCEntityTameableAnimal entityanimal = null;
 
-        for (MoCEntityTameableAnimal entityanimal1 : list)
-        {
-            if (this.animal.canMateWith(entityanimal1) && this.animal.getDistanceSq(entityanimal1) < d0)
-            {
+        for (MoCEntityTameableAnimal entityanimal1 : list) {
+            if (this.animal.canMateWith(entityanimal1) && this.animal.getDistanceSq(entityanimal1) < d0) {
                 entityanimal = entityanimal1;
                 d0 = this.animal.getDistanceSq(entityanimal1);
             }
@@ -133,7 +133,7 @@ public class EntityAIMateMoC extends EntityAIBase {
             entityageable.setLocationAndAngles(this.animal.posX, this.animal.posY, this.animal.posZ, 0.0F, 0.0F);
             if (entityageable instanceof MoCEntityTurkey) {
                 // Randomly select sex of spawn.
-                ((MoCEntityTurkey)entityageable).selectType();
+                ((MoCEntityTurkey) entityageable).selectType();
             }
 
             this.world.spawnEntity(entityageable);
@@ -143,9 +143,9 @@ public class EntityAIMateMoC extends EntityAIBase {
                 double d0 = random.nextGaussian() * 0.02D;
                 double d1 = random.nextGaussian() * 0.02D;
                 double d2 = random.nextGaussian() * 0.02D;
-                double d3 = random.nextDouble() * (double)this.animal.width * 2.0D - (double)this.animal.width;
-                double d4 = 0.5D + random.nextDouble() * (double)this.animal.height;
-                double d5 = random.nextDouble() * (double)this.animal.width * 2.0D - (double)this.animal.width;
+                double d3 = random.nextDouble() * (double) this.animal.width * 2.0D - (double) this.animal.width;
+                double d4 = 0.5D + random.nextDouble() * (double) this.animal.height;
+                double d5 = random.nextDouble() * (double) this.animal.width * 2.0D - (double) this.animal.width;
                 this.world.spawnParticle(EnumParticleTypes.HEART, this.animal.posX + d3, this.animal.posY + d4, this.animal.posZ + d5, d0, d1, d2);
             }
 

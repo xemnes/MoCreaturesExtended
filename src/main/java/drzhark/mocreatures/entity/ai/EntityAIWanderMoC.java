@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.EntityAIWander;
 
 public class EntityAIWanderMoC extends EntityAIWander {
 
-    private EntityCreature entityCreature;
+    private final EntityCreature entityCreature;
 
     public EntityAIWanderMoC(EntityCreature creature, double speedIn) {
         super(creature, speedIn);

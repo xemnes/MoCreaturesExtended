@@ -18,31 +18,26 @@ import javax.annotation.Nullable;
 
 public class FlyNodeProcessor extends NodeProcessor {
 
-    public PathPoint getStart()
-    {
+    public PathPoint getStart() {
         return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(this.entity.getEntityBoundingBox().minY + 0.5D), MathHelper.floor(this.entity.getEntityBoundingBox().minZ));
     }
 
     /**
      * Returns PathPoint for given coordinates
      */
-    public PathPoint getPathPointToCoords(double x, double y, double z)
-    {
-        return this.openPoint(MathHelper.floor(x - (double)(this.entity.width / 2.0F)), MathHelper.floor(y + 0.5D), MathHelper.floor(z - (double)(this.entity.width / 2.0F)));
+    public PathPoint getPathPointToCoords(double x, double y, double z) {
+        return this.openPoint(MathHelper.floor(x - (double) (this.entity.width / 2.0F)), MathHelper.floor(y + 0.5D), MathHelper.floor(z - (double) (this.entity.width / 2.0F)));
     }
 
 
-    public int findPathOptions(PathPoint[] pathOptions, PathPoint currentPoint, PathPoint targetPoint, float maxDistance)
-    {
+    public int findPathOptions(PathPoint[] pathOptions, PathPoint currentPoint, PathPoint targetPoint, float maxDistance) {
         int i = 0;
 
-        for (EnumFacing enumfacing : EnumFacing.values())
-        {
+        for (EnumFacing enumfacing : EnumFacing.values()) {
             // Todo: this could be wrong!
             PathPoint pathpoint = this.getSafePoint(currentPoint.x + enumfacing.getXOffset(), currentPoint.y + enumfacing.getYOffset(), currentPoint.z + enumfacing.getZOffset());
 
-            if (pathpoint != null && !pathpoint.visited && pathpoint.distanceTo(targetPoint) < maxDistance)
-            {
+            if (pathpoint != null && !pathpoint.visited && pathpoint.distanceTo(targetPoint) < maxDistance) {
                 pathOptions[i++] = pathpoint;
             }
         }
@@ -51,27 +46,21 @@ public class FlyNodeProcessor extends NodeProcessor {
     }
 
     @Nullable
-    private PathPoint getSafePoint(int p_186328_1_, int p_186328_2_, int p_186328_3_)
-    {
+    private PathPoint getSafePoint(int p_186328_1_, int p_186328_2_, int p_186328_3_) {
         PathNodeType pathnodetype = this.isFree(p_186328_1_, p_186328_2_, p_186328_3_);
         return pathnodetype == PathNodeType.OPEN ? this.openPoint(p_186328_1_, p_186328_2_, p_186328_3_) : null;
     }
 
-    
-    private PathNodeType isFree(int p_186327_1_, int p_186327_2_, int p_186327_3_)
-    {
+
+    private PathNodeType isFree(int p_186327_1_, int p_186327_2_, int p_186327_3_) {
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-        for (int i = p_186327_1_; i < p_186327_1_ + this.entitySizeX; ++i)
-        {
-            for (int j = p_186327_2_; j < p_186327_2_ + this.entitySizeY; ++j)
-            {
-                for (int k = p_186327_3_; k < p_186327_3_ + this.entitySizeZ; ++k)
-                {
+        for (int i = p_186327_1_; i < p_186327_1_ + this.entitySizeX; ++i) {
+            for (int j = p_186327_2_; j < p_186327_2_ + this.entitySizeY; ++j) {
+                for (int k = p_186327_3_; k < p_186327_3_ + this.entitySizeZ; ++k) {
                     IBlockState iblockstate = this.blockaccess.getBlockState(blockpos$mutableblockpos.setPos(i, j, k));
 
-                    if (iblockstate.getMaterial() != Material.AIR)
-                    {
+                    if (iblockstate.getMaterial() != Material.AIR) {
                         return PathNodeType.BLOCKED;
                     }
                 }
@@ -80,17 +69,15 @@ public class FlyNodeProcessor extends NodeProcessor {
 
         return PathNodeType.OPEN;
     }
-    
+
     @Override
-    public PathNodeType getPathNodeType(IBlockAccess blockaccessIn, int x, int y, int z, EntityLiving entitylivingIn, int xSize, int ySize, int zSize, boolean canBreakDoorsIn, boolean canEnterDoorsIn)
-    {
+    public PathNodeType getPathNodeType(IBlockAccess blockaccessIn, int x, int y, int z, EntityLiving entitylivingIn, int xSize, int ySize, int zSize, boolean canBreakDoorsIn, boolean canEnterDoorsIn) {
         return PathNodeType.OPEN;
     }
 
     @Override
-    public PathNodeType getPathNodeType(IBlockAccess x, int y, int z, int p_186330_4_)
-    {
+    public PathNodeType getPathNodeType(IBlockAccess x, int y, int z, int p_186330_4_) {
         return PathNodeType.OPEN;
     }
-    
+
 }

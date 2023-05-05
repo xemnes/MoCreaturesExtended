@@ -12,16 +12,17 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EntitySelectors;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class EntityAINearestAttackableTargetMoC extends EntitiAITargetMoC {
+public class EntityAINearestAttackableTargetMoC extends EntityAITargetMoC {
 
     protected final Class<? extends EntityLivingBase> targetClass;
-    private final int targetChance;
-    /** Instance of EntityAINearestAttackableTargetSorter. */
+    /**
+     * Instance of EntityAINearestAttackableTargetSorter.
+     */
     protected final EntityAINearestAttackableTargetMoC.Sorter theNearestAttackableTargetSorter;
+    private final int targetChance;
     /**
      * This filter is applied to the Entity search.  Only matching entities will be targetted.  (null -> no
      * restrictions)
@@ -39,7 +40,7 @@ public class EntityAINearestAttackableTargetMoC extends EntitiAITargetMoC {
     }
 
     public EntityAINearestAttackableTargetMoC(EntityCreature creature, Class<? extends EntityLivingBase> classTarget, int chance, boolean checkSight, boolean onlyNearby,
-            final Predicate<EntityLivingBase> targetSelector) {
+                                              final Predicate<EntityLivingBase> targetSelector) {
         super(creature, checkSight, onlyNearby);
         if (creature instanceof IMoCEntity) {
             this.theAttacker = (IMoCEntity) creature;
@@ -48,37 +49,33 @@ public class EntityAINearestAttackableTargetMoC extends EntitiAITargetMoC {
         this.targetChance = chance;
         this.theNearestAttackableTargetSorter = new EntityAINearestAttackableTargetMoC.Sorter(creature);
         this.setMutexBits(1);
-        this.targetEntitySelector = new Predicate<EntityLivingBase>() {
+        this.targetEntitySelector = entitylivingbaseIn -> {
+            if (targetSelector != null && !targetSelector.apply(entitylivingbaseIn)) {
+                return false;
+            } else {
+                if (entitylivingbaseIn instanceof EntityPlayer) {
+                    double d0 = EntityAINearestAttackableTargetMoC.this.getTargetDistance();
 
-            @Override
-            public boolean apply(EntityLivingBase entitylivingbaseIn) {
-                if (targetSelector != null && !targetSelector.apply(entitylivingbaseIn)) {
-                    return false;
-                } else {
-                    if (entitylivingbaseIn instanceof EntityPlayer) {
-                        double d0 = EntityAINearestAttackableTargetMoC.this.getTargetDistance();
-
-                        if (entitylivingbaseIn.isSneaking()) {
-                            d0 *= 0.800000011920929D;
-                        }
-
-                        if (entitylivingbaseIn.isInvisible()) {
-                            float f = ((EntityPlayer) entitylivingbaseIn).getArmorVisibility();
-
-                            if (f < 0.1F) {
-                                f = 0.1F;
-                            }
-
-                            d0 *= 0.7F * f;
-                        }
-
-                        if (entitylivingbaseIn.getDistance(EntityAINearestAttackableTargetMoC.this.taskOwner) > d0) {
-                            return false;
-                        }
+                    if (entitylivingbaseIn.isSneaking()) {
+                        d0 *= 0.800000011920929D;
                     }
 
-                    return EntityAINearestAttackableTargetMoC.this.isSuitableTarget(entitylivingbaseIn, false);
+                    if (entitylivingbaseIn.isInvisible()) {
+                        float f = ((EntityPlayer) entitylivingbaseIn).getArmorVisibility();
+
+                        if (f < 0.1F) {
+                            f = 0.1F;
+                        }
+
+                        d0 *= 0.7F * f;
+                    }
+
+                    if (entitylivingbaseIn.getDistance(EntityAINearestAttackableTargetMoC.this.taskOwner) > d0) {
+                        return false;
+                    }
                 }
+
+                return EntityAINearestAttackableTargetMoC.this.isSuitableTarget(entitylivingbaseIn, false);
             }
         };
     }
@@ -98,16 +95,13 @@ public class EntityAINearestAttackableTargetMoC extends EntitiAITargetMoC {
             List<EntityLivingBase> list =
                     this.taskOwner.world.getEntitiesWithinAABB(this.targetClass, this.taskOwner.getEntityBoundingBox().expand(d0, 4.0D, d0),
                             Predicates.and(this.targetEntitySelector, EntitySelectors.NOT_SPECTATING));
-            Collections.sort(list, this.theNearestAttackableTargetSorter);
+            list.sort(this.theNearestAttackableTargetSorter);
 
             if (list.isEmpty()) {
                 return false;
             } else {
-                this.targetEntity = (EntityLivingBase) list.get(0);
-                if (this.targetEntity instanceof EntityPlayer && !this.theAttacker.shouldAttackPlayers()) {
-                    return false;
-                }
-                return true;
+                this.targetEntity = list.get(0);
+                return !(this.targetEntity instanceof EntityPlayer) || this.theAttacker.shouldAttackPlayers();
             }
         }
     }
@@ -132,7 +126,7 @@ public class EntityAINearestAttackableTargetMoC extends EntitiAITargetMoC {
         public int compare(Entity p_compare_1_, Entity p_compare_2_) {
             double d0 = this.entity.getDistanceSq(p_compare_1_);
             double d1 = this.entity.getDistanceSq(p_compare_2_);
-            return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
+            return Double.compare(d0, d1);
         }
     }
 

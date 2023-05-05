@@ -14,11 +14,11 @@ import net.minecraft.util.math.Vec3d;
 
 public class EntityAIWanderMoC2 extends EntityAIBase {
 
-    private EntityCreature entity;
+    private final EntityCreature entity;
+    private final double speed;
     private double xPosition;
     private double yPosition;
     private double zPosition;
-    private double speed;
     private int executionChance;
     private boolean mustUpdate;
 
@@ -66,7 +66,7 @@ public class EntityAIWanderMoC2 extends EntityAIBase {
                 //System.out.println("vector height " + finalYHeight + " smaller than min flying height " + ((IMoCEntity) this.entity).minFlyingHeight());
                 return false;
             }
-            if ((finalYHeight > ((IMoCEntity) this.entity).maxFlyingHeight())){
+            if ((finalYHeight > ((IMoCEntity) this.entity).maxFlyingHeight())) {
                 //System.out.println("vector height " + finalYHeight + " bigger than max flying height " + ((IMoCEntity) this.entity).maxFlyingHeight());
                 return false;
             }

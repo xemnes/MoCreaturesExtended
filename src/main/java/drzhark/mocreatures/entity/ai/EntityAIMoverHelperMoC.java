@@ -17,37 +17,27 @@ import net.minecraft.util.math.MathHelper;
 
 public class EntityAIMoverHelperMoC extends EntityMoveHelper {
 
-    EntityCreature theCreature;
     protected EntityMoveHelper.Action action = EntityMoveHelper.Action.WAIT;
+    EntityCreature theCreature;
 
-    public boolean isUpdating()
-    {
-        return this.action == EntityMoveHelper.Action.MOVE_TO;
+    public EntityAIMoverHelperMoC(EntityLiving entityliving) {
+        super(entityliving);
+        this.theCreature = (EntityCreature) entityliving;
     }
 
-    public double getSpeed()
-    {
-        return this.speed;
+    public boolean isUpdating() {
+        return this.action == EntityMoveHelper.Action.MOVE_TO;
     }
 
     /**
      * Sets the speed and location to move to
      */
-    public void setMoveTo(double x, double y, double z, double speedIn)
-    {
+    public void setMoveTo(double x, double y, double z, double speedIn) {
         this.posX = x;
         this.posY = y;
         this.posZ = z;
         this.speed = speedIn;
         this.action = EntityMoveHelper.Action.MOVE_TO;
-    }
-
-    public void strafe(float forward, float strafe)
-    {
-        this.action = EntityMoveHelper.Action.STRAFE;
-        this.moveForward = forward;
-        this.moveStrafe = strafe;
-        this.speed = 0.25D;
     }
 
     /*public void read(EntityMoveHelper that)
@@ -61,18 +51,22 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
         this.moveStrafe = that.moveStrafe;
     }*/
 
-    public void onUpdateMoveOnGround()
-    {
-        if (this.action == EntityMoveHelper.Action.STRAFE)
-        {
-            float f = (float)this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
-            float f1 = (float)this.speed * f;
+    public void strafe(float forward, float strafe) {
+        this.action = EntityMoveHelper.Action.STRAFE;
+        this.moveForward = forward;
+        this.moveStrafe = strafe;
+        this.speed = 0.25D;
+    }
+
+    public void onUpdateMoveOnGround() {
+        if (this.action == EntityMoveHelper.Action.STRAFE) {
+            float f = (float) this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+            float f1 = (float) this.speed * f;
             float f2 = this.moveForward;
             float f3 = this.moveStrafe;
             float f4 = MathHelper.sqrt(f2 * f2 + f3 * f3);
 
-            if (f4 < 1.0F)
-            {
+            if (f4 < 1.0F) {
                 f4 = 1.0F;
             }
 
@@ -85,12 +79,10 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
             float f8 = f3 * f6 + f2 * f5;
             PathNavigate pathnavigate = this.entity.getNavigator();
 
-            if (pathnavigate != null)
-            {
+            if (pathnavigate != null) {
                 NodeProcessor nodeprocessor = pathnavigate.getNodeProcessor();
 
-                if (nodeprocessor != null && nodeprocessor.getPathNodeType(this.entity.world, MathHelper.floor(this.entity.posX + (double)f7), MathHelper.floor(this.entity.posY), MathHelper.floor(this.entity.posZ + (double)f8)) != PathNodeType.WALKABLE)
-                {
+                if (nodeprocessor != null && nodeprocessor.getPathNodeType(this.entity.world, MathHelper.floor(this.entity.posX + (double) f7), MathHelper.floor(this.entity.posY), MathHelper.floor(this.entity.posZ + (double) f8)) != PathNodeType.WALKABLE) {
                     this.moveForward = 1.0F;
                     this.moveStrafe = 0.0F;
                     f1 = f;
@@ -101,32 +93,26 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
             this.entity.setMoveForward(this.moveForward);
             this.entity.setMoveStrafing(this.moveStrafe);
             this.action = EntityMoveHelper.Action.WAIT;
-        }
-        else if (this.action == EntityMoveHelper.Action.MOVE_TO)
-        {
+        } else if (this.action == EntityMoveHelper.Action.MOVE_TO) {
             this.action = EntityMoveHelper.Action.WAIT;
             double d0 = this.posX - this.entity.posX;
             double d1 = this.posZ - this.entity.posZ;
             double d2 = this.posY - this.entity.posY;
             double d3 = d0 * d0 + d2 * d2 + d1 * d1;
 
-            if (d3 < 2.500000277905201E-7D)
-            {
+            if (d3 < 2.500000277905201E-7D) {
                 this.entity.setMoveForward(0.0F);
                 return;
             }
 
-            float f9 = (float)(MathHelper.atan2(d1, d0) * (180D / Math.PI)) - 90.0F;
+            float f9 = (float) (MathHelper.atan2(d1, d0) * (180D / Math.PI)) - 90.0F;
             this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, f9, 20.0F);
-            this.entity.setAIMoveSpeed((float)(this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
+            this.entity.setAIMoveSpeed((float) (this.speed * this.entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue()));
 
-            if (d2 > (double)this.entity.stepHeight && d0 * d0 + d1 * d1 < (double)Math.max(1.0F, this.entity.width))
-            {
+            if (d2 > (double) this.entity.stepHeight && d0 * d0 + d1 * d1 < (double) Math.max(1.0F, this.entity.width)) {
                 this.entity.getJumpHelper().setJumping();
             }
-        }
-        else
-        {
+        } else {
             this.entity.setMoveForward(0.0F);
         }
     }
@@ -134,65 +120,32 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
     /**
      * Limits the given angle to a upper and lower limit.
      */
-    protected float limitAngle(float p_75639_1_, float p_75639_2_, float p_75639_3_)
-    {
+    protected float limitAngle(float p_75639_1_, float p_75639_2_, float p_75639_3_) {
         float f = MathHelper.wrapDegrees(p_75639_2_ - p_75639_1_);
 
-        if (f > p_75639_3_)
-        {
+        if (f > p_75639_3_) {
             f = p_75639_3_;
         }
 
-        if (f < -p_75639_3_)
-        {
+        if (f < -p_75639_3_) {
             f = -p_75639_3_;
         }
 
         float f1 = p_75639_1_ + f;
 
-        if (f1 < 0.0F)
-        {
+        if (f1 < 0.0F) {
             f1 += 360.0F;
-        }
-        else if (f1 > 360.0F)
-        {
+        } else if (f1 > 360.0F) {
             f1 -= 360.0F;
         }
 
         return f1;
     }
 
-    public double getX()
-    {
-        return this.posX;
-    }
-
-    public double getY()
-    {
-        return this.posY;
-    }
-
-    public double getZ()
-    {
-        return this.posZ;
-    }
-
-    public static enum Action
-    {
-        WAIT,
-        MOVE_TO,
-        STRAFE;
-    }
-
-    public EntityAIMoverHelperMoC(EntityLiving entityliving) {
-        super(entityliving);
-        this.theCreature = (EntityCreature) entityliving;
-    }
-
     @Override
     public void onUpdateMoveHelper() {
         boolean isFlyer = ((IMoCEntity) theCreature).isFlyer();
-        boolean isSwimmer = this.theCreature.isInWater(); 
+        boolean isSwimmer = this.theCreature.isInWater();
         float fLimitAngle = 90F;
         if (!isFlyer && !isSwimmer) {
             onUpdateMoveOnGround();
@@ -232,8 +185,8 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
             float f1 = (float) (this.speed * this.theCreature.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
             this.theCreature.setAIMoveSpeed(this.theCreature.getAIMoveSpeed() + (f1 - this.theCreature.getAIMoveSpeed()) * 0.125F);
             double d4 = Math.sin((double) (this.theCreature.ticksExisted + this.theCreature.getEntityId()) * 0.75D) * 0.01D;
-            double d5 = Math.cos((double) (this.theCreature.rotationYaw * (float) Math.PI / 180.0F));
-            double d6 = Math.sin((double) (this.theCreature.rotationYaw * (float) Math.PI / 180.0F));
+            double d5 = Math.cos(this.theCreature.rotationYaw * (float) Math.PI / 180.0F);
+            double d6 = Math.sin(this.theCreature.rotationYaw * (float) Math.PI / 180.0F);
             this.theCreature.motionX += d4 * d5;
             this.theCreature.motionZ += d4 * d6;
             //d4 = Math.sin((double)(this.theCreature.ticksExisted + this.theCreature.getEntityId()) * 0.75D) * 0.05D;
@@ -241,7 +194,7 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
             this.theCreature.motionY += (double) this.theCreature.getAIMoveSpeed() * d1 * 1.5D;
         }
     }
-    
+
     /**
      * Makes flying creatures reach the proper flying height
      */
@@ -296,7 +249,12 @@ public class EntityAIMoverHelperMoC extends EntityMoveHelper {
             if (this.theCreature.motionY < -0.1) {
                 this.theCreature.motionY = -0.1;
             }
-            return;
         }
+    }
+
+    public enum Action {
+        WAIT,
+        MOVE_TO,
+        STRAFE
     }
 }

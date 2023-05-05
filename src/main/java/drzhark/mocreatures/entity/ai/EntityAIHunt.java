@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 
 public class EntityAIHunt extends EntityAINearestAttackableTargetMoC {
 
-    private EntityCreature hunter;
+    private final EntityCreature hunter;
 
     public EntityAIHunt(EntityCreature entity, Class<? extends EntityCreature> classTarget, int chance, boolean checkSight, boolean onlyNearby, Predicate<EntityLivingBase> predicate) {
         super(entity, classTarget, chance, checkSight, onlyNearby, predicate);

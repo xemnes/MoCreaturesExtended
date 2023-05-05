@@ -20,14 +20,14 @@ import java.util.UUID;
 
 public class EntityAIFollowOwnerPlayer extends EntityAIBase {
 
-    private EntityLiving thePet;
-    private EntityPlayer theOwner;
+    private final EntityLiving thePet;
+    private final double speed;
+    private final PathNavigate petPathfinder;
     World world;
-    private double speed;
-    private PathNavigate petPathfinder;
-    private int delayCounter;
     float maxDist;
     float minDist;
+    private EntityPlayer theOwner;
+    private int delayCounter;
 
     public EntityAIFollowOwnerPlayer(EntityLiving thePetIn, double speedIn, float minDistIn, float maxDistIn) {
         this.thePet = thePetIn;
@@ -62,9 +62,7 @@ public class EntityAIFollowOwnerPlayer extends EntityAIBase {
 
         if (entityplayer == null) {
             return false;
-        }
-
-        else if (this.thePet.getDistanceSq(entityplayer) < this.minDist * this.minDist
+        } else if (this.thePet.getDistanceSq(entityplayer) < this.minDist * this.minDist
                 || this.thePet.getDistanceSq(entityplayer) > this.maxDist * this.maxDist) {
             return false;
         } else {
@@ -102,39 +100,30 @@ public class EntityAIFollowOwnerPlayer extends EntityAIBase {
         //((PathNavigateGround) this.thePet.getNavigator()).setAvoidsWater(true); //TODO
     }
 
-    private boolean isEmptyBlock(BlockPos pos)
-    {
+    private boolean isEmptyBlock(BlockPos pos) {
         IBlockState iblockstate = this.world.getBlockState(pos);
-        return iblockstate.getMaterial() == Material.AIR ? true : !iblockstate.isFullCube();
+        return iblockstate.getMaterial() == Material.AIR || !iblockstate.isFullCube();
     }
-    
-    public void updateTask()
-    {
-        this.thePet.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float)this.thePet.getVerticalFaceSpeed());
+
+    public void updateTask() {
+        this.thePet.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float) this.thePet.getVerticalFaceSpeed());
 
         if (!((IMoCEntity) this.thePet).getIsSitting()) {
-            if (--this.delayCounter <= 0)
-            {
+            if (--this.delayCounter <= 0) {
                 this.delayCounter = 10;
 
-                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.speed))
-                {
-                    if (!this.thePet.getLeashed())
-                    {
-                        if (this.thePet.getDistanceSq(this.theOwner) >= 144.0D)
-                        {
+                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.speed)) {
+                    if (!this.thePet.getLeashed()) {
+                        if (this.thePet.getDistanceSq(this.theOwner) >= 144.0D) {
                             int i = MathHelper.floor(this.theOwner.posX) - 2;
                             int j = MathHelper.floor(this.theOwner.posZ) - 2;
                             int k = MathHelper.floor(this.theOwner.getEntityBoundingBox().minY);
 
-                            for (int l = 0; l <= 4; ++l)
-                            {
-                                for (int i1 = 0; i1 <= 4; ++i1)
-                                {
+                            for (int l = 0; l <= 4; ++l) {
+                                for (int i1 = 0; i1 <= 4; ++i1) {
                                     final BlockPos pos = new BlockPos(i + l, k - 1, j + i1);
-                                    if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.DOWN) && this.isEmptyBlock(new BlockPos(i + l, k, j + i1)) && this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1)))
-                                    {
-                                        this.thePet.setLocationAndAngles((double)((float)(i + l) + 0.5F), (double)k, (double)((float)(j + i1) + 0.5F), this.thePet.rotationYaw, this.thePet.rotationPitch);
+                                    if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.world.getBlockState(pos).isSideSolid(world, pos, EnumFacing.DOWN) && this.isEmptyBlock(new BlockPos(i + l, k, j + i1)) && this.isEmptyBlock(new BlockPos(i + l, k + 1, j + i1))) {
+                                        this.thePet.setLocationAndAngles((float) (i + l) + 0.5F, k, (float) (j + i1) + 0.5F, this.thePet.rotationYaw, this.thePet.rotationPitch);
                                         this.petPathfinder.clearPath();
                                         return;
                                     }

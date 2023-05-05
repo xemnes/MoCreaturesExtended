@@ -9,7 +9,7 @@ import net.minecraft.entity.ai.EntityAIPanic;
 
 public class EntityAIPanicMoC extends EntityAIPanic {
 
-    private EntityCreature entityCreature;
+    private final EntityCreature entityCreature;
 
     public EntityAIPanicMoC(EntityCreature creature, double speedIn) {
         super(creature, speedIn);

@@ -5,11 +5,7 @@ package drzhark.mocreatures.entity.ai;
 
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.monster.MoCEntityOgre;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,17 +15,27 @@ import net.minecraft.scoreboard.Team;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
-public abstract class EntitiAITargetMoC extends EntityAIBase {
+public abstract class EntityAITargetMoC extends EntityAIBase {
 
-    /** The entity that this task belongs to */
+    /**
+     * The entity that this task belongs to
+     */
     protected final EntityCreature taskOwner;
-    /** If true, EntityAI targets must be able to be seen (cannot be blocked by walls) to be suitable targets. */
+    /**
+     * When true, only entities that can be reached with minimal effort will be targetted.
+     */
+    private final boolean nearbyOnly;
+    /**
+     * If true, EntityAI targets must be able to be seen (cannot be blocked by walls) to be suitable targets.
+     */
     protected boolean shouldCheckSight;
-    /** When true, only entities that can be reached with minimal effort will be targetted. */
-    private boolean nearbyOnly;
-    /** When nearbyOnly is true: 0 -> No target, but OK to search; 1 -> Nearby target found; 2 -> Target too far. */
+    /**
+     * When nearbyOnly is true: 0 -> No target, but OK to search; 1 -> Nearby target found; 2 -> Target too far.
+     */
     private int targetSearchStatus;
-    /** When nearbyOnly is true, this throttles target searching to avoid excessive pathfinding. */
+    /**
+     * When nearbyOnly is true, this throttles target searching to avoid excessive pathfinding.
+     */
     private int targetSearchDelay;
     /**
      * If  @shouldCheckSight is true, the number of ticks before the interuption of this AITastk when the entity does't
@@ -37,24 +43,24 @@ public abstract class EntitiAITargetMoC extends EntityAIBase {
      */
     private int targetUnseenTicks;
 
-    public EntitiAITargetMoC(EntityCreature creature, boolean checkSight, boolean onlyNearby) {
+    public EntityAITargetMoC(EntityCreature creature, boolean checkSight, boolean onlyNearby) {
         this.taskOwner = creature;
         this.shouldCheckSight = checkSight;
         this.nearbyOnly = onlyNearby;
     }
 
-    public EntitiAITargetMoC(EntityCreature creature, boolean checkSight) {
+    public EntityAITargetMoC(EntityCreature creature, boolean checkSight) {
         this(creature, checkSight, false);
     }
 
     /**
      * A static method used to see if an entity is a suitable target through a number of checks.
      *
-     * @param attacker entity which is attacking
-     * @param target attack target
+     * @param attacker           entity which is attacking
+     * @param target             attack target
      * @param includeInvincibles should ignore {@link net.minecraft.entity.player.EntityPlayer#capabilities
-     * EntityPlayer.capabilities}.{@link net.minecraft.entity.player.PlayerCapabilities#disableDamage disableDamage}
-     * @param checkSight should check if attacker can see target
+     *                           EntityPlayer.capabilities}.{@link net.minecraft.entity.player.PlayerCapabilities#disableDamage disableDamage}
+     * @param checkSight         should check if attacker can see target
      */
     public static boolean isSuitableTarget(EntityLiving attacker, EntityLivingBase target, boolean includeInvincibles, boolean checkSight) {
         if (target == null) {
@@ -159,7 +165,7 @@ public abstract class EntitiAITargetMoC extends EntityAIBase {
      */
     @Override
     public void resetTask() {
-        this.taskOwner.setAttackTarget((EntityLivingBase) null);
+        this.taskOwner.setAttackTarget(null);
     }
 
     /**
@@ -183,9 +189,7 @@ public abstract class EntitiAITargetMoC extends EntityAIBase {
                     this.targetSearchStatus = this.canEasilyReach(target) ? 1 : 2;
                 }
 
-                if (this.targetSearchStatus == 2) {
-                    return false;
-                }
+                return this.targetSearchStatus != 2;
             }
 
             return true;

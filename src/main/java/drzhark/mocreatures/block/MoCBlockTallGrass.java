@@ -10,14 +10,16 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -44,13 +46,6 @@ public class MoCBlockTallGrass extends MoCBlockBush implements IShearable {
     }
 
     /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    public Item getItemDropped(int par1, Random par2Random, int par3) {
-        return null;
-    }
-
-    /**
      * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i'
      * (inclusive).
      */
@@ -66,24 +61,23 @@ public class MoCBlockTallGrass extends MoCBlockBush implements IShearable {
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return new java.util.ArrayList<ItemStack>(java.util.Arrays.asList(new ItemStack(MoCBlocks.mocTallGrass)));
+        return new ArrayList<>(Collections.singletonList(new ItemStack(MoCBlocks.mocTallGrass)));
     }
 
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         Block soil = worldIn.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.mocGrass || soil == MoCBlocks.mocDirt || soil == Blocks.GRASS 
+        return soil == MoCBlocks.mocGrass || soil == MoCBlocks.mocDirt || soil == Blocks.GRASS
                 || soil == Blocks.DIRT || soil == Blocks.FARMLAND;
     }
 
     @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         IBlockState soil = worldIn.getBlockState(pos.down());
         Block tempblock = soil.getBlock();
-        if (tempblock instanceof MoCBlockDirt || tempblock instanceof MoCBlockGrass){
+        if (tempblock instanceof MoCBlockDirt || tempblock instanceof MoCBlockGrass) {
             return true;
         }
-        return super.canPlaceBlockAt(worldIn, pos) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+        return super.canPlaceBlockAt(worldIn, pos) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
     }
 }

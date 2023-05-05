@@ -7,7 +7,6 @@ import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -32,7 +31,7 @@ public class MoCBlockBush extends BlockBush {
 
     @Override
     public int damageDropped(IBlockState state) {
-        return ((MoCBlockBush.EnumType) state.getValue(VARIANT)).getMetadata();
+        return state.getValue(VARIANT).getMetadata();
     }
 
     @Override
@@ -50,30 +49,46 @@ public class MoCBlockBush extends BlockBush {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return ((MoCBlockBush.EnumType) state.getValue(VARIANT)).getMetadata();
+        return state.getValue(VARIANT).getMetadata();
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT});
+        return new BlockStateContainer(this, VARIANT);
     }
 
-    public static enum EnumType implements IStringSerializable {
+    public enum EnumType implements IStringSerializable {
         WYVERN_LAIR(0, "wyvern_lair"), OGRE_LAIR(1, "ogre_lair");
 
         private static final MoCBlockBush.EnumType[] META_LOOKUP = new MoCBlockBush.EnumType[values().length];
+
+        static {
+            MoCBlockBush.EnumType[] var0 = values();
+            for (EnumType var3 : var0) {
+                META_LOOKUP[var3.getMetadata()] = var3;
+            }
+        }
+
         private final int meta;
         private final String name;
         private final String unlocalizedName;
 
-        private EnumType(int meta, String name) {
+        EnumType(int meta, String name) {
             this(meta, name, name);
         }
 
-        private EnumType(int meta, String name, String unlocalizedName) {
+        EnumType(int meta, String name, String unlocalizedName) {
             this.meta = meta;
             this.name = name;
             this.unlocalizedName = unlocalizedName;
+        }
+
+        public static MoCBlockBush.EnumType byMetadata(int meta) {
+            if (meta < 0 || meta >= META_LOOKUP.length) {
+                meta = 0;
+            }
+
+            return META_LOOKUP[meta];
         }
 
         public int getMetadata() {
@@ -85,14 +100,6 @@ public class MoCBlockBush extends BlockBush {
             return this.name;
         }
 
-        public static MoCBlockBush.EnumType byMetadata(int meta) {
-            if (meta < 0 || meta >= META_LOOKUP.length) {
-                meta = 0;
-            }
-
-            return META_LOOKUP[meta];
-        }
-
         @Override
         public String getName() {
             return this.name;
@@ -100,16 +107,6 @@ public class MoCBlockBush extends BlockBush {
 
         public String getUnlocalizedName() {
             return this.unlocalizedName;
-        }
-
-        static {
-            MoCBlockBush.EnumType[] var0 = values();
-            int var1 = var0.length;
-
-            for (int var2 = 0; var2 < var1; ++var2) {
-                MoCBlockBush.EnumType var3 = var0[var2];
-                META_LOOKUP[var3.getMetadata()] = var3;
-            }
         }
     }
 }

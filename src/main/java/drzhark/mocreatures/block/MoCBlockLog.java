@@ -3,11 +3,9 @@
  */
 package drzhark.mocreatures.block;
 
-import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
@@ -26,13 +24,6 @@ public class MoCBlockLog extends MoCBlock {
     @Override
     public int quantityDropped(Random par1Random) {
         return 1;
-    }
-
-    /**
-     * Returns the ID of the items to drop on destruction.
-     */
-    public Item getItemDropped(int par1, Random par2Random, int par3) {
-        return Item.getItemFromBlock(MoCBlocks.mocLog);
     }
 
     @Override

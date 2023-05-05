@@ -585,7 +585,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         Biome currentbiome = MoCTools.Biomekind(this.world, pos);
 
         // African
-        if (BiomeDictionary.hasType(currentbiome, Type.SANDY)) {
+        if (BiomeDictionary.hasType(currentbiome, Type.SANDY) || BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) {
             setType(1);
             return true;
         }

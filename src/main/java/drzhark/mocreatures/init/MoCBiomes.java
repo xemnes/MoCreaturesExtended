@@ -41,6 +41,5 @@ public class MoCBiomes {
             // Avoid registering with BiomeManager so wyvern lair does not generate in other dimensions
             //BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, weight));
         }
-
     }
 }

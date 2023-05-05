@@ -6,15 +6,7 @@ package drzhark.mocreatures.init;
 import com.google.common.base.Preconditions;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.block.MoCBlock;
-import drzhark.mocreatures.block.MoCBlockDirt;
-import drzhark.mocreatures.block.MoCBlockGrass;
-import drzhark.mocreatures.block.MoCBlockLeaf;
-import drzhark.mocreatures.block.MoCBlockLog;
-import drzhark.mocreatures.block.MoCBlockPlanks;
-import drzhark.mocreatures.block.MoCBlockRock;
-import drzhark.mocreatures.block.MoCBlockTallGrass;
-import drzhark.mocreatures.block.MultiItemBlock;
+import drzhark.mocreatures.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -35,7 +27,7 @@ import java.util.Set;
 @ObjectHolder(MoCConstants.MOD_ID)
 public class MoCBlocks {
 
-    public static ArrayList<String> multiBlockNames = new ArrayList<String>();
+    public static ArrayList<String> multiBlockNames = new ArrayList<>();
 
     public static MoCBlock mocStone = (MoCBlock) new MoCBlockRock("MoCStone").setHardness(1.5F).setResistance(10.0F);
     public static MoCBlock mocGrass = (MoCBlock) new MoCBlockGrass("MoCGrass").setHardness(0.5F);
@@ -60,13 +52,13 @@ public class MoCBlocks {
             final IForgeRegistry<Block> registry = event.getRegistry();
 
             final Block[] blocks = {
-                mocStone,
-                mocGrass,
-                mocDirt,
-                mocLeaf,
-                mocLog,
-                mocTallGrass,
-                mocPlank
+                    mocStone,
+                    mocGrass,
+                    mocDirt,
+                    mocLeaf,
+                    mocLog,
+                    mocTallGrass,
+                    mocPlank
             };
 
             //wyvern lair block harvest settings

@@ -3,10 +3,6 @@
  */
 package drzhark.mocreatures.entity.monster;
 
-import java.util.List;
-
-import com.google.common.primitives.Ints;
-
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -21,11 +17,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -49,14 +41,13 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class MoCEntityScorpion extends MoCEntityMob {
 
-    private boolean isPoisoning;
-    private int poisontimer;
+    private static final DataParameter<Boolean> IS_PICKED = EntityDataManager.createKey(MoCEntityScorpion.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.createKey(MoCEntityScorpion.class, DataSerializers.BOOLEAN);
     public int mouthCounter;
     public int armCounter;
+    private boolean isPoisoning;
+    private int poisontimer;
 
-    private static final DataParameter<Boolean> IS_PICKED = EntityDataManager.<Boolean>createKey(MoCEntityScorpion.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.<Boolean>createKey(MoCEntityScorpion.class, DataSerializers.BOOLEAN);
-    
     public MoCEntityScorpion(World world) {
         super(world);
         setSize(1.4F, 0.9F);
@@ -65,11 +56,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
         setEdad(20);
 
         if (!this.world.isRemote) {
-            if (this.rand.nextInt(4) == 0) {
-                setHasBabies(true);
-            } else {
-                setHasBabies(false);
-            }
+            setHasBabies(this.rand.nextInt(4) == 0);
         }
     }
 
@@ -104,8 +91,6 @@ public class MoCEntityScorpion extends MoCEntityMob {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("scorpiondirt.png");
             case 2:
                 return MoCreatures.proxy.getTexture("scorpioncave.png");
             case 3:
@@ -120,28 +105,28 @@ public class MoCEntityScorpion extends MoCEntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_PICKED, Boolean.valueOf(false));
-        this.dataManager.register(HAS_BABIES, Boolean.valueOf(false)); 
+        this.dataManager.register(IS_PICKED, Boolean.FALSE);
+        this.dataManager.register(HAS_BABIES, Boolean.FALSE);
     }
 
     public boolean getHasBabies() {
-        return ((Boolean)this.dataManager.get(HAS_BABIES)).booleanValue();
+        return this.dataManager.get(HAS_BABIES);
+    }
+
+    public void setHasBabies(boolean flag) {
+        this.dataManager.set(HAS_BABIES, flag);
     }
 
     public boolean getIsPicked() {
-        return ((Boolean)this.dataManager.get(IS_PICKED)).booleanValue();
+        return this.dataManager.get(IS_PICKED);
     }
 
     public boolean getIsPoisoning() {
         return this.isPoisoning;
     }
 
-    public void setHasBabies(boolean flag) {
-        this.dataManager.set(HAS_BABIES, Boolean.valueOf(flag));
-    }
-
     public void setPicked(boolean flag) {
-        this.dataManager.set(IS_PICKED, Boolean.valueOf(flag));
+        this.dataManager.set(IS_PICKED, flag);
     }
 
     public void setPoisoning(boolean flag) {
@@ -235,7 +220,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
 
-            if (entity != null && entity != this && entity instanceof EntityLivingBase && this.shouldAttackPlayers() && getIsAdult()) {
+            if (entity != this && entity instanceof EntityLivingBase && this.shouldAttackPlayers() && getIsAdult()) {
                 setAttackTarget((EntityLivingBase) entity);
             }
             return true;
@@ -272,7 +257,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
             {
                 if (!this.world.isRemote && flag && !this.world.provider.doesWaterVaporize()) {
                     MoCreatures.burnPlayer((EntityPlayer) entityIn);
-                    ((EntityLivingBase) entityIn).setFire(15);
+                    entityIn.setFire(15);
                 }
             }
         } else {

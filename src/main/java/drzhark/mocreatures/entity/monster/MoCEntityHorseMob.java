@@ -75,15 +75,15 @@ public class MoCEntityHorseMob extends MoCEntityMob {
     }
 
     /**
-     * Overridden for the dynamic nightmare texture. * 
-     * 23 Undead 
-     * 24 Undead Unicorn 
+     * Overridden for the dynamic nightmare texture. *
+     * 23 Undead
+     * 24 Undead Unicorn
      * 25 Undead Pegasus
-     * 26 skeleton 
-     * 27 skeleton unicorn 
+     * 26 skeleton
+     * 27 skeleton unicorn
      * 28 skeleton pegasus
      * 30 bug horse
-     * 32 Bat Horse 
+     * 32 Bat Horse
      * 38 nightmare
      */
     @Override
@@ -108,9 +108,9 @@ public class MoCEntityHorseMob extends MoCEntityMob {
                     this.textCounter = 10;
                 }
 
-                String iteratorTex = "" + this.textCounter;
+                String iteratorTex = String.valueOf(this.textCounter);
                 iteratorTex = iteratorTex.substring(0, 1);
-                String decayTex = "" + (getEdad() / 100);
+                String decayTex = String.valueOf(getEdad() / 100);
                 decayTex = decayTex.substring(0, 1);
                 return MoCreatures.proxy.getTexture(baseTex + decayTex + iteratorTex + ".png");
 
@@ -132,7 +132,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
                     this.textCounter = 10;
                 }
                 String NTA = "horsenightmare";
-                String NTB = "" + this.textCounter;
+                String NTB = String.valueOf(this.textCounter);
                 NTB = NTB.substring(0, 1);
                 String NTC = ".png";
 
@@ -204,9 +204,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
     }
 
     /**
-     * Has an unicorn? to render it and buckle entities!
-     *
-     * @return
+     * Has a unicorn? to render it and buckle entities!
      */
     public boolean isUnicorned() {
         return this.getType() == 24 || this.getType() == 27 || this.getType() == 32;
@@ -386,11 +384,6 @@ public class MoCEntityHorseMob extends MoCEntityMob {
     @Override
     public int maxFlyingHeight() {
         return 10;
-    }
-
-    @Override
-    public int minFlyingHeight() {
-        return 1;
     }
 
     @Override

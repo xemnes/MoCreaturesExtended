@@ -25,11 +25,11 @@ import net.minecraft.world.World;
 
 public class MoCEntityMiniGolem extends MoCEntityMob {
 
+    private static final DataParameter<Boolean> ANGRY = EntityDataManager.createKey(MoCEntityMiniGolem.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HAS_ROCK = EntityDataManager.createKey(MoCEntityMiniGolem.class, DataSerializers.BOOLEAN);
     public int tcounter;
     public MoCEntityThrowableRock tempRock;
-    private static final DataParameter<Boolean> ANGRY = EntityDataManager.<Boolean>createKey(MoCEntityMiniGolem.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HAS_ROCK = EntityDataManager.<Boolean>createKey(MoCEntityMiniGolem.class, DataSerializers.BOOLEAN);
-    
+
 
     public MoCEntityMiniGolem(World world) {
         super(world);
@@ -56,24 +56,24 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(ANGRY, Boolean.valueOf(false));
-        this.dataManager.register(HAS_ROCK, Boolean.valueOf(false)); 
+        this.dataManager.register(ANGRY, Boolean.FALSE);
+        this.dataManager.register(HAS_ROCK, Boolean.FALSE);
     }
 
     public boolean getIsAngry() {
-        return ((Boolean)this.dataManager.get(ANGRY)).booleanValue();
+        return this.dataManager.get(ANGRY);
     }
 
     public void setIsAngry(boolean flag) {
-        this.dataManager.set(ANGRY, Boolean.valueOf(flag));
+        this.dataManager.set(ANGRY, flag);
     }
 
     public boolean getHasRock() {
-        return ((Boolean)this.dataManager.get(HAS_ROCK)).booleanValue();
+        return this.dataManager.get(HAS_ROCK);
     }
 
     public void setHasRock(boolean flag) {
-        this.dataManager.set(HAS_ROCK, Boolean.valueOf(flag));
+        this.dataManager.set(HAS_ROCK, flag);
     }
 
     @Override
@@ -81,12 +81,7 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
         super.onLivingUpdate();
 
         if (!this.world.isRemote) {
-            if (this.getAttackTarget() == null) {
-                setIsAngry(false);
-
-            } else {
-                setIsAngry(true);
-            }
+            setIsAngry(this.getAttackTarget() != null);
 
             if (getIsAngry() && this.getAttackTarget() != null) {
                 if (!getHasRock() && this.rand.nextInt(30) == 0) {

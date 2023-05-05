@@ -43,7 +43,7 @@ public class MoCEntityHellRat extends MoCEntityRat {
         if (this.textCounter > 29) {
             this.textCounter = 10;
         }
-        String textNumber = "" + this.textCounter;
+        String textNumber = String.valueOf(this.textCounter);
         textNumber = textNumber.substring(0, 1);
         return MoCreatures.proxy.getTexture("hellrat" + textNumber + ".png");
     }

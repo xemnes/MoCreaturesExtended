@@ -46,7 +46,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         super(world);
         setSize(0.9F, 1.3F);
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -75,15 +75,12 @@ public class MoCEntityWWolf extends MoCEntityMob {
         switch (getType()) {
             case 1:
                 return MoCreatures.proxy.getTexture("wolfblack.png");
-            case 2:
-                return MoCreatures.proxy.getTexture("wolfwild.png");
             case 3:
                 return MoCreatures.proxy.getTexture("wolftimber.png"); //snow wolf
             case 4:
                 return MoCreatures.proxy.getTexture("wolfdark.png");
             case 5:
                 return MoCreatures.proxy.getTexture("wolfbright.png");
-
             default:
                 return MoCreatures.proxy.getTexture("wolfwild.png");
         }
@@ -133,8 +130,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
-        for (int i = 0; i < list.size(); i++) {
-            Entity entity1 = list.get(i);
+        for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityLivingBase) || (entity1 == entity) || (entity1 == entity.getRidingEntity())
                     || (entity1 == entity.getRidingEntity()) || (entity1 instanceof EntityPlayer) || (entity1 instanceof EntityMob)
                     || (entity1 instanceof MoCEntityBigCat) || (entity1 instanceof MoCEntityBear) || (entity1 instanceof EntityCow)
@@ -193,8 +189,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         super.onLivingUpdate();
         if (!this.world.isRemote && !this.isBeingRidden() && this.rand.nextInt(100) == 0) {
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
-            for (int i = 0; i < list.size(); i++) {
-                Entity entity = list.get(i);
+            for (Entity entity : list) {
                 if (!(entity instanceof EntityMob)) {
                     continue;
                 }

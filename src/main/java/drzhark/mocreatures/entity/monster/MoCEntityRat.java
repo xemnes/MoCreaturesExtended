@@ -22,7 +22,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class MoCEntityRat extends MoCEntityMob {
@@ -70,13 +69,10 @@ public class MoCEntityRat extends MoCEntityMob {
     @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
-            case 1:
-                return MoCreatures.proxy.getTexture("ratb.png");
             case 2:
                 return MoCreatures.proxy.getTexture("ratbl.png");
             case 3:
                 return MoCreatures.proxy.getTexture("ratw.png");
-
             default:
                 return MoCreatures.proxy.getTexture("ratb.png");
         }
@@ -85,24 +81,18 @@ public class MoCEntityRat extends MoCEntityMob {
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         Entity entity = damagesource.getTrueSource();
-
-        if (entity != null && entity instanceof EntityLivingBase) {
+        if (entity instanceof EntityLivingBase) {
             setAttackTarget((EntityLivingBase) entity);
             if (!this.world.isRemote) {
                 List<MoCEntityRat> list =
                         this.world.getEntitiesWithinAABB(MoCEntityRat.class,
                                 new AxisAlignedBB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D)
                                         .expand(16D, 4D, 16D));
-                Iterator<MoCEntityRat> iterator = list.iterator();
-                do {
-                    if (!iterator.hasNext()) {
-                        break;
-                    }
-                    MoCEntityRat entityrat = (MoCEntityRat) iterator.next();
+                for (MoCEntityRat entityrat : list) {
                     if ((entityrat != null) && (entityrat.getAttackTarget() == null)) {
                         entityrat.setAttackTarget((EntityLivingBase) entity);
                     }
-                } while (true);
+                }
             }
         }
         return super.attackEntityFrom(damagesource, i);
@@ -118,7 +108,6 @@ public class MoCEntityRat extends MoCEntityMob {
 
         if ((this.rand.nextInt(100) == 0) && (this.getBrightness() > 0.5F)) {
             setAttackTarget(null);
-            return;
         }
     }
 

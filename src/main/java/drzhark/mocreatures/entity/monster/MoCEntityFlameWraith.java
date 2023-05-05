@@ -43,7 +43,7 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
                 float f = getBrightness();
                 if ((f > 0.5F)
                         && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY),
-                                MathHelper.floor(this.posZ))) && ((this.rand.nextFloat() * 30F) < ((f - 0.4F) * 2.0F))) {
+                        MathHelper.floor(this.posZ))) && ((this.rand.nextFloat() * 30F) < ((f - 0.4F) * 2.0F))) {
                     this.setHealth(getHealth() - 2);
                 }
             }
@@ -63,15 +63,5 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
             entityLivingBaseIn.setFire(this.burningTime);
         }
         super.applyEnchantments(entityLivingBaseIn, entityIn);
-    }
-
-    @Override
-    public boolean isBurning() {
-        return this.rand.nextInt(100) == 0;
-    }
-
-    @Override
-    protected boolean isHarmedByDaylight() {
-        return false;
     }
 }

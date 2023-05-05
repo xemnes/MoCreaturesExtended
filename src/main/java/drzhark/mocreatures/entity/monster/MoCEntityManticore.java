@@ -101,8 +101,6 @@ public class MoCEntityManticore extends MoCEntityMob {
                 return MoCreatures.proxy.getTexture("bcmanticoredark.png");
             case 3:
                 return MoCreatures.proxy.getTexture("bcmanticoreblue.png");
-            case 4:
-                return MoCreatures.proxy.getTexture("bcmanticoregreen.png");
             default:
                 return MoCreatures.proxy.getTexture("bcmanticoregreen.png");
         }
@@ -143,11 +141,6 @@ public class MoCEntityManticore extends MoCEntityMob {
     @Override
     public int maxFlyingHeight() {
         return 10;
-    }
-
-    @Override
-    public int minFlyingHeight() {
-        return 1;
     }
 
     @Override
@@ -212,7 +205,7 @@ public class MoCEntityManticore extends MoCEntityMob {
         //if (true) return;
         super.onLivingUpdate();
 
-        /**
+        /*
          * slow falling
          */
         /*if (!this.onGround && (this.motionY < 0.0D)) {
@@ -321,7 +314,7 @@ public class MoCEntityManticore extends MoCEntityMob {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
 
-            if (entity != null && entity != this && entity instanceof EntityLivingBase && this.shouldAttackPlayers() && getIsAdult()) {
+            if (entity != this && entity instanceof EntityLivingBase && this.shouldAttackPlayers() && getIsAdult()) {
                 setAttackTarget((EntityLivingBase) entity);
             }
             return true;
@@ -352,7 +345,7 @@ public class MoCEntityManticore extends MoCEntityMob {
             {
                 if (flag && !this.world.isRemote && !this.world.provider.doesWaterVaporize()) {
                     MoCreatures.burnPlayer((EntityPlayer) entityIn);
-                    ((EntityLivingBase) entityIn).setFire(15);
+                    entityIn.setFire(15);
                 }
             }
         } else {
@@ -437,7 +430,6 @@ public class MoCEntityManticore extends MoCEntityMob {
 
     @Override
     protected void dropFewItems(boolean flag, int x) {
-        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
         int chance = MoCreatures.proxy.rareItemDropChance;
         if (this.rand.nextInt(100) < chance) {
             entityDropItem(new ItemStack(MoCItems.mocegg, 1, getType() + 61), 0.0F);

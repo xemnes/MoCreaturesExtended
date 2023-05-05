@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class MoCEntityGreenOgre extends MoCEntityOgre{
+public class MoCEntityGreenOgre extends MoCEntityOgre {
 
     public MoCEntityGreenOgre(World world) {
         super(world);
@@ -19,18 +19,17 @@ public class MoCEntityGreenOgre extends MoCEntityOgre{
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getTexture("ogregreen.png");
     }
-    
+
     /**
      * Returns the strength of the blasting power
-     * @return
      */
     @Override
     public float getDestroyForce() {
-            return MoCreatures.proxy.ogreStrength;
+        return MoCreatures.proxy.ogreStrength;
     }
-    
+
     @Override
     protected Item getDropItem() {
         return Item.getItemFromBlock(Blocks.OBSIDIAN);
-    } 
+    }
 }

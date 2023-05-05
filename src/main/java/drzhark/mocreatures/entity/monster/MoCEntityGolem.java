@@ -47,19 +47,18 @@ import java.util.List;
 
 public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpawnData {
 
+    private static final DataParameter<Integer> GOLEM_STATE = EntityDataManager.createKey(MoCEntityGolem.class, DataSerializers.VARINT);
     public int tcounter;
-    public MoCEntityThrowableRock tempRock;
-    private byte golemCubes[];
+    private byte[] golemCubes;
     private int dCounter = 0;
     private int sCounter;
-    private static final DataParameter<Integer> GOLEM_STATE = EntityDataManager.<Integer>createKey(MoCEntityGolem.class, DataSerializers.VARINT);
 
     public MoCEntityGolem(World world) {
         super(world);
         this.texture = "golemt.png";
         setSize(1.5F, 4F);
     }
-    
+
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -94,15 +93,15 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     protected void entityInit() {
         super.entityInit();
         initGolemCubes();
-        this.dataManager.register(GOLEM_STATE, Integer.valueOf(0)); // 0 spawned / 1 summoning rocks /2 has enemy /3 half life (harder) /4 dying
+        this.dataManager.register(GOLEM_STATE, 0); // 0 spawned / 1 summoning rocks /2 has enemy /3 half life (harder) /4 dying
     }
 
     public int getGolemState() {
-        return ((Integer)this.dataManager.get(GOLEM_STATE)).intValue();
+        return this.dataManager.get(GOLEM_STATE);
     }
 
     public void setGolemState(int i) {
-        this.dataManager.set(GOLEM_STATE, Integer.valueOf(i));
+        this.dataManager.set(GOLEM_STATE, i);
     }
 
     @Override
@@ -201,8 +200,8 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     private void destroyGolem() {
         List<Integer> usedBlocks = usedCubes();
         if ((!usedBlocks.isEmpty()) && (MoCTools.mobGriefing(this.world)) && (MoCreatures.proxy.golemDestroyBlocks)) {
-            for (int i = 0; i < usedBlocks.size(); i++) {
-                Block block = Block.getBlockById(generateBlock(this.golemCubes[usedBlocks.get(i)]));
+            for (Integer usedBlock : usedBlocks) {
+                Block block = Block.getBlockById(generateBlock(this.golemCubes[usedBlock]));
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(block, 1, 0));
                 entityitem.setPickupDelay(10);
                 this.world.spawnEntity(entityitem);
@@ -220,9 +219,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         //finds a missing rock spot in its body
         //looks for a random rock around it
         BlockPos myTRockPos = MoCTools.getRandomBlockPos(this, 24D);
-        if (myTRockPos == null) {
-            return;
-        }
 
         boolean canDestroyBlocks = MoCTools.mobGriefing(this.world) && MoCreatures.proxy.golemDestroyBlocks;
         IBlockState blockstate = this.world.getBlockState(myTRockPos);
@@ -258,8 +254,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * returns a random block when the golem is unable to break blocks
-     *
-     * @return
      */
     private int returnRandomCheapBlock() {
         int i = this.rand.nextInt(4);
@@ -278,9 +272,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * When the golem receives the rock, called from within EntityTRock
-     *
-     * @param ID = block id
-     * @param Metadata = block Metadata
      */
     public void receiveRock(IBlockState state) {
         if (!this.world.isRemote) {
@@ -321,13 +312,12 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Shoots one block to the target
-     * @param entity
      */
     private void shootBlock(Entity entity) {
         if (entity == null) {
             return;
         }
-        List<Integer> armBlocks = new ArrayList<Integer>();
+        List<Integer> armBlocks = new ArrayList<>();
 
         for (int i = 9; i < 15; i++) {
             if (this.golemCubes[i] != 30) {
@@ -554,9 +544,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     /**
      * Saves the type of Cube(value) on the given 'slot' if server, then sends a
      * packet to the clients
-     *
-     * @param slot
-     * @param value
      */
     public void saveGolemCube(byte slot, byte value) {
         this.golemCubes[slot] = value;
@@ -569,11 +556,9 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * returns a list of the empty blocks
-     *
-     * @return
      */
     private List<Integer> missingCubes() {
-        List<Integer> emptyBlocks = new ArrayList<Integer>();
+        List<Integer> emptyBlocks = new ArrayList<>();
 
         for (int i = 0; i < 23; i++) {
             if (this.golemCubes[i] == 30) {
@@ -585,8 +570,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Returns true if is 'missing' any cube, false if it's full
-     *
-     * @return
      */
     public boolean isMissingCubes() {
         for (int i = 0; i < 23; i++) {
@@ -598,7 +581,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     }
 
     private List<Integer> missingChestCubes() {
-        List<Integer> emptyChestBlocks = new ArrayList<Integer>();
+        List<Integer> emptyChestBlocks = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
             if (this.golemCubes[i] == 30) {
@@ -610,11 +593,9 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * returns a list of the used block spots
-     *
-     * @return
      */
     private List<Integer> usedCubes() {
-        List<Integer> usedBlocks = new ArrayList<Integer>();
+        List<Integer> usedBlocks = new ArrayList<>();
 
         for (int i = 0; i < 23; i++) {
             if (this.golemCubes[i] != 30) {
@@ -626,8 +607,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Returns a random used cube position if the golem is empty, returns -1
-     *
-     * @return
      */
     private int getRandomUsedCube() {
         List<Integer> usedBlocks = usedCubes();
@@ -640,8 +619,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Returns a random empty cube position if the golem is full, returns -1
-     *
-     * @return
      */
     private int getRandomMissingCube() {
         //first it makes sure it has the four chest cubes
@@ -663,33 +640,26 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     /**
      * returns the position of the cube to be added, contains logic for the
      * extremities
-     *
-     * @return
      */
     private int getRandomCubeAdj() {
         int i = getRandomMissingCube();
 
         if (i == 10 || i == 13 || i == 16 || i == 19) {
-            if (this.golemCubes[i - 1] == 30) {
-                return i - 1;
-            } else {
+            if (this.golemCubes[i - 1] != 30) {
                 saveGolemCube((byte) i, this.golemCubes[i - 1]);
-                return i - 1;
             }
+            return i - 1;
         }
 
         if (i == 11 || i == 14 || i == 17 || i == 20) {
             if (this.golemCubes[i - 2] == 30 && this.golemCubes[i - 1] == 30) {
                 return i - 2;
             }
-            if (this.golemCubes[i - 1] == 30) {
-                saveGolemCube((byte) (i - 1), this.golemCubes[i - 2]);
-                return i - 2;
-            } else {
+            if (this.golemCubes[i - 1] != 30) {
                 saveGolemCube((byte) i, this.golemCubes[i - 1]);
-                saveGolemCube((byte) (i - 1), this.golemCubes[i - 2]);
-                return i - 2;
             }
+            saveGolemCube((byte) (i - 1), this.golemCubes[i - 2]);
+            return i - 2;
         }
         return i;
     }
@@ -722,15 +692,11 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     /**
      * The chest opens when the Golem is missing cubes and the summoned blocks
      * are close
-     *
-     * @return
      */
     public boolean openChest() {
         if (isMissingCubes()) {
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(2D, 2D, 2D));
-
-            for (int i = 0; i < list.size(); i++) {
-                Entity entity1 = list.get(i);
+            for (Entity entity1 : list) {
                 if (entity1 instanceof MoCEntityThrowableRock) {
                     if (MoCreatures.proxy.getParticleFX() > 0) {
                         MoCreatures.proxy.VacuumFX(this);
@@ -745,14 +711,10 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     /**
      * Converts the world block into the golem block texture if not found,
      * returns -1
-     *
-     * @param blockType
-     * @return
      */
     private byte translateOre(int blockType) {
         switch (blockType) {
             case 0:
-                return 0;
             case 1:
                 return 0;
             case 18:
@@ -828,9 +790,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Provides the blockID originated from the golem's block
-     *
-     * @param golemBlock
-     * @return
      */
     private int generateBlock(int golemBlock) {
         switch (golemBlock) {
@@ -912,8 +871,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Used for the power texture used on the golem
-     *
-     * @return
      */
     public ResourceLocation getEffectTexture() {
         switch (getGolemState()) {
@@ -932,9 +889,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     /**
      * Used for the particle FX
-     *
-     * @param i
-     * @return
      */
     public float colorFX(int i) {
         switch (getGolemState()) {
@@ -960,7 +914,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
                 }
             case 3:
                 if (i == 1) {
-                    return 255F / 255F;
+                    return 1.0f;
                 }
                 if (i == 2) {
                     return 154F / 255F;
@@ -999,6 +953,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     public boolean getCanSpawnHere() {
         return (super.getCanSpawnHere()
                 && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper
-                        .floor(this.posZ))) && (this.posY > 50D));
+                .floor(this.posZ))) && (this.posY > 50D));
     }
 }

@@ -27,10 +27,10 @@ public class MoCEntityOgre extends MoCEntityMob {
 
     public int attackCounterLeft;
     public int attackCounterRight;
-    private int movingHead;
     public int smashCounter;
     public int armToAnimate; // 1 = left, 2 = right, 3 = both
     public int attackCounter;
+    private int movingHead;
 
     public MoCEntityOgre(World world) {
         super(world);
@@ -68,7 +68,7 @@ public class MoCEntityOgre extends MoCEntityMob {
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();
-            if (this.isRidingOrBeingRiddenBy(entity)) {
+            if (entity != null && this.isRidingOrBeingRiddenBy(entity)) {
                 return true;
             }
             if ((entity != this) && (this.world.getDifficulty().getId() > 0) && entity instanceof EntityLivingBase) {
@@ -108,7 +108,6 @@ public class MoCEntityOgre extends MoCEntityMob {
 
     /**
      * Returns the strength of the blasting power
-     * @return
      */
     public float getDestroyForce() {
         return MoCreatures.proxy.ogreStrength;
@@ -167,11 +166,6 @@ public class MoCEntityOgre extends MoCEntityMob {
         MoCTools.DestroyBlast(this, this.posX, this.posY + 1.0D, this.posZ, getDestroyForce(), isFireStarter());
     }
 
-    @Override
-    protected boolean isHarmedByDaylight() {
-        return false;
-    }
-
     /**
      * Starts attack counters and synchronizes animations with clients
      */
@@ -182,13 +176,12 @@ public class MoCEntityOgre extends MoCEntityMob {
 
             boolean leftArmW = (getType() == 2 || getType() == 4 || getType() == 6) && this.rand.nextInt(2) == 0;
 
+            this.attackCounter = 1;
             if (leftArmW) {
-                this.attackCounter = 1;
                 this.armToAnimate = 1;
                 MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 1),
                         new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
             } else {
-                this.attackCounter = 1;
                 this.armToAnimate = 2;
                 MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 2),
                         new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));

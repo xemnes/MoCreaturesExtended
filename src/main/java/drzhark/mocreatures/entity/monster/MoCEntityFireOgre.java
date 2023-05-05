@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class MoCEntityFireOgre extends MoCEntityOgre{
+public class MoCEntityFireOgre extends MoCEntityOgre {
 
     public MoCEntityFireOgre(World world) {
         super(world);
@@ -21,22 +21,22 @@ public class MoCEntityFireOgre extends MoCEntityOgre{
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getTexture("ogrered.png");
     }
-    
+
     @Override
     public boolean isFireStarter() {
         return true;
     }
-    
+
     @Override
     public float getDestroyForce() {
-            return MoCreatures.proxy.fireOgreStrength;
+        return MoCreatures.proxy.fireOgreStrength;
     }
-    
+
     @Override
     protected boolean isHarmedByDaylight() {
         return true;
     }
-    
+
     @Override
     protected Item getDropItem() {
         boolean flag = (this.rand.nextInt(100) < MoCreatures.proxy.rareItemDropChance);
@@ -44,5 +44,5 @@ public class MoCEntityFireOgre extends MoCEntityOgre{
             return Item.getItemFromBlock(Blocks.FIRE);
         }
         return MoCItems.heartfire;
-    } 
+    }
 }

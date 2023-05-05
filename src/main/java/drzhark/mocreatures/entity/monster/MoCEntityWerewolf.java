@@ -37,12 +37,12 @@ import net.minecraft.world.World;
 
 public class MoCEntityWerewolf extends MoCEntityMob {
 
+    private static final DataParameter<Boolean> IS_HUMAN = EntityDataManager.createKey(MoCEntityWerewolf.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_HUNCHED = EntityDataManager.createKey(MoCEntityWerewolf.class, DataSerializers.BOOLEAN);
     private boolean transforming;
     private int tcounter;
     private int textCounter;
-    private static final DataParameter<Boolean> IS_HUMAN = EntityDataManager.<Boolean>createKey(MoCEntityWerewolf.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> IS_HUNCHED = EntityDataManager.<Boolean>createKey(MoCEntityWerewolf.class, DataSerializers.BOOLEAN);
-    
+
     public MoCEntityWerewolf(World world) {
         super(world);
         setSize(0.9F, 1.6F);
@@ -71,8 +71,8 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_HUMAN, Boolean.valueOf(false));
-        this.dataManager.register(IS_HUNCHED, Boolean.valueOf(false));
+        this.dataManager.register(IS_HUMAN, Boolean.FALSE);
+        this.dataManager.register(IS_HUNCHED, Boolean.FALSE);
     }
 
     @Override
@@ -109,8 +109,6 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         switch (getType()) {
             case 1:
                 return MoCreatures.proxy.getTexture("wolfblack.png");
-            case 2:
-                return MoCreatures.proxy.getTexture("wolfbrown.png");
             case 3:
                 return MoCreatures.proxy.getTexture("wolftimber.png");
             case 4:
@@ -125,7 +123,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                     this.textCounter = 10;
                 }
                 String NTA = "wolffire";
-                String NTB = "" + this.textCounter;
+                String NTB = String.valueOf(this.textCounter);
                 NTB = NTB.substring(0, 1);
                 String NTC = ".png";
 
@@ -136,19 +134,19 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     }
 
     public boolean getIsHumanForm() {
-        return ((Boolean)this.dataManager.get(IS_HUMAN)).booleanValue();
+        return this.dataManager.get(IS_HUMAN);
     }
 
     public void setHumanForm(boolean flag) {
-        this.dataManager.set(IS_HUMAN, Boolean.valueOf(flag));
+        this.dataManager.set(IS_HUMAN, flag);
     }
 
     public boolean getIsHunched() {
-        return ((Boolean)this.dataManager.get(IS_HUNCHED)).booleanValue();
+        return this.dataManager.get(IS_HUNCHED);
     }
 
     public void setHunched(boolean flag) {
-        this.dataManager.set(IS_HUNCHED, Boolean.valueOf(flag));
+        this.dataManager.set(IS_HUNCHED, flag);
     }
 
     @Override
@@ -158,7 +156,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             return false;
         }
         if (this.getType() == 4 && entityIn instanceof EntityLivingBase) {
-            ((EntityLivingBase) entityIn).setFire(10);
+            entityIn.setFire(10);
         }
         return super.attackEntityAsMob(entityIn);
     }
@@ -166,7 +164,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         Entity entity = damagesource.getTrueSource();
-        if (!getIsHumanForm() && (entity != null) && (entity instanceof EntityPlayer)) {
+        if (!getIsHumanForm() && (entity instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             ItemStack stack = entityplayer.getHeldItemMainhand();
             if (!stack.isEmpty()) {
@@ -176,13 +174,13 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                 }
                 if (stack.getItem() instanceof ItemSword) {
                     String swordMaterial = ((ItemSword) stack.getItem()).getToolMaterialName();
-                    String swordName = ((ItemSword) stack.getItem()).getTranslationKey();
+                    String swordName = stack.getItem().getTranslationKey();
                     if (swordMaterial.toLowerCase().contains("silver") || swordName.toLowerCase().contains("silver")) {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 3F;
                     }
                 } else if (stack.getItem() instanceof ItemTool) {
                     String toolMaterial = ((ItemTool) stack.getItem()).getToolMaterialName();
-                    String toolName = ((ItemTool) stack.getItem()).getTranslationKey();
+                    String toolName = stack.getItem().getTranslationKey();
                     if (toolMaterial.toLowerCase().contains("silver") || toolName.toLowerCase().contains("silver")) {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 2F;
                     }
@@ -328,7 +326,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                 this.tcounter++;
                 if ((this.tcounter % 2) == 0) {
                     this.posX += 0.3D;
-                    this.posY += this.tcounter / 30;
+                    this.posY += (double) this.tcounter / 30;
                     attackEntityFrom(DamageSource.causeMobDamage(this), 1);
                 }
                 if ((this.tcounter % 2) != 0) {
@@ -346,8 +344,8 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             //so entity doesn't despawn that often
             if (this.rand.nextInt(300) == 0) {
                 this.idleTime -= 100 * this.world.getDifficulty().getId();
-                if (this.idleTime  < 0) {
-                    this.idleTime  = 0;
+                if (this.idleTime < 0) {
+                    this.idleTime = 0;
                 }
             }
         }

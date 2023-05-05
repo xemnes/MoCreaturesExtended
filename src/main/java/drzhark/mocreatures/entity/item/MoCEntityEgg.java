@@ -5,17 +5,8 @@ package drzhark.mocreatures.entity.item;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.aquatic.MoCEntityFishy;
-import drzhark.mocreatures.entity.aquatic.MoCEntityMediumFish;
-import drzhark.mocreatures.entity.aquatic.MoCEntityPiranha;
-import drzhark.mocreatures.entity.aquatic.MoCEntityShark;
-import drzhark.mocreatures.entity.aquatic.MoCEntitySmallFish;
-import drzhark.mocreatures.entity.passive.MoCEntityKomodo;
-import drzhark.mocreatures.entity.passive.MoCEntityManticorePet;
-import drzhark.mocreatures.entity.passive.MoCEntityOstrich;
-import drzhark.mocreatures.entity.passive.MoCEntityPetScorpion;
-import drzhark.mocreatures.entity.passive.MoCEntitySnake;
-import drzhark.mocreatures.entity.passive.MoCEntityWyvern;
+import drzhark.mocreatures.entity.aquatic.*;
+import drzhark.mocreatures.entity.passive.*;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -30,9 +21,9 @@ import net.minecraft.world.World;
 
 public class MoCEntityEgg extends EntityLiving {
 
+    public int eggType;
     private int tCounter;
     private int lCounter;
-    public int eggType;
 
     public MoCEntityEgg(World world, int type) {
         this(world);
@@ -146,9 +137,7 @@ public class MoCEntityEgg extends EntityLiving {
                         if (entityplayer != null) {
                             MoCTools.tameWithName(entityplayer, entityspawn);
                         }
-                    }
-
-                    else if (getEggType() == 11) // shark
+                    } else if (getEggType() == 11) // shark
                     {
                         MoCEntityShark entityspawn = new MoCEntityShark(this.world);
                         entityspawn.setPosition(this.posX, this.posY, this.posZ);
@@ -158,9 +147,7 @@ public class MoCEntityEgg extends EntityLiving {
                         if (entityplayer != null) {
                             MoCTools.tameWithName(entityplayer, entityspawn);
                         }
-                    }
-
-                    else if (getEggType() == 90) // piranha
+                    } else if (getEggType() == 90) // piranha
                     {
                         MoCEntityPiranha entityspawn = new MoCEntityPiranha(this.world);
                         entityspawn.setPosition(this.posX, this.posY, this.posZ);
@@ -170,9 +157,7 @@ public class MoCEntityEgg extends EntityLiving {
                         if (entityplayer != null) {
                             MoCTools.tameWithName(entityplayer, entityspawn);
                         }
-                    }
-
-                    else if (getEggType() >= 80 && getEggType() < (80 + MoCEntitySmallFish.fishNames.length)) // smallfish
+                    } else if (getEggType() >= 80 && getEggType() < (80 + MoCEntitySmallFish.fishNames.length)) // smallfish
                     {
                         final int type = getEggType() - 79;
                         MoCEntitySmallFish entityspawn = MoCEntitySmallFish.createEntity(this.world, type);
@@ -183,9 +168,7 @@ public class MoCEntityEgg extends EntityLiving {
                         if (entityplayer != null) {
                             MoCTools.tameWithName(entityplayer, entityspawn);
                         }
-                    }
-
-                    else if (getEggType() >= 70 && getEggType() < (70 + MoCEntityMediumFish.fishNames.length)) // mediumfish
+                    } else if (getEggType() >= 70 && getEggType() < (70 + MoCEntityMediumFish.fishNames.length)) // mediumfish
                     {
                         final int type = getEggType() - 69;
                         MoCEntityMediumFish entityspawn = MoCEntityMediumFish.createEntity(this.world, type);
@@ -200,9 +183,7 @@ public class MoCEntityEgg extends EntityLiving {
                     MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
                     setDead();
                 }
-            }
-
-            else if (!isInWater() && getEggType() > 20 && (this.rand.nextInt(20) == 0)) // non aquatic creatures
+            } else if (!isInWater() && getEggType() > 20 && (this.rand.nextInt(20) == 0)) // non aquatic creatures
             {
                 this.tCounter++;
                 //if (getEggType() == 30) tCounter = 0; //with this, wild ostriches won't spawn eggs.

@@ -25,14 +25,14 @@ import java.util.List;
 
 public class MoCEntityThrowableRock extends Entity {
 
+    private static final DataParameter<Integer> ROCK_STATE = EntityDataManager.createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> MASTERS_ID = EntityDataManager.createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> BEHAVIOUR_TYPE = EntityDataManager.createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
     public int rockTimer;
     public int acceleration = 100;
     private double oPosX;
     private double oPosY;
     private double oPosZ;
-    private static final DataParameter<Integer> ROCK_STATE = EntityDataManager.<Integer>createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> MASTERS_ID = EntityDataManager.<Integer>createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> BEHAVIOUR_TYPE = EntityDataManager.<Integer>createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
 
     public MoCEntityThrowableRock(World par1World) {
         super(par1World);
@@ -52,35 +52,35 @@ public class MoCEntityThrowableRock extends Entity {
         this.setMasterID(entitythrower.getEntityId());
     }
 
+    public IBlockState getState() {
+        return Block.getStateById(this.dataManager.get(ROCK_STATE) & 65535);
+    }
+
     public void setState(IBlockState state) {
         this.dataManager.set(ROCK_STATE, (Block.getStateId(state) & 65535));
     }
 
-    public IBlockState getState() {
-        return Block.getStateById(((Integer)this.dataManager.get(ROCK_STATE)).intValue() & 65535);
+    public int getMasterID() {
+        return this.dataManager.get(MASTERS_ID);
     }
 
     public void setMasterID(int i) {
-        this.dataManager.set(MASTERS_ID, Integer.valueOf(i));
-    }
-
-    public int getMasterID() {
-        return ((Integer)this.dataManager.get(MASTERS_ID)).intValue();
-    }
-
-    public void setBehavior(int i) {
-        this.dataManager.set(BEHAVIOUR_TYPE, Integer.valueOf(i));
+        this.dataManager.set(MASTERS_ID, i);
     }
 
     public int getBehavior() {
-        return ((Integer)this.dataManager.get(BEHAVIOUR_TYPE)).intValue();
+        return this.dataManager.get(BEHAVIOUR_TYPE);
+    }
+
+    public void setBehavior(int i) {
+        this.dataManager.set(BEHAVIOUR_TYPE, i);
     }
 
     @Override
     protected void entityInit() {
-        this.dataManager.register(BEHAVIOUR_TYPE, Integer.valueOf(0));
-        this.dataManager.register(ROCK_STATE, Integer.valueOf(0));
-        this.dataManager.register(MASTERS_ID, Integer.valueOf(0));
+        this.dataManager.register(BEHAVIOUR_TYPE, 0);
+        this.dataManager.register(ROCK_STATE, 0);
+        this.dataManager.register(MASTERS_ID, 0);
     }
 
     @Override
@@ -132,8 +132,7 @@ public class MoCEntityThrowableRock extends Entity {
                     this.world.getEntitiesWithinAABBExcludingEntity(this,
                             this.getEntityBoundingBox().contract(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 
-            for (int i = 0; i < list.size(); i++) {
-                Entity entity1 = (Entity) list.get(i);
+            for (Entity entity1 : list) {
                 if (master != null && entity1.getEntityId() == master.getEntityId()) {
                     continue;
                 }
@@ -146,7 +145,7 @@ public class MoCEntityThrowableRock extends Entity {
 
                 if (master != null) {
                     entity1.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) master), 4);
-                } else {
+                } else if (entity1 != null) {
                     entity1.attackEntityFrom(DamageSource.GENERIC, 4);
                 }
             }

@@ -16,12 +16,12 @@ import java.util.UUID;
 
 public class MoCPetData {
 
-    private NBTTagCompound ownerData = new NBTTagCompound();
-    private NBTTagList tamedList = new NBTTagList();
-    private BitSet IDMap = new BitSet(Long.SIZE << 4);
     @SuppressWarnings("unused")
     private final UUID ownerUniqueId;
-    private ArrayList<Integer> usedPetIds = new ArrayList<Integer>();
+    private final BitSet IDMap = new BitSet(Long.SIZE << 4);
+    private final ArrayList<Integer> usedPetIds = new ArrayList<>();
+    private NBTTagCompound ownerData = new NBTTagCompound();
+    private NBTTagList tamedList = new NBTTagList();
 
     public MoCPetData(IMoCTameable pet) {
         this.ownerData.setTag("TamedList", this.tamedList);
@@ -41,7 +41,7 @@ public class MoCPetData {
         if (this.tamedList != null) {
             int id = getNextFreePetId();
             petNBT.setInteger("PetId", id);
-            NBTTagCompound petData = (NBTTagCompound) petNBT.copy();
+            NBTTagCompound petData = petNBT.copy();
             petData.setInteger("ChunkX", coords.getX());
             petData.setInteger("ChunkY", coords.getY());
             petData.setInteger("ChunkZ", coords.getZ());
@@ -123,10 +123,10 @@ public class MoCPetData {
         int next = 0;
         while (true) {
             next = this.IDMap.nextClearBit(next);
-            if (this.usedPetIds.contains(new Integer(next))) {
+            if (this.usedPetIds.contains(next)) {
                 this.IDMap.set(next);
             } else {
-                this.usedPetIds.add(new Integer(next));
+                this.usedPetIds.add(next);
                 return next;
             }
         }
@@ -160,8 +160,8 @@ public class MoCPetData {
             int next = 0;
             while (true) {
                 next = this.IDMap.nextClearBit(next);
-                if (!this.usedPetIds.contains(new Integer(next))) {
-                    this.usedPetIds.add(new Integer(next));
+                if (!this.usedPetIds.contains(next)) {
+                    this.usedPetIds.add(next);
                 } else {
                     break;
                 }

@@ -206,7 +206,6 @@ import drzhark.mocreatures.entity.passive.MoCEntityTurtle;
 import drzhark.mocreatures.entity.passive.MoCEntityWyvern;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageInstaSpawn;
-import drzhark.mocreatures.util.MoCLog;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
@@ -737,7 +736,7 @@ public class MoCClientProxy extends MoCProxy {
     @SuppressWarnings("unused")
     @Override
     public void initGUI() {
-        MoCLog.logger.info("Initializing MoCreatures GUI API");
+        MoCreatures.LOGGER.info("Initializing MoCreatures GUI API");
         // GUI API settings
         this.guiapiSettings = new MoCSettings("MoCreatures");
         this.MoCScreen = new ModSettingScreen("DrZhark's Mo'Creatures");

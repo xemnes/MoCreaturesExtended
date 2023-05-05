@@ -3,6 +3,8 @@
  */
 package drzhark.mocreatures;
 
+import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.util.CMSUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
@@ -18,10 +20,6 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import drzhark.mocreatures.entity.IMoCTameable;
-import drzhark.mocreatures.util.CMSUtils;
-import drzhark.mocreatures.util.MoCLog;
 
 public class MoCEventHooks {
 
@@ -106,13 +104,11 @@ public class MoCEventHooks {
             // Others
             NBTTagCompound nbt = new NBTTagCompound();
             event.getEntityLiving().writeToNBT(nbt);
-            if (nbt != null) {
-                if (nbt.hasKey("Owner") && !nbt.getString("Owner").equals("")) {
-                    return; // ignore
-                }
-                if (nbt.hasKey("Tamed") && nbt.getBoolean("Tamed") == true) {
-                    return; // ignore
-                }
+            if (nbt.hasKey("Owner") && !nbt.getString("Owner").equals("")) {
+                return; // ignore
+            }
+            if (nbt.hasKey("Tamed") && nbt.getBoolean("Tamed")) {
+                return; // ignore
             }
             // Deny Rest
             if (event.getEntityLiving().getIdleTime() > 600) {
@@ -123,7 +119,7 @@ public class MoCEventHooks {
                 int x = MathHelper.floor(event.getEntity().posX);
                 int y = MathHelper.floor(event.getEntity().getEntityBoundingBox().minY);
                 int z = MathHelper.floor(event.getEntity().posZ);
-                MoCLog.logger.info("Forced Despawn of entity " + event.getEntityLiving() + " at " + x + ", " + y + ", " + z
+                MoCreatures.LOGGER.info("Forced Despawn of entity " + event.getEntityLiving() + " at " + x + ", " + y + ", " + z
                         + ". To prevent forced despawns, use /moc forceDespawns false.");
             }
         }
@@ -141,12 +137,7 @@ public class MoCEventHooks {
             blockLightLevel = CMSUtils.getLightFromNeighbors(world.getChunk(x >> 4, z >> 4), x & 15, y, z & 15);
         }
         if (blockLightLevel < minDespawnLightLevel && maxDespawnLightLevel != -1) {
-            //if (debug) CMSUtils.getEnvironment(world).envLog.logger.info("Denied spawn! for " + entity.getName() + blockLightLevel + " under minimum threshold of " + minDespawnLightLevel + " in dimension " + world.provider.getDimensionType().getId() + " at coords " + x + ", " + y + ", " + z);
             return false;
-        } else if (blockLightLevel > maxDespawnLightLevel && maxDespawnLightLevel != -1) {
-            //if (debug) CMSUtils.getEnvironment(world).envLog.logger.info("Denied spawn! for " + entity.getName() + blockLightLevel + " over maximum threshold of " + maxDespawnLightLevel + " in dimension " + world.provider.getDimensionType().getId() + " at coords " + x + ", " + y + ", " + z);
-            return false;
-        }
-        return true;
+        } else return blockLightLevel <= maxDespawnLightLevel || maxDespawnLightLevel == -1;
     }
 }

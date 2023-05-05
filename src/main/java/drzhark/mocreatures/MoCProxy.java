@@ -10,7 +10,6 @@ import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import drzhark.mocreatures.init.MoCEntities;
-import drzhark.mocreatures.util.MoCLog;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -25,36 +24,38 @@ import java.util.List;
 
 public class MoCProxy implements IGuiHandler {
 
+    protected static final String CATEGORY_MOC_GENERAL_SETTINGS = "global-settings";
+    protected static final String CATEGORY_MOC_CREATURE_GENERAL_SETTINGS = "creature-general-settings";
+    protected static final String CATEGORY_MOC_MONSTER_GENERAL_SETTINGS = "monster-general-settings";
+    protected static final String CATEGORY_MOC_WATER_CREATURE_GENERAL_SETTINGS = "water-mob-general-settings";
+    protected static final String CATEGORY_MOC_AMBIENT_GENERAL_SETTINGS = "ambient-general-settings";
+    protected static final String CATEGORY_MOC_ID_SETTINGS = "custom-id-settings";
+    private static final String CATEGORY_OWNERSHIP_SETTINGS = "ownership-settings";
     public static String ARMOR_TEXTURE = "textures/armor/";
     public static String BLOCK_TEXTURE = "textures/blocks/";
     public static String ITEM_TEXTURE = "textures/items/";
     public static String MODEL_TEXTURE = "textures/models/";
     public static String GUI_TEXTURE = "textures/gui/";
     public static String MISC_TEXTURE = "textures/misc/";
-
     //CONFIG VARIABLES
     // Client Only
     public boolean displayPetHealth;
     public boolean displayPetName;
     public boolean displayPetIcons;
     public boolean animateTextures;
-
     public boolean attackDolphins;
     public boolean attackWolves;
     public boolean attackHorses;
     public boolean staticBed;
     public boolean staticLitter;
-
     public boolean easyBreeding;
     public boolean destroyDrops;
     public boolean enableOwnership;
     public boolean enableResetOwnership;
     public boolean elephantBulldozer;
     public boolean killallVillagers;
-
     // griefing options
     public boolean golemDestroyBlocks;
-
     public int itemID;
     //new blocks IDs
     public int blockDirtID;
@@ -66,7 +67,6 @@ public class MoCProxy implements IGuiHandler {
     public int blockPlanksID;
     public int WyvernDimension;
     public int WyvernBiomeID;
-
     public int maxTamed;
     public int maxOPTamed;
     public int zebraChance;
@@ -83,7 +83,6 @@ public class MoCProxy implements IGuiHandler {
     public float strength = 1;
     public int minDespawnLightLevel = 2;
     public int maxDespawnLightLevel = 7;
-
     // ogre settings
     public float ogreStrength;
     public float caveOgreStrength;
@@ -91,7 +90,6 @@ public class MoCProxy implements IGuiHandler {
     public short ogreAttackRange;
     public short fireOgreChance;
     public short caveOgreChance;
-
     public boolean forceDespawns;
     public boolean enableHunters;
     public boolean debug = false;
@@ -99,18 +97,9 @@ public class MoCProxy implements IGuiHandler {
     public boolean needsUpdate = false;
     public boolean worldInitDone = false;
     public int activeScreen = -1;
-
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
-
-    protected static final String CATEGORY_MOC_GENERAL_SETTINGS = "global-settings";
-    protected static final String CATEGORY_MOC_CREATURE_GENERAL_SETTINGS = "creature-general-settings";
-    protected static final String CATEGORY_MOC_MONSTER_GENERAL_SETTINGS = "monster-general-settings";
-    protected static final String CATEGORY_MOC_WATER_CREATURE_GENERAL_SETTINGS = "water-mob-general-settings";
-    protected static final String CATEGORY_MOC_AMBIENT_GENERAL_SETTINGS = "ambient-general-settings";
-    protected static final String CATEGORY_MOC_ID_SETTINGS = "custom-id-settings";
-    private static final String CATEGORY_OWNERSHIP_SETTINGS = "ownership-settings";
 
     public void resetAllData() {
         //registerEntities();
@@ -129,7 +118,7 @@ public class MoCProxy implements IGuiHandler {
         MoCEntities.registerEntities();
         this.readGlobalConfigValues();
         if (this.debug) {
-            MoCLog.logger.info("Initializing MoCreatures Config File at " + event.getSuggestedConfigurationFile().getParent() + "MoCSettings.cfg");
+            MoCreatures.LOGGER.info("Initializing MoCreatures Config File at " + event.getSuggestedConfigurationFile().getParent() + "MoCSettings.cfg");
         }
     }
 
@@ -204,8 +193,8 @@ public class MoCProxy implements IGuiHandler {
 
     public List<String> parseName(String biomeConfigEntry) {
         String tag = biomeConfigEntry.substring(0, biomeConfigEntry.indexOf('|'));
-        String biomeName = biomeConfigEntry.substring(biomeConfigEntry.indexOf('|') + 1, biomeConfigEntry.length());
-        List<String> biomeParts = new ArrayList<String>();
+        String biomeName = biomeConfigEntry.substring(biomeConfigEntry.indexOf('|') + 1);
+        List<String> biomeParts = new ArrayList<>();
         biomeParts.add(tag);
         biomeParts.add(biomeName);
         return biomeParts;
@@ -218,7 +207,7 @@ public class MoCProxy implements IGuiHandler {
                 if (!cat.containsKey("dimensions")) {
                     cat.put("dimensions", new MoCProperty("dimensions", Arrays.toString(entityData.getDimensions()), MoCProperty.Type.STRING));
                 } else {
-                    entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll("\\[","").replaceAll("]","").split(", ")).mapToInt(Integer::parseInt).toArray());
+                    entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")).mapToInt(Integer::parseInt).toArray());
                 }
                 if (!cat.containsKey("frequency")) {
                     cat.put("frequency", new MoCProperty("frequency", Integer.toString(entityData.getFrequency()), MoCProperty.Type.INTEGER));
@@ -295,7 +284,7 @@ public class MoCProxy implements IGuiHandler {
                         "Max tamed creatures an op can have. Requires enableOwnership to be set to true.").getInt();
         this.enableOwnership =
                 this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableOwnership", false,
-                        "Assigns player as owner for each creature they tame. Only the owner can interact with the tamed creature.")
+                                "Assigns player as owner for each creature they tame. Only the owner can interact with the tamed creature.")
                         .getBoolean(false);
         this.enableResetOwnership =
                 this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableResetOwnerScroll", false,

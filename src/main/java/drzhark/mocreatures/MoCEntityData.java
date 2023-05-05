@@ -15,12 +15,12 @@ import java.util.List;
 
 public class MoCEntityData {
 
-    private EnumCreatureType typeOfCreature;
+    private final List<Type> biomeTypes;
     public SpawnListEntry spawnListEntry;
+    private EnumCreatureType typeOfCreature;
     private String entityName;
     private boolean canSpawn = true;
     private int entityId;
-    private List<Type> biomeTypes;
     @SideOnly(Side.CLIENT)
     private WidgetSimplewindow entityWindow;
     private int frequency;
@@ -156,12 +156,12 @@ public class MoCEntityData {
         this.entityName = name;
     }
 
-    public void setCanSpawn(boolean flag) {
-        this.canSpawn = flag;
-    }
-
     public boolean getCanSpawn() {
         return this.canSpawn;
+    }
+
+    public void setCanSpawn(boolean flag) {
+        this.canSpawn = flag;
     }
 
     public SpawnListEntry getSpawnListEntry() {

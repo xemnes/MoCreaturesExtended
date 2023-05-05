@@ -17,13 +17,12 @@ import net.minecraftforge.common.DimensionManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
 public class MoCPetMapData extends WorldSavedData {
 
-    private Map<UUID, MoCPetData> petMap = Maps.newHashMap();
+    private final Map<UUID, MoCPetData> petMap = Maps.newHashMap();
 
     public MoCPetMapData(String par1Str) {
         super(par1Str);
@@ -41,24 +40,22 @@ public class MoCPetMapData extends WorldSavedData {
         return this.petMap;
     }
 
-    public boolean removeOwnerPet(IMoCTameable pet, int petId) {
+    public void removeOwnerPet(IMoCTameable pet, int petId) {
         if (this.petMap.get(pet.getOwnerId()) != null) // required since getInteger will always return 0 if no key is found
         {
             if (this.petMap.get(pet.getOwnerId()).removePet(petId)) {
                 this.markDirty();
                 pet.setOwnerPetId(-1);
-                return true;
             }
         }
-        return false;
     }
 
     public void updateOwnerPet(IMoCTameable pet) {
         this.markDirty();
         if (pet.getOwnerPetId() == -1 || this.petMap.get(pet.getOwnerId()) == null) {
             UUID owner = MoCreatures.isServer() ? pet.getOwnerId() : Minecraft.getMinecraft().player.getUniqueID();
-            MoCPetData petData = null;
-            int id = -1;
+            MoCPetData petData;
+            int id;
             if (this.petMap.containsKey(owner)) {
                 petData = this.petMap.get(owner);
                 id = petData.addPet(pet);
@@ -75,14 +72,14 @@ public class MoCPetMapData extends WorldSavedData {
             MoCPetData petData = this.getPetData(owner);
             NBTTagCompound rootNBT = petData.getOwnerRootNBT();
             NBTTagList tag = rootNBT.getTagList("TamedList", 10);
-            int id = -1;
+            int id;
             id = pet.getOwnerPetId();
 
             for (int i = 0; i < tag.tagCount(); i++) {
                 NBTTagCompound nbt = tag.getCompoundTagAt(i);
                 if (nbt.getInteger("PetId") == id) {
                     // Update what we need for commands
-                    nbt.setTag("Pos", this.newDoubleNBTList(new double[] {((Entity) pet).posX, ((Entity) pet).posY, ((Entity) pet).posZ}));
+                    nbt.setTag("Pos", this.newDoubleNBTList(((Entity) pet).posX, ((Entity) pet).posY, ((Entity) pet).posZ));
                     nbt.setInteger("ChunkX", ((Entity) pet).chunkCoordX);
                     nbt.setInteger("ChunkY", ((Entity) pet).chunkCoordY);
                     nbt.setInteger("ChunkZ", ((Entity) pet).chunkCoordZ);
@@ -95,14 +92,9 @@ public class MoCPetMapData extends WorldSavedData {
 
     protected NBTTagList newDoubleNBTList(double... par1ArrayOfDouble) {
         NBTTagList nbttaglist = new NBTTagList();
-        double[] adouble = par1ArrayOfDouble;
-        int i = par1ArrayOfDouble.length;
-
-        for (int j = 0; j < i; ++j) {
-            double d1 = adouble[j];
+        for (double d1 : par1ArrayOfDouble) {
             nbttaglist.appendTag(new NBTTagDouble(d1));
         }
-
         return nbttaglist;
     }
 
@@ -124,22 +116,17 @@ public class MoCPetMapData extends WorldSavedData {
     public void forceSave() {
         if (DimensionManager.getWorld(0) != null) {
             ISaveHandler saveHandler = DimensionManager.getWorld(0).getSaveHandler();
-            if (saveHandler != null) {
-                try {
-                    File file1 = saveHandler.getMapFileFromName("mocreatures");
-
-                    if (file1 != null) {
-                        NBTTagCompound nbttagcompound = new NBTTagCompound();
-                        this.writeToNBT(nbttagcompound);
-                        NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-                        nbttagcompound1.setTag("data", nbttagcompound);
-                        FileOutputStream fileoutputstream = new FileOutputStream(file1);
-                        CompressedStreamTools.writeCompressed(nbttagcompound1, fileoutputstream);
-                        fileoutputstream.close();
-                    }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
+            try {
+                File file1 = saveHandler.getMapFileFromName("mocreatures");
+                NBTTagCompound nbttagcompound = new NBTTagCompound();
+                this.writeToNBT(nbttagcompound);
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                nbttagcompound1.setTag("data", nbttagcompound);
+                FileOutputStream fileoutputstream = new FileOutputStream(file1);
+                CompressedStreamTools.writeCompressed(nbttagcompound1, fileoutputstream);
+                fileoutputstream.close();
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         }
     }
@@ -149,12 +136,9 @@ public class MoCPetMapData extends WorldSavedData {
      */
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
-        Iterator<String> iterator = par1NBTTagCompound.getKeySet().iterator();
-        while (iterator.hasNext()) {
-            String s = (String) iterator.next();
+        for (String s : par1NBTTagCompound.getKeySet()) {
             NBTTagCompound nbt = (NBTTagCompound) par1NBTTagCompound.getTag(s);
             UUID ownerUniqueId = UUID.fromString(s);
-
             if (!this.petMap.containsKey(ownerUniqueId)) {
                 this.petMap.put(ownerUniqueId, new MoCPetData(nbt, ownerUniqueId));
             }
@@ -164,16 +148,14 @@ public class MoCPetMapData extends WorldSavedData {
     /**
      * write data to NBTTagCompound from this MapDataBase, similar to Entities
      * and TileEntities
-     * @return 
      */
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound par1NBTTagCompound) {
         for (Map.Entry<UUID, MoCPetData> ownerEntry : this.petMap.entrySet()) {
             try {
-            if (this.petMap.entrySet() != null && ownerEntry.getKey()!= null) 
-            {
-            par1NBTTagCompound.setTag(ownerEntry.getKey().toString(), ownerEntry.getValue().getOwnerRootNBT());
-        }
+                if (ownerEntry.getKey() != null) {
+                    par1NBTTagCompound.setTag(ownerEntry.getKey().toString(), ownerEntry.getValue().getOwnerRootNBT());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

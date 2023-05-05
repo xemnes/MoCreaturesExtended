@@ -13,7 +13,7 @@ import drzhark.mocreatures.MoCEntityData;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.configuration.MoCConfiguration;
 import drzhark.mocreatures.configuration.MoCProperty;
-import drzhark.mocreatures.util.MoCLog;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -144,7 +144,7 @@ public class MoCSettings extends ModSettings {
                         MoCProperty property = propEntry.getValue();
                         if (propEntry.getKey().equalsIgnoreCase("type")) {
                             if (MoCreatures.proxy.debug) {
-                                MoCLog.logger.info("setting type to " + z.toString(context));
+                                MoCreatures.LOGGER.info("setting type to " + z.toString(context));
                             }
 
                             if (entityData.getType() != null) {
@@ -162,35 +162,35 @@ public class MoCSettings extends ModSettings {
                             break OUTER;
                         } else if (propEntry.getKey().equalsIgnoreCase("frequency")) {
                             if (MoCreatures.proxy.debug) {
-                                MoCLog.logger.info("setting frequency to " + z.toString(context));
+                                MoCreatures.LOGGER.info("setting frequency to " + z.toString(context));
                             }
                             entityData.setFrequency(Integer.parseInt(z.toString(context)));
                             property.value = z.toString(context);
                             break OUTER;
                         } else if (propEntry.getKey().equalsIgnoreCase("minspawn")) {
                             if (MoCreatures.proxy.debug) {
-                                MoCLog.logger.info("setting min to " + z.toString(context));
+                                MoCreatures.LOGGER.info("setting min to " + z.toString(context));
                             }
                             entityData.setMinSpawn(Integer.parseInt(z.toString(context)));
                             property.value = z.toString(context);
                             break OUTER;
                         } else if (propEntry.getKey().equalsIgnoreCase("maxspawn")) {
                             if (MoCreatures.proxy.debug) {
-                                MoCLog.logger.info("setting max to " + z.toString(context));
+                                MoCreatures.LOGGER.info("setting max to " + z.toString(context));
                             }
                             entityData.setMaxSpawn(Integer.parseInt(z.toString(context)));
                             property.value = z.toString(context);
                             break OUTER;
                         } else if (propEntry.getKey().equalsIgnoreCase("maxchunk")) {
                             if (MoCreatures.proxy.debug) {
-                                MoCLog.logger.info("setting chunk to " + z.toString(context));
+                                MoCreatures.LOGGER.info("setting chunk to " + z.toString(context));
                             }
                             entityData.setMaxInChunk(Integer.parseInt(z.toString(context)));
                             property.value = z.toString(context);
                             break OUTER;
                         } else if (propEntry.getKey().equalsIgnoreCase("canspawn")) {
                             if (MoCreatures.proxy.debug) {
-                                MoCLog.logger.info("setting canspawn to " + z.toString(context));
+                                MoCreatures.LOGGER.info("setting canspawn to " + z.toString(context));
                             }
                             entityData.setCanSpawn(Boolean.parseBoolean(z.toString(context)));
                             property.value = z.toString(context);
@@ -205,7 +205,7 @@ public class MoCSettings extends ModSettings {
                         MoCProperty property = propEntry.getValue();
                         property.value = z.toString(context);
                         if (MoCreatures.proxy.debug) {
-                            MoCLog.logger.info("set config value " + z.backendName + " to " + property.value);
+                            MoCreatures.LOGGER.info("set config value " + z.backendName + " to " + property.value);
                         }
 
                         break;

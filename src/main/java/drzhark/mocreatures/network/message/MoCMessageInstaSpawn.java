@@ -5,7 +5,6 @@ package drzhark.mocreatures.network.message;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.util.MoCLog;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -40,12 +39,12 @@ public class MoCMessageInstaSpawn implements IMessage, IMessageHandler<MoCMessag
         if ((MoCreatures.proxy.getProxyMode() == 1 && MoCreatures.proxy.allowInstaSpawn) || MoCreatures.proxy.getProxyMode() == 2) { // make sure the client has admin rights on server!
             MoCTools.spawnNearPlayer(ctx.getServerHandler().player, message.entityId, message.numberToSpawn);
             if (MoCreatures.proxy.debug) {
-                MoCLog.logger.info("Player " + ctx.getServerHandler().player.getName() + " used MoC instaspawner and got "
+                MoCreatures.LOGGER.info("Player " + ctx.getServerHandler().player.getName() + " used MoC instaspawner and got "
                         + message.numberToSpawn + " creatures spawned");
             }
         } else {
             if (MoCreatures.proxy.debug) {
-                MoCLog.logger.info("Player " + ctx.getServerHandler().player.getName()
+                MoCreatures.LOGGER.info("Player " + ctx.getServerHandler().player.getName()
                         + " tried to use MoC instaspawner, but the allowInstaSpawn setting is set to " + MoCreatures.proxy.allowInstaSpawn);
             }
         }

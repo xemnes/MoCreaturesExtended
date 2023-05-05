@@ -36,10 +36,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-
-import javax.annotation.Nullable;
 
 public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTameable {
 
@@ -76,14 +75,12 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         return this.dataManager.get(OWNER_UNIQUE_ID).orNull();
     }
 
-    public void setOwnerId(@Nullable UUID uniqueId)
-    {
+    public void setOwnerId(@Nullable UUID uniqueId) {
         this.dataManager.set(OWNER_UNIQUE_ID, Optional.fromNullable(uniqueId));
     }
 
     @Override
-    public void setTamed(boolean tamed)
-    {
+    public void setTamed(boolean tamed) {
         this.dataManager.set(TAMED, tamed);
     }
 
@@ -94,13 +91,10 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
 
     @Nullable
     public EntityLivingBase getOwner() {
-        try
-        {
+        try {
             UUID uuid = this.getOwnerId();
             return uuid == null ? null : this.world.getPlayerEntityByUUID(uuid);
-        }
-        catch (IllegalArgumentException var2)
-        {
+        } catch (IllegalArgumentException var2) {
             return null;
         }
     }
@@ -337,12 +331,10 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         super.readEntityFromNBT(nbttagcompound);
         setTamed(nbttagcompound.getBoolean("Tamed"));
         String s = "";
-        if (nbttagcompound.hasKey("OwnerUUID", 8))
-        {
+        if (nbttagcompound.hasKey("OwnerUUID", 8)) {
             s = nbttagcompound.getString("OwnerUUID");
         }
-        if (!s.isEmpty())
-        {
+        if (!s.isEmpty()) {
             this.setOwnerId(UUID.fromString(s));
         }
         if (nbttagcompound.hasKey("PetId")) {
@@ -423,7 +415,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
     public boolean compatibleMate(Entity mate) {
         return mate instanceof IMoCTameable;
     }
-    
+
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
@@ -432,7 +424,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
             doBreeding();
         }
     }
-    
+
     /**
      * Breeding code
      */
@@ -466,7 +458,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
                 return;
             }
 
-            setGestationTime(getGestationTime()+1);
+            setGestationTime(getGestationTime() + 1);
             if (!this.world.isRemote) {
                 MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHeart(this.getEntityId()),
                         new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));

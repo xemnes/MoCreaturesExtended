@@ -14,7 +14,6 @@ import drzhark.mocreatures.entity.passive.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAppear;
-import drzhark.mocreatures.util.MoCLog;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -180,7 +179,7 @@ public class MoCItemPetAmulet extends MoCItem {
                 }
             } catch (Exception ex) {
                 if (MoCreatures.proxy.debug) {
-                    MoCLog.logger.warn("Error spawning creature from fishnet/amulet " + ex);
+                    MoCreatures.LOGGER.warn("Error spawning creature from fishnet/amulet " + ex);
                 }
             }
         }

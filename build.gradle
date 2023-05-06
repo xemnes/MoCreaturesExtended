@@ -45,7 +45,7 @@ targetCompatibility = '1.8'
 minecraft {
     version = "${project.forgeVersion}"
     runDir = "run"
-    mappings = project.mcpMappings    
+    mappings = project.mcpMappings
     useDepAts = true
     makeObfSourceJar = false
 }
@@ -76,9 +76,7 @@ dependencies {
 }
 
 compileJava {
-    options.compilerArgs += [
-            '-Xlint:-processing',
-    ]
+    options.compilerArgs += ['-Xlint:-processing',]
     options.deprecation = true
     options.encoding = 'utf8'
 }
@@ -111,14 +109,12 @@ jar {
     classifier 'original'
 
     manifest {
-        attributes(
-                'Built-By': System.properties['user.name'],
+        attributes('Built-By': System.properties['user.name'],
                 'Created-By': System.properties['java.vm.version'] + ' (' + System.properties['java.vm.vendor'] + ')',
                 'Implementation-Title': project.name,
                 'Implementation-Version': version,
                 'Implementation-Vendor': url,
-                'FMLAT': "mocreatures_at.cfg"
-        )
+                'FMLAT': "mocreatures_at.cfg")
     }
 }
 
@@ -130,9 +126,7 @@ if (JavaVersion.current().isJava8Compatible() || JavaVersion.current().isJava9Co
 }
 
 compileJava {
-    options.compilerArgs += [
-            '-Xlint:-processing',
-    ]
+    options.compilerArgs += ['-Xlint:-processing',]
     options.deprecation = true
     options.encoding = 'utf8'
 }
@@ -151,11 +145,11 @@ processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
+
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
@@ -167,7 +161,7 @@ shadowJar {
     dependsOn reobfJar
 
     classifier ''
-    archiveName = "DrZharks-MoCreatures-Extended-1.12.2-"+version+".jar"
+    archiveName = "DrZharks-MoCreatures-Extended-1.12.2-" + version + ".jar"
     exclude 'dummyThing'
     relocate 'com.typesafe.config', 'configurate.typesafe.config'
     dependencies {

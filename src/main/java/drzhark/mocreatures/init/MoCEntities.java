@@ -185,7 +185,7 @@ public class MoCEntities {
             MoCreatures.mocEntityMap.put("Firefly", new MoCEntityData("Firefly", 3, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityFirefly.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.SWAMP, Type.MAGICAL, Type.LUSH, Type.DENSE))));
             MoCreatures.mocEntityMap.put("Fly", new MoCEntityData("Fly", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityFly.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.MESA, Type.WET, Type.SWAMP, Type.HOT))));
             MoCreatures.mocEntityMap.put("Maggot", new MoCEntityData("Maggot", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityMaggot.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.MESA, Type.WET, Type.SWAMP, Type.HOT))));
-            MoCreatures.mocEntityMap.put("Snail", new MoCEntityData("Snail", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntitySnail.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.DENSE))));
+            MoCreatures.mocEntityMap.put("Snail", new MoCEntityData("Snail", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntitySnail.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.DENSE, Type.LUSH))));
             MoCreatures.mocEntityMap.put("Roach", new MoCEntityData("Roach", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityRoach.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.HOT))));
 
             // creatures
@@ -198,7 +198,7 @@ public class MoCEntities {
             MoCreatures.mocEntityMap.put("Bunny", new MoCEntityData("Bunny", 4, overworldWyvernLair, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityBunny.class, 8, 2, 3), new ArrayList<>(Arrays.asList(Type.FOREST, Type.PLAINS, Type.SNOWY, Type.MAGICAL, Type.CONIFEROUS))));
             MoCreatures.mocEntityMap.put("Crocodile", new MoCEntityData("Crocodile", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityCrocodile.class, 6, 1,2), new ArrayList<>(Arrays.asList(Type.SWAMP))));
             MoCreatures.mocEntityMap.put("Deer", new MoCEntityData("Deer", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityDeer.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.PLAINS, Type.CONIFEROUS))));
-            MoCreatures.mocEntityMap.put("Duck", new MoCEntityData("Duck", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityDuck.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.RIVER))));
+            MoCreatures.mocEntityMap.put("Duck", new MoCEntityData("Duck", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityDuck.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.RIVER, Type.LUSH))));
             MoCreatures.mocEntityMap.put("Elephant", new MoCEntityData("Elephant", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityElephant.class, 4, 1, 1), new ArrayList<>(Arrays.asList(Type.SANDY, Type.JUNGLE, Type.SAVANNA, Type.SNOWY))));
             MoCreatures.mocEntityMap.put("Ent", new MoCEntityData("Ent", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityEnt.class, 4, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST))));
             MoCreatures.mocEntityMap.put("Fox", new MoCEntityData("Fox", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityFox.class, 8, 1, 1), new ArrayList<>(Arrays.asList(Type.FOREST, Type.SNOWY, Type.CONIFEROUS))));
@@ -207,10 +207,10 @@ public class MoCEntities {
             MoCreatures.mocEntityMap.put("KomodoDragon", new MoCEntityData("KomodoDragon", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityKomodo.class, 8,1, 2), new ArrayList<>(Arrays.asList(Type.SWAMP, Type.SAVANNA))));
             MoCreatures.mocEntityMap.put("Leopard", new MoCEntityData("Leopard", 4, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityLeopard.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.SNOWY, Type.SAVANNA))));
             MoCreatures.mocEntityMap.put("Lion", new MoCEntityData("Lion", 4, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityLion.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.SAVANNA, Type.SANDY))));
-            MoCreatures.mocEntityMap.put("Mole", new MoCEntityData("Mole", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityMole.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.LUSH))));
-            MoCreatures.mocEntityMap.put("Mouse", new MoCEntityData("Mouse", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityMouse.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST))));
+            MoCreatures.mocEntityMap.put("Mole", new MoCEntityData("Mole", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityMole.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.LUSH, Type.PLAINS))));
+            MoCreatures.mocEntityMap.put("Mouse", new MoCEntityData("Mouse", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityMouse.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.PLAINS))));
             MoCreatures.mocEntityMap.put("Ostrich", new MoCEntityData("Ostrich", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityOstrich.class, 4, 1, 1), new ArrayList<>(Arrays.asList(Type.SAVANNA, Type.SANDY))));
-            MoCreatures.mocEntityMap.put("Panther", new MoCEntityData("Panther", 4, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityPanther.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.SAVANNA))));
+            MoCreatures.mocEntityMap.put("Panther", new MoCEntityData("Panther", 4, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityPanther.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE))));
             MoCreatures.mocEntityMap.put("Raccoon", new MoCEntityData("Raccoon", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityRaccoon.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.RIVER))));
             MoCreatures.mocEntityMap.put("Snake", new MoCEntityData("Snake", 3, overworldWyvernLair, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntitySnake.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.SANDY, Type.PLAINS, Type.FOREST, Type.SWAMP, Type.LUSH, Type.JUNGLE, Type.MAGICAL))));
             MoCreatures.mocEntityMap.put("Tiger", new MoCEntityData("Tiger", 4, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityTiger.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE))));
@@ -252,7 +252,7 @@ public class MoCEntities {
             MoCreatures.mocEntityMap.put("FireOgre", new MoCEntityData("FireOgre", 3, nether, EnumCreatureType.MONSTER, new SpawnListEntry(MoCEntityFireOgre.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.NETHER))));
             MoCreatures.mocEntityMap.put("Wraith", new MoCEntityData("Wraith", 3, overworld, EnumCreatureType.MONSTER, new SpawnListEntry(MoCEntityWraith.class, 6, 1, 4), new ArrayList<>(Arrays.asList(Type.FOREST, Type.CONIFEROUS, Type.DEAD, Type.DENSE, Type.SPOOKY))));
             MoCreatures.mocEntityMap.put("FlameWraith", new MoCEntityData("FlameWraith", 3, nether, EnumCreatureType.MONSTER, new SpawnListEntry(MoCEntityFlameWraith.class, 5, 1, 2), new ArrayList<>(Arrays.asList(Type.NETHER))));
-            MoCreatures.mocEntityMap.put("Rat", new MoCEntityData("Rat", 2, overworld, EnumCreatureType.MONSTER, new SpawnListEntry(MoCEntityRat.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.PLAINS))));
+            MoCreatures.mocEntityMap.put("Rat", new MoCEntityData("Rat", 2, overworld, EnumCreatureType.MONSTER, new SpawnListEntry(MoCEntityRat.class, 7, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.PLAINS))));
             MoCreatures.mocEntityMap.put("HellRat", new MoCEntityData("HellRat", 4, nether, EnumCreatureType.MONSTER, new SpawnListEntry(MoCEntityHellRat.class, 6, 1, 4), new ArrayList<>(Arrays.asList(Type.NETHER))));
     }
 

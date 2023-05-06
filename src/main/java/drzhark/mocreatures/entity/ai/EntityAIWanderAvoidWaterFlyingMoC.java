@@ -1,6 +1,5 @@
 package drzhark.mocreatures.entity.ai;
 
-import com.sun.istack.internal.NotNull;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
@@ -14,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-import javax.annotation.Nullable;
 import java.util.Iterator;
 
 public class EntityAIWanderAvoidWaterFlyingMoC extends EntityAIWanderAvoidWater {
@@ -22,7 +20,7 @@ public class EntityAIWanderAvoidWaterFlyingMoC extends EntityAIWanderAvoidWater 
         super(creatureIn, speedIn);
     }
 
-    @Nullable
+    @Override
     protected Vec3d getPosition() {
         Vec3d vec3d = null;
 
@@ -37,7 +35,6 @@ public class EntityAIWanderAvoidWaterFlyingMoC extends EntityAIWanderAvoidWater 
         return vec3d == null ? super.getPosition() : vec3d;
     }
 
-    @NotNull
     private Vec3d getLandingPos() {
         BlockPos blockPos = new BlockPos(this.entity);
         BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();

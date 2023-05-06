@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures;
 
+import com.google.common.primitives.Ints;
 import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.util.CMSUtils;
 import net.minecraft.entity.Entity;
@@ -20,6 +21,8 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.List;
 
 public class MoCEventHooks {
 
@@ -57,6 +60,23 @@ public class MoCEventHooks {
         //        gameRule.setOrCreateGameRule("doMobSpawning", "true");
         //    }
         //}
+    }
+
+    @SubscribeEvent
+    public void onLivingSpawnEvent(LivingSpawnEvent event) {
+        MoCEntityData data = MoCreatures.entityMap.get(event.getEntityLiving().getClass());
+        if (data == null) return; // not a MoC entity
+        World world = event.getWorld();
+        List<Integer> dimensionIDs = Ints.asList(data.getDimensions());
+        if (!dimensionIDs.contains(world.provider.getDimension())) {
+            event.setResult(Result.DENY);
+        }
+        if (data.getFrequency() <= 0) {
+            event.setResult(Result.DENY);
+        }
+        if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
+            event.setResult(Result.ALLOW);
+        }
     }
 
     @SubscribeEvent

@@ -539,16 +539,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
-            return false;
-        }
-        if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
-            return true;
-        }
         boolean willSpawn;
         boolean debug = MoCreatures.proxy.debug;
         int x = MathHelper.floor(this.posX);

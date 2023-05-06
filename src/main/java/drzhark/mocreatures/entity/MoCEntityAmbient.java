@@ -359,16 +359,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
 
     @Override
     public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
-            return false;
-        }
-        if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
-            return true;
-        }
         boolean willSpawn;
         boolean debug = false;
         willSpawn = this.world.checkNoEntityCollision(this.getEntityBoundingBox())

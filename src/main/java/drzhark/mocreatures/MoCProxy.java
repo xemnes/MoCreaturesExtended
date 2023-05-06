@@ -115,7 +115,6 @@ public class MoCProxy implements IGuiHandler {
         this.configFile = event.getSuggestedConfigurationFile();
         this.mocSettingsConfig.load();
         this.mocEntityConfig.load();
-        MoCEntities.registerEntities();
         this.readGlobalConfigValues();
         if (this.debug) {
             MoCreatures.LOGGER.info("Initializing MoCreatures Config File at " + event.getSuggestedConfigurationFile().getParent() + "MoCSettings.cfg");
@@ -229,11 +228,11 @@ public class MoCProxy implements IGuiHandler {
                 //} else {
                 //    entityData.setMaxInChunk(Integer.parseInt(cat.get("maxchunk").value));
                 //}
-                if (!cat.containsKey("canspawn")) {
-                    cat.put("canspawn", new MoCProperty("canspawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
-                } else {
-                    entityData.setCanSpawn(Boolean.parseBoolean(cat.get("canspawn").value));
-                }
+                //if (!cat.containsKey("canspawn")) {
+                //    cat.put("canspawn", new MoCProperty("canspawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
+                //} else {
+                //    entityData.setCanSpawn(Boolean.parseBoolean(cat.get("canspawn").value));
+                //}
             }
         }
         this.mocEntityConfig.save();

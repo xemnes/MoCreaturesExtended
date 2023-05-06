@@ -119,6 +119,7 @@ public class MoCreatures {
             MinecraftForge.EVENT_BUS.register(new MoCClientTickHandler());
             MinecraftForge.EVENT_BUS.register(new MoCKeyHandler());
         }
+        MoCEntities.registerEntities();
     }
 
     @EventHandler

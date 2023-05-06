@@ -161,13 +161,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
     @Override
     public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
-            return false;
-        }
         boolean willSpawn = super.getCanSpawnHere();
         boolean debug = MoCreatures.proxy.debug;
         if (willSpawn && debug)

@@ -586,13 +586,6 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
      */
     @Override
     public boolean getCanSpawnHere() {
-        List<Integer> dimensionIDs = Ints.asList(MoCreatures.entityMap.get(this.getClass()).getDimensions());
-        if (!dimensionIDs.contains(world.provider.getDimension())) {
-            return false;
-        }
-        if (MoCreatures.entityMap.get(this.getClass()).getFrequency() <= 0) {
-            return false;
-        }
         boolean willSpawn = this.world.checkNoEntityCollision(this.getEntityBoundingBox()) && this.posY >= world.getSeaLevel() - 12;
         boolean debug = MoCreatures.proxy.debug;
         if (debug && willSpawn)

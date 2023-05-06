@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -339,6 +340,8 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
         }
 
         var6.decorate(this.world, this.rand, new BlockPos(var4, 0, var5));
+
+        WorldEntitySpawner.performWorldGenSpawning(this.world, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
 
         if (x == 0 && z == 0 && !this.portalDone) {
             createPortal(this.world, this.rand);

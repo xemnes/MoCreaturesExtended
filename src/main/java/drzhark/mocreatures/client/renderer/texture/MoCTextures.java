@@ -3,8 +3,8 @@
  */
 package drzhark.mocreatures.client.renderer.texture;
 
-import com.google.common.collect.Maps;
 import drzhark.mocreatures.MoCProxy;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.File;
@@ -21,8 +21,8 @@ import java.util.jar.JarFile;
 
 public class MoCTextures {
 
-    private static final Map<String, ResourceLocation> RESOURCE_CACHE = Maps.newHashMap();
-    private static final Map<String, String[]> TEXTURE_RESOURCES = Maps.newHashMap();
+    private static final Object2ObjectOpenHashMap<String, ResourceLocation> RESOURCE_CACHE = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectOpenHashMap<String, String[]> TEXTURE_RESOURCES = new Object2ObjectOpenHashMap<>();
 
     public void loadTextures() {
         try {
@@ -32,17 +32,15 @@ public class MoCTextures {
             TEXTURE_RESOURCES.put(MoCProxy.ITEM_TEXTURE, getResourceListing(this.getClass(), "assets/mocreatures/textures/items/"));
             TEXTURE_RESOURCES.put(MoCProxy.MISC_TEXTURE, getResourceListing(this.getClass(), "assets/mocreatures/textures/misc/"));
             TEXTURE_RESOURCES.put(MoCProxy.MODEL_TEXTURE, getResourceListing(this.getClass(), "assets/mocreatures/textures/models/"));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }
         for (Map.Entry<String, String[]> textureEntry : TEXTURE_RESOURCES.entrySet()) {
             String[] resources = textureEntry.getValue();
-            if (resources != null && resources.length > 0) {
-                for (int i = 0; i < resources.length; i++) {
-                    if (resources[i].contains(".png")) {
-                        RESOURCE_CACHE.put(resources[i], new ResourceLocation("mocreatures", textureEntry.getKey() + resources[i]));
+            if (resources != null) {
+                for (String resource : resources) {
+                    if (resource.contains(".png")) {
+                        RESOURCE_CACHE.put(resource, new ResourceLocation("mocreatures", textureEntry.getKey() + resource));
                     }
                 }
             }
@@ -54,13 +52,11 @@ public class MoCTextures {
      * basically a brute-force implementation. Works for regular files and also
      * JARs.
      *
-     * @author Greg Briggs
      * @param clazz Any java class that lives in the same place as the resources
-     *        you want.
-     * @param path Should end with "/", but not start with one.
+     *              you want.
+     * @param path  Should end with "/", but not start with one.
      * @return Just the name of each member item, not the full paths.
-     * @throws URISyntaxException
-     * @throws IOException
+     * @author Greg Briggs
      */
     @SuppressWarnings("rawtypes")
     String[] getResourceListing(Class clazz, String path) throws URISyntaxException, IOException {
@@ -79,12 +75,12 @@ public class MoCTextures {
             dirURL = clazz.getClassLoader().getResource(me);
         }
 
-        if (dirURL.getProtocol().equals("jar")) {
+        if (dirURL != null && dirURL.getProtocol().equals("jar")) {
             /* A JAR path */
             String jarPath = dirURL.getPath().substring(5, dirURL.getPath().indexOf("!")); //strip out only the JAR file
             JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"));
             Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
-            Set<String> result = new HashSet<String>(); //avoid duplicates in case it is a subdirectory
+            Set<String> result = new HashSet<>(); //avoid duplicates in case it is a subdirectory
             while (entries.hasMoreElements()) {
                 String name = entries.nextElement().getName();
                 if (name.startsWith(path)) { //filter according to the path
@@ -98,7 +94,7 @@ public class MoCTextures {
                 }
             }
             jar.close();
-            return result.toArray(new String[result.size()]);
+            return result.toArray(new String[0]);
         }
 
         throw new UnsupportedOperationException("Cannot list files for URL " + dirURL);

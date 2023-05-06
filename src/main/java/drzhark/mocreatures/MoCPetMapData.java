@@ -5,6 +5,8 @@ package drzhark.mocreatures;
 
 import com.google.common.collect.Maps;
 import drzhark.mocreatures.entity.IMoCTameable;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -22,7 +24,7 @@ import java.util.UUID;
 
 public class MoCPetMapData extends WorldSavedData {
 
-    private final Map<UUID, MoCPetData> petMap = Maps.newHashMap();
+    private final Object2ObjectOpenHashMap<UUID, MoCPetData> petMap = new Object2ObjectOpenHashMap<>();
 
     public MoCPetMapData(String par1Str) {
         super(par1Str);
@@ -36,7 +38,7 @@ public class MoCPetMapData extends WorldSavedData {
         return this.petMap.get(ownerUniqueId);
     }
 
-    public Map<UUID, MoCPetData> getPetMap() {
+    public Object2ObjectOpenHashMap<UUID, MoCPetData> getPetMap() {
         return this.petMap;
     }
 

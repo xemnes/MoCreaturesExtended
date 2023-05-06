@@ -1,42 +1,26 @@
 /*
  * GNU GENERAL PUBLIC LICENSE Version 3
  */
-/**
+/*
  * This software is provided under the terms of the Minecraft Forge Public
  * License v1.0.
  */
 
 package drzhark.mocreatures.configuration;
 
-import static drzhark.mocreatures.configuration.MoCProperty.Type.BOOLEAN;
-import static drzhark.mocreatures.configuration.MoCProperty.Type.DOUBLE;
-import static drzhark.mocreatures.configuration.MoCProperty.Type.INTEGER;
-import static drzhark.mocreatures.configuration.MoCProperty.Type.STRING;
-
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PushbackInputStream;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static drzhark.mocreatures.configuration.MoCProperty.Type.*;
 
 /**
  * This class offers advanced configurations capabilities, allowing to provide
@@ -51,25 +35,23 @@ public class MoCConfiguration {
     public static final String DEFAULT_ENCODING = "UTF-8";
     public static final String CATEGORY_SPLITTER = ".";
     public static final String NEW_LINE;
-    private static final Pattern CONFIG_START = Pattern.compile("START: \"([^\\\"]+)\"");
-    private static final Pattern CONFIG_END = Pattern.compile("END: \"([^\\\"]+)\"");
     public static final CharMatcher allowedProperties = CharMatcher.javaLetterOrDigit().or(CharMatcher.anyOf(ALLOWED_CHARS));
+    private static final Pattern CONFIG_START = Pattern.compile("START: \"([^\"]+)\"");
+    private static final Pattern CONFIG_END = Pattern.compile("END: \"([^\"]+)\"");
     private static MoCConfiguration PARENT = null;
-
-    File file;
-
-    public Map<String, MoCConfigCategory> categories = new TreeMap<String, MoCConfigCategory>();
-    private Map<String, MoCConfiguration> children = new TreeMap<String, MoCConfiguration>();
-
-    private boolean caseSensitiveCustomCategories;
-    public String defaultEncoding = DEFAULT_ENCODING;
-    private String fileName = null;
-    public boolean isChild = false;
-    private boolean changed = false;
 
     static {
         NEW_LINE = System.getProperty("line.separator");
     }
+
+    private final Object2ObjectLinkedOpenHashMap<String, MoCConfiguration> children = new Object2ObjectLinkedOpenHashMap<>();
+    public Object2ObjectLinkedOpenHashMap<String, MoCConfigCategory> categories = new Object2ObjectLinkedOpenHashMap<>();
+    public String defaultEncoding = DEFAULT_ENCODING;
+    public boolean isChild = false;
+    File file;
+    private boolean caseSensitiveCustomCategories;
+    private String fileName = null;
+    private boolean changed = false;
 
     public MoCConfiguration() {
     }
@@ -99,11 +81,15 @@ public class MoCConfiguration {
         this(file);
     }
 
+    public static void enableGlobalConfig() {
+        PARENT = new MoCConfiguration(new File(Loader.instance().getConfigDir(), "global.cfg"));
+        PARENT.load();
+    }
+
     public MoCProperty get(String category, String key) {
         MoCConfigCategory cat = getCategory(category);
         if (cat.containsKey(key)) {
-            MoCProperty prop = cat.get(key);
-            return prop;
+            return cat.get(key);
         }
         return null;
     }
@@ -165,9 +151,9 @@ public class MoCConfiguration {
     }
 
     public MoCProperty get(String category, String key, int[] defaultValue, String comment) {
-        List<String> values = new ArrayList<String>();
-        for (int i = 0; i < defaultValue.length; i++) {
-            values.add(Integer.toString(defaultValue[i]));
+        List<String> values = new ArrayList<>();
+        for (int j : defaultValue) {
+            values.add(Integer.toString(j));
         }
 
         MoCProperty prop = get(category, key, values, comment, INTEGER);
@@ -183,9 +169,9 @@ public class MoCConfiguration {
     }
 
     public MoCProperty get(String category, String key, double[] defaultValue, String comment) {
-        List<String> values = new ArrayList<String>();
-        for (int i = 0; i < defaultValue.length; i++) {
-            values.add(Double.toString(defaultValue[i]));
+        List<String> values = new ArrayList<>();
+        for (double v : defaultValue) {
+            values.add(Double.toString(v));
         }
 
         MoCProperty prop = get(category, key, values, comment, DOUBLE);
@@ -202,9 +188,9 @@ public class MoCConfiguration {
     }
 
     public MoCProperty get(String category, String key, boolean[] defaultValue, String comment) {
-        List<String> values = new ArrayList<String>();
-        for (int i = 0; i < defaultValue.length; i++) {
-            values.add(Boolean.toString(defaultValue[i]));
+        List<String> values = new ArrayList<>();
+        for (boolean b : defaultValue) {
+            values.add(Boolean.toString(b));
         }
 
         MoCProperty prop = get(category, key, values, comment, BOOLEAN);
@@ -298,7 +284,7 @@ public class MoCConfiguration {
             }
 
             if (this.file.canRead()) {
-                input = new UnicodeInputStreamReader(new FileInputStream(this.file), this.defaultEncoding);
+                input = new UnicodeInputStreamReader(Files.newInputStream(this.file.toPath()), this.defaultEncoding);
                 this.defaultEncoding = input.getEncoding();
                 buffer = new BufferedReader(input);
 
@@ -321,8 +307,7 @@ public class MoCConfiguration {
 
                     if (start.matches()) {
                         this.fileName = start.group(1);
-
-                        this.categories = new TreeMap<String, MoCConfigCategory>();
+                        this.categories = new Object2ObjectLinkedOpenHashMap<>();
                         continue;
                     } else if (end.matches()) {
                         this.fileName = end.group(1);
@@ -337,8 +322,7 @@ public class MoCConfiguration {
                     boolean quoted = false;
 
                     for (int i = 0; i < line.length() && !skip; ++i) {
-                        if (Character.isLetterOrDigit(line.charAt(i)) || ALLOWED_CHARS.indexOf(line.charAt(i)) != -1
-                                || (quoted && line.charAt(i) != '"')) {
+                        if (Character.isLetterOrDigit(line.charAt(i)) || ALLOWED_CHARS.indexOf(line.charAt(i)) != -1 || (quoted && line.charAt(i) != '"')) {
                             if (nameStart == -1) {
                                 nameStart = i;
                             }
@@ -356,7 +340,7 @@ public class MoCConfiguration {
                                     if (quoted) {
                                         quoted = false;
                                     }
-                                    if (!quoted && nameStart == -1) {
+                                    if (nameStart == -1) {
                                         quoted = true;
                                     }
                                     break;
@@ -378,8 +362,7 @@ public class MoCConfiguration {
 
                                 case '}':
                                     if (currentCat == null) {
-                                        throw new RuntimeException(String.format("Config file corrupt, attepted to close to many categories '%s:%d'",
-                                                this.fileName, lineNum));
+                                        throw new RuntimeException(String.format("Config file corrupt, attepted to close to many categories '%s:%d'", this.fileName, lineNum));
                                     }
                                     currentCat = currentCat.parent;
 
@@ -416,17 +399,15 @@ public class MoCConfiguration {
                                         throw new RuntimeException(String.format("'%s' has no scope in '%s:%d'", name, this.fileName, lineNum));
                                     }
 
-                                    tmpList = new ArrayList<String>();
+                                    tmpList = new ArrayList<>();
 
                                     if ((line.length() > i + 1)) {
                                         if (line.charAt(i + 1) == '>') {
                                             i++;
                                         } else {
-                                            line = line.substring(i + 1, line.length());
-                                            String[] values = line.split(":|\\>");
-                                            for (int j = 0; j < values.length; j++) {
-                                                tmpList.add(values[j]);
-                                            }
+                                            line = line.substring(i + 1);
+                                            String[] values = line.split("[:>]");
+                                            Collections.addAll(tmpList, values);
                                             i = line.length() - 1;
                                         }
                                     } else {
@@ -445,8 +426,7 @@ public class MoCConfiguration {
                                     break;
 
                                 default:
-                                    throw new RuntimeException(String.format("Corrupted config detected! Unknown character '%s' in '%s:%d'. Please delete your MoCreatures/CMS configs and restart to fix error.", line.charAt(i), this.fileName,
-                                            lineNum));
+                                    throw new RuntimeException(String.format("Corrupted config detected! Unknown character '%s' in '%s:%d'. Please delete your MoCreatures/CMS configs and restart to fix error.", line.charAt(i), this.fileName, lineNum));
                             }
                         }
                     }
@@ -464,13 +444,13 @@ public class MoCConfiguration {
             if (buffer != null) {
                 try {
                     buffer.close();
-                } catch (IOException e) {
+                } catch (IOException ignored) {
                 }
             }
             if (input != null) {
                 try {
                     input.close();
-                } catch (IOException e) {
+                } catch (IOException ignored) {
                 }
             }
         }
@@ -596,67 +576,6 @@ public class MoCConfiguration {
         }
     }
 
-    public static void enableGlobalConfig() {
-        PARENT = new MoCConfiguration(new File(Loader.instance().getConfigDir(), "global.cfg"));
-        PARENT.load();
-    }
-
-    public static class UnicodeInputStreamReader extends Reader {
-
-        private final InputStreamReader input;
-
-        public UnicodeInputStreamReader(InputStream source, String encoding) throws IOException {
-            String enc = encoding;
-            byte[] data = new byte[4];
-
-            PushbackInputStream pbStream = new PushbackInputStream(source, data.length);
-            int read = pbStream.read(data, 0, data.length);
-            int size = 0;
-
-            int bom16 = (data[0] & 0xFF) << 8 | (data[1] & 0xFF);
-            int bom24 = bom16 << 8 | (data[2] & 0xFF);
-            int bom32 = bom24 << 8 | (data[3] & 0xFF);
-
-            if (bom24 == 0xEFBBBF) {
-                enc = "UTF-8";
-                size = 3;
-            } else if (bom16 == 0xFEFF) {
-                enc = "UTF-16BE";
-                size = 2;
-            } else if (bom16 == 0xFFFE) {
-                enc = "UTF-16LE";
-                size = 2;
-            } else if (bom32 == 0x0000FEFF) {
-                enc = "UTF-32BE";
-                size = 4;
-            } else if (bom32 == 0xFFFE0000) //This will never happen as it'll be caught by UTF-16LE,
-            { //but if anyone ever runs across a 32LE file, i'd like to disect it.
-                enc = "UTF-32LE";
-                size = 4;
-            }
-
-            if (size < read) {
-                pbStream.unread(data, size, read - size);
-            }
-
-            this.input = new InputStreamReader(pbStream, enc);
-        }
-
-        public String getEncoding() {
-            return this.input.getEncoding();
-        }
-
-        @Override
-        public int read(char[] cbuf, int off, int len) throws IOException {
-            return this.input.read(cbuf, off, len);
-        }
-
-        @Override
-        public void close() throws IOException {
-            this.input.close();
-        }
-    }
-
     public boolean hasChanged() {
         if (this.changed) {
             return true;
@@ -702,5 +621,61 @@ public class MoCConfiguration {
 
     public File getFile() {
         return this.file;
+    }
+
+    public static class UnicodeInputStreamReader extends Reader {
+
+        private final InputStreamReader input;
+
+        public UnicodeInputStreamReader(InputStream source, String encoding) throws IOException {
+            String enc = encoding;
+            byte[] data = new byte[4];
+
+            PushbackInputStream pbStream = new PushbackInputStream(source, data.length);
+            int read = pbStream.read(data, 0, data.length);
+            int size = 0;
+
+            int bom16 = (data[0] & 0xFF) << 8 | (data[1] & 0xFF);
+            int bom24 = bom16 << 8 | (data[2] & 0xFF);
+            int bom32 = bom24 << 8 | (data[3] & 0xFF);
+
+            if (bom24 == 0xEFBBBF) {
+                enc = "UTF-8";
+                size = 3;
+            } else if (bom16 == 0xFEFF) {
+                enc = "UTF-16BE";
+                size = 2;
+            } else if (bom16 == 0xFFFE) {
+                enc = "UTF-16LE";
+                size = 2;
+            } else if (bom32 == 0x0000FEFF) {
+                enc = "UTF-32BE";
+                size = 4;
+            } else if (bom32 == 0xFFFE0000) //This will never happen as it'll be caught by UTF-16LE,
+            { //but if anyone ever runs across a 32LE file, I'd like to dissect it.
+                enc = "UTF-32LE";
+                size = 4;
+            }
+
+            if (size < read) {
+                pbStream.unread(data, size, read - size);
+            }
+
+            this.input = new InputStreamReader(pbStream, enc);
+        }
+
+        public String getEncoding() {
+            return this.input.getEncoding();
+        }
+
+        @Override
+        public int read(char[] cbuf, int off, int len) throws IOException {
+            return this.input.read(cbuf, off, len);
+        }
+
+        @Override
+        public void close() throws IOException {
+            this.input.close();
+        }
     }
 }

@@ -3,27 +3,23 @@
  */
 package drzhark.mocreatures.configuration;
 
-import static drzhark.mocreatures.configuration.MoCConfiguration.NEW_LINE;
-import static drzhark.mocreatures.configuration.MoCConfiguration.allowedProperties;
-
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
+
+import static drzhark.mocreatures.configuration.MoCConfiguration.NEW_LINE;
+import static drzhark.mocreatures.configuration.MoCConfiguration.allowedProperties;
 
 public class MoCConfigCategory implements Map<String, MoCProperty> {
 
+    public final MoCConfigCategory parent;
+    private final ArrayList<MoCConfigCategory> children = new ArrayList<>();
+    private final Map<String, MoCProperty> properties = new TreeMap<>();
     private String name;
     private String comment;
-    private ArrayList<MoCConfigCategory> children = new ArrayList<MoCConfigCategory>();
-    private Map<String, MoCProperty> properties = new TreeMap<String, MoCProperty>();
-    public final MoCConfigCategory parent;
     private boolean changed = false;
 
     public MoCConfigCategory(String name) {
@@ -46,6 +42,10 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
         }
     }
 
+    public static String getQualifiedName(String name, MoCConfigCategory parent) {
+        return (parent == null ? name : parent.getQualifiedName() + MoCConfiguration.CATEGORY_SPLITTER + name);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof MoCConfigCategory) {
@@ -58,10 +58,6 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
 
     public String getQualifiedName() {
         return getQualifiedName(this.name, this.parent);
-    }
-
-    public static String getQualifiedName(String name, MoCConfigCategory parent) {
-        return (parent == null ? name : parent.getQualifiedName() + MoCConfiguration.CATEGORY_SPLITTER + name);
     }
 
     public MoCConfigCategory getFirstParent() {
@@ -97,9 +93,9 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
     }
 
     private void write(BufferedWriter out, boolean new_line, String... data) throws IOException {
-        for (int x = 0; x < data.length; x++) {
-            if (data[x] != null) {
-                out.write(data[x]);
+        for (String datum : data) {
+            if (datum != null) {
+                out.write(datum);
             }
         }
         if (new_line) {
@@ -131,7 +127,7 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
 
         write(out, pad0, this.name, " {");
 
-        MoCProperty[] props = this.properties.values().toArray(new MoCProperty[this.properties.size()]);
+        MoCProperty[] props = this.properties.values().toArray(new MoCProperty[0]);
 
         for (int x = 0; x < props.length; x++) {
             MoCProperty prop = props[x];
@@ -155,7 +151,7 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
 
             if (prop.isList()) {
                 char type = prop.getType().getID();
-                write(out, false, pad1 + String.valueOf(type), ":", propName, " <");
+                write(out, false, pad1 + type, ":", propName, " <");
                 for (int i = 0; i < prop.valueList.size(); i++) {
                     String line = prop.valueList.get(i);
                     if (prop.valueList.size() == i + 1) // if last line, don't write delimiter
@@ -182,7 +178,7 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
     }
 
     private String getIndent(int indent) {
-        StringBuilder buf = new StringBuilder("");
+        StringBuilder buf = new StringBuilder();
         for (int x = 0; x < indent; x++) {
             buf.append("    ");
         }
@@ -270,8 +266,7 @@ public class MoCConfigCategory implements Map<String, MoCProperty> {
 
     @Override
     //Immutable copy, changes will NOT be reflected in this category
-            public
-            Set<java.util.Map.Entry<String, MoCProperty>> entrySet() {
+    public Set<java.util.Map.Entry<String, MoCProperty>> entrySet() {
         return ImmutableSet.copyOf(this.properties.entrySet());
     }
 

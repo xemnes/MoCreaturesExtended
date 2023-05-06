@@ -15,6 +15,9 @@ import drzhark.mocreatures.datafixer.EntityDataWalker;
 import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
 import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.network.MoCMessageHandler;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,9 +40,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.UUID;
 
 @Mod(modid = MoCConstants.MOD_ID, name = MoCConstants.MOD_NAME, version = MoCConstants.MOD_VERSION, acceptableRemoteVersions = MoCConstants.MOD_ACCEPTED_VERSIONS)
@@ -56,9 +56,9 @@ public class MoCreatures {
     public static GameProfile MOCFAKEPLAYER = new GameProfile(UUID.fromString("6E379B45-1111-2222-3333-2FE1A88BCD66"), "[MoCreatures]");
     public static DimensionType WYVERN_LAIR;
     public static int WyvernLairDimensionID; // -17
-    public static Map<String, MoCEntityData> mocEntityMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-    public static Map<Class<? extends EntityLiving>, MoCEntityData> entityMap = new HashMap<>();
-    public static Map<Integer, Class<? extends EntityLiving>> instaSpawnerMap = new HashMap<>();
+    public static Object2ObjectLinkedOpenHashMap<String, MoCEntityData> mocEntityMap = new Object2ObjectLinkedOpenHashMap<>();
+    public static Object2ObjectOpenHashMap<Class<? extends EntityLiving>, MoCEntityData> entityMap = new Object2ObjectOpenHashMap<>();
+    public static Int2ObjectOpenHashMap<Class<? extends EntityLiving>> instaSpawnerMap = new Int2ObjectOpenHashMap<>();
     public MoCPetMapData mapData;
 
     public static void burnPlayer(EntityPlayer player) {

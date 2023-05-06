@@ -5,6 +5,7 @@ package drzhark.mocreatures.entity.ambient;
 
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
+import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,14 +22,14 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     }
 
     @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    }
+
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-
-        if (!this.world.isRemote) {
-            if (getIsFlying() && this.rand.nextInt(200) == 0) {
-                setIsFlying(false);
-            }
-        }
     }
 
     @Override
@@ -85,9 +86,7 @@ public class MoCEntityButterfly extends MoCEntityInsect {
 
     @Override
     public boolean isMyFavoriteFood(ItemStack stack) {
-        return !stack.isEmpty()
-                && (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER) || stack.getItem() == Item
-                .getItemFromBlock(Blocks.YELLOW_FLOWER));
+        return !stack.isEmpty() && (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER) || stack.getItem() == Item.getItemFromBlock(Blocks.YELLOW_FLOWER));
     }
 
     @Override

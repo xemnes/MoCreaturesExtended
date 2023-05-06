@@ -7,6 +7,7 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -20,6 +21,12 @@ public class MoCEntityCricket extends MoCEntityInsect {
     public MoCEntityCricket(World world) {
         super(world);
         this.texture = "cricketa.png";
+    }
+
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
     }
 
     @Override
@@ -47,10 +54,6 @@ public class MoCEntityCricket extends MoCEntityInsect {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
-            if (getIsFlying() && this.rand.nextInt(50) == 0) {
-                setIsFlying(false);
-            }
-
             if (getIsFlying() || !this.onGround) {
                 EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5D);
                 if (ep != null && --this.soundCounter == -1) {

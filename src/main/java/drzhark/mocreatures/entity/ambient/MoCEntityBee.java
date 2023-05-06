@@ -12,6 +12,7 @@ import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -30,6 +31,12 @@ public class MoCEntityBee extends MoCEntityInsect {
     }
 
     @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    }
+
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -40,10 +47,6 @@ public class MoCEntityBee extends MoCEntityInsect {
                     MoCTools.playCustomSound(this, getMySound());
                     this.soundCount = 20;
                 }
-            }
-
-            if (getIsFlying() && this.rand.nextInt(500) == 0) {
-                setIsFlying(false);
             }
         }
     }
@@ -82,9 +85,7 @@ public class MoCEntityBee extends MoCEntityInsect {
 
     @Override
     public boolean isMyFavoriteFood(ItemStack stack) {
-        return !stack.isEmpty()
-                && (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER) || stack.getItem() == Item
-                .getItemFromBlock(Blocks.YELLOW_FLOWER));
+        return !stack.isEmpty() && (stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER) || stack.getItem() == Item.getItemFromBlock(Blocks.YELLOW_FLOWER));
     }
 
     @Override

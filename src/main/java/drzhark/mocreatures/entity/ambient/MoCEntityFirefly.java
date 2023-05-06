@@ -6,6 +6,7 @@ package drzhark.mocreatures.entity.ambient;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -19,6 +20,12 @@ public class MoCEntityFirefly extends MoCEntityInsect {
     }
 
     @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    }
+
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -27,10 +34,6 @@ public class MoCEntityFirefly extends MoCEntityInsect {
             if (ep != null && getIsFlying() && --this.soundCount == -1) {
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_CRICKET_FLY);
                 this.soundCount = 20;
-            }
-
-            if (getIsFlying() && this.rand.nextInt(500) == 0) {
-                setIsFlying(false);
             }
         }
     }

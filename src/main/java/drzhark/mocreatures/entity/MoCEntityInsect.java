@@ -4,46 +4,54 @@
 package drzhark.mocreatures.entity;
 
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.network.MoCMessageHandler;
-import drzhark.mocreatures.network.message.MoCMessageAnimation;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import drzhark.mocreatures.entity.ai.EntityAIWanderAvoidWaterFlyingMoC;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateFlying;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-
-import java.util.List;
 
 public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
-    private static final DataParameter<Boolean> IS_FLYING = EntityDataManager.createKey(MoCEntityInsect.class, DataSerializers.BOOLEAN);
-    protected EntityAIWanderMoC2 wander;
     private int climbCounter;
 
     public MoCEntityInsect(World world) {
         super(world);
         setSize(0.2F, 0.2F);
-        this.tasks.addTask(2, this.wander = new EntityAIWanderMoC2(this, 1.0D, 80));
+        this.moveHelper = new EntityFlyHelper(this);
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue(0.6D);
+    }
+
+    @Override
+    protected PathNavigate createNavigator(World worldIn) {
+        PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
+        pathnavigateflying.setCanOpenDoors(false);
+        pathnavigateflying.setCanFloat(true);
+        pathnavigateflying.setCanEnterDoors(true);
+        return pathnavigateflying;
     }
 
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(IS_FLYING, false);
+    }
+
+    @Override
+    protected void initEntityAI() {
+        super.initEntityAI();
+        this.tasks.addTask(2, new EntityAIWanderAvoidWaterFlyingMoC(this, 1.0D));
     }
 
     @Override
@@ -51,54 +59,27 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
         return getIsFlying();
     }
 
+    @Override
     public boolean getIsFlying() {
-        return this.dataManager.get(IS_FLYING);
-    }
-
-    public void setIsFlying(boolean flag) {
-        this.dataManager.set(IS_FLYING, flag);
+        return (isOnAir() || !onGround) && (motionX > 0 || motionY > 0 || motionZ > 0);
     }
 
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
+        if (!this.onGround && this.motionY < 0.0D) {
+            this.motionY *= 0.6D;
+        }
+
         if (!this.world.isRemote) {
-            if (!getIsFlying() && isOnLadder() && !this.onGround) {
-                MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 1),
-                        new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
-            }
-
-            if (isFlyer() && !getIsFlying() && this.rand.nextInt(getFlyingFreq()) == 0) {
-                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 4D, 4D));
-                for (Entity entity1 : list) {
-                    if (!(entity1 instanceof EntityLivingBase)) continue;
-                    if (entity1.width >= 0.4F && entity1.height >= 0.4F && canEntityBeSeen(entity1)) {
-                        setIsFlying(true);
-                        this.wander.makeUpdate();
-                    }
-                }
-            }
-
-            if (isFlyer() && !getIsFlying() && this.rand.nextInt(200) == 0) {
-                setIsFlying(true);
-                this.wander.makeUpdate();
-            }
-
             if (isAttractedToLight() && this.rand.nextInt(50) == 0) {
                 int[] ai = MoCTools.ReturnNearestBlockCoord(this, Blocks.TORCH, 8D);
                 if (ai[0] > -1000) {
-                    this.getNavigator().tryMoveToXYZ(ai[0], ai[1], ai[2], 1.0D);//
+                    this.getNavigator().tryMoveToXYZ(ai[0], ai[1], ai[2], 1.0D);
                 }
             }
-
-            //this makes the flying insect move all the time in the air
-            if (getIsFlying() && this.getNavigator().noPath() && !isMovementCeased() && this.getAttackTarget() == null) {
-                this.wander.makeUpdate();
-            }
-
-        } else // client stuff
-        {
+        } else {
             if (this.climbCounter > 0 && ++this.climbCounter > 8) {
                 this.climbCounter = 0;
             }
@@ -118,7 +99,6 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
         {
             this.climbCounter = 1;
         }
-
     }
 
     @Override
@@ -134,27 +114,17 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     protected void jump() {
     }
 
-    protected int getFlyingFreq() {
-        return 20;
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
     }
 
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
+    @Override
+    public boolean doesEntityNotTriggerPressurePlate() {
+        return true;
+    }
+
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ARTHROPOD;
-    }
-
-    @Override
-    public PathNavigate getNavigator() {
-        /*if (this.isInWater() && this.isAmphibian()) {
-            return this.navigatorWater;
-        }
-        */
-        if (this.getIsFlying()) {
-            return this.navigatorFlyer;
-        }
-        return this.navigator;
     }
 }

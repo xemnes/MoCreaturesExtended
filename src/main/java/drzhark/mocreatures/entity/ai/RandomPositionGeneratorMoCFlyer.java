@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class RandomPositionGeneratorMoCFlyer {
     /**
-     * used to store a driection when the user passes a point to move towards or away from. WARNING: NEVER THREAD SAFE.
+     * used to store a direction when the user passes a point to move towards or away from. WARNING: NEVER THREAD SAFE.
      * MULTIPLE findTowards and findAway calls, will share this var
      */
     private static Vec3d staticVector = Vec3d.ZERO;

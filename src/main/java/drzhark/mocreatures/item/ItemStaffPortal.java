@@ -25,20 +25,19 @@ import net.minecraft.world.World;
 
 public class ItemStaffPortal extends MoCItem {
 
+    private int portalPosX;
+    private int portalPosY;
+    private int portalPosZ;
+    private int portalDimension;
+
     public ItemStaffPortal(String name) {
         super(name);
         this.maxStackSize = 1;
         setMaxDamage(3);
     }
 
-    private int portalPosX;
-    private int portalPosY;
-    private int portalPosZ;
-    private int portalDimension;
-
     @Override
-    public EnumActionResult
-            onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         final ItemStack stack = player.getHeldItem(hand);
         if (worldIn.isRemote) {
             return EnumActionResult.FAIL;
@@ -52,9 +51,7 @@ public class ItemStaffPortal extends MoCItem {
             } else if (hasMending) {
                 enchantments = "mending";
             }
-            player.sendMessage(new TextComponentTranslation(MoCreatures.MOC_LOGO + 
-                TextFormatting.RED + " Detected illegal enchantment(s) '" + TextFormatting.GREEN + enchantments + 
-                    TextFormatting.RED + "' on Staff Portal!\nThe item has been removed from your inventory."));
+            player.sendMessage(new TextComponentTranslation(MoCreatures.MOC_LOGO + TextFormatting.RED + " Detected illegal enchantment(s) '" + TextFormatting.GREEN + enchantments + TextFormatting.RED + "' on Staff Portal!\nThe item has been removed from your inventory."));
             player.inventory.deleteStack(stack);
             return EnumActionResult.SUCCESS;
         }
@@ -81,10 +78,8 @@ public class ItemStaffPortal extends MoCItem {
                 if (var2 != null) {
                     playerMP.connection.setPlayerLocation(var2.getX(), var2.getY(), var2.getZ(), 0.0F, 0.0F);
                 }
-                playerMP.getServer().getPlayerList().transferPlayerToDimension(playerMP, MoCreatures.WyvernLairDimensionID,
-                        new MoCDirectTeleporter(playerMP.getServer().getWorld(MoCreatures.WyvernLairDimensionID)));
+                playerMP.getServer().getPlayerList().transferPlayerToDimension(playerMP, MoCreatures.WyvernLairDimensionID, new MoCDirectTeleporter(playerMP.getServer().getWorld(MoCreatures.WyvernLairDimensionID)));
                 stack.damageItem(1, player);
-                return EnumActionResult.SUCCESS;
             } else {
                 //on the WyvernLair!
                 if ((player.posX > 1.5D || player.posX < -1.5D) || (player.posZ > 2.5D || player.posZ < -2.5D)) {
@@ -97,31 +92,23 @@ public class ItemStaffPortal extends MoCItem {
                 {
                     BlockPos var2 = playerMP.getServer().getWorld(0).getSpawnPoint();
 
-                    if (var2 != null) {
-                        for (int i1 = 0; i1 < 60; i1++) {
-                            IBlockState blockstate = playerMP.getServer().getWorld(0).getBlockState(pos.add(0, i1, 0));
-                            IBlockState blockstate1 = playerMP.getServer().getWorld(0).getBlockState(pos.add(0, i1 + 1, 0));
+                    for (int i1 = 0; i1 < 60; i1++) {
+                        IBlockState blockstate = playerMP.getServer().getWorld(0).getBlockState(pos.add(0, i1, 0));
+                        IBlockState blockstate1 = playerMP.getServer().getWorld(0).getBlockState(pos.add(0, i1 + 1, 0));
 
-                            if (blockstate.getBlock() == Blocks.AIR && blockstate1.getBlock() == Blocks.AIR) {
-                                playerMP.connection.setPlayerLocation(var2.getX(), (double) var2.getY() + i1 + 1, var2.getZ(), 0.0F,
-                                        0.0F);
-                                if (MoCreatures.proxy.debug) {
-                                    System.out.println("MoC Staff teleporter found location at spawn");
-                                }
-                                foundSpawn = true;
-                                break;
-                            }
-                        }
-
-                        if (!foundSpawn) {
+                        if (blockstate.getBlock() == Blocks.AIR && blockstate1.getBlock() == Blocks.AIR) {
+                            playerMP.connection.setPlayerLocation(var2.getX(), (double) var2.getY() + i1 + 1, var2.getZ(), 0.0F, 0.0F);
                             if (MoCreatures.proxy.debug) {
-                                System.out.println("MoC Staff teleporter couldn't find an adequate teleport location at spawn");
+                                System.out.println("MoC Staff teleporter found location at spawn");
                             }
-                            return EnumActionResult.FAIL;
+                            foundSpawn = true;
+                            break;
                         }
-                    } else {
+                    }
+
+                    if (!foundSpawn) {
                         if (MoCreatures.proxy.debug) {
-                            System.out.println("MoC Staff teleporter couldn't find spawn point");
+                            System.out.println("MoC Staff teleporter couldn't find an adequate teleport location at spawn");
                         }
                         return EnumActionResult.FAIL;
                     }
@@ -130,15 +117,14 @@ public class ItemStaffPortal extends MoCItem {
                 }
 
                 stack.damageItem(1, player);
-                playerMP.getServer().getPlayerList().transferPlayerToDimension(playerMP, this.portalDimension,
-                        new MoCDirectTeleporter(playerMP.getServer().getWorld(0)));
-                return EnumActionResult.SUCCESS;
+                playerMP.getServer().getPlayerList().transferPlayerToDimension(playerMP, this.portalDimension, new MoCDirectTeleporter(playerMP.getServer().getWorld(0)));
             }
+            return EnumActionResult.SUCCESS;
         }
     }
 
     /**
-     * Returns True is the item is renderer in full 3D when hold.
+     * Returns True is the item is renderer in full 3D when held.
      */
     @Override
     public boolean isFull3D() {
@@ -147,7 +133,7 @@ public class ItemStaffPortal extends MoCItem {
 
     /**
      * returns the action that specifies what animation to play when the items
-     * is being used
+     * are being used
      */
     @Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack) {

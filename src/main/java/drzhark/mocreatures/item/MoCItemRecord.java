@@ -23,10 +23,9 @@ public class MoCItemRecord extends ItemRecord {
     }
 
     @SideOnly(Side.CLIENT)
-    /**
+    /*
      * Return the title for this record.
-     */
-    public String getRecordTitle() {
+     */ public String getRecordTitle() {
         return "MoC - " + this.getRecordNameLocal();
     }
 }

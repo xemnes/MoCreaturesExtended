@@ -6,25 +6,14 @@ package drzhark.mocreatures.item;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
-import drzhark.mocreatures.entity.passive.MoCEntityBear;
-import drzhark.mocreatures.entity.passive.MoCEntityBigCat;
-import drzhark.mocreatures.entity.passive.MoCEntityElephant;
-import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.entity.passive.MoCEntityKitty;
-import drzhark.mocreatures.entity.passive.MoCEntityOstrich;
-import drzhark.mocreatures.entity.passive.MoCEntityPetScorpion;
-import drzhark.mocreatures.entity.passive.MoCEntityWyvern;
+import drzhark.mocreatures.entity.passive.*;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -48,10 +37,8 @@ public class MoCItemWhip extends MoCItem {
     }
 
     @Override
-    public EnumActionResult
-            onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         final ItemStack stack = player.getHeldItem(hand);
-        int i1 = 0;
         Block block = worldIn.getBlockState(pos).getBlock();
         Block block1 = worldIn.getBlockState(pos.up()).getBlock();
         if (side != EnumFacing.DOWN && (block1 == Blocks.AIR) && (block != Blocks.AIR) && (block != Blocks.STANDING_SIGN)) {
@@ -59,13 +46,10 @@ public class MoCItemWhip extends MoCItem {
             worldIn.playSound(player, pos, MoCSoundEvents.ENTITY_GENERIC_WHIP, SoundCategory.PLAYERS, 0.5F, 0.4F / ((itemRand.nextFloat() * 0.4F) + 0.8F));
             stack.damageItem(1, player);
             List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(12D, 12D, 12D));
-            for (int l1 = 0; l1 < list.size(); l1++) {
-                Entity entity = list.get(l1);
-
+            for (Entity entity : list) {
                 if (entity instanceof MoCEntityAnimal) {
                     MoCEntityAnimal animal = (MoCEntityAnimal) entity;
-                    if (MoCreatures.proxy.enableOwnership && animal.getOwnerId() != null
-                            && !player.getName().equals(animal.getOwnerId()) && !MoCTools.isThisPlayerAnOP(player)) {
+                    if (MoCreatures.proxy.enableOwnership && animal.getOwnerId() != null && !player.getUniqueID().equals(animal.getOwnerId()) && !MoCTools.isThisPlayerAnOP(player)) {
                         continue;
                     }
                 }
@@ -74,7 +58,6 @@ public class MoCItemWhip extends MoCItem {
                     MoCEntityBigCat entitybigcat = (MoCEntityBigCat) entity;
                     if (entitybigcat.getIsTamed()) {
                         entitybigcat.setSitting(!entitybigcat.getIsSitting());
-                        i1++;
                     } else if ((worldIn.getDifficulty().getId() > 0) && entitybigcat.getIsAdult()) {
                         entitybigcat.setAttackTarget(player);
                     }
@@ -134,22 +117,18 @@ public class MoCItemWhip extends MoCItem {
                         entityelephant.sprintCounter = 1;
                     }
                 }
-                
+
                 if (entity instanceof MoCEntityBear) {
                     MoCEntityBear entitybear = (MoCEntityBear) entity;
 
                     if (entitybear.getIsTamed()) {
-                       if (entitybear.getBearState() == 0) {
-                               entitybear.setBearState(2);
-                           }else {
-                               entitybear.setBearState(0);
-                           }
+                        if (entitybear.getBearState() == 0) {
+                            entitybear.setBearState(2);
+                        } else {
+                            entitybear.setBearState(0);
+                        }
                     }
                 }
-            }
-
-            if (i1 > 6) {
-                //entityplayer.triggerAchievement(MoCreatures.Indiana);
             }
             return EnumActionResult.SUCCESS;
         }

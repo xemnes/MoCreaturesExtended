@@ -30,10 +30,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-
-import javax.annotation.Nullable;
 
 public class MoCItemPetAmulet extends MoCItem {
 
@@ -75,7 +74,7 @@ public class MoCItemPetAmulet extends MoCItem {
         if (!world.isRemote) {
             initAndReadNBT(stack);
             if (this.spawnClass.isEmpty()) {
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
             try {
                 this.spawnClass = this.spawnClass.replace(MoCConstants.MOD_PREFIX, "").toLowerCase();
@@ -96,7 +95,7 @@ public class MoCItemPetAmulet extends MoCItem {
                     }
                 }
                 EntityLiving tempLiving = (EntityLiving) EntityList.createEntityByIDFromName(new ResourceLocation(MoCConstants.MOD_PREFIX + this.spawnClass.toLowerCase()), world);
-                if (tempLiving != null && tempLiving instanceof IMoCEntity) {
+                if (tempLiving instanceof IMoCEntity) {
                     IMoCTameable storedCreature = (IMoCTameable) tempLiving;
                     ((EntityLiving) storedCreature).setPosition(newPosX, newPosY, newPosZ);
                     storedCreature.setType(this.creatureType);
@@ -137,7 +136,7 @@ public class MoCItemPetAmulet extends MoCItem {
                             }
                         }
                     } else {
-                        //if the player using the amulet is different than the original owner
+                        //if the player using the amulet is different from the original owner
                         if (!(this.ownerUniqueId.equals(player.getUniqueID())) && MoCreatures.instance.mapData != null) {
                             MoCPetData oldOwner = MoCreatures.instance.mapData.getPetData(this.ownerUniqueId);
                             MoCPetData newOwner = MoCreatures.instance.mapData.getPetData(player.getUniqueID());
@@ -145,8 +144,7 @@ public class MoCItemPetAmulet extends MoCItem {
                             if (MoCTools.isThisPlayerAnOP(player)) {
                                 maxCount = MoCreatures.proxy.maxOPTamed;
                             }
-                            if ((newOwner != null && newOwner.getTamedList().tagCount() < maxCount) || (newOwner == null && maxCount > 0)
-                                    || !MoCreatures.proxy.enableOwnership) {
+                            if ((newOwner != null && newOwner.getTamedList().tagCount() < maxCount) || (newOwner == null && maxCount > 0) || !MoCreatures.proxy.enableOwnership) {
                                 MoCreatures.instance.mapData.updateOwnerPet(storedCreature);
                             }
                             // remove pet entry from old owner
@@ -163,9 +161,7 @@ public class MoCItemPetAmulet extends MoCItem {
                     }
 
                     if (player.getEntityWorld().spawnEntity((EntityLiving) storedCreature)) {
-                        MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAppear(((EntityLiving) storedCreature).getEntityId()),
-                                new TargetPoint(player.getEntityWorld().provider.getDimensionType().getId(), player.posX, player.posY,
-                                        player.posZ, 64));
+                        MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAppear(((EntityLiving) storedCreature).getEntityId()), new TargetPoint(player.getEntityWorld().provider.getDimensionType().getId(), player.posX, player.posY, player.posZ, 64));
                         if (this.ownerUniqueId == null || this.name.isEmpty()) {
                             MoCTools.tameWithName(player, storedCreature);
                         }
@@ -184,7 +180,7 @@ public class MoCItemPetAmulet extends MoCItem {
             }
         }
 
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
@@ -216,19 +212,19 @@ public class MoCItemPetAmulet extends MoCItem {
     }
 
     @SideOnly(Side.CLIENT)
-    /**
+    /*
      * allows items to add custom lines of information to the mouseover description
      */
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         initAndReadNBT(stack);
-        if (this.spawnClass != "") {
+        if (!this.spawnClass.equals("")) {
             tooltip.add(TextFormatting.AQUA + this.spawnClass);
         }
-        if (this.name != "") {
+        if (!this.name.equals("")) {
             tooltip.add(TextFormatting.BLUE + this.name);
         }
-        if (this.ownerName != "") {
+        if (!this.ownerName.equals("")) {
             tooltip.add(TextFormatting.DARK_BLUE + "Owned by " + this.ownerName);
         }
     }

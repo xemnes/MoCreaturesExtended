@@ -25,11 +25,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class MoCItemWeapon extends MoCItem {
 
-    private float attackDamage;
     private final Item.ToolMaterial material;
+    private final float attackDamage;
     private int specialWeaponType = 0;
     private boolean breakable = false;
 
@@ -42,11 +43,8 @@ public class MoCItemWeapon extends MoCItem {
     }
 
     /**
-     *
-     * @param par1
-     * @param par2ToolMaterial
      * @param damageType 0 = default, 1 = poison, 2 = slow down, 3 = fire, 4 =
-     *        confusion, 5 = blindness
+     *                   confusion, 5 = blindness
      */
     public MoCItemWeapon(String name, ToolMaterial par2ToolMaterial, int damageType, boolean fragile) {
         this(name, par2ToolMaterial);
@@ -66,16 +64,15 @@ public class MoCItemWeapon extends MoCItem {
             return 15.0F;
         } else {
             Material material = state.getMaterial();
-            return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL && material != Material.LEAVES
-                    && material != Material.GOURD ? 1.0F : 1.5F;
+            return material != Material.PLANTS && material != Material.VINE && material != Material.CORAL && material != Material.LEAVES && material != Material.GOURD ? 1.0F : 1.5F;
         }
     }
 
     /**
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
-     *  
-     * @param target The Entity being hit
+     *
+     * @param target   The Entity being hit
      * @param attacker the attacking entity
      */
     @Override
@@ -115,7 +112,7 @@ public class MoCItemWeapon extends MoCItem {
     }
 
     /**
-     * Returns True is the item is renderer in full 3D when hold.
+     * Returns True is the item is renderer in full 3D when held.
      */
     @Override
     @SideOnly(Side.CLIENT)
@@ -125,7 +122,7 @@ public class MoCItemWeapon extends MoCItem {
 
     /**
      * returns the action that specifies what animation to play when the items
-     * is being used
+     * are being used
      */
     @Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack) {
@@ -148,7 +145,7 @@ public class MoCItemWeapon extends MoCItem {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
         player.setActiveHand(hand);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     /**
@@ -188,14 +185,13 @@ public class MoCItemWeapon extends MoCItem {
 
     /**
      * Return whether this item is repairable in an anvil.
-     *  
+     *
      * @param toRepair The ItemStack to be repaired
-     * @param repair The ItemStack that should repair this Item (leather for leather armor, etc.)
+     * @param repair   The ItemStack that should repair this Item (leather for leather armor, etc.)
      */
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
         ItemStack mat = this.material.getRepairItemStack();
-        if (mat != null && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false))
-            return true;
+        if (OreDictionary.itemMatches(mat, repair, false)) return true;
         return super.getIsRepairable(toRepair, repair);
     }
 
@@ -206,8 +202,7 @@ public class MoCItemWeapon extends MoCItem {
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier",
-                    (double) this.attackDamage, 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, 0));
         }
         return multimap;
     }

@@ -42,7 +42,7 @@ public class MoCItemEgg extends MoCItem {
             entityegg.motionX += (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
             entityegg.motionZ += (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
         }
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
     @Override
@@ -83,6 +83,6 @@ public class MoCItemEgg extends MoCItem {
 
     @Override
     public String getTranslationKey(ItemStack itemstack) {
-        return (new StringBuilder()).append(getTranslationKey()).append(".").append(itemstack.getItemDamage()).toString();
+        return getTranslationKey() + "." + itemstack.getItemDamage();
     }
 }

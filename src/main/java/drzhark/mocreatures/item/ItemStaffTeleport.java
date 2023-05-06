@@ -28,7 +28,7 @@ public class ItemStaffTeleport extends MoCItem {
     }
 
     /**
-     * Returns True is the item is renderer in full 3D when hold.
+     * Returns True is the item is renderer in full 3D when held.
      */
     @Override
     public boolean isFull3D() {
@@ -37,7 +37,7 @@ public class ItemStaffTeleport extends MoCItem {
 
     /**
      * returns the action that specifies what animation to play when the items
-     * is being used
+     * are being used
      */
     @Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack) {
@@ -60,31 +60,22 @@ public class ItemStaffTeleport extends MoCItem {
         double coordX = player.posX;
         for (int x = 4; x < 128; x++) {
             double newPosY = coordY - Math.cos((player.rotationPitch - 90F) / 57.29578F) * x;
-            double newPosX =
-                    coordX + Math.cos((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F))
-                            * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * x);
-            double newPosZ =
-                    coordZ + Math.sin((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F))
-                            * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * x);
+            double newPosX = coordX + Math.cos((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F)) * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * x);
+            double newPosZ = coordZ + Math.sin((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F)) * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * x);
             BlockPos pos = new BlockPos(MathHelper.floor(newPosX), MathHelper.floor(newPosY), MathHelper.floor(newPosZ));
             IBlockState blockstate = player.world.getBlockState(pos);
             if (blockstate.getBlock() != Blocks.AIR) {
                 newPosY = coordY - Math.cos((player.rotationPitch - 90F) / 57.29578F) * (x - 1);
-                newPosX =
-                        coordX + Math.cos((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F))
-                                * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * (x - 1));
-                newPosZ =
-                        coordZ + Math.sin((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F))
-                                * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * (x - 1));
+                newPosX = coordX + Math.cos((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F)) * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * (x - 1));
+                newPosZ = coordZ + Math.sin((MoCTools.realAngle(player.rotationYaw - 90F) / 57.29578F)) * (Math.sin((player.rotationPitch - 90F) / 57.29578F) * (x - 1));
 
                 if (!worldIn.isRemote) {
                     EntityPlayerMP playerMP = (EntityPlayerMP) player;
-                    playerMP.connection.setPlayerLocation(newPosX, newPosY, newPosZ, player.rotationYaw,
-                            player.rotationPitch);
+                    playerMP.connection.setPlayerLocation(newPosX, newPosY, newPosZ, player.rotationYaw, player.rotationPitch);
                     MoCTools.playCustomSound(player, MoCSoundEvents.ENTITY_GENERIC_MAGIC_APPEAR);
                 }
                 MoCreatures.proxy.teleportFX(player);
-               // player.setItemInUse(stack, 200);
+                // player.setItemInUse(stack, 200);
                 stack.damageItem(1, player);
 
                 return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
@@ -95,8 +86,7 @@ public class ItemStaffTeleport extends MoCItem {
         return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 
-    public int getMaxItemUseDuration(ItemStack stack)
-    {
+    public int getMaxItemUseDuration(ItemStack stack) {
         return 200;
     }
 }

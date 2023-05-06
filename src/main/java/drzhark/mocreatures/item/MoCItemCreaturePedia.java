@@ -28,7 +28,7 @@ public class MoCItemCreaturePedia extends MoCItem {
     }
 
     /**
-     * Called when a player right clicks a entity with a item.
+     * Called when a player right-clicks an entity with an item.
      */
     public void itemInteractionForEntity2(ItemStack par1ItemStack, EntityLiving entityliving) {
         if (entityliving.world.isRemote) {
@@ -52,7 +52,6 @@ public class MoCItemCreaturePedia extends MoCItem {
 
         if (entityliving instanceof MoCEntityDolphin) {
             MoCreatures.showCreaturePedia("/mocreatures/pedia/dolphin.png");
-            return;
         }
     }
 
@@ -64,9 +63,8 @@ public class MoCItemCreaturePedia extends MoCItem {
             double d1 = -1D;
             EntityLivingBase entityliving = null;
             List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(dist, dist, dist));
-            for (int i = 0; i < list.size(); i++) {
-                Entity entity1 = list.get(i);
-                if (entity1 == null || !(entity1 instanceof EntityLivingBase)) {
+            for (Entity entity1 : list) {
+                if (!(entity1 instanceof EntityLivingBase)) {
                     continue;
                 }
 
@@ -75,33 +73,32 @@ public class MoCItemCreaturePedia extends MoCItem {
                 }
 
                 double d2 = entity1.getDistanceSq(player.posX, player.posY, player.posZ);
-                if (((dist < 0.0D) || (d2 < (dist * dist))) && ((d1 == -1D) || (d2 < d1))
-                        && ((EntityLivingBase) entity1).canEntityBeSeen(player)) {
+                if (d2 < dist * dist && (d1 == -1D || d2 < d1) && ((EntityLivingBase) entity1).canEntityBeSeen(player)) {
                     d1 = d2;
                     entityliving = (EntityLivingBase) entity1;
                 }
             }
 
             if (entityliving == null) {
-                return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+                return new ActionResult<>(EnumActionResult.PASS, stack);
             }
 
             if (entityliving instanceof MoCEntityHorse) {
                 MoCreatures.showCreaturePedia(player, "/mocreatures/pedia/horse.png");
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
 
             if (entityliving instanceof MoCEntityTurtle) {
                 MoCreatures.showCreaturePedia(player, "/mocreatures/pedia/turtle.png");
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
 
             if (entityliving instanceof MoCEntityBunny) {
                 MoCreatures.showCreaturePedia(player, "/mocreatures/pedia/bunny.png");
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+                return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
         }
 
-        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
+        return new ActionResult<>(EnumActionResult.PASS, stack);
     }
 }

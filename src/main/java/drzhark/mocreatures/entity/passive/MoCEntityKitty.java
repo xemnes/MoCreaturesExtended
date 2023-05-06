@@ -437,7 +437,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 obj = entitykittybed;
             }
         }
-
         return obj;
     }
 
@@ -473,6 +472,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        // Only process one hand to prevent double interactions
+        if (hand != EnumHand.MAIN_HAND) {
+            return false;
+        }
+
         final Boolean tameResult = this.processTameInteract(player, hand);
         if (tameResult != null) {
             return tameResult;
@@ -603,8 +607,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             if (!getIsHungry() && !getIsSitting() && (this.rand.nextInt(100) == 0)) {
                 setHungry(true);
             }
-
-            if (this.isRiding()) MoCTools.dismountSneakingPlayer(this);
 
             label0:
             switch (getKittyState()) {
@@ -1147,6 +1149,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         } else {
             super.onLivingUpdate();
         }
+        // Dismount player on both sides to prevent desyncs
+        if (this.isRiding()) MoCTools.dismountSneakingPlayer(this);
     }
 
     public boolean onMaBack() {

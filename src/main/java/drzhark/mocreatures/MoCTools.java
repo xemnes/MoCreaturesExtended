@@ -1643,7 +1643,7 @@ public class MoCTools {
             double dist = (-1.5D);
             double newPosX = entityRidden.posX + (dist * Math.sin(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
             double newPosZ = entityRidden.posZ - (dist * Math.cos(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
-            entity.setPosition(newPosX, entityRidden.posY + 2D, newPosZ);
+            entity.setPositionAndUpdate(newPosX, entityRidden.posY + 2D, newPosZ);
             MoCTools.playCustomSound(entity, SoundEvents.ENTITY_CHICKEN_EGG);
         }
     }

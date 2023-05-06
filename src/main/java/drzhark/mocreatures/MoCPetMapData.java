@@ -3,9 +3,7 @@
  */
 package drzhark.mocreatures;
 
-import com.google.common.collect.Maps;
 import drzhark.mocreatures.entity.IMoCTameable;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

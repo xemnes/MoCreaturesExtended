@@ -280,7 +280,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
     // Fixes despawn issue when chunks unload and duplicated mounts when disconnecting on servers
     @Override
     public void setDead() {
-        if (!this.world.isRemote && getIsTamed() && getHealth() > 0 && !this.riderIsDisconnecting) {
+        if (!this.world.isRemote && getIsTamed() && getHealth() > 0 && !isRiderDisconnecting()) {
             return;
         }
         super.setDead();

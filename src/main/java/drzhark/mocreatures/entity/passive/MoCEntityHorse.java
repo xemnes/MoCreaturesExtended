@@ -205,7 +205,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                     setType(60);// zebra
                 }
             }
-            if (BiomeDictionary.hasType(currentbiome, Type.SANDY)) {
+            if (BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) {
                 setType(60);// zebra
             }
 

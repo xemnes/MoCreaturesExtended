@@ -552,7 +552,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setType(2);
                 }
             }
-                        
+
             if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) || BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
                 // spotted or coral or normal
                 if (l < 4) {
@@ -563,7 +563,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setType(6);
                 }
             }
-            
+
             if (BiomeDictionary.hasType(currentbiome, Type.SWAMP)) {
                 // python or cobra or normal
                 if (l < 4) {
@@ -574,7 +574,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setType(1);
                 }
             }
-            
+
             if (BiomeDictionary.hasType(currentbiome, Type.JUNGLE)) {
                 // bright green or bright orange or normal
                 if (l < 4) {
@@ -585,7 +585,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setType(1);
                 }
             }
-            
+
             if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY))) {
                 setType(2);
             }

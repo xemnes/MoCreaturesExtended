@@ -21,8 +21,8 @@ import java.util.Random;
 
 public class BiomeGenWyvernLair extends Biome {
 
-    private MoCWorldGenBigTree wyvernGenBigTree;
-    private WorldGenShrub worldGenShrub;
+    private final MoCWorldGenBigTree wyvernGenBigTree;
+    private final WorldGenShrub worldGenShrub;
 
     public BiomeGenWyvernLair(Biome.BiomeProperties biomeProperties) {
         super(biomeProperties);

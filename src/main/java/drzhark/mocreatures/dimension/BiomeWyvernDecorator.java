@@ -14,5 +14,4 @@ public class BiomeWyvernDecorator extends BiomeDecorator {
         this.mushroomsPerChunk = 20;
         this.treesPerChunk = 4;
     }
-
 }

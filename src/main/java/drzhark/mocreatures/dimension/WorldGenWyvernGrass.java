@@ -14,9 +14,11 @@ import java.util.Random;
 
 public class WorldGenWyvernGrass extends WorldGenerator {
 
-    /** Stores ID for WorldGenTallGrass */
-    private IBlockState iBlockStateGrass;
-    private MoCBlockTallGrass grass;
+    /**
+     * Stores ID for WorldGenTallGrass
+     */
+    private final IBlockState iBlockStateGrass;
+    private final MoCBlockTallGrass grass;
 
     public WorldGenWyvernGrass(IBlockState iblockstategrass) {
         this.iBlockStateGrass = iblockstategrass;
@@ -30,14 +32,12 @@ public class WorldGenWyvernGrass extends WorldGenerator {
         do {
             blockstate = worldIn.getBlockState(position);
             Block block = blockstate.getBlock();
-            if (!block.isAir(blockstate, worldIn, position) && !block.isLeaves(blockstate, worldIn, position))
-                break;
+            if (!block.isAir(blockstate, worldIn, position) && !block.isLeaves(blockstate, worldIn, position)) break;
             position = position.down();
         } while (position.getY() > 0);
 
         for (int i = 0; i < 128; ++i) {
-            BlockPos blockpos1 =
-                    position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
+            BlockPos blockpos1 = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
             if (worldIn.isAirBlock(blockpos1) && grass.canBlockStay(worldIn, blockpos1, iBlockStateGrass)) {
                 worldIn.setBlockState(blockpos1, this.iBlockStateGrass, 2);
             }

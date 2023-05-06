@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class WorldGenTower extends WorldGenerator {
 
-    private Block MainBlock;
-    private Block brickBlock;
+    private final Block MainBlock;
+    private final Block brickBlock;
 
     public WorldGenTower(Block Main, Block Brick, Block Deco) {
         this.MainBlock = Main;

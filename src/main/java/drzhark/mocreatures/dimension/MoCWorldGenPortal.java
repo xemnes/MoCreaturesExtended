@@ -12,14 +12,14 @@ import java.util.Random;
 
 public class MoCWorldGenPortal extends WorldGenerator {
 
-    private Block pillarBlock;
-    private Block stairBlock;
-    private Block wallBlock;
-    private Block centerBlock;
-    private int pillarMetadata;
+    private final Block pillarBlock;
+    private final Block stairBlock;
+    private final Block wallBlock;
+    private final Block centerBlock;
+    private final int pillarMetadata;
+    private final int wallMetadata;
+    private final int centerMetadata;
     private int stairMetadata;
-    private int wallMetadata;
-    private int centerMetadata;
 
     public MoCWorldGenPortal(Block pillar, int pillarMeta, Block stair, int stairMeta, Block wall, int wallMeta, Block center, int centerMeta) {
         this.pillarBlock = pillar;
@@ -32,17 +32,15 @@ public class MoCWorldGenPortal extends WorldGenerator {
         this.centerMetadata = centerMeta;
     }
 
-    public boolean generatePillar(World world, BlockPos pos) {
+    public void generatePillar(World world, BlockPos pos) {
         for (int nY = pos.getY(); nY < pos.getY() + 6; nY++) {
             world.setBlockState(new BlockPos(pos.getX(), nY, pos.getZ()), this.pillarBlock.getStateFromMeta(this.pillarMetadata), 2);
         }
-        return true;
     }
 
     @Override
     public boolean generate(World world, Random random, BlockPos pos) {
-        if (world.getBlockState(pos).getBlock() == this.centerBlock || world.getBlockState(pos.down()).getBlock() == this.centerBlock
-                || world.getBlockState(pos.up()).getBlock() == this.centerBlock) {
+        if (world.getBlockState(pos).getBlock() == this.centerBlock || world.getBlockState(pos.down()).getBlock() == this.centerBlock || world.getBlockState(pos.up()).getBlock() == this.centerBlock) {
             return true;
         }
 

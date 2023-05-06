@@ -10,20 +10,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;
 import drzhark.mocreatures.entity.monster.MoCEntityOgre;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.network.message.MoCMessageAnimation;
-import drzhark.mocreatures.network.message.MoCMessageAppear;
-import drzhark.mocreatures.network.message.MoCMessageAttachedEntity;
-import drzhark.mocreatures.network.message.MoCMessageEntityDive;
-import drzhark.mocreatures.network.message.MoCMessageEntityJump;
-import drzhark.mocreatures.network.message.MoCMessageExplode;
-import drzhark.mocreatures.network.message.MoCMessageHealth;
-import drzhark.mocreatures.network.message.MoCMessageHeart;
-import drzhark.mocreatures.network.message.MoCMessageInstaSpawn;
-import drzhark.mocreatures.network.message.MoCMessageNameGUI;
-import drzhark.mocreatures.network.message.MoCMessageShuffle;
-import drzhark.mocreatures.network.message.MoCMessageTwoBytes;
-import drzhark.mocreatures.network.message.MoCMessageUpdatePetName;
-import drzhark.mocreatures.network.message.MoCMessageVanish;
+import drzhark.mocreatures.network.message.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -69,9 +56,9 @@ public class MoCMessageHandler {
     public static class ClientPacketTask implements Runnable {
 
         @SuppressWarnings("rawtypes")
-        private IMessageHandler message;
+        private final IMessageHandler message;
         @SuppressWarnings("unused")
-        private MessageContext ctx;
+        private final MessageContext ctx;
 
         @SuppressWarnings("rawtypes")
         public ClientPacketTask(IMessageHandler message, MessageContext ctx) {
@@ -90,7 +77,6 @@ public class MoCMessageHandler {
                         break;
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageAppear) {
                 MoCMessageAppear message = (MoCMessageAppear) this.message;
                 List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
@@ -100,16 +86,14 @@ public class MoCMessageHandler {
                         break;
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageAttachedEntity) {
                 MoCMessageAttachedEntity message = (MoCMessageAttachedEntity) this.message;
-                Object var2 = MoCClientProxy.mc.player.world.getEntityByID(message.sourceEntityId);
+                Entity var2 = MoCClientProxy.mc.player.world.getEntityByID(message.sourceEntityId);
                 Entity var3 = MoCClientProxy.mc.player.world.getEntityByID(message.targetEntityId);
 
                 if (var2 != null) {
-                    ((Entity) var2).startRiding(var3);
+                    var2.startRiding(var3);
                 }
-                return;
             } else if (this.message instanceof MoCMessageExplode) {
                 MoCMessageExplode message = (MoCMessageExplode) this.message;
                 List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
@@ -119,7 +103,6 @@ public class MoCMessageHandler {
                         break;
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageHealth) {
                 MoCMessageHealth message = (MoCMessageHealth) this.message;
                 List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
@@ -129,7 +112,6 @@ public class MoCMessageHandler {
                         break;
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageHeart) {
                 MoCMessageHeart message = (MoCMessageHeart) this.message;
                 Entity entity = null;
@@ -137,11 +119,10 @@ public class MoCMessageHandler {
                     entity = MoCClientProxy.mc.player.world.getEntityByID(message.entityId);
                     if (entity != null) {
                         if (entity instanceof IMoCTameable) {
-                            ((IMoCTameable)entity).spawnHeart();
+                            ((IMoCTameable) entity).spawnHeart();
                         }
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageShuffle) {
                 MoCMessageShuffle message = (MoCMessageShuffle) this.message;
                 List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
@@ -155,14 +136,12 @@ public class MoCMessageHandler {
                         break;
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageTwoBytes) {
                 MoCMessageTwoBytes message = (MoCMessageTwoBytes) this.message;
                 Entity ent = MoCClientProxy.mc.player.world.getEntityByID(message.entityId);
-                if (ent != null && ent instanceof MoCEntityGolem) {
+                if (ent instanceof MoCEntityGolem) {
                     ((MoCEntityGolem) ent).saveGolemCube(message.slot, message.value);
                 }
-                return;
             } else if (this.message instanceof MoCMessageVanish) {
                 MoCMessageVanish message = (MoCMessageVanish) this.message;
                 List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
@@ -172,12 +151,10 @@ public class MoCMessageHandler {
                         break;
                     }
                 }
-                return;
             } else if (this.message instanceof MoCMessageNameGUI) {
                 MoCMessageNameGUI message = (MoCMessageNameGUI) this.message;
                 Entity entity = MoCClientProxy.mc.player.world.getEntityByID(message.entityId);
                 MoCClientProxy.mc.displayGuiScreen(new MoCGUIEntityNamer(((IMoCEntity) entity), ((IMoCEntity) entity).getPetName()));
-                return;
             }
         }
     }

@@ -543,18 +543,18 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 return false;
             }
 
+            // Trying to make sense of the override order
             if (BiomeDictionary.hasType(currentbiome, Type.SANDY)) {
+                // rattlesnake or spotted
                 if (l < 5) {
                     setType(7); // rattlesnake or spotted brownish ?
                 } else {
                     setType(2);
                 }
             }
-
-            if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY))) {
-                setType(2);
-            }
-            if (BiomeDictionary.hasType(currentbiome, Type.HILLS)) {
+                        
+            if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) || BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
+                // spotted or coral or normal
                 if (l < 4) {
                     setType(1);
                 } else if (l < 7) {
@@ -563,15 +563,31 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                     setType(6);
                 }
             }
+            
             if (BiomeDictionary.hasType(currentbiome, Type.SWAMP)) {
-                // python or bright green bright orange
+                // python or cobra or normal
                 if (l < 4) {
                     setType(8);
                 } else if (l < 8) {
-                    setType(4);
+                    setType(6);
                 } else {
                     setType(1);
                 }
+            }
+            
+            if (BiomeDictionary.hasType(currentbiome, Type.JUNGLE)) {
+                // bright green or bright orange or normal
+                if (l < 4) {
+                    setType(4);
+                } else if (l < 7) {
+                    setType(3);
+                } else {
+                    setType(1);
+                }
+            }
+            
+            if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY))) {
+                setType(2);
             }
         } catch (Exception ignored) {
         }

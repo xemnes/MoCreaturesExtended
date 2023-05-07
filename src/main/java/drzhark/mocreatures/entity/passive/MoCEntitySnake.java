@@ -560,7 +560,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 } else if (l < 7) {
                     setType(5);
                 } else {
-                    setType(6);
+                    setType(2);
                 }
             }
 

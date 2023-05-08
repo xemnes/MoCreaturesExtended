@@ -42,6 +42,11 @@ public class BiomeGenWyvernLair extends Biome {
         this.decorator = new BiomeWyvernDecorator();
     }
 
+    @Override
+    public float getSpawningChance() {
+        return 0.5F;
+    }
+
     /**
      * Gets a WorldGen appropriate for this biome.
      */

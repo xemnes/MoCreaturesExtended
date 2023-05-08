@@ -113,6 +113,7 @@ public class MoCreatures {
         }
         MoCMessageHandler.init();
         MinecraftForge.EVENT_BUS.register(new MoCEventHooks());
+        MinecraftForge.TERRAIN_GEN_BUS.register(new MoCTerrainEventHooks());
         proxy.ConfigInit(event);
         proxy.initTextures();
         if (!isServer()) {

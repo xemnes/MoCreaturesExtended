@@ -3,16 +3,17 @@
  */
 package drzhark.mocreatures.dimension;
 
+import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEntitySpawner;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -21,6 +22,7 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenEndIsland;
 import net.minecraft.world.gen.feature.WorldGenLakes;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.List;
 import java.util.Random;
@@ -310,7 +312,7 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
 
     public void populate(int x, int z) {
         BlockFalling.fallInstantly = true;
-        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
+        ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, false);
 
         int var4 = x * 16;
         int var5 = z * 16;
@@ -341,13 +343,13 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
 
         var6.decorate(this.world, this.rand, new BlockPos(var4, 0, var5));
 
-        WorldEntitySpawner.performWorldGenSpawning(this.world, var6, var4 + 8, var5 + 8, 16, 16, this.rand);
+        MoCTools.performCustomWorldGenSpawning(this.world, var6, var4 + 8, var5 + 8, 16, 16, this.rand, this.world.getBiome(blockpos).getSpawnableList(EnumCreatureType.CREATURE), EntityLiving.SpawnPlacementType.ON_GROUND);
 
         if (x == 0 && z == 0 && !this.portalDone) {
             createPortal(this.world, this.rand);
         }
 
-        net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
+        ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
         BlockFalling.fallInstantly = false;
     }
 

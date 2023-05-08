@@ -9,7 +9,6 @@ import drzhark.mocreatures.configuration.MoCProperty;
 import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.init.MoCEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -97,6 +96,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean needsUpdate = false;
     public boolean worldInitDone = false;
     public int activeScreen = -1;
+    public int spawnMultiplier;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -108,10 +108,8 @@ public class MoCProxy implements IGuiHandler {
 
     //----------------CONFIG INITIALIZATION
     public void ConfigInit(FMLPreInitializationEvent event) {
-        this.mocSettingsConfig =
-                new MoCConfiguration(new File(event.getSuggestedConfigurationFile().getParent(), "MoCreatures" + File.separator + "MoCSettings.cfg"));
-        this.mocEntityConfig =
-                new MoCConfiguration(new File(event.getSuggestedConfigurationFile().getParent(), "MoCreatures" + File.separator + "MoCreatures.cfg"));
+        this.mocSettingsConfig = new MoCConfiguration(new File(event.getSuggestedConfigurationFile().getParent(), "MoCreatures" + File.separator + "MoCSettings.cfg"));
+        this.mocEntityConfig = new MoCConfiguration(new File(event.getSuggestedConfigurationFile().getParent(), "MoCreatures" + File.separator + "MoCreatures.cfg"));
         this.configFile = event.getSuggestedConfigurationFile();
         this.mocSettingsConfig.load();
         this.mocEntityConfig.load();
@@ -243,114 +241,47 @@ public class MoCProxy implements IGuiHandler {
      */
     public void readGlobalConfigValues() {
         // client-side only
-        this.displayPetHealth =
-                this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetHealth", true, "Shows Pet Health").getBoolean(true);
+        this.displayPetHealth = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetHealth", true, "Shows Pet Health").getBoolean(true);
         this.displayPetName = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetName", true, "Shows Pet Name").getBoolean(true);
-        this.displayPetIcons =
-                this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetIcons", true, "Shows Pet Emotes").getBoolean(true);
-        this.animateTextures =
-                this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "animateTextures", true, "Animate Textures").getBoolean(true);
+        this.displayPetIcons = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetIcons", true, "Shows Pet Emotes").getBoolean(true);
+        this.animateTextures = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "animateTextures", true, "Animate Textures").getBoolean(true);
         // general
-        this.itemID =
-                this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "ItemID", 8772,
-                        "The starting ID used for MoCreatures items. Each item will increment this number by 1 for its ID.").getInt();
-        this.allowInstaSpawn =
-                this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "allowInstaSpawn", false,
-                        "Allows you to instantly spawn MoCreatures from GUI.").getBoolean(false);
+        this.itemID = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "ItemID", 8772, "The starting ID used for MoCreatures items. Each item will increment this number by 1 for its ID.").getInt();
+        this.allowInstaSpawn = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "allowInstaSpawn", false, "Allows you to instantly spawn MoCreatures from GUI.").getBoolean(false);
         this.debug = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "debug", false, "Turns on verbose logging").getBoolean(false);
-        this.minDespawnLightLevel =
-                this.mocSettingsConfig
-                        .get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "despawnLightLevel", 2,
-                                "The minimum light level threshold used to determine whether or not to despawn a farm animal. Note: Configure this value in CMS if it is installed.")
-                        .getInt();
-        this.maxDespawnLightLevel =
-                this.mocSettingsConfig
-                        .get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "despawnLightLevel", 7,
-                                "The maximum light level threshold used to determine whether or not to despawn a farm animal. Note: Configure this value in CMS if it is installed.")
-                        .getInt();
-        this.forceDespawns =
-                this.mocSettingsConfig
-                        .get(CATEGORY_MOC_GENERAL_SETTINGS,
-                                "forceDespawns",
-                                false,
-                                "If true, it will force despawns on all creatures including vanilla for a more dynamic experience while exploring world. If false, all passive mocreatures will not despawn to prevent other creatures from taking over. Note: if you experience issues with farm animals despawning, adjust despawnLightLevel. If CMS is installed, this setting must remain true if you want MoCreatures to despawn.")
-                        .getBoolean(false);
-        this.maxTamed =
-                this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "maxTamedPerPlayer", 10,
-                        "Max tamed creatures a player can have. Requires enableOwnership to be set to true.").getInt();
-        this.maxOPTamed =
-                this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "maxTamedPerOP", 20,
-                        "Max tamed creatures an op can have. Requires enableOwnership to be set to true.").getInt();
-        this.enableOwnership =
-                this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableOwnership", false,
-                                "Assigns player as owner for each creature they tame. Only the owner can interact with the tamed creature.")
-                        .getBoolean(false);
-        this.enableResetOwnership =
-                this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableResetOwnerScroll", false,
-                        "Allows players to remove a tamed creatures owner essentially untaming it.").getBoolean(false);
-        this.easyBreeding =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasyBreeding", false, "Makes horse breeding simpler.")
-                        .getBoolean(false);
+        this.minDespawnLightLevel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "despawnLightLevel", 2, "The minimum light level threshold used to determine whether or not to despawn a farm animal. Note: Configure this value in CMS if it is installed.").getInt();
+        this.maxDespawnLightLevel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "despawnLightLevel", 7, "The maximum light level threshold used to determine whether or not to despawn a farm animal. Note: Configure this value in CMS if it is installed.").getInt();
+        this.forceDespawns = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "forceDespawns", false, "If true, it will force despawns on all creatures including vanilla for a more dynamic experience while exploring world. If false, all passive mocreatures will not despawn to prevent other creatures from taking over. Note: if you experience issues with farm animals despawning, adjust despawnLightLevel. If CMS is installed, this setting must remain true if you want MoCreatures to despawn.").getBoolean(false);
+        this.maxTamed = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "maxTamedPerPlayer", 10, "Max tamed creatures a player can have. Requires enableOwnership to be set to true.").getInt();
+        this.maxOPTamed = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "maxTamedPerOP", 20, "Max tamed creatures an op can have. Requires enableOwnership to be set to true.").getInt();
+        this.enableOwnership = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableOwnership", false, "Assigns player as owner for each creature they tame. Only the owner can interact with the tamed creature.").getBoolean(false);
+        this.enableResetOwnership = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableResetOwnerScroll", false, "Allows players to remove a tamed creatures owner essentially untaming it.").getBoolean(false);
+        this.easyBreeding = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasyBreeding", false, "Makes horse breeding simpler.").getBoolean(false);
         this.elephantBulldozer = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ElephantBulldozer", true).getBoolean(true);
-        this.zebraChance =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ZebraChance", 10, "The percent for spawning a zebra.").getInt();
-        this.ostrichEggDropChance =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "OstrichEggDropChance", 3,
-                        "A value of 3 means ostriches have a 3% chance to drop an egg.").getInt();
+        this.zebraChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ZebraChance", 10, "The percent for spawning a zebra.").getInt();
+        this.ostrichEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "OstrichEggDropChance", 3, "A value of 3 means ostriches have a 3% chance to drop an egg.").getInt();
         this.staticBed = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticBed", true).getBoolean(true);
         this.staticLitter = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticLitter", true).getBoolean(true);
         this.particleFX = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "particleFX", 3).getInt();
-        this.attackDolphins =
-                this.mocSettingsConfig.get(CATEGORY_MOC_WATER_CREATURE_GENERAL_SETTINGS, "AttackDolphins", false,
-                        "Allows water creatures to attack dolphins.").getBoolean(false);
-        this.attackHorses =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackHorses", false, "Allows creatures to attack horses.")
-                        .getBoolean(false);
-        this.attackWolves =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackWolves", false, "Allows creatures to attack wolves.")
-                        .getBoolean(false);
-        this.enableHunters =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EnableHunters", true,
-                        "Allows creatures to attack other creatures. Not recommended if despawning is off.").getBoolean(true);
+        this.attackDolphins = this.mocSettingsConfig.get(CATEGORY_MOC_WATER_CREATURE_GENERAL_SETTINGS, "AttackDolphins", false, "Allows water creatures to attack dolphins.").getBoolean(false);
+        this.attackHorses = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackHorses", false, "Allows creatures to attack horses.").getBoolean(false);
+        this.attackWolves = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackWolves", false, "Allows creatures to attack wolves.").getBoolean(false);
+        this.enableHunters = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EnableHunters", true, "Allows creatures to attack other creatures. Not recommended if despawning is off.").getBoolean(true);
         this.destroyDrops = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "DestroyDrops", false).getBoolean(false);
         this.killallVillagers = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KillAllVillagers", false).getBoolean(false);
-        this.rareItemDropChance =
-                this.mocSettingsConfig
-                        .get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS,
-                                "RareItemDropChance",
-                                25,
-                                "A value of 25 means Horses/Ostriches/Scorpions/etc. have a 25% chance to drop a rare item such as a heart of darkness, unicorn, bone when killed. Raise the value if you want higher drop rates.")
-                        .getInt();
-        this.wyvernEggDropChance =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WyvernEggDropChance", 10,
-                        "A value of 10 means wyverns have a 10% chance to drop an egg.").getInt();
-        this.motherWyvernEggDropChance =
-                this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "MotherWyvernEggDropChance", 33,
-                        "A value of 33 means mother wyverns have a 33% chance to drop an egg.").getInt();
-
-        this.ogreStrength =
-                Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "OgreStrength", 2.5F,
-                        "The block destruction radius of green Ogres").getString());
-        this.caveOgreStrength =
-                Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "CaveOgreStrength", 3.0F,
-                        "The block destruction radius of Cave Ogres").getString());
-        this.fireOgreStrength =
-                Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "FireOgreStrength", 2.0F,
-                        "The block destruction radius of Fire Ogres").getString());
-        this.ogreAttackRange =
-                (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "OgreAttackRange", 12,
-                        "The block radius where ogres 'smell' players").getInt();
-        this.fireOgreChance =
-                (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "FireOgreChance", 25,
-                        "The chance percentage of spawning Fire ogres in the Overworld").getInt();
-        this.caveOgreChance =
-                (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "CaveOgreChance", 75,
-                        "The chance percentage of spawning Cave ogres at depth of 50 in the Overworld").getInt();
-        this.golemDestroyBlocks =
-                this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "golemDestroyBlocks", true, "Allows Big Golems to break blocks.")
-                        .getBoolean(true);
+        this.rareItemDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "RareItemDropChance", 25, "A value of 25 means Horses/Ostriches/Scorpions/etc. have a 25% chance to drop a rare item such as a heart of darkness, unicorn, bone when killed. Raise the value if you want higher drop rates.").getInt();
+        this.wyvernEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WyvernEggDropChance", 10, "A value of 10 means wyverns have a 10% chance to drop an egg.").getInt();
+        this.motherWyvernEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "MotherWyvernEggDropChance", 33, "A value of 33 means mother wyverns have a 33% chance to drop an egg.").getInt();
+        this.ogreStrength = Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "OgreStrength", 2.5F, "The block destruction radius of green Ogres").getString());
+        this.caveOgreStrength = Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "CaveOgreStrength", 3.0F, "The block destruction radius of Cave Ogres").getString());
+        this.fireOgreStrength = Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "FireOgreStrength", 2.0F, "The block destruction radius of Fire Ogres").getString());
+        this.ogreAttackRange = (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "OgreAttackRange", 12, "The block radius where ogres 'smell' players").getInt();
+        this.fireOgreChance = (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "FireOgreChance", 25, "The chance percentage of spawning Fire ogres in the Overworld").getInt();
+        this.caveOgreChance = (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "CaveOgreChance", 75, "The chance percentage of spawning Cave ogres at depth of 50 in the Overworld").getInt();
+        this.golemDestroyBlocks = this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "golemDestroyBlocks", true, "Allows Big Golems to break blocks.").getBoolean(true);
         this.WyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17).getInt();
         this.WyvernBiomeID = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairBiomeID", 207).getInt();
+        this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 2, "Multiplier for entity spawns during world gen").getInt();
         this.mocSettingsConfig.save();
     }
 
@@ -377,8 +308,6 @@ public class MoCProxy implements IGuiHandler {
 
     /***
      * Dummy to know if is dedicated server or not
-     *
-     * @return
      */
     public int getProxyMode() {
         return 1;
@@ -386,9 +315,6 @@ public class MoCProxy implements IGuiHandler {
 
     /**
      * Sets the name client side. Name is synchronized with datawatchers
-     *
-     * @param player
-     * @param mocanimal
      */
     public void setName(EntityPlayer player, IMoCEntity mocanimal) {
         //client side only

@@ -201,7 +201,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         String s = MoCTools.biomeName(this.world, pos);
         try {
             if (BiomeDictionary.hasType(currentbiome, Type.PLAINS)) {
-                if (this.rand.nextInt(3) == 0) {
+                if (this.rand.nextInt(10) == 0) {
                     setType(60);// zebra
                 }
             }

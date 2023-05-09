@@ -1,9 +1,6 @@
 package drzhark.mocreatures.entity.ai;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLog;
+import net.minecraft.block.*;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.RandomPositionGenerator;
@@ -56,7 +53,7 @@ public class EntityAIWanderAvoidWaterFlyingMoC extends EntityAIWanderAvoidWater 
 
             if (!blockPos.equals(blockPos1)) {
                 Block block = this.entity.world.getBlockState(mutableBlockPos1.setPos(blockPos1).move(EnumFacing.DOWN)).getBlock();
-                boolean flag = block instanceof BlockLeaves || block instanceof BlockLog || block instanceof BlockGrass;
+                boolean flag = block instanceof BlockLeaves || block instanceof BlockLog || block instanceof BlockBush;
 
                 if (flag && this.entity.world.isAirBlock(blockPos1) && this.entity.world.isAirBlock(mutableBlockPos.setPos(blockPos1).move(EnumFacing.UP))) {
                     break;

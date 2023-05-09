@@ -68,7 +68,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        if (!this.onGround && this.motionY < 0.0D) {
+        if (!getIsFlying() && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
 
@@ -108,10 +108,6 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
     public boolean climbing() {
         return (this.climbCounter != 0);
-    }
-
-    @Override
-    protected void jump() {
     }
 
     @Override

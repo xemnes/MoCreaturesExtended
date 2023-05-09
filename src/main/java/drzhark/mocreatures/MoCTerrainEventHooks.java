@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class MoCTerrainEventHooks {
             for (int i = 0; i < MoCreatures.proxy.spawnMultiplier; i++) {
                 MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureList, EntityLiving.SpawnPlacementType.IN_WATER);
             }
+            event.setResult(Event.Result.DENY);
         }
     }
 }

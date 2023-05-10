@@ -79,9 +79,11 @@ public class MoCTools {
     public static List<Biome.SpawnListEntry> performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
         List<Biome.SpawnListEntry> usedSpawnListEntries = new ArrayList<>(spawnList.size());
         if (!spawnList.isEmpty()) {
-            while (random.nextFloat() < (biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier)) {
-                Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(world.rand, spawnList);
-                int groupCount = spawnListEntry.minGroupCount + random.nextInt(1 + spawnListEntry.maxGroupCount - spawnListEntry.minGroupCount);
+            while (random.nextFloat() < Math.min(biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier, 0.4F)) {
+                Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(random, spawnList);
+                int minCount = Math.min(spawnListEntry.minGroupCount, 1);
+                int maxCount = Math.min(spawnListEntry.maxGroupCount, 6);
+                int groupCount = minCount + random.nextInt(1 + maxCount - minCount);
                 IEntityLivingData livingData = null;
                 int xPos = centerX + random.nextInt(diameterX);
                 int zPos = centerZ + random.nextInt(diameterZ);
@@ -105,10 +107,12 @@ public class MoCTools {
                             if (ForgeEventFactory.canEntitySpawn(entityliving, world, xPos, blockPos.getY(), zPos, false) == Event.Result.DENY)
                                 continue;
                             entityliving.setLocationAndAngles(xPos, blockPos.getY(), zPos, random.nextFloat() * 360.0F, 0.0F);
-                            world.spawnEntity(entityliving);
-                            livingData = entityliving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), livingData);
-                            usedSpawnListEntries.add(spawnListEntry);
-                            flag = true;
+                            if (entityliving.isNotColliding()) {
+                                world.spawnEntity(entityliving);
+                                livingData = entityliving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), livingData);
+                                usedSpawnListEntries.add(spawnListEntry);
+                                flag = true;
+                            } else entityliving.setDead();
                         }
                         xPos += random.nextInt(5) - random.nextInt(5);
                         for (zPos += random.nextInt(5) - random.nextInt(5); xPos < centerX || xPos >= centerX + diameterX || zPos < centerZ || zPos >= centerZ + diameterX; zPos = zPosOrig + random.nextInt(5) - random.nextInt(5)) {

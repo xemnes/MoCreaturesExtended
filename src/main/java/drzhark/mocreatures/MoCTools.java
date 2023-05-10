@@ -76,20 +76,21 @@ public class MoCTools {
     /**
      * Spawns entities during world gen
      */
-    public static void performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
+    public static List<Biome.SpawnListEntry> performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
+        List<Biome.SpawnListEntry> usedSpawnListEntries = new ArrayList<>(spawnList.size());
         if (!spawnList.isEmpty()) {
-            while (random.nextFloat() < biome.getSpawningChance()) {
+            while (random.nextFloat() < (biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier)) {
                 Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(world.rand, spawnList);
-                int i = spawnListEntry.minGroupCount + random.nextInt(1 + spawnListEntry.maxGroupCount - spawnListEntry.minGroupCount);
+                int groupCount = spawnListEntry.minGroupCount + random.nextInt(1 + spawnListEntry.maxGroupCount - spawnListEntry.minGroupCount);
                 IEntityLivingData livingData = null;
-                int j = centerX + random.nextInt(diameterX);
-                int k = centerZ + random.nextInt(diameterZ);
-                int l = j;
-                int i1 = k;
-                for (int j1 = 0; j1 < i; ++j1) {
+                int xPos = centerX + random.nextInt(diameterX);
+                int zPos = centerZ + random.nextInt(diameterZ);
+                int xPosOrig = xPos;
+                int zPosOrig = zPos;
+                for (int i = 0; i < groupCount; i++) {
                     boolean flag = false;
-                    for (int k1 = 0; !flag && k1 < 4; ++k1) {
-                        BlockPos blockPos = MoCTools.getActualTopSolidOrLiquidBlock(world, new BlockPos(j, 0, k));
+                    for (int j = 0; !flag && j < 4; j++) {
+                        BlockPos blockPos = MoCTools.getActualTopSolidOrLiquidBlock(world, new BlockPos(xPos, 0, zPos));
                         if (placementType == EntityLiving.SpawnPlacementType.IN_WATER) {
                             blockPos = blockPos.down();
                         }
@@ -101,21 +102,23 @@ public class MoCTools {
                                 exception.printStackTrace();
                                 continue;
                             }
-                            if (ForgeEventFactory.canEntitySpawn(entityliving, world, j, blockPos.getY(), k, false) == Event.Result.DENY)
+                            if (ForgeEventFactory.canEntitySpawn(entityliving, world, xPos, blockPos.getY(), zPos, false) == Event.Result.DENY)
                                 continue;
-                            entityliving.setLocationAndAngles(j, blockPos.getY(), k, random.nextFloat() * 360.0F, 0.0F);
+                            entityliving.setLocationAndAngles(xPos, blockPos.getY(), zPos, random.nextFloat() * 360.0F, 0.0F);
                             world.spawnEntity(entityliving);
                             livingData = entityliving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), livingData);
+                            usedSpawnListEntries.add(spawnListEntry);
                             flag = true;
                         }
-                        j += random.nextInt(5) - random.nextInt(5);
-                        for (k += random.nextInt(5) - random.nextInt(5); j < centerX || j >= centerX + diameterX || k < centerZ || k >= centerZ + diameterX; k = i1 + random.nextInt(5) - random.nextInt(5)) {
-                            j = l + random.nextInt(5) - random.nextInt(5);
+                        xPos += random.nextInt(5) - random.nextInt(5);
+                        for (zPos += random.nextInt(5) - random.nextInt(5); xPos < centerX || xPos >= centerX + diameterX || zPos < centerZ || zPos >= centerZ + diameterX; zPos = zPosOrig + random.nextInt(5) - random.nextInt(5)) {
+                            xPos = xPosOrig + random.nextInt(5) - random.nextInt(5);
                         }
                     }
                 }
             }
         }
+        return usedSpawnListEntries;
     }
 
     /**

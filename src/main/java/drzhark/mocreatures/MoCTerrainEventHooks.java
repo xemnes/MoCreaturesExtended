@@ -12,6 +12,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,15 +29,22 @@ public class MoCTerrainEventHooks {
             Random rand = event.getRand();
             BlockPos blockPos = new BlockPos(chunkX, 0, chunkZ);
             Biome biome = world.getBiome(blockPos.add(16, 0, 16));
-            List<Biome.SpawnListEntry> creatureList = biome.getSpawnableList(EnumCreatureType.CREATURE);
-            List<Biome.SpawnListEntry> waterCreatureList = biome.getSpawnableList(EnumCreatureType.WATER_CREATURE);
+            List<Biome.SpawnListEntry> creatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.CREATURE));
+            List<Biome.SpawnListEntry> waterCreatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.WATER_CREATURE));
 
             for (int i = 0; i < MoCreatures.proxy.spawnMultiplier; i++) {
-                MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, creatureList, EntityLiving.SpawnPlacementType.ON_GROUND);
+                List<Biome.SpawnListEntry> usedList = MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, creatureList, EntityLiving.SpawnPlacementType.ON_GROUND);
+                for (Biome.SpawnListEntry usedEntries : usedList) {
+                    creatureList.remove(usedEntries);
+                }
             }
             for (int i = 0; i < MoCreatures.proxy.spawnMultiplier; i++) {
-                MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureList, EntityLiving.SpawnPlacementType.IN_WATER);
+                List<Biome.SpawnListEntry> usedList = MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureList, EntityLiving.SpawnPlacementType.IN_WATER);
+                for (Biome.SpawnListEntry usedEntries : usedList) {
+                    waterCreatureList.remove(usedEntries);
+                }
             }
+
             event.setResult(Event.Result.DENY);
         }
     }

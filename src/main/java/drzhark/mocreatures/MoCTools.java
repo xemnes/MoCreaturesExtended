@@ -76,10 +76,9 @@ public class MoCTools {
     /**
      * Spawns entities during world gen
      */
-    public static List<Biome.SpawnListEntry> performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
-        List<Biome.SpawnListEntry> usedSpawnListEntries = new ArrayList<>(spawnList.size());
+    public static void performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
         if (!spawnList.isEmpty()) {
-            while (random.nextFloat() < Math.min(biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier, 0.4F)) {
+            while (random.nextFloat() < biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier) {
                 Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(random, spawnList);
                 int minCount = Math.min(spawnListEntry.minGroupCount, 1);
                 int maxCount = Math.min(spawnListEntry.maxGroupCount, 6);
@@ -110,7 +109,6 @@ public class MoCTools {
                             if (entityliving.isNotColliding()) {
                                 world.spawnEntity(entityliving);
                                 livingData = entityliving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), livingData);
-                                usedSpawnListEntries.add(spawnListEntry);
                                 flag = true;
                             } else entityliving.setDead();
                         }
@@ -122,7 +120,6 @@ public class MoCTools {
                 }
             }
         }
-        return usedSpawnListEntries;
     }
 
     /**

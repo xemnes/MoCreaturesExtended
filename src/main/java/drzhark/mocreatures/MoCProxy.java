@@ -96,7 +96,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean needsUpdate = false;
     public boolean worldInitDone = false;
     public int activeScreen = -1;
-    public int spawnMultiplier;
+    public double spawnMultiplier;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -281,7 +281,7 @@ public class MoCProxy implements IGuiHandler {
         this.golemDestroyBlocks = this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "golemDestroyBlocks", true, "Allows Big Golems to break blocks.").getBoolean(true);
         this.WyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17).getInt();
         this.WyvernBiomeID = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairBiomeID", 207).getInt();
-        this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 2, "Multiplier for entity spawns during world gen").getInt();
+        this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 1.75D, "Multiplier for entity spawns during world gen").getDouble(1.75D);
         this.mocSettingsConfig.save();
     }
 

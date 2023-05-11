@@ -137,6 +137,7 @@ public class MoCreatures {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         isCustomSpawnerLoaded = Loader.isModLoaded("customspawner");
+        MoCTerrainEventHooks.buildWorldGenSpawnLists();
     }
 
     @EventHandler

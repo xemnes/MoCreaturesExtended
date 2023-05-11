@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
@@ -11,12 +12,18 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class MoCTerrainEventHooks {
+
+    public static List<Biome.SpawnListEntry> creatureList = new ArrayList<>();
+    public static List<Biome.SpawnListEntry> waterCreatureList = new ArrayList<>();
+    public static Object2ObjectOpenHashMap<Biome, List<Biome.SpawnListEntry>> creatureSpawnMap = new Object2ObjectOpenHashMap<>();
+    public static Object2ObjectOpenHashMap<Biome, List<Biome.SpawnListEntry>> waterCreatureSpawnMap = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
     public void onPopulateChunkEvent(PopulateChunkEvent.Populate event) {
@@ -29,23 +36,23 @@ public class MoCTerrainEventHooks {
             Random rand = event.getRand();
             BlockPos blockPos = new BlockPos(chunkX, 0, chunkZ);
             Biome biome = world.getBiome(blockPos.add(16, 0, 16));
-            List<Biome.SpawnListEntry> creatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.CREATURE));
-            List<Biome.SpawnListEntry> waterCreatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.WATER_CREATURE));
 
-            for (int i = 0; i < MoCreatures.proxy.spawnMultiplier; i++) {
-                List<Biome.SpawnListEntry> usedList = MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, creatureList, EntityLiving.SpawnPlacementType.ON_GROUND);
-                for (Biome.SpawnListEntry usedEntries : usedList) {
-                    creatureList.remove(usedEntries);
-                }
-            }
-            for (int i = 0; i < MoCreatures.proxy.spawnMultiplier; i++) {
-                List<Biome.SpawnListEntry> usedList = MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureList, EntityLiving.SpawnPlacementType.IN_WATER);
-                for (Biome.SpawnListEntry usedEntries : usedList) {
-                    waterCreatureList.remove(usedEntries);
-                }
-            }
+            MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, creatureSpawnMap.get(biome), EntityLiving.SpawnPlacementType.ON_GROUND);
+            MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureSpawnMap.get(biome), EntityLiving.SpawnPlacementType.IN_WATER);
 
             event.setResult(Event.Result.DENY);
+        }
+    }
+
+    public static void buildWorldGenSpawnLists() {
+        for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
+            creatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.CREATURE));
+            creatureList.removeIf(entry -> entry.itemWeight == 0);
+            creatureSpawnMap.put(biome, creatureList);
+
+            waterCreatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.WATER_CREATURE));
+            waterCreatureList.removeIf(entry -> entry.itemWeight == 0);
+            waterCreatureSpawnMap.put(biome, waterCreatureList);
         }
     }
 }

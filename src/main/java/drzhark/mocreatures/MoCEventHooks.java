@@ -5,19 +5,24 @@ package drzhark.mocreatures;
 
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.passive.MoCEntityKitty;
 import drzhark.mocreatures.util.CMSUtils;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -63,18 +68,41 @@ public class MoCEventHooks {
     }
 
     @SubscribeEvent
+    public void onPopulateVillage(PopulateChunkEvent.Post event) {
+        // Village spawning
+        if (event.isHasVillageGenerated()) {
+            MoCEntityData data = MoCreatures.entityMap.get(MoCEntityKitty.class);
+            if (data == null) return;
+            World world = event.getWorld();
+            List<Integer> dimensionIDs = Ints.asList(data.getDimensions());
+            if (!dimensionIDs.contains(world.provider.getDimension()) || data.getFrequency() <= 0 || !data.getCanSpawn())
+                return;
+            if (event.getRand().nextInt(100) < 10) {
+                BlockPos pos = new BlockPos(event.getChunkX() * 16, 100, event.getChunkZ() * 16);
+                MoCEntityKitty kitty = new MoCEntityKitty(world);
+                BlockPos spawnPos = getSafeSpawnPos(kitty, pos.add(8, 0, 8));
+                if (spawnPos != null) {
+                    kitty.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(kitty)), null);
+                    kitty.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                    world.spawnEntity(kitty);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
     public void onLivingSpawnEvent(LivingSpawnEvent event) {
-        MoCEntityData data = MoCreatures.entityMap.get(event.getEntityLiving().getClass());
+        EntityLivingBase entity = event.getEntityLiving();
+        Class<? extends EntityLivingBase> entityClass = entity.getClass();
+        MoCEntityData data = MoCreatures.entityMap.get(entityClass);
         if (data == null) return; // not a MoC entity
         World world = event.getWorld();
         List<Integer> dimensionIDs = Ints.asList(data.getDimensions());
         if (!dimensionIDs.contains(world.provider.getDimension())) {
             event.setResult(Result.DENY);
-        }
-        if (data.getFrequency() <= 0) {
+        } else if (data.getFrequency() <= 0) {
             event.setResult(Result.DENY);
-        }
-        if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
+        } else if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
             event.setResult(Result.ALLOW);
         }
     }
@@ -102,8 +130,7 @@ public class MoCEventHooks {
         if (MoCreatures.proxy.forceDespawns && !MoCreatures.isCustomSpawnerLoaded) {
             // try to guess what we should ignore
             // Monsters
-            if ((IMob.class.isAssignableFrom(event.getEntityLiving().getClass()) || IRangedAttackMob.class.isAssignableFrom(event.getEntityLiving().getClass()))
-                    || event.getEntityLiving().isCreatureType(EnumCreatureType.MONSTER, false)) {
+            if ((IMob.class.isAssignableFrom(event.getEntityLiving().getClass()) || IRangedAttackMob.class.isAssignableFrom(event.getEntityLiving().getClass())) || event.getEntityLiving().isCreatureType(EnumCreatureType.MONSTER, false)) {
                 return;
             }
             // Tameable
@@ -113,11 +140,9 @@ public class MoCEventHooks {
                 }
             }
             // Farm animals
-            if (event.getEntityLiving() instanceof EntitySheep || event.getEntityLiving() instanceof EntityPig || event.getEntityLiving() instanceof EntityCow
-                    || event.getEntityLiving() instanceof EntityChicken) {
+            if (event.getEntityLiving() instanceof EntitySheep || event.getEntityLiving() instanceof EntityPig || event.getEntityLiving() instanceof EntityCow || event.getEntityLiving() instanceof EntityChicken) {
                 // check lightlevel
-                if (isValidDespawnLightLevel(event.getEntity(), event.getWorld(), MoCreatures.proxy.minDespawnLightLevel,
-                        MoCreatures.proxy.maxDespawnLightLevel)) {
+                if (isValidDespawnLightLevel(event.getEntity(), event.getWorld(), MoCreatures.proxy.minDespawnLightLevel, MoCreatures.proxy.maxDespawnLightLevel)) {
                     return;
                 }
             }
@@ -139,8 +164,7 @@ public class MoCEventHooks {
                 int x = MathHelper.floor(event.getEntity().posX);
                 int y = MathHelper.floor(event.getEntity().getEntityBoundingBox().minY);
                 int z = MathHelper.floor(event.getEntity().posZ);
-                MoCreatures.LOGGER.info("Forced Despawn of entity " + event.getEntityLiving() + " at " + x + ", " + y + ", " + z
-                        + ". To prevent forced despawns, use /moc forceDespawns false.");
+                MoCreatures.LOGGER.info("Forced Despawn of entity " + event.getEntityLiving() + " at " + x + ", " + y + ", " + z + ". To prevent forced despawns, use /moc forceDespawns false.");
             }
         }
     }
@@ -159,5 +183,25 @@ public class MoCEventHooks {
         if (blockLightLevel < minDespawnLightLevel && maxDespawnLightLevel != -1) {
             return false;
         } else return blockLightLevel <= maxDespawnLightLevel || maxDespawnLightLevel == -1;
+    }
+
+    private static BlockPos getSafeSpawnPos(EntityLivingBase entity, BlockPos near) {
+        int radius = 6;
+        int maxTries = 24;
+        BlockPos testing;
+        for (int i = 0; i < maxTries; i++) {
+            int x = near.getX() + entity.getEntityWorld().rand.nextInt(radius * 2) - radius;
+            int z = near.getZ() + entity.getEntityWorld().rand.nextInt(radius * 2) - radius;
+            int y = entity.getEntityWorld().getHeight(x, z) + 16;
+            testing = new BlockPos(x, y, z);
+            while (entity.getEntityWorld().isAirBlock(testing) && testing.getY() > 0) {
+                testing = testing.down(1);
+            }
+            IBlockState iblockstate = entity.getEntityWorld().getBlockState(testing);
+            if (iblockstate.canEntitySpawn(entity)) {
+                return testing.up(1);
+            }
+        }
+        return null;
     }
 }

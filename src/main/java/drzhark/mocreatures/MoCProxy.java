@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -188,13 +189,13 @@ public class MoCProxy implements IGuiHandler {
     public void printMessageToPlayer(String msg) {
     }
 
-    public List<String> parseName(String biomeConfigEntry) {
-        String tag = biomeConfigEntry.substring(0, biomeConfigEntry.indexOf('|'));
-        String biomeName = biomeConfigEntry.substring(biomeConfigEntry.indexOf('|') + 1);
-        List<String> biomeParts = new ArrayList<>();
-        biomeParts.add(tag);
-        biomeParts.add(biomeName);
-        return biomeParts;
+    public List<BiomeDictionary.Type> parseBiomeTypes(String[] biomeNames) {
+        List<BiomeDictionary.Type> biomeTypes = new ArrayList<>();
+        for (String biomeName : biomeNames) {
+            BiomeDictionary.Type biomeType = BiomeDictionary.Type.getType(biomeName);
+            biomeTypes.add(biomeType);
+        }
+        return biomeTypes;
     }
 
     public void readMocConfigValues() {
@@ -205,6 +206,11 @@ public class MoCProxy implements IGuiHandler {
                     cat.put("dimensions", new MoCProperty("dimensions", Arrays.toString(entityData.getDimensions()), MoCProperty.Type.STRING));
                 } else {
                     entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")).mapToInt(Integer::parseInt).toArray());
+                }
+                if (!cat.containsKey("biometypes")) {
+                    cat.put("biometypes", new MoCProperty("biometypes", Arrays.toString(entityData.getBiomeTypes().toArray()), MoCProperty.Type.STRING));
+                } else {
+                    entityData.setBiomeTypes(parseBiomeTypes(cat.get("biometypes").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")));
                 }
                 if (!cat.containsKey("frequency")) {
                     cat.put("frequency", new MoCProperty("frequency", Integer.toString(entityData.getFrequency()), MoCProperty.Type.INTEGER));
@@ -226,11 +232,11 @@ public class MoCProxy implements IGuiHandler {
                 //} else {
                 //    entityData.setMaxInChunk(Integer.parseInt(cat.get("maxchunk").value));
                 //}
-                //if (!cat.containsKey("canspawn")) {
-                //    cat.put("canspawn", new MoCProperty("canspawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
-                //} else {
-                //    entityData.setCanSpawn(Boolean.parseBoolean(cat.get("canspawn").value));
-                //}
+                if (!cat.containsKey("canspawn")) {
+                    cat.put("canspawn", new MoCProperty("canspawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
+                } else {
+                    entityData.setCanSpawn(Boolean.parseBoolean(cat.get("canspawn").value));
+                }
             }
         }
         this.mocEntityConfig.save();

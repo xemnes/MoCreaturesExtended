@@ -7,6 +7,7 @@ import drzhark.guiapi.widget.WidgetSimplewindow;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class MoCEntityData {
 
-    private final List<Type> biomeTypes;
     public SpawnListEntry spawnListEntry;
+    private List<Type> biomeTypes;
     private EnumCreatureType typeOfCreature;
     private String entityName;
     private boolean canSpawn = true;
@@ -106,6 +107,10 @@ public class MoCEntityData {
 
     public List<Type> getBiomeTypes() {
         return this.biomeTypes;
+    }
+
+    public void setBiomeTypes(List<BiomeDictionary.Type> biomeTypes) {
+        this.biomeTypes = biomeTypes;
     }
 
     public int getEntityID() {

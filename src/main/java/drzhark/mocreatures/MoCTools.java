@@ -76,46 +76,44 @@ public class MoCTools {
     /**
      * Spawns entities during world gen
      */
+    @SuppressWarnings("deprecation")
     public static void performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
-        if (!spawnList.isEmpty()) {
-            while (random.nextFloat() < biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier) {
-                Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(random, spawnList);
-                int minCount = Math.min(spawnListEntry.minGroupCount, 1);
-                int maxCount = Math.min(spawnListEntry.maxGroupCount, 6);
-                int groupCount = minCount + random.nextInt(1 + maxCount - minCount);
-                IEntityLivingData livingData = null;
-                int xPos = centerX + random.nextInt(diameterX);
-                int zPos = centerZ + random.nextInt(diameterZ);
-                int xPosOrig = xPos;
-                int zPosOrig = zPos;
-                for (int i = 0; i < groupCount; i++) {
-                    boolean flag = false;
-                    for (int j = 0; !flag && j < 4; j++) {
-                        BlockPos blockPos = MoCTools.getActualTopSolidOrLiquidBlock(world, new BlockPos(xPos, 0, zPos));
-                        if (placementType == EntityLiving.SpawnPlacementType.IN_WATER) {
-                            blockPos = blockPos.down();
+        if (spawnList.isEmpty()) return;
+        while (random.nextFloat() < biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier) {
+            Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(random, spawnList);
+            int minCount = Math.min(spawnListEntry.minGroupCount, 1);
+            int maxCount = Math.min(spawnListEntry.maxGroupCount, 6);
+            int groupCount = minCount + random.nextInt(1 + maxCount - minCount);
+            IEntityLivingData livingData = null;
+            int xPos = centerX + random.nextInt(diameterX);
+            int zPos = centerZ + random.nextInt(diameterZ);
+            int xPosOrig = xPos;
+            int zPosOrig = zPos;
+            for (int i = 0; i < groupCount; i++) {
+                boolean spawned = false;
+                for (int j = 0; !spawned && j < 4; j++) {
+                    BlockPos blockPos = MoCTools.getActualTopSolidOrLiquidBlock(world, new BlockPos(xPos, 0, zPos));
+                    if (placementType == EntityLiving.SpawnPlacementType.IN_WATER) blockPos = blockPos.down();
+                    if (WorldEntitySpawner.canCreatureTypeSpawnAtLocation(placementType, world, blockPos)) {
+                        EntityLiving entityliving;
+                        try {
+                            entityliving = spawnListEntry.newInstance(world);
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                            continue;
                         }
-                        if (WorldEntitySpawner.canCreatureTypeSpawnAtLocation(placementType, world, blockPos)) {
-                            EntityLiving entityliving;
-                            try {
-                                entityliving = spawnListEntry.newInstance(world);
-                            } catch (Exception exception) {
-                                exception.printStackTrace();
-                                continue;
-                            }
-                            if (ForgeEventFactory.canEntitySpawn(entityliving, world, xPos, blockPos.getY(), zPos, false) == Event.Result.DENY)
-                                continue;
-                            entityliving.setLocationAndAngles(xPos, blockPos.getY(), zPos, random.nextFloat() * 360.0F, 0.0F);
-                            if (entityliving.isNotColliding()) {
-                                world.spawnEntity(entityliving);
-                                livingData = entityliving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), livingData);
-                                flag = true;
-                            } else entityliving.setDead();
-                        }
-                        xPos += random.nextInt(5) - random.nextInt(5);
-                        for (zPos += random.nextInt(5) - random.nextInt(5); xPos < centerX || xPos >= centerX + diameterX || zPos < centerZ || zPos >= centerZ + diameterX; zPos = zPosOrig + random.nextInt(5) - random.nextInt(5)) {
-                            xPos = xPosOrig + random.nextInt(5) - random.nextInt(5);
-                        }
+                        if (ForgeEventFactory.canEntitySpawn(entityliving, world, xPos, blockPos.getY(), zPos, false) == Event.Result.DENY)
+                            continue;
+                        entityliving.setLocationAndAngles(xPos, blockPos.getY(), zPos, random.nextFloat() * 360.0F, 0.0F);
+                        if (entityliving.isNotColliding()) {
+                            livingData = entityliving.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entityliving)), livingData);
+                            world.spawnEntity(entityliving);
+                            spawned = true;
+                        } else entityliving.setDead();
+                    }
+                    xPos += random.nextInt(5) - random.nextInt(5);
+                    for (zPos += random.nextInt(5) - random.nextInt(5); xPos < centerX || xPos >= centerX + diameterX || zPos < centerZ || zPos >= centerZ + diameterX; zPos = zPosOrig + random.nextInt(5) - random.nextInt(5)) {
+                        xPos = xPosOrig + random.nextInt(5) - random.nextInt(5);
                     }
                 }
             }
@@ -123,7 +121,7 @@ public class MoCTools {
     }
 
     /**
-     * {@link World#getTopSolidOrLiquidBlock} but actually returning top blocks AND liquid blocks
+     * {@link World#getTopSolidOrLiquidBlock} but actually returning top blocks AND liquid blocks.
      * Thanks for nothing, MCP!
      */
     public static BlockPos getActualTopSolidOrLiquidBlock(World world, BlockPos pos) {
@@ -918,7 +916,7 @@ public class MoCTools {
                 if (event != null && !event.isCanceled()) {
                     blockstate.getBlock().dropBlockAsItemWithChance(entity.world, chunkposition, blockstate, 0.3F, 1);
                     entity.world.setBlockToAir(chunkposition);
-                    // pass explosion instance to fix BlockTNT NPE's
+                    // pass explosion instance to fix BlockTNT NPEs
                     Explosion explosion = new Explosion(entity.world, null, chunkposition.getX(), chunkposition.getY(), chunkposition.getZ(), 3f, false, false);
                     blockstate.getBlock().onBlockExploded(entity.world, chunkposition, explosion);
                 }

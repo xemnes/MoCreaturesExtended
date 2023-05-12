@@ -11,6 +11,7 @@ package drzhark.mocreatures.configuration;
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.FMLInjectionData;
 
@@ -477,6 +478,9 @@ public class MoCConfiguration {
                 BufferedWriter buffer = new BufferedWriter(new OutputStreamWriter(fos, this.defaultEncoding));
 
                 buffer.write("# Configuration file" + NEW_LINE + NEW_LINE);
+
+                buffer.write("# Valid biome types:" + NEW_LINE);
+                buffer.write("# " + BiomeDictionary.Type.getAll() + NEW_LINE + NEW_LINE);
 
                 if (this.children.isEmpty()) {
                     save(buffer);

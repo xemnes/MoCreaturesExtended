@@ -26,7 +26,8 @@ public class MoCTerrainEventHooks {
     public static Object2ObjectOpenHashMap<Biome, List<Biome.SpawnListEntry>> waterCreatureSpawnMap = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
-    public void onPopulateChunkEvent(PopulateChunkEvent.Populate event) {
+    public void onPopulateChunk(PopulateChunkEvent.Populate event) {
+        // Regular spawning
         if (event.getType() == PopulateChunkEvent.Populate.EventType.ANIMALS) {
             int chunkX = event.getChunkX() * 16;
             int chunkZ = event.getChunkZ() * 16;

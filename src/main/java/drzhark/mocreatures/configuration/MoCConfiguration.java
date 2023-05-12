@@ -479,8 +479,10 @@ public class MoCConfiguration {
 
                 buffer.write("# Configuration file" + NEW_LINE + NEW_LINE);
 
-                buffer.write("# Valid biome types:" + NEW_LINE);
-                buffer.write("# " + BiomeDictionary.Type.getAll() + NEW_LINE + NEW_LINE);
+                if (this.fileName.contains("MoCreatures.cfg")) {
+                    buffer.write("# Valid biome types:" + NEW_LINE);
+                    buffer.write("# " + BiomeDictionary.Type.getAll() + NEW_LINE + NEW_LINE);
+                }
 
                 if (this.children.isEmpty()) {
                     save(buffer);

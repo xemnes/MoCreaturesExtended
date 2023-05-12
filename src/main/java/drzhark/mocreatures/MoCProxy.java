@@ -202,40 +202,45 @@ public class MoCProxy implements IGuiHandler {
         if (MoCreatures.mocEntityMap != null && !MoCreatures.mocEntityMap.isEmpty()) {
             for (MoCEntityData entityData : MoCreatures.mocEntityMap.values()) {
                 MoCConfigCategory cat = this.mocEntityConfig.getCategory(entityData.getEntityName().toLowerCase());
+                if (!cat.containsKey("biomeTypes")) {
+                    cat.put("biomeTypes", new MoCProperty("biomeTypes", Arrays.toString(entityData.getBiomeTypes().toArray()), MoCProperty.Type.STRING));
+                } else {
+                    entityData.setBiomeTypes(parseBiomeTypes(cat.get("biomeTypes").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")));
+                }
+                if (!cat.containsKey("blockedBiomeTypes")) {
+                    cat.put("blockedBiomeTypes", new MoCProperty("blockedBiomeTypes", Arrays.toString(entityData.getBlockedBiomeTypes().toArray()), MoCProperty.Type.STRING));
+                } else {
+                    entityData.setBlockedBiomeTypes(parseBiomeTypes(cat.get("blockedBiomeTypes").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")));
+                }
+                if (!cat.containsKey("canSpawn")) {
+                    cat.put("canSpawn", new MoCProperty("canSpawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
+                } else {
+                    entityData.setCanSpawn(Boolean.parseBoolean(cat.get("canSpawn").value));
+                }
                 if (!cat.containsKey("dimensions")) {
                     cat.put("dimensions", new MoCProperty("dimensions", Arrays.toString(entityData.getDimensions()), MoCProperty.Type.STRING));
                 } else {
                     entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")).mapToInt(Integer::parseInt).toArray());
-                }
-                if (!cat.containsKey("biometypes")) {
-                    cat.put("biometypes", new MoCProperty("biometypes", Arrays.toString(entityData.getBiomeTypes().toArray()), MoCProperty.Type.STRING));
-                } else {
-                    entityData.setBiomeTypes(parseBiomeTypes(cat.get("biometypes").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")));
                 }
                 if (!cat.containsKey("frequency")) {
                     cat.put("frequency", new MoCProperty("frequency", Integer.toString(entityData.getFrequency()), MoCProperty.Type.INTEGER));
                 } else {
                     entityData.setFrequency(Integer.parseInt(cat.get("frequency").value));
                 }
-                if (!cat.containsKey("minspawn")) {
-                    cat.put("minspawn", new MoCProperty("minspawn", Integer.toString(entityData.getMinSpawn()), MoCProperty.Type.INTEGER));
-                } else {
-                    entityData.setMinSpawn(Integer.parseInt(cat.get("minspawn").value));
-                }
-                if (!cat.containsKey("maxspawn")) {
-                    cat.put("maxspawn", new MoCProperty("maxspawn", Integer.toString(entityData.getMaxSpawn()), MoCProperty.Type.INTEGER));
-                } else {
-                    entityData.setMaxSpawn(Integer.parseInt(cat.get("maxspawn").value));
-                }
-                //if (!cat.containsKey("maxchunk")) {
-                //    cat.put("maxchunk", new MoCProperty("maxchunk", Integer.toString(entityData.getMaxInChunk()), MoCProperty.Type.INTEGER));
+                //if (!cat.containsKey("maxChunk")) {
+                //    cat.put("maxChunk", new MoCProperty("maxChunk", Integer.toString(entityData.getMaxInChunk()), MoCProperty.Type.INTEGER));
                 //} else {
-                //    entityData.setMaxInChunk(Integer.parseInt(cat.get("maxchunk").value));
+                //    entityData.setMaxInChunk(Integer.parseInt(cat.get("maxChunk").value));
                 //}
-                if (!cat.containsKey("canspawn")) {
-                    cat.put("canspawn", new MoCProperty("canspawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
+                if (!cat.containsKey("maxSpawn")) {
+                    cat.put("maxSpawn", new MoCProperty("maxSpawn", Integer.toString(entityData.getMaxSpawn()), MoCProperty.Type.INTEGER));
                 } else {
-                    entityData.setCanSpawn(Boolean.parseBoolean(cat.get("canspawn").value));
+                    entityData.setMaxSpawn(Integer.parseInt(cat.get("maxSpawn").value));
+                }
+                if (!cat.containsKey("minSpawn")) {
+                    cat.put("minSpawn", new MoCProperty("minSpawn", Integer.toString(entityData.getMinSpawn()), MoCProperty.Type.INTEGER));
+                } else {
+                    entityData.setMinSpawn(Integer.parseInt(cat.get("minSpawn").value));
                 }
             }
         }

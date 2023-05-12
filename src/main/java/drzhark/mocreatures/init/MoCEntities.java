@@ -270,12 +270,19 @@ public class MoCEntities {
     public static void registerSpawns() {
         MoCreatures.proxy.readMocConfigValues();
         ArrayList<Biome> spawnBiomes = new ArrayList<>();
-        for (MoCEntityData entityData : MoCreatures.mocEntityMap.values()) {
-            if (!entityData.getCanSpawn()) continue;
-            spawnBiomes.clear();
-            for (BiomeDictionary.Type type : entityData.getBiomeTypes()) {
-                spawnBiomes.addAll(BiomeDictionary.getBiomes(type));
+        for (MoCEntityData entityData : MoCreatures.mocEntityMap.values()) { // Iterate over all entities
+            if (!entityData.getCanSpawn()) continue; // Skip entities that are disabled
+            spawnBiomes.clear(); // Clear spawn biomes from previous entity
+            for (BiomeDictionary.Type type : entityData.getBiomeTypes()) { // Iterate over all allowed biomes
+                spawnBiomes.addAll(BiomeDictionary.getBiomes(type)); // Add biome types that are allowed
             }
+            for (Biome biome : spawnBiomes) { // Iterate over all previously added biomes
+                for (BiomeDictionary.Type blockedType : entityData.getBlockedBiomeTypes()) { // Iterate over all blocked biomes
+                    if (BiomeDictionary.hasType(biome, blockedType)) // Check if biome type is blocked
+                        spawnBiomes.remove(biome); // Remove blocked biome type
+                }
+            }
+            // Add spawn entry for the entity
             EntityRegistry.addSpawn(entityData.getEntityClass(), entityData.getFrequency(), entityData.getMinSpawn(), entityData.getMaxSpawn(), entityData.getType(), spawnBiomes.toArray(new Biome[0]));
         }
         MoCreatures.LOGGER.info("Entity spawn registration complete.");

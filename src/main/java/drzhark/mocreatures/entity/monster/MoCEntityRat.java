@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.monster;
 
+import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
@@ -20,7 +21,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 
@@ -50,7 +55,7 @@ public class MoCEntityRat extends MoCEntityMob {
     @Override
     public void selectType() {
         checkSpawningBiome();
-        
+
         if (getType() == 0) {
             int i = this.rand.nextInt(100);
             if (i <= 65) {
@@ -79,18 +84,18 @@ public class MoCEntityRat extends MoCEntityMob {
                 return MoCreatures.proxy.getTexture("ratb.png");
         }
     }
-    
+
     @Override
     public boolean checkSpawningBiome() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
         Biome currentbiome = MoCTools.Biomekind(this.world, pos);
 
         try {
-            if (BiomeDictionary.hasType(currentbiome, Type.MESA)) {
+            if (BiomeDictionary.hasType(currentbiome, BiomeDictionary.Type.MESA)) {
                 setType(1); // only brown rats
             }
-                
-            if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
+
+            if (BiomeDictionary.hasType(currentbiome, BiomeDictionary.Type.SNOWY)) {
                 setType(3); // only white rats
             }
         } catch (Exception ignored) {
@@ -104,10 +109,7 @@ public class MoCEntityRat extends MoCEntityMob {
         if (entity instanceof EntityLivingBase) {
             setAttackTarget((EntityLivingBase) entity);
             if (!this.world.isRemote) {
-                List<MoCEntityRat> list =
-                        this.world.getEntitiesWithinAABB(MoCEntityRat.class,
-                                new AxisAlignedBB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D)
-                                        .expand(16D, 4D, 16D));
+                List<MoCEntityRat> list = this.world.getEntitiesWithinAABB(MoCEntityRat.class, new AxisAlignedBB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16D, 4D, 16D));
                 for (MoCEntityRat entityrat : list) {
                     if ((entityrat != null) && (entityrat.getAttackTarget() == null)) {
                         entityrat.setAttackTarget((EntityLivingBase) entity);

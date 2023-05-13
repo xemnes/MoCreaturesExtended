@@ -3,7 +3,6 @@
  */
 package drzhark.mocreatures.entity;
 
-import com.google.common.primitives.Ints;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;

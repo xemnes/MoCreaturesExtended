@@ -185,7 +185,7 @@ public class MoCEventHooks {
         } else return blockLightLevel <= maxDespawnLightLevel || maxDespawnLightLevel == -1;
     }
 
-    private static BlockPos getSafeSpawnPos(EntityLivingBase entity, BlockPos near) {
+    private BlockPos getSafeSpawnPos(EntityLivingBase entity, BlockPos near) {
         int radius = 6;
         int maxTries = 24;
         BlockPos testing;

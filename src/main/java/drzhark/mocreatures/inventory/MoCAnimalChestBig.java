@@ -27,7 +27,7 @@ public class MoCAnimalChestBig extends InventoryLargeChest {
         int var2;
 
         for (var2 = 0; var2 < this.getSizeInventory(); ++var2) {
-            this.setInventorySlotContents(var2, (ItemStack) null);
+            this.setInventorySlotContents(var2, null);
         }
 
         for (var2 = 0; var2 < par1NBTTagList.tagCount(); ++var2) {

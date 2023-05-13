@@ -72,12 +72,12 @@ public class MoCAnimalChest extends InventoryBasic implements ILockableContainer
     }
 
     @Override
-    public void setLockCode(LockCode code) {
-        this.lockCode = code;
+    public LockCode getLockCode() {
+        return this.lockCode;
     }
 
     @Override
-    public LockCode getLockCode() {
-        return this.lockCode;
+    public void setLockCode(LockCode code) {
+        this.lockCode = code;
     }
 }

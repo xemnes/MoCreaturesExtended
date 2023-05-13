@@ -32,6 +32,6 @@ public class MoCMessageEntityJump implements IMessage, IMessageHandler<MoCMessag
 
     @Override
     public String toString() {
-        return String.format("MoCMessageEntityJump");
+        return "MoCMessageEntityJump";
     }
 }

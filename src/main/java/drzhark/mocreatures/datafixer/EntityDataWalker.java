@@ -7,8 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.datafix.IDataFixer;
 import net.minecraft.util.datafix.IDataWalker;
 
-public class EntityDataWalker implements IDataWalker
-{
+public class EntityDataWalker implements IDataWalker {
     @Override
     public NBTTagCompound process(IDataFixer fixer, NBTTagCompound compound, int version) {
         final String entityId = compound.getString("id");

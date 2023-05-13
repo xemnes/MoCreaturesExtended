@@ -1,7 +1,7 @@
 [
   {
     "modid": "mocreatures",
-    "name": "DrZhark's Mo'Creatures Mod",
+    "name": "DrZhark's Mo'Creatures Extended",
     "description": "This mod adds many more creatures to Minecraft.  Authored by DrZhark, coding, AI, animations: DrZhark.  Models, textures: BlockDaddy, DrZhark.  SMP coding: Bloodshot, DrZhark",
     "version": "${version}",
     "mcversion": "${mcversion}",

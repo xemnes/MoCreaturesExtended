@@ -14,6 +14,32 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelRay extends ModelBase {
 
+    //public int typeInt;
+    public boolean isMantaRay;
+    public boolean attacking;
+    ModelRenderer Tail;
+    ModelRenderer Body;
+    ModelRenderer Right;
+    ModelRenderer Left;
+    ModelRenderer BodyU;
+    ModelRenderer RWingA;
+    ModelRenderer RWingB;
+    ModelRenderer RWingC;
+    ModelRenderer RWingD;
+    ModelRenderer RWingE;
+    ModelRenderer RWingF;
+    ModelRenderer BodyTail;
+    ModelRenderer RWingG;
+    ModelRenderer LWingA;
+    ModelRenderer LWingB;
+    ModelRenderer LWingC;
+    ModelRenderer LWingD;
+    ModelRenderer LWingE;
+    ModelRenderer LWingF;
+    ModelRenderer LWingG;
+    ModelRenderer LEye;
+    ModelRenderer REye;
+
     public MoCModelRay() {
         this.textureWidth = 64;
         this.textureHeight = 32;
@@ -196,32 +222,5 @@ public class MoCModelRay extends ModelBase {
         } else {
             this.Tail.rotateAngleX = 0F;
         }
-
     }
-
-    //public int typeInt;
-    public boolean isMantaRay;
-    public boolean attacking;
-    ModelRenderer Tail;
-    ModelRenderer Body;
-    ModelRenderer Right;
-    ModelRenderer Left;
-    ModelRenderer BodyU;
-    ModelRenderer RWingA;
-    ModelRenderer RWingB;
-    ModelRenderer RWingC;
-    ModelRenderer RWingD;
-    ModelRenderer RWingE;
-    ModelRenderer RWingF;
-    ModelRenderer BodyTail;
-    ModelRenderer RWingG;
-    ModelRenderer LWingA;
-    ModelRenderer LWingB;
-    ModelRenderer LWingC;
-    ModelRenderer LWingD;
-    ModelRenderer LWingE;
-    ModelRenderer LWingF;
-    ModelRenderer LWingG;
-    ModelRenderer LEye;
-    ModelRenderer REye;
 }

@@ -45,10 +45,10 @@ public class MoCModelBunny extends ModelBase {
         this.part11.setRotationPoint(0.0F, -1 + byte0, -4F);
         this.part2 = new ModelRenderer(this, 0, 10);
         this.part2.addBox(-3F, -4F, -3F, 6, 8, 6, 0.0F);
-        this.part2.setRotationPoint(0.0F, 0 + byte0, 0.0F);
+        this.part2.setRotationPoint(0.0F, byte0, 0.0F);
         this.part3 = new ModelRenderer(this, 0, 24);
         this.part3.addBox(-2F, 4F, -2F, 4, 3, 4, 0.0F);
-        this.part3.setRotationPoint(0.0F, 0 + byte0, 0.0F);
+        this.part3.setRotationPoint(0.0F, byte0, 0.0F);
         this.part4 = new ModelRenderer(this, 24, 16);
         this.part4.addBox(-2F, 0.0F, -1F, 2, 2, 2);
         this.part4.setRotationPoint(3F, 3 + byte0, -3F);
@@ -100,6 +100,5 @@ public class MoCModelBunny extends ModelBase {
             this.part5.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.0F * f1;
             this.part7.rotateAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.2F * f1;
         }
-
     }
 }

@@ -350,5 +350,4 @@ public class MoCModelWolf extends ModelBase {
         this.TailC.rotateAngleY = this.TailA.rotateAngleY;
         this.TailD.rotateAngleY = this.TailA.rotateAngleY;
     }
-
 }

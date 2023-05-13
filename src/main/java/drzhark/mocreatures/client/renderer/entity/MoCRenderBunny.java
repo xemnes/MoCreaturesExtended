@@ -13,13 +13,13 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCRenderBunny extends MoCRenderMoC<MoCEntityBunny> {
 
-    @Override
-    protected ResourceLocation getEntityTexture(MoCEntityBunny entitybunny) {
-        return ((MoCEntityBunny) entitybunny).getTexture();
-    }
-
     public MoCRenderBunny(ModelBase modelbase, float f) {
         super(modelbase, f);
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(MoCEntityBunny entitybunny) {
+        return entitybunny.getTexture();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MoCRenderBunny extends MoCRenderMoC<MoCEntityBunny> {
     @Override
     protected void preRenderCallback(MoCEntityBunny entitybunny, float f) {
         rotBunny(entitybunny);
-        adjustOffsets(entitybunny.getAdjustedXOffset(), entitybunny.getAdjustedYOffset(),entitybunny.getAdjustedZOffset());
+        adjustOffsets(entitybunny.getAdjustedXOffset(), entitybunny.getAdjustedYOffset(), entitybunny.getAdjustedZOffset());
     }
 
     protected void rotBunny(MoCEntityBunny entitybunny) {

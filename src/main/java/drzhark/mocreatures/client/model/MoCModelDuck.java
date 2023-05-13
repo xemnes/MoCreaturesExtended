@@ -88,7 +88,7 @@ public class MoCModelDuck extends ModelBase {
         this.rightLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
         this.leftLeg.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 1.4F * par2;
         if (fly) {
-            Float WingRot = MathHelper.cos((par3 * 1.4F) + 3.141593F) * 0.6F;
+            float WingRot = MathHelper.cos((par3 * 1.4F) + 3.141593F) * 0.6F;
             this.rightWing.rotateAngleZ = 0.5F + WingRot;
             this.leftWing.rotateAngleZ = -0.5F - WingRot;
         } else {

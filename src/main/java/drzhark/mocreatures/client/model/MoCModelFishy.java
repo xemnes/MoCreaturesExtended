@@ -36,7 +36,7 @@ public class MoCModelFishy extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        MoCEntityFishy smallFish = (MoCEntityFishy)entity;
+        MoCEntityFishy smallFish = (MoCEntityFishy) entity;
         float yOffset = smallFish.getAdjustedYOffset();
         float xOffset = smallFish.getAdjustedXOffset();
         float zOffset = smallFish.getAdjustedZOffset();

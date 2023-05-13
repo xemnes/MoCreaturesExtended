@@ -24,7 +24,5 @@ public class MoCModelManticore extends MoCModelNewBigCat {
         this.isMovingVertically = bigcat.motionY != 0;
         this.hasChest = false;
         this.isTamed = false;
-        this.hasChest = false;
-
     }
 }

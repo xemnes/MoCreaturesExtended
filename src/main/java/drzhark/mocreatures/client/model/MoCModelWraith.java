@@ -76,6 +76,5 @@ public class MoCModelWraith extends ModelBiped {
 
         this.bipedRightArm.rotateAngleZ += (MathHelper.cos(f2 * 0.09F) * 0.05F) + 0.05F;
         this.bipedLeftArm.rotateAngleZ -= (MathHelper.cos(f2 * 0.09F) * 0.05F) + 0.05F;
-
     }
 }

@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class MoCModelRoach extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer Head;
     ModelRenderer LAnthenna;
     ModelRenderer LAnthennaB;
@@ -30,7 +31,6 @@ public class MoCModelRoach extends ModelBase {
     ModelRenderer RShellOpen;
     ModelRenderer LeftWing;
     ModelRenderer RightWing;
-    private float radianF = 57.29578F;
 
     public MoCModelRoach() {
         this.textureWidth = 32;
@@ -224,7 +224,5 @@ public class MoCModelRoach extends ModelBase {
         this.FrontLegs.rotateAngleX = -1.115358F + frontLegAdj + legMov;
         this.MidLegs.rotateAngleX = 1.264073F + legMovB;
         this.RearLegs.rotateAngleX = 1.368173F - frontLegAdj + legMov;
-
     }
-
 }

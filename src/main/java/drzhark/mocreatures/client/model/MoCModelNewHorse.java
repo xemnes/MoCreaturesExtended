@@ -466,8 +466,8 @@ public class MoCModelNewHorse extends ModelBase {
                 GL11.glDisable(3042/* GL_BLEND */);
                 GL11.glPopMatrix();
             }/*
-              * else { ButterflyL.render(f5); ButterflyR.render(f5); }
-              */
+             * else { ButterflyL.render(f5); ButterflyR.render(f5); }
+             */
 
         } else
         //rendering a ghost or vanishing
@@ -586,7 +586,7 @@ public class MoCModelNewHorse extends ModelBase {
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean eating, boolean rider, boolean floating,
-            boolean standing, boolean saddled, boolean tail, boolean wings, boolean flapwings, boolean shuffle, int type) {
+                                  boolean standing, boolean saddled, boolean tail, boolean wings, boolean flapwings, boolean shuffle, int type) {
         float RLegXRot = MathHelper.cos((f * 0.6662F) + 3.141593F) * 0.8F * f1;
         float LLegXRot = MathHelper.cos(f * 0.6662F) * 0.8F * f1;
         float HeadXRot = (f4 / 57.29578F);
@@ -597,7 +597,7 @@ public class MoCModelNewHorse extends ModelBase {
             f3 = -20F;
         }
 
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
 
@@ -622,7 +622,7 @@ public class MoCModelNewHorse extends ModelBase {
             this.Head.rotationPointY = -6F;
             this.Head.rotationPointZ = -1F;
             this.Head.rotateAngleX = (15 / 57.29578F) + (HeadXRot);
-            ;//120 degrees
+            //120 degrees
             this.Head.rotateAngleY = (f3 / 57.29578F);
             this.TailA.rotationPointY = 9F;
             this.TailB.rotationPointZ = 18F;
@@ -707,11 +707,11 @@ public class MoCModelNewHorse extends ModelBase {
                 this.InnerWing.rotationPointZ = -6F;
             }
 
-            /**
+            /*
              * flapping wings or cruising. IF flapping wings, move up and down.
-             * if cruising, movement depends of speed
+             * if cruising, movement depends on speed
              */
-            float WingRot = 0F;
+            float WingRot;
             if (flapwings) {
                 WingRot = MathHelper.cos((f2 * 0.3F) + 3.141593F) * 1.2F;// * f1;
             } else
@@ -742,10 +742,10 @@ public class MoCModelNewHorse extends ModelBase {
             this.InnerWingR.rotationPointZ = this.InnerWing.rotationPointZ;
 
             //OuterWing.rotationPointX = InnerWing.rotationPointX + (MathHelper.cos(WingRot)*12F);
-            //the rotation point X rotates depending of the cos of rotation times the distance of the other block:
+            //the rotation point X rotates depending on the cos of rotation times the distance of the other block:
             //cos (WingRot) * 12F
-            //the rotation PointX of Innerwing = 5
-            //the rotation PointX of Outerwing = 17
+            //the rotation PointX of InnerWing = 5
+            //the rotation PointX of OuterWing = 17
             //the difference = 12.
             // for the rotation point Y, sin is used instead.
             //OuterWing.rotationPointX = InnerWing.rotationPointX + (MathHelper.cos(WingRot)*12F);
@@ -795,14 +795,14 @@ public class MoCModelNewHorse extends ModelBase {
 
         if (type > 44 && type < 60 || type == 21) //butterfly horses or ghost horse
         {
-            /**
+            /*
              * buttefly to have two / 3 movs: 1 slow movement when idle on
              * ground has to be random from closing up to horizontal 2 fast wing
              * flapping flying movement, short range close to 0 degree RLegXRot
              * = MathHelper.cos((f * 0.6662F) + 3.141593F) * 0.8F * f1;
              */
 
-            /**
+            /*
              * f = distance walked f1 = speed 0 - 1 f2 = timer
              */
 
@@ -829,9 +829,7 @@ public class MoCModelNewHorse extends ModelBase {
                     }
 
                 }
-            }
-
-            else
+            } else
             //for ghost horse
             {
                 WingRot = MathHelper.cos((f2 * 0.1F));//* 0.2F;
@@ -845,7 +843,7 @@ public class MoCModelNewHorse extends ModelBase {
              * MathHelper.cos((f * 0.5F)) *0.1F ;//* 1.2F * f1; }
              */
 
-            /**
+            /*
              * this part is needed for position and angle of the butterfly wings
              * and ghost horse wings
              */
@@ -874,7 +872,7 @@ public class MoCModelNewHorse extends ModelBase {
             this.ButterflyR.rotateAngleZ = baseAngle - WingRot;
         }
 
-        /**
+        /*
          * knee joints Leg1 and Leg4 use LLegXRot Leg2 and Leg3 use RLegXRot
          */
         //RLegXRot = 45/57.29578F;
@@ -929,17 +927,7 @@ public class MoCModelNewHorse extends ModelBase {
             this.Leg2A.rotateAngleX = RLegXRotC;
             this.Leg2B.rotateAngleX = LLegXRotC;
             this.Leg2C.rotateAngleX = this.Leg2B.rotateAngleX;
-
-            this.Leg3A.rotateAngleX = RLegXRot;
-            this.Leg3B.rotateAngleX = RLegXRotB;
-            this.Leg3C.rotateAngleX = RLegXRotB;
-
-            this.Leg4A.rotateAngleX = LLegXRot;
-            this.Leg4B.rotateAngleX = LLegXRotB;
-            this.Leg4C.rotateAngleX = LLegXRotB;
-        }
-
-        else
+        } else
         //not standing
         {
             this.Leg3A.rotationPointY = 9F;
@@ -997,15 +985,13 @@ public class MoCModelNewHorse extends ModelBase {
             this.Leg2B.rotateAngleX = RLegXRotC;
             this.Leg2C.rotateAngleX = RLegXRotC;
 
-            this.Leg3A.rotateAngleX = RLegXRot;
-            this.Leg3B.rotateAngleX = RLegXRotB;
-            this.Leg3C.rotateAngleX = RLegXRotB;
-
-            this.Leg4A.rotateAngleX = LLegXRot;
-            this.Leg4B.rotateAngleX = LLegXRotB;
-            this.Leg4C.rotateAngleX = LLegXRotB;
-
         }
+        this.Leg3A.rotateAngleX = RLegXRot;
+        this.Leg3B.rotateAngleX = RLegXRotB;
+        this.Leg3C.rotateAngleX = RLegXRotB;
+        this.Leg4A.rotateAngleX = LLegXRot;
+        this.Leg4B.rotateAngleX = LLegXRotB;
+        this.Leg4C.rotateAngleX = LLegXRotB;
 
         if (type == 60 && shuffle) {
             this.Leg3A.rotationPointY = 9F;
@@ -1167,7 +1153,6 @@ public class MoCModelNewHorse extends ModelBase {
                 this.SaddleL2.rotateAngleZ = 0F;
                 this.SaddleR.rotateAngleZ = 0F;
                 this.SaddleR2.rotateAngleZ = 0F;
-                ;
             } else {
                 this.SaddleL.rotateAngleX = RLegXRot / 3F;
                 this.SaddleL2.rotateAngleX = RLegXRot / 3F;
@@ -1206,7 +1191,5 @@ public class MoCModelNewHorse extends ModelBase {
         this.TailA.rotateAngleX = tailMov;//-1.3089F+(f1*1.5F);
         this.TailB.rotateAngleX = tailMov;//-1.3089F+(f1*1.5F);
         this.TailC.rotateAngleX = -0.2618F + tailMov;//-1.5707F -tailMov;
-
     }
-
 }

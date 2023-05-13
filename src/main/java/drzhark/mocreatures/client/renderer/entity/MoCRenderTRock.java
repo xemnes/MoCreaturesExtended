@@ -34,7 +34,7 @@ public class MoCRenderTRock extends Render<Entity> {
         int i = entitytrock.getBrightnessForRender();
         int j = i % 65536;
         int k = i / 65536;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j / 1.0F, (float) k / 1.0F);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) j, (float) k);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         float lightLevel = entitytrock.getBrightness();

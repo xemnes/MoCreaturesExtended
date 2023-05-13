@@ -34,7 +34,7 @@ public class MoCModelBird extends ModelBase {
         this.beak.setRotationPoint(0.0F, -1 + byte0, -4F);
         this.body = new ModelRenderer(this, 0, 9);
         this.body.addBox(-2F, -4F, -3F, 4, 8, 4, 0.0F);
-        this.body.setRotationPoint(0.0F, 0 + byte0, 0.0F);
+        this.body.setRotationPoint(0.0F, byte0, 0.0F);
         this.body.rotateAngleX = 1.047198F;
         this.leftleg = new ModelRenderer(this, 26, 0);
         this.leftleg.addBox(-1F, 0.0F, -4F, 3, 4, 3);

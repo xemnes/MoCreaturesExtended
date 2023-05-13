@@ -15,13 +15,13 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCRenderBird extends MoCRenderMoC<MoCEntityBird> {
 
+    public MoCRenderBird(ModelBase modelbase, float f) {
+        super(modelbase, f);
+    }
+
     @Override
     protected ResourceLocation getEntityTexture(EntityLiving par1Entity) {
         return ((MoCEntityBird) par1Entity).getTexture();
-    }
-
-    public MoCRenderBird(ModelBase modelbase, float f) {
-        super(modelbase, f);
     }
 
     @Override

@@ -18,11 +18,11 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCRenderKittyBed extends RenderLiving<MoCEntityKittyBed> {
 
-    public MoCModelKittyBed kittybed;
-    private int mycolor;
-    public static float fleeceColorTable[][] = { {1.0F, 1.0F, 1.0F}, {0.95F, 0.7F, 0.2F}, {0.9F, 0.5F, 0.85F}, {0.6F, 0.7F, 0.95F},
+    public static float[][] fleeceColorTable = {{1.0F, 1.0F, 1.0F}, {0.95F, 0.7F, 0.2F}, {0.9F, 0.5F, 0.85F}, {0.6F, 0.7F, 0.95F},
             {0.9F, 0.9F, 0.2F}, {0.5F, 0.8F, 0.1F}, {0.95F, 0.7F, 0.8F}, {0.3F, 0.3F, 0.3F}, {0.6F, 0.6F, 0.6F}, {0.3F, 0.6F, 0.7F},
             {0.7F, 0.4F, 0.9F}, {0.2F, 0.4F, 0.8F}, {0.5F, 0.4F, 0.3F}, {0.4F, 0.5F, 0.2F}, {0.8F, 0.3F, 0.3F}, {0.1F, 0.1F, 0.1F}};
+    public MoCModelKittyBed kittybed;
+    private int mycolor;
 
     public MoCRenderKittyBed(MoCModelKittyBed modelkittybed, MoCModelKittyBed2 modelkittybed2, float f) {
         super(MoCClientProxy.mc.getRenderManager(), modelkittybed, f);
@@ -44,7 +44,7 @@ public class MoCRenderKittyBed extends RenderLiving<MoCEntityKittyBed> {
         return entitykittybed.getTexture();
     }
 
-    private class LayerMoCKittyBed implements LayerRenderer<MoCEntityKittyBed> {
+    private static class LayerMoCKittyBed implements LayerRenderer<MoCEntityKittyBed> {
 
         private final MoCRenderKittyBed mocRenderer;
         private final MoCModelKittyBed2 mocModel = new MoCModelKittyBed2();

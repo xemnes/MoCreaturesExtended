@@ -18,6 +18,8 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
 
+    public MoCModelCrocodile croc;
+
     public MoCRenderCrocodile(MoCModelCrocodile modelbase, float f) {
         super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
         this.croc = modelbase;
@@ -25,7 +27,7 @@ public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
 
     @Override
     protected ResourceLocation getEntityTexture(MoCEntityCrocodile entitycrocodile) {
-        return ((MoCEntityCrocodile) entitycrocodile).getTexture();
+        return entitycrocodile.getTexture();
     }
 
     @Override
@@ -98,7 +100,4 @@ public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
         // if(!entitycrocodile.getIsAdult()) { f = entitycrocodile.edad; }
         GL11.glScalef(f, f, f);
     }
-
-    public MoCModelCrocodile croc;
-
 }

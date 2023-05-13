@@ -22,7 +22,7 @@ public class MoCRenderGolem extends MoCRenderMoC<MoCEntityGolem> {
 
     @Override
     protected ResourceLocation getEntityTexture(MoCEntityGolem par1Entity) {
-        return ((MoCEntityGolem) par1Entity).getTexture();
+        return par1Entity.getTexture();
     }
 
     private class LayerMoCGolem implements LayerRenderer<MoCEntityGolem> {

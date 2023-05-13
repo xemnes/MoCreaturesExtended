@@ -116,7 +116,7 @@ public class MoCModelMediumFish extends ModelBase {
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        MoCEntityMediumFish mediumFish = (MoCEntityMediumFish)entity;
+        MoCEntityMediumFish mediumFish = (MoCEntityMediumFish) entity;
         float yOffset = mediumFish.getAdjustedYOffset();
         float xOffset = mediumFish.getAdjustedXOffset();
         float zOffset = mediumFish.getAdjustedZOffset();
@@ -148,7 +148,7 @@ public class MoCModelMediumFish extends ModelBase {
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
         //TailA.rotateAngleY = MathHelper.cos(f2 * 0.7F);
@@ -166,5 +166,4 @@ public class MoCModelMediumFish extends ModelBase {
         this.MouthBottomB.rotateAngleZ = -0.7132579F + mouthMov;
         //super.setRotationAngles(f, f1, f2, f3, f4, f5);
     }
-
 }

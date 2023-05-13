@@ -28,8 +28,7 @@ public class MoCCreativeTabs extends CreativeTabs {
      */
     @SideOnly(Side.CLIENT)
     public void displayAllRelevantItems(NonNullList<ItemStack> items) {
-        for (Item item : Item.REGISTRY)
-        {
+        for (Item item : Item.REGISTRY) {
             if (item == MoCItems.mocegg) {
                 continue;
             }

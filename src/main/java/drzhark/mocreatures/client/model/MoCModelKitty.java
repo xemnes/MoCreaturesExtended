@@ -15,18 +15,17 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCModelKitty extends ModelBase {
 
+    private final ModelRenderer body;
     public boolean isSitting;
     public boolean isSwinging;
     public float swingProgress;
     public int kittystate;
-    public ModelRenderer headParts[];
+    public ModelRenderer[] headParts;
     public ModelRenderer tail;
     public ModelRenderer rightArm;
     public ModelRenderer leftArm;
     public ModelRenderer rightLeg;
     public ModelRenderer leftLeg;
-
-    private ModelRenderer body;
 
     public MoCModelKitty() {
         this(0.0F);

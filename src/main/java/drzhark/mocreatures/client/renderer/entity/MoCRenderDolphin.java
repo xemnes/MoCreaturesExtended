@@ -35,7 +35,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
             float f4 = entitydolphin.getDistance(this.renderManager.renderViewEntity);
             if (f4 < 16F) {
                 String s = "";
-                s = (new StringBuilder()).append(s).append(entitydolphin.getPetName()).toString();
+                s = s + entitydolphin.getPetName();
                 float f5 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();
@@ -54,7 +54,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
                     tessellator.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
                     // might break SSP
                     float f6 = entitydolphin.getHealth();
-                    // maxhealth is always 30 for dolphins so we do not need to use a datawatcher
+                    // max health is always 30 for dolphins, so we do not need to use a data watcher
                     float f7 = entitydolphin.getMaxHealth();
                     float f8 = f6 / f7;
                     float f9 = 40F * f8;
@@ -103,7 +103,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
             float f3 = 0.01666667F * f2;
             float f4 = entitydolphin.getDistance(this.renderManager.renderViewEntity);
             String s = "";
-            s = (new StringBuilder()).append(s).append(entitydolphin.getPetName()).toString();
+            s = s + entitydolphin.getPetName();
             if ((f4 < 12F) && (s.length() > 0)) {
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();

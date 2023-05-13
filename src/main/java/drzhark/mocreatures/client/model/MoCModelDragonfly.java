@@ -141,13 +141,13 @@ public class MoCModelDragonfly extends ModelBase {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean flying) {
         //super.setRotationAngles(f, f1, f2, f3, f4, f5);
 
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
 
         float WingRot = 0F;
-        float legMov = 0F;
-        float legMovB = 0F;
+        float legMov;
+        float legMovB;
 
         if (flying) {
             WingRot = MathHelper.cos((f2 * 2.0F)) * 0.5F;
@@ -168,5 +168,4 @@ public class MoCModelDragonfly extends ModelBase {
         this.MidLegs.rotateAngleX = 0.5948578F + legMovB;
         this.RearLegs.rotateAngleX = 1.070744F + legMov;
     }
-
 }

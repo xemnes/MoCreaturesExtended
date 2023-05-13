@@ -14,6 +14,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelTurtle extends ModelBase {
 
+    public boolean isHiding;
+    public boolean upsidedown;
+    public float swingProgress;
+    ModelRenderer Shell;
+    ModelRenderer ShellUp;
+    ModelRenderer ShellTop;
+    ModelRenderer Belly;
+    ModelRenderer Leg1;
+    ModelRenderer Leg2;
+    ModelRenderer Leg3;
+    ModelRenderer Leg4;
+    ModelRenderer Head;
+    ModelRenderer Tail;
+    private boolean turtleHat;
+    private boolean TMNT;
+    private boolean isSwimming;
+
     public MoCModelTurtle() {
         this.Shell = new ModelRenderer(this, 28, 0);
         this.Shell.addBox(0F, 0F, 0F, 9, 1, 9);
@@ -193,22 +210,4 @@ public class MoCModelTurtle extends ModelBase {
             this.Tail.rotationPointZ = 4F;
         }
     }
-
-    ModelRenderer Shell;
-    ModelRenderer ShellUp;
-    ModelRenderer ShellTop;
-    ModelRenderer Belly;
-    ModelRenderer Leg1;
-    ModelRenderer Leg2;
-    ModelRenderer Leg3;
-    ModelRenderer Leg4;
-    ModelRenderer Head;
-    ModelRenderer Tail;
-    public boolean isHiding;
-    public boolean upsidedown;
-    private boolean turtleHat;
-    private boolean TMNT;
-    private boolean isSwimming;
-    public float swingProgress;
-
 }

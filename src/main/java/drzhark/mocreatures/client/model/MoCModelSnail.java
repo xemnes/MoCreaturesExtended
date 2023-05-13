@@ -90,5 +90,4 @@ public class MoCModelSnail extends ModelBase {
         this.Tail.rotationPointZ = 2F + tailMov;
         this.ShellUp.rotateAngleX = 0.2268928F + (tailMov / 10F);
     }
-
 }

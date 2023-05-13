@@ -11,11 +11,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
 
 public class MoCClientTickHandler {
 
-    private void onTickInGame() {
-    }
-
     boolean inMenu;
     int lastTickRun;
+
+    private void onTickInGame() {
+    }
 
     private void onTickInGui(GuiScreen curScreen) {
         // handle GUI tick stuff here

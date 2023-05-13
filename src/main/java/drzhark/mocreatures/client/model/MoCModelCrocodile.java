@@ -13,6 +13,57 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelCrocodile extends ModelBase {
 
+    public float biteProgress;
+    public boolean swimming;
+    public boolean resting;
+    ModelRenderer LJaw;
+    ModelRenderer TailA;
+    ModelRenderer TailB;
+    ModelRenderer TailC;
+    ModelRenderer UJaw;
+    ModelRenderer Head;
+    ModelRenderer Body;
+    ModelRenderer Leg1;
+    ModelRenderer Leg3;
+    ModelRenderer Leg2;
+    ModelRenderer Leg4;
+    ModelRenderer TailD;
+    ModelRenderer Leg1A;
+    ModelRenderer Leg2A;
+    ModelRenderer Leg3A;
+    ModelRenderer Leg4A;
+    ModelRenderer UJaw2;
+    ModelRenderer LJaw2;
+    ModelRenderer TeethA;
+    ModelRenderer TeethB;
+    ModelRenderer TeethC;
+    ModelRenderer TeethD;
+    ModelRenderer TeethF;
+    ModelRenderer Spike0;
+    ModelRenderer Spike1;
+    ModelRenderer Spike2;
+    ModelRenderer Spike3;
+    ModelRenderer Spike4;
+    ModelRenderer Spike5;
+    ModelRenderer Spike6;
+    ModelRenderer Spike7;
+    ModelRenderer Spike8;
+    ModelRenderer Spike9;
+    ModelRenderer Spike10;
+    ModelRenderer Spike11;
+    ModelRenderer SpikeBack0;
+    ModelRenderer SpikeBack1;
+    ModelRenderer SpikeBack2;
+    ModelRenderer SpikeBack3;
+    ModelRenderer SpikeBack4;
+    ModelRenderer SpikeBack5;
+    ModelRenderer SpikeEye;
+    ModelRenderer SpikeEye1;
+    ModelRenderer TeethA1;
+    ModelRenderer TeethB1;
+    ModelRenderer TeethC1;
+    ModelRenderer TeethD1;
+
     public MoCModelCrocodile() {
         this.LJaw = new ModelRenderer(this, 42, 0);
         this.LJaw.addBox(-2.5F, 1F, -12F, 5, 2, 6);
@@ -291,10 +342,6 @@ public class MoCModelCrocodile extends ModelBase {
         this.TeethD1 = new ModelRenderer(this, 50, 10);
         this.TeethD1.addBox(-1.9F, 1F, -12.5F, 0, 1, 6);
         this.TeethD1.setRotationPoint(0F, 18F, -8F);
-    }
-
-    public void model2() {
-
     }
 
     @Override
@@ -601,58 +648,5 @@ public class MoCModelCrocodile extends ModelBase {
         this.TeethB1.rotateAngleY = this.UJaw.rotateAngleY;
         this.TeethC1.rotateAngleY = this.UJaw.rotateAngleY;
         this.TeethD1.rotateAngleY = this.UJaw.rotateAngleY;
-
     }
-
-    ModelRenderer LJaw;
-    ModelRenderer TailA;
-    ModelRenderer TailB;
-    ModelRenderer TailC;
-    ModelRenderer UJaw;
-    ModelRenderer Head;
-    ModelRenderer Body;
-    ModelRenderer Leg1;
-    ModelRenderer Leg3;
-    ModelRenderer Leg2;
-    ModelRenderer Leg4;
-    ModelRenderer TailD;
-    ModelRenderer Leg1A;
-    ModelRenderer Leg2A;
-    ModelRenderer Leg3A;
-    ModelRenderer Leg4A;
-    ModelRenderer UJaw2;
-    ModelRenderer LJaw2;
-    ModelRenderer TeethA;
-    ModelRenderer TeethB;
-    ModelRenderer TeethC;
-    ModelRenderer TeethD;
-    public float biteProgress;
-    public boolean swimming;
-    public boolean resting;
-
-    ModelRenderer TeethF;
-    ModelRenderer Spike0;
-    ModelRenderer Spike1;
-    ModelRenderer Spike2;
-    ModelRenderer Spike3;
-    ModelRenderer Spike4;
-    ModelRenderer Spike5;
-    ModelRenderer Spike6;
-    ModelRenderer Spike7;
-    ModelRenderer Spike8;
-    ModelRenderer Spike9;
-    ModelRenderer Spike10;
-    ModelRenderer Spike11;
-    ModelRenderer SpikeBack0;
-    ModelRenderer SpikeBack1;
-    ModelRenderer SpikeBack2;
-    ModelRenderer SpikeBack3;
-    ModelRenderer SpikeBack4;
-    ModelRenderer SpikeBack5;
-    ModelRenderer SpikeEye;
-    ModelRenderer SpikeEye1;
-    ModelRenderer TeethA1;
-    ModelRenderer TeethB1;
-    ModelRenderer TeethC1;
-    ModelRenderer TeethD1;
 }

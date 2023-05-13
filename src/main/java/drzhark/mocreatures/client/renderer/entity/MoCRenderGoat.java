@@ -20,14 +20,17 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
 
-    @Override
-    protected ResourceLocation getEntityTexture(MoCEntityGoat entitygoat) {
-        return entitygoat.getTexture();
-    }
+    private final MoCModelGoat tempGoat;
+    float depth = 0F;
 
     public MoCRenderGoat(ModelBase modelbase, float f) {
         super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
         this.tempGoat = (MoCModelGoat) modelbase;
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(MoCEntityGoat entitygoat) {
+        return entitygoat.getTexture();
     }
 
     @Override
@@ -57,7 +60,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
             float f4 = entitygoat.getDistance(this.renderManager.renderViewEntity);
             if (f4 < 16F) {
                 String s = "";
-                s = (new StringBuilder()).append(s).append(entitygoat.getPetName()).toString();
+                s = s + entitygoat.getPetName();
                 float f5 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();
@@ -76,7 +79,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                     tessellator.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
                     // might break SSP
                     float f6 = entitygoat.getHealth();
-                    // maxhealth is always 30 for dolphins so we do not need to use a datawatcher
+                    // max health is always 30 for dolphins, so we do not need to use a data watcher
                     float f7 = entitygoat.getMaxHealth();
                     float f8 = f6 / f7;
                     float f9 = 40F * f8;
@@ -122,7 +125,4 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     protected void stretch(MoCEntityGoat entitygoat) {
         GL11.glScalef(entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F);
     }
-
-    private final MoCModelGoat tempGoat;
-    float depth = 0F;
 }

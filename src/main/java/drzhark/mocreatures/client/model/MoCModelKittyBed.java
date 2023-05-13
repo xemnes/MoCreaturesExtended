@@ -12,35 +12,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelKittyBed extends ModelBase {
 
-    ModelRenderer TableL;
-
-    ModelRenderer TableR;
-
-    ModelRenderer Table_B;
-
-    ModelRenderer FoodT;
-
-    ModelRenderer FoodTraySide;
-
-    ModelRenderer FoodTraySideB;
-
-    ModelRenderer FoodTraySideC;
-
-    ModelRenderer FoodTraySideD;
-
-    ModelRenderer Milk;
-
-    ModelRenderer PetFood;
-
-    ModelRenderer Bottom;
-
     public boolean hasMilk;
-
     public boolean hasFood;
-
     public boolean pickedUp;
-
     public float milklevel;
+    ModelRenderer TableL;
+    ModelRenderer TableR;
+    ModelRenderer Table_B;
+    ModelRenderer FoodT;
+    ModelRenderer FoodTraySide;
+    ModelRenderer FoodTraySideB;
+    ModelRenderer FoodTraySideC;
+    ModelRenderer FoodTraySideD;
+    ModelRenderer Milk;
+    ModelRenderer PetFood;
+    ModelRenderer Bottom;
 
     public MoCModelKittyBed() {
         float f = 0.0F;

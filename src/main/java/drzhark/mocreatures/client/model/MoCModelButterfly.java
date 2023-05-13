@@ -154,21 +154,21 @@ public class MoCModelButterfly extends ModelBase {
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean onGround) {
 
-        /**
-         * buttefly to have two / 3 movs: 1 slow movement when idle on ground
+        /*
+         * butterfly to have two / 3 moves: 1 slow movement when idle on ground
          * has to be random from closing up to horizontal 2 fast wing flapping
          * flying movement, short range close to 0 degree RLegXRot =
          * MathHelper.cos((f * 0.6662F) + 3.141593F) * 0.8F * f1;
          */
 
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
 
         float f2a = f2 % 100F;
         float WingRot = 0F;
-        float legMov = 0F;
-        float legMovB = 0F;
+        float legMov;
+        float legMovB;
 
         if (!onGround) //flying
         {
@@ -196,14 +196,12 @@ public class MoCModelButterfly extends ModelBase {
         this.WingRight.rotateAngleZ = baseAngle - WingRot;
         this.WingLeftFront.rotateAngleZ = -baseAngle + WingRot;
 
-        this.WingLeftBack.rotateAngleZ = 0.5934119F + -baseAngle + WingRot;
+        this.WingLeftBack.rotateAngleZ = 0.5934119F - baseAngle + WingRot;
         this.WingRightFront.rotateAngleZ = baseAngle - WingRot;
         this.WingRightBack.rotateAngleZ = -0.5934119F + baseAngle - WingRot;
 
         this.FrontLegs.rotateAngleX = 0.1487144F + legMov;
         this.MidLegs.rotateAngleX = 0.5948578F + legMovB;
         this.RearLegs.rotateAngleX = 1.070744F + legMov;
-
     }
-
 }

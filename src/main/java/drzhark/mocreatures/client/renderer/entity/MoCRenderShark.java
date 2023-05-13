@@ -34,7 +34,7 @@ public class MoCRenderShark extends RenderLiving<MoCEntityShark> {
             float f4 = entityshark.getDistance(this.renderManager.renderViewEntity);
             if (f4 < 16F) {
                 String s = "";
-                s = (new StringBuilder()).append(s).append(entityshark.getPetName()).toString();
+                s = s + entityshark.getPetName();
                 float f5 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();
@@ -101,7 +101,7 @@ public class MoCRenderShark extends RenderLiving<MoCEntityShark> {
             float f3 = 0.01666667F * f2;
             float f4 = entityshark.getDistance(this.renderManager.renderViewEntity);
             String s = "";
-            s = (new StringBuilder()).append(s).append(entityshark.getPetName()).toString();
+            s = s + entityshark.getPetName();
             if ((f4 < 12F) && (s.length() > 0)) {
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();

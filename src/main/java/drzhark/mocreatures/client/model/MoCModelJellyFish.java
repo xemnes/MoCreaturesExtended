@@ -3,16 +3,38 @@
  */
 package drzhark.mocreatures.client.model;
 
-import drzhark.mocreatures.entity.aquatic.MoCEntityJellyFish;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelJellyFish extends ModelBase {
+
+    ModelRenderer Top;
+    ModelRenderer Head;
+    ModelRenderer HeadSmall;
+    ModelRenderer Body;
+    ModelRenderer BodyCenter;
+    ModelRenderer BodyBottom;
+    ModelRenderer Side1;
+    ModelRenderer Side2;
+    ModelRenderer Side3;
+    ModelRenderer Side4;
+    ModelRenderer LegSmall1;
+    ModelRenderer LegC1;
+    ModelRenderer LegC2;
+    ModelRenderer LegC3;
+    ModelRenderer Leg1;
+    ModelRenderer Leg2;
+    ModelRenderer Leg3;
+    ModelRenderer Leg4;
+    ModelRenderer Leg5;
+    ModelRenderer Leg6;
+    ModelRenderer Leg7;
+    ModelRenderer Leg8;
+    ModelRenderer Leg9;
 
     public MoCModelJellyFish() {
         this.textureWidth = 64;
@@ -201,28 +223,4 @@ public class MoCModelJellyFish extends ModelBase {
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
-    ModelRenderer Top;
-    ModelRenderer Head;
-    ModelRenderer HeadSmall;
-    ModelRenderer Body;
-    ModelRenderer BodyCenter;
-    ModelRenderer BodyBottom;
-    ModelRenderer Side1;
-    ModelRenderer Side2;
-    ModelRenderer Side3;
-    ModelRenderer Side4;
-    ModelRenderer LegSmall1;
-    ModelRenderer LegC1;
-    ModelRenderer LegC2;
-    ModelRenderer LegC3;
-    ModelRenderer Leg1;
-    ModelRenderer Leg2;
-    ModelRenderer Leg3;
-    ModelRenderer Leg4;
-    ModelRenderer Leg5;
-    ModelRenderer Leg6;
-    ModelRenderer Leg7;
-    ModelRenderer Leg8;
-    ModelRenderer Leg9;
 }

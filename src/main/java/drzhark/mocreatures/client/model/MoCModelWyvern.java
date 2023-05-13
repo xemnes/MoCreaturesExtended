@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCModelWyvern extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer back4;
     ModelRenderer back3;
     ModelRenderer back2;
@@ -128,17 +129,12 @@ public class MoCModelWyvern extends ModelBase {
     ModelRenderer LeftWing;
     ModelRenderer RightWing;
     ModelRenderer MainHead;
-
     ModelRenderer leftwingflap1;
     ModelRenderer leftwingflap2;
     ModelRenderer leftwingflap3;
-
     ModelRenderer rightwingflap1;
     ModelRenderer rightwingflap2;
     ModelRenderer rightwingflap3;
-
-    private float radianF = 57.29578F;
-
     private boolean isRidden;
     private boolean isChested;
     private boolean isSaddled;
@@ -999,7 +995,7 @@ public class MoCModelWyvern extends ModelBase {
         float k = 0.6F;
 
         int i = 0;
-        float tailLat = 0F;
+        float tailLat;
         tailLat = A * MathHelper.sin(w * t - k * i++);
         this.tail1.rotateAngleY = tailLat;
         tailLat = A * MathHelper.sin(w * t - k * i++);
@@ -1011,11 +1007,11 @@ public class MoCModelWyvern extends ModelBase {
         tailLat = A * MathHelper.sin(w * t - k * i++);
         this.tail5.rotateAngleY = tailLat;
 
-        float WingSpread = MathHelper.cos(f * 0.3F) * 0.9F * f1;
+        float WingSpread;
 
-        /**
+        /*
          * flapping wings or cruising. IF flapping wings, move up and down. if
-         * cruising, movement depends of speed
+         * cruising, movement depends on speed
          */
         //float WingRot = 0F;
         if (flapwings && !isGhost) {
@@ -1038,11 +1034,11 @@ public class MoCModelWyvern extends ModelBase {
             this.leftuparm.rotateAngleZ = WingSpread * 2 / 3F;
             this.rightuparm.rotateAngleZ = -WingSpread * 2 / 3F;
             this.leftlowarm.rotateAngleZ = WingSpread * 0.1F;
-            this.leftfing1a.rotateAngleZ = WingSpread * 1F;
+            this.leftfing1a.rotateAngleZ = WingSpread;
             this.leftfing2a.rotateAngleZ = WingSpread * 0.8F;
 
             this.rightlowarm.rotateAngleZ = -WingSpread * 0.1F;
-            this.rightfing1a.rotateAngleZ = -WingSpread * 1F;
+            this.rightfing1a.rotateAngleZ = -WingSpread;
             this.rightfing2a.rotateAngleZ = -WingSpread * 0.8F;
 
             //System.out.println("WingSpread = " + WingSpread);
@@ -1156,7 +1152,7 @@ public class MoCModelWyvern extends ModelBase {
         if (openMouth != 0) {
             float mouthMov = (MathHelper.cos((openMouth - 15) * 0.11F) * 0.8F);
             this.Jaw.rotateAngleX = (-10F / this.radianF) + mouthMov;
-            this.leftearskin.rotateAngleY = +mouthMov;
+            this.leftearskin.rotateAngleY = mouthMov;
             this.rightearskin.rotateAngleY = -mouthMov;
 
         } else {
@@ -1164,7 +1160,5 @@ public class MoCModelWyvern extends ModelBase {
             this.leftearskin.rotateAngleY = 0F;
             this.rightearskin.rotateAngleY = 0F;
         }
-
     }
-
 }

@@ -116,8 +116,8 @@ public class MoCModelMole extends ModelBase {
         this.Nose.rotateAngleX = 0.2617994F + this.Head.rotateAngleX;
         this.Nose.rotateAngleY = this.Head.rotateAngleY;
 
-        float RLegXRot = MathHelper.cos((f * 1.0F) + 3.141593F) * 0.8F * f1;
-        float LLegXRot = MathHelper.cos(f * 1.0F) * 0.8F * f1;
+        float RLegXRot = MathHelper.cos((f) + 3.141593F) * 0.8F * f1;
+        float LLegXRot = MathHelper.cos(f) * 0.8F * f1;
 
         this.RLeg.rotateAngleY = RLegXRot;
         this.RFingers.rotateAngleY = this.RLeg.rotateAngleY;
@@ -128,5 +128,4 @@ public class MoCModelMole extends ModelBase {
 
         this.Tail.rotateAngleZ = this.LLeg.rotateAngleX * 0.625F;
     }
-
 }

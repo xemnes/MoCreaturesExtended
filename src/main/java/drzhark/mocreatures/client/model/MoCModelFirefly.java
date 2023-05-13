@@ -171,8 +171,8 @@ public class MoCModelFirefly extends ModelBase {
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean isFlying) {
-        float legMov = 0F;
-        float legMovB = 0F;
+        float legMov;
+        float legMovB;
 
         float frontLegAdj = 0F;
         if (isFlying) {
@@ -191,5 +191,4 @@ public class MoCModelFirefly extends ModelBase {
         this.MidLegs.rotateAngleX = 1.070744F + legMovB;
         this.RearLegs.rotateAngleX = 1.249201F + legMov;
     }
-
 }

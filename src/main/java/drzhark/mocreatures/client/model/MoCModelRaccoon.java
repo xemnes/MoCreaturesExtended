@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class MoCModelRaccoon extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer Head;
     ModelRenderer Snout;
     ModelRenderer RightEar;
@@ -32,8 +33,6 @@ public class MoCModelRaccoon extends ModelBase {
     ModelRenderer LeftRearLegB;
     ModelRenderer LeftRearLegA;
     ModelRenderer LeftRearFoot;
-
-    private float radianF = 57.29578F;
 
     public MoCModelRaccoon() {
         this.textureWidth = 64;
@@ -202,8 +201,8 @@ public class MoCModelRaccoon extends ModelBase {
         //LeftSideburn.rotateAngleX = Head.rotateAngleX;
         //LeftSideburn.rotateAngleY = (30F/radianF) + Head.rotateAngleY;
 
-        float RLegXRot = MathHelper.cos((f * 1.0F) + 3.141593F) * 0.8F * f1;
-        float LLegXRot = MathHelper.cos(f * 1.0F) * 0.8F * f1;
+        float RLegXRot = MathHelper.cos((f) + 3.141593F) * 0.8F * f1;
+        float LLegXRot = MathHelper.cos(f) * 0.8F * f1;
 
         this.RightFrontLegA.rotateAngleX = (30F / this.radianF) + RLegXRot;
         this.LeftFrontLegA.rotateAngleX = (30F / this.radianF) + LLegXRot;

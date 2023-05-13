@@ -14,6 +14,14 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCModelGoat extends ModelBase {
 
+    public int typeInt;
+    public int attacking;
+    public float edad;
+    public boolean bleat;
+    public int legMov;
+    public int earMov;
+    public int tailMov;
+    public int eatMov;
     ModelRenderer Leg1;
     ModelRenderer Leg2;
     ModelRenderer Leg3;
@@ -39,15 +47,6 @@ public class MoCModelGoat extends ModelBase {
     ModelRenderer Goatie;
     ModelRenderer Neck;
     ModelRenderer Tits;
-
-    public int typeInt;
-    public int attacking;
-    public float edad;
-    public boolean bleat;
-    public int legMov;
-    public int earMov;
-    public int tailMov;
-    public int eatMov;
 
     public MoCModelGoat() {
         this.textureWidth = 64;
@@ -322,6 +321,5 @@ public class MoCModelGoat extends ModelBase {
         this.LHorn4.rotateAngleY = this.Head.rotateAngleY;
         this.RHorn5.rotateAngleY = this.Head.rotateAngleY;
         this.LHorn5.rotateAngleY = this.Head.rotateAngleY;
-
     }
 }

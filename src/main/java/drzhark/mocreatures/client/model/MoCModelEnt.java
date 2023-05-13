@@ -297,7 +297,5 @@ public class MoCModelEnt extends ModelBase {
         this.Leave12.rotateAngleY =
                 this.Leave13.rotateAngleY =
                         this.Leave14.rotateAngleY = this.Leave15.rotateAngleY = this.Leave16.rotateAngleY = this.Neck.rotateAngleY;
-
     }
-
 }

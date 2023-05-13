@@ -11,6 +11,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class MoCModelMiniGolem extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer Head;
     ModelRenderer HeadRed;
     ModelRenderer Body;
@@ -27,8 +28,6 @@ public class MoCModelMiniGolem extends ModelBase {
     ModelRenderer RightFoot;
     ModelRenderer LeftLeg;
     ModelRenderer LeftFoot;
-
-    private float radianF = 57.29578F;
 
     public MoCModelMiniGolem() {
         this.textureWidth = 64;
@@ -173,5 +172,4 @@ public class MoCModelMiniGolem extends ModelBase {
 
         //super.setRotationAngles(f, f1, f2, f3, f4, f5);
     }
-
 }

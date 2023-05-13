@@ -12,6 +12,25 @@ import org.lwjgl.opengl.GL11;
 
 public class MoCModelNewBigCat extends ModelBase {
 
+    private final float radianF = 57.29578F;
+    private final float lLegMov = 0F;
+    private final float rLegMov = 0F;
+    protected boolean hasMane;
+    protected boolean isRidden;
+    protected boolean isSaddled;
+    protected boolean flapwings;
+    protected boolean onAir;
+    protected boolean isFlyer;
+    protected boolean floating;
+    protected boolean poisoning;
+    protected boolean isTamed;
+    protected boolean movingTail;
+    protected int openMouthCounter;
+    protected boolean hasSaberTeeth;
+    protected boolean hasChest;
+    protected boolean hasStinger;
+    protected boolean isGhost;
+    protected boolean isMovingVertically;
     //fields
     ModelRenderer RightHindFoot;
     ModelRenderer Stinger;
@@ -88,30 +107,9 @@ public class MoCModelNewBigCat extends ModelBase {
     ModelRenderer NeckHarness;
     ModelRenderer Collar;
     ModelRenderer StorageChest;
-
-    private float radianF = 57.29578F;
-
-    protected boolean hasMane;
-    protected boolean isRidden;
     private boolean isChested;
-    protected boolean isSaddled;
-    protected boolean flapwings;
-    protected boolean onAir;
     private boolean diving;
     private boolean isSitting;
-    protected boolean isFlyer;
-    protected boolean floating;
-    protected boolean poisoning;
-    protected boolean isTamed;
-    protected boolean movingTail;
-    private float lLegMov = 0F;
-    private float rLegMov = 0F;
-    protected int openMouthCounter;
-    protected boolean hasSaberTeeth;
-    protected boolean hasChest;
-    protected boolean hasStinger;
-    protected boolean isGhost;
-    protected boolean isMovingVertically;
 
     public MoCModelNewBigCat() {
         this.textureWidth = 128;
@@ -672,9 +670,9 @@ public class MoCModelNewBigCat extends ModelBase {
         float LLegXRot = MathHelper.cos(f * 0.8F) * 0.8F * f1;
         float gallopRLegXRot = MathHelper.cos((f * 0.6F) + 3.141593F) * 0.8F * f1;
         float gallopLLegXRot = MathHelper.cos(f * 0.6F) * 0.8F * f1;
-        
-        float stingYOffset = 8F;
-        float stingZOffset = 0F;
+
+        float stingYOffset;
+        float stingZOffset;
 
         //float TailXRot = MathHelper.cos(f * 0.4F) * 0.2F * f1;
         // cos(f * 0.4F) ==> determines the speed of the movement
@@ -684,7 +682,7 @@ public class MoCModelNewBigCat extends ModelBase {
         //float rLegRotFinal = MathHelper.cos(this.rLegMov) * 0.8F * f1;
         //float lLegRotFinal = MathHelper.cos((this.rLegMov) + legDisparity) * 0.8F * f1;
         //this.rLegMov = this.rLegMov + (f1 * 0.25F);//(MathHelper.cos((f1 * 10F) + rLegMov) * f1);
-        
+
         //lLegMov = lLegMov + (f1*0.05F);
         //leg should not return to 0 when stopped, and increment based on movement speed
         //the movement should still follow a cos function i.e. pendulum
@@ -743,9 +741,7 @@ public class MoCModelNewBigCat extends ModelBase {
             this.Collar.rotationPointY = 7F;
             this.Collar.rotationPointZ = -4F;
 
-        }
-
-        else {
+        } else {
             stingYOffset = 8F;
             stingZOffset = 0F;
 
@@ -854,7 +850,7 @@ public class MoCModelNewBigCat extends ModelBase {
              f3 = -10F;
          }*/
 
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
 
@@ -904,11 +900,11 @@ public class MoCModelNewBigCat extends ModelBase {
 
         if (this.isFlyer) {
 
-            /**
+            /*
              * flapping wings or cruising. IF flapping wings, move up and down.
-             * if cruising, movement depends of speed
+             * if cruising, movement depends on speed
              */
-            float WingRot = 0F;
+            float WingRot;
             if (this.flapwings) {
                 WingRot = MathHelper.cos((f2 * 0.3F) + 3.141593F) * 1.2F;// * f1;
             } else
@@ -938,7 +934,7 @@ public class MoCModelNewBigCat extends ModelBase {
             this.InnerWingR.rotationPointZ = this.InnerWing.rotationPointZ;
 
             //OuterWing.rotationPointX = InnerWing.rotationPointX + (MathHelper.cos(WingRot)*12F);
-            //the rotation point X rotates depending of the cos of rotation times the distance of the other block:
+            //the rotation point X rotates depending on the cos of rotation times the distance of the other block:
             //cos (WingRot) * 12F
             //the rotation PointX of Innerwing = 4
             //the rotation PointX of Outerwing = 16
@@ -1029,13 +1025,10 @@ public class MoCModelNewBigCat extends ModelBase {
                     this.Stinger.rotateAngleX = 25.5F / this.radianF;
                     this.Stinger.rotationPointY = 4F;
                     this.Stinger.rotationPointZ = -29F;
-
                 }
             }
-
         }
     }
-
 }
 
 //TODO
@@ -1046,8 +1039,3 @@ public class MoCModelNewBigCat extends ModelBase {
 //FIRECAT!!
 //LIZARDCAT
 //BONE CAT
-/*
-
-
-
-*/

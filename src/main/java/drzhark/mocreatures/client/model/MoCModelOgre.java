@@ -14,6 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelOgre extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer Head;
     ModelRenderer Brow;
     ModelRenderer NoseBridge;
@@ -112,8 +113,6 @@ public class MoCModelOgre extends ModelBase {
     ModelRenderer Head2RgtHorn;
     ModelRenderer Head2LftHorn;
     ModelRenderer Head2DiamondHorn;
-
-    private float radianF = 57.29578F;
     private int type;
     private int attackCounter;
     private int headMoving;
@@ -724,7 +723,7 @@ public class MoCModelOgre extends ModelBase {
         //leftArm 
         //attacking with left arm
         if (this.armToAnimate == 1 || this.armToAnimate == 3) {
-            this.LftShoulder.rotateAngleX = +armMov;
+            this.LftShoulder.rotateAngleX = armMov;
             this.LftHand.rotateAngleX = (-45F / this.radianF);
         } else //normal left arm movement
         {
@@ -736,7 +735,7 @@ public class MoCModelOgre extends ModelBase {
         //rightArm
         //attacking with right arm
         if (this.armToAnimate == 2 || this.armToAnimate == 3) {
-            this.RgtShoulder.rotateAngleX = +armMov;
+            this.RgtShoulder.rotateAngleX = armMov;
             this.RgtHand.rotateAngleX = (-45F / this.radianF);
         } else //normal right arm movement
         {
@@ -858,7 +857,5 @@ public class MoCModelOgre extends ModelBase {
             this.Head2LftHorn.rotateAngleY = this.Head2.rotateAngleY;
             this.Head2DiamondHorn.rotateAngleY = this.Head2.rotateAngleY;
         }
-
     }
-
 }

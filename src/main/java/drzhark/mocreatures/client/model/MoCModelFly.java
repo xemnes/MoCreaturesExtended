@@ -139,8 +139,8 @@ public class MoCModelFly extends ModelBase {
         float WingRot = MathHelper.cos((f2 * 3.0F)) * 0.7F;
         this.RightWing.rotateAngleZ = WingRot;
         this.LeftWing.rotateAngleZ = -WingRot;
-        float legMov = 0F;
-        float legMovB = 0F;
+        float legMov;
+        float legMovB;
 
         if (!onGround) {
             legMov = (f1 * 1.5F);
@@ -154,5 +154,4 @@ public class MoCModelFly extends ModelBase {
         this.MidLegs.rotateAngleX = 0.5948578F + legMovB;
         this.RearLegs.rotateAngleX = 1.070744F + legMov;
     }
-
 }

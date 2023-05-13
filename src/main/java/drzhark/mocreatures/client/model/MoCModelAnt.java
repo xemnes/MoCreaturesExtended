@@ -97,5 +97,4 @@ public class MoCModelAnt extends ModelBase {
         this.MidLegs.rotateAngleX = 0.5948578F + legMovB;
         this.RearLegs.rotateAngleX = 0.9136644F + legMov;
     }
-
 }

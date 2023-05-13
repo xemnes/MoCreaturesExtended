@@ -61,16 +61,12 @@ public class MoCRenderWerewolf extends RenderLiving<MoCEntityWerewolf> {
                     case 2:
                         bindTexture(MoCreatures.proxy.getTexture("werehuman.png"));
                         break;
-                    case 3:
-                        bindTexture(MoCreatures.proxy.getTexture("wereoldie.png"));
-                        break;
                     case 4:
                         bindTexture(MoCreatures.proxy.getTexture("werewoman.png"));
                         break;
                     default:
                         bindTexture(MoCreatures.proxy.getTexture("wereoldie.png"));
                 }
-
             }
 
             this.mocModel.setModelAttributes(this.mocRenderer.getMainModel());

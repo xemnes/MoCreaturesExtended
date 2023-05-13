@@ -24,6 +24,101 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelOstrich extends ModelBase {
 
+    private final float radianF = 57.29578F;
+    ModelRenderer UBeak;
+    ModelRenderer UBeak2;
+    ModelRenderer UBeakb;
+    ModelRenderer UBeak2b;
+    ModelRenderer LBeak;
+    ModelRenderer LBeakb;
+    ModelRenderer LBeak2;
+    ModelRenderer LBeak2b;
+    ModelRenderer Body;
+    ModelRenderer Tail;
+    ModelRenderer LLegA;
+    ModelRenderer LLegB;
+    ModelRenderer LLegC;
+    ModelRenderer LFoot;
+    ModelRenderer RLegA;
+    ModelRenderer RLegB;
+    ModelRenderer RLegC;
+    ModelRenderer RFoot;
+    ModelRenderer Tail1;
+    ModelRenderer Tail2;
+    ModelRenderer Tail3;
+    ModelRenderer LWingB;
+    ModelRenderer LWingC;
+    ModelRenderer LWingD;
+    ModelRenderer LWingE;
+    ModelRenderer RWingB;
+    ModelRenderer RWingC;
+    ModelRenderer RWingD;
+    ModelRenderer RWingE;
+    ModelRenderer SaddleA;
+    ModelRenderer SaddleB;
+    ModelRenderer SaddleL;
+    ModelRenderer SaddleR;
+    ModelRenderer SaddleL2;
+    ModelRenderer SaddleR2;
+    ModelRenderer SaddleC;
+    ModelRenderer NeckLFeather;
+    ModelRenderer NeckUFeather;
+    ModelRenderer NeckD;
+    ModelRenderer Saddlebag;
+    ModelRenderer Flagpole;
+    ModelRenderer FlagBlack;
+    ModelRenderer FlagDarkGrey;
+    ModelRenderer FlagYellow;
+    ModelRenderer FlagBrown;
+    ModelRenderer FlagGreen;
+    ModelRenderer FlagCyan;
+    ModelRenderer FlagLightBlue;
+    ModelRenderer FlagDarkBlue;
+    ModelRenderer FlagPurple;
+    ModelRenderer FlagDarkPurple;
+    ModelRenderer FlagDarkGreen;
+    ModelRenderer FlagLightRed;
+    ModelRenderer FlagRed;
+    ModelRenderer FlagWhite;
+    ModelRenderer FlagGrey;
+    ModelRenderer FlagOrange;
+    ModelRenderer NeckU;
+    ModelRenderer NeckL;
+    ModelRenderer NeckHarness;
+    ModelRenderer NeckHarness2;
+    ModelRenderer NeckHarnessRight;
+    ModelRenderer NeckHarnessLeft;
+    ModelRenderer Head;
+    ModelRenderer UniHorn;
+    ModelRenderer HelmetLeather;
+    ModelRenderer HelmetIron;
+    ModelRenderer HelmetGold;
+    ModelRenderer HelmetDiamond;
+    ModelRenderer HelmetHide;
+    ModelRenderer HelmetNeckHide;
+    ModelRenderer HelmetHideEar1;
+    ModelRenderer HelmetHideEar2;
+    ModelRenderer HelmetFur;
+    ModelRenderer HelmetNeckFur;
+    ModelRenderer HelmetFurEar1;
+    ModelRenderer HelmetFurEar2;
+    ModelRenderer HelmetReptile;
+    ModelRenderer HelmetReptileEar2;
+    ModelRenderer HelmetReptileEar1;
+    ModelRenderer HelmetGreenChitin;
+    ModelRenderer HelmetYellowChitin;
+    ModelRenderer HelmetBlueChitin;
+    ModelRenderer HelmetBlackChitin;
+    ModelRenderer HelmetRedChitin;
+    ModelRenderer Tailpart1;
+    ModelRenderer Tailpart2;
+    ModelRenderer Tailpart3;
+    ModelRenderer Tailpart4;
+    ModelRenderer Tailpart5;
+    private int helmet;
+    private byte typeI;
+    private int flagColor;
+
     public MoCModelOstrich() {
         this.textureWidth = 128;
         this.textureHeight = 128; //64
@@ -484,7 +579,6 @@ public class MoCModelOstrich extends ModelBase {
      * ((EntitySheep)entityliving).func_44003_c(par4) * 9.0F; this.field_44016_o
      * = ((EntitySheep)entityliving).func_44002_d(par4); }
      */
-
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
@@ -586,9 +680,9 @@ public class MoCModelOstrich extends ModelBase {
             this.Saddlebag.render(f5);
             this.Flagpole.render(f5);
             switch (this.flagColor) {
-            //case 0:
-            //    FlagWhite.render(f5);
-            //   break;
+                //case 0:
+                //    FlagWhite.render(f5);
+                //   break;
                 case 1:
                     this.FlagOrange.render(f5);
                     break;
@@ -697,7 +791,7 @@ public class MoCModelOstrich extends ModelBase {
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean hiding, boolean wing, boolean rider,
-            int jumpCounter, boolean floating) {
+                                  int jumpCounter, boolean floating) {
         float LLegXRot = MathHelper.cos(f * 0.4F) * 1.1F * f1;
         float RLegXRot = MathHelper.cos((f * 0.4F) + 3.141593F) * 1.1F * f1;
 
@@ -963,17 +1057,17 @@ public class MoCModelOstrich extends ModelBase {
 
             this.LLegA.rotateAngleX = 0.1745329F + LLegXRot;
             this.LLegB.rotateAngleX = this.LLegA.rotateAngleX;
-            this.LLegC.rotateAngleX = -0.2617994F + +LLegXRot;
+            this.LLegC.rotateAngleX = -0.2617994F + LLegXRot;
             this.LFoot.rotateAngleX = this.LLegA.rotateAngleX;
             this.RLegA.rotateAngleX = 0.1745329F + RLegXRot;
             this.RLegB.rotateAngleX = this.RLegA.rotateAngleX;
-            this.RLegC.rotateAngleX = -0.2617994F + +RLegXRot;
+            this.RLegC.rotateAngleX = -0.2617994F + RLegXRot;
             this.RFoot.rotateAngleX = this.RLegA.rotateAngleX;
         }
 
         //wings
-        float wingF = 0F;
-        /**
+        float wingF;
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
         if (this.typeI == 5 || this.typeI == 6) {
@@ -1015,9 +1109,7 @@ public class MoCModelOstrich extends ModelBase {
             this.SaddleL.rotateAngleX = -60F / this.radianF;
             this.SaddleL2.rotateAngleX = this.SaddleL.rotateAngleX;
             this.SaddleR.rotateAngleX = -60F / this.radianF;
-            ;
             this.SaddleR2.rotateAngleX = this.SaddleR.rotateAngleX;
-            ;
 
             this.SaddleL.rotateAngleZ = -40F / this.radianF;
             this.SaddleL2.rotateAngleZ = this.SaddleL.rotateAngleZ;
@@ -1052,102 +1144,5 @@ public class MoCModelOstrich extends ModelBase {
             rotF += (rotF / f6);
             this.Tailpart5.rotateAngleY = rotF;
         }
-
     }
-
-    ModelRenderer UBeak;
-    ModelRenderer UBeak2;
-    ModelRenderer UBeakb;
-    ModelRenderer UBeak2b;
-    ModelRenderer LBeak;
-    ModelRenderer LBeakb;
-    ModelRenderer LBeak2;
-    ModelRenderer LBeak2b;
-    ModelRenderer Body;
-    ModelRenderer Tail;
-    ModelRenderer LLegA;
-    ModelRenderer LLegB;
-    ModelRenderer LLegC;
-    ModelRenderer LFoot;
-    ModelRenderer RLegA;
-    ModelRenderer RLegB;
-    ModelRenderer RLegC;
-    ModelRenderer RFoot;
-    ModelRenderer Tail1;
-    ModelRenderer Tail2;
-    ModelRenderer Tail3;
-    ModelRenderer LWingB;
-    ModelRenderer LWingC;
-    ModelRenderer LWingD;
-    ModelRenderer LWingE;
-    ModelRenderer RWingB;
-    ModelRenderer RWingC;
-    ModelRenderer RWingD;
-    ModelRenderer RWingE;
-    ModelRenderer SaddleA;
-    ModelRenderer SaddleB;
-    ModelRenderer SaddleL;
-    ModelRenderer SaddleR;
-    ModelRenderer SaddleL2;
-    ModelRenderer SaddleR2;
-    ModelRenderer SaddleC;
-    ModelRenderer NeckLFeather;
-    ModelRenderer NeckUFeather;
-    ModelRenderer NeckD;
-    ModelRenderer Saddlebag;
-    ModelRenderer Flagpole;
-    ModelRenderer FlagBlack;
-    ModelRenderer FlagDarkGrey;
-    ModelRenderer FlagYellow;
-    ModelRenderer FlagBrown;
-    ModelRenderer FlagGreen;
-    ModelRenderer FlagCyan;
-    ModelRenderer FlagLightBlue;
-    ModelRenderer FlagDarkBlue;
-    ModelRenderer FlagPurple;
-    ModelRenderer FlagDarkPurple;
-    ModelRenderer FlagDarkGreen;
-    ModelRenderer FlagLightRed;
-    ModelRenderer FlagRed;
-    ModelRenderer FlagWhite;
-    ModelRenderer FlagGrey;
-    ModelRenderer FlagOrange;
-    ModelRenderer NeckU;
-    ModelRenderer NeckL;
-    ModelRenderer NeckHarness;
-    ModelRenderer NeckHarness2;
-    ModelRenderer NeckHarnessRight;
-    ModelRenderer NeckHarnessLeft;
-    ModelRenderer Head;
-    ModelRenderer UniHorn;
-    ModelRenderer HelmetLeather;
-    ModelRenderer HelmetIron;
-    ModelRenderer HelmetGold;
-    ModelRenderer HelmetDiamond;
-    ModelRenderer HelmetHide;
-    ModelRenderer HelmetNeckHide;
-    ModelRenderer HelmetHideEar1;
-    ModelRenderer HelmetHideEar2;
-    ModelRenderer HelmetFur;
-    ModelRenderer HelmetNeckFur;
-    ModelRenderer HelmetFurEar1;
-    ModelRenderer HelmetFurEar2;
-    ModelRenderer HelmetReptile;
-    ModelRenderer HelmetReptileEar2;
-    ModelRenderer HelmetReptileEar1;
-    ModelRenderer HelmetGreenChitin;
-    ModelRenderer HelmetYellowChitin;
-    ModelRenderer HelmetBlueChitin;
-    ModelRenderer HelmetBlackChitin;
-    ModelRenderer HelmetRedChitin;
-    ModelRenderer Tailpart1;
-    ModelRenderer Tailpart2;
-    ModelRenderer Tailpart3;
-    ModelRenderer Tailpart4;
-    ModelRenderer Tailpart5;
-
-    private int helmet;
-    private byte typeI;
-    private int flagColor;
-    private float radianF = 57.29578F;
 }

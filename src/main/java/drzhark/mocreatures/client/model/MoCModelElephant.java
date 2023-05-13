@@ -111,12 +111,11 @@ public class MoCModelElephant extends ModelBase {
     ModelRenderer StorageUpRight;
 
     float radianF = 57.29578F;
-
+    int tusks;
     private boolean isSitting;
     private int tailCounter;
     private int earCounter;
     private int trunkCounter;
-    int tusks;
 
     public MoCModelElephant() {
         this.textureWidth = 128;
@@ -750,103 +749,102 @@ public class MoCModelElephant extends ModelBase {
      * Used to adjust the Y offset of the model cubes
      */
     private void AdjustY(float f) {
-        float yOff = f;
-        this.Head.rotationPointY = yOff + -10F;
-        this.Neck.rotationPointY = yOff + -8F;
-        this.HeadBump.rotationPointY = yOff + -10F;
-        this.Chin.rotationPointY = yOff + -10F;
-        this.LowerLip.rotationPointY = yOff + -10F;
-        this.Back.rotationPointY = yOff + -4F;
-        this.LeftSmallEar.rotationPointY = yOff + -10F;
-        this.LeftBigEar.rotationPointY = yOff + -10F;
-        this.RightSmallEar.rotationPointY = yOff + -10F;
-        this.RightBigEar.rotationPointY = yOff + -10F;
-        this.Hump.rotationPointY = yOff + -13F;
-        this.Body.rotationPointY = yOff + -2F;
-        this.Skirt.rotationPointY = yOff + 8F;
-        this.RightTuskA.rotationPointY = yOff + -10F;
-        this.RightTuskB.rotationPointY = yOff + -10F;
-        this.RightTuskC.rotationPointY = yOff + -10F;
-        this.RightTuskD.rotationPointY = yOff + -10F;
-        this.LeftTuskA.rotationPointY = yOff + -10F;
-        this.LeftTuskB.rotationPointY = yOff + -10F;
-        this.LeftTuskC.rotationPointY = yOff + -10F;
-        this.LeftTuskD.rotationPointY = yOff + -10F;
-        this.TrunkA.rotationPointY = yOff + -3F;
-        this.TrunkB.rotationPointY = yOff + 5.5F;
-        this.TrunkC.rotationPointY = yOff + 13F;
-        this.TrunkD.rotationPointY = yOff + 16F;
-        this.TrunkE.rotationPointY = yOff + 19.5F;
-        this.FrontRightUpperLeg.rotationPointY = yOff + 4F;
-        this.FrontRightLowerLeg.rotationPointY = yOff + 14F;
-        this.FrontLeftUpperLeg.rotationPointY = yOff + 4F;
-        this.FrontLeftLowerLeg.rotationPointY = yOff + 14F;
-        this.BackRightUpperLeg.rotationPointY = yOff + 4F;
-        this.BackRightLowerLeg.rotationPointY = yOff + 14F;
-        this.BackLeftUpperLeg.rotationPointY = yOff + 4F;
-        this.BackLeftLowerLeg.rotationPointY = yOff + 14F;
-        this.TailRoot.rotationPointY = yOff + -8F;
-        this.Tail.rotationPointY = yOff + -8F;
-        this.TailPlush.rotationPointY = yOff + -8F;
-        this.StorageRightBedroll.rotationPointY = yOff + -10.2F;
-        this.StorageLeftBedroll.rotationPointY = yOff + -10.2F;
-        this.StorageFrontRightChest.rotationPointY = yOff + -1.2F;
-        this.StorageBackRightChest.rotationPointY = yOff + -1.2F;
-        this.StorageFrontLeftChest.rotationPointY = yOff + -1.2F;
-        this.StorageBackLeftChest.rotationPointY = yOff + -1.2F;
-        this.StorageRightBlankets.rotationPointY = yOff + -10.2F;
-        this.StorageLeftBlankets.rotationPointY = yOff + -10.2F;
-        this.HarnessBlanket.rotationPointY = yOff + -13.2F;
-        this.HarnessUpperBelt.rotationPointY = yOff + -2F;
-        this.HarnessLowerBelt.rotationPointY = yOff + -2F;
-        this.CabinPillow.rotationPointY = yOff + -16F;
-        this.CabinLeftRail.rotationPointY = yOff + -23F;
-        this.Cabin.rotationPointY = yOff + -35F;
-        this.CabinRightRail.rotationPointY = yOff + -23F;
-        this.CabinBackRail.rotationPointY = yOff + -23F;
-        this.CabinRoof.rotationPointY = yOff + -34F;
-        this.FortBackRightWall.rotationPointY = yOff + -16F;
-        this.FortBackLeftWall.rotationPointY = yOff + -16F;
-        this.FortBackWall.rotationPointY = yOff + -16F;
-        this.FortNeckBeam.rotationPointY = yOff + -16F;
-        this.FortBackBeam.rotationPointY = yOff + -16F;
-        this.FortFloor1.rotationPointY = yOff + -16F;
-        this.FortFloor2.rotationPointY = yOff + -16F;
-        this.FortFloor3.rotationPointY = yOff + -16F;
+        this.Head.rotationPointY = f - 10F;
+        this.Neck.rotationPointY = f - 8F;
+        this.HeadBump.rotationPointY = f - 10F;
+        this.Chin.rotationPointY = f - 10F;
+        this.LowerLip.rotationPointY = f - 10F;
+        this.Back.rotationPointY = f - 4F;
+        this.LeftSmallEar.rotationPointY = f - 10F;
+        this.LeftBigEar.rotationPointY = f - 10F;
+        this.RightSmallEar.rotationPointY = f - 10F;
+        this.RightBigEar.rotationPointY = f - 10F;
+        this.Hump.rotationPointY = f - 13F;
+        this.Body.rotationPointY = f - 2F;
+        this.Skirt.rotationPointY = f + 8F;
+        this.RightTuskA.rotationPointY = f - 10F;
+        this.RightTuskB.rotationPointY = f - 10F;
+        this.RightTuskC.rotationPointY = f - 10F;
+        this.RightTuskD.rotationPointY = f - 10F;
+        this.LeftTuskA.rotationPointY = f - 10F;
+        this.LeftTuskB.rotationPointY = f - 10F;
+        this.LeftTuskC.rotationPointY = f - 10F;
+        this.LeftTuskD.rotationPointY = f - 10F;
+        this.TrunkA.rotationPointY = f - 3F;
+        this.TrunkB.rotationPointY = f + 5.5F;
+        this.TrunkC.rotationPointY = f + 13F;
+        this.TrunkD.rotationPointY = f + 16F;
+        this.TrunkE.rotationPointY = f + 19.5F;
+        this.FrontRightUpperLeg.rotationPointY = f + 4F;
+        this.FrontRightLowerLeg.rotationPointY = f + 14F;
+        this.FrontLeftUpperLeg.rotationPointY = f + 4F;
+        this.FrontLeftLowerLeg.rotationPointY = f + 14F;
+        this.BackRightUpperLeg.rotationPointY = f + 4F;
+        this.BackRightLowerLeg.rotationPointY = f + 14F;
+        this.BackLeftUpperLeg.rotationPointY = f + 4F;
+        this.BackLeftLowerLeg.rotationPointY = f + 14F;
+        this.TailRoot.rotationPointY = f - 8F;
+        this.Tail.rotationPointY = f - 8F;
+        this.TailPlush.rotationPointY = f - 8F;
+        this.StorageRightBedroll.rotationPointY = f - 10.2F;
+        this.StorageLeftBedroll.rotationPointY = f - 10.2F;
+        this.StorageFrontRightChest.rotationPointY = f - 1.2F;
+        this.StorageBackRightChest.rotationPointY = f - 1.2F;
+        this.StorageFrontLeftChest.rotationPointY = f - 1.2F;
+        this.StorageBackLeftChest.rotationPointY = f - 1.2F;
+        this.StorageRightBlankets.rotationPointY = f - 10.2F;
+        this.StorageLeftBlankets.rotationPointY = f - 10.2F;
+        this.HarnessBlanket.rotationPointY = f - 13.2F;
+        this.HarnessUpperBelt.rotationPointY = f - 2F;
+        this.HarnessLowerBelt.rotationPointY = f - 2F;
+        this.CabinPillow.rotationPointY = f - 16F;
+        this.CabinLeftRail.rotationPointY = f - 23F;
+        this.Cabin.rotationPointY = f - 35F;
+        this.CabinRightRail.rotationPointY = f - 23F;
+        this.CabinBackRail.rotationPointY = f - 23F;
+        this.CabinRoof.rotationPointY = f - 34F;
+        this.FortBackRightWall.rotationPointY = f - 16F;
+        this.FortBackLeftWall.rotationPointY = f - 16F;
+        this.FortBackWall.rotationPointY = f - 16F;
+        this.FortNeckBeam.rotationPointY = f - 16F;
+        this.FortBackBeam.rotationPointY = f - 16F;
+        this.FortFloor1.rotationPointY = f - 16F;
+        this.FortFloor2.rotationPointY = f - 16F;
+        this.FortFloor3.rotationPointY = f - 16F;
 
-        this.StorageUpLeft.rotationPointY = yOff + -16F;
-        this.StorageUpRight.rotationPointY = yOff + -16F;
+        this.StorageUpLeft.rotationPointY = f - 16F;
+        this.StorageUpRight.rotationPointY = f - 16F;
 
-        this.TuskLD1.rotationPointY = yOff + -10F;
-        this.TuskLD2.rotationPointY = yOff + -10F;
-        this.TuskLD3.rotationPointY = yOff + -10F;
-        this.TuskLD4.rotationPointY = yOff + -10F;
-        this.TuskLD5.rotationPointY = yOff + -10F;
-        this.TuskRD1.rotationPointY = yOff + -10F;
-        this.TuskRD2.rotationPointY = yOff + -10F;
-        this.TuskRD3.rotationPointY = yOff + -10F;
-        this.TuskRD4.rotationPointY = yOff + -10F;
-        this.TuskRD5.rotationPointY = yOff + -10F;
-        this.TuskLI1.rotationPointY = yOff + -10F;
-        this.TuskLI2.rotationPointY = yOff + -10F;
-        this.TuskLI3.rotationPointY = yOff + -10F;
-        this.TuskLI4.rotationPointY = yOff + -10F;
-        this.TuskLI5.rotationPointY = yOff + -10F;
-        this.TuskRI1.rotationPointY = yOff + -10F;
-        this.TuskRI2.rotationPointY = yOff + -10F;
-        this.TuskRI3.rotationPointY = yOff + -10F;
-        this.TuskRI4.rotationPointY = yOff + -10F;
-        this.TuskRI5.rotationPointY = yOff + -10F;
-        this.TuskLW1.rotationPointY = yOff + -10F;
-        this.TuskLW2.rotationPointY = yOff + -10F;
-        this.TuskLW3.rotationPointY = yOff + -10F;
-        this.TuskLW4.rotationPointY = yOff + -10F;
-        this.TuskLW5.rotationPointY = yOff + -10F;
-        this.TuskRW1.rotationPointY = yOff + -10F;
-        this.TuskRW2.rotationPointY = yOff + -10F;
-        this.TuskRW3.rotationPointY = yOff + -10F;
-        this.TuskRW4.rotationPointY = yOff + -10F;
-        this.TuskRW5.rotationPointY = yOff + -10F;
+        this.TuskLD1.rotationPointY = f - 10F;
+        this.TuskLD2.rotationPointY = f - 10F;
+        this.TuskLD3.rotationPointY = f - 10F;
+        this.TuskLD4.rotationPointY = f - 10F;
+        this.TuskLD5.rotationPointY = f - 10F;
+        this.TuskRD1.rotationPointY = f - 10F;
+        this.TuskRD2.rotationPointY = f - 10F;
+        this.TuskRD3.rotationPointY = f - 10F;
+        this.TuskRD4.rotationPointY = f - 10F;
+        this.TuskRD5.rotationPointY = f - 10F;
+        this.TuskLI1.rotationPointY = f - 10F;
+        this.TuskLI2.rotationPointY = f - 10F;
+        this.TuskLI3.rotationPointY = f - 10F;
+        this.TuskLI4.rotationPointY = f - 10F;
+        this.TuskLI5.rotationPointY = f - 10F;
+        this.TuskRI1.rotationPointY = f - 10F;
+        this.TuskRI2.rotationPointY = f - 10F;
+        this.TuskRI3.rotationPointY = f - 10F;
+        this.TuskRI4.rotationPointY = f - 10F;
+        this.TuskRI5.rotationPointY = f - 10F;
+        this.TuskLW1.rotationPointY = f - 10F;
+        this.TuskLW2.rotationPointY = f - 10F;
+        this.TuskLW3.rotationPointY = f - 10F;
+        this.TuskLW4.rotationPointY = f - 10F;
+        this.TuskLW5.rotationPointY = f - 10F;
+        this.TuskRW1.rotationPointY = f - 10F;
+        this.TuskRW2.rotationPointY = f - 10F;
+        this.TuskRW3.rotationPointY = f - 10F;
+        this.TuskRW4.rotationPointY = f - 10F;
+        this.TuskRW5.rotationPointY = f - 10F;
 
     }
 
@@ -874,7 +872,7 @@ public class MoCModelElephant extends ModelBase {
         }
         AdjustY(f10);
 
-        /**
+        /*
          * Random Trunk animation
          */
         float TrunkXRot = 0F;
@@ -904,10 +902,10 @@ public class MoCModelElephant extends ModelBase {
         this.LowerLip.rotateAngleX = (85F / this.radianF) + HeadXRot;
 
         //ears
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
-        /**
+        /*
          * Ear random animation
          */
         float EarF = 0F;
@@ -1134,9 +1132,6 @@ public class MoCModelElephant extends ModelBase {
 
     /**
      * Used for leg adjustment - anteroposterior movement
-     *
-     * @param target
-     * @param attached
      */
     private void adjustXRotationPoints(ModelRenderer target, ModelRenderer origin) {
         //rotation point Z and Y adjusted for legs =
@@ -1162,7 +1157,7 @@ public class MoCModelElephant extends ModelBase {
         //rotation point Z and X adjusted for head =
         //Z rotation point = attached rotation point Z - cos(attached.rotateangleX) * distance
         //Y rotation point = attached rotation point Y - sin(attached.rotateangleX) * distance
-        float distanceZ = 0F;
+        float distanceZ;
         if (target.rotationPointZ > origin.rotationPointZ) {
             distanceZ = target.rotationPointZ - origin.rotationPointZ;
         } else {
@@ -1176,7 +1171,7 @@ public class MoCModelElephant extends ModelBase {
     @SuppressWarnings("unused")
     private void adjustAllRotationPoints(ModelRenderer target, ModelRenderer origin) {
 
-        float distanceY = 0F;
+        float distanceY;
         if (target.rotationPointY > origin.rotationPointY) {
             distanceY = target.rotationPointY - origin.rotationPointY;
         } else {
@@ -1195,5 +1190,4 @@ public class MoCModelElephant extends ModelBase {
         target.rotationPointX = origin.rotationPointX - MathHelper.sin(origin.rotateAngleY) * (MathHelper.cos(origin.rotateAngleX) * distanceY);
 
     }
-
 }

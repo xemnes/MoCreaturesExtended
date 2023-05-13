@@ -11,6 +11,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class MoCModelKomodo extends ModelBase {
 
+    private final float radianF = 57.29578F;
     //ModelRenderer TongueDown;
     ModelRenderer Tail;
     ModelRenderer Tail4;
@@ -41,11 +42,9 @@ public class MoCModelKomodo extends ModelBase {
     ModelRenderer LegBackRight;
     ModelRenderer Nose;
     ModelRenderer Tongue;
-
     ModelRenderer SaddleA;
     ModelRenderer SaddleC;
     ModelRenderer SaddleB;
-    private float radianF = 57.29578F;
 
     public MoCModelKomodo() {
         this.textureWidth = 64;
@@ -252,23 +251,21 @@ public class MoCModelKomodo extends ModelBase {
      * Used to adjust the Y offset of the model cubes
      */
     private void AdjustY(float f) {
-        float yOff = f;
-        this.Tail.rotationPointY = yOff + 13F;
-        this.Head.rotationPointY = yOff + 13F;
-        this.Chest.rotationPointY = yOff + 13F;
-        this.LegFrontLeft.rotationPointY = yOff + 17F;
-        this.LegBackLeft.rotationPointY = yOff + 17F;
-        this.LegFrontRight.rotationPointY = yOff + 17F;
-        this.LegBackRight.rotationPointY = yOff + 17F;
-        this.Abdomen.rotationPointY = yOff + 13F;
-        this.SaddleA.rotationPointY = yOff + 12F;
-        this.SaddleB.rotationPointY = yOff + 12F;
-        this.SaddleC.rotationPointY = yOff + 12F;
-
+        this.Tail.rotationPointY = f + 13F;
+        this.Head.rotationPointY = f + 13F;
+        this.Chest.rotationPointY = f + 13F;
+        this.LegFrontLeft.rotationPointY = f + 17F;
+        this.LegBackLeft.rotationPointY = f + 17F;
+        this.LegFrontRight.rotationPointY = f + 17F;
+        this.LegBackRight.rotationPointY = f + 17F;
+        this.Abdomen.rotationPointY = f + 13F;
+        this.SaddleA.rotationPointY = f + 12F;
+        this.SaddleB.rotationPointY = f + 12F;
+        this.SaddleC.rotationPointY = f + 12F;
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean sitting, boolean movetail, boolean tongue,
-            boolean mouth, boolean swimming) {
+                                  boolean mouth, boolean swimming) {
         float TailXRot = MathHelper.cos(f * 0.4F) * 0.2F * f1;
         float LLegXRot = MathHelper.cos(f * 1.2F) * 1.2F * f1;
         float RLegXRot = MathHelper.cos((f * 1.2F) + 3.141593F) * 1.2F * f1;
@@ -386,7 +383,7 @@ public class MoCModelKomodo extends ModelBase {
         float k = 0.6F;
 
         int i = 0;
-        float tailLat = 0F;
+        float tailLat;
         tailLat = A * MathHelper.sin(w * t - k * i++);
         this.Tail1.rotateAngleY = tailLat;
         tailLat = A * MathHelper.sin(w * t - k * i++);
@@ -395,7 +392,5 @@ public class MoCModelKomodo extends ModelBase {
         this.Tail3.rotateAngleY = tailLat;
         tailLat = A * MathHelper.sin(w * t - k * i++);
         this.Tail4.rotateAngleY = tailLat;
-
     }
-
 }

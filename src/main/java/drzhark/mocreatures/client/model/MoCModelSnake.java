@@ -15,18 +15,42 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCModelSnake extends ModelBase {
 
+    //public ModelRenderer WingL[];
+    //public ModelRenderer WingR[];
+    private final int bodyparts = 40;
+    public ModelRenderer[] bodySnake;
+    ModelRenderer Head;
+    ModelRenderer Nose;
+    ModelRenderer Tongue0;
+    ModelRenderer Tongue;
+    ModelRenderer Tongue1;
+    ModelRenderer LNose;
+    ModelRenderer TeethUR;
+    ModelRenderer TeethUL;
+    ModelRenderer Tail;
+    ModelRenderer Wing1L;
+    ModelRenderer Wing1R;
+    ModelRenderer Wing2L;
+    ModelRenderer Wing2R;
+    ModelRenderer Wing3R;
+    ModelRenderer Wing3L;
+    ModelRenderer Wing4R;
+    ModelRenderer Wing4L;
+    ModelRenderer Wing5L;
+    ModelRenderer Wing5R;
+
     public MoCModelSnake() {
         this.textureWidth = 64;
         this.textureHeight = 32;
 
         this.bodySnake = new ModelRenderer[this.bodyparts];
-        float factor = -0.3F;
+        float factor;
         float fsegm = 1F / 8F;
         float flength = 0.0F;
         float fsep = -1.6F;
         for (int i = 0; i < this.bodyparts; i++) {
 
-            flength = ((this.bodyparts / 2) - i) * fsep;
+            flength = (((float) this.bodyparts / 2) - i) * fsep;
 
             float fport = ((i + 1F) / this.bodyparts);
             if (fport < fsegm) //front narrower
@@ -51,7 +75,7 @@ public class MoCModelSnake extends ModelBase {
                 factor = -0.2F;
             }
 
-            int j = 0;
+            int j;
             if (i % 2 == 0) {
                 j = 0;
                 //System.out.println("Given number is Even.");
@@ -68,7 +92,7 @@ public class MoCModelSnake extends ModelBase {
         this.Tail.addBox(-0.5F, 0.5F, -1.0F, 1, 1, 5);
         this.Tail.setRotationPoint(0F, 23F, flength);
 
-        flength = (this.bodyparts / 2) * fsep;
+        flength = ((float) this.bodyparts / 2) * fsep;
         this.Head = new ModelRenderer(this, 0, 0);
         this.Head.addBox(-1F, -0.5F, -2F, 2, 2, 2);
         this.Head.setRotationPoint(0F, 23F, flength);
@@ -103,43 +127,43 @@ public class MoCModelSnake extends ModelBase {
 
         this.Wing1L = new ModelRenderer(this, 8, 4);
         this.Wing1L.addBox(0F, -0.5F, 0F, 2, 2, 2);
-        this.Wing1L.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 1) * fsep);
+        this.Wing1L.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 1) * fsep);
 
         this.Wing1R = new ModelRenderer(this, 8, 4);
         this.Wing1R.addBox(-2F, -0.5F, 0F, 2, 2, 2);
-        this.Wing1R.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 1) * fsep);
+        this.Wing1R.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 1) * fsep);
 
         this.Wing2L = new ModelRenderer(this, 8, 4);
         this.Wing2L.addBox(0.5F, -0.5F, 0F, 2, 2, 2);
-        this.Wing2L.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 2) * fsep);
+        this.Wing2L.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 2) * fsep);
 
         this.Wing2R = new ModelRenderer(this, 8, 4);
         this.Wing2R.addBox(-2.5F, -0.5F, 0F, 2, 2, 2);
-        this.Wing2R.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 2) * fsep);
+        this.Wing2R.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 2) * fsep);
 
         this.Wing3R = new ModelRenderer(this, 16, 4);
         this.Wing3R.addBox(-3F, -0.5F, 0F, 2, 2, 2);
-        this.Wing3R.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 3) * fsep);
+        this.Wing3R.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 3) * fsep);
 
         this.Wing3L = new ModelRenderer(this, 16, 4);
         this.Wing3L.addBox(1F, -0.5F, 0F, 2, 2, 2);
-        this.Wing3L.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 3) * fsep);
+        this.Wing3L.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 3) * fsep);
 
         this.Wing4R = new ModelRenderer(this, 16, 8);
         this.Wing4R.addBox(-2.5F, -0.5F, 0F, 2, 2, 2);
-        this.Wing4R.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 4) * fsep);
+        this.Wing4R.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 4) * fsep);
 
         this.Wing4L = new ModelRenderer(this, 16, 8);
         this.Wing4L.addBox(0.5F, -0.5F, 0F, 2, 2, 2);
-        this.Wing4L.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 4) * fsep);
+        this.Wing4L.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 4) * fsep);
 
         this.Wing5L = new ModelRenderer(this, 16, 8);
         this.Wing5L.addBox(0F, -0.5F, 0F, 2, 2, 2);
-        this.Wing5L.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 5) * fsep);
+        this.Wing5L.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 5) * fsep);
 
         this.Wing5R = new ModelRenderer(this, 16, 8);
         this.Wing5R.addBox(-2F, -0.5F, 0F, 2, 2, 2);
-        this.Wing5R.setRotationPoint(0F, 23F, ((this.bodyparts / 2) - 5) * fsep);
+        this.Wing5R.setRotationPoint(0F, 23F, (((float) this.bodyparts / 2) - 5) * fsep);
 
     }
 
@@ -159,7 +183,7 @@ public class MoCModelSnake extends ModelBase {
         boolean picked = entitysnake.pickedUp();
         setRotationAngles(f3, f4, tongueOff, mouthOff, rattleOff, nearplayer, typeI);
 
-        float sidef = 0.0F;
+        float sidef;
 
         // y = A * sin(w * t - k *x)
         // w1 = speed of wave propagation +/- as needed
@@ -175,7 +199,7 @@ public class MoCModelSnake extends ModelBase {
 
         for (int i = 0; i < this.bodyparts; i++) {
             float sideperf = 1F;
-            float yOff = 0F;
+            float yOff;
             //sideperf = 1F;
 
             GL11.glPushMatrix();
@@ -184,7 +208,7 @@ public class MoCModelSnake extends ModelBase {
                 /* if (i > (bodyparts/3) && (i <2*bodyparts/3)) {
                        direction = -1;
                    } else {
-                       direction = 1; 
+                       direction = 1;
                    }*/
 
                 //this shortens the snake while resting
@@ -192,32 +216,32 @@ public class MoCModelSnake extends ModelBase {
                 //GL11.glTranslatef(0.0F, 0.0F, -0.05F*i);
             } else
 
-            //climbing animation
-            if (climbing && i < this.bodyparts / 2) {
-                yOff = (i - (this.bodyparts / 2)) * 0.08F;
-                GL11.glTranslatef(0.0F, yOff / 3.0F, -yOff * 1.2F);
-            } else
+                //climbing animation
+                if (climbing && i < this.bodyparts / 2) {
+                    yOff = (i - ((float) this.bodyparts / 2)) * 0.08F;
+                    GL11.glTranslatef(0.0F, yOff / 3.0F, -yOff * 1.2F);
+                } else
 
-            //raises head of snakes near player
-            if (nearplayer || picked)//&& !(picked && fsize<0.6F))//&& !picked)
-            {
-                if (i < this.bodyparts / 3) {
-                    yOff = (i - (this.bodyparts / 3)) * 0.09F;
-                    float zOff = (i - (this.bodyparts / 3)) * 0.065F;
-                    // if (picked) { yOff = yOff*-1F; //zOff = zOff*-1F; }
-                    GL11.glTranslatef(0.0F, yOff / 1.5F, -zOff * f6);
-                }
+                    //raises head of snakes near player
+                    if (nearplayer || picked)//&& !(picked && fsize<0.6F))//&& !picked)
+                    {
+                        if (i < this.bodyparts / 3) {
+                            yOff = (i - ((float) this.bodyparts / 3)) * 0.09F;
+                            float zOff = (i - ((float) this.bodyparts / 3)) * 0.065F;
+                            // if (picked) { yOff = yOff*-1F; //zOff = zOff*-1F; }
+                            GL11.glTranslatef(0.0F, yOff / 1.5F, -zOff * f6);
+                        }
 
-                if (i < this.bodyparts / 6) {
-                    sideperf = 0.0F;
-                } else {
-                    sideperf = ((i - 7) / (this.bodyparts / 3F));
-                    if (sideperf > 1.0F) {
-                        sideperf = 1.0F;
+                        if (i < this.bodyparts / 6) {
+                            sideperf = 0.0F;
+                        } else {
+                            sideperf = ((i - 7) / (this.bodyparts / 3F));
+                            if (sideperf > 1.0F) {
+                                sideperf = 1.0F;
+                            }
+                        }
+
                     }
-                }
-
-            }
 
             //raises tail of rattlesnakes
             if (typeI == 7 && nearplayer && i > (5 * this.bodyparts / 6) && !picked)//&& not picked
@@ -230,7 +254,7 @@ public class MoCModelSnake extends ModelBase {
 
             if (picked && i > this.bodyparts / 2)//&& big to bring down the tail
             {
-                yOff = ((i - (this.bodyparts / 2))) * 0.08F;
+                yOff = ((i - ((float) this.bodyparts / 2))) * 0.08F;
                 GL11.glTranslatef(0.0F, yOff / 1.5F, -yOff);
 
             }
@@ -264,7 +288,7 @@ public class MoCModelSnake extends ModelBase {
              */
             {
 
-                sidef = 0.5F * MathHelper.sin(w * t - 0.3F * i) - (movInt / 20F) * MathHelper.sin(+0.8F * t - 0.2F * i);
+                sidef = 0.5F * MathHelper.sin(w * t - 0.3F * i) - (movInt / 20F) * MathHelper.sin(0.8F * t - 0.2F * i);
                 sidef = sidef * sideperf;
                 //GL11.glTranslatef(0.0F, 0.0F, -0.05F*i);
 
@@ -415,31 +439,4 @@ public class MoCModelSnake extends ModelBase {
         }
         //super.setRotationAngles(f, f1, f2, f3, f4, f5);
     }
-
-    ModelRenderer Head;
-    ModelRenderer Nose;
-    ModelRenderer Tongue0;
-    ModelRenderer Tongue;
-    ModelRenderer Tongue1;
-    ModelRenderer LNose;
-    ModelRenderer TeethUR;
-    ModelRenderer TeethUL;
-    ModelRenderer Tail;
-
-    ModelRenderer Wing1L;
-    ModelRenderer Wing1R;
-    ModelRenderer Wing2L;
-    ModelRenderer Wing2R;
-    ModelRenderer Wing3R;
-    ModelRenderer Wing3L;
-    ModelRenderer Wing4R;
-    ModelRenderer Wing4L;
-    ModelRenderer Wing5L;
-    ModelRenderer Wing5R;
-
-    public ModelRenderer bodySnake[];
-    //public ModelRenderer WingL[];
-    //public ModelRenderer WingR[];
-    private final int bodyparts = 40;
-
 }

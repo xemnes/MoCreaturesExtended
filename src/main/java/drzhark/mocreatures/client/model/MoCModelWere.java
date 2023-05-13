@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelWere extends ModelBase {
 
+    public boolean hunched;
     ModelRenderer Head;
     ModelRenderer Nose;
     ModelRenderer Snout;
@@ -57,8 +58,6 @@ public class MoCModelWere extends ModelBase {
     ModelRenderer LFinger3;
     ModelRenderer LFinger4;
     ModelRenderer LFinger5;
-
-    public boolean hunched;
 
     public MoCModelWere() {
         this.textureWidth = 64;
@@ -529,7 +528,5 @@ public class MoCModelWere extends ModelBase {
         this.LFinger3.rotateAngleZ = this.LArmA.rotateAngleZ;
         this.LFinger4.rotateAngleZ = this.LArmA.rotateAngleZ;
         this.LFinger5.rotateAngleZ = this.LArmA.rotateAngleZ;
-
     }
-
 }

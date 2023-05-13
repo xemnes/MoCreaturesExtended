@@ -15,13 +15,13 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class MoCModelGolem extends ModelBase {
 
-    ModelRenderer blocks[][];
+    ModelRenderer[][] blocks;
     ModelRenderer head;
     ModelRenderer headb;
     ModelRenderer chest;
     ModelRenderer chestb;
 
-    byte blocksText[];
+    byte[] blocksText;
     float radianF = 57.29578F;
     int w = 32;
     int h = 16;
@@ -243,7 +243,7 @@ public class MoCModelGolem extends ModelBase {
     }
 
     public void
-            setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean openChest, boolean isSummoning, boolean throwing) {
+    setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, boolean openChest, boolean isSummoning, boolean throwing) {
         float RLegXRot = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.2F * f1;
         float LLegXRot = MathHelper.cos(f * 0.6662F) * 1.2F * f1;
         float RArmZRot = -(MathHelper.cos(f2 * 0.09F) * 0.05F) + 0.05F;
@@ -354,7 +354,5 @@ public class MoCModelGolem extends ModelBase {
             this.blocks[11][this.blocksText[11]].rotateAngleZ = LArmZRot;
             this.blocks[11][this.blocksText[11]].rotateAngleX = RLegXRot;
         }
-
     }
-
 }

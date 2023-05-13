@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class MoCModelSilverSkeleton extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer Head;
     ModelRenderer Body;
     ModelRenderer Back;
@@ -33,11 +34,9 @@ public class MoCModelSilverSkeleton extends ModelBase {
     ModelRenderer LeftKnee;
     ModelRenderer LeftLeg;
     ModelRenderer LeftFoot;
-
     private int leftAttack;
     private int rightAttack;
     private boolean riding;
-    private float radianF = 57.29578F;
 
     public MoCModelSilverSkeleton() {
         this.textureWidth = 64;
@@ -205,17 +204,14 @@ public class MoCModelSilverSkeleton extends ModelBase {
             this.LeftArm.rotateAngleZ = (MathHelper.cos(f2 * 0.09F) * 0.05F) - 0.05F;
             this.LeftArm.rotateAngleX = RLegXRot;
         } else {
-            float armMov = -(MathHelper.cos((leftAttack) * 0.18F) * 3F);
-            this.LeftArm.rotateAngleX = +armMov;
+            this.LeftArm.rotateAngleX = -(MathHelper.cos((leftAttack) * 0.18F) * 3F);
         }
 
         if (rightAttack == 0) {
             this.RightArm.rotateAngleZ = -(MathHelper.cos(f2 * 0.09F) * 0.05F) + 0.05F;
             this.RightArm.rotateAngleX = LLegXRot;
-
         } else {
-            float armMov = -(MathHelper.cos((rightAttack) * 0.18F) * 3F);
-            this.RightArm.rotateAngleX = +armMov;
+            this.RightArm.rotateAngleX = -(MathHelper.cos((rightAttack) * 0.18F) * 3F);
         }
 
         this.LeftHand.rotateAngleX =
@@ -271,5 +267,4 @@ public class MoCModelSilverSkeleton extends ModelBase {
             this.LeftLeg.rotateAngleX = (RLegXRotB);
         }
     }
-
 }

@@ -194,6 +194,5 @@ public class MoCModelTurkey extends ModelBase {
             this.LWing.rotationPointX = 3.2F;
             this.RWing.rotationPointX = -3.2F;
         }
-
     }
 }

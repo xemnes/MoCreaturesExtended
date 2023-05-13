@@ -19,7 +19,7 @@ public class MoCRenderCricket extends MoCRenderMoC<MoCEntityCricket> {
 
     @Override
     protected void preRenderCallback(MoCEntityCricket entitycricket, float par2) {
-        rotateCricket((MoCEntityCricket) entitycricket);
+        rotateCricket(entitycricket);
     }
 
     protected void rotateCricket(MoCEntityCricket entitycricket) {
@@ -36,6 +36,6 @@ public class MoCRenderCricket extends MoCRenderMoC<MoCEntityCricket> {
 
     @Override
     protected ResourceLocation getEntityTexture(MoCEntityCricket par1Entity) {
-        return ((MoCEntityCricket) par1Entity).getTexture();
+        return par1Entity.getTexture();
     }
 }

@@ -35,7 +35,7 @@ public class MoCRenderFirefly extends MoCRenderInsect<MoCEntityFirefly> {
 
     @Override
     protected ResourceLocation getEntityTexture(MoCEntityFirefly entityfirefly) {
-        return ((MoCEntityFirefly) entityfirefly).getTexture();
+        return entityfirefly.getTexture();
     }
     /*
         private class LayerMoCFirefly implements LayerRenderer {

@@ -48,5 +48,4 @@ public class MoCRenderNewHorse extends MoCRenderMoC<MoCEntityHorse> {
         }
         GL11.glScalef(sizeFactor, sizeFactor, sizeFactor);
     }
-
 }

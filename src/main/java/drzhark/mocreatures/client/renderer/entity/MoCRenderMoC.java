@@ -41,7 +41,7 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
             float f5 = ((Entity) entityMoC).getDistance(this.renderManager.renderViewEntity);
             if (f5 < 16F) {
                 String s = "";
-                s = (new StringBuilder()).append(s).append(entityMoC.getPetName()).toString();
+                s = s + entityMoC.getPetName();
                 float f7 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();
@@ -124,8 +124,6 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
 
     /**
      * Tilts the creature to the front / back
-     *
-     * @param mocreature
      */
     protected void adjustPitch(IMoCEntity mocreature) {
         float f = mocreature.pitchRotationOffset();
@@ -137,8 +135,6 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
 
     /**
      * Rolls creature
-     *
-     * @param mocreature
      */
     protected void adjustRoll(IMoCEntity mocreature) {
         float f = mocreature.rollRotationOffset();
@@ -157,7 +153,6 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
 
     /**
      * translates the model
-     *
      */
     protected void adjustOffsets(float xOffset, float yOffset, float zOffset) {
         GL11.glTranslatef(xOffset, yOffset, zOffset);
@@ -167,5 +162,4 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
     protected ResourceLocation getEntityTexture(EntityLiving entity) {
         return ((IMoCEntity) entity).getTexture();
     }
-
 }

@@ -19,14 +19,14 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
 
     public MoCModelKitty pussy1;
 
-    @Override
-    protected ResourceLocation getEntityTexture(MoCEntityKitty entitykitty) {
-        return entitykitty.getTexture();
-    }
-
     public MoCRenderKitty(ModelBase modelkitty, float f) {
         super(modelkitty, f);
         this.pussy1 = (MoCModelKitty) modelkitty;
+    }
+
+    @Override
+    protected ResourceLocation getEntityTexture(MoCEntityKitty entitykitty) {
+        return entitykitty.getTexture();
     }
 
     @Override

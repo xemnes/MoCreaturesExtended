@@ -14,6 +14,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelScorpion extends ModelBase {
 
+    protected boolean poisoning;
+    protected boolean isTalking;
+    protected boolean babies;
+    protected int attacking;
+    protected boolean sitting;
     ModelRenderer Head;
     ModelRenderer MouthL;
     ModelRenderer MouthR;
@@ -62,12 +67,6 @@ public class MoCModelScorpion extends ModelBase {
     ModelRenderer baby3;
     ModelRenderer baby4;
     ModelRenderer baby5;
-    protected boolean poisoning;
-    protected boolean isTalking;
-    protected boolean babies;
-    protected int attacking;
-    protected boolean sitting;
-
     float radianF = 57.29578F;
 
     public MoCModelScorpion() {
@@ -453,7 +452,7 @@ public class MoCModelScorpion extends ModelBase {
             this.Sting2.rotationPointZ = -15.2F;
         }
 
-        /**
+        /*
          * Mouth animation
          */
         float MouthRot = 0F;
@@ -489,12 +488,12 @@ public class MoCModelScorpion extends ModelBase {
         this.RArm4.rotationPointZ = -11F;
         this.RArm4.rotateAngleY = 0F;
 
-        /**
+        /*
          * Random hand animations
          */
         if (attacking == 0) {
 
-            /**
+            /*
              * LHand random animation
              */
             float lHand = 0F;
@@ -504,9 +503,9 @@ public class MoCModelScorpion extends ModelBase {
                 lHand = f2a / this.radianF;
             }
             this.LArm3.rotateAngleY = (9F / this.radianF) - lHand;
-            this.LArm4.rotateAngleY = +lHand;
+            this.LArm4.rotateAngleY = lHand;
 
-            /**
+            /*
              * RHand random animation
              */
             float RHand = 0F;
@@ -578,7 +577,7 @@ public class MoCModelScorpion extends ModelBase {
             }
         }
 
-        /**
+        /*
          * Babies animation
          */
         if (babies) {
@@ -625,7 +624,7 @@ public class MoCModelScorpion extends ModelBase {
             this.baby5.rotateAngleY = fb5;///radianF;
         }
 
-        /**
+        /*
          * floats used for the scorpion's leg animations
          */
         float f9 = -(MathHelper.cos(f * 0.6662F * 2.0F + 0.0F) * 0.4F) * f1;
@@ -783,7 +782,5 @@ public class MoCModelScorpion extends ModelBase {
             this.Leg8B.rotateAngleZ -= f16;
             this.Leg8C.rotateAngleZ -= f16;
         }
-
     }
-
 }

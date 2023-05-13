@@ -11,6 +11,7 @@ import net.minecraft.util.math.MathHelper;
 
 public class MoCModelCrab extends ModelBase {
 
+    private final float radianF = 57.29578F;
     ModelRenderer Shell;
     ModelRenderer ShellRight;
     ModelRenderer ShellLeft;
@@ -45,8 +46,6 @@ public class MoCModelCrab extends ModelBase {
     ModelRenderer RightLeg4A;
     ModelRenderer RightLeg4B;
     ModelRenderer RightLeg4C;
-
-    private float radianF = 57.29578F;
     private boolean fleeing;
 
     public MoCModelCrab() {
@@ -271,7 +270,7 @@ public class MoCModelCrab extends ModelBase {
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-        /**
+        /*
          * f = distance walked f1 = speed 0 - 1 f2 = timer
          */
         if (fleeing) {
@@ -290,7 +289,7 @@ public class MoCModelCrab extends ModelBase {
 
             //hand movement
 
-            /**
+            /*
              * LHand random animation
              */
             float lHand = 0F;
@@ -303,7 +302,7 @@ public class MoCModelCrab extends ModelBase {
             this.LeftArmA.rotateAngleY = 30F / this.radianF + lHand;
             this.LeftArmB.rotateAngleY = 120F / this.radianF + lHand;
 
-            /**
+            /*
              * RHand random animation
              */
             float RHand = 0F;
@@ -315,7 +314,7 @@ public class MoCModelCrab extends ModelBase {
             this.RightArmB.rotateAngleY = -120F / this.radianF - RHand;
         }
 
-        /**
+        /*
          * floats used for the leg animations
          */
         float f9 = -(MathHelper.cos(f * 5F)) * f1 * 2F;
@@ -384,7 +383,5 @@ public class MoCModelCrab extends ModelBase {
         this.LeftLeg4A.rotateAngleZ = 0.418879F;
         this.LeftLeg4A.rotateAngleY -= f12;
         this.LeftLeg4A.rotateAngleZ -= f16;
-
     }
-
 }

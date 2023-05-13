@@ -13,6 +13,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelDeer extends ModelBase {
 
+    public ModelRenderer Body;
+    public ModelRenderer Neck;
+    public ModelRenderer Head;
+    public ModelRenderer Leg1;
+    public ModelRenderer Leg2;
+    public ModelRenderer Leg3;
+    public ModelRenderer Leg4;
+    public ModelRenderer Tail;
+    public ModelRenderer LEar;
+    public ModelRenderer REar;
+    public ModelRenderer LeftAntler;
+    public ModelRenderer RightAntler;
+
     public MoCModelDeer() {
         this.Head = new ModelRenderer(this, 0, 0);
         this.Head.addBox(-1.5F, -6F, -9.5F, 3, 3, 6, 0.0F);
@@ -81,18 +94,4 @@ public class MoCModelDeer extends ModelBase {
         this.Leg3.rotateAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.4F * f1;
         this.Leg4.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
     }
-
-    public ModelRenderer Body;
-    public ModelRenderer Neck;
-    public ModelRenderer Head;
-    public ModelRenderer Leg1;
-    public ModelRenderer Leg2;
-    public ModelRenderer Leg3;
-    public ModelRenderer Leg4;
-    public ModelRenderer Tail;
-    public ModelRenderer LEar;
-    public ModelRenderer REar;
-    public ModelRenderer LeftAntler;
-    public ModelRenderer RightAntler;
-
 }

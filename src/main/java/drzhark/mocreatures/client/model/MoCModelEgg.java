@@ -12,6 +12,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelEgg extends ModelBase {
 
+    public ModelRenderer Egg;
+    ModelRenderer Egg1;
+    ModelRenderer Egg2;
+    ModelRenderer Egg3;
+    ModelRenderer Egg4;
+    ModelRenderer Egg5;
+
     public MoCModelEgg() {
         //textureWidth = 64;
         //textureHeight = 32;
@@ -52,11 +59,4 @@ public class MoCModelEgg extends ModelBase {
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
         //super.setRotationAngles(f, f1, f2, f3, f4, f5);
     }
-
-    public ModelRenderer Egg;
-    ModelRenderer Egg1;
-    ModelRenderer Egg2;
-    ModelRenderer Egg3;
-    ModelRenderer Egg4;
-    ModelRenderer Egg5;
 }

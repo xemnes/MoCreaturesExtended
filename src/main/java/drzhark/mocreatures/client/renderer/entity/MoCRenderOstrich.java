@@ -28,7 +28,7 @@ public class MoCRenderOstrich extends MoCRenderMoC<MoCEntityOstrich> {
 
     @Override
     protected void preRenderCallback(MoCEntityOstrich entityliving, float f) {
-        MoCEntityOstrich entityostrich = (MoCEntityOstrich) entityliving;
+        MoCEntityOstrich entityostrich = entityliving;
         if (entityostrich.getType() == 1) {
             stretch(entityostrich);
         }
@@ -42,5 +42,4 @@ public class MoCRenderOstrich extends MoCRenderMoC<MoCEntityOstrich> {
         float f = entityostrich.getEdad() * 0.01F;
         GL11.glScalef(f, f, f);
     }
-
 }

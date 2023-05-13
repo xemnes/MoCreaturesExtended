@@ -188,5 +188,4 @@ public class MoCModelBoar extends ModelBase {
         this.Tail.rotateAngleZ = LLegRotX * 0.2F;
 
     }
-
 }

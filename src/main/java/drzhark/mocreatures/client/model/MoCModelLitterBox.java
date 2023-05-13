@@ -12,21 +12,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCModelLitterBox extends ModelBase {
 
-    ModelRenderer Table1;
-
-    ModelRenderer Table3;
-
-    ModelRenderer Table2;
-
-    ModelRenderer Litter;
-
-    ModelRenderer Table4;
-
-    ModelRenderer Bottom;
-
-    ModelRenderer LitterUsed;
-
     public boolean usedlitter;
+    ModelRenderer Table1;
+    ModelRenderer Table3;
+    ModelRenderer Table2;
+    ModelRenderer Litter;
+    ModelRenderer Table4;
+    ModelRenderer Bottom;
+    ModelRenderer LitterUsed;
 
     public MoCModelLitterBox() {
         float f = 0.0F;

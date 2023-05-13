@@ -8,7 +8,6 @@ import drzhark.mocreatures.dimension.BiomeGenWyvernLair;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,7 +31,7 @@ public class MoCBiomes {
         @SubscribeEvent
         public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
             final IForgeRegistry<Biome> registry = event.getRegistry();
-            registerBiome(registry, WyvernLairBiome, "wyvernbiome", BiomeManager.BiomeType.WARM, 1000, Type.MAGICAL);
+            registerBiome(registry, WyvernLairBiome, "wyvernbiome", BiomeManager.BiomeType.WARM, 1000, MoCEntities.WYVERN_LAIR);
         }
 
         private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeManager.BiomeType biomeType, final int weight, final BiomeDictionary.Type... types) {

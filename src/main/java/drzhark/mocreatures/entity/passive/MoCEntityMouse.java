@@ -77,8 +77,12 @@ public class MoCEntityMouse extends MoCEntityAnimal {
         Biome currentbiome = MoCTools.Biomekind(this.world, pos);
 
         try {
+            if (BiomeDictionary.hasType(currentbiome, Type.MESA)) {
+                setType(2); // only brown mice
+            }
+                
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
-                setType(3); //white mice!
+                setType(3); // only white mice
             }
         } catch (Exception ignored) {
         }

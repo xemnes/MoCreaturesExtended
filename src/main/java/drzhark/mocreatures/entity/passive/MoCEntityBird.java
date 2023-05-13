@@ -33,6 +33,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
 
@@ -81,6 +83,8 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
     @Override
     public void selectType() {
+        checkSpawningBiome();
+
         if (getType() == 0) {
             setType(this.rand.nextInt(6) + 1);
         }
@@ -103,6 +107,20 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             default:
                 return MoCreatures.proxy.getTexture("birdblue.png");
         }
+    }
+
+    @Override
+    public boolean checkSpawningBiome() {
+        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
+        Biome currentbiome = MoCTools.Biomekind(this.world, pos);
+
+        try {
+            if (BiomeDictionary.hasType(currentbiome, BiomeDictionary.Type.MESA)) {
+                setType(2); // only black birds
+            }
+        } catch (Exception ignored) {
+        }
+        return true;
     }
 
     @Override

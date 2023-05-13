@@ -26,8 +26,8 @@ import java.util.List;
 
 public class CommandMoCSpawn extends CommandBase {
 
-    private static List<String> commands = new ArrayList<String>();
-    private static List<String> aliases = new ArrayList<String>();
+    private static final List<String> commands = new ArrayList<>();
+    private static final List<String> aliases = new ArrayList<>();
 
     static {
         commands.add("/mocspawn <horse|manticore|wyvern|wyvernghost> <int>");
@@ -72,9 +72,9 @@ public class CommandMoCSpawn extends CommandBase {
             }
 
             String playername = sender.getName();
-            EntityPlayerMP player =
-                    FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(playername);
-            MoCEntityTameableAnimal specialEntity = null;
+            EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(playername);
+            if (player == null) return;
+            MoCEntityTameableAnimal specialEntity;
             if (entityType.equalsIgnoreCase("horse")) {
                 specialEntity = new MoCEntityHorse(player.world);
                 specialEntity.setAdult(true);
@@ -87,7 +87,7 @@ public class CommandMoCSpawn extends CommandBase {
             } else if (entityType.equalsIgnoreCase("wyvernghost")) {
                 specialEntity = new MoCEntityWyvern(player.world);
                 specialEntity.setAdult(false);
-                ((MoCEntityWyvern)specialEntity).setIsGhost(true);
+                ((MoCEntityWyvern) specialEntity).setIsGhost(true);
             } else {
                 sender.sendMessage(new TextComponentTranslation(TextFormatting.RED + "ERROR:" + TextFormatting.WHITE
                         + "The entity spawn type " + entityType + " is not a valid type."));
@@ -132,9 +132,9 @@ public class CommandMoCSpawn extends CommandBase {
     }
 
     public void sendCommandHelp(ICommandSender sender) {
-        sender.sendMessage(new TextComponentTranslation("\u00a72Listing MoCreatures commands"));
-        for (int i = 0; i < commands.size(); i++) {
-            sender.sendMessage(new TextComponentTranslation(commands.get(i)));
+        sender.sendMessage(new TextComponentTranslation("§2Listing MoCreatures commands"));
+        for (String command : commands) {
+            sender.sendMessage(new TextComponentTranslation(command));
         }
     }
 }

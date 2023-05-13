@@ -25,11 +25,12 @@ import net.minecraftforge.common.DimensionManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class CommandMoCPets extends CommandBase {
 
-    private static List<String> commands = new ArrayList<String>();
-    private static List<String> aliases = new ArrayList<String>();
+    private static final List<String> commands = new ArrayList<>();
+    private static final List<String> aliases = new ArrayList<>();
 
     static {
         commands.add("/mocpets");
@@ -64,21 +65,21 @@ public class CommandMoCPets extends CommandBase {
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
         int unloadedCount = 0;
         int loadedCount = 0;
-        ArrayList<Integer> foundIds = new ArrayList<Integer>();
-        ArrayList<String> tamedlist = new ArrayList<String>();
+        ArrayList<Integer> foundIds = new ArrayList<>();
+        ArrayList<String> tamedlist = new ArrayList<>();
         if (!(sender instanceof EntityPlayer)) {
             return;
         }
-        String playername = sender.getName();
         EntityPlayer player = (EntityPlayer) sender;
+        UUID playerId = player.getUniqueID();
         // search for tamed entity
         for (int dimension : DimensionManager.getIDs()) {
             WorldServer world = DimensionManager.getWorld(dimension);
             for (int j = 0; j < world.loadedEntityList.size(); j++) {
-                Entity entity = (Entity) world.loadedEntityList.get(j);
+                Entity entity = world.loadedEntityList.get(j);
                 if (IMoCTameable.class.isAssignableFrom(entity.getClass())) {
                     IMoCTameable mocreature = (IMoCTameable) entity;
-                    if (mocreature.getOwnerId() != null && mocreature.getOwnerId().equals(playername)) {
+                    if (mocreature.getOwnerId() != null && mocreature.getOwnerId().equals(playerId)) {
                         loadedCount++;
                         foundIds.add(mocreature.getOwnerPetId());
                         tamedlist.add(TextFormatting.WHITE + "Found pet with " + TextFormatting.DARK_AQUA + "Type" + TextFormatting.WHITE
@@ -140,7 +141,7 @@ public class CommandMoCPets extends CommandBase {
                     + loadedCount
                     + TextFormatting.WHITE
                     + (!MoCreatures.isServer() ? ", Unloaded Count : " + TextFormatting.AQUA + unloadedCount + TextFormatting.WHITE
-                            + ", Total count : " + TextFormatting.AQUA + (loadedCount + unloadedCount) : "")));
+                    + ", Total count : " + TextFormatting.AQUA + (loadedCount + unloadedCount) : "")));
         }
     }
 
@@ -155,17 +156,17 @@ public class CommandMoCPets extends CommandBase {
 
     public boolean teleportLoadedPet(WorldServer world, EntityPlayerMP player, int petId, String petName, ICommandSender par1ICommandSender) {
         for (int j = 0; j < world.loadedEntityList.size(); j++) {
-            Entity entity = (Entity) world.loadedEntityList.get(j);
+            Entity entity = world.loadedEntityList.get(j);
             // search for entities that are MoCEntityAnimal's
             if (IMoCTameable.class.isAssignableFrom(entity.getClass()) && !((IMoCTameable) entity).getPetName().equals("")
                     && ((IMoCTameable) entity).getOwnerPetId() == petId) {
                 // grab the entity data
                 NBTTagCompound compound = new NBTTagCompound();
                 entity.writeToNBT(compound);
-                if (compound != null && compound.getString("Owner") != null) {
+                if (!compound.isEmpty() && !compound.getString("Owner").isEmpty()) {
                     String owner = compound.getString("Owner");
                     String name = compound.getString("Name");
-                    if (owner != null && owner.equalsIgnoreCase(player.getName())) {
+                    if (!owner.isEmpty() && owner.equalsIgnoreCase(player.getName())) {
                         // check if in same dimension
                         if (entity.dimension == player.dimension) {
                             entity.setPosition(player.posX, player.posY, player.posZ);
@@ -177,13 +178,10 @@ public class CommandMoCPets extends CommandBase {
                                 newEntity.setPosition(player.posX, player.posY, player.posZ);
                                 DimensionManager.getWorld(player.dimension).spawnEntity(newEntity);
                             }
-                            if (entity.getRidingEntity() == null) {
-                                entity.isDead = true;
-                            } else // dismount players
-                            {
+                            if (entity.getRidingEntity() != null) {
                                 entity.getRidingEntity().dismountRidingEntity();
-                                entity.isDead = true;
                             }
+                            entity.isDead = true;
                             world.resetUpdateEntityTick();
                             DimensionManager.getWorld(player.dimension).resetUpdateEntityTick();
                         }
@@ -199,9 +197,9 @@ public class CommandMoCPets extends CommandBase {
     }
 
     public void sendCommandHelp(ICommandSender sender) {
-        sender.sendMessage(new TextComponentTranslation("\u00a72Listing MoCreatures commands"));
-        for (int i = 0; i < commands.size(); i++) {
-            sender.sendMessage(new TextComponentTranslation(commands.get(i)));
+        sender.sendMessage(new TextComponentTranslation("§2Listing MoCreatures commands"));
+        for (String command : commands) {
+            sender.sendMessage(new TextComponentTranslation(command));
         }
     }
 
@@ -211,7 +209,7 @@ public class CommandMoCPets extends CommandBase {
 
         if (par2ArrayOfStr.length > 0 && Character.isDigit(par2ArrayOfStr[0].charAt(0))) {
             try {
-                j = par2ArrayOfStr.length == 0 ? 0 : parseInt(par2ArrayOfStr[0], 1, x + 1) - 1;
+                j = parseInt(par2ArrayOfStr[0], 1, x + 1) - 1;
             } catch (NumberInvalidException numberinvalidexception) {
                 numberinvalidexception.printStackTrace();
             }
@@ -219,8 +217,8 @@ public class CommandMoCPets extends CommandBase {
         int k = Math.min((j + 1) * pagelimit, list.size());
 
         sender.sendMessage(new TextComponentTranslation(TextFormatting.DARK_GREEN + "--- Showing MoCreatures Help Info "
-                + TextFormatting.AQUA + Integer.valueOf(j + 1) + TextFormatting.WHITE + " of " + TextFormatting.AQUA
-                + Integer.valueOf(x + 1) + TextFormatting.GRAY + " (/mocpets <page>)" + TextFormatting.DARK_GREEN + "---"));
+                + TextFormatting.AQUA + (j + 1) + TextFormatting.WHITE + " of " + TextFormatting.AQUA
+                + (x + 1) + TextFormatting.GRAY + " (/mocpets <page>)" + TextFormatting.DARK_GREEN + "---"));
 
         for (int l = j * pagelimit; l < k; ++l) {
             String tamedInfo = list.get(l);

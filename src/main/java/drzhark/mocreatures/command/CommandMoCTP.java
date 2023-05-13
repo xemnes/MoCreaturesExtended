@@ -26,8 +26,8 @@ import java.util.List;
 
 public class CommandMoCTP extends CommandBase {
 
-    private static List<String> commands = new ArrayList<String>();
-    private static List<String> aliases = new ArrayList<String>();
+    private static final List<String> commands = new ArrayList<>();
+    private static final List<String> aliases = new ArrayList<>();
 
     static {
         commands.add("/moctp <entityid> <playername>");
@@ -61,8 +61,8 @@ public class CommandMoCTP extends CommandBase {
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-        int petId = 0;
-        if (args == null || args.length == 0) {
+        int petId;
+        if (args.length == 0) {
             sender.sendMessage(new TextComponentTranslation(TextFormatting.RED + "Error" + TextFormatting.WHITE
                     + ": You must enter a valid entity ID."));
             return;
@@ -79,7 +79,7 @@ public class CommandMoCTP extends CommandBase {
         EntityPlayer player = (EntityPlayer) sender;//FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(playername);
         // search for tamed entity in mocreatures.dat
         MoCPetData ownerPetData = MoCreatures.instance.mapData.getPetData(player.getUniqueID());
-        if (player != null & ownerPetData != null) {
+        if (ownerPetData != null) {
             for (int i = 0; i < ownerPetData.getTamedList().tagCount(); i++) {
                 NBTTagCompound nbt = ownerPetData.getTamedList().getCompoundTagAt(i);
                 if (nbt.hasKey("PetId") && nbt.getInteger("PetId") == petId) {
@@ -123,17 +123,17 @@ public class CommandMoCTP extends CommandBase {
 
     public boolean teleportLoadedPet(WorldServer world, EntityPlayer player, int petId, String petName, ICommandSender par1ICommandSender) {
         for (int j = 0; j < world.loadedEntityList.size(); j++) {
-            Entity entity = (Entity) world.loadedEntityList.get(j);
+            Entity entity = world.loadedEntityList.get(j);
             // search for entities that are MoCEntityAnimal's
             if (IMoCTameable.class.isAssignableFrom(entity.getClass()) && !((IMoCTameable) entity).getPetName().equals("")
                     && ((IMoCTameable) entity).getOwnerPetId() == petId) {
                 // grab the entity data
                 NBTTagCompound compound = new NBTTagCompound();
                 entity.writeToNBT(compound);
-                if (compound != null && compound.getString("Owner") != null) {
+                if (!compound.isEmpty() && !compound.getString("Owner").isEmpty()) {
                     String owner = compound.getString("Owner");
                     String name = compound.getString("Name");
-                    if (owner != null && owner.equalsIgnoreCase(player.getName())) {
+                    if (!owner.isEmpty() && owner.equalsIgnoreCase(player.getName())) {
                         // check if in same dimension
                         if (entity.dimension == player.dimension) {
                             entity.setPosition(player.posX, player.posY, player.posZ);
@@ -145,13 +145,10 @@ public class CommandMoCTP extends CommandBase {
                                 newEntity.setPosition(player.posX, player.posY, player.posZ);
                                 DimensionManager.getWorld(player.dimension).spawnEntity(newEntity);
                             }
-                            if (entity.getRidingEntity() == null) {
-                                entity.isDead = true;
-                            } else // dismount players
-                            {
+                            if (entity.getRidingEntity() != null) {
                                 entity.getRidingEntity().dismountRidingEntity();
-                                entity.isDead = true;
                             }
+                            entity.isDead = true;
                             world.resetUpdateEntityTick();
                             DimensionManager.getWorld(player.dimension).resetUpdateEntityTick();
                         }
@@ -167,9 +164,9 @@ public class CommandMoCTP extends CommandBase {
     }
 
     public void sendCommandHelp(ICommandSender sender) {
-        sender.sendMessage(new TextComponentTranslation("\u00a72Listing MoCreatures commands"));
-        for (int i = 0; i < commands.size(); i++) {
-            sender.sendMessage(new TextComponentTranslation(commands.get(i)));
+        sender.sendMessage(new TextComponentTranslation("§2Listing MoCreatures commands"));
+        for (String command : commands) {
+            sender.sendMessage(new TextComponentTranslation(command));
         }
     }
 }

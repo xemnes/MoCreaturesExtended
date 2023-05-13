@@ -49,6 +49,8 @@ public class MoCEntityRat extends MoCEntityMob {
 
     @Override
     public void selectType() {
+        checkSpawningBiome();
+        
         if (getType() == 0) {
             int i = this.rand.nextInt(100);
             if (i <= 65) {
@@ -76,6 +78,24 @@ public class MoCEntityRat extends MoCEntityMob {
             default:
                 return MoCreatures.proxy.getTexture("ratb.png");
         }
+    }
+    
+    @Override
+    public boolean checkSpawningBiome() {
+        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
+        Biome currentbiome = MoCTools.Biomekind(this.world, pos);
+
+        try {
+            if (BiomeDictionary.hasType(currentbiome, Type.MESA)) {
+                setType(1); // only brown rats
+            }
+                
+            if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
+                setType(3); // only white rats
+            }
+        } catch (Exception ignored) {
+        }
+        return true;
     }
 
     @Override

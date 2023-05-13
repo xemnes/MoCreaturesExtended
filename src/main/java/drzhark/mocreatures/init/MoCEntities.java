@@ -34,6 +34,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class MoCEntities {
 
+    public static BiomeDictionary.Type STEEP = BiomeDictionary.Type.getType("STEEP");
     public static List<EntityEntry> ENTITIES = new ArrayList<>();
     public static List<EntityEntry> SPAWN_ENTITIES = new ArrayList<>();
     /**

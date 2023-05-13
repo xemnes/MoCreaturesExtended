@@ -42,7 +42,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.UUID;
 
-@Mod(modid = MoCConstants.MOD_ID, name = MoCConstants.MOD_NAME, version = MoCConstants.MOD_VERSION, acceptableRemoteVersions = MoCConstants.MOD_ACCEPTED_VERSIONS)
+@Mod(modid = MoCConstants.MOD_ID, name = MoCConstants.MOD_NAME, version = MoCConstants.MOD_VERSION, acceptableRemoteVersions = MoCConstants.MOD_ACCEPTED_VERSIONS, dependencies = MoCConstants.MOD_DEPENDENCIES)
 public class MoCreatures {
 
     public static final Logger LOGGER = LogManager.getLogger(MoCConstants.MOD_ID);
@@ -131,13 +131,14 @@ public class MoCreatures {
         proxy.registerRenderInformation();
         WYVERN_LAIR = DimensionType.register("Wyvern Lair", "_wyvern_lair", WyvernLairDimensionID, WorldProviderWyvernEnd.class, false);
         DimensionManager.registerDimension(WyvernLairDimensionID, WYVERN_LAIR);
+        MoCTerrainEventHooks.addBiomeTypes();
         MoCEntities.registerSpawns();
+        MoCTerrainEventHooks.buildWorldGenSpawnLists();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         isCustomSpawnerLoaded = Loader.isModLoaded("customspawner");
-        MoCTerrainEventHooks.buildWorldGenSpawnLists();
     }
 
     @EventHandler

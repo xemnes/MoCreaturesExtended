@@ -3,12 +3,16 @@
  */
 package drzhark.mocreatures;
 
+import drzhark.mocreatures.init.MoCEntities;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,6 +28,42 @@ public class MoCTerrainEventHooks {
     public static List<Biome.SpawnListEntry> waterCreatureList = new ArrayList<>();
     public static Object2ObjectOpenHashMap<Biome, List<Biome.SpawnListEntry>> creatureSpawnMap = new Object2ObjectOpenHashMap<>();
     public static Object2ObjectOpenHashMap<Biome, List<Biome.SpawnListEntry>> waterCreatureSpawnMap = new Object2ObjectOpenHashMap<>();
+
+    public static void buildWorldGenSpawnLists() {
+        for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
+            creatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.CREATURE));
+            creatureList.removeIf(entry -> entry.itemWeight == 0);
+            creatureSpawnMap.put(biome, creatureList);
+
+            waterCreatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.WATER_CREATURE));
+            waterCreatureList.removeIf(entry -> entry.itemWeight == 0);
+            waterCreatureSpawnMap.put(biome, waterCreatureList);
+        }
+    }
+
+    @SuppressWarnings("DataFlowIssue")
+    public static void addBiomeTypes() {
+        // Extreme Hills
+        BiomeDictionary.addTypes(Biomes.EXTREME_HILLS, MoCEntities.STEEP);
+        BiomeDictionary.addTypes(Biomes.EXTREME_HILLS_EDGE, MoCEntities.STEEP);
+        BiomeDictionary.addTypes(Biomes.MUTATED_EXTREME_HILLS, MoCEntities.STEEP);
+        BiomeDictionary.addTypes(Biomes.MUTATED_EXTREME_HILLS_WITH_TREES, MoCEntities.STEEP);
+
+        // Mesa
+        BiomeDictionary.addTypes(Biomes.MUTATED_MESA, BiomeDictionary.Type.MESA);
+        BiomeDictionary.addTypes(Biomes.MUTATED_MESA_ROCK, BiomeDictionary.Type.MESA);
+        BiomeDictionary.addTypes(Biomes.MUTATED_MESA_CLEAR_ROCK, BiomeDictionary.Type.MESA);
+
+        // Traverse
+        ResourceLocation rockyPlateau = new ResourceLocation("traverse:rocky_plateau");
+        if (ForgeRegistries.BIOMES.containsKey(rockyPlateau)) {
+            BiomeDictionary.addTypes(ForgeRegistries.BIOMES.getValue(rockyPlateau), BiomeDictionary.Type.PLAINS);
+        }
+        ResourceLocation aridHighland = new ResourceLocation("traverse:arid_highland");
+        if (ForgeRegistries.BIOMES.containsKey(aridHighland)) {
+            BiomeDictionary.addTypes(ForgeRegistries.BIOMES.getValue(aridHighland), BiomeDictionary.Type.SAVANNA);
+        }
+    }
 
     @SubscribeEvent
     public void onPopulateChunk(PopulateChunkEvent.Populate event) {
@@ -42,18 +82,6 @@ public class MoCTerrainEventHooks {
             MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureSpawnMap.get(biome), EntityLiving.SpawnPlacementType.IN_WATER);
 
             event.setResult(Event.Result.DENY);
-        }
-    }
-
-    public static void buildWorldGenSpawnLists() {
-        for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
-            creatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.CREATURE));
-            creatureList.removeIf(entry -> entry.itemWeight == 0);
-            creatureSpawnMap.put(biome, creatureList);
-
-            waterCreatureList = new ArrayList<>(biome.getSpawnableList(EnumCreatureType.WATER_CREATURE));
-            waterCreatureList.removeIf(entry -> entry.itemWeight == 0);
-            waterCreatureSpawnMap.put(biome, waterCreatureList);
         }
     }
 }

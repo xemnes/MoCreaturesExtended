@@ -544,10 +544,10 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             }
 
             // Trying to make sense of the override order
-            if (BiomeDictionary.hasType(currentbiome, Type.SANDY)) {
+            if (BiomeDictionary.hasType(currentbiome, Type.SANDY) || BiomeDictionary.hasType(currentbiome, Type.MESA)) {
                 // rattlesnake or spotted
                 if (l < 5) {
-                    setType(7); // rattlesnake or spotted brownish ?
+                    setType(7);
                 } else {
                     setType(2);
                 }

@@ -4,7 +4,7 @@
 package drzhark.mocreatures.network;
 
 import drzhark.mocreatures.client.MoCClientProxy;
-import drzhark.mocreatures.client.gui.helpers.MoCGUIEntityNamer;
+import drzhark.mocreatures.client.gui.MoCGUIEntityNamer;
 import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;

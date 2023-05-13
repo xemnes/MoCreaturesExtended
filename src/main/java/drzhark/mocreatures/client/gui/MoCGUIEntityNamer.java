@@ -1,7 +1,7 @@
 /*
  * GNU GENERAL PUBLIC LICENSE Version 3
  */
-package drzhark.mocreatures.client.gui.helpers;
+package drzhark.mocreatures.client.gui;
 
 import drzhark.mocreatures.MoCProxy;
 import drzhark.mocreatures.client.MoCClientProxy;
@@ -25,22 +25,22 @@ import java.io.IOException;
 @SideOnly(Side.CLIENT)
 public class MoCGUIEntityNamer extends GuiScreen {
 
+    private static final TextureManager textureManager = MoCClientProxy.mc.getTextureManager();
+    private static final ResourceLocation TEXTURE_MOCNAME = new ResourceLocation("mocreatures", MoCProxy.GUI_TEXTURE + "mocname.png");
+    private final IMoCEntity namedEntity;
     protected String screenTitle;
-    private final IMoCEntity NamedEntity;
-    @SuppressWarnings("unused")
-    private int updateCounter;
-    private String NameToSet;
     protected int xSize;
     protected int ySize;
-    private static TextureManager textureManager = MoCClientProxy.mc.getTextureManager();
-    private static final ResourceLocation TEXTURE_MOCNAME = new ResourceLocation("mocreatures", MoCProxy.GUI_TEXTURE + "mocname.png");
+    @SuppressWarnings("unused")
+    private int updateCounter;
+    private String nameToSet;
 
     public MoCGUIEntityNamer(IMoCEntity mocanimal, String s) {
         this.xSize = 256;
         this.ySize = 181;
         this.screenTitle = "Choose your Pet's name:";
-        this.NamedEntity = mocanimal;
-        this.NameToSet = s;
+        this.namedEntity = mocanimal;
+        this.nameToSet = s;
     }
 
     @Override
@@ -51,8 +51,8 @@ public class MoCGUIEntityNamer extends GuiScreen {
     }
 
     public void updateName() {
-        this.NamedEntity.setPetName(this.NameToSet);
-        MoCMessageHandler.INSTANCE.sendToServer(new MoCMessageUpdatePetName(((EntityLiving) this.NamedEntity).getEntityId(), this.NameToSet));
+        this.namedEntity.setPetName(this.nameToSet);
+        MoCMessageHandler.INSTANCE.sendToServer(new MoCMessageUpdatePetName(((EntityLiving) this.namedEntity).getEntityId(), this.nameToSet));
         this.mc.displayGuiScreen(null);
     }
 
@@ -61,7 +61,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
         if (!guibutton.enabled) {
             return;
         }
-        if ((guibutton.id == 0) && (this.NameToSet != null) && (!this.NameToSet.equals(""))) {
+        if ((guibutton.id == 0) && (this.nameToSet != null) && (!this.nameToSet.equals(""))) {
             updateName();
         }
     }
@@ -75,7 +75,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
         int i1 = (this.height - (this.ySize + 16)) / 2;
         drawTexturedModalRect(l, i1, 0, 0, this.xSize, this.ySize);
         drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 100, 0xffffff);
-        drawCenteredString(this.fontRenderer, this.NameToSet, this.width / 2, 120, 0xffffff);
+        drawCenteredString(this.fontRenderer, this.nameToSet, this.width / 2, 120, 0xffffff);
         super.drawScreen(i, j, f);
     }
 
@@ -92,22 +92,20 @@ public class MoCGUIEntityNamer extends GuiScreen {
 
     @Override
     protected void keyTyped(char c, int i) {
-        if ((i == 14) && (this.NameToSet.length() > 0)) {
-            this.NameToSet = this.NameToSet.substring(0, this.NameToSet.length() - 1);
+        if ((i == 14) && (this.nameToSet.length() > 0)) {
+            this.nameToSet = this.nameToSet.substring(0, this.nameToSet.length() - 1);
         }
-        if (!ChatAllowedCharacters.isAllowedCharacter(c) || (this.NameToSet.length() >= 15)) {
+        if (!ChatAllowedCharacters.isAllowedCharacter(c) || (this.nameToSet.length() >= 15)) {
         } else {
-            StringBuilder name = new StringBuilder(this.NameToSet);
-            name.append(c);
-            this.NameToSet = name.toString();
+            this.nameToSet = this.nameToSet + c;
         }
     }
 
     @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        if (this.NamedEntity instanceof IMoCTameable) {
-            IMoCTameable tamedEntity = (IMoCTameable) this.NamedEntity;
+        if (this.namedEntity instanceof IMoCTameable) {
+            IMoCTameable tamedEntity = (IMoCTameable) this.namedEntity;
             tamedEntity.playTameEffect(true);
         }
     }

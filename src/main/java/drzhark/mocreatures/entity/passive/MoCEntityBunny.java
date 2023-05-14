@@ -9,6 +9,7 @@ import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -25,6 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -74,6 +76,17 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     protected void entityInit() {
         super.entityInit();
         this.dataManager.register(HAS_EATEN, Boolean.FALSE);
+    }
+
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
+        if (this.world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) this.enablePersistence();
+        return super.onInitialSpawn(difficulty, par1EntityLivingData);
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return this.world.provider.getDimension() != MoCreatures.proxy.WyvernDimension;
     }
 
     public boolean getHasEaten() {

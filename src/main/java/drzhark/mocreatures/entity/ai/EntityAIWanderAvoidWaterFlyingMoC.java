@@ -7,7 +7,6 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.RandomPositionGenerator;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -45,11 +44,7 @@ public class EntityAIWanderAvoidWaterFlyingMoC extends EntityAIWanderAvoidWater 
 
         while (true) {
             if (!iterator.hasNext()) {
-                BlockPos blockPos2 = new BlockPos(this.entity);
-                while (this.entity.world.getBlockState(blockPos2).getBlock() == Blocks.AIR) {
-                    blockPos2 = blockPos2.down();
-                }
-                return new Vec3d(blockPos2.getX(), blockPos2.getY(), blockPos2.getZ());
+                return null;
             }
 
             blockPos1 = iterator.next();

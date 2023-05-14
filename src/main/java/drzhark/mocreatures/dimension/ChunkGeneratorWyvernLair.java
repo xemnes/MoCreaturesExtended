@@ -22,7 +22,12 @@ import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorSimplex;
 import net.minecraft.world.gen.feature.WorldGenEndIsland;
 import net.minecraft.world.gen.feature.WorldGenLakes;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.terraingen.ChunkGeneratorEvent;
+import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
+import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 import java.util.List;
 import java.util.Random;
@@ -83,8 +88,8 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
         this.noiseGen6 = new NoiseGeneratorOctaves(this.rand, 16);
         this.islandNoise = new NoiseGeneratorSimplex(this.rand);
 
-        net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextEnd ctx = new net.minecraftforge.event.terraingen.InitNoiseGensEvent.ContextEnd(lperlinNoise1, lperlinNoise2, perlinNoise1, noiseGen5, noiseGen6, islandNoise);
-        ctx = net.minecraftforge.event.terraingen.TerrainGen.getModdedNoiseGenerators(worldIn, this.rand, ctx);
+        InitNoiseGensEvent.ContextEnd ctx = new InitNoiseGensEvent.ContextEnd(lperlinNoise1, lperlinNoise2, perlinNoise1, noiseGen5, noiseGen6, islandNoise);
+        ctx = TerrainGen.getModdedNoiseGenerators(worldIn, this.rand, ctx);
         this.lperlinNoise1 = ctx.getLPerlin1();
         this.lperlinNoise2 = ctx.getLPerlin2();
         this.perlinNoise1 = ctx.getPerlin();
@@ -157,8 +162,7 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
     }
 
     public void buildSurfaces(ChunkPrimer primer) {
-        if (!net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks(this, this.chunkX, this.chunkZ, primer, this.world))
-            return;
+        if (!ForgeEventFactory.onReplaceBiomeBlocks(this, this.chunkX, this.chunkZ, primer, this.world)) return;
         for (int i = 0; i < 16; ++i) {
             for (int j = 0; j < 16; ++j) {
                 byte b0 = 5;
@@ -247,10 +251,9 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
     }
 
     private double[] getHeights(double[] p_185963_1_, int p_185963_2_, int p_185963_3_, int p_185963_4_, int p_185963_5_, int p_185963_6_, int p_185963_7_) {
-        net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField event = new net.minecraftforge.event.terraingen.ChunkGeneratorEvent.InitNoiseField(this, p_185963_1_, p_185963_2_, p_185963_3_, p_185963_4_, p_185963_5_, p_185963_6_, p_185963_7_);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-        if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY)
-            return event.getNoisefield();
+        ChunkGeneratorEvent.InitNoiseField event = new ChunkGeneratorEvent.InitNoiseField(this, p_185963_1_, p_185963_2_, p_185963_3_, p_185963_4_, p_185963_5_, p_185963_6_, p_185963_7_);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.getResult() == Event.Result.DENY) return event.getNoisefield();
 
         if (p_185963_1_ == null) {
             p_185963_1_ = new double[p_185963_5_ * p_185963_6_ * p_185963_7_];
@@ -343,11 +346,15 @@ public class ChunkGeneratorWyvernLair implements IChunkGenerator {
 
         var6.decorate(this.world, this.rand, new BlockPos(var4, 0, var5));
 
-        MoCTools.performCustomWorldGenSpawning(this.world, var6, var4 + 8, var5 + 8, 16, 16, this.rand, this.world.getBiome(blockpos).getSpawnableList(EnumCreatureType.CREATURE), EntityLiving.SpawnPlacementType.ON_GROUND);
-
         if (x == 0 && z == 0 && !this.portalDone) {
             createPortal(this.world, this.rand);
         }
+
+        //if (x != 0 && z != 0 && !this.towerDone) {
+        //    generateTower(this.world, this.rand, (int) (this.world.rand.nextGaussian() * 64), (int) (this.world.rand.nextGaussian() * 64));
+        //}
+
+        MoCTools.performCustomWorldGenSpawning(this.world, var6, var4 + 8, var5 + 8, 16, 16, this.rand, this.world.getBiome(blockpos).getSpawnableList(EnumCreatureType.CREATURE), EntityLiving.SpawnPlacementType.ON_GROUND);
 
         ForgeEventFactory.onChunkPopulate(false, this, this.world, this.rand, x, z, false);
         BlockFalling.fallInstantly = false;

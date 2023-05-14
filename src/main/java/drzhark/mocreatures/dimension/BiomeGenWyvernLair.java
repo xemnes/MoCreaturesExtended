@@ -32,19 +32,14 @@ public class BiomeGenWyvernLair extends Biome {
         this.spawnableCaveCreatureList.clear();
         this.modSpawnableLists.clear();
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityBunny.class, 6, 2, 3));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 8, 2, 3));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 2));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 10, 1, 4));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 6, 1, 2));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 1));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 1, 3));
         this.topBlock = MoCBlocks.mocGrass.getDefaultState();
         this.fillerBlock = MoCBlocks.mocDirt.getDefaultState();
         this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.mocLog.getDefaultState(), MoCBlocks.mocLeaf.getDefaultState(), 2, 30, 10);
         this.worldGenShrub = new WorldGenShrub(Blocks.DIRT.getDefaultState(), Blocks.AIR.getDefaultState());
         this.decorator = new BiomeWyvernDecorator();
-    }
-
-    @Override
-    public float getSpawningChance() {
-        return 0.5F;
     }
 
     /**

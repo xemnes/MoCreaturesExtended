@@ -7,9 +7,11 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
 public class MoCEntityDragonfly extends MoCEntityInsect {
@@ -25,6 +27,17 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    }
+
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
+        if (this.world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) this.enablePersistence();
+        return super.onInitialSpawn(difficulty, par1EntityLivingData);
+    }
+
+    @Override
+    protected boolean canDespawn() {
+        return this.world.provider.getDimension() != MoCreatures.proxy.WyvernDimension;
     }
 
     @Override

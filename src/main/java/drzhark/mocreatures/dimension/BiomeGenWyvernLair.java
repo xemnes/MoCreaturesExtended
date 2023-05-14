@@ -31,10 +31,10 @@ public class BiomeGenWyvernLair extends Biome {
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
         this.modSpawnableLists.clear();
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityBunny.class, 6, 2, 3));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 6, 1, 2));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 1));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 1, 3));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityBunny.class, 6, 2, 4));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 6, 2, 4));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 3));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 2, 3));
         this.topBlock = MoCBlocks.mocGrass.getDefaultState();
         this.fillerBlock = MoCBlocks.mocDirt.getDefaultState();
         this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.mocLog.getDefaultState(), MoCBlocks.mocLeaf.getDefaultState(), 2, 30, 10);

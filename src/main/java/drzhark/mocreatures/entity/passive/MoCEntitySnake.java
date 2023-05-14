@@ -7,6 +7,7 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
+import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -567,10 +568,10 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             }
 
             if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) || BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
-                // spotted or coral or normal
-                if (l < 4) {
+                // dark green or coral or spotted
+                if (l < 3) {
                     setType(1);
-                } else if (l < 7) {
+                } else if (l < 5) {
                     setType(5);
                 } else {
                     setType(2);
@@ -578,10 +579,10 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             }
 
             if (BiomeDictionary.hasType(currentbiome, Type.SWAMP)) {
-                // python or cobra or normal
-                if (l < 4) {
+                // python or cobra or dark green
+                if (l < 5) {
                     setType(8);
-                } else if (l < 8) {
+                } else if (l < 7) {
                     setType(6);
                 } else {
                     setType(1);
@@ -589,11 +590,26 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             }
 
             if (BiomeDictionary.hasType(currentbiome, Type.JUNGLE)) {
-                // bright green or bright orange or normal
+                // bright green or bright orange or cobra or dark green
                 if (l < 4) {
                     setType(4);
-                } else if (l < 7) {
+                } else if (l < 6) {
                     setType(3);
+                } else if (l < 8) {
+                    setType(6);
+                } else {
+                    setType(1);
+                }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, MoCEntities.WYVERN_LAIR)) {
+                // bright green or bright orange or spotted or dark green
+                if (l < 3) {
+                    setType(4);
+                } else if (l < 5) {
+                    setType(3);
+                } else if (l < 7) {
+                    setType(2);
                 } else {
                     setType(1);
                 }

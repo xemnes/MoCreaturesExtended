@@ -53,18 +53,15 @@ public class MoCEventHooks {
             MoCreatures.instance.mapData = data;
             MoCreatures.proxy.worldInitDone = true;
         }
-        // make sure doMobSpawning is on if CMS is not installed
+
+        // Make sure doMobSpawning is on if CMS is not installed
         GameRules gameRule = event.getWorld().getGameRules();
         if (!MoCreatures.isCustomSpawnerLoaded) {
-            MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was not loaded!");
             gameRule.setOrCreateGameRule("doMobSpawning", "true");
+            if (MoCreatures.proxy.debug) {
+                MoCreatures.LOGGER.debug("Changed doMobSpawning to true since CMS was not loaded!");
+            }
         }
-        //if (gameRule != null && MoCreatures.isCustomSpawnerLoaded) {
-        //    if (!CustomSpawner.eventListeners) {
-        //        MoCreatures.LOGGER.info("Changing doMobSpawning to True since CMS was loaded but Event Listeners are disabled!");
-        //        gameRule.setOrCreateGameRule("doMobSpawning", "true");
-        //    }
-        //}
     }
 
     @SubscribeEvent

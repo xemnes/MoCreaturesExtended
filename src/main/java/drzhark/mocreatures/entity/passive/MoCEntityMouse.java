@@ -80,7 +80,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
             if (BiomeDictionary.hasType(currentbiome, Type.MESA)) {
                 setType(2); // only brown mice
             }
-                
+
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
                 setType(3); // only white mice
             }

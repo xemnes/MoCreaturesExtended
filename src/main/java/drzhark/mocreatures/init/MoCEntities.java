@@ -26,6 +26,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -270,23 +271,48 @@ public class MoCEntities {
     }
 
     public static void registerSpawns() {
+        // Read spawn properties from config
         MoCreatures.proxy.readMocConfigValues();
-        ArrayList<Biome> spawnBiomes = new ArrayList<>();
-        for (MoCEntityData entityData : MoCreatures.mocEntityMap.values()) { // Iterate over all entities
-            if (!entityData.getCanSpawn()) continue; // Skip entities that are disabled
-            spawnBiomes.clear(); // Clear spawn biomes from previous entity
-            for (BiomeDictionary.Type type : entityData.getBiomeTypes()) { // Iterate over all allowed biomes
-                spawnBiomes.addAll(BiomeDictionary.getBiomes(type)); // Add biome types that are allowed
+
+        // Iterate over all entities
+        for (MoCEntityData entityData : MoCreatures.mocEntityMap.values()) {
+            // Skip entities early that are disabled
+            if (!entityData.getCanSpawn() || entityData.getFrequency() <= 0) {
+                continue;
             }
-            for (Biome biome : spawnBiomes) { // Iterate over all previously added biomes
-                for (BiomeDictionary.Type blockedType : entityData.getBlockedBiomeTypes()) { // Iterate over all blocked biomes
-                    if (BiomeDictionary.hasType(biome, blockedType)) // Check if biome type is blocked
-                        spawnBiomes.remove(biome); // Remove blocked biome type
+
+            // Initialize list for valid spawn biomes
+            List<Biome> spawnBiomes = new ArrayList<>();
+
+            // Iterate over all biomes
+            for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
+                boolean isBlocked = false;
+
+                // Iterate over all blocked biome types
+                for (BiomeDictionary.Type typeBlocked : entityData.getBlockedBiomeTypes()) {
+                    // Check if biome has blocked biome type
+                    // Set flag and skip when first blocked type is found
+                    if (BiomeDictionary.hasType(biome, typeBlocked)) {
+                        isBlocked = true;
+                        break;
+                    }
+                }
+
+                // Check if biome is not blocked and matches any of the allowed biome types
+                // Add biome to list when valid
+                if (!isBlocked && entityData.getBiomeTypes().stream().anyMatch(type -> BiomeDictionary.hasType(biome, type))) {
+                    spawnBiomes.add(biome);
+
+                    if (MoCreatures.proxy.debug) {
+                        MoCreatures.LOGGER.debug("Entity {} is valid for biome {}", entityData.getEntityName(), biome.getBiomeName());
+                    }
                 }
             }
-            // Add spawn entry for the entity
+
+            // Register entity spawn with spawn properties from config and previously computed spawn biomes
             EntityRegistry.addSpawn(entityData.getEntityClass(), entityData.getFrequency(), entityData.getMinSpawn(), entityData.getMaxSpawn(), entityData.getType(), spawnBiomes.toArray(new Biome[0]));
         }
+
         MoCreatures.LOGGER.info("Entity spawn registration complete.");
     }
 }

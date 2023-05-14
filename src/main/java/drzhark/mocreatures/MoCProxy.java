@@ -98,6 +98,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean worldInitDone = false;
     public int activeScreen = -1;
     public double spawnMultiplier;
+    public int kittyVillageChance;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -293,6 +294,7 @@ public class MoCProxy implements IGuiHandler {
         this.WyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17).getInt();
         this.WyvernBiomeID = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairBiomeID", 207).getInt();
         this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 1.75D, "Multiplier for entity spawns during world gen").getDouble(1.75D);
+        this.kittyVillageChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KittyVillageChance", 30, "Spawn chance percentage for kitties in village chunks").getInt();
         this.mocSettingsConfig.save();
     }
 

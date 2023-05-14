@@ -74,15 +74,14 @@ public class MoCEventHooks {
             List<Integer> dimensionIDs = Ints.asList(data.getDimensions());
             if (!dimensionIDs.contains(world.provider.getDimension()) || data.getFrequency() <= 0 || !data.getCanSpawn())
                 return;
-            if (event.getRand().nextInt(100) < 10) {
+            if (event.getRand().nextInt(100) < MoCreatures.proxy.kittyVillageChance) {
                 BlockPos pos = new BlockPos(event.getChunkX() * 16, 100, event.getChunkZ() * 16);
                 MoCEntityKitty kitty = new MoCEntityKitty(world);
                 BlockPos spawnPos = getSafeSpawnPos(kitty, pos.add(8, 0, 8));
-                if (spawnPos != null) {
-                    kitty.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(kitty)), null);
-                    kitty.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-                    world.spawnEntity(kitty);
-                }
+                if (spawnPos == null) return;
+                kitty.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(kitty)), null);
+                kitty.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                world.spawnEntity(kitty);
             }
         }
     }

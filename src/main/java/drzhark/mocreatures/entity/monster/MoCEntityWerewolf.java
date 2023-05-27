@@ -168,24 +168,28 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             ItemStack stack = entityplayer.getHeldItemMainhand();
             if (!stack.isEmpty()) {
-                i = 1F;
                 if (stack.getItem() == MoCItems.silversword) {
                     i = 10F;
-                }
-                if (stack.getItem() instanceof ItemSword) {
+                } else if (stack.getItem() instanceof ItemSword) {
                     String swordMaterial = ((ItemSword) stack.getItem()).getToolMaterialName();
                     String swordName = stack.getItem().getTranslationKey();
                     if (swordMaterial.toLowerCase().contains("silver") || swordName.toLowerCase().contains("silver")) {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 3F;
+                    } else {
+                        i = ((ItemSword) stack.getItem()).getAttackDamage() * 0.5F;
                     }
                 } else if (stack.getItem() instanceof ItemTool) {
                     String toolMaterial = ((ItemTool) stack.getItem()).getToolMaterialName();
                     String toolName = stack.getItem().getTranslationKey();
                     if (toolMaterial.toLowerCase().contains("silver") || toolName.toLowerCase().contains("silver")) {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 2F;
+                    } else {
+                        i = ((ItemSword) stack.getItem()).getAttackDamage() * 0.5F;
                     }
                 } else if (stack.getItem().getTranslationKey().toLowerCase().contains("silver")) {
                     i = 6F;
+                } else {
+                    i = Math.min(i * 0.5F, 4F);
                 }
             }
         }
@@ -265,8 +269,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         if (getIsHumanForm()) {
-            if (!this.transforming)
-                return MoCSoundEvents.ENTITY_WEREWOLF_HURT_HUMAN;
+            if (!this.transforming) return MoCSoundEvents.ENTITY_WEREWOLF_HURT_HUMAN;
             return null;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_HURT;
@@ -375,8 +378,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             d3 *= d7;
             d4 *= d7;
             d5 *= d7;
-            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d + (i * 1.0D)) / 2D, (d1 + (j * 1.0D)) / 2D, (d2 + (k * 1.0D)) / 2D,
-                    d3, d4, d5);
+            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (d + (i * 1.0D)) / 2D, (d1 + (j * 1.0D)) / 2D, (d2 + (k * 1.0D)) / 2D, d3, d4, d5);
         }
 
         if (getIsHumanForm()) {

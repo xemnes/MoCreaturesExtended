@@ -33,6 +33,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSaddle;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -1388,7 +1389,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && !getIsRideable() && stack.getItem() == Items.SADDLE) {
+        if (!stack.isEmpty() && !getIsRideable() && stack.getItem() instanceof ItemSaddle) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);

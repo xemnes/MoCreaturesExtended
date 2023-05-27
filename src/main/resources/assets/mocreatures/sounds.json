@@ -856,7 +856,7 @@
     ]
   },
   "shuffling": {
-    "category": "music",
+    "category": "record",
     "sounds": [
       {
         "name": "mocreatures:music/shuffling",

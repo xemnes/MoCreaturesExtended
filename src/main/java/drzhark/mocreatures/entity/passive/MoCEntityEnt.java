@@ -9,6 +9,9 @@ import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -176,7 +179,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         Block blockUnderFeet = this.world.getBlockState(pos.down()).getBlock();
         Block blockOnFeet = this.world.getBlockState(pos).getBlock();
 
-        if (blockUnderFeet == Blocks.DIRT) {
+        if (blockUnderFeet instanceof BlockDirt) {
             Block block = Blocks.GRASS;
             BlockEvent.BreakEvent event = null;
             if (!this.world.isRemote) {
@@ -191,10 +194,10 @@ public class MoCEntityEnt extends MoCEntityAnimal {
             return;
         }
 
-        if (blockUnderFeet == Blocks.GRASS && blockOnFeet == Blocks.AIR) {
+        if (blockUnderFeet instanceof BlockGrass && blockOnFeet == Blocks.AIR) {
             IBlockState iblockstate = getBlockStateToBePlanted();
             int plantChance = 3;
-            if (iblockstate.getBlock() == Blocks.SAPLING) {
+            if (iblockstate.getBlock() instanceof BlockSapling) {
                 plantChance = 10;
             }
             //boolean cantPlant = false;

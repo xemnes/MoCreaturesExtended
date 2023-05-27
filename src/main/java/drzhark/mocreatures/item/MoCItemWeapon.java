@@ -4,6 +4,7 @@
 package drzhark.mocreatures.item;
 
 import com.google.common.collect.Multimap;
+import net.minecraft.block.BlockWeb;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -11,7 +12,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
@@ -60,7 +60,7 @@ public class MoCItemWeapon extends MoCItem {
     }
 
     public float getStrVsBlock(ItemStack stack, IBlockState state) {
-        if (state.getBlock() == Blocks.WEB) {
+        if (state.getBlock() instanceof BlockWeb) {
             return 15.0F;
         } else {
             Material material = state.getMaterial();
@@ -153,7 +153,7 @@ public class MoCItemWeapon extends MoCItem {
      */
     @Override
     public boolean canHarvestBlock(IBlockState state) {
-        return state.getBlock() == Blocks.WEB;
+        return state.getBlock() instanceof BlockWeb;
     }
 
     /**

@@ -5,11 +5,9 @@ package drzhark.mocreatures.block;
 
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -67,8 +65,7 @@ public class MoCBlockTallGrass extends MoCBlockBush implements IShearable {
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         Block soil = worldIn.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.mocGrass || soil == MoCBlocks.mocDirt || soil == Blocks.GRASS
-                || soil == Blocks.DIRT || soil == Blocks.FARMLAND;
+        return soil == MoCBlocks.mocGrass || soil == MoCBlocks.mocDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
     }
 
     @Override

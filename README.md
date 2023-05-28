@@ -1,4 +1,4 @@
-# 🐘 Mo'Creatures Extended 🦁
+![DrZhark's Mo'Creatures Extended](logo_ext_small.png)
 
 ### Continued maintenance for Mo'Creatures in 1.12.2
 

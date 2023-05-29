@@ -29,7 +29,7 @@ public class MoCEntityFireOgre extends MoCEntityOgre {
 
     @Override
     public float getDestroyForce() {
-        return MoCreatures.proxy.fireOgreStrength;
+        return MoCreatures.proxy.ogreFireStrength;
     }
 
     @Override

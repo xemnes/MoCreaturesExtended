@@ -334,8 +334,8 @@ public class MoCClientProxy extends MoCProxy {
     }
 
     @Override
-    public void ConfigInit(FMLPreInitializationEvent event) {
-        super.ConfigInit(event);
+    public void configInit(FMLPreInitializationEvent event) {
+        super.configInit(event);
     }
 
     @Override

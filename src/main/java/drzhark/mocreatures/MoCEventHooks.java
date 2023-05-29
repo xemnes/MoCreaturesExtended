@@ -98,7 +98,7 @@ public class MoCEventHooks {
             event.setResult(Result.DENY);
         } else if (data.getFrequency() <= 0) {
             event.setResult(Result.DENY);
-        } else if (dimensionIDs.contains(MoCreatures.proxy.WyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) {
+        } else if (dimensionIDs.contains(MoCreatures.proxy.wyvernDimension) && world.provider.getDimension() == MoCreatures.proxy.wyvernDimension) {
             event.setResult(Result.ALLOW);
         }
     }

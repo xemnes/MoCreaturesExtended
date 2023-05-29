@@ -1106,7 +1106,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
      */
     //private int HorseGenetics(MoCEntityHorse entityhorse, MoCEntityHorse entityhorse1)
     private int HorseGenetics(int typeA, int typeB) {
-        boolean flag = MoCreatures.proxy.easyBreeding;
+        boolean flag = MoCreatures.proxy.easyHorseBreeding;
         //int typeA = entityhorse.getType();
         //int typeB = entityhorse1.getType();
 
@@ -1151,15 +1151,12 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         // rest of cases will return either typeA, typeB or new mix
-        int chanceInt = (this.rand.nextInt(4)) + 1;
         if (!flag) {
-            if (chanceInt == 1) // 25%
-            {
-                return typeA;
-            } else if (chanceInt == 2) // 25%
-            {
-                return typeB;
-            }
+            int chanceInt = (this.rand.nextInt(4)) + 1;
+            // 25%
+            if (chanceInt == 1) return typeA;
+            // 25%
+            if (chanceInt == 2) return typeB;
         }
 
         if ((typeA == 1 && typeB == 2) || (typeA == 2 && typeB == 1)) {

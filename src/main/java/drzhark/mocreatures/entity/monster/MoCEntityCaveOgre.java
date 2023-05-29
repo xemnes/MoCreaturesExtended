@@ -27,7 +27,7 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
      */
     @Override
     public float getDestroyForce() {
-        return MoCreatures.proxy.caveOgreStrength;
+        return MoCreatures.proxy.ogreCaveStrength;
     }
 
     @Override

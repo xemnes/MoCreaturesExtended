@@ -191,7 +191,7 @@ public class MoCEntityKittyBed extends EntityLiving {
 
     @Override
     public void move(MoverType type, double d, double d1, double d2) {
-        if ((this.getRidingEntity() != null) || !this.onGround || !MoCreatures.proxy.staticLitter) {
+        if ((this.getRidingEntity() != null) || !this.onGround || !MoCreatures.proxy.staticBed) {
             if (!this.world.isRemote) {
                 super.move(type, d, d1, d2);
             }

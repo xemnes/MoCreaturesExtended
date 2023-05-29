@@ -66,19 +66,19 @@ public class ItemStaffPortal extends MoCItem {
         if (player.getRidingEntity() != null || player.isBeingRidden()) {
             return EnumActionResult.FAIL;
         } else {
-            if (player.dimension != MoCreatures.WyvernLairDimensionID) {
+            if (player.dimension != MoCreatures.wyvernLairDimensionID) {
                 this.portalDimension = player.dimension;
                 this.portalPosX = (int) player.posX;
                 this.portalPosY = (int) player.posY;
                 this.portalPosZ = (int) player.posZ;
                 writeToNBT(nbtcompound);
 
-                BlockPos var2 = playerMP.getServer().getWorld(MoCreatures.WyvernLairDimensionID).getSpawnCoordinate();
+                BlockPos var2 = playerMP.getServer().getWorld(MoCreatures.wyvernLairDimensionID).getSpawnCoordinate();
 
                 if (var2 != null) {
                     playerMP.connection.setPlayerLocation(var2.getX(), var2.getY(), var2.getZ(), 0.0F, 0.0F);
                 }
-                playerMP.getServer().getPlayerList().transferPlayerToDimension(playerMP, MoCreatures.WyvernLairDimensionID, new MoCDirectTeleporter(playerMP.getServer().getWorld(MoCreatures.WyvernLairDimensionID)));
+                playerMP.getServer().getPlayerList().transferPlayerToDimension(playerMP, MoCreatures.wyvernLairDimensionID, new MoCDirectTeleporter(playerMP.getServer().getWorld(MoCreatures.wyvernLairDimensionID)));
                 stack.damageItem(1, player);
             } else {
                 //on the WyvernLair!

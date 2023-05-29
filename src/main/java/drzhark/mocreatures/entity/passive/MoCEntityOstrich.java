@@ -543,7 +543,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!getIsTamed() && !getIsFertile() && !stack.isEmpty() && getType() == 2 && stack.getItem() == Items.MELON_SEEDS) {
+        if (!getIsFertile() && !stack.isEmpty() && getType() == 2 && stack.getItem() == Items.MELON_SEEDS) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);

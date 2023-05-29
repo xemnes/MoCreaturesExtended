@@ -181,8 +181,8 @@ public class MoCEntities {
         int[] overworld = new int[]{0};
         int[] nether = new int[]{-1};
         int[] overworldNether = new int[]{0, -1};
-        int[] wyvernLair = new int[]{MoCreatures.proxy.WyvernDimension};
-        int[] overworldWyvernLair = new int[]{0, MoCreatures.proxy.WyvernDimension};
+        int[] wyvernLair = new int[]{MoCreatures.proxy.wyvernDimension};
+        int[] overworldWyvernLair = new int[]{0, MoCreatures.proxy.wyvernDimension};
 
         /*
          * Animal

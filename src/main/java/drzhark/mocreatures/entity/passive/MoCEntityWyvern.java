@@ -112,7 +112,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
-        if (this.world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) this.enablePersistence();
+        if (this.world.provider.getDimension() == MoCreatures.proxy.wyvernDimension) this.enablePersistence();
         return super.onInitialSpawn(difficulty, par1EntityLivingData);
     }
 
@@ -124,7 +124,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
     @Override
     protected boolean canDespawn() {
-        return this.world.provider.getDimension() != MoCreatures.proxy.WyvernDimension;
+        return this.world.provider.getDimension() != MoCreatures.proxy.wyvernDimension;
     }
 
     public boolean getIsFlying() {
@@ -346,7 +346,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             if (getAttackTarget() != null && (!this.getIsTamed() || this.getRidingEntity() != null) && !isMovementCeased() && this.rand.nextInt(20) == 0) {
                 setIsFlying(true);
             }
-            if (!getIsTamed() && this.dimension == MoCreatures.WyvernLairDimensionID && (this.rand.nextInt(50) == 0) && this.posY < 10D) {
+            if (!getIsTamed() && this.dimension == MoCreatures.wyvernLairDimensionID && (this.rand.nextInt(50) == 0) && this.posY < 10D) {
                 this.setDead();
             }
 

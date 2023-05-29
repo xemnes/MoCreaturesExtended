@@ -80,13 +80,13 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
 
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
-        if (this.world.provider.getDimension() == MoCreatures.proxy.WyvernDimension) this.enablePersistence();
+        if (this.world.provider.getDimension() == MoCreatures.proxy.wyvernDimension) this.enablePersistence();
         return super.onInitialSpawn(difficulty, par1EntityLivingData);
     }
 
     @Override
     protected boolean canDespawn() {
-        return this.world.provider.getDimension() != MoCreatures.proxy.WyvernDimension;
+        return this.world.provider.getDimension() != MoCreatures.proxy.wyvernDimension;
     }
 
     public boolean getHasEaten() {

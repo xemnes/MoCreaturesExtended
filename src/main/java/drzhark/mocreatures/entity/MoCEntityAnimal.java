@@ -130,8 +130,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public boolean renderName() {
-        return MoCreatures.proxy.getDisplayPetName()
-                && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
     }
 
     @Override
@@ -233,9 +232,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         EntityLivingBase entityliving = null;
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
         for (Entity entity1 : list) {
-            if (!(entity1 instanceof EntityLivingBase) || (entity1 == entity) || (entity1 == entity.getRidingEntity())
-                    || (entity1 == entity.getRidingEntity()) || (entity1 instanceof EntityPlayer) || (entity1 instanceof EntityMob)
-                    || (this.height <= entity1.height) || (this.width <= entity1.width)) {
+            if (!(entity1 instanceof EntityLivingBase) || (entity1 == entity) || (entity1 == entity.getRidingEntity()) || (entity1 == entity.getRidingEntity()) || (entity1 instanceof EntityPlayer) || (entity1 instanceof EntityMob) || (this.height <= entity1.height) || (this.width <= entity1.width)) {
                 continue;
             }
             double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
@@ -504,8 +501,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
                 }
                 float f = getDistance(entity);
                 if (f < 2.0F && this.rand.nextInt(10) == 0) {
-                    attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) entity),
-                            (float) ((EntityMob) entity).getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+                    attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) entity), (float) ((EntityMob) entity).getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
                 }
             }
             if (entityplayer.isSneaking()) {
@@ -523,9 +519,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
             for (int l = 0; l <= 4; l++) {
                 for (int i1 = 0; i1 <= 4; i1++) {
                     BlockPos pos = new BlockPos(i, k, j);
-                    if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.world.getBlockState(pos.add(l, -1, i1)).isNormalCube()
-                            && !this.world.getBlockState(pos.add(l, 0, i1)).isNormalCube()
-                            && !this.world.getBlockState(pos.add(l, 1, i1)).isNormalCube()) {
+                    if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.world.getBlockState(pos.add(l, -1, i1)).isNormalCube() && !this.world.getBlockState(pos.add(l, 0, i1)).isNormalCube() && !this.world.getBlockState(pos.add(l, 1, i1)).isNormalCube()) {
                         setLocationAndAngles((i + l) + 0.5F, k, (j + i1) + 0.5F, this.rotationYaw, this.rotationPitch);
                         return;
                     }
@@ -545,7 +539,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         int z = MathHelper.floor(this.posZ);
         BlockPos blockpos = new BlockPos(x, y, z);
         IBlockState iblockstate = this.world.getBlockState((new BlockPos(this)).down());
-        iblockstate.canEntitySpawn(this);
         willSpawn = this.world.getLight(blockpos) > 8 && iblockstate.canEntitySpawn(this);
         if (debug && willSpawn)
             System.out.println("Animal: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
@@ -906,9 +899,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     }
 
     public boolean isOnAir() {
-        return (this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 0.2D), MathHelper
-                .floor(this.posZ))) && this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper
-                .floor(this.posY - 1.2D), MathHelper.floor(this.posZ))));
+        return (this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 0.2D), MathHelper.floor(this.posZ))) && this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 1.2D), MathHelper.floor(this.posZ))));
     }
 
     @Override
@@ -1005,9 +996,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag =
-                entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-                        .getAttributeValue()));
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
         if (flag) {
             this.applyEnchantments(this, entityIn);
         }
@@ -1177,8 +1166,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public void setLeashHolder(Entity entityIn, boolean sendAttachNotification) {
         if (this.getIsTamed() && entityIn instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityIn;
-            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
-                    && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
+            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
                 return;
             }
         }

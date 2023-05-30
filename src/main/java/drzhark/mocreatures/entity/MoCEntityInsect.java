@@ -61,7 +61,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
     @Override
     public boolean getIsFlying() {
-        return (isOnAir() || !onGround) && (motionX > 0 || motionY > 0 || motionZ > 0);
+        return (isOnAir() || !onGround) && (motionX != 0 || motionY != 0 || motionZ != 0);
     }
 
     @Override

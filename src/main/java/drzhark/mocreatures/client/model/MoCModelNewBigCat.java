@@ -562,7 +562,7 @@ public class MoCModelNewBigCat extends ModelBase {
         this.hasChest = bigcat.getIsChested();
         this.hasStinger = bigcat.getHasStinger();
         this.isGhost = bigcat.getIsGhost();
-        this.isMovingVertically = bigcat.motionY != 0;
+        this.isMovingVertically = bigcat.motionY != 0 && !bigcat.onGround;
     }
 
     public float updateGhostTransparency(Entity entity) {
@@ -688,7 +688,7 @@ public class MoCModelNewBigCat extends ModelBase {
         //the movement should still follow a cos function i.e. pendulum
         //the faster the speed, the higher the increment
 
-        //TODO sync with legmovemnt speed
+        //TODO sync with leg movement speed
         if (this.movingTail) {
             this.Tail2.rotateAngleY = MathHelper.cos(f2 * 0.3F);
 

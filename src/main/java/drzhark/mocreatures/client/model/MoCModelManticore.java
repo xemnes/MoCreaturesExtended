@@ -21,7 +21,7 @@ public class MoCModelManticore extends MoCModelNewBigCat {
         this.hasSaberTeeth = true;
         this.onAir = (bigcat.isOnAir());
         this.hasStinger = true;
-        this.isMovingVertically = bigcat.motionY != 0;
+        this.isMovingVertically = bigcat.motionY != 0 && !bigcat.onGround;
         this.hasChest = false;
         this.isTamed = false;
     }

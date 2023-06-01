@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.client.model.MoCModelGolem;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderGolem extends MoCRenderMoC<MoCEntityGolem> {
@@ -38,32 +38,29 @@ public class MoCRenderGolem extends MoCRenderMoC<MoCEntityGolem> {
 
             ResourceLocation effectTexture = entity.getEffectTexture();
             if (effectTexture != null) {
-                GL11.glDepthMask(false);
-
+                GlStateManager.depthMask(false);
                 float var4 = entity.ticksExisted + f1;
                 bindTexture(effectTexture);
-                GL11.glMatrixMode(GL11.GL_TEXTURE);
-                GL11.glLoadIdentity();
+                GlStateManager.matrixMode(5890);
+                GlStateManager.loadIdentity();
                 float var5 = var4 * 0.01F;
                 float var6 = var4 * 0.01F;
-                GL11.glTranslatef(var5, var6, 0.0F);
-                // TODO
-                //this.setRenderPassModel(this.MoCModelG);
-                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-                GL11.glEnable(GL11.GL_BLEND);
+                GlStateManager.translate(var5, var6, 0.0F);
+                GlStateManager.matrixMode(5888);
+                GlStateManager.enableBlend();
                 float var7 = 0.5F;
-                GL11.glColor4f(var7, var7, var7, 1.0F);
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
-
+                GlStateManager.color(var7, var7, var7, 1.0F);
+                GlStateManager.disableLighting();
+                GlStateManager.blendFunc(1, 1);
                 this.mocModel.setModelAttributes(this.mocRenderer.getMainModel());
                 this.mocModel.setLivingAnimations(entity, f, f1, f2);
                 this.mocModel.render(entity, f, f1, f3, f4, f5, f6);
-                GL11.glMatrixMode(GL11.GL_TEXTURE);
-                GL11.glLoadIdentity();
-                GL11.glMatrixMode(GL11.GL_MODELVIEW);
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL11.GL_BLEND);
+                GlStateManager.matrixMode(5890);
+                GlStateManager.loadIdentity();
+                GlStateManager.matrixMode(5888);
+                GlStateManager.enableLighting();
+                GlStateManager.disableBlend();
+                GlStateManager.depthMask(true);
             }
         }
 

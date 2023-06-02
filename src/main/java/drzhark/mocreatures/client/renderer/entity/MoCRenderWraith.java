@@ -6,43 +6,38 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.entity.monster.MoCEntityWraith;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderWraith extends RenderLiving<MoCEntityWraith> {
 
     public MoCRenderWraith(ModelBiped modelbiped, float f) {
-        //super(modelbiped, f, 1.0F);
         super(MoCClientProxy.mc.getRenderManager(), modelbiped, f);
-        //modelBipedMain = modelbiped;
     }
 
     @Override
-    public void doRender(MoCEntityWraith entitywraith, double d, double d1, double d2, float f, float f1) {
-        //boolean flag = wraith.isGlowing();
-        boolean flag = false;
-
-        GL11.glPushMatrix();
-        GL11.glEnable(3042 /* GL_BLEND */);
+    public void doRender(MoCEntityWraith wraith, double d, double d1, double d2, float f, float f1) {
+        boolean flag = wraith.isGlowing();
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
         if (!flag) {
             float transparency = 0.6F;
-            GL11.glBlendFunc(770, 771);
-            GL11.glColor4f(0.8F, 0.8F, 0.8F, transparency);
+            GlStateManager.blendFunc(770, 771);
+            GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
         } else {
-            GL11.glBlendFunc(770, 1);
+            GlStateManager.blendFunc(770, 1);
         }
-        super.doRender(entitywraith, d, d1, d2, f, f1);
-        GL11.glDisable(3042/* GL_BLEND */);
-        GL11.glPopMatrix();
-
+        super.doRender(wraith, d, d1, d2, f, f1);
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
     }
 
     @Override
-    protected ResourceLocation getEntityTexture(MoCEntityWraith entitywraith) {
-        return entitywraith.getTexture();
+    protected ResourceLocation getEntityTexture(MoCEntityWraith wraith) {
+        return wraith.getTexture();
     }
 }

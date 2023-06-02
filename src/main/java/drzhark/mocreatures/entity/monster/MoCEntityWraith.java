@@ -45,8 +45,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-                .setBaseValue(this.world.getDifficulty().getId() == 1 ? 2.0D : 3.0D); // setAttackStrength
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(this.world.getDifficulty().getId() == 1 ? 2.0D : 3.0D); // setAttackStrength
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
@@ -112,8 +111,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     private void startArmSwingAttack() {
         if (!this.world.isRemote) {
             this.attackCounter = 1;
-            MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 1),
-                    new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
+            MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 1), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
         }
     }
 
@@ -121,9 +119,9 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     public void onLivingUpdate() {
         if (this.attackCounter > 0) {
             this.attackCounter += 2;
-            if (this.attackCounter > 10)
-                this.attackCounter = 0;
+            if (this.attackCounter > 10) this.attackCounter = 0;
         }
+
         super.onLivingUpdate();
     }
 
@@ -135,9 +133,8 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
 
     }
 
-    //TODO ACTIVATE FOR RELEASE
-    /*@Override
+    @Override
     protected boolean isHarmedByDaylight() {
         return true;
-    }*/
+    }
 }

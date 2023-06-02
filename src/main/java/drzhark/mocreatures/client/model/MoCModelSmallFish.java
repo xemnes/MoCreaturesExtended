@@ -6,9 +6,9 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.aquatic.MoCEntitySmallFish;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class MoCModelSmallFish extends ModelBase {
 
@@ -80,8 +80,8 @@ public class MoCModelSmallFish extends ModelBase {
         float yOffset = smallFish.getAdjustedYOffset();
         float xOffset = smallFish.getAdjustedXOffset();
         float zOffset = smallFish.getAdjustedZOffset();
-        GL11.glPushMatrix();
-        GL11.glTranslatef(xOffset, yOffset, zOffset);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(xOffset, yOffset, zOffset);
         this.BodyFlat.render(f5);
         this.BodyRomboid.render(f5);
         this.MidBodyFin.render(f5);
@@ -92,7 +92,7 @@ public class MoCModelSmallFish extends ModelBase {
         this.LowerFinB.render(f5);
         this.LowerFinC.render(f5);
         this.Tail.render(f5);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

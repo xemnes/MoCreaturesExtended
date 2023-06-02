@@ -6,9 +6,9 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.passive.MoCEntityBigCat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class MoCModelNewBigCat extends ModelBase {
 
@@ -580,14 +580,14 @@ public class MoCModelNewBigCat extends ModelBase {
         renderTeeth(this.hasSaberTeeth);
         renderChest(this.hasChest);
 
-        GL11.glPushMatrix();
-        //GL11.glTranslatef(0F, yOffset, 0F);
+        GlStateManager.pushMatrix();
+        //GlStateManager.translate(0F, yOffset, 0F);
 
         if (this.isGhost) {
-            GL11.glEnable(3042 /* GL_BLEND */);
-            GL11.glBlendFunc(770, 771);
-            GL11.glColor4f(0.8F, 0.8F, 0.8F, updateGhostTransparency(entity));
-            //GL11.glScalef(1.3F, 1.0F, 1.3F);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(770, 771);
+            GlStateManager.color(0.8F, 0.8F, 0.8F, updateGhostTransparency(entity));
+            //GlStateManager.scale(1.3F, 1.0F, 1.3F);
         }
 
         this.Chest.render(f5);
@@ -617,9 +617,9 @@ public class MoCModelNewBigCat extends ModelBase {
         }
 
         if (this.isGhost) {
-            GL11.glDisable(3042/* GL_BLEND */);
+            GlStateManager.disableBlend();
         }
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
     }
 

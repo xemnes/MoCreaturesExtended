@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.entity.aquatic.MoCEntityFishy;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderFishy extends RenderLiving<MoCEntityFishy> {
@@ -29,7 +29,7 @@ public class MoCRenderFishy extends RenderLiving<MoCEntityFishy> {
 
     @Override
     protected void preRenderCallback(MoCEntityFishy entityfishy, float f) {
-        GL11.glTranslatef(0.0F, 0.3F, 0.0F);
+        GlStateManager.translate(0.0F, 0.3F, 0.0F);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MoCRenderFishy extends RenderLiving<MoCEntityFishy> {
     }
 
     protected void stretch(MoCEntityFishy entityfishy) {
-        GL11.glScalef(entityfishy.getEdad() * 0.01F, entityfishy.getEdad() * 0.01F, entityfishy.getEdad() * 0.01F);
+        GlStateManager.scale(entityfishy.getEdad() * 0.01F, entityfishy.getEdad() * 0.01F, entityfishy.getEdad() * 0.01F);
     }
 
     @Override

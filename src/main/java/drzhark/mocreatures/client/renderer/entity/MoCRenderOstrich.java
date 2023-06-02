@@ -5,10 +5,10 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.entity.passive.MoCEntityOstrich;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderOstrich extends MoCRenderMoC<MoCEntityOstrich> {
@@ -23,7 +23,7 @@ public class MoCRenderOstrich extends MoCRenderMoC<MoCEntityOstrich> {
     }
 
     protected void adjustHeight(MoCEntityOstrich entityliving, float FHeight) {
-        GL11.glTranslatef(0.0F, FHeight, 0.0F);
+        GlStateManager.translate(0.0F, FHeight, 0.0F);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class MoCRenderOstrich extends MoCRenderMoC<MoCEntityOstrich> {
     protected void stretch(MoCEntityOstrich entityostrich) {
 
         float f = entityostrich.getEdad() * 0.01F;
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 }

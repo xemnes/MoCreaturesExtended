@@ -5,12 +5,12 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.entity.passive.MoCEntityBird;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderBird extends MoCRenderMoC<MoCEntityBird> {
@@ -39,7 +39,7 @@ public class MoCRenderBird extends MoCRenderMoC<MoCEntityBird> {
     @Override
     protected void preRenderCallback(MoCEntityBird entitybird, float f) {
         if (!entitybird.world.isRemote && (entitybird.getRidingEntity() != null)) {
-            GL11.glTranslatef(0.0F, 1.3F, 0.0F);
+            GlStateManager.translate(0.0F, 1.3F, 0.0F);
         }
     }
 }

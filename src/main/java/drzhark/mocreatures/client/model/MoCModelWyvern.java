@@ -7,11 +7,11 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.passive.MoCEntityWyvern;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelWyvern extends ModelBase {
@@ -796,15 +796,15 @@ public class MoCModelWyvern extends ModelBase {
 
         setRotationAngles(f, f1, f2, f3, f4, f5);//, onAir, flapwings, isRidden, openMouth, diving, isSitting);
         float yOffset = wyvern.getAdjustedYOffset();
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0F, yOffset, 0F);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0F, yOffset, 0F);
 
         if (isGhost) {
             float transparency = wyvern.tFloat();
-            GL11.glEnable(3042 /* GL_BLEND */);
-            GL11.glBlendFunc(770, 771);
-            GL11.glColor4f(0.8F, 0.8F, 0.8F, transparency);
-            //GL11.glScalef(1.3F, 1.0F, 1.3F);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(770, 771);
+            GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
+            //GlStateManager.scale(1.3F, 1.0F, 1.3F);
         }
         this.back1.render(f5);
         this.Tail.render(f5);
@@ -927,9 +927,9 @@ public class MoCModelWyvern extends ModelBase {
         this.diamondrightshoulder.render(f5);
         this.diamondchestarmor.render(f5);
         if (isGhost) {
-            GL11.glDisable(3042/* GL_BLEND */);
+            GlStateManager.disableBlend();
         }
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

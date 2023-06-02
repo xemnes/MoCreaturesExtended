@@ -5,10 +5,10 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.model.MoCModelScorpion;
 import drzhark.mocreatures.entity.passive.MoCEntityPetScorpion;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
@@ -30,7 +30,7 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
         }
         if (sitting) {
             float factorY = 0.4F * (entityscorpion.getEdad() / 100F);
-            GL11.glTranslatef(0F, factorY, 0F);
+            GlStateManager.translate(0F, factorY, 0F);
         }
         if (!entityscorpion.getIsAdult()) {
             stretch(entityscorpion);
@@ -43,16 +43,16 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
     }
 
     protected void upsideDown(MoCEntityPetScorpion entityscorpion) {
-        GL11.glRotatef(-90F, -1F, 0.0F, 0.0F);
-        GL11.glTranslatef(-1.5F, -0.5F, -2.5F);
+        GlStateManager.rotate(-90F, -1F, 0.0F, 0.0F);
+        GlStateManager.translate(-1.5F, -0.5F, -2.5F);
     }
 
     protected void adjustHeight(MoCEntityPetScorpion entityscorpion) {
-        GL11.glTranslatef(0.0F, -0.1F, 0.0F);
+        GlStateManager.translate(0.0F, -0.1F, 0.0F);
     }
 
     protected void rotateAnimal(MoCEntityPetScorpion entityscorpion) {
-        GL11.glRotatef(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
     }
 
     protected void stretch(MoCEntityPetScorpion entityscorpion) {
@@ -61,7 +61,7 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
         if (!entityscorpion.getIsAdult()) {
             f = entityscorpion.getEdad() * 0.01F;
         }
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 
     @Override

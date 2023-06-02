@@ -5,10 +5,10 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.entity.passive.MoCEntityBunny;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderBunny extends MoCRenderMoC<MoCEntityBunny> {
@@ -44,17 +44,17 @@ public class MoCRenderBunny extends MoCRenderMoC<MoCEntityBunny> {
     protected void rotBunny(MoCEntityBunny entitybunny) {
         if (!entitybunny.onGround && (entitybunny.getRidingEntity() == null)) {
             if (entitybunny.motionY > 0.5D) {
-                GL11.glRotatef(35F, -1F, 0.0F, 0.0F);
+                GlStateManager.rotate(35F, -1F, 0.0F, 0.0F);
             } else if (entitybunny.motionY < -0.5D) {
-                GL11.glRotatef(-35F, -1F, 0.0F, 0.0F);
+                GlStateManager.rotate(-35F, -1F, 0.0F, 0.0F);
             } else {
-                GL11.glRotatef((float) (entitybunny.motionY * 70D), -1F, 0.0F, 0.0F);
+                GlStateManager.rotate((float) (entitybunny.motionY * 70D), -1F, 0.0F, 0.0F);
             }
         }
     }
 
     protected void stretch(MoCEntityBunny entitybunny) {
         float f = entitybunny.getEdad() * 0.01F;
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 }

@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.passive.MoCEntitySnake;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelSnake extends ModelBase {
@@ -202,7 +202,7 @@ public class MoCModelSnake extends ModelBase {
             float yOff;
             //sideperf = 1F;
 
-            GL11.glPushMatrix();
+            GlStateManager.pushMatrix();
             if (isresting) {
                 //this part doesn't work at all
                 /* if (i > (bodyparts/3) && (i <2*bodyparts/3)) {
@@ -213,13 +213,13 @@ public class MoCModelSnake extends ModelBase {
 
                 //this shortens the snake while resting
                 //TODO reactivate ?
-                //GL11.glTranslatef(0.0F, 0.0F, -0.05F*i);
+                //GlStateManager.translate(0.0F, 0.0F, -0.05F*i);
             } else
 
                 //climbing animation
                 if (climbing && i < this.bodyparts / 2) {
                     yOff = (i - ((float) this.bodyparts / 2)) * 0.08F;
-                    GL11.glTranslatef(0.0F, yOff / 3.0F, -yOff * 1.2F);
+                    GlStateManager.translate(0.0F, yOff / 3.0F, -yOff * 1.2F);
                 } else
 
                     //raises head of snakes near player
@@ -229,7 +229,7 @@ public class MoCModelSnake extends ModelBase {
                             yOff = (i - ((float) this.bodyparts / 3)) * 0.09F;
                             float zOff = (i - ((float) this.bodyparts / 3)) * 0.065F;
                             // if (picked) { yOff = yOff*-1F; //zOff = zOff*-1F; }
-                            GL11.glTranslatef(0.0F, yOff / 1.5F, -zOff * f6);
+                            GlStateManager.translate(0.0F, yOff / 1.5F, -zOff * f6);
                         }
 
                         if (i < this.bodyparts / 6) {
@@ -247,7 +247,7 @@ public class MoCModelSnake extends ModelBase {
             if (typeI == 7 && nearplayer && i > (5 * this.bodyparts / 6) && !picked)//&& not picked
             {
                 yOff = 0.55F + ((i - this.bodyparts)) * 0.08F;
-                GL11.glTranslatef(0.0F, -yOff / 1.5F, 0.0F);
+                GlStateManager.translate(0.0F, -yOff / 1.5F, 0.0F);
             }
 
             //TODO reactivate once strangling is working
@@ -255,22 +255,22 @@ public class MoCModelSnake extends ModelBase {
             if (picked && i > this.bodyparts / 2)//&& big to bring down the tail
             {
                 yOff = ((i - ((float) this.bodyparts / 2))) * 0.08F;
-                GL11.glTranslatef(0.0F, yOff / 1.5F, -yOff);
+                GlStateManager.translate(0.0F, yOff / 1.5F, -yOff);
 
             }
 
             //not working strangling
             /*
              * if (picked && i > bodyparts/3)//&& big to bring down the tail {
-             * yOff =((i-(bodyparts/3)))*0.08F; GL11.glTranslatef(0.0F,
+             * yOff =((i-(bodyparts/3)))*0.08F; GlStateManager.translate(0.0F,
              * yOff/1.5F, 0.0F); anglef = (10) * (i+1) ;//works well for small
              * snakes //anglef = (6) * (i+1) ; //this may work!!
-             * //GL11.glTranslatef(0.0F, 0.0F, -0.05F*i); GL11.glRotatef(anglef,
+             * //GlStateManager.translate(0.0F, 0.0F, -0.05F*i); GlStateManager.rotate(anglef,
              * 0.0F, 1.0F, 0.0F); }
              */
 
             /*
-             * if (picked) //&& first persons pesrpective { GL11.glScalef(fsize,
+             * if (picked) //&& first persons pesrpective { GlStateManager.scale(fsize,
              * fsize, fsize); }
              */
             /*
@@ -281,25 +281,25 @@ public class MoCModelSnake extends ModelBase {
              * //sidef = 0.5F * MathHelper.sin(2F * (f)- 0.25F * (float)j) -
              * 0.2F * MathHelper.cos(1.2F *f - 0.15F *(float)j); //sidef =
              * MathHelper.sqrt(i/10F); //sidef = sidef * sideperf;
-             * //GL11.glTranslatef(sidef, 0.0F, 0.0F); anglef = (8) * (i+1)
+             * //GlStateManager.translate(sidef, 0.0F, 0.0F); anglef = (8) * (i+1)
              * ;//works well for small snakes //anglef = (6) * (i+1) ; //this
-             * may work!! GL11.glTranslatef(0.0F, 0.0F, -0.05F*i);
-             * GL11.glRotatef(anglef, 0.0F, 1.0F, 0.0F); }else
+             * may work!! GlStateManager.translate(0.0F, 0.0F, -0.05F*i);
+             * GlStateManager.rotate(anglef, 0.0F, 1.0F, 0.0F); }else
              */
             {
 
                 sidef = 0.5F * MathHelper.sin(w * t - 0.3F * i) - (movInt / 20F) * MathHelper.sin(0.8F * t - 0.2F * i);
                 sidef = sidef * sideperf;
-                //GL11.glTranslatef(0.0F, 0.0F, -0.05F*i);
+                //GlStateManager.translate(0.0F, 0.0F, -0.05F*i);
 
-                GL11.glTranslatef(sidef, 0.0F, 0.0F);
+                GlStateManager.translate(sidef, 0.0F, 0.0F);
             }
 
             //this one works as well
             //sidef = 0.5F * MathHelper.sin(w * t - 0.3F * (float)j)- 0.1F * MathHelper.sin(+0.8F * t - 0.2F * (float)j);
             //sidef = sidef * sideperf;
 
-            //GL11.glTranslatef(sidef, 0.0F, sidef/5);
+            //GlStateManager.translate(sidef, 0.0F, sidef/5);
             //sidef = (0.4F * MathHelper.sin(-3.7F * t - 0.2F * (float)i)) + (0.3F * MathHelper.sin(-2F * t - 0.2F * (float)i));
             //sidef = 1.1F * MathHelper.sin(-2F * t - 0.2F * (float)i);
 
@@ -356,7 +356,7 @@ public class MoCModelSnake extends ModelBase {
                 this.Tail.render(f5);
             }
 
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
     }
 

@@ -5,9 +5,9 @@ package drzhark.mocreatures.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class MoCModelMaggot extends ModelBase {
 
@@ -46,21 +46,21 @@ public class MoCModelMaggot extends ModelBase {
         //f2 = timer!
         //System.out.println("f2 = " + f2);
 
-        GL11.glPushMatrix();
-        GL11.glEnable(3042 /* GL_BLEND */);
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
         //float transparency = 0.9F;
-        GL11.glBlendFunc(770, 771);
-        //GL11.glColor4f(1.2F, 1.2F, 1.2F, transparency);
+        GlStateManager.blendFunc(770, 771);
+        //GlStateManager.color(1.2F, 1.2F, 1.2F, transparency);
         float f9 = -(MathHelper.cos(f * 3F)) * f1 * 2F;
-        //GL11.glScalef(1.0F, 1.0F, 1.0F + (f1 * 3F));
-        GL11.glScalef(1.0F, 1.0F, 1.0F + (f9));
+        //GlStateManager.scale(1.0F, 1.0F, 1.0F + (f1 * 3F));
+        GlStateManager.scale(1.0F, 1.0F, 1.0F + (f9));
 
         this.Head.render(f5);
         this.Body.render(f5);
         this.Tail.render(f5);
         this.Tailtip.render(f5);
-        GL11.glDisable(3042/* GL_BLEND */);
-        GL11.glPopMatrix();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
 
     }
 

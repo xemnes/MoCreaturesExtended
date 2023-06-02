@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.aquatic.MoCEntityFishy;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelFishy extends ModelBase {
@@ -40,11 +40,11 @@ public class MoCModelFishy extends ModelBase {
         float yOffset = smallFish.getAdjustedYOffset();
         float xOffset = smallFish.getAdjustedXOffset();
         float zOffset = smallFish.getAdjustedZOffset();
-        GL11.glPushMatrix();
-        GL11.glTranslatef(xOffset, yOffset, zOffset);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(xOffset, yOffset, zOffset);
         this.Body.render(f5);
         this.Tail.render(f5);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {

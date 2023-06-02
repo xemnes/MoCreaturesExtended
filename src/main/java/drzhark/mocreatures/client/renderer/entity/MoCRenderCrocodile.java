@@ -7,13 +7,13 @@ import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.client.model.MoCModelCrocodile;
 import drzhark.mocreatures.entity.passive.MoCEntityCrocodile;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
@@ -59,12 +59,12 @@ public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
 
         //float f = entitycrocodile.swingProgress *10F *entitycrocodile.getFlipDirection();
         //float f2 = entitycrocodile.swingProgress /30 *entitycrocodile.getFlipDirection();
-        //GL11.glRotatef(180F + f, 0.0F, 0.0F, -1.0F);
-        //GL11.glTranslatef(0.0F-f2, 0.5F, 0.0F);
+        //GlStateManager.rotate(180F + f, 0.0F, 0.0F, -1.0F);
+        //GlStateManager.translate(0.0F-f2, 0.5F, 0.0F);
     }
 
     protected void adjustHeight(MoCEntityCrocodile entitycrocodile, float FHeight) {
-        GL11.glTranslatef(0.0F, FHeight, 0.0F);
+        GlStateManager.translate(0.0F, FHeight, 0.0F);
     }
 
     protected void spinCroc(MoCEntityCrocodile entitycrocodile, EntityLiving prey) {
@@ -87,7 +87,7 @@ public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
             f3 = 1.0F;
         }
         f3 *= direction;
-        GL11.glRotatef(f3 * 90F, 0.0F, 0.0F, 1.0F);
+        GlStateManager.rotate(f3 * 90F, 0.0F, 0.0F, 1.0F);
 
         if (prey != null) {
             prey.deathTime = intEndSpin;
@@ -98,6 +98,6 @@ public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
         // float f = 1.3F;
         float f = entitycrocodile.getEdad() * 0.01F;
         // if(!entitycrocodile.getIsAdult()) { f = entitycrocodile.edad; }
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 }

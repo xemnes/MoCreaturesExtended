@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.entity.monster.MoCEntityRat;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
@@ -38,12 +38,12 @@ public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
     }
 
     protected void rotateAnimal(T entityrat) {
-        GL11.glRotatef(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
     }
 
     protected void stretch(T entityrat) {
         float f = 0.8F;
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 
     @Override

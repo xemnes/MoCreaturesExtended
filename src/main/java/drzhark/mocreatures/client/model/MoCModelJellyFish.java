@@ -151,23 +151,23 @@ public class MoCModelJellyFish extends ModelBase {
         MoCEntityJellyFish jellyfish = (MoCEntityJellyFish) entity;
         boolean glowing = jellyfish.isGlowing();
         boolean outOfWater = !jellyfish.isInWater();
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
 
         if (outOfWater) {
-            GL11.glTranslatef(0F, 0.6F, -0.3F);
+            GlStateManager.translate(0F, 0.6F, -0.3F);
         } else {
-            GL11.glTranslatef(0F, 0.2F, 0F);
+            GlStateManager.translate(0F, 0.2F, 0F);
 
-            //GL11.glRotatef((float) (f1 * -60D), -1F, 0.0F, 0.0F);
+            //GlStateManager.rotate((float) (f1 * -60D), -1F, 0.0F, 0.0F);
 
         }*/
-        //GL11.glEnable(3042 /* GL_BLEND */);
+        //GlStateManager.enableBlend();
         /*if (!glowing || outOfWater) {
             float transparency = 0.7F;
-            GL11.glBlendFunc(770, 771);
-            GL11.glColor4f(0.8F, 0.8F, 0.8F, transparency);
+            GlStateManager.blendFunc(770, 771);
+            GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
         } else {
-            GL11.glBlendFunc(770, 1);
+            GlStateManager.blendFunc(770, 1);
         }*/
         this.Top.render(f5);
         this.Head.render(f5);
@@ -193,8 +193,8 @@ public class MoCModelJellyFish extends ModelBase {
         this.Leg8.render(f5);
         this.Leg9.render(f5);
 
-        //GL11.glDisable(3042/* GL_BLEND */);
-        //GL11.glPopMatrix();
+        //GlStateManager.disableBlend();
+        //GlStateManager.popMatrix();
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {

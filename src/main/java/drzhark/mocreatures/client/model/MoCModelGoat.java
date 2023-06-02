@@ -5,11 +5,11 @@ package drzhark.mocreatures.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelGoat extends ModelBase {
@@ -181,7 +181,7 @@ public class MoCModelGoat extends ModelBase {
         if (this.typeInt > 1 && this.typeInt < 5) {
             this.Tits.render(f5);
         }
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
 
         if (this.attacking != 0) {
             // float yOff = f5*((2.0F*attacking)/45F)-1.33333F;
@@ -193,7 +193,7 @@ public class MoCModelGoat extends ModelBase {
             float yOff = (this.attacking / 150F) - (1F / 5F);
             // float zOff = 0.1F;
             float zOff = (this.attacking / 450F) - (1F / 15F);
-            GL11.glTranslatef(0.0F, yOff, -zOff);
+            GlStateManager.translate(0.0F, yOff, -zOff);
         }
         this.LEar.render(f5);
         this.REar.render(f5);
@@ -227,9 +227,9 @@ public class MoCModelGoat extends ModelBase {
             }
         }
         // mouth movement
-        // GL11.glTranslatef(eatMov, 0.0F, 0.0F);
+        // GlStateManager.translate(eatMov, 0.0F, 0.0F);
         if (this.eatMov != 0 && !this.bleat) {
-            GL11.glTranslatef(this.eatMov / 100F, 0.0F, 0.0F);
+            GlStateManager.translate(this.eatMov / 100F, 0.0F, 0.0F);
         }
         if (this.typeInt > 4 && this.edad > 0.9) {
             this.Goatie.render(f5);
@@ -237,7 +237,7 @@ public class MoCModelGoat extends ModelBase {
         this.Tongue.render(f5);
         this.Mouth.render(f5);
 
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
     }
 

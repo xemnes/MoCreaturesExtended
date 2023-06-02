@@ -5,10 +5,10 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.model.MoCModelNewHorse;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderNewHorse extends MoCRenderMoC<MoCEntityHorse> {
@@ -23,7 +23,7 @@ public class MoCRenderNewHorse extends MoCRenderMoC<MoCEntityHorse> {
     }
 
     protected void adjustHeight(MoCEntityHorse entityhorse, float FHeight) {
-        GL11.glTranslatef(0.0F, FHeight, 0.0F);
+        GlStateManager.translate(0.0F, FHeight, 0.0F);
     }
 
     @Override
@@ -46,6 +46,6 @@ public class MoCRenderNewHorse extends MoCRenderMoC<MoCEntityHorse> {
         {
             sizeFactor *= 0.9F;
         }
-        GL11.glScalef(sizeFactor, sizeFactor, sizeFactor);
+        GlStateManager.scale(sizeFactor, sizeFactor, sizeFactor);
     }
 }

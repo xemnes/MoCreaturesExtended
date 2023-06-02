@@ -11,7 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelTurkey extends ModelBase {
@@ -120,11 +119,11 @@ public class MoCModelTurkey extends ModelBase {
             this.RFoot.render(f5);
             this.LLeg.render(f5);
             this.LFoot.render(f5);
-            GL11.glPushMatrix();
-            GL11.glScalef(0.8F, 0.8F, 1F);
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(0.8F, 0.8F, 1F);
             this.Body.render(f5);
             this.Chest.render(f5);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
             GlStateManager.popMatrix();
         } else {
             this.Beak.render(f5);
@@ -143,11 +142,11 @@ public class MoCModelTurkey extends ModelBase {
                 this.Chest.render(f5);
 
             } else {
-                GL11.glPushMatrix();
-                GL11.glScalef(0.8F, 0.8F, 1F);
+                GlStateManager.pushMatrix();
+                GlStateManager.scale(0.8F, 0.8F, 1F);
                 this.Body.render(f5);
                 this.Chest.render(f5);
-                GL11.glPopMatrix();
+                GlStateManager.popMatrix();
             }
         }
     }

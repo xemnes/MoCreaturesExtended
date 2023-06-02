@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.entity.item.MoCEntityEgg;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderEgg extends RenderLiving<MoCEntityEgg> {
@@ -28,7 +28,7 @@ public class MoCRenderEgg extends RenderLiving<MoCEntityEgg> {
 
     protected void stretch(MoCEntityEgg entityegg) {
         float f = entityegg.getSize() * 0.01F;
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 
     @Override

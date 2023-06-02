@@ -6,10 +6,10 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.entity.passive.MoCEntitySnake;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderSnake extends MoCRenderMoC<MoCEntitySnake> {
@@ -24,7 +24,7 @@ public class MoCRenderSnake extends MoCRenderMoC<MoCEntitySnake> {
     }
 
     protected void adjustHeight(MoCEntitySnake entitysnake, float FHeight) {
-        GL11.glTranslatef(0.0F, FHeight, 0.0F);
+        GlStateManager.translate(0.0F, FHeight, 0.0F);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MoCRenderSnake extends MoCRenderMoC<MoCEntitySnake> {
 
         /*
          * if(mod_mocreatures.mc.isMultiplayerWorld() &&
-         * (entitysnake.pickedUp())) { GL11.glTranslatef(0.0F, 1.4F, 0.0F); }
+         * (entitysnake.pickedUp())) { GlStateManager.translate(0.0F, 1.4F, 0.0F); }
          */
 
         if (entitysnake.pickedUp())// && entitysnake.getSizeF() < 0.6F)
@@ -43,16 +43,16 @@ public class MoCRenderSnake extends MoCRenderMoC<MoCEntitySnake> {
                 xOff = 0.0F;
             }
             if (entitysnake.world.isRemote) {
-                GL11.glTranslatef(xOff, 0.0F, 0F);
+                GlStateManager.translate(xOff, 0.0F, 0F);
             } else {
-                GL11.glTranslatef(xOff, 0F, 0.0F);
+                GlStateManager.translate(xOff, 0F, 0.0F);
                 //-0.5 puts it in the right shoulder
             }
             /*
-             * //if(small) //works for small snakes GL11.glRotatef(20F, 1F, 0F,
+             * //if(small) //works for small snakes GlStateManager.rotate(20F, 1F, 0F,
              * 0F); if(mod_mocreatures.mc.isMultiplayerWorld()) {
-             * GL11.glTranslatef(-0.5F, 1.4F, 0F); } else {
-             * GL11.glTranslatef(0.7F, 0F, 1.2F); }
+             * GlStateManager.translate(-0.5F, 1.4F, 0F); } else {
+             * GlStateManager.translate(0.7F, 0F, 1.2F); }
              */
         }
 
@@ -65,7 +65,7 @@ public class MoCRenderSnake extends MoCRenderMoC<MoCEntitySnake> {
 
     protected void stretch(MoCEntitySnake entitysnake) {
         float f = entitysnake.getSizeF();
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 
     /*

@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.ambient.MoCEntityDragonfly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelDragonfly extends ModelBase {
@@ -117,18 +117,18 @@ public class MoCModelDragonfly extends ModelBase {
         this.Mouth.render(f5);
         this.Thorax.render(f5);
 
-        GL11.glPushMatrix();
-        GL11.glEnable(3042 /* GL_BLEND */);
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
         float transparency = 0.6F;
-        GL11.glBlendFunc(770, 771);
-        GL11.glColor4f(0.8F, 0.8F, 0.8F, transparency);
-        //GL11.glScalef(1.3F, 1.0F, 1.3F);
+        GlStateManager.blendFunc(770, 771);
+        GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
+        //GlStateManager.scale(1.3F, 1.0F, 1.3F);
         this.WingRearRight.render(f5);
         this.WingFrontRight.render(f5);
         this.WingFrontLeft.render(f5);
         this.WingRearLeft.render(f5);
-        GL11.glDisable(3042/* GL_BLEND */);
-        GL11.glPopMatrix();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
 
     }
 

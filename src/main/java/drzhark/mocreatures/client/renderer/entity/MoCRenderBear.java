@@ -5,10 +5,10 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.model.MoCModelBear;
 import drzhark.mocreatures.entity.passive.MoCEntityBear;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderBear extends MoCRenderMoC<MoCEntityBear> {
@@ -30,7 +30,7 @@ public class MoCRenderBear extends MoCRenderMoC<MoCEntityBear> {
             sizeFactor = 1.0F;
         }
         sizeFactor *= entitybear.getBearSize();
-        GL11.glScalef(sizeFactor, sizeFactor, sizeFactor);
+        GlStateManager.scale(sizeFactor, sizeFactor, sizeFactor);
     }
 
     @Override

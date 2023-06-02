@@ -6,9 +6,9 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.monster.MoCEntitySilverSkeleton;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class MoCModelSilverSkeleton extends ModelBase {
 
@@ -141,23 +141,23 @@ public class MoCModelSilverSkeleton extends ModelBase {
         this.rightAttack = samurai.attackCounterRight;
         this.riding = samurai.getRidingEntity() != null;
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        GL11.glPushMatrix();
+        GlStateManager.pushMatrix();
         if (sprinting && f1 > 0.3F) {
-            //GL11.glPushMatrix();
-            GL11.glRotatef((float) (f1 * -20D), -1F, 0.0F, 0.0F);
+            //GlStateManager.pushMatrix();
+            GlStateManager.rotate((float) (f1 * -20D), -1F, 0.0F, 0.0F);
             //renderParts(f5);
-            //GL11.glPopMatrix();
+            //GlStateManager.popMatrix();
         }
         if (riding) {
 
-            GL11.glTranslatef(0.0F, 0.5F, 0.0F);
+            GlStateManager.translate(0.0F, 0.5F, 0.0F);
             //renderParts(f5);
-            //GL11.glPopMatrix();
+            //GlStateManager.popMatrix();
         }
         //renderParts(f5);
 
         renderParts(f5);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     private void renderParts(float f5) {

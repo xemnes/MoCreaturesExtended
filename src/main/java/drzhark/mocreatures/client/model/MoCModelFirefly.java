@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.ambient.MoCEntityFirefly;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelFirefly extends ModelBase {
@@ -130,38 +130,16 @@ public class MoCModelFirefly extends ModelBase {
             this.RightShellOpen.render(f5);
             this.LeftShellOpen.render(f5);
 
-            GL11.glPushMatrix();
-            GL11.glEnable(3042 /* GL_BLEND */);
+            GlStateManager.pushMatrix();
+            GlStateManager.enableBlend();
             float transparency = 0.6F;
-            GL11.glBlendFunc(770, 771);
-            GL11.glColor4f(0.8F, 0.8F, 0.8F, transparency);
+            GlStateManager.blendFunc(770, 771);
+            GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
             this.LeftWing.render(f5);
             this.RightWing.render(f5);
-            GL11.glDisable(3042/* GL_BLEND */);
-            GL11.glPopMatrix();
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
         }
-
-        //flag = glowing
-
-        //    boolean flag = true;
-        //    GL11.glPushMatrix();
-        //    GL11.glEnable(3042 /*GL_BLEND*/ );
-        //    if (!flag)
-        //    {
-        //        float transparency = 0.4F;
-        //        GL11.glBlendFunc(770, 771);
-        //        GL11.glColor4f(0.8F, 0.8F, 0.8F, transparency);
-        //    }
-        //    else
-        //    {
-        //        GL11.glBlendFunc(770, 1);
-        //        //GL11.glBlendFunc(770, GL11.GL_ONE);
-        //    }
-        //
-        //    GL11.glDisable(3042/*GL_BLEND*/);
-        //
-        //    GL11.glPopMatrix();
-
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

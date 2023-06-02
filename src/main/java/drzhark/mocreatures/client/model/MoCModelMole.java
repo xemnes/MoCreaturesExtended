@@ -6,9 +6,9 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.passive.MoCEntityMole;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.opengl.GL11;
 
 public class MoCModelMole extends ModelBase {
 
@@ -86,8 +86,8 @@ public class MoCModelMole extends ModelBase {
         setRotationAngles(f, f1, f2, f3, f4, f5);
         MoCEntityMole mole = (MoCEntityMole) entity;
         float yOffset = mole.getAdjustedYOffset();
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0F, yOffset, 0F);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0F, yOffset, 0F);
         this.Nose.render(f5);
         this.Head.render(f5);
         this.Body.render(f5);
@@ -99,7 +99,7 @@ public class MoCModelMole extends ModelBase {
         this.RFingers.render(f5);
         this.LRearLeg.render(f5);
         this.RRearLeg.render(f5);
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

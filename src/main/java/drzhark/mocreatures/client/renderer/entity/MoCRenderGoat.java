@@ -9,13 +9,13 @@ import drzhark.mocreatures.client.model.MoCModelGoat;
 import drzhark.mocreatures.entity.passive.MoCEntityGoat;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
@@ -35,7 +35,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
 
     @Override
     protected void preRenderCallback(MoCEntityGoat entitygoat, float f) {
-        GL11.glTranslatef(0.0F, this.depth, 0.0F);
+        GlStateManager.translate(0.0F, this.depth, 0.0F);
         stretch(entitygoat);
 
     }
@@ -63,16 +63,16 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                 s = s + entitygoat.getPetName();
                 float f5 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
-                GL11.glPushMatrix();
-                GL11.glTranslatef((float) d + 0.0F, (float) d1 + f5, (float) d2);
-                GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(-f3, -f3, f3);
-                GL11.glDisable(2896 /* GL_LIGHTING */);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate((float) d + 0.0F, (float) d1 + f5, (float) d2);
+                GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                GlStateManager.scale(-f3, -f3, f3);
+                GlStateManager.disableLighting();
                 Tessellator tessellator = Tessellator.getInstance();
                 byte byte0 = (byte) (-15 + (-40 * entitygoat.getEdad() * 0.01F));
                 if (flag1) {
-                    GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.disableTexture2D();
                     if (!flag) {
                         byte0 += 8;
                     }
@@ -92,14 +92,14 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                     tessellator.getBuffer().pos(f9 - 20F, -6 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                     tessellator.getBuffer().pos(f9 - 20F, -10 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                     tessellator.draw();
-                    GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.enableTexture2D();
                 }
                 if (flag) {
-                    GL11.glDepthMask(false);
-                    GL11.glDisable(2929 /* GL_DEPTH_TEST */);
-                    GL11.glEnable(3042 /* GL_BLEND */);
-                    GL11.glBlendFunc(770, 771);
-                    GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.depthMask(false);
+                    GlStateManager.disableDepth();
+                    GlStateManager.enableBlend();
+                    GlStateManager.blendFunc(770, 771);
+                    GlStateManager.disableTexture2D();
                     tessellator.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
                     int i = fontrenderer.getStringWidth(s) / 2;
                     tessellator.getBuffer().pos(-i - 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
@@ -107,22 +107,22 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                     tessellator.getBuffer().pos(i + 1, 8 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
                     tessellator.getBuffer().pos(i + 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
                     tessellator.draw();
-                    GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.enableTexture2D();
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);
-                    GL11.glEnable(2929 /* GL_DEPTH_TEST */);
-                    GL11.glDepthMask(true);
+                    GlStateManager.enableDepth();
+                    GlStateManager.depthMask(true);
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, -1);
-                    GL11.glDisable(3042 /* GL_BLEND */);
-                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    GlStateManager.disableBlend();
+                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 }
-                GL11.glEnable(2896 /* GL_LIGHTING */);
-                GL11.glPopMatrix();
+                GlStateManager.enableLighting();
+                GlStateManager.popMatrix();
             }
         }
 
     }
 
     protected void stretch(MoCEntityGoat entitygoat) {
-        GL11.glScalef(entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F);
+        GlStateManager.scale(entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F);
     }
 }

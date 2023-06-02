@@ -11,6 +11,7 @@ import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageUpdatePetName;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ChatAllowedCharacters;
@@ -18,7 +19,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
@@ -69,7 +69,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
     @Override
     public void drawScreen(int i, int j, float f) {
         drawDefaultBackground();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         textureManager.bindTexture(TEXTURE_MOCNAME);
         int l = (this.width - this.xSize) / 2;
         int i1 = (this.height - (this.ySize + 16)) / 2;

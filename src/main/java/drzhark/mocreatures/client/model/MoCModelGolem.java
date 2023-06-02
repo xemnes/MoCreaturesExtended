@@ -6,11 +6,11 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.monster.MoCEntityGolem;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCModelGolem extends ModelBase {
@@ -210,8 +210,8 @@ public class MoCModelGolem extends ModelBase {
         }
         float yOffset = entityG.getAdjustedYOffset();
         setRotationAngles(f, f1, f2, f3, f4, f5, openChest, isSummoning, throwing);
-        GL11.glPushMatrix();
-        GL11.glTranslatef(0F, yOffset, 0F);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0F, yOffset, 0F);
         for (int i = 0; i < 23; i++) {
             //blocksText[i] = entityG.getBlockText(i);
             if (this.blocksText[i] != 30) {
@@ -226,7 +226,7 @@ public class MoCModelGolem extends ModelBase {
             this.head.render(f5);
             this.chest.render(f5);
         }
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
     }
 

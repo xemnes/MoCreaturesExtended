@@ -7,12 +7,12 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.model.MoCModelKitty;
 import drzhark.mocreatures.entity.passive.MoCEntityKitty;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
@@ -43,12 +43,12 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
                     f5 = 0.4F;
                 }
 
-                GL11.glPushMatrix();
-                GL11.glTranslatef((float) d + 0.0F, (float) d1 - f5, (float) d2);
-                GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(-f3, -f3, f3);
-                GL11.glDisable(2896 /* GL_LIGHTING */);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate((float) d + 0.0F, (float) d1 - f5, (float) d2);
+                GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                GlStateManager.scale(-f3, -f3, f3);
+                GlStateManager.disableLighting();
                 Tessellator tessellator = Tessellator.getInstance();
 
                 if (flag2 && entitykitty.getIsEmo()) {
@@ -67,8 +67,8 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
                     tessellator.draw();
                 }
 
-                GL11.glEnable(2896 /* GL_LIGHTING */);
-                GL11.glPopMatrix();
+                GlStateManager.enableLighting();
+                GlStateManager.popMatrix();
             }
         }
     }
@@ -86,19 +86,19 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
     }
 
     protected void onMaBack(MoCEntityKitty entitykitty) {
-        GL11.glRotatef(90F, 0.0F, 0.0F, -1F);
+        GlStateManager.rotate(90F, 0.0F, 0.0F, -1F);
 
         if (!entitykitty.world.isRemote && (entitykitty.getRidingEntity() != null)) {
-            GL11.glTranslatef(-1.5F, 0.2F, -0.2F);
+            GlStateManager.translate(-1.5F, 0.2F, -0.2F);
         } else {
-            GL11.glTranslatef(0.1F, 0.2F, -0.2F);
+            GlStateManager.translate(0.1F, 0.2F, -0.2F);
         }
 
     }
 
     protected void onTheSide(MoCEntityKitty entityliving) {
-        GL11.glRotatef(90F, 0.0F, 0.0F, -1F);
-        GL11.glTranslatef(0.2F, 0.0F, -0.2F);
+        GlStateManager.rotate(90F, 0.0F, 0.0F, -1F);
+        GlStateManager.translate(0.2F, 0.0F, -0.2F);
     }
 
     @Override
@@ -123,16 +123,16 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
 
     protected void rotateAnimal(MoCEntityKitty entitykitty) {
         if (!entitykitty.onGround) {
-            GL11.glRotatef(90F, -1F, 0.0F, 0.0F);
+            GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
         }
     }
 
     protected void stretch(MoCEntityKitty entitykitty) {
-        GL11.glScalef(entitykitty.getEdad() * 0.01F, entitykitty.getEdad() * 0.01F, entitykitty.getEdad() * 0.01F);
+        GlStateManager.scale(entitykitty.getEdad() * 0.01F, entitykitty.getEdad() * 0.01F, entitykitty.getEdad() * 0.01F);
     }
 
     protected void upsideDown(MoCEntityKitty entitykitty) {
-        GL11.glRotatef(180F, 0.0F, 0.0F, -1F);
-        GL11.glTranslatef(-0.35F, 0F, -0.55F);
+        GlStateManager.rotate(180F, 0.0F, 0.0F, -1F);
+        GlStateManager.translate(-0.35F, 0F, -0.55F);
     }
 }

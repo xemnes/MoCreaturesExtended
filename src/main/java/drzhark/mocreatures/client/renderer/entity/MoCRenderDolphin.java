@@ -8,13 +8,13 @@ import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.entity.aquatic.MoCEntityDolphin;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
@@ -38,16 +38,16 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
                 s = s + entitydolphin.getPetName();
                 float f5 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
-                GL11.glPushMatrix();
-                GL11.glTranslatef((float) d + 0.0F, (float) d1 + f5, (float) d2);
-                GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(-f3, -f3, f3);
-                GL11.glDisable(2896 /* GL_LIGHTING */);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate((float) d + 0.0F, (float) d1 + f5, (float) d2);
+                GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                GlStateManager.scale(-f3, -f3, f3);
+                GlStateManager.disableLighting();
                 Tessellator tessellator = Tessellator.getInstance();
                 byte byte0 = -50;
                 if (flag1) {
-                    GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.disableTexture2D();
                     if (!flag) {
                         byte0 += 8;
                     }
@@ -67,14 +67,14 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
                     tessellator.getBuffer().pos(f9 - 20F, -6 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                     tessellator.getBuffer().pos(f9 - 20F, -10 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                     tessellator.draw();
-                    GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.enableTexture2D();
                 }
                 if (flag) {
-                    GL11.glDepthMask(false);
-                    GL11.glDisable(2929 /* GL_DEPTH_TEST */);
-                    GL11.glEnable(3042 /* GL_BLEND */);
-                    GL11.glBlendFunc(770, 771);
-                    GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.depthMask(false);
+                    GlStateManager.disableDepth();
+                    GlStateManager.enableBlend();
+                    GlStateManager.blendFunc(770, 771);
+                    GlStateManager.disableTexture2D();
                     tessellator.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
                     int i = fontrenderer.getStringWidth(s) / 2;
                     tessellator.getBuffer().pos(-i - 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
@@ -82,16 +82,16 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
                     tessellator.getBuffer().pos(i + 1, 8 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
                     tessellator.getBuffer().pos(i + 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
                     tessellator.draw();
-                    GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.enableTexture2D();
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);
-                    GL11.glEnable(2929 /* GL_DEPTH_TEST */);
-                    GL11.glDepthMask(true);
+                    GlStateManager.enableDepth();
+                    GlStateManager.depthMask(true);
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, -1);
-                    GL11.glDisable(3042 /* GL_BLEND */);
-                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    GlStateManager.disableBlend();
+                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 }
-                GL11.glEnable(2896 /* GL_LIGHTING */);
-                GL11.glPopMatrix();
+                GlStateManager.enableLighting();
+                GlStateManager.popMatrix();
             }
         }
     }
@@ -106,19 +106,19 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
             s = s + entitydolphin.getPetName();
             if ((f4 < 12F) && (s.length() > 0)) {
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
-                GL11.glPushMatrix();
-                GL11.glTranslatef((float) d + 0.0F, (float) d1 + 0.3F, (float) d2);
-                GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(-f3, -f3, f3);
-                GL11.glDisable(2896 /* GL_LIGHTING */);
-                GL11.glDepthMask(false);
-                GL11.glDisable(2929 /* GL_DEPTH_TEST */);
-                GL11.glEnable(3042 /* GL_BLEND */);
-                GL11.glBlendFunc(770, 771);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate((float) d + 0.0F, (float) d1 + 0.3F, (float) d2);
+                GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                GlStateManager.scale(-f3, -f3, f3);
+                GlStateManager.disableLighting();
+                GlStateManager.depthMask(false);
+                GlStateManager.disableDepth();
+                GlStateManager.enableBlend();
+                GlStateManager.blendFunc(770, 771);
                 Tessellator tessellator = Tessellator.getInstance();
                 byte byte0 = -50;
-                GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                GlStateManager.disableTexture2D();
                 tessellator.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
                 int i = fontrenderer.getStringWidth(s) / 2;
                 tessellator.getBuffer().pos(-i - 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
@@ -140,15 +140,15 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
                     tessellator.getBuffer().pos(f8 - 20F, -10 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                 }
                 tessellator.draw();
-                GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                GlStateManager.enableTexture2D();
                 fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);
-                GL11.glEnable(2929 /* GL_DEPTH_TEST */);
-                GL11.glDepthMask(true);
+                GlStateManager.enableDepth();
+                GlStateManager.depthMask(true);
                 fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, -1);
-                GL11.glEnable(2896 /* GL_LIGHTING */);
-                GL11.glDisable(3042 /* GL_BLEND */);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                GL11.glPopMatrix();
+                GlStateManager.enableLighting();
+                GlStateManager.disableBlend();
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.popMatrix();
             }
         }
     }
@@ -160,7 +160,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
     }
 
     protected void stretch(MoCEntityDolphin entitydolphin) {
-        GL11.glScalef(entitydolphin.getEdad() * 0.01F, entitydolphin.getEdad() * 0.01F, entitydolphin.getEdad() * 0.01F);
+        GlStateManager.scale(entitydolphin.getEdad() * 0.01F, entitydolphin.getEdad() * 0.01F, entitydolphin.getEdad() * 0.01F);
     }
 
     @Override

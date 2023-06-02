@@ -140,6 +140,19 @@ public class MoCModelFirefly extends ModelBase {
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
+
+        boolean flag = !entityfirefly.getEntityWorld().isDaytime();
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
+        if (!flag) {
+            float transparency = 0.4F;
+            GlStateManager.blendFunc(770, 771);
+            GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
+        } else {
+            GlStateManager.blendFunc(770, 1);
+        }
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

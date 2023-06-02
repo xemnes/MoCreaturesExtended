@@ -3,8 +3,10 @@
  */
 package drzhark.mocreatures.client.model;
 
+import drzhark.mocreatures.entity.aquatic.MoCEntityJellyFish;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -147,28 +149,24 @@ public class MoCModelJellyFish extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         setRotationAngles(f, f1, f2, f3, f4, f5);
-        /* Disable until transparency issues with players are fixed
         MoCEntityJellyFish jellyfish = (MoCEntityJellyFish) entity;
         boolean glowing = jellyfish.isGlowing();
         boolean outOfWater = !jellyfish.isInWater();
         GlStateManager.pushMatrix();
-
         if (outOfWater) {
             GlStateManager.translate(0F, 0.6F, -0.3F);
         } else {
             GlStateManager.translate(0F, 0.2F, 0F);
-
-            //GlStateManager.rotate((float) (f1 * -60D), -1F, 0.0F, 0.0F);
-
-        }*/
-        //GlStateManager.enableBlend();
-        /*if (!glowing || outOfWater) {
+            GlStateManager.rotate((float) (f1 * -60D), -1F, 0.0F, 0.0F);
+        }
+        GlStateManager.enableBlend();
+        if (!glowing || outOfWater) {
             float transparency = 0.7F;
             GlStateManager.blendFunc(770, 771);
             GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
         } else {
             GlStateManager.blendFunc(770, 1);
-        }*/
+        }
         this.Top.render(f5);
         this.Head.render(f5);
         this.HeadSmall.render(f5);
@@ -192,9 +190,8 @@ public class MoCModelJellyFish extends ModelBase {
         this.Leg7.render(f5);
         this.Leg8.render(f5);
         this.Leg9.render(f5);
-
-        //GlStateManager.disableBlend();
-        //GlStateManager.popMatrix();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {

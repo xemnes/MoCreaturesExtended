@@ -441,23 +441,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     }
 
     // Mojang changed offsets in 1.12 so this needs to be reviewed
-    /*@Override
+    @Override
     public double getYOffset() {
-        if (this.getRidingEntity() instanceof EntityPlayer && this.getRidingEntity() == MoCreatures.proxy.getPlayer() && this.world.isRemote) {
-            if (getKittyState() == 10) {
-                return (super.getYOffset() - 0.95F);
-            }
-            if (upsideDown()) {
-                return (super.getYOffset() - 1.55F);
-            }
-            if (onMaBack()) {
-                return (super.getYOffset() - 1.35F);
-            }
-        }
-
         if ((this.getRidingEntity() instanceof EntityPlayer) && this.world.isRemote) {
             if (getKittyState() == 10) {
-                return (super.getYOffset() + 0.45F);
+                return (super.getYOffset() + 0.4F);
             }
             if (upsideDown()) {
                 return (super.getYOffset() - 0.1F);
@@ -466,9 +454,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 return (super.getYOffset() + 0.1F);
             }
         }
-
         return super.getYOffset();
-    }*/
+    }
 
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
@@ -553,7 +540,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             setSitting(!getIsSitting());
             return true;
         }
-
         if (stack.isEmpty() && (getKittyState() > 2) && pickable()) {
             if (this.startRiding(player)) {
                 changeKittyState(15);
@@ -772,17 +758,14 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         break;
                     }
 
-                    if (this.itemAttackTarget != null) {
-                        if (getAttackTarget() != null) {
-                            float f1 = getDistance(getAttackTarget());
-                            if (f1 < 1.5F) {
-                                swingArm();
-                                if (this.rand.nextInt(10) == 0) {
-                                    //float force = 0.3F;
-                                    //if (type == 10) force = 0.2F;
-                                    MoCTools.bigsmack(this, this.itemAttackTarget, 0.3F);
-                                    //kittySmack(this, entityLivingToAttack);
-                                }
+                    if (this.itemAttackTarget != null && getAttackTarget() != null) {
+                        float f1 = getDistance(getAttackTarget());
+                        if (f1 < 1.5F) {
+                            swingArm();
+                            if (this.rand.nextInt(10) == 0) {
+                                float force = 0.3F;
+                                if (getType() == 10) force = 0.2F;
+                                MoCTools.bigsmack(this, this.itemAttackTarget, force);
                             }
                         }
                     }

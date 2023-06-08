@@ -77,7 +77,7 @@ public class MoCItems {
     public static final MoCItemSword bo = new MoCItemSword("bo", Item.ToolMaterial.IRON);
     public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", Item.ToolMaterial.IRON);
-    public static final MoCItemSword silversword = new MoCItemSword("silversword", EnumHelper.addToolMaterial("SILVER", 0, 177, 6.0F, 1.5F, 19));
+    public static final MoCItemSword silversword = new MoCItemSword("silversword", EnumHelper.addToolMaterial("SILVER", 0, 224, 6.0F, 3, 19));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", ToolMaterial.IRON, 4, false);
     public static final MoCItemSword scorpSwordFrost = new MoCItemSword("scorpswordfrost", ToolMaterial.IRON, 2, false);
     public static final MoCItemSword scorpSwordNether = new MoCItemSword("scorpswordnether", ToolMaterial.IRON, 3, false);

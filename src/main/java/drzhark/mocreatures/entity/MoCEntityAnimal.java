@@ -658,36 +658,24 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     public void moveEntityWithRiderUntamed(float strafe, float forward, EntityLivingBase passenger) {
         //Riding behaviour if untamed
-        if ((this.isBeingRidden()) && !getIsTamed()) {
-            if ((this.rand.nextInt(5) == 0) && !getIsJumping() && this.jumpPending) {
-                this.motionY += getCustomJump();
-                setIsJumping(true);
-                this.jumpPending = false;
-            }
+        if (!this.world.isRemote) {
             if (this.rand.nextInt(10) == 0) {
-                this.motionX += this.rand.nextDouble() / 30D;
-                this.motionZ += this.rand.nextDouble() / 10D;
+                this.motionX = this.rand.nextGaussian() / 30D;
+                this.motionZ = this.rand.nextGaussian() / 10D;
             }
-            if (!this.world.isRemote) {
-                move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            }
-            if (!this.world.isRemote && this.rand.nextInt(50) == 0) {
-                passenger.motionY += 0.9D;
-                passenger.motionZ -= 0.3D;
-                passenger.dismountRidingEntity();
-            }
-            if (this.onGround) {
-                setIsJumping(false);
-            }
-            if (!this.world.isRemote && this instanceof IMoCTameable && passenger instanceof EntityPlayer) {
-                int chance = (getMaxTemper() - getTemper());
-                if (chance <= 0) {
-                    chance = 1;
-                }
-                if (this.rand.nextInt(chance * 8) == 0) {
-                    MoCTools.tameWithName((EntityPlayer) passenger, (IMoCTameable) this);
-                }
 
+            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+
+            if (this.rand.nextInt(50) == 0) {
+                passenger.dismountRidingEntity();
+                this.jump();
+            }
+
+            if (this instanceof IMoCTameable && passenger instanceof EntityPlayer) {
+                int chance = (this.getMaxTemper() - this.getTemper());
+                if (chance <= 0) chance = 1;
+                if (this.rand.nextInt(chance * 8) == 0)
+                    MoCTools.tameWithName((EntityPlayer) passenger, (IMoCTameable) this);
             }
         }
     }

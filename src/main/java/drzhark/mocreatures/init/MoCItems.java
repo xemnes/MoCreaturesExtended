@@ -77,7 +77,7 @@ public class MoCItems {
     public static final MoCItemSword bo = new MoCItemSword("bo", Item.ToolMaterial.IRON);
     public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", Item.ToolMaterial.IRON);
-    public static final MoCItemSword silversword = new MoCItemSword("silversword", EnumHelper.addToolMaterial("SILVER", 0, 250, 6.0F, 4, 15));
+    public static final MoCItemSword silversword = new MoCItemSword("silversword", EnumHelper.addToolMaterial("SILVER", 0, 177, 6.0F, 1.5F, 19));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", ToolMaterial.IRON, 4, false);
     public static final MoCItemSword scorpSwordFrost = new MoCItemSword("scorpswordfrost", ToolMaterial.IRON, 2, false);
     public static final MoCItemSword scorpSwordNether = new MoCItemSword("scorpswordnether", ToolMaterial.IRON, 3, false);
@@ -86,9 +86,9 @@ public class MoCItems {
     public static final MoCItemWeapon scorpStingFrost = new MoCItemWeapon("scorpstingfrost", ToolMaterial.GOLD, 2, true);
     public static final MoCItemWeapon scorpStingNether = new MoCItemWeapon("scorpstingnether", ToolMaterial.GOLD, 3, true);
     public static final MoCItemWeapon scorpStingDirt = new MoCItemWeapon("scorpstingdirt", ToolMaterial.GOLD, 1, true);
-    public static final MoCItemWeapon tusksWood = new MoCItemWeapon("tuskswood", ToolMaterial.WOOD);
-    public static final MoCItemWeapon tusksIron = new MoCItemWeapon("tusksiron", ToolMaterial.IRON);
-    public static final MoCItemWeapon tusksDiamond = new MoCItemWeapon("tusksdiamond", ToolMaterial.DIAMOND);
+    public static final MoCItem tusksWood = new MoCItem("tuskswood");
+    public static final MoCItem tusksIron = new MoCItem("tusksiron");
+    public static final MoCItem tusksDiamond = new MoCItem("tusksdiamond");
     public static final MoCItem elephantHarness = new MoCItem("elephantharness");
     public static final MoCItem elephantChest = new MoCItem("elephantchest");
     public static final MoCItem elephantGarment = new MoCItem("elephantgarment");

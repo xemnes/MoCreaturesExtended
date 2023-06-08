@@ -59,8 +59,8 @@ public class MoCItemSword extends ItemSword {
             case 3: //fire
                 target.setFire(10);
                 break;
-            case 4: //confusion
-                target.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, potionTime, 0));
+            case 4: //weakness
+                target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, potionTime, 0));
                 break;
             case 5: //blindness
                 target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, potionTime, 0));

@@ -4,4 +4,6 @@
 
 * Project setup, bugfixes, turkey breeding ~ Dockter
 * Codebase cleanup, spawn logic, general maintenance ~ ACGaming
-* Entity spawn rules ~ xJon
+* Entity spawn rules, quality assurance ~ xJon
+* Language/model adjustments ~ IcarussOne
+* French translation ~ nocturni

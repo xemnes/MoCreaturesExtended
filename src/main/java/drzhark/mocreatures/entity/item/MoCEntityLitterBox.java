@@ -15,7 +15,6 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -119,14 +118,6 @@ public class MoCEntityLitterBox extends EntityLiving {
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && ((stack.getItem() == Items.STONE_PICKAXE) || (stack.getItem() == Items.WOODEN_PICKAXE)
-                || (stack.getItem() == Items.IRON_PICKAXE) || (stack.getItem() == Items.GOLDEN_PICKAXE) || (stack.getItem() == Items.DIAMOND_PICKAXE))) {
-            player.inventory.addItemStackToInventory(new ItemStack(MoCItems.litterbox));
-            this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.2F, (((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F) + 1.0F) * 2.0F);
-            setDead();
-            return true;
-        }
-
         if (!stack.isEmpty() && (stack.getItem() == Item.getItemFromBlock(Blocks.SAND))) {
             stack.shrink(1);
             if (stack.isEmpty()) {
@@ -136,7 +127,12 @@ public class MoCEntityLitterBox extends EntityLiving {
             this.littertime = 0;
             return true;
         }
-
+        if (player.isSneaking() && this.getRidingEntity() == null) {
+            player.inventory.addItemStackToInventory(new ItemStack(MoCItems.litterbox));
+            this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.2F, (((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F) + 1.0F) * 2.0F);
+            setDead();
+            return true;
+        }
         if (this.getRidingEntity() == null) {
             if (this.startRiding(player)) {
                 setPickedUp(true);

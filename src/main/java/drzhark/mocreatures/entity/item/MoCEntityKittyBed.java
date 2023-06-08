@@ -169,8 +169,7 @@ public class MoCEntityKittyBed extends EntityLiving {
             setHasFood(true);
             return true;
         }
-        if (!stack.isEmpty() && ((stack.getItem() == Items.STONE_PICKAXE) || (stack.getItem() == Items.WOODEN_PICKAXE)
-                || (stack.getItem() == Items.IRON_PICKAXE) || (stack.getItem() == Items.GOLDEN_PICKAXE) || (stack.getItem() == Items.DIAMOND_PICKAXE))) {
+        if (player.isSneaking() && this.getRidingEntity() == null) {
             final int color = getSheetColor();
             player.inventory.addItemStackToInventory(new ItemStack(MoCItems.kittybed[color], 1));
             this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.2F, (((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F) + 1.0F) * 2.0F);

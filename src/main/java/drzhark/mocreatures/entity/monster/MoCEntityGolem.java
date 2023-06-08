@@ -124,8 +124,8 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
             }
 
             if (getGolemState() != 0 && getGolemState() != 4 && isMissingCubes()) {
-                int freq = 21 - (getGolemState() * this.world.getDifficulty().getId());
-                if (getGolemState() == 1) freq = 10;
+                int freq = 42 - (getGolemState() * this.world.getDifficulty().getId());
+                if (getGolemState() == 1) freq = 20;
                 if (this.rand.nextInt(freq) == 0) acquireRock(2);
             }
 
@@ -170,11 +170,11 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     private void destroyGolem() {
         List<Integer> usedBlocks = usedCubes();
-        if ((!usedBlocks.isEmpty()) && (MoCTools.mobGriefing(this.world)) && (MoCreatures.proxy.golemDestroyBlocks)) {
+        if (!usedBlocks.isEmpty() && MoCTools.mobGriefing(this.world) && MoCreatures.proxy.golemDestroyBlocks) {
             for (Integer usedBlock : usedBlocks) {
                 Block block = Block.getBlockById(generateBlock(this.golemCubes[usedBlock]));
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(block, 1, 0));
-                entityitem.setPickupDelay(10);
+                entityitem.setDefaultPickupDelay();
                 this.world.spawnEntity(entityitem);
             }
         }
@@ -333,10 +333,12 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
      */
     private void destroyRandomGolemCube() {
         int i = getRandomUsedCube();
-        if (i == 4) return; //do not destroy the valuable back cube
+        if (i == 4) return; // do not destroy the valuable back cube
 
         int x = i;
-        if (this.golemCubes[i + 1] != 30 && (i == 10 || i == 13 || i == 16 || i == 19)) x = i + 1;
+        if (i == 10 || i == 13 || i == 16 || i == 19) {
+            if (this.golemCubes[i + 1] != 30) x = i + 1;
+        }
 
         if (i == 9 || i == 12 || i == 15 || i == 18) {
             if (this.golemCubes[i + 2] != 30) x = i + 2;
@@ -349,7 +351,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_HURT, 3F);
             if ((MoCTools.mobGriefing(this.world)) && (MoCreatures.proxy.golemDestroyBlocks)) {
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(block, 1, 0));
-                entityitem.setPickupDelay(10);
+                entityitem.setDefaultPickupDelay();
                 this.world.spawnEntity(entityitem);
             }
         }

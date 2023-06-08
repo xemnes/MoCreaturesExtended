@@ -39,12 +39,12 @@ public class MoCItemWeapon extends MoCItem {
         this.material = par2ToolMaterial;
         this.maxStackSize = 1;
         this.setMaxDamage(par2ToolMaterial.getMaxUses());
-        this.attackDamage = 4F + par2ToolMaterial.getAttackDamage();
+        this.attackDamage = 3F + par2ToolMaterial.getAttackDamage();
     }
 
     /**
      * @param damageType 0 = default, 1 = poison, 2 = slow down, 3 = fire, 4 =
-     *                   confusion, 5 = blindness
+     *                   weakness, 5 = blindness
      */
     public MoCItemWeapon(String name, ToolMaterial par2ToolMaterial, int damageType, boolean fragile) {
         this(name, par2ToolMaterial);
@@ -79,7 +79,7 @@ public class MoCItemWeapon extends MoCItem {
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target, EntityLivingBase attacker) {
         int i = 1;
         if (this.breakable) {
-            i = 10;
+            i = 5;
         }
         par1ItemStack.damageItem(i, attacker);
         int potionTime = 100;
@@ -93,8 +93,8 @@ public class MoCItemWeapon extends MoCItem {
             case 3: //fire
                 target.setFire(10);
                 break;
-            case 4: //confusion
-                target.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, potionTime, 0));
+            case 4: //weakness
+                target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, potionTime, 0));
                 break;
             case 5: //blindness
                 target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, potionTime, 0));

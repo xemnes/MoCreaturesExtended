@@ -203,7 +203,7 @@ public class MoCModelGolem extends ModelBase {
         boolean openChest = entityG.openChest();
         boolean isSummoning = entityG.isMissingCubes();
         boolean angry = entityG.getGolemState() > 1;
-        boolean throwing = (entityG.tcounter > 25);
+        boolean throwing = (entityG.tCounter > 25);
 
         for (int i = 0; i < 23; i++) {
             this.blocksText[i] = entityG.getBlockText(i);

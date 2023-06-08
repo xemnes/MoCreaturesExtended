@@ -134,7 +134,7 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
         if (this.tcounter >= 50) {
             //throws a newly spawned Trock and destroys the held Trock
             if (this.getAttackTarget() != null && this.getDistance(this.getAttackTarget()) < 48F) {
-                MoCTools.ThrowStone(this, this.getAttackTarget(), this.tempRock.getState(), 10D, 0.25D);
+                MoCTools.throwStone(this, this.getAttackTarget(), this.tempRock.getState(), 10D, 0.25D);
             }
 
             this.tempRock.setDead();

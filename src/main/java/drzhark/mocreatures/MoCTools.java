@@ -1176,6 +1176,17 @@ public class MoCTools {
         return new BlockPos(MathHelper.floor(tempX), MathHelper.floor(tempY), MathHelper.floor(tempZ));
     }
 
+    public static BlockPos getRandomSurfaceBlockPos(Entity entity, int distance) {
+        BlockPos pos = entity.getPosition();
+        World world = entity.getEntityWorld();
+
+        int x = pos.getX() + world.rand.nextInt(distance * 2 + 1) - distance;
+        int z = pos.getZ() + world.rand.nextInt(distance * 2 + 1) - distance;
+        int y = world.getHeight(new BlockPos(x, 0, z)).getY() - 1;
+
+        return new BlockPos(x, y, z);
+    }
+
     public static boolean allowedBlock(int ID) {
         return ID != 0 && ID != 7 //bedrock
                 && ID != 8 //water
@@ -1564,15 +1575,15 @@ public class MoCTools {
     /**
      * Throws stone at entity
      */
-    public static void ThrowStone(Entity throwerEntity, Entity targetEntity, IBlockState state, double speedMod, double height) {
-        ThrowStone(throwerEntity, (int) targetEntity.posX, (int) targetEntity.posY, (int) targetEntity.posZ, state, speedMod, height);
+    public static void throwStone(Entity throwerEntity, Entity targetEntity, IBlockState state, double speedMod, double height) {
+        throwStone(throwerEntity, (int) targetEntity.posX, (int) targetEntity.posY, (int) targetEntity.posZ, state, speedMod, height);
     }
 
     /**
      * Throws stone at X,Y,Z coordinates
      */
-    public static void ThrowStone(Entity throwerEntity, int X, int Y, int Z, IBlockState state) {
-        ThrowStone(throwerEntity, X, Y, Z, state, 10D, 0.25D);
+    public static void throwStone(Entity throwerEntity, int X, int Y, int Z, IBlockState state) {
+        throwStone(throwerEntity, X, Y, Z, state, 10D, 0.25D);
         /*MoCEntityThrowableRock etrock = new MoCEntityThrowableRock(throwerEntity.world, throwerEntity, throwerEntity.posX, throwerEntity.posY + 0.5D, throwerEntity.posZ);//, false, false);
         throwerEntity.world.spawnEntity(etrock);
         etrock.setState(state);
@@ -1582,7 +1593,7 @@ public class MoCTools {
         etrock.motionZ = ((Z - throwerEntity.posZ) / 10.0D);*/
     }
 
-    public static void ThrowStone(Entity throwerEntity, int X, int Y, int Z, IBlockState state, double speedMod, double height) {
+    public static void throwStone(Entity throwerEntity, int X, int Y, int Z, IBlockState state, double speedMod, double height) {
         MoCEntityThrowableRock etrock = new MoCEntityThrowableRock(throwerEntity.world, throwerEntity, throwerEntity.posX, throwerEntity.posY + 0.5D, throwerEntity.posZ);//, false, false);
         throwerEntity.world.spawnEntity(etrock);
         etrock.setState(state);

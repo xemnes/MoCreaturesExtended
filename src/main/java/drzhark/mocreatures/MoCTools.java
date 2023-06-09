@@ -78,7 +78,7 @@ public class MoCTools {
      */
     @SuppressWarnings("deprecation")
     public static void performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
-        if (spawnList.isEmpty()) return;
+        if (spawnList == null || spawnList.isEmpty()) return;
         while (random.nextFloat() < Math.min(biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier, 0.5F)) {
             Biome.SpawnListEntry spawnListEntry = WeightedRandom.getRandomItem(random, spawnList);
             int minCount = Math.min(spawnListEntry.minGroupCount, 1);

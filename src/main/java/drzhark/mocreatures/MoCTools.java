@@ -1004,27 +1004,27 @@ public class MoCTools {
         mystack[2] = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST); //plate
         mystack[3] = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD); //helmet
 
-        //full scorpion cave armor set, enable night vision
+        //full scorpion cave armor set, enable strength
         if (mystack[0].getItem() == MoCItems.scorpBootsCave && mystack[1].getItem() == MoCItems.scorpLegsCave && mystack[2].getItem() == MoCItems.scorpPlateCave && mystack[3].getItem() == MoCItems.scorpHelmetCave) {
-            player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 70, 0));
             return;
         }
 
         //full scorpion nether armor set, enable fire resistance
         if (mystack[0].getItem() == MoCItems.scorpBootsNether && mystack[1].getItem() == MoCItems.scorpLegsNether && mystack[2].getItem() == MoCItems.scorpPlateNether && mystack[3].getItem() == MoCItems.scorpHelmetNether) {
-            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 70, 0));
             return;
         }
 
-        //full scorpion frost armor set, enable water breathing
+        //full scorpion frost armor set, enable resistance
         if (mystack[0].getItem() == MoCItems.scorpBootsFrost && mystack[1].getItem() == MoCItems.scorpLegsFrost && mystack[2].getItem() == MoCItems.scorpPlateFrost && mystack[3].getItem() == MoCItems.scorpHelmetFrost) {
-            player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 70, 0));
             return;
         }
 
-        //full scorpion armor set, regeneration effect
+        //full scorpion armor set, enable health boost
         if (mystack[0].getItem() == MoCItems.scorpBootsDirt && mystack[1].getItem() == MoCItems.scorpLegsDirt && mystack[2].getItem() == MoCItems.scorpPlateDirt && mystack[3].getItem() == MoCItems.scorpHelmetDirt) {
-            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 70, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 70, 1));
         }
     }
 

@@ -52,7 +52,7 @@ public class MoCItemSword extends ItemSword {
         int potionTime = 100;
         switch (this.specialWeaponType) {
             case 1: //poison
-                target.addPotionEffect(new PotionEffect(MobEffects.POISON, potionTime, 0));
+                target.addPotionEffect(new PotionEffect(MobEffects.POISON, potionTime, 1));
                 break;
             case 2: //frost slowdown
                 target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, potionTime, 0));

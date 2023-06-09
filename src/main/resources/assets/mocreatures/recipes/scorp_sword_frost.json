@@ -1,19 +1,23 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "minecraft:diamond_sword"
-    },
-    {
-      "item": "mocreatures:scorpstingfrost"
-    },
-    {
-      "item": "mocreatures:scorpstingfrost"
-    },
-    {
-      "item": "mocreatures:scorpstingfrost"
-    }
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S",
+    "G",
+    "C"
   ],
+  "key": {
+    "S": {
+      "item": "mocreatures:scorpstingfrost",
+      "data": 32767
+    },
+	"G": {
+      "item": "minecraft:golden_sword",
+      "data": 32767
+    },
+	"C": {
+      "item": "mocreatures:chitinfrost"
+    }
+  },
   "result": {
     "item": "mocreatures:scorpswordfrost"
   }

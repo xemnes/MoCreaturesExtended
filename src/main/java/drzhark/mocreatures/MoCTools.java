@@ -984,19 +984,7 @@ public class MoCTools {
         }
         return count;
     }
-
-    /**
-     * Forces a data sync between server/client. currently used to syncrhonize
-     * mounts
-     */
-    /*public static void forceDataSync(IMoCEntity entityMoCreature) {
-        if (entityMoCreature.updateMount() && ((Entity) entityMoCreature).getRidingEntity() != null) {
-            MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAttachedEntity(((Entity) entityMoCreature).getEntityId(),
-                    ((Entity) entityMoCreature).getRidingEntity().getEntityId()), new TargetPoint(
-                    ((Entity) entityMoCreature).getRidingEntity().world.provider.getDimensionType().getId(), ((Entity) entityMoCreature).getRidingEntity().posX,
-                    ((Entity) entityMoCreature).getRidingEntity().posY, ((Entity) entityMoCreature).getRidingEntity().posZ, 64));
-        }
-    }*/
+    
     public static void updatePlayerArmorEffects(EntityPlayer player) {
         ItemStack[] mystack = new ItemStack[4];
         mystack[0] = player.getItemStackFromSlot(EntityEquipmentSlot.FEET); //boots
@@ -1016,15 +1004,15 @@ public class MoCTools {
             return;
         }
 
-        //full scorpion frost armor set, enable water breathing
+        //full scorpion frost armor set, enable resistance
         if (mystack[0].getItem() == MoCItems.scorpBootsFrost && mystack[1].getItem() == MoCItems.scorpLegsFrost && mystack[2].getItem() == MoCItems.scorpPlateFrost && mystack[3].getItem() == MoCItems.scorpHelmetFrost) {
-            player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 0));
             return;
         }
 
-        //full scorpion armor set, regeneration effect
+        //full scorpion armor set, enable health boost
         if (mystack[0].getItem() == MoCItems.scorpBootsDirt && mystack[1].getItem() == MoCItems.scorpLegsDirt && mystack[2].getItem() == MoCItems.scorpPlateDirt && mystack[3].getItem() == MoCItems.scorpHelmetDirt) {
-            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 70, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1));
         }
     }
 

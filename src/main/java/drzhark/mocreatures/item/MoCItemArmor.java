@@ -84,7 +84,7 @@ public class MoCItemArmor extends ItemArmor {
      */
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        if (world.rand.nextInt(50) == 0) {
+        if (player.ticksExisted % 40 == 0) {
             player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
             ItemStack stack = player.getItemStackFromSlot(EntityEquipmentSlot.FEET);
             if (!stack.isEmpty() && stack.getItem() instanceof MoCItemArmor) {

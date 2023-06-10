@@ -61,7 +61,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     public MoCEntityBigCat(World world) {
         super(world);
-        setEdad(45);
+        setAge(45);
         setSize(1.4F, 1.3F);
         setAdult(this.rand.nextInt(4) != 0);
         this.stepHeight = 1.0F;
@@ -98,7 +98,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
-            setEdad(getMaxEdad());
+            setAge(getMaxEdad());
         }
     }
 
@@ -267,7 +267,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 }
 
                 ghost.setAdult(false);
-                ghost.setEdad(1);
+                ghost.setAge(1);
                 ghost.setType(this.getType());
                 ghost.selectType();
                 ghost.setIsGhost(true);
@@ -302,15 +302,15 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             }
         } else //server stuff
         {
-            if (getIsGhost() && getEdad() > 0 && getEdad() < 10 && this.rand.nextInt(5) == 0) {
-                setEdad(getEdad() + 1);
-                if (getEdad() == 9) {
-                    setEdad(getMaxEdad());
+            if (getIsGhost() && getAge() > 0 && getAge() < 10 && this.rand.nextInt(5) == 0) {
+                setAge(getAge() + 1);
+                if (getAge() == 9) {
+                    setAge(getMaxEdad());
                     setAdult(true);
                 }
             }
 
-            if (!getIsGhost() && getEdad() < 10) {
+            if (!getIsGhost() && getAge() < 10) {
                 this.setDead();
             }
             /*if (getHasEaten() && rand.nextInt(300) == 0)
@@ -379,7 +379,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     @Override
     public boolean isNotScared() {
-        return getIsAdult() || getEdad() > 80;
+        return getIsAdult() || getAge() > 80;
     }
 
     @Override
@@ -490,7 +490,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             setHasEaten(true);
             return true;
         }
-        if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getEdad() > 80)
+        if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getAge() > 80)
                 && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
             stack.shrink(1);
             if (stack.isEmpty()) {
@@ -542,7 +542,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     @Override
     public float getSizeFactor() {
-        return getEdad() * 0.01F;
+        return getAge() * 0.01F;
     }
 
     @Override
@@ -631,7 +631,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     @Override
     public double getMountedYOffset() {
-        double Yfactor = ((0.0833D * this.getEdad()) - 2.5D) / 10D;
+        double Yfactor = ((0.0833D * this.getAge()) - 2.5D) / 10D;
         return this.height * Yfactor;
     }
 
@@ -642,7 +642,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             this.fTransparency = (this.rand.nextFloat() * (0.4F - 0.2F) + 0.15F);
         }
 
-        if (this.getEdad() < 10) {
+        if (this.getAge() < 10) {
             return 0F;
         }
         return this.fTransparency;
@@ -650,7 +650,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     @Override
     public int nameYOffset() {
-        return (int) (((0.445D * this.getEdad()) + 15D) * -1);
+        return (int) (((0.445D * this.getAge()) + 15D) * -1);
     }
 
     @Override

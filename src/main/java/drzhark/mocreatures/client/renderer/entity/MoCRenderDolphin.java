@@ -160,7 +160,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
     }
 
     protected void stretch(MoCEntityDolphin entitydolphin) {
-        GlStateManager.scale(entitydolphin.getEdad() * 0.01F, entitydolphin.getEdad() * 0.01F, entitydolphin.getEdad() * 0.01F);
+        GlStateManager.scale(entitydolphin.getAge() * 0.01F, entitydolphin.getAge() * 0.01F, entitydolphin.getAge() * 0.01F);
     }
 
     @Override

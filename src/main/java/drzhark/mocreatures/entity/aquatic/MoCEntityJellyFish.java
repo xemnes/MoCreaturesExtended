@@ -25,7 +25,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     public MoCEntityJellyFish(World world) {
         super(world);
         setSize(0.3F, 0.5F);
-        setEdad(50 + (this.rand.nextInt(50)));
+        setAge(50 + (this.rand.nextInt(50)));
     }
 
     @Override
@@ -132,7 +132,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
     @Override
     public int nameYOffset() {
-        return (int) (getEdad() * -1 / 2.3);
+        return (int) (getAge() * -1 / 2.3);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
         if (myMoveSpeed > 0F)
             pulseSpeed = 0.5F;
         float pulseSize = MathHelper.cos(this.ticksExisted * pulseSpeed) * 0.2F;
-        return getEdad() * 0.01F + (pulseSize / 5);
+        return getAge() * 0.01F + (pulseSize / 5);
     }
 
     @Override

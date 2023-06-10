@@ -158,7 +158,7 @@ public class MoCRenderShark extends RenderLiving<MoCEntityShark> {
     }
 
     protected void stretch(MoCEntityShark entityshark) {
-        GlStateManager.scale(entityshark.getEdad() * 0.01F, entityshark.getEdad() * 0.01F, entityshark.getEdad() * 0.01F);
+        GlStateManager.scale(entityshark.getAge() * 0.01F, entityshark.getAge() * 0.01F, entityshark.getAge() * 0.01F);
     }
 
     @Override

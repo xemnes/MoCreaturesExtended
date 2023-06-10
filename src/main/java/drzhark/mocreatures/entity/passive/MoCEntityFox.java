@@ -35,7 +35,7 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
     public MoCEntityFox(World world) {
         super(world);
         setSize(0.6F, 0.7F);
-        setEdad(this.rand.nextInt(15) + 50);
+        setAge(this.rand.nextInt(15) + 50);
         setAdult(this.rand.nextInt(3) != 0);
     }
 
@@ -121,8 +121,8 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
             }
             this.setHealth(getMaxHealth());
 
-            if (!this.world.isRemote && !getIsAdult() && (getEdad() < 100)) {
-                setEdad(getEdad() + 1);
+            if (!this.world.isRemote && !getIsAdult() && (getAge() < 100)) {
+                setAge(getAge() + 1);
             }
 
             return true;
@@ -201,6 +201,6 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
         if (getIsAdult()) {
             return 0.9F;
         }
-        return 0.9F * getEdad() * 0.01F;
+        return 0.9F * getAge() * 0.01F;
     }
 }

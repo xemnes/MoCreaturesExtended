@@ -128,7 +128,7 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
     }
 
     protected void stretch(MoCEntityKitty entitykitty) {
-        GlStateManager.scale(entitykitty.getEdad() * 0.01F, entitykitty.getEdad() * 0.01F, entitykitty.getEdad() * 0.01F);
+        GlStateManager.scale(entitykitty.getAge() * 0.01F, entitykitty.getAge() * 0.01F, entitykitty.getAge() * 0.01F);
     }
 
     protected void upsideDown(MoCEntityKitty entitykitty) {

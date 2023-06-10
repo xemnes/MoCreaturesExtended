@@ -58,9 +58,9 @@ public interface IMoCEntity {
 
     float pitchRotationOffset();
 
-    int getEdad();
+    int getAge();
 
-    void setEdad(int i);
+    void setAge(int i);
 
     float yawRotationOffset();
 

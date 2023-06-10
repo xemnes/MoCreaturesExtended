@@ -39,7 +39,7 @@ public class MoCRenderOstrich extends MoCRenderMoC<MoCEntityOstrich> {
 
     protected void stretch(MoCEntityOstrich entityostrich) {
 
-        float f = entityostrich.getEdad() * 0.01F;
+        float f = entityostrich.getAge() * 0.01F;
         GlStateManager.scale(f, f, f);
     }
 }

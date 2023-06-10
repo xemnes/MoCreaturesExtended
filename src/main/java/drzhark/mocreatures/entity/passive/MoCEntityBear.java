@@ -52,7 +52,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     public MoCEntityBear(World world) {
         super(world);
         setSize(1.2F, 1.5F);
-        setEdad(55);
+        setAge(55);
         setAdult(this.rand.nextInt(4) != 0);
         this.stepHeight = 1.0F;
     }
@@ -135,7 +135,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
-            setEdad(getMaxEdad());
+            setAge(getMaxEdad());
         }
     }
 
@@ -209,7 +209,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (this.attackCounter > 0 && ++this.attackCounter > 9) {
             this.attackCounter = 0;
         }
-        if (!this.world.isRemote && !getIsAdult() && getEdad() < 80 && (this.rand.nextInt(300) == 0)) {
+        if (!this.world.isRemote && !getIsAdult() && getAge() < 80 && (this.rand.nextInt(300) == 0)) {
             setBearState(2);
         }
         /*
@@ -339,7 +339,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getEdad() > 80)
+        if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getAge() > 80)
                 && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
             stack.shrink(1);
             if (stack.isEmpty()) {
@@ -383,13 +383,13 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
     @Override
     public double getMountedYOffset() {
-        double Yfactor = ((0.086D * this.getEdad()) - 2.5D) / 10D;
+        double Yfactor = ((0.086D * this.getAge()) - 2.5D) / 10D;
         return this.height * Yfactor;
     }
 
     @Override
     public int nameYOffset() {
-        return (int) (((0.445D * this.getEdad()) + 15D) * -1);
+        return (int) (((0.445D * this.getAge()) + 15D) * -1);
     }
 
     @Override
@@ -399,7 +399,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
     @Override
     public float getSizeFactor() {
-        return getEdad() * 0.01F;
+        return getAge() * 0.01F;
     }
 
     @Override
@@ -415,7 +415,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (getIsAdult()) {
             return (-55);
         }
-        return (100 / getEdad()) * (-40);
+        return (100 / getAge()) * (-40);
     }*/
 
     @Override

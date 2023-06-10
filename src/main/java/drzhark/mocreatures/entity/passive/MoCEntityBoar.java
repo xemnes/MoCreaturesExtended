@@ -31,7 +31,7 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     public MoCEntityBoar(World world) {
         super(world);
         setSize(0.9F, 0.8F);
-        setEdad(this.rand.nextInt(15) + 45);
+        setAge(this.rand.nextInt(15) + 45);
         setAdult(this.rand.nextInt(4) != 0);
     }
 
@@ -125,7 +125,7 @@ public class MoCEntityBoar extends MoCEntityAnimal {
         if (getIsAdult()) {
             return 1F;
         }
-        return getEdad() * 0.01F;
+        return getAge() * 0.01F;
     }
 
 }

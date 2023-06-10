@@ -135,12 +135,12 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     }
 
     @Override
-    public int getEdad() {
+    public int getAge() {
         return this.dataManager.get(AGE);
     }
 
     @Override
-    public void setEdad(int i) {
+    public void setAge(int i) {
         this.dataManager.set(AGE, i);
     }
 
@@ -218,10 +218,10 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
                     }
                 }
             }
-            if (getEdad() == 0) setEdad(getMaxEdad() - 10); //fixes tiny creatures spawned by error
+            if (getAge() == 0) setAge(getMaxEdad() - 10); //fixes tiny creatures spawned by error
             if (!getIsAdult() && (this.rand.nextInt(300) == 0)) {
-                setEdad(getEdad() + 1);
-                if (getEdad() >= getMaxEdad()) {
+                setAge(getAge() + 1);
+                if (getAge() >= getMaxEdad()) {
                     setAdult(true);
                 }
             }
@@ -264,7 +264,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         super.writeEntityToNBT(nbttagcompound);
         //nbttagcompound = MoCTools.getEntityData(this);
         nbttagcompound.setBoolean("Adult", getIsAdult());
-        nbttagcompound.setInteger("Edad", getEdad());
+        nbttagcompound.setInteger("Edad", getAge());
         nbttagcompound.setString("Name", getPetName());
         nbttagcompound.setInteger("TypeInt", getType());
 
@@ -275,7 +275,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         super.readEntityFromNBT(nbttagcompound);
         //nbttagcompound = MoCTools.getEntityData(this);
         setAdult(nbttagcompound.getBoolean("Adult"));
-        setEdad(nbttagcompound.getInteger("Edad"));
+        setAge(nbttagcompound.getInteger("Edad"));
         setPetName(nbttagcompound.getString("Name"));
         setType(nbttagcompound.getInteger("TypeInt"));
 

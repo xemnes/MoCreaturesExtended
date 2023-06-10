@@ -13,7 +13,7 @@ public class MoCEntityMantaRay extends MoCEntityRay {
     public MoCEntityMantaRay(World world) {
         super(world);
         setSize(1.8F, 1F);
-        setEdad(80 + (this.rand.nextInt(100)));
+        setAge(80 + (this.rand.nextInt(100)));
     }
 
     @Override

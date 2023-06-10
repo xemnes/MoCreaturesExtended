@@ -30,7 +30,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         super(world);
         this.texture = "shark.png";
         setSize(1.7F, 0.8F);
-        setEdad(60 + this.rand.nextInt(100));
+        setAge(60 + this.rand.nextInt(100));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
             for (int l = 0; l < j; l++) {
                 entityDropItem(new ItemStack(MoCItems.sharkteeth, 1, 0), 0.0F);
             }
-        } else if ((this.world.getDifficulty().getId() > 0) && (getEdad() > 150)) {
+        } else if ((this.world.getDifficulty().getId() > 0) && (getAge() > 150)) {
             int k = this.rand.nextInt(3);
             for (int i1 = 0; i1 < k; i1++) {
                 entityDropItem(new ItemStack(MoCItems.mocegg, 1, 11), 0.0F);
@@ -89,7 +89,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     }
 
     protected Entity findPlayerToAttack() {
-        if ((this.world.getDifficulty().getId() > 0) && (getEdad() >= 100)) {
+        if ((this.world.getDifficulty().getId() > 0) && (getAge() >= 100)) {
             EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 16D);
             if ((entityplayer != null) && entityplayer.isInWater() && !getIsTamed()) {
                 return entityplayer;
@@ -126,8 +126,8 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
             if (!getIsAdult() && (this.rand.nextInt(50) == 0)) {
-                setEdad(getEdad() + 1);
-                if (getEdad() >= 200) {
+                setAge(getAge() + 1);
+                if (getAge() >= 200) {
                     setAdult(true);
                 }
             }

@@ -68,7 +68,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         super(world);
         setSize(0.7F, 0.5F);
         setAdult(true);
-        setEdad(40);
+        setAge(40);
         setKittyState(1);
         this.kittytimer = 0;
         this.madtimer = this.rand.nextInt(5);
@@ -259,6 +259,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public void fall(float f, float f1) {
+        // No fall damage
     }
 
     @Override
@@ -536,7 +537,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             }
             return true;
         }
-        if (!stack.isEmpty() && (getKittyState() > 2) && whipeable() && (stack.getItem() == MoCItems.whip)) {
+        if (!stack.isEmpty() && (getKittyState() > 2) && whipable() && (stack.getItem() == MoCItems.whip)) {
             setSitting(!getIsSitting());
             return true;
         }
@@ -585,8 +586,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 setIsEmo(!getIsEmo());
             }
             if (!getIsAdult() && (this.rand.nextInt(200) == 0)) {
-                setEdad(getEdad() + 1);
-                if (getEdad() >= 100) {
+                setAge(getAge() + 1);
+                if (getAge() >= 100) {
                     setAdult(true);
                 }
             }
@@ -835,18 +836,17 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                             swingArm();
                             if (this.rand.nextInt(10) == 0) {
                                 MoCTools.bigsmack(this, this.itemAttackTarget, 0.2F);
-                                //kittySmack(this, entityLivingToAttack);
                             }
                         }
                     }
-                    if (getAttackTarget() != null && (getAttackTarget() instanceof MoCEntityKitty) && (this.rand.nextInt(20) == 0)) {
+                    if (getAttackTarget() instanceof MoCEntityKitty && (this.rand.nextInt(20) == 0)) {
                         float f3 = getDistance(getAttackTarget());
                         if (f3 < 2.0F) {
                             swingArm();
                             this.getNavigator().clearPath();
                         }
                     }
-                    if ((getAttackTarget() == null) || !(getAttackTarget() instanceof EntityPlayer)) {
+                    if (!(getAttackTarget() instanceof EntityPlayer)) {
                         break;
                     }
                     float f4 = getDistance(getAttackTarget());
@@ -979,9 +979,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         }
                         break;
                     }
-                    if (!getOnTree()) {
-                        break;
-                    }
                     int l = this.treeCoord[0];
                     int j1 = this.treeCoord[1];
                     int l1 = this.treeCoord[2];
@@ -1029,7 +1026,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     break;
 
                 case 18: // '\022'
-                    if ((getAttackTarget() == null) || !(getAttackTarget() instanceof MoCEntityKitty)) {
+                    if (!(getAttackTarget() instanceof MoCEntityKitty)) {
                         changeKittyState(9);
                         break;
                     }
@@ -1116,7 +1113,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         }
                         this.kittytimer = 1000;
                     }
-                    if ((getAttackTarget() != null) && (getAttackTarget() instanceof EntityPlayer) && (this.rand.nextInt(300) == 0)) {
+                    if (getAttackTarget() instanceof EntityPlayer && this.rand.nextInt(300) == 0) {
                         setAttackTarget(null);
                     }
                     break;
@@ -1163,8 +1160,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public void setDead() {
-        if (!this.world.isRemote && (getKittyState() > 2) && (getHealth() > 0)) {
-        } else {
+        if (this.world.isRemote || getKittyState() <= 2 || getHealth() <= 0) {
             super.setDead();
         }
     }
@@ -1190,7 +1186,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         return getKittyState() == 14;
     }
 
-    public boolean whipeable() {
+    public boolean whipable() {
         return getKittyState() != 13;
     }
 
@@ -1218,23 +1214,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         nbttagcompound.setInteger("KittyState", getKittyState());
     }
 
-    /*@Override
-    public boolean updateMount() {
-        return true;
-    }*/
-
-    /*@Override
-    public boolean forceUpdates() {
-        return true;
-    }*/
-
     //drops medallion on death
     @Override
     public void onDeath(DamageSource damagesource) {
-        if (!this.world.isRemote) {
-            if (getIsTamed()) {
-                MoCTools.dropCustomItem(this, this.world, new ItemStack(MoCItems.medallion, 1));
-            }
+        if (!this.world.isRemote && getIsTamed()) {
+            MoCTools.dropCustomItem(this, this.world, new ItemStack(MoCItems.medallion, 1));
         }
         super.onDeath(damagesource);
     }

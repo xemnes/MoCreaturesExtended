@@ -45,7 +45,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
         super(world);
         setAdult(true);
         setTamed(false);
-        setEdad(50 + this.rand.nextInt(15));
+        setAge(50 + this.rand.nextInt(15));
         if (this.rand.nextInt(4) == 0) {
             setAdult(false);
         }

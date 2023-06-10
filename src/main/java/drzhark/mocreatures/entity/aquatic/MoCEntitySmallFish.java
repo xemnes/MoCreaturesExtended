@@ -24,7 +24,7 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
     public MoCEntitySmallFish(World world) {
         super(world);
         setSize(0.3F, 0.3F);
-        setEdad(70 + this.rand.nextInt(30));
+        setAge(70 + this.rand.nextInt(30));
     }
 
     public static MoCEntitySmallFish createEntity(World world, int type) {
@@ -132,7 +132,7 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
 
     @Override
     public float getSizeFactor() {
-        return getEdad() * 0.01F;
+        return getAge() * 0.01F;
     }
 
     @Override

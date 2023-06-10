@@ -92,7 +92,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         this.eatenPumpkin = false;
         this.nightmareInt = 0;
         this.isImmuneToFire = false;
-        setEdad(50);
+        setAge(50);
         setIsChested(false);
         this.stepHeight = 1.0F;
 
@@ -512,7 +512,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     @Override
     public boolean renderName() {
-        if (getIsGhost() && getEdad() < 10) return false;
+        if (getIsGhost() && getAge() < 10) return false;
         return super.renderName();
     }
 
@@ -848,7 +848,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 iteratorTex = iteratorTex.substring(0, 1);
             }
 
-            String decayTex = String.valueOf(getEdad() / 100);
+            String decayTex = String.valueOf(getAge() / 100);
             decayTex = decayTex.substring(0, 1);
             return MoCreatures.proxy.getTexture(baseTex + decayTex + iteratorTex + ".png");
         }
@@ -1372,7 +1372,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             // to return undead horses to pristine conditions
             if (this.isUndead() && this.getIsAdult() && !this.world.isRemote) {
-                setEdad(10);
+                setAge(10);
                 if (this.getType() >= 26) setType(getType() - 3);
             }
             drinkingHorse();
@@ -1479,7 +1479,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             if ((getHealth() + 5) > getMaxHealth()) this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getEdad() < getMaxEdad())) setEdad(getEdad() + 1);
+            if (!getIsAdult() && (getAge() < getMaxEdad())) setAge(getAge() + 1);
             return true;
         }
 
@@ -1492,7 +1492,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             if ((getHealth() + 10) > getMaxHealth()) this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getEdad() < getMaxEdad())) setEdad(getEdad() + 2);
+            if (!getIsAdult() && (getAge() < getMaxEdad())) setAge(getAge() + 2);
             return true;
         }
 
@@ -1505,7 +1505,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             if ((getHealth() + 20) > getMaxHealth()) this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getEdad() < getMaxEdad())) setEdad(getEdad() + 3);
+            if (!getIsAdult() && (getAge() < getMaxEdad())) setAge(getAge() + 3);
             return true;
         }
 
@@ -1515,7 +1515,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (!this.world.isRemote) MoCTools.tameWithName(player, this);
             this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getEdad() < getMaxEdad()) && !this.world.isRemote) setEdad(getEdad() + 1);
+            if (!getIsAdult() && (getAge() < getMaxEdad()) && !this.world.isRemote) setAge(getAge() + 1);
             return true;
         }
 
@@ -1727,7 +1727,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     @Override
     public int nameYOffset() {
         if (this.getIsAdult()) return -80;
-        else return (-5 - getEdad());
+        else return (-5 - getAge());
     }
 
     private boolean nearMusicBox() {
@@ -1797,7 +1797,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 if (entityplayer != null) MoCTools.tameWithName(entityplayer, entityhorse1);
 
                 entityhorse1.setAdult(false);
-                entityhorse1.setEdad(1);
+                entityhorse1.setAge(1);
                 int l = 22;
                 if (this.isFlyer()) l = 21;
                 entityhorse1.setType(l);
@@ -1834,8 +1834,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         if (isUndead() && (this.getType() < 26) && getIsAdult() && (this.rand.nextInt(20) == 0)) {
             if (!this.world.isRemote) {
-                if (this.rand.nextInt(16) == 0) setEdad(getEdad() + 1);
-                if (getEdad() >= 399) setType(this.getType() + 3);
+                if (this.rand.nextInt(16) == 0) setAge(getAge() + 1);
+                if (getAge() >= 399) setType(this.getType() + 3);
             } else UndeadFX();
         }
 
@@ -1878,8 +1878,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
              * foal following mommy!
              */
             /*if (!getIsAdult() && (this.rand.nextInt(200) == 0)) {
-                setEdad(getEdad() + 1);
-                if (getEdad() >= 100) {
+                setAge(getAge() + 1);
+                if (getAge() >= 100) {
                     setAdult(true);
                     setBred(false);
                     MoCEntityHorse mommy = getClosestMommy(this, 16D);
@@ -2063,10 +2063,10 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
         }
 
-        if (getIsGhost() && getEdad() < 10 && this.rand.nextInt(7) == 0) setEdad(getEdad() + 1);
+        if (getIsGhost() && getAge() < 10 && this.rand.nextInt(7) == 0) setAge(getAge() + 1);
 
-        if (getIsGhost() && getEdad() == 9) {
-            setEdad(100);
+        if (getIsGhost() && getAge() == 9) {
+            setAge(100);
             setAdult(true);
         }
     }
@@ -2155,7 +2155,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             this.transFloat = (this.rand.nextFloat() * (0.6F - 0.3F) + 0.3F);
         }
 
-        if (getIsGhost() && getEdad() < 10) this.transFloat = 0;
+        if (getIsGhost() && getAge() < 10) this.transFloat = 0;
 
         return this.transFloat;
     }

@@ -100,8 +100,8 @@ public class MoCEntityPandaBear extends MoCEntityBear {
 
             this.setHealth(getMaxHealth());
             eatingAnimal();
-            if (!this.world.isRemote && !getIsAdult() && (getEdad() < 100)) {
-                setEdad(getEdad() + 1);
+            if (!this.world.isRemote && !getIsAdult() && (getAge() < 100)) {
+                setAge(getAge() + 1);
             }
 
             return true;

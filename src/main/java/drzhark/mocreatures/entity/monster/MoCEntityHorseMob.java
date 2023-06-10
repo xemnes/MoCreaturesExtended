@@ -110,7 +110,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
 
                 String iteratorTex = String.valueOf(this.textCounter);
                 iteratorTex = iteratorTex.substring(0, 1);
-                String decayTex = String.valueOf(getEdad() / 100);
+                String decayTex = String.valueOf(getAge() / 100);
                 decayTex = decayTex.substring(0, 1);
                 return MoCreatures.proxy.getTexture(baseTex + decayTex + iteratorTex + ".png");
 

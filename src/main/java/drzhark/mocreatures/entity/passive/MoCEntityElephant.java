@@ -73,7 +73,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         super(world);
         setAdult(true);
         setTamed(false);
-        setEdad(50);
+        setAge(50);
         setSize(1.1F, 3F); //TODO 
         this.stepHeight = 1.0F;
 
@@ -618,7 +618,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         }
 
         if (!getIsAdult()) {
-            sizeF = sizeF * (getEdad() * 0.01F);
+            sizeF = sizeF * (getAge() * 0.01F);
         }
         return sizeF;
     }
@@ -870,7 +870,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        if (!getIsAdult() && getEdad() < 80) {
+        if (!getIsAdult() && getAge() < 80) {
             return MoCSoundEvents.ENTITY_ELEPHANT_AMBIENT_BABY;
         }
         return MoCSoundEvents.ENTITY_ELEPHANT_AMBIENT;
@@ -943,7 +943,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
     @Override
     public int nameYOffset() {
-        int yOff = (int) ((100 / getEdad()) * (getSizeFactor() * -110));
+        int yOff = (int) ((100 / getAge()) * (getSizeFactor() * -110));
         if (getIsAdult()) {
             yOff = (int) (getSizeFactor() * -110);
         }
@@ -995,6 +995,6 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
     @Override
     public boolean isNotScared() {
-        return getIsAdult() || getEdad() > 80 || getIsTamed();
+        return getIsAdult() || getAge() > 80 || getIsTamed();
     }
 }

@@ -41,7 +41,7 @@ public class MoCRenderFishy extends RenderLiving<MoCEntityFishy> {
     }
 
     protected void stretch(MoCEntityFishy entityfishy) {
-        GlStateManager.scale(entityfishy.getEdad() * 0.01F, entityfishy.getEdad() * 0.01F, entityfishy.getEdad() * 0.01F);
+        GlStateManager.scale(entityfishy.getAge() * 0.01F, entityfishy.getAge() * 0.01F, entityfishy.getAge() * 0.01F);
     }
 
     @Override

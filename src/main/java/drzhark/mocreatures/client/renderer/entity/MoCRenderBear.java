@@ -25,7 +25,7 @@ public class MoCRenderBear extends MoCRenderMoC<MoCEntityBear> {
     }
 
     protected void stretch(MoCEntityBear entitybear) {
-        float sizeFactor = entitybear.getEdad() * 0.01F;
+        float sizeFactor = entitybear.getAge() * 0.01F;
         if (entitybear.getIsAdult()) {
             sizeFactor = 1.0F;
         }

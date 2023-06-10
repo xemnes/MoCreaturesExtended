@@ -49,9 +49,9 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         this.stepHeight = 1.0F;
 
         if (this.rand.nextInt(6) == 0) {
-            setEdad(30 + this.rand.nextInt(40));
+            setAge(30 + this.rand.nextInt(40));
         } else {
-            setEdad(90 + this.rand.nextInt(20));
+            setAge(90 + this.rand.nextInt(20));
         }
     }
 
@@ -174,7 +174,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
     @Override
     protected void dropFewItems(boolean flag, int x) {
-        boolean flag2 = (getEdad() > 90 && this.rand.nextInt(5) == 0);
+        boolean flag2 = (getAge() > 90 && this.rand.nextInt(5) == 0);
 
         if (flag2) {
             int j = this.rand.nextInt(2) + 1;
@@ -190,7 +190,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     public float getSizeFactor() {
         if (!getIsAdult()) {
-            return getEdad() * 0.01F;
+            return getAge() * 0.01F;
         }
         return 1.2F;
     }
@@ -203,7 +203,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && getIsTamed() && (getEdad() > 90 || getIsAdult()) && !getIsRideable()
+        if (!stack.isEmpty() && getIsTamed() && (getAge() > 90 || getIsAdult()) && !getIsRideable()
                 && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
             stack.shrink(1);
             if (stack.isEmpty()) {
@@ -213,7 +213,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (getIsRideable() && getIsTamed() && getEdad() > 90 && (!this.isBeingRidden())) {
+        if (getIsRideable() && getIsTamed() && getAge() > 90 && (!this.isBeingRidden())) {
             if (!this.world.isRemote && player.startRiding(this)) {
                 player.rotationYaw = this.rotationYaw;
                 player.rotationPitch = this.rotationPitch;
@@ -240,7 +240,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         if (getIsAdult()) {
             return (-50);
         }
-        return (-50 + (getEdad() / 2));
+        return (-50 + (getAge() / 2));
     }
 
     @Override
@@ -266,7 +266,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         if (getIsAdult()) {
             return yOff + (this.height);
         }
-        return this.height * ((double) 120 / getEdad());
+        return this.height * ((double) 120 / getAge());
     }
 
     @Override
@@ -330,7 +330,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
     @Override
     public boolean isNotScared() {
-        return getEdad() > 70;
+        return getAge() > 70;
     }
 
     @Override

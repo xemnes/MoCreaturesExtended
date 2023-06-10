@@ -71,7 +71,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     public MoCEntityOstrich(World world) {
         super(world);
         setSize(1.0F, 1.6F);
-        setEdad(35);
+        setAge(35);
         this.eggCounter = this.rand.nextInt(1000) + 1000;
         this.stepHeight = 1.0F;
     }
@@ -447,8 +447,8 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
             if (getType() == 1 && (this.rand.nextInt(200) == 0)) {
                 //when is chick and becomes adult, change over to different type
-                setEdad(getEdad() + 1);
-                if (getEdad() >= 100) {
+                setAge(getAge() + 1);
+                if (getAge() >= 100) {
                     setAdult(true);
                     setType(0);
                     selectType();
@@ -836,7 +836,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         if (getType() > 1) {
             return -105;
         } else {
-            return (-5 - getEdad());
+            return (-5 - getAge());
         }
     }
 

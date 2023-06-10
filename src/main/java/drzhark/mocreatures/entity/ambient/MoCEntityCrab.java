@@ -24,7 +24,7 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     public MoCEntityCrab(World world) {
         super(world);
         setSize(0.3F, 0.3F);
-        setEdad(50 + this.rand.nextInt(50));
+        setAge(50 + this.rand.nextInt(50));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     @SideOnly(Side.CLIENT)
     @Override
     public float getSizeFactor() {
-        return 0.7F * getEdad() * 0.01F;
+        return 0.7F * getAge() * 0.01F;
     }
 
     @Override

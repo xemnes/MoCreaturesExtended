@@ -53,7 +53,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
         setSize(1.4F, 0.9F);
         this.poisontimer = 0;
         setAdult(true);
-        setEdad(20);
+        setAge(20);
 
         if (!this.world.isRemote) {
             setHasBabies(this.rand.nextInt(4) == 0);
@@ -291,7 +291,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
                 MoCEntityPetScorpion entityscorpy = new MoCEntityPetScorpion(this.world);
                 entityscorpy.setPosition(this.posX, this.posY, this.posZ);
                 entityscorpy.setAdult(false);
-                entityscorpy.setEdad(20);
+                entityscorpy.setAge(20);
                 entityscorpy.setType(getType());
                 this.world.spawnEntity(entityscorpy);
                 MoCTools.playCustomSound(entityscorpy, SoundEvents.ENTITY_CHICKEN_EGG);
@@ -429,7 +429,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
 
     @Override
     public boolean isNotScared() {
-        return getIsAdult() || this.getEdad() > 70;
+        return getIsAdult() || this.getAge() > 70;
     }
 
     @Override

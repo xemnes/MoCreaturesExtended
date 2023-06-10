@@ -42,7 +42,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         super(world);
         this.texture = "crocodile.png";
         setSize(1.4F, 0.6F); //it was 2.0, 0.6F
-        setEdad(50 + this.rand.nextInt(50));
+        setAge(50 + this.rand.nextInt(50));
         setTamed(false);
     }
 
@@ -292,7 +292,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         }
         int direction;
 
-        double dist = getEdad() * 0.01F + passenger.width - 0.4D;
+        double dist = getAge() * 0.01F + passenger.width - 0.4D;
         double newPosX = this.posX - (dist * Math.cos((MoCTools.realAngle(this.rotationYaw - 90F)) / 57.29578F));
         double newPosZ = this.posZ - (dist * Math.sin((MoCTools.realAngle(this.rotationYaw - 90F)) / 57.29578F));
         passenger.setPosition(newPosX, this.posY + getMountedYOffset() + passenger.getYOffset(), newPosZ);

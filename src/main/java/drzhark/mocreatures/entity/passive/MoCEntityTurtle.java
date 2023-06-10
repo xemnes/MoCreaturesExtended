@@ -44,7 +44,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
         super(world);
         setSize(0.6F, 0.4F);
         setAdult(false);
-        setEdad(60 + this.rand.nextInt(50));
+        setAge(60 + this.rand.nextInt(50));
     }
 
     @Override
@@ -116,9 +116,9 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     public double getYOffset() {
         if (this.getRidingEntity() instanceof EntityPlayer) {
             if (this.getRidingEntity().isSneaking()) {
-                return -0.25D + ((300D - this.getEdad()) / 500D);
+                return -0.25D + ((300D - this.getAge()) / 500D);
             }
-            return (300D - this.getEdad()) / 500D;
+            return (300D - this.getAge()) / 500D;
         }
 
         return super.getYOffset();
@@ -256,8 +256,8 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
             }
         }
         //to make mega turtles if tamed
-        if (getIsTamed() && getEdad() < 300 && this.rand.nextInt(900) == 0) {
-            setEdad(getEdad() + 1);
+        if (getIsTamed() && getAge() < 300 && this.rand.nextInt(900) == 0) {
+            setAge(getAge() + 1);
         }
         if (getIsUpsideDown() && isInWater()) {
             setIsUpsideDown(false);
@@ -387,7 +387,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
 
     @Override
     public int nameYOffset() {
-        return -10 - (getEdad() / 5);
+        return -10 - (getAge() / 5);
     }
 
     @Override
@@ -405,12 +405,12 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
 
     @Override
     protected double minDivingDepth() {
-        return (getEdad() + 8D) / 340D;
+        return (getAge() + 8D) / 340D;
     }
 
     @Override
     protected double maxDivingDepth() {
-        return (this.getEdad() / 100D);
+        return (this.getAge() / 100D);
     }
 
     @Override

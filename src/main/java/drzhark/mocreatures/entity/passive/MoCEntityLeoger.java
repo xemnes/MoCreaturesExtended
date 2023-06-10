@@ -88,7 +88,7 @@ public class MoCEntityLeoger extends MoCEntityBigCat {
 
     @Override
     public boolean canAttackTarget(EntityLivingBase entity) {
-        if (!this.getIsAdult() && (this.getEdad() < this.getMaxEdad() * 0.8)) {
+        if (!this.getIsAdult() && (this.getAge() < this.getMaxEdad() * 0.8)) {
             return false;
         }
         if (entity instanceof MoCEntityLeoger) {

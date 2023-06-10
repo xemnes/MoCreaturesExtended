@@ -29,7 +29,7 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
             rotateAnimal(entityscorpion);
         }
         if (sitting) {
-            float factorY = 0.4F * (entityscorpion.getEdad() / 100F);
+            float factorY = 0.4F * (entityscorpion.getAge() / 100F);
             GlStateManager.translate(0F, factorY, 0F);
         }
         if (!entityscorpion.getIsAdult()) {
@@ -59,7 +59,7 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
 
         float f = 1.1F;
         if (!entityscorpion.getIsAdult()) {
-            f = entityscorpion.getEdad() * 0.01F;
+            f = entityscorpion.getAge() * 0.01F;
         }
         GlStateManager.scale(f, f, f);
     }

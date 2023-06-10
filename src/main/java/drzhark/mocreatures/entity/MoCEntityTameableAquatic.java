@@ -500,7 +500,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
                     ((EntityLiving) baby).setPosition(this.posX, this.posY, this.posZ);
                     this.world.spawnEntity((EntityLiving) baby);
                     baby.setAdult(false);
-                    baby.setEdad(35);
+                    baby.setAge(35);
                     baby.setTamed(true);
                     baby.setOwnerId(this.getOwnerId());
                     baby.setType(getOffspringTypeInt((IMoCTameable) mate));

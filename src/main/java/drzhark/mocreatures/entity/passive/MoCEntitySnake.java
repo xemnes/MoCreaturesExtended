@@ -64,7 +64,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         setSize(1.4F, 0.5F);
         this.bodyswing = 2F;
         this.movInt = this.rand.nextInt(10);
-        setEdad(50 + this.rand.nextInt(50));
+        setAge(50 + this.rand.nextInt(50));
     }
 
     @Override
@@ -183,7 +183,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
     @Override
     public boolean isNotScared() {
-        return getType() > 2 && getEdad() > 50;
+        return getType() > 2 && getAge() > 50;
     }
 
     /**
@@ -244,7 +244,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         {
             factor = 1.5F;
         }
-        return this.getEdad() * 0.01F * factor;
+        return this.getAge() * 0.01F * factor;
     }
 
     @Override
@@ -490,7 +490,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
     @Override
     protected void dropFewItems(boolean flag, int x) {
-        if (getEdad() > 60) {
+        if (getAge() > 60) {
             int j = this.rand.nextInt(3);
             for (int l = 0; l < j; l++) {
 
@@ -680,6 +680,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
 
     @Override
     protected double maxDivingDepth() {
-        return (this.getEdad() / 100D);
+        return (this.getAge() / 100D);
     }
 }

@@ -43,7 +43,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     @Override
     public void doRender(MoCEntityGoat entitygoat, double d, double d1, double d2, float f, float f1) {
         this.tempGoat.typeInt = entitygoat.getType();
-        this.tempGoat.edad = entitygoat.getEdad() * 0.01F;
+        this.tempGoat.edad = entitygoat.getAge() * 0.01F;
         this.tempGoat.bleat = entitygoat.getBleating();
         this.tempGoat.attacking = entitygoat.getAttacking();
         this.tempGoat.legMov = entitygoat.legMovement();
@@ -70,7 +70,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                 GlStateManager.scale(-f3, -f3, f3);
                 GlStateManager.disableLighting();
                 Tessellator tessellator = Tessellator.getInstance();
-                byte byte0 = (byte) (-15 + (-40 * entitygoat.getEdad() * 0.01F));
+                byte byte0 = (byte) (-15 + (-40 * entitygoat.getAge() * 0.01F));
                 if (flag1) {
                     GlStateManager.disableTexture2D();
                     if (!flag) {
@@ -123,6 +123,6 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     }
 
     protected void stretch(MoCEntityGoat entitygoat) {
-        GlStateManager.scale(entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F, entitygoat.getEdad() * 0.01F);
+        GlStateManager.scale(entitygoat.getAge() * 0.01F, entitygoat.getAge() * 0.01F, entitygoat.getAge() * 0.01F);
     }
 }

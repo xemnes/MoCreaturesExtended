@@ -75,7 +75,7 @@ public class MoCEntityPolarBear extends MoCEntityBear {
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && this.getEdad() < 80 && MoCTools.isItemEdibleforCarnivores(stack.getItem())) {
+        if (!stack.isEmpty() && this.getAge() < 80 && MoCTools.isItemEdibleforCarnivores(stack.getItem())) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
@@ -87,8 +87,8 @@ public class MoCEntityPolarBear extends MoCEntityBear {
 
             this.setHealth(getMaxHealth());
             eatingAnimal();
-            if (!this.world.isRemote && !getIsAdult() && (getEdad() < 100)) {
-                setEdad(getEdad() + 1);
+            if (!this.world.isRemote && !getIsAdult() && (getAge() < 100)) {
+                setAge(getAge() + 1);
             }
 
             return true;

@@ -53,7 +53,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     public MoCEntityGoat(World world) {
         super(world);
         setSize(0.8F, 1F);
-        setEdad(70);
+        setAge(70);
     }
 
     @Override
@@ -108,25 +108,25 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
             int i = this.rand.nextInt(100);
             if (i <= 15) {
                 setType(1);
-                setEdad(50);
+                setAge(50);
             } else if (i <= 30) {
                 setType(2);
-                setEdad(70);
+                setAge(70);
             } else if (i <= 45) {
                 setType(3);
-                setEdad(70);
+                setAge(70);
             } else if (i <= 60) {
                 setType(4);
-                setEdad(70);
+                setAge(70);
             } else if (i <= 75) {
                 setType(5);
-                setEdad(90);
+                setAge(90);
             } else if (i <= 90) {
                 setType(6);
-                setEdad(90);
+                setAge(90);
             } else {
                 setType(7);
-                setEdad(90);
+                setAge(90);
             }
         }
 
@@ -208,9 +208,9 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
             this.hungry = false;
         }
 
-        if (!this.world.isRemote && (getEdad() < 90 || getType() > 4 && getEdad() < 100) && this.rand.nextInt(500) == 0) {
-            setEdad(getEdad() + 1);
-            if (getType() == 1 && getEdad() > 70) {
+        if (!this.world.isRemote && (getAge() < 90 || getType() > 4 && getAge() < 100) && this.rand.nextInt(500) == 0) {
+            setAge(getAge() + 1);
+            if (getType() == 1 && getAge() > 70) {
                 int i = this.rand.nextInt(6) + 2;
                 setType(i);
 

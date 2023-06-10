@@ -58,7 +58,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         setSize(1.4F, 0.9F);
         this.poisontimer = 0;
         setAdult(false);
-        setEdad(20);
+        setAge(20);
         setHasBabies(false);
         this.stepHeight = 20.0F;
     }
@@ -425,7 +425,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (this.getRidingEntity() == null && this.getEdad() < 60 && !getIsAdult()) {
+        if (this.getRidingEntity() == null && this.getAge() < 60 && !getIsAdult()) {
             if (this.startRiding(player)) {
                 this.rotationYaw = player.rotationYaw;
                 if (!this.world.isRemote && !getIsTamed()) {
@@ -472,7 +472,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
     @Override
     public int nameYOffset() {
-        int n = (int) (1 - (getEdad() * 0.8));
+        int n = (int) (1 - (getAge() * 0.8));
         if (n < -60) {
             n = -60;
         }

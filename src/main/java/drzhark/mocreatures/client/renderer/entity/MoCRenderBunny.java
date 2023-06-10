@@ -54,7 +54,7 @@ public class MoCRenderBunny extends MoCRenderMoC<MoCEntityBunny> {
     }
 
     protected void stretch(MoCEntityBunny entitybunny) {
-        float f = entitybunny.getEdad() * 0.01F;
+        float f = entitybunny.getAge() * 0.01F;
         GlStateManager.scale(f, f, f);
     }
 }

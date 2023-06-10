@@ -105,7 +105,7 @@ public class MoCItemPetAmulet extends MoCItem {
                     storedCreature.setOwnerId(player.getUniqueID());
                     this.ownerName = player.getName();
                     ((EntityLiving) storedCreature).setHealth(this.health);
-                    storedCreature.setEdad(this.edad);
+                    storedCreature.setAge(this.edad);
                     storedCreature.setAdult(this.adult);
                     if (storedCreature instanceof MoCEntityBigCat) {
                         ((MoCEntityBigCat) storedCreature).setHasAmulet(true);

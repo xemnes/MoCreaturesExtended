@@ -38,7 +38,7 @@ public class MoCRenderNewHorse extends MoCRenderMoC<MoCEntityHorse> {
     }
 
     protected void stretch(MoCEntityHorse entityhorse) {
-        float sizeFactor = entityhorse.getEdad() * 0.01F;
+        float sizeFactor = entityhorse.getAge() * 0.01F;
         if (entityhorse.getIsAdult()) {
             sizeFactor = 1.0F;
         }

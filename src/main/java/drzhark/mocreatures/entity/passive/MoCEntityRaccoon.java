@@ -29,7 +29,7 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
         super(world);
         setSize(0.5F, 0.6F);
         this.texture = "raccoon.png";
-        setEdad(50 + this.rand.nextInt(15));
+        setAge(50 + this.rand.nextInt(15));
 
         setAdult(this.rand.nextInt(3) != 0);
     }
@@ -92,8 +92,8 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
             }
             this.setHealth(getMaxHealth());
 
-            if (!this.world.isRemote && !getIsAdult() && (getEdad() < 100)) {
-                setEdad(getEdad() + 1);
+            if (!this.world.isRemote && !getIsAdult() && (getAge() < 100)) {
+                setAge(getAge() + 1);
             }
 
             return true;
@@ -132,7 +132,7 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
         if (getIsAdult()) {
             return 0.85F;
         }
-        return 0.85F * getEdad() * 0.01F;
+        return 0.85F * getAge() * 0.01F;
     }
 
     @Override

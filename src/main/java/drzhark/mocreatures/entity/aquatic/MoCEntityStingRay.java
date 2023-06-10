@@ -23,7 +23,7 @@ public class MoCEntityStingRay extends MoCEntityRay {
     public MoCEntityStingRay(World world) {
         super(world);
         setSize(1.2F, 0.5F);
-        setEdad(50 + (this.rand.nextInt(40)));
+        setAge(50 + (this.rand.nextInt(40)));
     }
 
     @Override

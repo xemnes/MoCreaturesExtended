@@ -29,7 +29,7 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
 
     public MoCEntityDeer(World world) {
         super(world);
-        setEdad(75);
+        setAge(75);
         setSize(0.9F, 1.3F);
         setAdult(true);
         setTamed(false);
@@ -187,6 +187,6 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
         if (getType() == 2) {
             return 1.3F;
         }
-        return getEdad() * 0.01F;
+        return getAge() * 0.01F;
     }
 }

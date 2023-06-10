@@ -122,12 +122,12 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     @Override
-    public int getEdad() {
+    public int getAge() {
         return this.dataManager.get(AGE);
     }
 
     @Override
-    public void setEdad(int i) {
+    public void setAge(int i) {
         this.dataManager.set(AGE, i);
     }
 
@@ -373,7 +373,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         super.writeEntityToNBT(nbttagcompound);
         nbttagcompound = MoCTools.getEntityData(this);
         nbttagcompound.setBoolean("Adult", getIsAdult());
-        nbttagcompound.setInteger("Edad", getEdad());
+        nbttagcompound.setInteger("Edad", getAge());
         nbttagcompound.setString("Name", getPetName());
         nbttagcompound.setInteger("TypeInt", getType());
     }
@@ -383,7 +383,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         super.readEntityFromNBT(nbttagcompound);
         nbttagcompound = MoCTools.getEntityData(this);
         setAdult(nbttagcompound.getBoolean("Adult"));
-        setEdad(nbttagcompound.getInteger("Edad"));
+        setAge(nbttagcompound.getInteger("Edad"));
         setPetName(nbttagcompound.getString("Name"));
         setType(nbttagcompound.getInteger("TypeInt"));
     }

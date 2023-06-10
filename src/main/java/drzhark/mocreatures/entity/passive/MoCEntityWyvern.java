@@ -74,9 +74,9 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         this.stepHeight = 1.0F;
 
         if (this.rand.nextInt(6) == 0) {
-            setEdad(50 + this.rand.nextInt(50));
+            setAge(50 + this.rand.nextInt(50));
         } else {
-            setEdad(80 + this.rand.nextInt(20));
+            setAge(80 + this.rand.nextInt(20));
         }
     }
 
@@ -370,10 +370,10 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (getIsGhost() && getEdad() > 0 && getEdad() < 10 && this.rand.nextInt(5) == 0) {
-                setEdad(getEdad() + 1);
-                if (getEdad() == 9) {
-                    setEdad(140);
+            if (getIsGhost() && getAge() > 0 && getAge() < 10 && this.rand.nextInt(5) == 0) {
+                setAge(getAge() + 1);
+                if (getAge() == 9) {
+                    setAge(140);
                     setAdult(true);
                 }
             }
@@ -402,7 +402,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
     @Override
     public float getSizeFactor() {
-        return getEdad() * 0.01F;
+        return getAge() * 0.01F;
     }
 
     @Override
@@ -429,7 +429,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!stack.isEmpty() && !getIsRideable() && getEdad() > 90 && this.getIsTamed() && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+        if (!stack.isEmpty() && !getIsRideable() && getAge() > 90 && this.getIsTamed() && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
@@ -438,7 +438,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!stack.isEmpty() && this.getIsTamed() && getEdad() > 90 && stack.getItem() == Items.IRON_HORSE_ARMOR) {
+        if (!stack.isEmpty() && this.getIsTamed() && getAge() > 90 && stack.getItem() == Items.IRON_HORSE_ARMOR) {
             if (getArmorType() == 0) {
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             }
@@ -452,7 +452,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!stack.isEmpty() && this.getIsTamed() && getEdad() > 90 && stack.getItem() == Items.GOLDEN_HORSE_ARMOR) {
+        if (!stack.isEmpty() && this.getIsTamed() && getAge() > 90 && stack.getItem() == Items.GOLDEN_HORSE_ARMOR) {
             if (getArmorType() == 0) {
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             }
@@ -465,7 +465,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!stack.isEmpty() && this.getIsTamed() && getEdad() > 90 && stack.getItem() == Items.DIAMOND_HORSE_ARMOR) {
+        if (!stack.isEmpty() && this.getIsTamed() && getAge() > 90 && stack.getItem() == Items.DIAMOND_HORSE_ARMOR) {
             if (getArmorType() == 0) {
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             }
@@ -478,7 +478,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!stack.isEmpty() && getIsTamed() && getEdad() > 90 && !getIsChested() && (stack.getItem() == Item.getItemFromBlock(Blocks.CHEST))) {
+        if (!stack.isEmpty() && getIsTamed() && getAge() > 90 && !getIsChested() && (stack.getItem() == Item.getItemFromBlock(Blocks.CHEST))) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
@@ -515,7 +515,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
         }
 
-        if (!stack.isEmpty() && !this.getIsGhost() && (stack.getItem() == MoCItems.essencelight) && getIsTamed() && getEdad() > 90 && getType() < 5) {
+        if (!stack.isEmpty() && !this.getIsGhost() && (stack.getItem() == MoCItems.essencelight) && getIsTamed() && getAge() > 90 && getType() < 5) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
@@ -577,7 +577,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (this.getIsRideable() && getEdad() > 90 && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
+        if (this.getIsRideable() && getAge() > 90 && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
             if (!this.world.isRemote && player.startRiding(this)) {
                 player.rotationYaw = this.rotationYaw;
                 player.rotationPitch = this.rotationPitch;
@@ -763,7 +763,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
     @Override
     public int nameYOffset() {
-        int yOff = getEdad() * -1;
+        int yOff = getAge() * -1;
         if (yOff < -120) {
             yOff = -120;
         }
@@ -943,7 +943,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
                 }
 
                 entitywyvern.setAdult(false);
-                entitywyvern.setEdad(1);
+                entitywyvern.setAge(1);
                 entitywyvern.setType(this.getType());
                 entitywyvern.selectType();
                 entitywyvern.setIsGhost(true);
@@ -961,7 +961,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             this.fTransparency = (this.rand.nextFloat() * (0.4F - 0.2F) + 0.15F);
         }
 
-        if (this.getEdad() < 10) {
+        if (this.getAge() < 10) {
             return 0F;
         }
         return fTransparency;

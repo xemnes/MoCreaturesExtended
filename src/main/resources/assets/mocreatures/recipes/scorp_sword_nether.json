@@ -10,11 +10,11 @@
       "item": "mocreatures:scorpstingnether",
       "data": 32767
     },
-	"G": {
+    "G": {
       "item": "minecraft:golden_sword",
       "data": 32767
     },
-	"C": {
+    "C": {
       "item": "mocreatures:chitinnether"
     }
   },

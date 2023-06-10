@@ -10,6 +10,7 @@ import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -68,6 +69,11 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_WRAITH_AMBIENT;
+    }
+    
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.UNDEAD;
     }
 
     @Override

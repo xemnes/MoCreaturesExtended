@@ -167,10 +167,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_TURTLE_EATING;
     public static final SoundEvent ENTITY_TURTLE_HURT;
     public static final SoundEvent ENTITY_WEREWOLF_AMBIENT;
-    public static final SoundEvent ENTITY_WEREWOLF_AMBIENT_HUMAN;
     public static final SoundEvent ENTITY_WEREWOLF_DEATH;
-    public static final SoundEvent ENTITY_WEREWOLF_DEATH_HUMAN;
-    public static final SoundEvent ENTITY_WEREWOLF_HURT_HUMAN;
     public static final SoundEvent ENTITY_WEREWOLF_HURT;
     public static final SoundEvent ENTITY_WEREWOLF_TRANSFORM;
     public static final SoundEvent ENTITY_WRAITH_AMBIENT;
@@ -340,9 +337,6 @@ public class MoCSoundEvents {
             ENTITY_TURTLE_DEATH = createSoundEvent("turtledying");
             ENTITY_TURTLE_EATING = createSoundEvent("turtleeating");
             ENTITY_TURTLE_HURT = createSoundEvent("turtlehurt");
-            ENTITY_WEREWOLF_AMBIENT_HUMAN = createSoundEvent("werehumangrunt"); // TODO
-            ENTITY_WEREWOLF_DEATH_HUMAN = createSoundEvent("werehumandying");
-            ENTITY_WEREWOLF_HURT_HUMAN = createSoundEvent("werehumanhurt");
             ENTITY_WEREWOLF_AMBIENT = createSoundEvent("werewolfgrunt");
             ENTITY_WEREWOLF_DEATH = createSoundEvent("werewolfdying");
             ENTITY_WEREWOLF_HURT = createSoundEvent("werewolfhurt");
@@ -528,9 +522,6 @@ public class MoCSoundEvents {
                     ENTITY_TURTLE_DEATH,
                     ENTITY_TURTLE_EATING,
                     ENTITY_TURTLE_HURT,
-                    ENTITY_WEREWOLF_AMBIENT_HUMAN,
-                    ENTITY_WEREWOLF_DEATH_HUMAN,
-                    ENTITY_WEREWOLF_HURT_HUMAN,
                     ENTITY_WEREWOLF_AMBIENT,
                     ENTITY_WEREWOLF_DEATH,
                     ENTITY_WEREWOLF_HURT,

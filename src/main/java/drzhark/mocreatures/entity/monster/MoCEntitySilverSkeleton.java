@@ -32,7 +32,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
 
     public MoCEntitySilverSkeleton(World world) {
         super(world);
-        this.texture = "silverskeleton.png";
+        this.texture = "silver_skeleton.png";
         setSize(0.9F, 1.4F);
     }
 
@@ -137,9 +137,6 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
         return SoundEvents.ENTITY_SKELETON_AMBIENT;
     }
 
-    /**
-     * Get this Entity's EnumCreatureAttribute
-     */
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;
@@ -148,10 +145,5 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     @Override
     protected void playStepSound(BlockPos pos, Block block) {
         this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
-    }
-
-    @Override
-    protected boolean isHarmedByDaylight() {
-        return true;
     }
 }

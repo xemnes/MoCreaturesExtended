@@ -427,7 +427,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
     protected void doBreeding() {
         int i = 0;
 
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(8D, 3D, 8D));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(8D, 3D, 8D));
         for (Entity entity : list) {
             if (compatibleMate(entity)) {
                 i++;
@@ -438,7 +438,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
             return;
         }
 
-        List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
+        List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D, 2D, 4D));
         for (Entity mate : list1) {
             if (!(compatibleMate(mate)) || (mate == this)) {
                 continue;

@@ -757,7 +757,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     public void Riding() {
         if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(1.0D, 0.0D, 1.0D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));
             for (Entity entity : list) {
                 if (entity.isDead) {
                     continue;

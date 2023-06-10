@@ -172,7 +172,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     protected EntityLivingBase getClosestEntityLiving(Entity entity, double d) {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (entitiesToIgnore(entity1)) continue;
             double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
@@ -237,7 +237,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public EntityItem getClosestItem(Entity entity, double d, ItemStack item, ItemStack item1) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) continue;
             EntityItem entityitem1 = (EntityItem) entity1;
@@ -255,7 +255,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public EntityItem getClosestEntityItem(Entity entity, double d) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) continue;
             EntityItem entityitem1 = (EntityItem) entity1;
@@ -316,7 +316,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public void Riding() {
         if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(1.0D, 0.0D, 1.0D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));
             for (Entity entity : list) {
                 if (entity.isDead) continue;
                 entity.onCollideWithPlayer(entityplayer);
@@ -485,7 +485,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     public void repelMobs(Entity entity1, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().expand(dist, 4D, dist));
+        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().grow(dist, 4D, dist));
         for (Entity entity : list) {
             if (!(entity instanceof EntityMob)) continue;
             EntityMob entitymob = (EntityMob) entity;
@@ -592,7 +592,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
      */
     protected EntityLivingBase getBoogey(double d) {
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, 4D, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d, 4D, d));
         for (Entity entity : list) {
             if (entitiesToInclude(entity)) {
                 entityliving = (EntityLivingBase) entity;

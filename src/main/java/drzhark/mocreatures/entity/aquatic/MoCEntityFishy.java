@@ -134,7 +134,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
                 return;
             }
             int i = 0;
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 3D, 4D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D, 3D, 4D));
             for (Entity entity : list) {
                 if (entity instanceof MoCEntityFishy) {
                     i++;
@@ -144,7 +144,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
             if (i > 1) {
                 return;
             }
-            List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
+            List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D, 2D, 4D));
             for (int k = 0; k < list.size(); k++) {
                 Entity entity1 = list1.get(k);
                 if (!(entity1 instanceof MoCEntityFishy) || (entity1 == this)) {

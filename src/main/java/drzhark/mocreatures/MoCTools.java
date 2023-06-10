@@ -217,7 +217,7 @@ public class MoCTools {
     }
 
     public static void buckleMobs(EntityLiving entityattacker, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entityattacker, entityattacker.getEntityBoundingBox().expand(dist, 2D, dist));
+        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entityattacker, entityattacker.getEntityBoundingBox().grow(dist, 2D, dist));
         for (Entity entitytarget : list) {
             if (!(entitytarget instanceof EntityLiving) || (entityattacker.isBeingRidden() && entitytarget == entityattacker.getRidingEntity())) {
                 continue;
@@ -231,7 +231,7 @@ public class MoCTools {
     }
 
     public static void buckleMobsNotPlayers(EntityLiving entityattacker, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entityattacker, entityattacker.getEntityBoundingBox().expand(dist, 2D, dist));
+        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entityattacker, entityattacker.getEntityBoundingBox().grow(dist, 2D, dist));
         for (Entity entitytarget : list) {
             if (!(entitytarget instanceof EntityLiving) || entityattacker.isBeingRidden() && entitytarget == entityattacker.getRidingEntity()) {
                 continue;
@@ -293,7 +293,7 @@ public class MoCTools {
     }
 
     public static boolean NearMaterialWithDistance(Entity entity, Double double1, Material mat) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(double1, double1, double1);
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(double1);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);
@@ -314,7 +314,7 @@ public class MoCTools {
     }
 
     public static boolean isNearBlockName(Entity entity, Double dist, String blockName) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(dist, dist / 2D, dist);
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(dist, dist / 2D, dist);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);
@@ -342,7 +342,7 @@ public class MoCTools {
     }
 
     public static TileEntityJukebox nearJukeBoxRecord(Entity entity, Double dist) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(dist, dist / 2D, dist);
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(dist, dist / 2D, dist);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);
@@ -391,7 +391,7 @@ public class MoCTools {
         int y = -1;
         int z = -1;
 
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(double1, yOff, double1);
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(double1, yOff, double1);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);
@@ -443,7 +443,7 @@ public class MoCTools {
         int y = -1;
         int z = -1;
 
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(dist, dist, dist);
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(dist);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);
@@ -650,7 +650,7 @@ public class MoCTools {
             return;
         }
 
-        List<Entity> list = entity.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = entity.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().grow(d));
 
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) {
@@ -664,7 +664,7 @@ public class MoCTools {
     }
 
     public static void repelMobs(Entity entity1, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().expand(dist, 4D, dist));
+        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().grow(dist, 4D, dist));
         for (Entity entity : list) {
             if (!(entity instanceof EntityMob)) {
                 continue;
@@ -984,7 +984,7 @@ public class MoCTools {
         }
         return count;
     }
-    
+
     public static void updatePlayerArmorEffects(EntityPlayer player) {
         ItemStack[] mystack = new ItemStack[4];
         mystack[0] = player.getItemStackFromSlot(EntityEquipmentSlot.FEET); //boots
@@ -1601,7 +1601,7 @@ public class MoCTools {
     public static EntityItem getClosestFood(Entity entity, double d) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = entity.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = entity.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) {
                 continue;
@@ -1640,7 +1640,7 @@ public class MoCTools {
     }
 
     public static void findMobRider(Entity mountEntity) {
-        List<Entity> list = mountEntity.world.getEntitiesWithinAABBExcludingEntity(mountEntity, mountEntity.getEntityBoundingBox().expand(4D, 2D, 4D));
+        List<Entity> list = mountEntity.world.getEntitiesWithinAABBExcludingEntity(mountEntity, mountEntity.getEntityBoundingBox().grow(4D, 2D, 4D));
         for (Entity entity : list) {
             if (!(entity instanceof EntityMob)) {
                 continue;

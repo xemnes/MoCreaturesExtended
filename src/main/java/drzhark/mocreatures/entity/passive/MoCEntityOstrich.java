@@ -505,7 +505,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     protected MoCEntityOstrich getClosestMaleOstrich(Entity entity, double d) {
         double d1 = -1D;
         MoCEntityOstrich entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof MoCEntityOstrich) || ((MoCEntityOstrich) entity1).getType() < 3) {
                 continue;

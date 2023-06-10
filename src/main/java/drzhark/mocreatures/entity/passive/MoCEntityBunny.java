@@ -214,7 +214,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
             } else if (this.bunnyReproduceTickerB < 127) {
                 this.bunnyReproduceTickerB++;
             } else {
-                List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4.0D, 4.0D, 4.0D));
+                List<Entity> list1 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4.0D));
                 for (Entity entity1 : list1) {
                     if (!(entity1 instanceof MoCEntityBunny) || (entity1 == this)) {
                         continue;

@@ -558,7 +558,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
      */
     public boolean openChest() {
         if (isMissingCubes()) {
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(2D, 2D, 2D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(2D));
             for (Entity entity1 : list) {
                 if (entity1 instanceof MoCEntityThrowableRock) {
                     if (MoCreatures.proxy.getParticleFX() > 0) MoCreatures.proxy.VacuumFX(this);

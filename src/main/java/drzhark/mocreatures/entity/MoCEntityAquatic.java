@@ -228,7 +228,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     public EntityItem getClosestFish(Entity entity, double d) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) continue;
             EntityItem entityitem1 = (EntityItem) entity1;
@@ -326,7 +326,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
 
     @Override
     public boolean isInWater() {
-        return this.world.handleMaterialAcceleration(this.getEntityBoundingBox().expand(0.0D, -0.2D, 0.0D), Material.WATER, this);
+        return this.world.handleMaterialAcceleration(this.getEntityBoundingBox().grow(0.0D, -0.2D, 0.0D), Material.WATER, this);
     }
 
     @Override
@@ -348,7 +348,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     public void Riding() {
         if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(1.0D, 0.0D, 1.0D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));
             for (Entity entity : list) {
                 if (entity.isDead) continue;
                 entity.onCollideWithPlayer(entityplayer);
@@ -434,7 +434,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
             if (this.fishHooked && this.rand.nextInt(200) == 0) {
                 this.fishHooked = false;
 
-                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(2, 2, 2));
+                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(2));
                 for (Entity entity1 : list) {
                     if (entity1 instanceof EntityFishHook) {
                         if (((EntityFishHook) entity1).caughtEntity == this) {
@@ -676,7 +676,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
      */
     protected EntityLivingBase getBoogey(double d) {
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, 4D, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d, 4D, d));
         for (Entity entity : list) {
             if (entitiesToInclude(entity)) {
                 entityliving = (EntityLivingBase) entity;

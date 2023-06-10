@@ -212,7 +212,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     protected EntityLivingBase getClosestEntityLiving(Entity entity, double d) {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (entitiesToIgnore(entity1)) {
                 continue;
@@ -230,7 +230,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public EntityLivingBase getClosestTarget(Entity entity, double d) {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityLivingBase) || (entity1 == entity) || (entity1 == entity.getRidingEntity()) || (entity1 == entity.getRidingEntity()) || (entity1 instanceof EntityPlayer) || (entity1 instanceof EntityMob) || (this.height <= entity1.height) || (this.width <= entity1.width)) {
                 continue;
@@ -247,7 +247,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     protected EntityLivingBase getClosestSpecificEntity(Entity entity, Class<? extends EntityLiving> myClass, double d) {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(entity, entity.getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!myClass.isAssignableFrom(entity1.getClass())) {
                 continue;
@@ -271,7 +271,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
      */
     protected EntityLivingBase getBoogey(double d) {
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, 4D, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d, 4D, d));
         for (Entity entity : list) {
             if (entitiesToInclude(entity)) {
                 entityliving = (EntityLivingBase) entity;
@@ -370,7 +370,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     @Override
     public boolean isInWater() {
         if (isAmphibian()) {
-            return this.world.handleMaterialAcceleration(this.getEntityBoundingBox().expand(0.0D, -0.2D, 0.0D), Material.WATER, this);
+            return this.world.handleMaterialAcceleration(this.getEntityBoundingBox().grow(0.0D, -0.2D, 0.0D), Material.WATER, this);
         }
         return super.isInWater();
     }
@@ -383,7 +383,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public EntityItem getClosestItem(Entity entity, double d, Item item, Item item1) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) {
                 continue;
@@ -405,7 +405,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public EntityItem getClosestEntityItem(Entity entity, double d) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) {
                 continue;
@@ -424,7 +424,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public EntityItem getClosestFood(Entity entity, double d) {
         double d1 = -1D;
         EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityItem)) {
                 continue;
@@ -490,7 +490,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public void Riding() {
         if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(1.0D, 0.0D, 1.0D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));
             for (Entity entity : list) {
                 if (entity.isDead) {
                     continue;
@@ -790,7 +790,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     }
 
     public void repelMobs(Entity entity1, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().expand(dist, 4D, dist));
+        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().grow(dist, 4D, dist));
         for (Entity entity : list) {
             if (!(entity instanceof EntityMob)) {
                 continue;

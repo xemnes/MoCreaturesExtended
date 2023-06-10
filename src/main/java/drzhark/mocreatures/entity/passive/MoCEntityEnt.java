@@ -154,7 +154,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
      * Makes small creatures follow the Ent
      */
     private void atractCritter() {
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(8D, 3D, 8D));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(8D, 3D, 8D));
         int n = this.rand.nextInt(3) + 1;
         int j = 0;
         for (Entity entity : list) {

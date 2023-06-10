@@ -246,7 +246,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
 
             if (!this.isBeingRidden() && this.rand.nextInt(100) == 0) {
                 MoCTools.findMobRider(this);
-                /*List list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 4D, 4D));
+                /*List list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D));
                 for (int i = 0; i < list.size(); i++) {
                     Entity entity = (Entity) list.get(i);
                     if (!(entity instanceof EntityMob)) {

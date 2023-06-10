@@ -34,7 +34,7 @@ public class EntityAIFollowAdult extends EntityAIBase {
         } else {
             List<EntityLiving> list =
                     this.childAnimal.world.getEntitiesWithinAABB(this.childAnimal.getClass(),
-                            this.childAnimal.getEntityBoundingBox().expand(8.0D, 4.0D, 8.0D));
+                            this.childAnimal.getEntityBoundingBox().grow(8.0D, 4.0D, 8.0D));
             EntityLiving entityliving = null;
             double d0 = Double.MAX_VALUE;
 

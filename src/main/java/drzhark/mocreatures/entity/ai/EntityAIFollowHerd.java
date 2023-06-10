@@ -46,7 +46,7 @@ public class EntityAIFollowHerd extends EntityAIBase {
 
         List<EntityLiving> list =
                 this.theAnimal.world.getEntitiesWithinAABB(this.theAnimal.getClass(),
-                        this.theAnimal.getEntityBoundingBox().expand(this.maxRange, 4.0D, this.maxRange));
+                        this.theAnimal.getEntityBoundingBox().grow(this.maxRange, 4.0D, this.maxRange));
         EntityLiving entityliving = null;
         double d0 = Double.MAX_VALUE;
 

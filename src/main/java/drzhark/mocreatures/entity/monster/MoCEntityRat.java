@@ -109,7 +109,7 @@ public class MoCEntityRat extends MoCEntityMob {
         if (entity instanceof EntityLivingBase) {
             setAttackTarget((EntityLivingBase) entity);
             if (!this.world.isRemote) {
-                List<MoCEntityRat> list = this.world.getEntitiesWithinAABB(MoCEntityRat.class, new AxisAlignedBB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16D, 4D, 16D));
+                List<MoCEntityRat> list = this.world.getEntitiesWithinAABB(MoCEntityRat.class, new AxisAlignedBB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).grow(16D, 4D, 16D));
                 for (MoCEntityRat entityrat : list) {
                     if ((entityrat != null) && (entityrat.getAttackTarget() == null)) {
                         entityrat.setAttackTarget((EntityLivingBase) entity);

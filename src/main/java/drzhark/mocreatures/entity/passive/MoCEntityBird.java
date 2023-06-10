@@ -363,7 +363,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             }
 
             if (!getIsFlying() && !getIsTamed() && this.rand.nextInt(10) == 0) {
-                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 4D, 4D));
+                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D));
                 for (Entity entity1 : list) {
                     if (!(entity1 instanceof EntityLivingBase) || entity1 instanceof MoCEntityBird) {
                         continue;
@@ -436,7 +436,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     }
 
     public int[] ReturnNearestMaterialCoord(Entity entity, Material material, Double double1) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand(double1, double1, double1);
+        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(double1);
         int i = MathHelper.floor(axisalignedbb.minX);
         int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
         int k = MathHelper.floor(axisalignedbb.minY);

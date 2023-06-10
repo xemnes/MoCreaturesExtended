@@ -171,7 +171,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     protected EntityLivingBase getClosestEntityLiving(Entity entity, double d) {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (entitiesToIgnore(entity1)) continue;
             double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);

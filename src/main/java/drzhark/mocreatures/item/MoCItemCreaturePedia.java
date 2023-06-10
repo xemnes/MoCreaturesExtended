@@ -62,7 +62,7 @@ public class MoCItemCreaturePedia extends MoCItem {
             double dist = 5D;
             double d1 = -1D;
             EntityLivingBase entityliving = null;
-            List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().expand(dist, dist, dist));
+            List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(dist));
             for (Entity entity1 : list) {
                 if (!(entity1 instanceof EntityLivingBase)) {
                     continue;

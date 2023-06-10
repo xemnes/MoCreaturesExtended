@@ -129,7 +129,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
     public EntityLivingBase getClosestTarget(Entity entity, double d) {
         double d1 = -1D;
         EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(d, d, d));
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity entity1 : list) {
             if (!(entity1 instanceof EntityLivingBase) || (entity1 == entity) || (entity1 == entity.getRidingEntity())
                     || (entity1 == entity.getRidingEntity()) || (entity1 instanceof EntityPlayer) || (entity1 instanceof EntityMob)
@@ -188,7 +188,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (!this.world.isRemote && !this.isBeingRidden() && this.rand.nextInt(100) == 0) {
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().expand(4D, 2D, 4D));
+            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D, 2D, 4D));
             for (Entity entity : list) {
                 if (!(entity instanceof EntityMob)) {
                     continue;

@@ -984,19 +984,7 @@ public class MoCTools {
         }
         return count;
     }
-
-    /**
-     * Forces a data sync between server/client. currently used to syncrhonize
-     * mounts
-     */
-    /*public static void forceDataSync(IMoCEntity entityMoCreature) {
-        if (entityMoCreature.updateMount() && ((Entity) entityMoCreature).getRidingEntity() != null) {
-            MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAttachedEntity(((Entity) entityMoCreature).getEntityId(),
-                    ((Entity) entityMoCreature).getRidingEntity().getEntityId()), new TargetPoint(
-                    ((Entity) entityMoCreature).getRidingEntity().world.provider.getDimensionType().getId(), ((Entity) entityMoCreature).getRidingEntity().posX,
-                    ((Entity) entityMoCreature).getRidingEntity().posY, ((Entity) entityMoCreature).getRidingEntity().posZ, 64));
-        }
-    }*/
+    
     public static void updatePlayerArmorEffects(EntityPlayer player) {
         ItemStack[] mystack = new ItemStack[4];
         mystack[0] = player.getItemStackFromSlot(EntityEquipmentSlot.FEET); //boots
@@ -1004,27 +992,27 @@ public class MoCTools {
         mystack[2] = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST); //plate
         mystack[3] = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD); //helmet
 
-        //full scorpion cave armor set, enable strength
+        //full scorpion cave armor set, enable night vision
         if (mystack[0].getItem() == MoCItems.scorpBootsCave && mystack[1].getItem() == MoCItems.scorpLegsCave && mystack[2].getItem() == MoCItems.scorpPlateCave && mystack[3].getItem() == MoCItems.scorpHelmetCave) {
-            player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 70, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0));
             return;
         }
 
         //full scorpion nether armor set, enable fire resistance
         if (mystack[0].getItem() == MoCItems.scorpBootsNether && mystack[1].getItem() == MoCItems.scorpLegsNether && mystack[2].getItem() == MoCItems.scorpPlateNether && mystack[3].getItem() == MoCItems.scorpHelmetNether) {
-            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 70, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 0));
             return;
         }
 
         //full scorpion frost armor set, enable resistance
         if (mystack[0].getItem() == MoCItems.scorpBootsFrost && mystack[1].getItem() == MoCItems.scorpLegsFrost && mystack[2].getItem() == MoCItems.scorpPlateFrost && mystack[3].getItem() == MoCItems.scorpHelmetFrost) {
-            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 70, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 0));
             return;
         }
 
         //full scorpion armor set, enable health boost
         if (mystack[0].getItem() == MoCItems.scorpBootsDirt && mystack[1].getItem() == MoCItems.scorpLegsDirt && mystack[2].getItem() == MoCItems.scorpPlateDirt && mystack[3].getItem() == MoCItems.scorpHelmetDirt) {
-            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 70, 1));
+            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1));
         }
     }
 

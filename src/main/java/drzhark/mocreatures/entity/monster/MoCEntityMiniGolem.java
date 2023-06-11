@@ -33,7 +33,7 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
 
     public MoCEntityMiniGolem(World world) {
         super(world);
-        this.texture = "minigolem.png";
+        this.texture = "mini_golem.png";
         setSize(1.0F, 1.0F);
     }
 
@@ -172,10 +172,5 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_GOLEM_AMBIENT;
-    }
-
-    @Override
-    protected boolean isHarmedByDaylight() {
-        return true;
     }
 }

@@ -3,6 +3,8 @@
  */
 package drzhark.mocreatures.entity.monster;
 
+import javax.annotation.Nullable;
+
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -19,6 +21,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -108,12 +111,12 @@ public class MoCEntityWerewolf extends MoCEntityMob {
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("wolfblack.png");
+                return MoCreatures.proxy.getTexture("werewolf_black.png");
             case 3:
-                return MoCreatures.proxy.getTexture("wolftimber.png");
+                return MoCreatures.proxy.getTexture("werewolf_white.png");
             case 4:
                 if (!MoCreatures.proxy.getAnimateTextures()) {
-                    return MoCreatures.proxy.getTexture("wolffire1.png");
+                    return MoCreatures.proxy.getTexture("werewolf_fire1.png");
                 }
                 this.textCounter++;
                 if (this.textCounter < 10) {
@@ -122,14 +125,14 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                 if (this.textCounter > 39) {
                     this.textCounter = 10;
                 }
-                String NTA = "wolffire";
+                String NTA = "werewolf_fire";
                 String NTB = String.valueOf(this.textCounter);
                 NTB = NTB.substring(0, 1);
                 String NTC = ".png";
 
                 return MoCreatures.proxy.getTexture(NTA + NTB + NTC);
             default:
-                return MoCreatures.proxy.getTexture("wolfbrown.png");
+                return MoCreatures.proxy.getTexture("werewolf_brown.png");
         }
     }
 
@@ -260,7 +263,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getDeathSound() {
         if (getIsHumanForm()) {
-            return MoCSoundEvents.ENTITY_WEREWOLF_DEATH_HUMAN;
+            return SoundEvents.ENTITY_GENERIC_HURT;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_DEATH;
         }
@@ -269,17 +272,18 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         if (getIsHumanForm()) {
-            if (!this.transforming) return MoCSoundEvents.ENTITY_WEREWOLF_HURT_HUMAN;
+            if (!this.transforming) return SoundEvents.ENTITY_GENERIC_HURT;
             return null;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_HURT;
         }
     }
 
+    @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
         if (getIsHumanForm()) {
-            return MoCSoundEvents.ENTITY_WEREWOLF_AMBIENT_HUMAN;
+            return null;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_AMBIENT;
         }

@@ -952,20 +952,6 @@
       "mocreatures:vanish"
     ]
   },
-  "werehumandying": {
-    "category": "hostile",
-    "sounds": [
-      "mocreatures:werehumandying1",
-      "mocreatures:werehumandying2"
-    ]
-  },
-  "werehumanhurt": {
-    "category": "hostile",
-    "sounds": [
-      "mocreatures:werehumanhurt1",
-      "mocreatures:werehumanhurt2"
-    ]
-  },
   "weretransform": {
     "category": "hostile",
     "sounds": [

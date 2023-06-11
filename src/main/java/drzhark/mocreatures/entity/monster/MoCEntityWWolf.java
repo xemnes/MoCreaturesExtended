@@ -74,15 +74,15 @@ public class MoCEntityWWolf extends MoCEntityMob {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("wolfblack.png");
+                return MoCreatures.proxy.getTexture("wild_wolf_black.png");
             case 3:
-                return MoCreatures.proxy.getTexture("wolftimber.png"); //snow wolf
+                return MoCreatures.proxy.getTexture("wild_wolf_timber.png");
             case 4:
-                return MoCreatures.proxy.getTexture("wolfdark.png");
+                return MoCreatures.proxy.getTexture("wild_wolf_dark.png");
             case 5:
-                return MoCreatures.proxy.getTexture("wolfbright.png");
+                return MoCreatures.proxy.getTexture("wild_wolf_bright.png");
             default:
-                return MoCreatures.proxy.getTexture("wolfwild.png");
+                return MoCreatures.proxy.getTexture("wild_wolf_classic.png");
         }
     }
 

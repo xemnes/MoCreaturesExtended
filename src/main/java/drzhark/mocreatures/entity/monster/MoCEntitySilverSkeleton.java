@@ -146,4 +146,9 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     protected void playStepSound(BlockPos pos, Block block) {
         this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
     }
+
+    @Override
+    protected boolean isHarmedByDaylight() {
+        return true;
+    }
 }

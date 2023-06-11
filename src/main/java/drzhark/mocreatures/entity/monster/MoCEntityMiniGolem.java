@@ -173,4 +173,9 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_GOLEM_AMBIENT;
     }
+
+    @Override
+    protected boolean isHarmedByDaylight() {
+        return true;
+    }
 }

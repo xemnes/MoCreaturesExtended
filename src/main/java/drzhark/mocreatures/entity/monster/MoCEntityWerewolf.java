@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.monster;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -37,6 +35,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityWerewolf extends MoCEntityMob {
 
@@ -263,7 +263,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getDeathSound() {
         if (getIsHumanForm()) {
-            return SoundEvents.ENTITY_GENERIC_HURT;
+            return MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_DEATH_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_DEATH;
         }
@@ -272,7 +272,8 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         if (getIsHumanForm()) {
-            if (!this.transforming) return SoundEvents.ENTITY_GENERIC_HURT;
+            if (!this.transforming)
+                return MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_HURT_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
             return null;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_HURT;
@@ -340,7 +341,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                     this.posX -= 0.3D;
                 }
                 if (this.tcounter == 10) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM);
+                    MoCTools.playCustomSound(this, MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM_HUMAN : MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM);
                 }
                 if (this.tcounter > 30) {
                     Transform();

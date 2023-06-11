@@ -75,6 +75,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean worldInitDone = false;
     public double spawnMultiplier;
     public int kittyVillageChance;
+    public boolean humanWerewolfSounds;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -257,6 +258,7 @@ public class MoCProxy implements IGuiHandler {
         this.wyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17, "The dimension ID of the wyvern lair.").getInt();
         this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 2.0D, "Multiplier for entity spawns during world generation.").getDouble(2.0D);
         this.kittyVillageChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KittyVillageChance", 15, "The percentage for kitties spawning in village chunks.").getInt();
+        this.humanWerewolfSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "HumanWerewolfSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);
 
         // Save
         this.mocSettingsConfig.save();

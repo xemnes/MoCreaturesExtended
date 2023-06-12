@@ -23,7 +23,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -178,14 +177,6 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                     String swordName = stack.getItem().getTranslationKey();
                     if (swordMaterial.toLowerCase().contains("silver") || swordName.toLowerCase().contains("silver")) {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 3F;
-                    } else {
-                        i = ((ItemSword) stack.getItem()).getAttackDamage() * 0.5F;
-                    }
-                } else if (stack.getItem() instanceof ItemTool) {
-                    String toolMaterial = ((ItemTool) stack.getItem()).getToolMaterialName();
-                    String toolName = stack.getItem().getTranslationKey();
-                    if (toolMaterial.toLowerCase().contains("silver") || toolName.toLowerCase().contains("silver")) {
-                        i = ((ItemSword) stack.getItem()).getAttackDamage() * 2F;
                     } else {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 0.5F;
                     }

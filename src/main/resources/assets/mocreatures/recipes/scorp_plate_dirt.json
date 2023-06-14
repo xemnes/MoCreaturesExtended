@@ -1,13 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "X X",
+    "X*X",
     "XXX",
     "XXX"
   ],
   "key": {
     "X": {
       "item": "mocreatures:chitin"
+    },
+	"*": {
+      "item": "minecraft:golden_chestplate",
+	  "data": 32767
     }
   },
   "result": {

@@ -2,11 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
-    "X X"
+    "X*X"
   ],
   "key": {
     "X": {
       "item": "mocreatures:chitinfrost"
+    },
+	"*": {
+      "item": "minecraft:golden_helmet",
+	  "data": 32767
     }
   },
   "result": {

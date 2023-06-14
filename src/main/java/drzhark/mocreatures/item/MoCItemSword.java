@@ -16,7 +16,6 @@ import net.minecraft.potion.PotionEffect;
 public class MoCItemSword extends ItemSword {
 
     private int specialWeaponType = 0;
-    private boolean breakable = false;
 
     public MoCItemSword(String name, Item.ToolMaterial material) {
         this(name, 0, material);
@@ -29,47 +28,35 @@ public class MoCItemSword extends ItemSword {
         this.setTranslationKey(name);
     }
 
-    public MoCItemSword(String name, Item.ToolMaterial material, int damageType, boolean fragile) {
+    public MoCItemSword(String name, Item.ToolMaterial material, int damageType) {
         this(name, material);
         this.specialWeaponType = damageType;
-        this.breakable = fragile;
     }
-
-    /**
-     * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
-     * the damage on the stack.
-     *
-     * @param target   The Entity being hit
-     * @param attacker the attacking entity
-     */
+    
     @Override
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase target, EntityLivingBase attacker) {
-        int i = 1;
-        if (this.breakable) {
-            i = 10;
-        }
-        par1ItemStack.damageItem(i, attacker);
-        int potionTime = 100;
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        int timer = 10; // in seconds
         switch (this.specialWeaponType) {
-            case 1: //poison
-                target.addPotionEffect(new PotionEffect(MobEffects.POISON, potionTime, 1));
+            case 1: // poison
+                target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
                 break;
-            case 2: //frost slowdown
-                target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, potionTime, 0));
+            case 2: // slowness
+                target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
                 break;
-            case 3: //fire
-                target.setFire(10);
+            case 3: // fire
+                target.setFire(timer);
                 break;
-            case 4: //weakness, nausea for players
-                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, potionTime, 0));
+            case 4: // weakness, nausea for players
+                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
                 break;
-            case 5: //blindness
-                target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, potionTime, 0));
+            case 5: // blindness (unused)
+                target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, timer * 20, 0));
                 break;
             default:
                 break;
         }
-
+        
+        stack.damageItem(1, attacker);
         return true;
     }
 }

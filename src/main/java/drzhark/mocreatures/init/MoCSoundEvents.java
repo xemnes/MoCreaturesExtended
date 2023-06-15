@@ -173,12 +173,15 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_WEREWOLF_HURT;
     public static final SoundEvent ENTITY_WEREWOLF_TRANSFORM;
     public static final SoundEvent ENTITY_WEREWOLF_TRANSFORM_HUMAN;
-    public static final SoundEvent ENTITY_WRAITH_AMBIENT;
     public static final SoundEvent ENTITY_WOLF_AMBIENT;
     public static final SoundEvent ENTITY_WOLF_DEATH;
     public static final SoundEvent ENTITY_WOLF_HURT;
+    public static final SoundEvent ENTITY_WRAITH_AMBIENT;
     public static final SoundEvent ENTITY_WRAITH_DEATH;
     public static final SoundEvent ENTITY_WRAITH_HURT;
+    public static final SoundEvent ENTITY_WRAITH_AMBIENT_LEGACY;
+    public static final SoundEvent ENTITY_WRAITH_DEATH_LEGACY;
+    public static final SoundEvent ENTITY_WRAITH_HURT_LEGACY;
     public static final SoundEvent ENTITY_WYVERN_AMBIENT;
     public static final SoundEvent ENTITY_WYVERN_DEATH;
     public static final SoundEvent ENTITY_WYVERN_HURT;
@@ -353,6 +356,9 @@ public class MoCSoundEvents {
             ENTITY_WRAITH_AMBIENT = createSoundEvent("wraith");
             ENTITY_WRAITH_DEATH = createSoundEvent("wraithdying");
             ENTITY_WRAITH_HURT = createSoundEvent("wraithhurt");
+            ENTITY_WRAITH_AMBIENT_LEGACY = createSoundEvent("wraithlegacy");
+            ENTITY_WRAITH_DEATH_LEGACY = createSoundEvent("wraithdyinglegacy");
+            ENTITY_WRAITH_HURT_LEGACY = createSoundEvent("wraithhurtlegacy");
             ENTITY_WYVERN_AMBIENT = createSoundEvent("wyverngrunt");
             ENTITY_WYVERN_DEATH = createSoundEvent("wyverndying");
             ENTITY_WYVERN_HURT = createSoundEvent("wyvernhurt");
@@ -541,6 +547,9 @@ public class MoCSoundEvents {
                     ENTITY_WRAITH_AMBIENT,
                     ENTITY_WRAITH_DEATH,
                     ENTITY_WRAITH_HURT,
+                    ENTITY_WRAITH_AMBIENT_LEGACY,
+                    ENTITY_WRAITH_DEATH_LEGACY,
+                    ENTITY_WRAITH_HURT_LEGACY,
                     ENTITY_WYVERN_AMBIENT,
                     ENTITY_WYVERN_DEATH,
                     ENTITY_WYVERN_HURT,

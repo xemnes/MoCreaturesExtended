@@ -82,7 +82,19 @@ public class BiomeGenWyvernLair extends Biome {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public int getSkyColorByTemp(final float par1) {
+    public int getModdedBiomeFoliageColor(final int original) {
+        return 0x4F4569;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getModdedBiomeGrassColor(final int original) {
+        return 0x4F4569;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getSkyColorByTemp(final float currentTemperature) {
         return 0x8C95FF;
     }
 }

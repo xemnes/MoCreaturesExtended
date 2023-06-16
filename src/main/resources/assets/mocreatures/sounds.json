@@ -1049,8 +1049,7 @@
   "wraithdying": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraithdying1",
-      "mocreatures:wraithdying2"
+      "mocreatures:wraithdying"
     ]
   },
   "wraithhurt": {
@@ -1058,6 +1057,28 @@
     "sounds": [
       "mocreatures:wraithhurt1",
       "mocreatures:wraithhurt2"
+    ]
+  },
+  "wraithlegacy": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:wraithlegacy1",
+      "mocreatures:wraithlegacy2",
+      "mocreatures:wraithlegacy3"
+    ]
+  },
+  "wraithdyinglegacy": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:wraithdyinglegacy1",
+      "mocreatures:wraithdyinglegacy2"
+    ]
+  },
+  "wraithhurtlegacy": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:wraithhurtlegacy1",
+      "mocreatures:wraithhurtlegacy2"
     ]
   },
   "wyverndying": {

@@ -76,6 +76,10 @@ public class MoCProxy implements IGuiHandler {
     public double spawnMultiplier;
     public int kittyVillageChance;
     public boolean humanWerewolfSounds;
+    public boolean classicWraithSounds;
+    public boolean classicWyvernLairSky;
+    public boolean darkerWyvernLair;
+    public boolean foggyWyvernLair;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -259,6 +263,10 @@ public class MoCProxy implements IGuiHandler {
         this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 2.0D, "Multiplier for entity spawns during world generation.").getDouble(2.0D);
         this.kittyVillageChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KittyVillageChance", 15, "The percentage for kitties spawning in village chunks.").getInt();
         this.humanWerewolfSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "HumanWerewolfSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);
+        this.classicWraithSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ClassicWraithSounds", false, "Enables legacy wraith sounds.").getBoolean(false);
+        this.classicWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ClassicWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
+        this.darkerWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "DarkerWyvernLair", false, "Disables sky light at the wyvern lair like in legacy versions. It is highly recommended to also have the classic wyvern lair sky enabled.").getBoolean(false);
+        this.foggyWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "FoggyWyvernLair", false, "Enables extra fog at the wyvern lair like in legacy versions.").getBoolean(false);
 
         // Save
         this.mocSettingsConfig.save();

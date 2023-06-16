@@ -5,11 +5,13 @@ package drzhark.mocreatures.dimension;
 
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCBiomes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -18,19 +20,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderWyvernEnd extends WorldProviderSurface {
 
-    /**
-     * creates a new world chunk manager for WorldProvider
-     */
     @Override
     protected void init() {
         this.biomeProvider = new BiomeProviderWyvernLair(MoCBiomes.WyvernLairBiome, 0.5F, 0.0F);
+        this.hasSkyLight = MoCreatures.proxy.darkerWyvernLair ? false : true;
         setDimension(MoCreatures.wyvernLairDimensionID);
         setCustomSky();
     }
 
-    /**
-     * Returns a new chunk provider which generates chunks for this world
-     */
     @Override
     public IChunkGenerator createChunkGenerator() {
         return new ChunkGeneratorWyvernLair(this.world, false, this.world.getSeed());
@@ -40,104 +37,113 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
         if (!this.world.isRemote) {
             return;
         }
-        setSkyRenderer(new MoCSkyRenderer());
-    }
-
-    @SideOnly(Side.CLIENT)
-    /*
-     * Returns array with sunrise/sunset colors
-     */
-    @Override
-    public float[] calcSunriseSunsetColors(float par1, float par2) {
-        return null;
+        
+        // It'll do for now until the custom sky renderer is ever expanded upon
+        if (MoCreatures.proxy.classicWyvernLairSky) setSkyRenderer(new MoCSkyRenderer());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    /*
-     * Return Vec3D with biome specific fog color
-     */ public Vec3d getFogColor(float par1, float par2) {
+    public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
+        return MoCreatures.proxy.classicWyvernLairSky ? null : super.calcSunriseSunsetColors(celestialAngle, partialTicks);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Vec3d getFogColor(float par1, float par2) {
         float var4 = MathHelper.cos(par1 * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
 
-        if (var4 < 0.0F) {
-            var4 = 0.0F;
+        // Classic Sky
+        if (MoCreatures.proxy.classicWyvernLairSky) {
+        	if (var4 < 0.0F) {
+        		var4 = 0.0F;
+        	}
+
+        	if (var4 > 1.0F) {
+        		var4 = 1.0F;
+        	}
+
+        	float var5 = 0 / 255.0F;
+        	float var6 = 98 / 255.0F;
+        	float var7 = 73 / 255.0F;
+
+        	var5 *= var4 * 0.0F + 0.15F;
+        	var6 *= var4 * 0.0F + 0.15F;
+        	var7 *= var4 * 0.0F + 0.15F;
+        	
+        	return new Vec3d(var5, var6, var7);
         }
 
-        if (var4 > 1.0F) {
-            var4 = 1.0F;
+        // New Sky
+        else {
+        	if (var4 < 0.0F) {
+        		var4 = 0.0F;
+        	}
+
+        	if (var4 > 1.0F) {
+        		var4 = 1.0F;
+        	}
+
+        	float var5 = 200 / 255.0F;
+        	float var6 = 220 / 255.0F;
+        	float var7 = 190 / 255.0F;
+
+        	var5 *= var4 * (var4 * 0.94F + 0.06F);
+        	var6 *= var4 * (var4 * 0.94F + 0.06F);
+        	var7 *= var4 * (var4 * 0.91F + 0.09F);
+        	
+        	return new Vec3d(var5, var6, var7);
         }
-
-        float var5 = 0 / 255.0F;
-        float var6 = 98 / 255.0F;
-        float var7 = 73 / 255.0F;
-
-        var5 *= var4 * 0.0F + 0.15F;
-        var6 *= var4 * 0.0F + 0.15F;
-        var7 *= var4 * 0.0F + 0.15F;
-        return new Vec3d(var5, var6, var7);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isSkyColored() {
-        return false;
+        return true;
     }
 
-    /**
-     * True if the player can respawn in this dimension (true = overworld, false
-     * = nether).
-     */
     @Override
     public boolean canRespawnHere() {
         return false;
     }
 
-    /**
-     * Returns 'true' if in the "main surface world", but 'false' if in the
-     * Nether or End dimensions.
-     */
-    @Override
-    public boolean isSurfaceWorld() {
-        return false;
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
-    /*
-     * the y level at which clouds are rendered.
-     */ public float getCloudHeight() {
-        return 76.0F;
+    public float getCloudHeight() {
+        return -5.0F;
+    }
+    
+    @Override
+    public double getHorizon() {
+    	return 0.0;
     }
 
-    /**
-     * Will check if the x, z position specified is alright to be set as the map
-     * spawn point
-     */
     @Override
     public boolean canCoordinateBeSpawn(int par1, int par2) {
         BlockPos pos = this.world.getTopSolidOrLiquidBlock(new BlockPos(par1, 0, par2));
         return this.world.getBlockState(pos).getMaterial().blocksMovement();
     }
 
-    /**
-     * Gets the hard-coded portal location to use when entering this dimension.
-     */
     @Override
     public BlockPos getSpawnCoordinate() {
         return new BlockPos(0, 70, 0);
     }
-
+    
+    // No bed explosions allowed
     @Override
-    public int getAverageGroundLevel() {
-        return 50;
+    public WorldSleepResult canSleepAt(EntityPlayer player, BlockPos pos) {
+		return WorldSleepResult.DENY;
+    }
+    
+    @Override
+    public boolean canDoLightning(Chunk chunk) {
+        return false;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    /*
-     * Returns true if the given X,Z coordinate should show environmental fog.
-     */ public boolean doesXZShowFog(int par1, int par2) {
-        return true;
+    public boolean doesXZShowFog(int par1, int par2) {
+        return MoCreatures.proxy.foggyWyvernLair ? true : false;
     }
 
     @Override
@@ -145,8 +151,13 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
         return MoCreatures.WYVERN_LAIR;
     }
 
+    // No custom sun and moon yet but the textures are both here for now
     public String getSunTexture() {
-        return "/mocreatures.twinsuns.png";
+        return "textures/misc/twinsuns.png";
+    }
+    
+    public String getMoonTexture() {
+        return "textures/misc/moon_phases.png";
     }
 
     /*@Override

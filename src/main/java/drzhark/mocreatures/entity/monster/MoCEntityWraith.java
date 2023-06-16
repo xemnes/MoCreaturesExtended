@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.monster;
 
+import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.ai.EntityAINearestAttackableTargetMoC;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -58,17 +59,17 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_WRAITH_DEATH;
+        return MoCreatures.proxy.classicWraithSounds ? MoCSoundEvents.ENTITY_WRAITH_DEATH_LEGACY : MoCSoundEvents.ENTITY_WRAITH_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_WRAITH_HURT;
+        return MoCreatures.proxy.classicWraithSounds ? MoCSoundEvents.ENTITY_WRAITH_HURT_LEGACY : MoCSoundEvents.ENTITY_WRAITH_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return MoCSoundEvents.ENTITY_WRAITH_AMBIENT;
+        return MoCreatures.proxy.classicWraithSounds ? MoCSoundEvents.ENTITY_WRAITH_AMBIENT_LEGACY : MoCSoundEvents.ENTITY_WRAITH_AMBIENT;
     }
     
     @Override

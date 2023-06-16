@@ -12,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -28,8 +27,8 @@ public class MoCEntityThrowableRock extends Entity {
     private static final DataParameter<Integer> ROCK_STATE = EntityDataManager.createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> MASTERS_ID = EntityDataManager.createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> BEHAVIOUR_TYPE = EntityDataManager.createKey(MoCEntityThrowableRock.class, DataSerializers.VARINT);
-    public int rockTimer;
     public int acceleration = 100;
+    private int rockTimer;
     private double oPosX;
     private double oPosY;
     private double oPosZ;
@@ -41,8 +40,7 @@ public class MoCEntityThrowableRock extends Entity {
         //this.yOffset = this.height / 2.0F;
     }
 
-    public MoCEntityThrowableRock(World par1World, Entity entitythrower, double par2, double par4, double par6)//, int behavior)//, int bMetadata)
-    {
+    public MoCEntityThrowableRock(World par1World, Entity entitythrower, double par2, double par4, double par6) {
         this(par1World);
         this.setPosition(par2, par4, par6);
         this.rockTimer = 250;
@@ -108,45 +106,23 @@ public class MoCEntityThrowableRock extends Entity {
         return !this.isDead;
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
     @Override
     public void onEntityUpdate() {
         Entity master = getMaster();
-        if (this.rockTimer-- <= -50 && getBehavior() == 0 || this.ticksExisted > 600) {
-            transformToItem();
-        }
+        if (this.rockTimer-- <= -50 && getBehavior() == 0 || this.ticksExisted > 600) transformToItem();
 
-        /*if (getBehavior() == 0) {
-            System.out.println("Zero Rock, Server? =" + !this.world.isRemote + " age " + rockTimer + " at " + this);
-        }*/
+        // held TRocks don't need to adjust its position
+        if (getBehavior() == 1) return;
 
-        //held Trocks don't need to adjust its position
-        if (getBehavior() == 1) {
-            return;
-        }
-
-        //rock damage code (for all rock behaviors)
+        // rock damage code (for all rock behaviors)
         if (!this.onGround) {
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().contract(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
-
-            for (Entity entity1 : list) {
-                if (master != null && entity1.getEntityId() == master.getEntityId()) {
-                    continue;
-                }
-                if (entity1 instanceof MoCEntityGolem) {
-                    continue;
-                }
-                if (entity1 != null && !(entity1 instanceof EntityLivingBase)) {
-                    continue;
-                }
-
-                if (master != null) {
-                    entity1.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) master), 4);
-                } else if (entity1 != null) {
-                    entity1.attackEntityFrom(DamageSource.GENERIC, 4);
-                }
+            for (Entity entity : list) {
+                if (master != null && entity.getEntityId() == master.getEntityId()) continue;
+                if (entity instanceof MoCEntityGolem) continue;
+                if (entity != null && !(entity instanceof EntityLivingBase)) continue;
+                if (master != null) entity.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) master), 4);
+                else if (entity != null) entity.attackEntityFrom(DamageSource.GENERIC, 4);
             }
         }
 
@@ -161,7 +137,7 @@ public class MoCEntityThrowableRock extends Entity {
                 return;
             }
 
-            //moves towards the master entity the bigger the number, the slower
+            // moves towards the master entity the bigger the number, the slower
             --this.acceleration;
             if (this.acceleration < 10) {
                 this.acceleration = 10;
@@ -177,33 +153,30 @@ public class MoCEntityThrowableRock extends Entity {
                 this.setDead();
             }
 
-            double summonedSpeed = this.acceleration;//20D;
+            double summonedSpeed = this.acceleration;
             this.motionX = ((master.posX - this.posX) / summonedSpeed);
             this.motionY = ((master.posY - this.posY) / 20D + 0.15D);
             this.motionZ = ((master.posZ - this.posZ) / summonedSpeed);
-            if (!this.world.isRemote) {
-                this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            }
+            if (!this.world.isRemote) this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
             return;
         }
 
-        if (getBehavior() == 4)// imploding / exploding rock
-        {
+        // imploding / exploding rock
+        if (getBehavior() == 4) {
             if (master == null) {
-                if (!this.world.isRemote) {
-                    setBehavior(5);
-                }
+                if (!this.world.isRemote) setBehavior(5);
                 return;
             }
 
-            //moves towards the master entity the bigger the number, the slower
+            // moves towards the master entity
+            // the bigger the number, the slower
             this.acceleration = 10;
 
             float tX = (float) this.posX - (float) master.posX;
             float tZ = (float) this.posZ - (float) master.posZ;
             float distXZToMaster = tX * tX + tZ * tZ;
 
-            double summonedSpeed = this.acceleration;//20D;
+            double summonedSpeed = this.acceleration;
             this.motionX = ((master.posX - this.posX) / summonedSpeed);
             this.motionY = ((master.posY - this.posY) / 20D + 0.15D);
             this.motionZ = ((master.posZ - this.posZ) / summonedSpeed);
@@ -221,24 +194,20 @@ public class MoCEntityThrowableRock extends Entity {
             return;
         }
 
-        if (getBehavior() == 5)// exploding rock
-        {
+        // exploding rock
+        if (getBehavior() == 5) {
             this.acceleration = 5;
-            double summonedSpeed = this.acceleration;//20D;
+            double summonedSpeed = this.acceleration;
             this.motionX = ((this.oPosX - this.posX) / summonedSpeed);
             this.motionY = ((this.oPosY - this.posY) / 20D + 0.15D);
             this.motionZ = ((this.oPosZ - this.posZ) / summonedSpeed);
-            if (!this.world.isRemote) {
-                this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            }
+            if (!this.world.isRemote) this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
             setBehavior(0);
             return;
         }
 
         this.motionY -= 0.04D;
-        if (!this.world.isRemote) {
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-        }
+        if (!this.world.isRemote) this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.98D;
         this.motionY *= 0.98D;
         this.motionZ *= 0.98D;
@@ -248,35 +217,24 @@ public class MoCEntityThrowableRock extends Entity {
             this.motionZ *= 0.699D;
             this.motionY *= -0.5D;
         }
-
     }
 
-    private void transformToItem() {
-        if (!this.world.isRemote && MoCTools.mobGriefing(this.world) && MoCreatures.proxy.golemDestroyBlocks) // don't drop rocks if mobgriefing is set to false, prevents duping
-        {
+    public void transformToItem() {
+        // don't drop rocks if mob griefing is set to false, prevents duping
+        if (!this.world.isRemote && MoCTools.mobGriefing(this.world) && MoCreatures.proxy.golemDestroyBlocks) {
             EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(this.getState().getBlock(), 1, this.getState().getBlock().getMetaFromState(this.getState())));
-            entityitem.setPickupDelay(10);
+            entityitem.setDefaultPickupDelay();
             entityitem.setAgeToCreativeDespawnTime();
             this.world.spawnEntity(entityitem);
         }
         this.setDead();
     }
 
-    public Block getMyBlock() {
-        if (this.getState() != null) {
-            return this.getState().getBlock();
-        }
-        return Blocks.STONE;
-    }
-
     private Entity getMaster() {
         List<Entity> entityList = this.world.loadedEntityList;
-        for (Entity ent : entityList) {
-            if (ent.getEntityId() == getMasterID()) {
-                return ent;
-            }
+        for (Entity entity : entityList) {
+            if (entity.getEntityId() == getMasterID()) return entity;
         }
-
         return null;
     }
 }

@@ -27,9 +27,8 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
 
     private static final DataParameter<Boolean> ANGRY = EntityDataManager.createKey(MoCEntityMiniGolem.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HAS_ROCK = EntityDataManager.createKey(MoCEntityMiniGolem.class, DataSerializers.BOOLEAN);
-    public int tcounter;
+    public int tCounter;
     public MoCEntityThrowableRock tempRock;
-
 
     public MoCEntityMiniGolem(World world) {
         super(world);
@@ -96,20 +95,26 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
         }
     }
 
+    @Override
+    public void onDeath(DamageSource cause) {
+        if (getHasRock() && this.tempRock != null) this.tempRock.transformToItem();
+        super.onDeath(cause);
+    }
+
     protected void acquireTRock() {
         IBlockState tRockState = MoCTools.destroyRandomBlockWithIBlockState(this, 3D);
         if (tRockState == null) {
-            this.tcounter = 1;
+            this.tCounter = 1;
             setHasRock(false);
             return;
         }
 
-        //creates a dummy Trock on top of it
-        MoCEntityThrowableRock trock = new MoCEntityThrowableRock(this.world, this, this.posX, this.posY + 1.5D, this.posZ);
-        this.world.spawnEntity(trock);
-        trock.setState(tRockState);
-        trock.setBehavior(1);
-        this.tempRock = trock;
+        //creates a dummy TRock on top of it
+        MoCEntityThrowableRock tRock = new MoCEntityThrowableRock(this.world, this, this.posX, this.posY + 1.5D, this.posZ);
+        this.world.spawnEntity(tRock);
+        tRock.setState(tRockState);
+        tRock.setBehavior(1);
+        this.tempRock = tRock;
         setHasRock(true);
     }
 
@@ -122,24 +127,24 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
      *
      */
     protected void attackWithTRock() {
-        this.tcounter++;
+        this.tCounter++;
 
-        if (this.tcounter < 50) {
-            //maintains position of Trock above head
+        if (this.tCounter < 50) {
+            //maintains position of TRock above head
             this.tempRock.posX = this.posX;
             this.tempRock.posY = (this.posY + 1.0D);
             this.tempRock.posZ = this.posZ;
         }
 
-        if (this.tcounter >= 50) {
-            //throws a newly spawned Trock and destroys the held Trock
+        if (this.tCounter >= 50) {
+            //throws a newly spawned TRock and destroys the held TRock
             if (this.getAttackTarget() != null && this.getDistance(this.getAttackTarget()) < 48F) {
                 MoCTools.throwStone(this, this.getAttackTarget(), this.tempRock.getState(), 10D, 0.25D);
             }
 
             this.tempRock.setDead();
             setHasRock(false);
-            this.tcounter = 0;
+            this.tCounter = 0;
         }
     }
 

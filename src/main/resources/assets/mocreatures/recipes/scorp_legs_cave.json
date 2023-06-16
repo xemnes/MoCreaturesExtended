@@ -9,9 +9,9 @@
     "X": {
       "item": "mocreatures:chitinblack"
     },
-	"*": {
+    "*": {
       "item": "minecraft:golden_leggings",
-	  "data": 32767
+      "data": 32767
     }
   },
   "result": {

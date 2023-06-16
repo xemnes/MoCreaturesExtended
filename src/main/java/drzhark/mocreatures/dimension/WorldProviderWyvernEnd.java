@@ -23,7 +23,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     @Override
     protected void init() {
         this.biomeProvider = new BiomeProviderWyvernLair(MoCBiomes.WyvernLairBiome, 0.5F, 0.0F);
-        this.hasSkyLight = MoCreatures.proxy.darkerWyvernLair ? false : true;
+        this.hasSkyLight = !MoCreatures.proxy.darkerWyvernLair;
         setDimension(MoCreatures.wyvernLairDimensionID);
         setCustomSky();
     }
@@ -37,7 +37,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
         if (!this.world.isRemote) {
             return;
         }
-        
+
         // It'll do for now until the custom sky renderer is ever expanded upon
         if (MoCreatures.proxy.classicWyvernLairSky) setSkyRenderer(new MoCSkyRenderer());
     }
@@ -55,44 +55,44 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
 
         // Classic Sky
         if (MoCreatures.proxy.classicWyvernLairSky) {
-        	if (var4 < 0.0F) {
-        		var4 = 0.0F;
-        	}
+            if (var4 < 0.0F) {
+                var4 = 0.0F;
+            }
 
-        	if (var4 > 1.0F) {
-        		var4 = 1.0F;
-        	}
+            if (var4 > 1.0F) {
+                var4 = 1.0F;
+            }
 
-        	float var5 = 0 / 255.0F;
-        	float var6 = 98 / 255.0F;
-        	float var7 = 73 / 255.0F;
+            float var5 = 0 / 255.0F;
+            float var6 = 98 / 255.0F;
+            float var7 = 73 / 255.0F;
 
-        	var5 *= var4 * 0.0F + 0.15F;
-        	var6 *= var4 * 0.0F + 0.15F;
-        	var7 *= var4 * 0.0F + 0.15F;
-        	
-        	return new Vec3d(var5, var6, var7);
+            var5 *= var4 * 0.0F + 0.15F;
+            var6 *= var4 * 0.0F + 0.15F;
+            var7 *= var4 * 0.0F + 0.15F;
+
+            return new Vec3d(var5, var6, var7);
         }
 
         // New Sky
         else {
-        	if (var4 < 0.0F) {
-        		var4 = 0.0F;
-        	}
+            if (var4 < 0.0F) {
+                var4 = 0.0F;
+            }
 
-        	if (var4 > 1.0F) {
-        		var4 = 1.0F;
-        	}
+            if (var4 > 1.0F) {
+                var4 = 1.0F;
+            }
 
-        	float var5 = 200 / 255.0F;
-        	float var6 = 220 / 255.0F;
-        	float var7 = 190 / 255.0F;
+            float var5 = 200 / 255.0F;
+            float var6 = 220 / 255.0F;
+            float var7 = 190 / 255.0F;
 
-        	var5 *= var4 * (var4 * 0.94F + 0.06F);
-        	var6 *= var4 * (var4 * 0.94F + 0.06F);
-        	var7 *= var4 * (var4 * 0.91F + 0.09F);
-        	
-        	return new Vec3d(var5, var6, var7);
+            var5 *= var4 * (var4 * 0.94F + 0.06F);
+            var6 *= var4 * (var4 * 0.94F + 0.06F);
+            var7 *= var4 * (var4 * 0.91F + 0.09F);
+
+            return new Vec3d(var5, var6, var7);
         }
     }
 
@@ -112,10 +112,10 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     public float getCloudHeight() {
         return -5.0F;
     }
-    
+
     @Override
     public double getHorizon() {
-    	return 0.0;
+        return 0.0;
     }
 
     @Override
@@ -128,13 +128,13 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     public BlockPos getSpawnCoordinate() {
         return new BlockPos(0, 70, 0);
     }
-    
+
     // No bed explosions allowed
     @Override
     public WorldSleepResult canSleepAt(EntityPlayer player, BlockPos pos) {
-		return WorldSleepResult.DENY;
+        return WorldSleepResult.DENY;
     }
-    
+
     @Override
     public boolean canDoLightning(Chunk chunk) {
         return false;
@@ -143,7 +143,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int par1, int par2) {
-        return MoCreatures.proxy.foggyWyvernLair ? true : false;
+        return MoCreatures.proxy.foggyWyvernLair;
     }
 
     @Override
@@ -155,7 +155,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     public String getSunTexture() {
         return "textures/misc/twinsuns.png";
     }
-    
+
     public String getMoonTexture() {
         return "textures/misc/moon_phases.png";
     }

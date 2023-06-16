@@ -9,9 +9,9 @@
     "X": {
       "item": "mocreatures:chitinfrost"
     },
-	"*": {
+    "*": {
       "item": "minecraft:golden_chestplate",
-	  "data": 32767
+      "data": 32767
     }
   },
   "result": {

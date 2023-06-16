@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenShrub;
-import net.minecraft.world.gen.feature.WorldGenVines;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -58,10 +57,10 @@ public class BiomeGenWyvernLair extends Biome {
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random) {
         return new WorldGenWyvernGrass(MoCBlocks.mocTallGrass.getStateFromMeta(0));
     }
-    
+
     @Override
     public boolean canRain() {
-    	return false;
+        return false;
     }
 
     @Override
@@ -79,19 +78,19 @@ public class BiomeGenWyvernLair extends Biome {
             var5.generate(par1World, par2Random, pos.add(var7, var8, var9));
         }*/
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public int getModdedBiomeFoliageColor(final int original) {
         return 0x4F4569;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public int getModdedBiomeGrassColor(final int original) {
         return 0x4F4569;
     }
-    
+
     @Override
     @SideOnly(Side.CLIENT)
     public int getSkyColorByTemp(final float currentTemperature) {

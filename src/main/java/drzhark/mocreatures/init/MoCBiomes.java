@@ -19,9 +19,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class MoCBiomes {
 
     public static Biome WyvernLairBiome = new BiomeGenWyvernLair(new BiomeProperties("Wyvern Isles")
-    		.setBaseHeight(0.3F)
-    		.setHeightVariation(1.5F)
-    		.setWaterColor(0x775757));
+            .setBaseHeight(0.3F)
+            .setHeightVariation(1.5F)
+            .setWaterColor(0x775757));
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
     public static class RegistrationHandler {

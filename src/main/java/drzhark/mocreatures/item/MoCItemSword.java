@@ -32,7 +32,7 @@ public class MoCItemSword extends ItemSword {
         this(name, material);
         this.specialWeaponType = damageType;
     }
-    
+
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         int timer = 10; // in seconds
@@ -55,7 +55,7 @@ public class MoCItemSword extends ItemSword {
             default:
                 break;
         }
-        
+
         stack.damageItem(1, attacker);
         return true;
     }

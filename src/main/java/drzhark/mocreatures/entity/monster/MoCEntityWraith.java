@@ -71,7 +71,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     protected SoundEvent getAmbientSound() {
         return MoCreatures.proxy.classicWraithSounds ? MoCSoundEvents.ENTITY_WRAITH_AMBIENT_LEGACY : MoCSoundEvents.ENTITY_WRAITH_AMBIENT;
     }
-    
+
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.UNDEAD;

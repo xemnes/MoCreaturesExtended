@@ -22,17 +22,17 @@ public class MoCRecipes {
         @SubscribeEvent
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
 
-        	GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 0), new ItemStack(Items.COAL, 1, 1), 0.15F);
-        	GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
-        	
+            GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 0), new ItemStack(Items.COAL, 1, 1), 0.15F);
+            GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
+
             GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey, 1), 0.35F);
-            
+
             GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet, 1), 0.35F);
-            
+
             OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.mocDirt, 1, 0));
             OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.mocDirt, 1, 1));
             OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.mocGrass, 1, 0));

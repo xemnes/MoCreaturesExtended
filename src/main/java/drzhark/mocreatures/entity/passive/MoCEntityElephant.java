@@ -545,19 +545,19 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         if (i == 1) {
             EntityItem entityitem =
                     new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(MoCItems.tusksWood, 1, this.tuskUses));
-            entityitem.setPickupDelay(10);
+            entityitem.setDefaultPickupDelay();
             this.world.spawnEntity(entityitem);
         }
         if (i == 2) {
             EntityItem entityitem =
                     new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(MoCItems.tusksIron, 1, this.tuskUses));
-            entityitem.setPickupDelay(10);
+            entityitem.setDefaultPickupDelay();
             this.world.spawnEntity(entityitem);
         }
         if (i == 3) {
             EntityItem entityitem =
                     new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(MoCItems.tusksDiamond, 1, this.tuskUses));
-            entityitem.setPickupDelay(10);
+            entityitem.setDefaultPickupDelay();
             this.world.spawnEntity(entityitem);
         }
         setTusks((byte) 0);

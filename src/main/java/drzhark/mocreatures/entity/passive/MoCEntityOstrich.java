@@ -723,7 +723,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
                 color = 0;
             }
             EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(Blocks.WOOL, 1, color));
-            entityitem.setPickupDelay(10);
+            entityitem.setDefaultPickupDelay();
             this.world.spawnEntity(entityitem);
             setFlagColor((byte) 0);
         }
@@ -878,7 +878,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             final ItemStack itemStack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
             if (!itemStack.isEmpty() && itemStack.getItem() instanceof ItemArmor) {
                 final EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, itemStack.copy());
-                entityitem.setPickupDelay(10);
+                entityitem.setDefaultPickupDelay();
                 this.world.spawnEntity(entityitem);
             }
             setHelmet((byte) 0);

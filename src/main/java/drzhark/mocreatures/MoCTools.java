@@ -685,91 +685,91 @@ public class MoCTools {
         }
 
         EntityItem entityitem = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.LOG, 16));
-        entityitem.setPickupDelay(10);
+        entityitem.setDefaultPickupDelay();
         world.spawnEntity(entityitem);
 
         EntityItem entityitem2 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.DIAMOND, 64));
-        entityitem2.setPickupDelay(10);
+        entityitem2.setDefaultPickupDelay();
         world.spawnEntity(entityitem2);
 
         EntityItem entityitem3 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.PUMPKIN, 6));
-        entityitem3.setPickupDelay(10);
+        entityitem3.setDefaultPickupDelay();
         world.spawnEntity(entityitem3);
 
         EntityItem entityitem4 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.COBBLESTONE, 64));
-        entityitem4.setPickupDelay(10);
+        entityitem4.setDefaultPickupDelay();
         world.spawnEntity(entityitem4);
 
         EntityItem entityitem5 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.APPLE, 24));
-        entityitem5.setPickupDelay(10);
+        entityitem5.setDefaultPickupDelay();
         world.spawnEntity(entityitem5);
 
         EntityItem entityitem6 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.LEATHER, 64));
-        entityitem6.setPickupDelay(10);
+        entityitem6.setDefaultPickupDelay();
         world.spawnEntity(entityitem6);
 
         EntityItem entityitem7 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.recordshuffle, 6));
-        entityitem7.setPickupDelay(10);
+        entityitem7.setDefaultPickupDelay();
         world.spawnEntity(entityitem7);
 
         EntityItem entityitem8 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.IRON_INGOT, 64));
-        entityitem8.setPickupDelay(10);
+        entityitem8.setDefaultPickupDelay();
         world.spawnEntity(entityitem8);
 
         EntityItem entityitem9 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.GOLD_INGOT, 12));
-        entityitem9.setPickupDelay(10);
+        entityitem9.setDefaultPickupDelay();
         world.spawnEntity(entityitem9);
 
         EntityItem entityitem10 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.STRING, 32));
-        entityitem10.setPickupDelay(10);
+        entityitem10.setDefaultPickupDelay();
         world.spawnEntity(entityitem10);
 
         EntityItem entityitem12 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.RED_FLOWER, 6));
-        entityitem12.setPickupDelay(10);
+        entityitem12.setDefaultPickupDelay();
         world.spawnEntity(entityitem12);
 
         EntityItem entityitem13 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.BLAZE_ROD, 12));
-        entityitem13.setPickupDelay(10);
+        entityitem13.setDefaultPickupDelay();
         world.spawnEntity(entityitem13);
 
         EntityItem entityitem14 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.ENDER_PEARL, 12));
-        entityitem14.setPickupDelay(10);
+        entityitem14.setDefaultPickupDelay();
         world.spawnEntity(entityitem14);
 
         EntityItem entityitem15 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.GHAST_TEAR, 12));
-        entityitem15.setPickupDelay(10);
+        entityitem15.setDefaultPickupDelay();
         world.spawnEntity(entityitem15);
 
         EntityItem entityitem16 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.LAPIS_BLOCK, 2));
-        entityitem16.setPickupDelay(10);
+        entityitem16.setDefaultPickupDelay();
         world.spawnEntity(entityitem16);
 
         EntityItem entityitem17 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.BONE, 12));
-        entityitem17.setPickupDelay(10);
+        entityitem17.setDefaultPickupDelay();
         world.spawnEntity(entityitem17);
 
         EntityItem entityitem18 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.unicornhorn, 16));
-        entityitem18.setPickupDelay(10);
+        entityitem18.setDefaultPickupDelay();
         world.spawnEntity(entityitem18);
 
         EntityItem entityitem19 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.FIRE, 32));
-        entityitem19.setPickupDelay(10);
+        entityitem19.setDefaultPickupDelay();
         world.spawnEntity(entityitem19);
 
         EntityItem entityitem20 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.essencedarkness, 6));
-        entityitem20.setPickupDelay(10);
+        entityitem20.setDefaultPickupDelay();
         world.spawnEntity(entityitem20);
 
         EntityItem entityitem21 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.essenceundead, 6));
-        entityitem21.setPickupDelay(10);
+        entityitem21.setDefaultPickupDelay();
         world.spawnEntity(entityitem21);
 
         EntityItem entityitem22 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.essencefire, 6));
-        entityitem22.setPickupDelay(10);
+        entityitem22.setDefaultPickupDelay();
         world.spawnEntity(entityitem22);
 
         EntityItem entityitem23 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Item.getItemFromBlock(Blocks.WOOL), 6, 15));
-        entityitem23.setPickupDelay(10);
+        entityitem23.setDefaultPickupDelay();
         world.spawnEntity(entityitem23);
 
     }

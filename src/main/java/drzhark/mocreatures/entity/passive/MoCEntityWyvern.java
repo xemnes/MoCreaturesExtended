@@ -603,17 +603,17 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
             if (i == 1) {
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(Items.IRON_HORSE_ARMOR, 1));
-                entityitem.setPickupDelay(10);
+                entityitem.setDefaultPickupDelay();
                 this.world.spawnEntity(entityitem);
             }
             if (i == 2) {
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(Items.GOLDEN_HORSE_ARMOR, 1));
-                entityitem.setPickupDelay(10);
+                entityitem.setDefaultPickupDelay();
                 this.world.spawnEntity(entityitem);
             }
             if (i == 3) {
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(Items.DIAMOND_HORSE_ARMOR, 1));
-                entityitem.setPickupDelay(10);
+                entityitem.setDefaultPickupDelay();
                 this.world.spawnEntity(entityitem);
             }
             setArmorType((byte) 0);

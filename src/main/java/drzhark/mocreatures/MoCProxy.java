@@ -80,6 +80,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean classicWyvernLairSky;
     public boolean darkerWyvernLair;
     public boolean foggyWyvernLair;
+    public boolean upscaledBunnyTextures;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -267,6 +268,7 @@ public class MoCProxy implements IGuiHandler {
         this.classicWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ClassicWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
         this.darkerWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "DarkerWyvernLair", false, "Disables sky light at the wyvern lair like in legacy versions. It is highly recommended to also have the classic wyvern lair sky enabled.").getBoolean(false);
         this.foggyWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "FoggyWyvernLair", false, "Enables extra fog at the wyvern lair like in legacy versions.").getBoolean(false);
+        this.upscaledBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "UpscaledBunnyTextures", false, "Enables upscaled bunny textures like in legacy versions. Goes great with HD resource packs!").getBoolean(false);
 
         // Save
         this.mocSettingsConfig.save();

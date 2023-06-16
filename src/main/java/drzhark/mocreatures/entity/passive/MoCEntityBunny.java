@@ -129,15 +129,15 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("bunnyb.png");
+                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_beige_upscaled.png") : MoCreatures.proxy.getTexture("bunny_beige.png");
             case 3:
-                return MoCreatures.proxy.getTexture("bunnyc.png");
+                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_white_upscaled.png") : MoCreatures.proxy.getTexture("bunny_white.png");
             case 4:
-                return MoCreatures.proxy.getTexture("bunnyd.png");
+                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_black_upscaled.png") : MoCreatures.proxy.getTexture("bunny_black.png");
             case 5:
-                return MoCreatures.proxy.getTexture("bunnye.png");
+                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_spotted_upscaled.png") : MoCreatures.proxy.getTexture("bunny_spotted.png");
             default:
-                return MoCreatures.proxy.getTexture("bunny.png");
+                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_golden_upscaled.png") : MoCreatures.proxy.getTexture("bunny_golden.png");
         }
     }
 

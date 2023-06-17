@@ -129,15 +129,15 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_beige_upscaled.png") : MoCreatures.proxy.getTexture("bunny_beige.png");
+                return MoCreatures.proxy.simpleBunnyTextures ? MoCreatures.proxy.getTexture("bunny_beige.png") : MoCreatures.proxy.getTexture("bunny_beige_detailed.png");
             case 3:
-                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_white_upscaled.png") : MoCreatures.proxy.getTexture("bunny_white.png");
+                return MoCreatures.proxy.simpleBunnyTextures ? MoCreatures.proxy.getTexture("bunny_white.png") : MoCreatures.proxy.getTexture("bunny_white_detailed.png");
             case 4:
-                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_black_upscaled.png") : MoCreatures.proxy.getTexture("bunny_black.png");
+                return MoCreatures.proxy.simpleBunnyTextures ? MoCreatures.proxy.getTexture("bunny_black.png") : MoCreatures.proxy.getTexture("bunny_black_detailed.png");
             case 5:
-                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_spotted_upscaled.png") : MoCreatures.proxy.getTexture("bunny_spotted.png");
+                return MoCreatures.proxy.simpleBunnyTextures ? MoCreatures.proxy.getTexture("bunny_spotted.png") : MoCreatures.proxy.getTexture("bunny_spotted_detailed.png");
             default:
-                return MoCreatures.proxy.upscaledBunnyTextures ? MoCreatures.proxy.getTexture("bunny_golden_upscaled.png") : MoCreatures.proxy.getTexture("bunny_golden.png");
+                return MoCreatures.proxy.simpleBunnyTextures ? MoCreatures.proxy.getTexture("bunny_golden.png") : MoCreatures.proxy.getTexture("bunny_golden_detailed.png");
         }
     }
 
@@ -200,8 +200,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
         }
         if (!this.world.isRemote) {
 
-            if (--this.jumpTimer <= 0 && this.onGround
-                    && ((this.motionX > 0.05D) || (this.motionZ > 0.05D) || (this.motionX < -0.05D) || (this.motionZ < -0.05D))) {
+            if (--this.jumpTimer <= 0 && this.onGround && ((this.motionX > 0.05D) || (this.motionZ > 0.05D) || (this.motionX < -0.05D) || (this.motionZ < -0.05D))) {
                 this.motionY = 0.3D;
                 this.jumpTimer = 15;
             }
@@ -220,8 +219,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
                         continue;
                     }
                     MoCEntityBunny entitybunny = (MoCEntityBunny) entity1;
-                    if ((entitybunny.getRidingEntity() != null) || (entitybunny.bunnyReproduceTickerA < 1023) || !entitybunny.getIsAdult()
-                            || !entitybunny.getHasEaten()) {
+                    if ((entitybunny.getRidingEntity() != null) || (entitybunny.bunnyReproduceTickerA < 1023) || !entitybunny.getIsAdult() || !entitybunny.getHasEaten()) {
                         continue;
                     }
                     MoCEntityBunny entitybunny1 = new MoCEntityBunny(this.world);

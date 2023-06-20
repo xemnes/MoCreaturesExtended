@@ -68,9 +68,11 @@ repositories {
 }
 
 dependencies {
+    deobfCompile "curse.maven:cofh-core-69162:2920433"
     deobfCompile "curse.maven:future-mc-310059:3924863"
     deobfCompile "curse.maven:thaumcraft-223628:2629023"
     deobfCompile "curse.maven:thermal-expansion-69163:2926431"
+    deobfCompile "curse.maven:thermal-foundation-222880:2926428"
     implementation "curse.maven:industrial-foregoing-266515:2745324"
     implementation "curse.maven:just-enough-resources-jer-240630:4440936"
     implementation "curse.maven:pams-harvestcraft-221857:2904825"

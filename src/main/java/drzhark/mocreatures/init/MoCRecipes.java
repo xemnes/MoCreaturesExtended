@@ -46,10 +46,10 @@ public class MoCRecipes {
             OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.mocStone, 1, 1));
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.mocLeaf, 1, 0));
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.mocLeaf, 1, 1));
-            
+
             OreDictionary.registerOre("egg", new ItemStack(MoCItems.mocegg, 1, OreDictionary.WILDCARD_VALUE));
             OreDictionary.registerOre("record", MoCItems.recordshuffle);
-            
+
             // Pam's HarvestCraft OreDictionaries
             OreDictionary.registerOre("foodCrabcooked", MoCItems.crabcooked);
             OreDictionary.registerOre("foodCrabraw", MoCItems.crabraw);

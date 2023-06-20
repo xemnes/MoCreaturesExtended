@@ -60,9 +60,20 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven {
+        // CurseForge
+        name = "Curse Maven"
+        url = "https://www.cursemaven.com"
+    }
 }
 
-dependencies {}
+dependencies {
+    deobfCompile "curse.maven:future-mc-310059:3924863"
+    deobfCompile "curse.maven:thermal-expansion-69163:2926431"
+    implementation "curse.maven:industrial-foregoing-266515:2745324"
+    implementation "curse.maven:just-enough-resources-jer-240630:4440936"
+    implementation "curse.maven:pams-harvestcraft-221857:2904825"
+}
 
 compileJava {
     options.compilerArgs += ['-Xlint:-processing',]

@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "SX ",
-    "R#R",
+    "SXS",
+    "G#G",
     " X "
   ],
   "key": {
@@ -12,8 +12,9 @@
     "#": {
       "item": "mocreatures:ratcooked"
     },
-    "R": {
-      "item": "minecraft:wheat_seeds"
+    "G": {
+      "item": "minecraft:tallgrass",
+	"data": 1
     },
     "S": {
       "item": "minecraft:pumpkin_seeds"

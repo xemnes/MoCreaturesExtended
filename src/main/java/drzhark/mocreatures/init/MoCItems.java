@@ -73,11 +73,6 @@ public class MoCItems {
     public static final MoCItem chitinFrost = new MoCItem("chitinfrost");
     public static final MoCItem chitinNether = new MoCItem("chitinnether");
     public static final MoCItem chitin = new MoCItem("chitin");
-    // Weapons
-    public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", Item.ToolMaterial.IRON);
-    public static final MoCItemSword sai = new MoCItemSword("sai", Item.ToolMaterial.IRON);
-    public static final MoCItemSword bo = new MoCItemSword("bo", Item.ToolMaterial.IRON);
-    public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
     public static final MoCItem tusksWood = new MoCItem("tuskswood");
     public static final MoCItem tusksIron = new MoCItem("tusksiron");
     public static final MoCItem tusksDiamond = new MoCItem("tusksdiamond");
@@ -90,19 +85,24 @@ public class MoCItems {
     public static final MoCItem scrollOfSale = new MoCItem("scrollofsale");
     public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
     // Food
-    public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 8, 0.6F, false);
-    public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
-    public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 6, 0.6F, false);
-    public static final MoCItemFood omelet = new MoCItemFood("omelet", 4, 0.6F, false);
-    public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 2, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
-    public static final MoCItemFood ostrichcooked = new MoCItemFood("ostrichcooked", 6, 0.6F, false);
-    public static final MoCItemFood ratBurger = new MoCItemFood("ratburger", 8, 0.6F, false);
-    public static final MoCItemFood ratCooked = new MoCItemFood("ratcooked", 4, 0.6F, false);
-    public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
-    public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
-    public static final MoCItemFood turtleraw = new MoCItemFood("turtleraw", 2, 0.3F, false);
-    public static final MoCItemFood turtlecooked = new MoCItemFood("turtlecooked", 6, 0.6F, false);
-    public static final MoCItemFood turtlesoup = new MoCItemTurtleSoup("turtlesoup", 6, 0.6F, false); // TODO: Soup overhaul
+    public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
+    public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 6, 0.8F, true);
+    public static final MoCItemFood omelet = new MoCItemFood("omelet", 3, 0.5F, false);
+    public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood ostrichcooked = new MoCItemFood("ostrichcooked", 7, 0.8F, true);
+    public static final MoCItemFood ratBurger = new MoCItemFood("ratburger", 10, 0.5F, false);
+    public static final MoCItemFood ratCooked = new MoCItemFood("ratcooked", 4, 0.5F, true);
+    public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood turtleraw = new MoCItemFood("turtleraw", 2, 0.2F, true);
+    public static final MoCItemFood turtlecooked = new MoCItemFood("turtlecooked", 6, 0.7F, true);
+    public static final MoCItemFood turtlesoup = new MoCItemTurtleSoup("turtlesoup", 8, 0.8F, false);
+    // Weapons
+    public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", Item.ToolMaterial.IRON);
+    public static final MoCItemSword sai = new MoCItemSword("sai", Item.ToolMaterial.IRON);
+    public static final MoCItemSword bo = new MoCItemSword("bo", Item.ToolMaterial.IRON);
+    public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
     static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 0, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
     static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 224, 9.5F, 3.0F, 19);

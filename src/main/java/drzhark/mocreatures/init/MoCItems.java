@@ -28,6 +28,7 @@ import java.util.*;
 public class MoCItems {
 
     public static final Set<Item> ITEMS = new HashSet<>();
+    // Misc
     public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.ITEM_RECORD_SHUFFLING);
     public static final MoCItem horsesaddle = new MoCItemHorseSaddle("horsesaddle");
     public static final MoCItem sharkteeth = new MoCItem("sharkteeth");
@@ -88,7 +89,7 @@ public class MoCItems {
     public static final MoCItem scrollFreedom = new MoCItem("scrolloffreedom");
     public static final MoCItem scrollOfSale = new MoCItem("scrollofsale");
     public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
-    // foods
+    // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 8, 0.6F, false);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
     public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 6, 0.6F, false);
@@ -100,7 +101,8 @@ public class MoCItems {
     public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
     public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.3F, false).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
     public static final MoCItemFood turtleraw = new MoCItemFood("turtleraw", 2, 0.3F, false);
-    public static final MoCItemFood turtlesoup = new MoCItemTurtleSoup("turtlesoup", 6, 0.6F, false);
+    public static final MoCItemFood turtlecooked = new MoCItemFood("turtlecooked", 6, 0.6F, false);
+    public static final MoCItemFood turtlesoup = new MoCItemTurtleSoup("turtlesoup", 6, 0.6F, false); // TODO: Soup overhaul
     static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 0, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
     static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 224, 9.5F, 3.0F, 19);
@@ -118,7 +120,7 @@ public class MoCItems {
     public static final MoCItemWeapon scorpStingFrost = new MoCItemWeapon("scorpstingfrost", STING, 2, true);
     public static final MoCItemWeapon scorpStingNether = new MoCItemWeapon("scorpstingnether", STING, 3, true);
     public static final MoCItemWeapon scorpStingDirt = new MoCItemWeapon("scorpstingdirt", STING, 1, true);
-    // Armors
+    // Armor
     static ArmorMaterial crocARMOR = EnumHelper.addArmorMaterial("crocARMOR", "crocARMOR", 10, new int[]{1, 3, 4, 1}, 17, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F).setRepairItem(new ItemStack(hideCroc));
     public static final MoCItemArmor plateCroc = new MoCItemArmor("reptileplate", crocARMOR, 4, EntityEquipmentSlot.CHEST);
     public static final MoCItemArmor helmetCroc = new MoCItemArmor("reptilehelmet", crocARMOR, 4, EntityEquipmentSlot.HEAD);
@@ -185,6 +187,7 @@ public class MoCItems {
                     fur,
                     omelet,
                     turtleraw,
+                    turtlecooked,
                     turtlesoup,
                     staffPortal,
                     staffTeleport,

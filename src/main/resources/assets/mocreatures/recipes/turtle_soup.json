@@ -1,11 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "item": "mocreatures:turtleraw"
+      "item": "minecraft:bowl"
     },
     {
-      "item": "minecraft:bowl"
+      "item": "mocreatures:turtlecooked"
+    },
+    {
+      "item": "minecraft:baked_potato"
+    },
+    {
+      "item": "minecraft:yellow_flower",
+      "data": 0
     }
   ],
   "result": {

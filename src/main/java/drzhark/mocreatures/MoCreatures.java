@@ -11,6 +11,7 @@ import drzhark.mocreatures.command.CommandMoCPets;
 import drzhark.mocreatures.command.CommandMoCSpawn;
 import drzhark.mocreatures.command.CommandMoCTP;
 import drzhark.mocreatures.command.CommandMoCreatures;
+import drzhark.mocreatures.compat.CompatHandler;
 import drzhark.mocreatures.datafixer.EntityDataWalker;
 import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
 import drzhark.mocreatures.init.MoCEntities;
@@ -121,6 +122,7 @@ public class MoCreatures {
             MinecraftForge.EVENT_BUS.register(new MoCKeyHandler());
         }
         MoCEntities.registerEntities();
+        CompatHandler.preInit();
     }
 
     @EventHandler
@@ -134,11 +136,13 @@ public class MoCreatures {
         MoCTerrainEventHooks.addBiomeTypes();
         MoCEntities.registerSpawns();
         MoCTerrainEventHooks.buildWorldGenSpawnLists();
+        CompatHandler.init();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         isCustomSpawnerLoaded = Loader.isModLoaded("customspawner");
+        CompatHandler.postInit();
     }
 
     @EventHandler

@@ -1,8 +1,13 @@
 package drzhark.mocreatures.compat;
 
+import com.buuz135.industrial.api.IndustrialForegoingHelper;
+import com.buuz135.industrial.api.extractor.ExtractorEntry;
+import com.buuz135.industrial.api.recipe.ProteinReactorEntry;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.compat.futuremc.FutureMCIntegration;
+import drzhark.mocreatures.compat.industrialforegoing.IndustrialForegoingIntegration;
 import drzhark.mocreatures.compat.thermalexpansion.ThermalExpansionIntegration;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
@@ -16,5 +21,20 @@ public class CompatHandler {
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         if (Loader.isModLoaded("futuremc")) FutureMCIntegration.addRecipes();
         if (Loader.isModLoaded("thermalexpansion")) ThermalExpansionIntegration.addRecipes();
+    }
+
+    public static void preInit() {
+    }
+
+    public static void init() {
+        if (Loader.isModLoaded("industrialforegoing")) {
+            for (ItemStack proteinGeneratorEntry : IndustrialForegoingIntegration.getBasicProteinGeneratorEntries())
+                IndustrialForegoingHelper.addProteinReactorEntry(new ProteinReactorEntry(proteinGeneratorEntry));
+            for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
+                IndustrialForegoingHelper.addWoodToLatex(entry);
+        }
+    }
+
+    public static void postInit() {
     }
 }

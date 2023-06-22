@@ -6,9 +6,11 @@ import com.buuz135.industrial.api.recipe.ProteinReactorEntry;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.compat.futuremc.FutureMCIntegration;
 import drzhark.mocreatures.compat.industrialforegoing.IndustrialForegoingIntegration;
+import drzhark.mocreatures.compat.thaumcraft.ThaumcraftIntegration;
 import drzhark.mocreatures.compat.thermalexpansion.ThermalExpansionIntegration;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -22,7 +24,7 @@ public class CompatHandler {
         if (Loader.isModLoaded("futuremc")) FutureMCIntegration.addRecipes();
         if (Loader.isModLoaded("thermalexpansion")) ThermalExpansionIntegration.addRecipes();
     }
-
+    
     public static void preInit() {
     }
 
@@ -33,6 +35,8 @@ public class CompatHandler {
             for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
+        
+        if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
     }
 
     public static void postInit() {

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     " X ",
     "#R#",
@@ -7,11 +7,12 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:wool",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "wool"
     },
     "#": {
-      "item": "minecraft:chest"
+      "type": "forge:ore_dict",
+      "ore": "chestWood"
     },
     "R": {
       "item": "mocreatures:hide"

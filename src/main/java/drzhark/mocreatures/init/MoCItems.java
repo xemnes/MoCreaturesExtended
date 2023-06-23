@@ -91,7 +91,7 @@ public class MoCItems {
     public static final MoCItemFood omelet = new MoCItemFood("omelet", 3, 0.5F, false);
     public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
     public static final MoCItemFood ostrichcooked = new MoCItemFood("ostrichcooked", 7, 0.8F, true);
-    public static final MoCItemFood ratBurger = new MoCItemFood("ratburger", 10, 0.5F, false);
+    public static final MoCItemFood ratBurger = new MoCItemFood("ratburger", 9, 0.5F, false);
     public static final MoCItemFood ratCooked = new MoCItemFood("ratcooked", 4, 0.5F, true);
     public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
     public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);

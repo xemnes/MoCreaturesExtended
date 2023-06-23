@@ -1,21 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " X ",
-    " Y ",
-    " Z "
-  ],
-  "key": {
-    "X": {
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
       "item": "minecraft:rotten_flesh"
     },
-    "Y": {
+    {
       "item": "mocreatures:heartundead"
     },
-    "Z": {
+    {
       "item": "minecraft:glass_bottle"
     }
-  },
+  ],
   "result": {
     "item": "mocreatures:essenceundead"
   }

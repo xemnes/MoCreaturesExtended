@@ -1,37 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
-    "PYS",
-    "RMR",
-    "X#X"
+    "***",
+    "FMF",
+    "###"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:wool",
-      "data": 11
-    },
     "#": {
-      "item": "minecraft:wool",
-      "data": 4
+      "type": "forge:ore_dict",
+      "ore": "wool"
     },
-    "R": {
-      "item": "minecraft:wool",
-      "data": 14
+    "F": {
+      "item": "mocreatures:fur"
     },
     "M": {
       "item": "mocreatures:medallion"
     },
-    "P": {
-      "item": "minecraft:dye",
-      "data": 9
-    },
-    "Y": {
-      "item": "minecraft:dye",
-      "data": 11
-    },
-    "S": {
-      "item": "minecraft:dye",
-      "data": 10
+    "*": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
     }
   },
   "result": {

@@ -1,21 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
-    "XRX",
-    "R#R",
+    "RRR",
+    "X#X",
     "XRX"
   ],
   "key": {
     "X": {
-      "item": "minecraft:stick"
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
     },
     "#": {
-      "item": "minecraft:wool",
-      "data": 4
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
     },
     "R": {
-      "item": "minecraft:wool",
-      "data": 14
+      "type": "forge:ore_dict",
+      "ore": "wool"
     }
   },
   "result": {

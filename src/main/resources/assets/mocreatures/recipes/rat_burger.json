@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "SXS",
     "G#G",
@@ -14,7 +14,7 @@
     },
     "G": {
       "item": "minecraft:tallgrass",
-	"data": 1
+      "data": 1
     },
     "S": {
       "item": "minecraft:pumpkin_seeds"

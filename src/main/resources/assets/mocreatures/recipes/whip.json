@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "#X#",
     "X X",
@@ -7,13 +7,15 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:leather"
+      "type": "forge:ore_dict",
+      "ore": "leather"
     },
     "#": {
       "item": "mocreatures:bigcatclaw"
     },
     "Z": {
-      "item": "minecraft:iron_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
   },
   "result": {

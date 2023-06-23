@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "XRX",
     "###",
@@ -7,15 +7,15 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:log",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "logWood"
     },
     "#": {
       "item": "minecraft:lead"
     },
     "R": {
-      "item": "minecraft:planks",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
     }
   },
   "result": {

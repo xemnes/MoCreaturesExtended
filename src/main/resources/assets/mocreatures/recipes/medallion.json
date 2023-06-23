@@ -1,15 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
-    "# #",
+    " # ",
+    "#*#",
     " X "
   ],
   "key": {
     "X": {
-      "item": "minecraft:gold_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
     },
     "#": {
-      "item": "minecraft:leather"
+      "type": "forge:ore_dict",
+      "ore": "leather"
+    },
+    "*": {
+      "type": "forge:ore_dict",
+      "ore": "gemLapis"
     }
   },
   "result": {

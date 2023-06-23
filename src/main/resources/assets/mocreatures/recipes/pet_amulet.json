@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "X X",
     " # ",
@@ -7,10 +7,12 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:gold_nugget"
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
     },
     "#": {
-      "item": "minecraft:diamond"
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
     }
   },
   "result": {

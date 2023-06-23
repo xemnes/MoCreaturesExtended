@@ -1,21 +1,20 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " X ",
-    " Y ",
-    " Z "
-  ],
-  "key": {
-    "X": {
-      "item": "mocreatures:essenceundead"
-    },
-    "Y": {
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
       "item": "mocreatures:essencefire"
     },
-    "Z": {
+    {
       "item": "mocreatures:essencedarkness"
+    },
+    {
+      "item": "mocreatures:essenceundead"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
     }
-  },
+  ],
   "result": {
     "item": "mocreatures:essencelight"
   }

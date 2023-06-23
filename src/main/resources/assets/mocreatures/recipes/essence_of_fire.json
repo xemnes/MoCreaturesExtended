@@ -1,21 +1,17 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " X ",
-    " Y ",
-    " Z "
-  ],
-  "key": {
-    "X": {
-      "item": "minecraft:blaze_powder"
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustBlaze"
     },
-    "Y": {
+    {
       "item": "mocreatures:heartfire"
     },
-    "Z": {
+    {
       "item": "minecraft:glass_bottle"
     }
-  },
+  ],
   "result": {
     "item": "mocreatures:essencefire"
   }

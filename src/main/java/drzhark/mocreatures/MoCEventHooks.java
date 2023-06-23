@@ -5,7 +5,7 @@ package drzhark.mocreatures;
 
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.entity.IMoCTameable;
-import drzhark.mocreatures.entity.passive.MoCEntityKitty;
+import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.util.CMSUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

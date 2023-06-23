@@ -4,9 +4,9 @@
 package drzhark.mocreatures.dimension;
 
 import drzhark.mocreatures.entity.ambient.MoCEntityDragonfly;
+import drzhark.mocreatures.entity.hunter.MoCEntitySnake;
+import drzhark.mocreatures.entity.neutral.MoCEntityWyvern;
 import drzhark.mocreatures.entity.passive.MoCEntityBunny;
-import drzhark.mocreatures.entity.passive.MoCEntitySnake;
-import drzhark.mocreatures.entity.passive.MoCEntityWyvern;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.util.math.BlockPos;

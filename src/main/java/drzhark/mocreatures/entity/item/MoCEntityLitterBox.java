@@ -5,7 +5,7 @@ package drzhark.mocreatures.entity.item;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.monster.MoCEntityOgre;
+import drzhark.mocreatures.entity.hostile.MoCEntityOgre;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

@@ -5,7 +5,7 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.client.model.MoCModelCrocodile;
-import drzhark.mocreatures.entity.passive.MoCEntityCrocodile;
+import drzhark.mocreatures.entity.hunter.MoCEntityCrocodile;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

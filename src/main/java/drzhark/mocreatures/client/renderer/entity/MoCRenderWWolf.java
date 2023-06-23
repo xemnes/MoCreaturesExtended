@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.MoCClientProxy;
-import drzhark.mocreatures.entity.monster.MoCEntityWWolf;
+import drzhark.mocreatures.entity.hostile.MoCEntityWWolf;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.EntityLiving;

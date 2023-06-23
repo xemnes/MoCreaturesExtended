@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.model;
 
-import drzhark.mocreatures.entity.monster.MoCEntityHorseMob;
+import drzhark.mocreatures.entity.hostile.MoCEntityHorseMob;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

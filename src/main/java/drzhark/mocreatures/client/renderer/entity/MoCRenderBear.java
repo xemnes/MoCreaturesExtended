@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.model.MoCModelBear;
-import drzhark.mocreatures.entity.passive.MoCEntityBear;
+import drzhark.mocreatures.entity.hunter.MoCEntityBear;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

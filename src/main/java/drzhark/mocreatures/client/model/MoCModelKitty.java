@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.model;
 
-import drzhark.mocreatures.entity.passive.MoCEntityKitty;
+import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;

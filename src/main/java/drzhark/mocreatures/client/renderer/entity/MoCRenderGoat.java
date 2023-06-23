@@ -6,7 +6,7 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.client.model.MoCModelGoat;
-import drzhark.mocreatures.entity.passive.MoCEntityGoat;
+import drzhark.mocreatures.entity.neutral.MoCEntityGoat;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;

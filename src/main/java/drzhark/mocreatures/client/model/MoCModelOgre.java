@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.model;
 
-import drzhark.mocreatures.entity.monster.MoCEntityOgre;
+import drzhark.mocreatures.entity.hostile.MoCEntityOgre;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

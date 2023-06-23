@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.MoCClientProxy;
-import drzhark.mocreatures.entity.monster.MoCEntityRat;
+import drzhark.mocreatures.entity.hostile.MoCEntityRat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

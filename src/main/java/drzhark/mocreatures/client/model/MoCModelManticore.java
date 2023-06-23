@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.model;
 
-import drzhark.mocreatures.entity.monster.MoCEntityManticore;
+import drzhark.mocreatures.entity.hostile.MoCEntityManticore;
 import net.minecraft.entity.Entity;
 
 public class MoCModelManticore extends MoCModelNewBigCat {

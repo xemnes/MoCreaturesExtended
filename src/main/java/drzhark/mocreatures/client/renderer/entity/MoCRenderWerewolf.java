@@ -7,7 +7,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.client.model.MoCModelWere;
 import drzhark.mocreatures.client.model.MoCModelWereHuman;
-import drzhark.mocreatures.entity.monster.MoCEntityWerewolf;
+import drzhark.mocreatures.entity.hostile.MoCEntityWerewolf;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;

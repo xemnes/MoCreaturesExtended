@@ -5,7 +5,7 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.client.model.MoCModelNewHorseMob;
-import drzhark.mocreatures.entity.monster.MoCEntityHorseMob;
+import drzhark.mocreatures.entity.hostile.MoCEntityHorseMob;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.util.ResourceLocation;

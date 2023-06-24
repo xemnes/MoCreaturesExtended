@@ -43,7 +43,7 @@ public class MoCRenderOldBigCat extends RenderLiving<MoCEntityBigCat> {
             float f5 = entitybigcat.getDistance(this.renderManager.renderViewEntity);
             if (f5 < 16F) {
                 String s = "";
-                s = (new StringBuilder()).append(s).append(entitybigcat.getPetName()).toString();
+                s = s + entitybigcat.getPetName();
                 float f7 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
                 GL11.glPushMatrix();

@@ -24,7 +24,7 @@ public class CompatHandler {
         if (Loader.isModLoaded("futuremc")) FutureMCIntegration.addRecipes();
         if (Loader.isModLoaded("thermalexpansion")) ThermalExpansionIntegration.addRecipes();
     }
-    
+
     public static void preInit() {
     }
 
@@ -35,7 +35,7 @@ public class CompatHandler {
             for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
-        
+
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
     }
 

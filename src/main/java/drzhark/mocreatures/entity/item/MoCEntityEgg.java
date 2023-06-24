@@ -12,7 +12,6 @@ import drzhark.mocreatures.entity.hunter.MoCEntityPetScorpion;
 import drzhark.mocreatures.entity.hunter.MoCEntitySnake;
 import drzhark.mocreatures.entity.neutral.MoCEntityOstrich;
 import drzhark.mocreatures.entity.neutral.MoCEntityWyvern;
-import drzhark.mocreatures.entity.passive.*;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;

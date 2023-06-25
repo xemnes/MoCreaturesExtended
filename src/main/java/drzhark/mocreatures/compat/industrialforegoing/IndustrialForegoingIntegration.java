@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 // Courtesy of SokyranTheDragon
 public class IndustrialForegoingIntegration {
+
     public static ItemStack[] getBasicProteinGeneratorEntries() {
         return new ItemStack[]{
                 new ItemStack(MoCItems.rawTurkey),

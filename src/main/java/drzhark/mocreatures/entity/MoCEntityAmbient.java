@@ -364,7 +364,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
                 && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0
                 && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
         if (willSpawn && debug)
-            System.out.println("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
+            System.out.println("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 

@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity;
 
+import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
@@ -163,7 +164,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         boolean willSpawn = super.getCanSpawnHere();
         boolean debug = MoCreatures.proxy.debug;
         if (willSpawn && debug)
-            System.out.println("Mob: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
+            System.out.println("Mob: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 

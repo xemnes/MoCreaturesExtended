@@ -588,7 +588,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         boolean willSpawn = this.world.checkNoEntityCollision(this.getEntityBoundingBox()) && this.posY >= world.getSeaLevel() - 12;
         boolean debug = MoCreatures.proxy.debug;
         if (debug && willSpawn)
-            System.out.println("Aquatic: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
+            System.out.println("Aquatic: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 

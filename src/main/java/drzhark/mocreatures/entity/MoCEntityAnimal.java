@@ -541,7 +541,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         IBlockState iblockstate = this.world.getBlockState((new BlockPos(this)).down());
         willSpawn = this.world.getLight(blockpos) > 8 && iblockstate.canEntitySpawn(this);
         if (debug && willSpawn)
-            System.out.println("Animal: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + this.world.getBiome(this.getPosition()).biomeName);
+            System.out.println("Animal: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 

@@ -8,7 +8,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class MoCEntityCaveOgre extends MoCEntityOgre {
@@ -19,7 +18,7 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("ogreblue.png");
+        return MoCreatures.proxy.getTexture("ogre_cave.png");
     }
 
     /**
@@ -37,8 +36,7 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
 
     @Override
     public boolean getCanSpawnHere() {
-        return (!this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper
-                .floor(this.posZ)))) && (this.posY < 50D) && super.getCanSpawnHere();
+        return super.getCanSpawnHere() && !this.world.canSeeSky(new BlockPos(this)) && (this.posY < 50.0D);
     }
 
     @Override

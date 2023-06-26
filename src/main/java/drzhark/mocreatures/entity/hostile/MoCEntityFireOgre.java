@@ -7,6 +7,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -19,7 +20,7 @@ public class MoCEntityFireOgre extends MoCEntityOgre {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("ogrered.png");
+        return MoCreatures.proxy.getTexture("ogre_fire.png");
     }
 
     @Override
@@ -33,8 +34,12 @@ public class MoCEntityFireOgre extends MoCEntityOgre {
     }
 
     @Override
-    protected boolean isHarmedByDaylight() {
-        return true;
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+
+        if (this.isWet()) {
+            this.attackEntityFrom(DamageSource.DROWN, 1.0F);
+        }
     }
 
     @Override

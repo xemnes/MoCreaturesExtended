@@ -62,34 +62,6 @@ public class MoCreatures {
     public static Int2ObjectOpenHashMap<Class<? extends EntityLiving>> instaSpawnerMap = new Int2ObjectOpenHashMap<>();
     public MoCPetMapData mapData;
 
-    public static void burnPlayer(EntityPlayer player) {
-        //TODO 4FIX
-        //if (!mc.world.isRemote)
-        //{
-        //    inst.burned = true;
-        //}
-    }
-
-    //how to check for client: if(FMLCommonHandler.instance().getSide().isRemote())
-
-    public static void freezePlayer(EntityPlayer player) {
-        //TODO 4FIX
-        //if (!mc.world.isRemote)
-        //{
-        //    inst.freezed = true;
-        //    inst.freezedcounter = 0;
-        //}
-    }
-
-    public static void poisonPlayer(EntityPlayer player) {
-        //TODO 4FIX
-        //if (!mc.world.isRemote)
-        //{
-        //    inst.poisoned = true;
-        //    inst.poisoncounter = 0;
-        //}
-    }
-
     public static void showCreaturePedia(EntityPlayer player, String s) {
         //TODO 4FIX        mc.displayGuiScreen(new MoCGUIPedia(s, 256, 256));
     }

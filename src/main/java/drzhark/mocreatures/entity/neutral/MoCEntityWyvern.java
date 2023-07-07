@@ -684,7 +684,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     protected void applyEnchantments(EntityLivingBase entityLivingBaseIn, Entity entityIn) {
         if (entityIn instanceof EntityPlayer && this.rand.nextInt(3) == 0) {
-            MoCreatures.poisonPlayer((EntityPlayer) entityIn);
             ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.POISON, 200, 0));
         }
 

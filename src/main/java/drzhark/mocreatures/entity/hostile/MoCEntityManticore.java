@@ -330,21 +330,14 @@ public class MoCEntityManticore extends MoCEntityMob {
             setPoisoning(true);
             if (getType() == 4 || getType() == 2)// regular
             {
-                if (flag) {
-                    MoCreatures.poisonPlayer((EntityPlayer) entityIn);
-                }
                 ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.POISON, 70, 0));
             } else if (getType() == 3)// blue
             {
-                if (flag) {
-                    MoCreatures.freezePlayer((EntityPlayer) entityIn);
-                }
                 ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 70, 0));
 
             } else if (getType() == 1)// red
             {
                 if (flag && !this.world.isRemote && !this.world.provider.doesWaterVaporize()) {
-                    MoCreatures.burnPlayer((EntityPlayer) entityIn);
                     entityIn.setFire(15);
                 }
             }

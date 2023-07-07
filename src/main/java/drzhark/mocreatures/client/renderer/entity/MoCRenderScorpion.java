@@ -21,26 +21,24 @@ public class MoCRenderScorpion extends MoCRenderMoC<MoCEntityScorpion> {
     public void doRender(MoCEntityScorpion entityscorpion, double d, double d1, double d2, float f, float f1) {
         super.doRender(entityscorpion, d, d1, d2, f, f1);
     }
+    
+    @Override
+    protected float getDeathMaxRotation(MoCEntityScorpion entityscorpion) {
+        return 180.0F;
+    }
 
     @Override
     protected void preRenderCallback(MoCEntityScorpion entityscorpion, float f) {
-        if (entityscorpion.climbing()) {
+        // Looks awkward when the scorpion has a passenger
+        /*if (entityscorpion.isOnLadder()) {
             rotateAnimal(entityscorpion);
-        }
+        }*/
 
         if (!entityscorpion.getIsAdult()) {
             stretch(entityscorpion);
-            if (entityscorpion.getIsPicked()) {
-                upsideDown(entityscorpion);
-            }
         } else {
             adjustHeight(entityscorpion);
         }
-    }
-
-    protected void upsideDown(MoCEntityScorpion entityscorpion) {
-        GlStateManager.rotate(-90F, -1F, 0.0F, 0.0F);
-        GlStateManager.translate(-1.5F, -0.5F, -2.5F);
     }
 
     protected void adjustHeight(MoCEntityScorpion entityscorpion) {

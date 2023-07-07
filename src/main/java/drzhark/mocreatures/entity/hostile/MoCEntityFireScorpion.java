@@ -1,0 +1,57 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
+package drzhark.mocreatures.entity.hostile;
+
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.MoCreatures;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+
+public class MoCEntityFireScorpion extends MoCEntityScorpion {
+
+    public MoCEntityFireScorpion(World world) {
+        super(world, 3);
+        setSize(1.4F, 0.9F);
+        this.isImmuneToFire = true;
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.34D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
+    }
+
+    @Override
+    public ResourceLocation getTexture() {
+        return MoCreatures.proxy.getTexture("scorpion_fire.png");
+    }
+
+    @Override
+    protected void applyEnchantments(EntityLivingBase entityLivingBaseIn, Entity entityIn) {
+        if (!getIsPoisoning() && this.rand.nextInt(5) == 0 && entityIn instanceof EntityLivingBase) {
+            setPoisoning(true);
+            entityIn.setFire(15);
+        } else {
+            swingArm();
+        }
+        super.applyEnchantments(entityLivingBaseIn, entityIn);
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.FIRE_SCORPION;
+    }
+}

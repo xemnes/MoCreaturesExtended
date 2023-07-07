@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCModelScorpion extends ModelBase {
 
     protected boolean poisoning;
+    protected boolean isAdult;
     protected boolean isTalking;
     protected boolean babies;
     protected int attacking;
@@ -316,6 +317,7 @@ public class MoCModelScorpion extends ModelBase {
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         MoCEntityScorpion scorpy = (MoCEntityScorpion) entity;
         poisoning = scorpy.swingingTail();
+        isAdult = scorpy.getIsAdult();
         isTalking = scorpy.mouthCounter != 0;
         babies = scorpy.getHasBabies();
         attacking = scorpy.armCounter;
@@ -367,7 +369,7 @@ public class MoCModelScorpion extends ModelBase {
         this.Leg8A.render(f5);
         this.Leg8B.render(f5);
         this.Leg8C.render(f5);
-        if (babies) {
+        if (babies && isAdult) {
             this.baby1.render(f5);
             this.baby2.render(f5);
             this.baby3.render(f5);
@@ -580,7 +582,7 @@ public class MoCModelScorpion extends ModelBase {
         /*
          * Babies animation
          */
-        if (babies) {
+        if (babies && isAdult) {
             float fmov = f2 % 100;
             float fb1 = 0F;
             float fb2 = 142F / this.radianF;

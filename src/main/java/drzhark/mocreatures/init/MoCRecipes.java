@@ -47,8 +47,18 @@ public class MoCRecipes {
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.mocLeaf, 1, 0));
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.mocLeaf, 1, 1));
 
+            OreDictionary.registerOre("chitinScorpion", MoCItems.chitinCave);
+            OreDictionary.registerOre("chitinScorpion", MoCItems.chitin);
+            OreDictionary.registerOre("chitinScorpion", MoCItems.chitinFrost);
+            OreDictionary.registerOre("chitinScorpion", MoCItems.chitinNether);
+            OreDictionary.registerOre("chitinScorpion", MoCItems.chitinUndead);
             OreDictionary.registerOre("egg", new ItemStack(MoCItems.mocegg, 1, OreDictionary.WILDCARD_VALUE));
             OreDictionary.registerOre("record", MoCItems.recordshuffle);
+            OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingCave);
+            OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingDirt);
+            OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingFrost);
+            OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingNether);
+            OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingUndead);
 
             // Pam's HarvestCraft OreDictionaries
             OreDictionary.registerOre("foodCrabcooked", MoCItems.crabcooked);

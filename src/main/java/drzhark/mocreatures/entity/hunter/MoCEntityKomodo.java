@@ -4,7 +4,6 @@
 package drzhark.mocreatures.entity.hunter;
 
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIHunt;
@@ -337,9 +336,6 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
     @Override
     protected void applyEnchantments(EntityLivingBase entityLivingBaseIn, Entity entityIn) {
-        if (entityIn instanceof EntityPlayer) {
-            MoCreatures.poisonPlayer((EntityPlayer) entityIn);
-        }
         ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.POISON, 150, 0));
         super.applyEnchantments(entityLivingBaseIn, entityIn);
     }

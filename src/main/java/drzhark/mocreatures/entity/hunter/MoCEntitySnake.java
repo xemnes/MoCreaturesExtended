@@ -648,9 +648,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     @Override
     protected void applyEnchantments(EntityLivingBase entityLivingBaseIn, Entity entityIn) {
         if (isVenomous()) {
-            if (entityIn instanceof EntityPlayer) {
-                MoCreatures.poisonPlayer((EntityPlayer) entityIn);
-            }
             ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.POISON, 150, 2));
         }
         super.applyEnchantments(entityLivingBaseIn, entityIn);

@@ -35,22 +35,22 @@ public class MoCItemSword extends ItemSword {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        int timer = 10; // in seconds
+        int timer = 10; // In seconds
         switch (this.specialWeaponType) {
-            case 1: // poison
+            case 1: // Poison 2
                 target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
                 break;
-            case 2: // slowness
+            case 2: // Slowness
                 target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
                 break;
-            case 3: // fire
+            case 3: // Fire
                 target.setFire(timer);
                 break;
-            case 4: // weakness, nausea for players
+            case 4: // Weakness (Nausea for players)
                 target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
                 break;
-            case 5: // blindness (unused)
-                target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, timer * 20, 0));
+            case 5: // Wither (Blindness for players)
+                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.BLINDNESS : MobEffects.WITHER, timer * 20, 0));
                 break;
             default:
                 break;

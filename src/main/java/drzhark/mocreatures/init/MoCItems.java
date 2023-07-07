@@ -72,6 +72,7 @@ public class MoCItems {
     public static final MoCItem chitinCave = new MoCItem("chitinblack");
     public static final MoCItem chitinFrost = new MoCItem("chitinfrost");
     public static final MoCItem chitinNether = new MoCItem("chitinnether");
+    public static final MoCItem chitinUndead = new MoCItem("chitinundead");
     public static final MoCItem chitin = new MoCItem("chitin");
     public static final MoCItem tusksWood = new MoCItem("tuskswood");
     public static final MoCItem tusksIron = new MoCItem("tusksiron");
@@ -115,11 +116,14 @@ public class MoCItems {
     public static final MoCItemSword scorpSwordNether = new MoCItemSword("scorpswordnether", SCORPN, 3);
     static ToolMaterial SCORPD = EnumHelper.addToolMaterial("SCORPD", 0, 301, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitin));
     public static final MoCItemSword scorpSwordDirt = new MoCItemSword("scorpsworddirt", SCORPD, 1);
-    static ToolMaterial STING = EnumHelper.addToolMaterial("STING", 0, 35, 6.0F, 0.0F, 5);
-    public static final MoCItemWeapon scorpStingCave = new MoCItemWeapon("scorpstingcave", STING, 4, true);
-    public static final MoCItemWeapon scorpStingFrost = new MoCItemWeapon("scorpstingfrost", STING, 2, true);
-    public static final MoCItemWeapon scorpStingNether = new MoCItemWeapon("scorpstingnether", STING, 3, true);
-    public static final MoCItemWeapon scorpStingDirt = new MoCItemWeapon("scorpstingdirt", STING, 1, true);
+    static ToolMaterial SCORPU = EnumHelper.addToolMaterial("SCORPU", 0, 301, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinUndead));
+    public static final MoCItemSword scorpSwordUndead = new MoCItemSword("scorpswordundead", SCORPU, 5);
+    static ToolMaterial STING = EnumHelper.addToolMaterial("STING", 0, 8, 6.0F, 0.0F, 5);
+    public static final MoCItemWeapon scorpStingCave = new MoCItemWeapon("scorpstingcave", STING, 4);
+    public static final MoCItemWeapon scorpStingFrost = new MoCItemWeapon("scorpstingfrost", STING, 2);
+    public static final MoCItemWeapon scorpStingNether = new MoCItemWeapon("scorpstingnether", STING, 3);
+    public static final MoCItemWeapon scorpStingDirt = new MoCItemWeapon("scorpstingdirt", STING, 1);
+    public static final MoCItemWeapon scorpStingUndead = new MoCItemWeapon("scorpstingundead", STING, 5);
     // Armor
     static ArmorMaterial crocARMOR = EnumHelper.addArmorMaterial("crocARMOR", "crocARMOR", 10, new int[]{1, 3, 4, 1}, 17, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F).setRepairItem(new ItemStack(hideCroc));
     public static final MoCItemArmor plateCroc = new MoCItemArmor("reptileplate", crocARMOR, 4, EntityEquipmentSlot.CHEST);
@@ -146,6 +150,11 @@ public class MoCItems {
     public static final MoCItemArmor scorpHelmetCave = new MoCItemArmor("scorphelmetcave", scorpcARMOR, 4, EntityEquipmentSlot.HEAD);
     public static final MoCItemArmor scorpLegsCave = new MoCItemArmor("scorplegscave", scorpcARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor scorpBootsCave = new MoCItemArmor("scorpbootscave", scorpcARMOR, 4, EntityEquipmentSlot.FEET);
+    static ArmorMaterial scorpuARMOR = EnumHelper.addArmorMaterial("scorpuARMOR", "scorpuARMOR", 18, new int[]{2, 6, 7, 2}, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 2.0F).setRepairItem(new ItemStack(chitinUndead));
+    public static final MoCItemArmor scorpPlateUndead = new MoCItemArmor("scorpplateundead", scorpuARMOR, 4, EntityEquipmentSlot.CHEST);
+    public static final MoCItemArmor scorpHelmetUndead = new MoCItemArmor("scorphelmetundead", scorpuARMOR, 4, EntityEquipmentSlot.HEAD);
+    public static final MoCItemArmor scorpLegsUndead = new MoCItemArmor("scorplegsundead", scorpuARMOR, 4, EntityEquipmentSlot.LEGS);
+    public static final MoCItemArmor scorpBootsUndead = new MoCItemArmor("scorpbootsundead", scorpuARMOR, 4, EntityEquipmentSlot.FEET);
     static ArmorMaterial furARMOR = EnumHelper.addArmorMaterial("furARMOR", "furARMOR", 4, new int[]{1, 2, 2, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F).setRepairItem(new ItemStack(fur));
     public static final MoCItemArmor chestFur = new MoCItemArmor("furchest", furARMOR, 4, EntityEquipmentSlot.CHEST);
     public static final MoCItemArmor helmetFur = new MoCItemArmor("furhelmet", furARMOR, 4, EntityEquipmentSlot.HEAD);
@@ -244,36 +253,43 @@ public class MoCItems {
                     ratBurger,
 
                     chitinCave,
-                    chitinFrost,
-                    chitinNether,
                     chitin,
+                    chitinNether,
+                    chitinFrost,
+                    chitinUndead,
 
-                    scorpSwordDirt,
-                    scorpSwordFrost,
                     scorpSwordCave,
+                    scorpSwordDirt,
                     scorpSwordNether,
+                    scorpSwordFrost,
+                    scorpSwordUndead,
 
-                    scorpPlateDirt,
-                    scorpHelmetDirt,
-                    scorpLegsDirt,
-                    scorpBootsDirt,
-                    scorpPlateFrost,
-                    scorpHelmetFrost,
-                    scorpLegsFrost,
-                    scorpBootsFrost,
-                    scorpPlateNether,
-                    scorpHelmetNether,
-                    scorpLegsNether,
-                    scorpBootsNether,
                     scorpHelmetCave,
                     scorpPlateCave,
                     scorpLegsCave,
                     scorpBootsCave,
+                    scorpPlateDirt,
+                    scorpHelmetDirt,
+                    scorpLegsDirt,
+                    scorpBootsDirt,
+                    scorpPlateNether,
+                    scorpHelmetNether,
+                    scorpLegsNether,
+                    scorpBootsNether,
+                    scorpPlateFrost,
+                    scorpHelmetFrost,
+                    scorpLegsFrost,
+                    scorpBootsFrost,
+                    scorpHelmetUndead,
+                    scorpPlateUndead,
+                    scorpLegsUndead,
+                    scorpBootsUndead,
 
-                    scorpStingDirt,
-                    scorpStingFrost,
                     scorpStingCave,
+                    scorpStingDirt,
                     scorpStingNether,
+                    scorpStingFrost,
+                    scorpStingUndead,
 
                     tusksWood,
                     tusksIron,

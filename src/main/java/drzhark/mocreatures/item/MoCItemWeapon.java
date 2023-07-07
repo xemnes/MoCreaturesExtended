@@ -32,7 +32,6 @@ public class MoCItemWeapon extends MoCItem {
     private final Item.ToolMaterial material;
     private final float attackDamage;
     private int specialWeaponType = 0;
-    private boolean breakable = false;
 
     public MoCItemWeapon(String name, Item.ToolMaterial par2ToolMaterial) {
         super(name);
@@ -42,10 +41,9 @@ public class MoCItemWeapon extends MoCItem {
         this.attackDamage = 3F + par2ToolMaterial.getAttackDamage();
     }
 
-    public MoCItemWeapon(String name, ToolMaterial par2ToolMaterial, int damageType, boolean fragile) {
+    public MoCItemWeapon(String name, ToolMaterial par2ToolMaterial, int damageType) {
         this(name, par2ToolMaterial);
         this.specialWeaponType = damageType;
-        this.breakable = fragile;
     }
 
     public float getAttackDamage() {
@@ -63,32 +61,28 @@ public class MoCItemWeapon extends MoCItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        int i = 1;
-        if (this.breakable) {
-            i = 5;
-        }
-        int timer = 10; // in seconds
+        int timer = 10; // In seconds
         switch (this.specialWeaponType) {
-            case 1: // poison
+            case 1: // Poison 2
                 target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
                 break;
-            case 2: // slowness
+            case 2: // Slowness
                 target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
                 break;
-            case 3: // fire
+            case 3: // Fire
                 target.setFire(timer);
                 break;
-            case 4: // weakness, nausea for players
+            case 4: // Weakness (Nausea for players)
                 target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
                 break;
-            case 5: // blindness (unused)
-                target.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, timer * 20, 0));
+            case 5: // Wither (Blindness for players)
+                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.BLINDNESS : MobEffects.WITHER, timer * 20, 0));
                 break;
             default:
                 break;
         }
 
-        stack.damageItem(i, attacker);
+        stack.damageItem(1, attacker);
         return true;
     }
 

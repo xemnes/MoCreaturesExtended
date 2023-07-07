@@ -75,6 +75,7 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.chitinCave, 1, 0), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.SENSES, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.chitinFrost, 1, 0), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.COLD, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.chitinNether, 1, 0), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.FIRE, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.chitinUndead, 1, 0), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.ENTROPY, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencedarkness, 1, 0), new AspectList().add(Aspect.DARKNESS, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencefire, 1, 0), new AspectList().add(Aspect.FIRE, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencelight, 1, 0), new AspectList().add(Aspect.AURA, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
@@ -104,10 +105,11 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingDirt, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.DEATH, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingFrost, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.TRAP, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingNether, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.FIRE, 5));
-        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordCave, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.DARKNESS, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordCave, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.MOTION, 10).add(Aspect.AVERSION, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordDirt, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.DEATH, 10).add(Aspect.AVERSION, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordFrost, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.TRAP, 10).add(Aspect.AVERSION, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordNether, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.FIRE, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordUndead, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.DARKNESS, 10).add(Aspect.AVERSION, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.sharksword, 1, 0), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.PLANT, 8).add(Aspect.BEAST, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.silversword, 1, 0), new AspectList().add(Aspect.AVERSION, 20).add(Aspect.METAL, 22).add(Aspect.DEATH, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.whip, 1, 0), new AspectList().add(Aspect.METAL, 5).add(Aspect.BEAST, 15).add(Aspect.ORDER, 5));
@@ -163,7 +165,11 @@ public class ThaumcraftIntegration {
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "hellrat", new AspectList().add(Aspect.BEAST, 10).add(Aspect.EARTH, 10).add(Aspect.FIRE, 10));
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "horsemob", new AspectList().add(Aspect.ENTROPY, 10).add(Aspect.BEAST, 15).add(Aspect.AIR, 5).add(Aspect.EARTH, 5));
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "petscorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.DEATH, 10));
-        ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "scorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.DEATH, 10));
+        ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "cave_scorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.MOTION, 10));
+        ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "dirt_scorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.DEATH, 10));
+        ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "frost_scorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.TRAP, 10));
+        ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "fire_scorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.FIRE, 10));
+        ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "undead_scorpion", new AspectList().add(Aspect.BEAST, 10).add(Aspect.ENTROPY, 10).add(Aspect.DARKNESS, 10));
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "silverskeleton", new AspectList().add(Aspect.UNDEAD, 20).add(Aspect.MAN, 5).add(Aspect.METAL, 10).add(Aspect.DEATH, 5));
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "wraith", new AspectList().add(Aspect.UNDEAD, 10).add(Aspect.MAN, 5).add(Aspect.SOUL, 10));
         // Entities - Mythical Creatures

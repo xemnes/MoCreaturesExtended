@@ -42,7 +42,7 @@ public class MoCEntityPandaBear extends MoCEntityBear {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 80;
     }
 

@@ -592,7 +592,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 50; //so the update is not handled on MoCEntityAnimal
     }
 

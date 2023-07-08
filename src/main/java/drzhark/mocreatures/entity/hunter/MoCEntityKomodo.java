@@ -320,7 +320,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 120;
     }
 

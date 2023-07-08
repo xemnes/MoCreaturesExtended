@@ -856,7 +856,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         if (this.getType() == 5) {
             return 180;
         }

@@ -159,6 +159,9 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     @Override
     public void setAge(int i) {
         this.dataManager.set(AGE, i);
+        if (getAge() >= getMaxAge()) {
+            setAdult(true);
+        }
     }
 
     public int getTemper() {
@@ -384,10 +387,10 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
                     this.mountCount = 0;
                 }
             }
-            if (getAge() == 0) setAge(getMaxEdad() - 10); //fixes tiny creatures spawned by error
+            if (getAge() == 0) setAge(getMaxAge() - 10); //fixes tiny creatures spawned by error
             if (!getIsAdult() && (this.rand.nextInt(300) == 0)) {
                 setAge(getAge() + 1);
-                if (getAge() >= getMaxEdad()) {
+                if (getAge() >= getMaxAge()) {
                     setAdult(true);
                 }
             }
@@ -954,7 +957,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         return (float) (d4);//latOffset;
     }
 
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 100;
     }
 

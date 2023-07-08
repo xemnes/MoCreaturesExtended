@@ -1479,7 +1479,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             if ((getHealth() + 5) > getMaxHealth()) this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getAge() < getMaxEdad())) setAge(getAge() + 1);
+            if (!getIsAdult() && (getAge() < getMaxAge())) setAge(getAge() + 1);
             return true;
         }
 
@@ -1492,7 +1492,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             if ((getHealth() + 10) > getMaxHealth()) this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getAge() < getMaxEdad())) setAge(getAge() + 2);
+            if (!getIsAdult() && (getAge() < getMaxAge())) setAge(getAge() + 2);
             return true;
         }
 
@@ -1505,7 +1505,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
             if ((getHealth() + 20) > getMaxHealth()) this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getAge() < getMaxEdad())) setAge(getAge() + 3);
+            if (!getIsAdult() && (getAge() < getMaxAge())) setAge(getAge() + 3);
             return true;
         }
 
@@ -1515,7 +1515,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (!this.world.isRemote) MoCTools.tameWithName(player, this);
             this.setHealth(getMaxHealth());
             eatingHorse();
-            if (!getIsAdult() && (getAge() < getMaxEdad()) && !this.world.isRemote) setAge(getAge() + 1);
+            if (!getIsAdult() && (getAge() < getMaxAge()) && !this.world.isRemote) setAge(getAge() + 1);
             return true;
         }
 

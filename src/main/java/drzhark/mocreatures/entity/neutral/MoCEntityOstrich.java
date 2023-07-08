@@ -950,7 +950,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     //EGG LYING
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 20;
     }
 }

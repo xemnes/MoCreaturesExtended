@@ -43,7 +43,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     @Override
     public void doRender(MoCEntityGoat entitygoat, double d, double d1, double d2, float f, float f1) {
         this.tempGoat.typeInt = entitygoat.getType();
-        this.tempGoat.edad = entitygoat.getAge() * 0.01F;
+        this.tempGoat.age = entitygoat.getAge() * 0.01F;
         this.tempGoat.bleat = entitygoat.getBleating();
         this.tempGoat.attacking = entitygoat.getAttacking();
         this.tempGoat.legMov = entitygoat.legMovement();

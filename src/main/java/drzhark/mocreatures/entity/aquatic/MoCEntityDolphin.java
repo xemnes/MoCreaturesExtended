@@ -448,7 +448,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 160;
     }
 

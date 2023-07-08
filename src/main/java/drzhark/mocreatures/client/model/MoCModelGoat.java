@@ -16,7 +16,7 @@ public class MoCModelGoat extends ModelBase {
 
     public int typeInt;
     public int attacking;
-    public float edad;
+    public float age;
     public boolean bleat;
     public int legMov;
     public int earMov;
@@ -201,25 +201,25 @@ public class MoCModelGoat extends ModelBase {
         this.Nose.render(f5);
 
         if (this.typeInt > 1) {
-            if (this.edad > 0.7) {
+            if (this.age > 0.7) {
                 this.RHorn1.render(f5);
                 this.LHorn1.render(f5);
             }
-            if (this.edad > 0.8) {
+            if (this.age > 0.8) {
                 this.RHorn2.render(f5);
                 this.LHorn2.render(f5);
             }
         }
         if (this.typeInt > 4) {
-            if (this.edad > 0.8) {
+            if (this.age > 0.8) {
                 this.RHorn3.render(f5);
                 this.LHorn3.render(f5);
             }
-            if (this.edad > 0.85) {
+            if (this.age > 0.85) {
                 this.RHorn4.render(f5);
                 this.LHorn4.render(f5);
             }
-            if (this.edad > 0.9) {
+            if (this.age > 0.9) {
                 this.RHorn5.render(f5);
                 this.LHorn5.render(f5);
 
@@ -231,7 +231,7 @@ public class MoCModelGoat extends ModelBase {
         if (this.eatMov != 0 && !this.bleat) {
             GlStateManager.translate(this.eatMov / 100F, 0.0F, 0.0F);
         }
-        if (this.typeInt > 4 && this.edad > 0.9) {
+        if (this.typeInt > 4 && this.age > 0.9) {
             this.Goatie.render(f5);
         }
         this.Tongue.render(f5);

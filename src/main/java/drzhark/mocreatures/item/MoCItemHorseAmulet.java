@@ -39,7 +39,7 @@ public class MoCItemHorseAmulet extends MoCItem {
     private int ageCounter;
     private String name;
     private float health;
-    private int edad;
+    private int age;
     private int creatureType;
     private String spawnClass;
     private boolean isGhost;
@@ -95,7 +95,7 @@ public class MoCItemHorseAmulet extends MoCItem {
                 storedCreature.setType(this.creatureType);
                 storedCreature.setTamed(true);
                 storedCreature.setRideable(this.rideable);
-                storedCreature.setAge(this.edad);
+                storedCreature.setAge(this.age);
                 storedCreature.setPetName(this.name);
                 storedCreature.setHealth(this.health);
                 storedCreature.setAdult(this.adult);
@@ -189,7 +189,7 @@ public class MoCItemHorseAmulet extends MoCItem {
         this.PetId = nbt.getInteger("PetId");
         this.creatureType = nbt.getInteger("CreatureType");
         this.health = nbt.getFloat("Health");
-        this.edad = nbt.getInteger("Edad");
+        this.age = nbt.getInteger("Edad");
         this.name = nbt.getString("Name");
         int spawnClassOld = nbt.getInteger("SpawnClass");
         if (spawnClassOld > 0) {
@@ -216,7 +216,7 @@ public class MoCItemHorseAmulet extends MoCItem {
         nbt.setInteger("PetId", this.PetId);
         nbt.setInteger("CreatureType", this.creatureType);
         nbt.setFloat("Health", this.health);
-        nbt.setInteger("Edad", this.edad);
+        nbt.setInteger("Edad", this.age);
         nbt.setString("Name", this.name);
         nbt.setString("SpawnClass", this.spawnClass);
         nbt.setBoolean("Rideable", this.rideable);

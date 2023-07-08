@@ -171,7 +171,7 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 120;
     }
 

@@ -195,7 +195,7 @@ public class MoCEntityLion extends MoCEntityBigCat {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         if (getType() == 1 || getType() == 6) {
             return 110;
         }
@@ -207,7 +207,7 @@ public class MoCEntityLion extends MoCEntityBigCat {
 
     @Override
     public boolean canAttackTarget(EntityLivingBase entity) {
-        if (!this.getIsAdult() && (this.getAge() < this.getMaxEdad() * 0.8)) {
+        if (!this.getIsAdult() && (this.getAge() < this.getMaxAge() * 0.8)) {
             return false;
         }
         if (entity instanceof MoCEntityLion) {

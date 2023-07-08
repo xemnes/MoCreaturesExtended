@@ -134,7 +134,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
-            setAge(getMaxEdad());
+            setAge(getMaxAge());
         }
     }
 

@@ -23,7 +23,7 @@ public class MoCEntityMantaRay extends MoCEntityRay {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 180;
     }
 

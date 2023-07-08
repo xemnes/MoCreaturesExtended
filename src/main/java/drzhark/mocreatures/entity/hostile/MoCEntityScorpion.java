@@ -308,7 +308,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     @Override
-    protected int getMaxEdad() {
+    protected int getMaxAge() {
         return 120;
     }
 

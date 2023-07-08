@@ -102,7 +102,7 @@ public class MoCEntityRay extends MoCEntityTameableAquatic {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 90;
     }
 

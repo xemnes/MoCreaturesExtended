@@ -39,7 +39,7 @@ public class MoCEntityPolarBear extends MoCEntityBear {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 140;
     }
 

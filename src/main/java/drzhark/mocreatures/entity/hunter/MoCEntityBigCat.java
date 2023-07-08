@@ -100,7 +100,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
-            setAge(getMaxEdad());
+            setAge(getMaxAge());
         }
     }
 
@@ -307,7 +307,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             if (getIsGhost() && getAge() > 0 && getAge() < 10 && this.rand.nextInt(5) == 0) {
                 setAge(getAge() + 1);
                 if (getAge() == 9) {
-                    setAge(getMaxEdad());
+                    setAge(getMaxAge());
                     setAdult(true);
                 }
             }

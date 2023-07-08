@@ -587,7 +587,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 120;
     }
 

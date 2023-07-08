@@ -143,6 +143,9 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     @Override
     public void setAge(int i) {
         this.dataManager.set(AGE, i);
+        if (getAge() >= getMaxAge()) {
+            setAdult(true);
+        }
     }
 
     @Nullable
@@ -219,10 +222,10 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
                     }
                 }
             }
-            if (getAge() == 0) setAge(getMaxEdad() - 10); //fixes tiny creatures spawned by error
+            if (getAge() == 0) setAge(getMaxAge() - 10); //fixes tiny creatures spawned by error
             if (!getIsAdult() && (this.rand.nextInt(300) == 0)) {
                 setAge(getAge() + 1);
-                if (getAge() >= getMaxEdad()) {
+                if (getAge() >= getMaxAge()) {
                     setAdult(true);
                 }
             }
@@ -236,7 +239,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         super.onLivingUpdate();
     }
 
-    protected int getMaxEdad() {
+    protected int getMaxAge() {
         return 100;
     }
 

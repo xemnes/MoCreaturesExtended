@@ -29,6 +29,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -493,10 +494,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             }
 
         }
-        if (!stack.isEmpty()
-                && getTusks() > 0
-                && ((stack.getItem() == Items.DIAMOND_PICKAXE) || (stack.getItem() == Items.WOODEN_PICKAXE)
-                || (stack.getItem() == Items.STONE_PICKAXE) || (stack.getItem() == Items.IRON_PICKAXE) || (stack.getItem() == Items.GOLDEN_PICKAXE))) {
+        if (!stack.isEmpty() && getTusks() > 0 && stack.getItem() instanceof ItemPickaxe) {
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_OFF);
             dropTusks();
             return true;
@@ -796,17 +794,14 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         switch (getType()) {
             case 1:
             case 3:
-
                 dist = 0.8D;
                 break;
             case 2:
             case 5:
-
                 dist = 0.1D;
                 break;
             case 4:
                 dist = 1.2D;
-
                 break;
         }
 
@@ -980,7 +975,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             }
             if ((this.isBeingRidden()) && (i > 0)) {
                 for (Entity entity : this.getRecursivePassengers()) {
-                    entity.attackEntityFrom(DamageSource.FALL, (float) i);
+                    entity.attackEntityFrom(DamageSource.FALL, i);
                 }
             }
             IBlockState iblockstate = this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.2D - (double) this.prevRotationYaw, this.posZ));

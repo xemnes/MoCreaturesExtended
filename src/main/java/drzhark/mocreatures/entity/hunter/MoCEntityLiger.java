@@ -97,13 +97,13 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     }
 
     @Override
-    public int getMaxEdad() {
+    public int getMaxAge() {
         return 135;
     }
 
     @Override
     public boolean canAttackTarget(EntityLivingBase entity) {
-        if (!this.getIsAdult() && (this.getAge() < this.getMaxEdad() * 0.8)) {
+        if (!this.getIsAdult() && (this.getAge() < this.getMaxAge() * 0.8)) {
             return false;
         }
         if (entity instanceof MoCEntityLiger) {

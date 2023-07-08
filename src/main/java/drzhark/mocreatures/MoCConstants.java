@@ -11,4 +11,5 @@ public class MoCConstants {
     public static final String MOD_VERSION = "12.1.2";
     public static final String MOD_ACCEPTED_VERSIONS = "[12.1.2]";
     public static final String MOD_DEPENDENCIES = "after:futuremc;after:thaumcraft;after:thermalexpansion;after:traverse";
+    public static final Integer DATAFIXER_VERSION = 1;
 }

@@ -12,7 +12,7 @@ import drzhark.mocreatures.command.CommandMoCSpawn;
 import drzhark.mocreatures.command.CommandMoCTP;
 import drzhark.mocreatures.command.CommandMoCreatures;
 import drzhark.mocreatures.compat.CompatHandler;
-import drzhark.mocreatures.datafixer.EntityDataWalker;
+import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
 import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
 import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -27,6 +27,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -81,9 +82,6 @@ public class MoCreatures {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        if (isServer()) {
-            FMLCommonHandler.instance().getMinecraftServerInstance().getDataFixer().registerWalker(FixTypes.ENTITY, new EntityDataWalker());
-        }
         MoCMessageHandler.init();
         MinecraftForge.EVENT_BUS.register(new MoCEventHooks());
         MinecraftForge.TERRAIN_GEN_BUS.register(new MoCTerrainEventHooks());
@@ -109,6 +107,8 @@ public class MoCreatures {
         MoCEntities.registerSpawns();
         MoCTerrainEventHooks.buildWorldGenSpawnLists();
         CompatHandler.init();
+        ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(MoCConstants.MOD_ID, MoCConstants.DATAFIXER_VERSION);
+        modFixer.registerFix(FixTypes.ENTITY, new EntityIDFixer());
     }
 
     @EventHandler

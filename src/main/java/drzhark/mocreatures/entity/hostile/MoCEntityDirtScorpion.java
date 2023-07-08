@@ -3,10 +3,7 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
-import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,6 +11,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityDirtScorpion extends MoCEntityScorpion {
 
@@ -29,11 +28,6 @@ public class MoCEntityDirtScorpion extends MoCEntityScorpion {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(3.0D);
-    }
-
-    @Override
-    public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("scorpion_dirt.png");
     }
 
     @Override

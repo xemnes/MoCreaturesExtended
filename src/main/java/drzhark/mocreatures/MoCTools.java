@@ -1014,7 +1014,7 @@ public class MoCTools {
         if (mystack[0].getItem() == MoCItems.scorpBootsDirt && mystack[1].getItem() == MoCItems.scorpLegsDirt && mystack[2].getItem() == MoCItems.scorpPlateDirt && mystack[3].getItem() == MoCItems.scorpHelmetDirt) {
             player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1));
         }
-        
+
         // Undead Scorpion Armor Set Effect - Strength
         if (mystack[0].getItem() == MoCItems.scorpBootsUndead && mystack[1].getItem() == MoCItems.scorpLegsUndead && mystack[2].getItem() == MoCItems.scorpPlateUndead && mystack[3].getItem() == MoCItems.scorpHelmetUndead) {
             player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0));

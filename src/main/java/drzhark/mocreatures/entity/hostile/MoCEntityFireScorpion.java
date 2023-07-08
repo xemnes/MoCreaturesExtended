@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.Entity;
@@ -12,6 +10,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityFireScorpion extends MoCEntityScorpion {
 

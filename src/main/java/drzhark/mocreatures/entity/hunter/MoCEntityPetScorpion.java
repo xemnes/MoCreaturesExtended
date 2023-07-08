@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -22,12 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -47,6 +40,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
     private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BYTE);
@@ -55,10 +50,10 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     private static final DataParameter<Boolean> IS_SITTING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     public int mouthCounter;
     public int armCounter;
+    public int transformType;
     private boolean isPoisoning;
     private int poisontimer;
     private int transformCounter;
-    public int transformType;
 
     public MoCEntityPetScorpion(World world) {
         super(world);
@@ -229,11 +224,11 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (((Byte) this.dataManager.get(CLIMBING)).byteValue() & 1) != 0;
+        return (this.dataManager.get(CLIMBING).byteValue() & 1) != 0;
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = ((Byte) this.dataManager.get(CLIMBING)).byteValue();
+        byte b0 = this.dataManager.get(CLIMBING).byteValue();
 
         if (climbing) {
             b0 = (byte) (b0 | 1);
@@ -350,7 +345,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
                     new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
         }
     }
-    
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -659,7 +654,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             float f = this.attacker.getBrightness();
 
             if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
-                this.attacker.setAttackTarget((EntityLivingBase) null);
+                this.attacker.setAttackTarget(null);
                 return false;
             } else {
                 return super.shouldContinueExecuting();
@@ -667,7 +662,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         }
 
         protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return (double) (4.0F + attackTarget.width);
+            return 4.0F + attackTarget.width;
         }
     }
 }

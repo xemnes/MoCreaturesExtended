@@ -21,7 +21,7 @@ public class MoCRenderScorpion extends MoCRenderMoC<MoCEntityScorpion> {
     public void doRender(MoCEntityScorpion entityscorpion, double d, double d1, double d2, float f, float f1) {
         super.doRender(entityscorpion, d, d1, d2, f, f1);
     }
-    
+
     @Override
     protected float getDeathMaxRotation(MoCEntityScorpion entityscorpion) {
         return 180.0F;

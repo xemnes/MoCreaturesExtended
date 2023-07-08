@@ -75,7 +75,7 @@ public class MoCItemArmor extends ItemArmor {
         if (itemstack.getItem() == MoCItems.scorpLegsNether) {
             tempArmorTexture = "scorpn_2.png";
         }
-        
+
         if ((itemstack.getItem() == MoCItems.scorpHelmetUndead) || (itemstack.getItem() == MoCItems.scorpPlateUndead) || (itemstack.getItem() == MoCItems.scorpBootsUndead)) {
             tempArmorTexture = "scorpu_1.png";
         }

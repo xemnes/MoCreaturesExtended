@@ -37,9 +37,9 @@ public class MoCEntityScorpion extends MoCEntityMob {
     private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.createKey(MoCEntityScorpion.class, DataSerializers.BOOLEAN);
     public int mouthCounter;
     public int armCounter;
+    public int getType; // Baby Type
     private boolean isPoisoning;
     private int poisontimer;
-    public int getType; // Baby Type
 
     public MoCEntityScorpion(World world, int type) {
         super(world);
@@ -51,7 +51,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
 
         // Fire and Undead Scorpions won't spawn with babies
         if (!this.world.isRemote && getType != 3 && getType != 5) {
-            setHasBabies(!this.getIsAdult() ? false : this.rand.nextInt(4) == 0);
+            setHasBabies(this.getIsAdult() && this.rand.nextInt(4) == 0);
         }
     }
 
@@ -126,11 +126,11 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (((Byte) this.dataManager.get(CLIMBING)).byteValue() & 1) != 0;
+        return (this.dataManager.get(CLIMBING) & 1) != 0;
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = ((Byte) this.dataManager.get(CLIMBING)).byteValue();
+        byte b0 = this.dataManager.get(CLIMBING);
 
         if (climbing) {
             b0 = (byte) (b0 | 1);
@@ -138,7 +138,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
             b0 = (byte) (b0 & -2);
         }
 
-        this.dataManager.set(CLIMBING, Byte.valueOf(b0));
+        this.dataManager.set(CLIMBING, b0);
     }
 
 
@@ -331,19 +331,21 @@ public class MoCEntityScorpion extends MoCEntityMob {
             super(scorpion, 1.0D, true);
         }
 
+        @Override
         public boolean shouldContinueExecuting() {
             float f = this.attacker.getBrightness();
 
             if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
-                this.attacker.setAttackTarget((EntityLivingBase) null);
+                this.attacker.setAttackTarget(null);
                 return false;
             } else {
                 return super.shouldContinueExecuting();
             }
         }
 
+        @Override
         protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return (double) (4.0F + attackTarget.width);
+            return 4.0F + attackTarget.width;
         }
     }
 
@@ -352,9 +354,10 @@ public class MoCEntityScorpion extends MoCEntityMob {
             super(scorpion, classTarget, true);
         }
 
+        @Override
         public boolean shouldExecute() {
             float f = this.taskOwner.getBrightness();
-            return f >= 0.5F ? false : super.shouldExecute();
+            return f < 0.5F && super.shouldExecute();
         }
     }
 }

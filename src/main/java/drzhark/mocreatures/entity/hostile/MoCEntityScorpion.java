@@ -121,15 +121,6 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (!this.world.isRemote) {
-            this.setBesideClimbableBlock(this.collidedHorizontally);
-        }
-    }
-
-    @Override
     public boolean isOnLadder() {
         return this.isBesideClimbableBlock();
     }
@@ -233,6 +224,15 @@ public class MoCEntityScorpion extends MoCEntityMob {
         }
     }
 
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.collidedHorizontally);
+        }
+    }
+
     public boolean swingingTail() {
         return getIsPoisoning() && this.poisontimer < 15;
     }
@@ -244,22 +244,13 @@ public class MoCEntityScorpion extends MoCEntityMob {
         if (!this.world.isRemote && getIsAdult() && getHasBabies()) {
             int k = this.rand.nextInt(5);
             for (int i = 0; i < k; i++) {
-                if (getType == 5) { // Undead Scorpion
-                    MoCEntityUndeadScorpion entityscorpy = new MoCEntityUndeadScorpion(this.world);
-                    entityscorpy.setPosition(this.posX, this.posY, this.posZ);
-                    entityscorpy.setAdult(false);
-                    entityscorpy.setAge(20);
-                    this.world.spawnEntity(entityscorpy);
-                    MoCTools.playCustomSound(entityscorpy, SoundEvents.ENTITY_SLIME_SQUISH);
-                } else {
-                    MoCEntityPetScorpion entityscorpy = new MoCEntityPetScorpion(this.world);
-                    entityscorpy.setPosition(this.posX, this.posY, this.posZ);
-                    entityscorpy.setAdult(false);
-                    entityscorpy.setAge(20);
-                    entityscorpy.setType(getType);
-                    this.world.spawnEntity(entityscorpy);
-                    MoCTools.playCustomSound(entityscorpy, SoundEvents.ENTITY_SLIME_SQUISH);
-                }
+                MoCEntityPetScorpion entityscorpy = new MoCEntityPetScorpion(this.world);
+                entityscorpy.setPosition(this.posX, this.posY, this.posZ);
+                entityscorpy.setAdult(false);
+                entityscorpy.setAge(20);
+                entityscorpy.setType(getType);
+                this.world.spawnEntity(entityscorpy);
+                MoCTools.playCustomSound(entityscorpy, SoundEvents.ENTITY_SLIME_SQUISH);
             }
         }
     }

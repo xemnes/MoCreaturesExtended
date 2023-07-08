@@ -224,15 +224,6 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-
-        if (!this.world.isRemote) {
-            this.setBesideClimbableBlock(this.collidedHorizontally);
-        }
-    }
-
-    @Override
     public boolean isOnLadder() {
         return this.isBesideClimbableBlock();
     }
@@ -276,23 +267,6 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
         if (this.armCounter != 0 && this.armCounter++ > 24) {
             this.armCounter = 0;
-        }
-
-        if (!this.world.isRemote && !this.isBeingRidden() && this.getIsAdult() && !this.getHasBabies() && this.rand.nextInt(100) == 0) {
-            MoCTools.findMobRider(this);
-            /*List list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(4D, 2D, 4D));
-            for (int i = 0; i < list.size(); i++) {
-                Entity entity = (Entity) list.get(i);
-                if (!(entity instanceof EntityMob)) {
-                    continue;
-                }
-                EntityMob entitymob = (EntityMob) entity;
-                if (entitymob.getRidingEntity() == null
-                        && (entitymob instanceof EntitySkeleton || entitymob instanceof EntityZombie || entitymob instanceof MoCEntitySilverSkeleton)) {
-                    entitymob.mountEntity(this);
-                    break;
-                }
-            }*/
         }
 
         if (getIsPoisoning()) {
@@ -374,6 +348,15 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         if (!this.world.isRemote) {
             MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 1),
                     new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
+        }
+    }
+    
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.collidedHorizontally);
         }
     }
 

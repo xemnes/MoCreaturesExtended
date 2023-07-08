@@ -1892,8 +1892,10 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             /*
              * Buckling
              */
-            if ((this.sprintCounter > 0 && this.sprintCounter < 150) && isUnicorned() && this.isBeingRidden())
+            if ((this.sprintCounter > 0 && this.sprintCounter < 150) && isUnicorned() && this.isBeingRidden()) {
                 MoCTools.buckleMobs(this, 2D, this.world);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_HORSE_MAD);
+            }
 
             if (isFlyer() && !getIsTamed() && this.rand.nextInt(100) == 0 && !isMovementCeased() && !getIsSitting())
                 wingFlap();

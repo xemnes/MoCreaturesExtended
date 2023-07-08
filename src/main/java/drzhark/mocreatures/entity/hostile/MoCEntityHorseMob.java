@@ -330,7 +330,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
             stand();
         }
         openMouth();
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_HORSE_MAD);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_HORSE_ANGRY_UNDEAD);
         return super.attackEntityAsMob(entityIn);
     }
 
@@ -341,7 +341,6 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         if ((this.getType() == 23) || (this.getType() == 24) || (this.getType() == 25)) {
             MoCTools.spawnSlimes(this.world, this);
         }
-
     }
 
     @Override

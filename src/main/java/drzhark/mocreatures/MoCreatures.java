@@ -63,15 +63,6 @@ public class MoCreatures {
     public static Int2ObjectOpenHashMap<Class<? extends EntityLiving>> instaSpawnerMap = new Int2ObjectOpenHashMap<>();
     public MoCPetMapData mapData;
 
-    public static void showCreaturePedia(EntityPlayer player, String s) {
-        //TODO 4FIX        mc.displayGuiScreen(new MoCGUIPedia(s, 256, 256));
-    }
-
-    public static void showCreaturePedia(String s) {
-        //TODO 4FIX        EntityPlayer entityplayer = mc.player;
-        //showCreaturePedia(entityplayer, s);
-    }
-
     public static void updateSettings() {
         proxy.readGlobalConfigValues();
     }

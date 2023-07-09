@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -333,6 +336,11 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_TURTLE_DEATH;
     }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.TURTLE;
+    }
 
     @Override
     protected Item getDropItem() {
@@ -352,7 +360,8 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
                 || getPetName().equals("michaelangelo")) {
             return MoCItems.nunchaku;
         }
-        return MoCItems.turtleraw;
+        
+        return null;
     }
 
     /**
@@ -414,7 +423,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public int getMaxAge() {
+    public int getMaxEdad() {
         return 120;
     }
 

@@ -4,12 +4,13 @@
 package drzhark.mocreatures.entity.passive;
 
 import com.google.common.collect.Sets;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIMateMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,6 +30,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Set;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);
@@ -105,13 +108,9 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
         return MoCSoundEvents.ENTITY_TURKEY_AMBIENT;
     }
 
-    @Override
-    protected Item getDropItem() {
-        boolean flag = (this.rand.nextInt(2) == 0);
-        if (flag && !this.isChild()) {
-            return MoCItems.rawTurkey;
-        }
-        return Items.FEATHER;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.TURKEY;
     }
 
     @Override

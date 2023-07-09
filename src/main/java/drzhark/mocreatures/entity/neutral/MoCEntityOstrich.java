@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -46,6 +47,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
@@ -757,6 +760,11 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         openMouth();
         return MoCSoundEvents.ENTITY_OSTRICH_DEATH;
     }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.OSTRICH;
+    }
 
     @Override
     protected Item getDropItem() {
@@ -778,7 +786,8 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             }
             return Items.ROTTEN_FLESH;
         }
-        return MoCItems.ostrichraw;
+        
+        return null;
     }
 
     @Override
@@ -950,7 +959,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     //EGG LYING
 
     @Override
-    public int getMaxAge() {
+    public int getMaxEdad() {
         return 20;
     }
 }

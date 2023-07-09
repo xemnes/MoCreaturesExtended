@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAmbient;
@@ -10,10 +13,8 @@ import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -66,9 +67,9 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
         }
     }
 
-    @Override
-    protected Item getDropItem() {
-        return MoCItems.crabraw;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.CRAB;
     }
 
     @Override

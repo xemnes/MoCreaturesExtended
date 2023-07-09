@@ -3,11 +3,11 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -48,12 +48,9 @@ public class MoCEntityHellRat extends MoCEntityRat {
         return MoCreatures.proxy.getTexture("hellrat" + textNumber + ".png");
     }
 
+    @Nullable
     @Override
-    protected Item getDropItem() {
-        boolean flag = (this.rand.nextInt(100) < MoCreatures.proxy.rareItemDropChance);
-        if (flag) {
-            return Item.getItemFromBlock(Blocks.FIRE);
-        }
-        return Items.REDSTONE;
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.HELL_RAT;
     }
 }

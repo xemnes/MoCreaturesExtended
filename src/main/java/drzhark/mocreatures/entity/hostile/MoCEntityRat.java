@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +16,6 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -28,6 +27,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityRat extends MoCEntityMob {
 
@@ -134,11 +135,6 @@ public class MoCEntityRat extends MoCEntityMob {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.ratRaw;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_RAT_DEATH;
     }
@@ -151,6 +147,11 @@ public class MoCEntityRat extends MoCEntityMob {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_RAT_AMBIENT;
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.RAT;
     }
 
     @Override

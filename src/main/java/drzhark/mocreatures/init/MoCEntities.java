@@ -144,7 +144,7 @@ public class MoCEntities {
     /**
      * Other
      */
-    public static EntityEntry EGG = createEntityEntry(MoCEntityEgg.class, "Egg");//, 0x2600, 0x052500);
+    public static EntityEntry EGG = createEntityEntry(MoCEntityEgg.class, "Egg");
     public static EntityEntry KITTY_BED = createEntityEntry(MoCEntityKittyBed.class, "KittyBed");
     public static EntityEntry LITTERBOX = createEntityEntry(MoCEntityLitterBox.class, "LitterBox");
     public static EntityEntry TROCK = createEntityEntry(MoCEntityThrowableRock.class, "TRock");
@@ -285,7 +285,7 @@ public class MoCEntities {
         MoCreatures.mocEntityMap.put("Fly", new MoCEntityData("Fly", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityFly.class, 12, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.MESA, Type.WET, Type.SWAMP, Type.HOT))));
         MoCreatures.mocEntityMap.put("Maggot", new MoCEntityData("Maggot", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityMaggot.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.MESA, Type.WET, Type.SWAMP, Type.HOT))));
         MoCreatures.mocEntityMap.put("Snail", new MoCEntityData("Snail", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntitySnail.class, 10, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.DENSE, Type.LUSH))));
-        MoCreatures.mocEntityMap.put("Roach", new MoCEntityData("Roach", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityRoach.class, 10, 1, 2), new ArrayList<>(Arrays.asList(Type.HOT))));
+        MoCreatures.mocEntityMap.put("Roach", new MoCEntityData("Roach", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityRoach.class, 10, 1, 2), new ArrayList<>(Arrays.asList(Type.HOT, Type.WASTELAND))));
     }
 
     public static void registerSpawns() {

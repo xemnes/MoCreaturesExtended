@@ -5,10 +5,13 @@ package drzhark.mocreatures.entity.ambient;
 
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class MoCEntityRoach extends MoCEntityInsect {
@@ -56,5 +59,20 @@ public class MoCEntityRoach extends MoCEntityInsect {
     @Override
     public boolean isNotScared() {
         return getIsFlying();
+    }
+    
+    @Override
+    public float getEyeHeight() {
+        return 0.1F;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_CRICKET_HURT;
     }
 }

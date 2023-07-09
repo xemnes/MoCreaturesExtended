@@ -130,17 +130,17 @@ public class MoCEntities {
     /**
      * Ambient
      */
-    public static EntityEntry ANT = createEntityEntry(MoCEntityAnt.class, "Ant", 65407, 12623485, EntityLiving.SpawnPlacementType.IN_AIR);
-    public static EntityEntry BEE = createEntityEntry(MoCEntityBee.class, "Bee", 65407, 15656192, EntityLiving.SpawnPlacementType.IN_AIR);//, 0x2600, 0x052500);
-    public static EntityEntry BUTTERFLY = createEntityEntry(MoCEntityButterfly.class, "ButterFly", 65407, 7434694, EntityLiving.SpawnPlacementType.IN_AIR);//, 0x22600, 0x012500);
-    public static EntityEntry CRAB = createEntityEntry(MoCEntityCrab.class, "Crab", 65407, 13749760, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry CRICKET = createEntityEntry(MoCEntityCricket.class, "Cricket", 65407, 16622, EntityLiving.SpawnPlacementType.ON_GROUND);//, 0x2600, 0x052500);
-    public static EntityEntry DRAGONFLY = createEntityEntry(MoCEntityDragonfly.class, "DragonFly", 65407, 14020607, EntityLiving.SpawnPlacementType.IN_AIR);//, 0x2600, 0x052500);
-    public static EntityEntry FIREFLY = createEntityEntry(MoCEntityFirefly.class, "Firefly", 65407, 9320590, EntityLiving.SpawnPlacementType.IN_AIR);//, 0x2600, 0x052500);
-    public static EntityEntry FLY = createEntityEntry(MoCEntityFly.class, "Fly", 65407, 1, EntityLiving.SpawnPlacementType.IN_AIR);//, 0x2600, 0x052500);
-    public static EntityEntry MAGGOT = createEntityEntry(MoCEntityMaggot.class, "Maggot", 65407, 9141102, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry SNAIL = createEntityEntry(MoCEntitySnail.class, "Snail", 65407, 14772545, EntityLiving.SpawnPlacementType.ON_GROUND);//, 0x2600, 0x052500);
-    public static EntityEntry ROACH = createEntityEntry(MoCEntityRoach.class, "Roach", 65407, 13749760, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry ANT = createEntityEntry(MoCEntityAnt.class, "Ant", 5915945, 2693905, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry BEE = createEntityEntry(MoCEntityBee.class, "Bee", 15912747, 526604, EntityLiving.SpawnPlacementType.IN_AIR);
+    public static EntityEntry BUTTERFLY = createEntityEntry(MoCEntityButterfly.class, "ButterFly", 12615169, 2956801, EntityLiving.SpawnPlacementType.IN_AIR);
+    public static EntityEntry CRAB = createEntityEntry(MoCEntityCrab.class, "Crab", 11880978, 15514213, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry CRICKET = createEntityEntry(MoCEntityCricket.class, "Cricket", 7830593, 3747075, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry DRAGONFLY = createEntityEntry(MoCEntityDragonfly.class, "DragonFly", 665770, 2207231, EntityLiving.SpawnPlacementType.IN_AIR);
+    public static EntityEntry FIREFLY = createEntityEntry(MoCEntityFirefly.class, "Firefly", 2102294, 8501028, EntityLiving.SpawnPlacementType.IN_AIR);
+    public static EntityEntry FLY = createEntityEntry(MoCEntityFly.class, "Fly", 1184284, 11077640, EntityLiving.SpawnPlacementType.IN_AIR);
+    public static EntityEntry MAGGOT = createEntityEntry(MoCEntityMaggot.class, "Maggot", 14076037, 6839592, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry SNAIL = createEntityEntry(MoCEntitySnail.class, "Snail", 10850932, 7225384, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry ROACH = createEntityEntry(MoCEntityRoach.class, "Roach", 5185289, 10245148, EntityLiving.SpawnPlacementType.ON_GROUND);
     /**
      * Other
      */
@@ -168,12 +168,12 @@ public class MoCEntities {
 
     private static void registerEntity(Class<? extends Entity> entityClass, String entityName) {
         final ResourceLocation resourceLocation = new ResourceLocation(MoCConstants.MOD_PREFIX + entityName.toLowerCase());
-        EntityRegistry.registerModEntity(resourceLocation, entityClass, resourceLocation.toString(), MoCEntityID++, MoCreatures.instance, 80, 1, true);
+        EntityRegistry.registerModEntity(resourceLocation, entityClass, resourceLocation.toString(), MoCEntityID++, MoCreatures.instance, 64, 1, true);
     }
 
     private static void registerEntity(Class<? extends Entity> entityClass, String entityName, int eggColor, int eggDotsColor) {
         final ResourceLocation resourceLocation = new ResourceLocation(MoCConstants.MOD_PREFIX + entityName.toLowerCase());
-        EntityRegistry.registerModEntity(resourceLocation, entityClass, resourceLocation.toString(), MoCEntityID++, MoCreatures.instance, 80, 1, true, eggColor, eggDotsColor);
+        EntityRegistry.registerModEntity(resourceLocation, entityClass, resourceLocation.toString(), MoCEntityID++, MoCreatures.instance, 64, 1, true, eggColor, eggDotsColor);
     }
 
     @SuppressWarnings("ArraysAsListWithZeroOrOneArgument")

@@ -21,7 +21,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
     public MoCEntityInsect(World world) {
         super(world);
-        setSize(0.2F, 0.2F);
+        setSize(0.4F, 0.3F);
         this.moveHelper = new EntityFlyHelper(this);
     }
 
@@ -57,6 +57,11 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     @Override
     public boolean isFlyingAlone() {
         return getIsFlying();
+    }
+    
+    @Override
+    public float getEyeHeight() {
+        return 0.2F;
     }
 
     @Override

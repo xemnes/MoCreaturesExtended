@@ -54,6 +54,12 @@
       "mocreatures:bee3"
     ]
   },
+  "beehurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:beehurt"
+    ]
+  },
   "beeupset": {
     "category": "neutral",
     "sounds": [
@@ -121,6 +127,12 @@
     "category": "neutral",
     "sounds": [
       "mocreatures:cricketfly"
+    ]
+  },
+  "crickethurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:crickethurt"
     ]
   },
   "crocdying": {
@@ -282,6 +294,12 @@
       "mocreatures:dragonfly"
     ]
   },
+  "dragonflyhurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:dragonflyhurt"
+    ]
+  },
   "drinking": {
     "category": "neutral",
     "sounds": [
@@ -358,6 +376,12 @@
     "category": "neutral",
     "sounds": [
       "mocreatures:fly"
+    ]
+  },
+  "flyhurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:flyhurt"
     ]
   },
   "foxcall": {

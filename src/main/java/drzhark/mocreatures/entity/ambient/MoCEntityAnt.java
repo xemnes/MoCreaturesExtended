@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -21,6 +23,7 @@ public class MoCEntityAnt extends MoCEntityAmbient {
 
     public MoCEntityAnt(World world) {
         super(world);
+        setSize(0.3F, 0.2F);
         this.texture = "ant.png";
     }
 
@@ -38,6 +41,7 @@ public class MoCEntityAnt extends MoCEntityAmbient {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
     }
 
@@ -112,8 +116,23 @@ public class MoCEntityAnt extends MoCEntityAmbient {
     @Override
     public float getAIMoveSpeed() {
         if (getHasFood()) {
-            return 0.05F;
+            return 0.1F;
         }
         return 0.15F;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return null;
+    }
+    
+    @Override
+    public float getEyeHeight() {
+        return 0.1F;
     }
 }

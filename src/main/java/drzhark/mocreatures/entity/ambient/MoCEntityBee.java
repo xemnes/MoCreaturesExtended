@@ -57,6 +57,16 @@ public class MoCEntityBee extends MoCEntityInsect {
         }
         return MoCSoundEvents.ENTITY_BEE_AMBIENT;
     }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_BEE_HURT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_BEE_HURT;
+    }
 
     @Override
     public int getTalkInterval() {

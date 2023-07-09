@@ -10,6 +10,8 @@ import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class MoCEntityFly extends MoCEntityInsect {
@@ -40,6 +42,16 @@ public class MoCEntityFly extends MoCEntityInsect {
                 }
             }
         }
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FLY_HURT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_FLY_HURT;
     }
 
     @Override

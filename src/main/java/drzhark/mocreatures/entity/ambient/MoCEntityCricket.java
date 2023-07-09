@@ -9,7 +9,9 @@ import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
@@ -44,9 +46,9 @@ public class MoCEntityCricket extends MoCEntityInsect {
     @Override
     public ResourceLocation getTexture() {
         if (getType() == 1) {
-            return MoCreatures.proxy.getTexture("cricketa.png");
+            return MoCreatures.proxy.getTexture("cricket_bright_green.png");
         } else {
-            return MoCreatures.proxy.getTexture("cricketb.png");
+            return MoCreatures.proxy.getTexture("cricket_green.png");
         }
     }
 
@@ -73,6 +75,16 @@ public class MoCEntityCricket extends MoCEntityInsect {
             }
         }
     }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
 
     @Override
     public void onUpdate() {
@@ -87,6 +99,11 @@ public class MoCEntityCricket extends MoCEntityInsect {
                 }
         }
     }
+    
+    @Override
+    public boolean isFlyer() {
+        return true;
+    }
 
     @Override
     public float getAIMoveSpeed() {
@@ -95,9 +112,9 @@ public class MoCEntityCricket extends MoCEntityInsect {
         }
         return 0.15F;
     }
-
+    
     @Override
-    public boolean isFlyer() {
-        return true;
+    public float getEyeHeight() {
+        return 0.15F;
     }
 }

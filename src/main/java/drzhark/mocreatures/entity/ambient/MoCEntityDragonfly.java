@@ -10,7 +10,9 @@ import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -51,13 +53,13 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("dragonflya.png");
+                return MoCreatures.proxy.getTexture("dragonfly_green.png");
             case 2:
-                return MoCreatures.proxy.getTexture("dragonflyb.png");
+                return MoCreatures.proxy.getTexture("dragonfly_cyan.png");
             case 3:
-                return MoCreatures.proxy.getTexture("dragonflyc.png");
+                return MoCreatures.proxy.getTexture("dragonfly_red.png");
             default:
-                return MoCreatures.proxy.getTexture("dragonflyd.png");
+                return MoCreatures.proxy.getTexture("dragonfly_blue.png");
         }
     }
 
@@ -72,6 +74,16 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
                 this.soundCount = 20;
             }
         }
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_DRAGONFLY_HURT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_DRAGONFLY_HURT;
     }
 
     @Override

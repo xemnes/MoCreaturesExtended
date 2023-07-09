@@ -19,6 +19,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_BEAR_DEATH;
     public static final SoundEvent ENTITY_BEAR_HURT;
     public static final SoundEvent ENTITY_BEE_AMBIENT;
+    public static final SoundEvent ENTITY_BEE_HURT;
     public static final SoundEvent ENTITY_BEE_UPSET;
     public static final SoundEvent ENTITY_BIRD_AMBIENT_BLACK;
     public static final SoundEvent ENTITY_BIRD_AMBIENT_BLUE;
@@ -30,6 +31,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_BIRD_HURT;
     public static final SoundEvent ENTITY_CRICKET_AMBIENT;
     public static final SoundEvent ENTITY_CRICKET_FLY;
+    public static final SoundEvent ENTITY_CRICKET_HURT;
     public static final SoundEvent ENTITY_CROCODILE_AMBIENT;
     public static final SoundEvent ENTITY_CROCODILE_DEATH;
     public static final SoundEvent ENTITY_CROCODILE_HURT;
@@ -48,6 +50,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_DUCK_DEATH;
     public static final SoundEvent ENTITY_DUCK_HURT;
     public static final SoundEvent ENTITY_DRAGONFLY_AMBIENT;
+    public static final SoundEvent ENTITY_DRAGONFLY_HURT;
     public static final SoundEvent ENTITY_ELEPHANT_AMBIENT_BABY;
     public static final SoundEvent ENTITY_ELEPHANT_AMBIENT;
     public static final SoundEvent ENTITY_ELEPHANT_DEATH;
@@ -56,6 +59,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_ENT_DEATH;
     public static final SoundEvent ENTITY_ENT_HURT;
     public static final SoundEvent ENTITY_FLY_AMBIENT;
+    public static final SoundEvent ENTITY_FLY_HURT;
     public static final SoundEvent ENTITY_FOX_AMBIENT;
     public static final SoundEvent ENTITY_FOX_DEATH;
     public static final SoundEvent ENTITY_FOX_HURT;
@@ -196,6 +200,7 @@ public class MoCSoundEvents {
             ENTITY_BEAR_DEATH = createSoundEvent("beardeath");
             ENTITY_BEAR_HURT = createSoundEvent("bearhurt");
             ENTITY_BEE_AMBIENT = createSoundEvent("bee");
+            ENTITY_BEE_HURT = createSoundEvent("beehurt");
             ENTITY_BEE_UPSET = createSoundEvent("beeupset");
             ENTITY_BIRD_AMBIENT_BLACK = createSoundEvent("birdblack");
             ENTITY_BIRD_AMBIENT_BLUE = createSoundEvent("birdblue");
@@ -206,6 +211,7 @@ public class MoCSoundEvents {
             ENTITY_BIRD_DEATH = createSoundEvent("birddying"); // TODO
             ENTITY_BIRD_HURT = createSoundEvent("birdhurt"); // TODO
             ENTITY_CRICKET_AMBIENT = createSoundEvent("cricket");
+            ENTITY_CRICKET_HURT = createSoundEvent("crickethurt");
             ENTITY_CRICKET_FLY = createSoundEvent("cricketfly");
             ENTITY_CROCODILE_AMBIENT = createSoundEvent("crocgrunt");
             ENTITY_CROCODILE_DEATH = createSoundEvent("crocdying");
@@ -225,6 +231,7 @@ public class MoCSoundEvents {
             ENTITY_DUCK_DEATH = createSoundEvent("duckdying"); // TODO
             ENTITY_DUCK_HURT = createSoundEvent("duckhurt");
             ENTITY_DRAGONFLY_AMBIENT = createSoundEvent("dragonfly");
+            ENTITY_DRAGONFLY_HURT = createSoundEvent("dragonflyhurt");
             ENTITY_ENT_AMBIENT = createSoundEvent("entgrunt"); // TODO
             ENTITY_ENT_DEATH = createSoundEvent("entdying"); // TODO
             ENTITY_ENT_HURT = createSoundEvent("enthurt"); // TODO
@@ -233,6 +240,7 @@ public class MoCSoundEvents {
             ENTITY_ELEPHANT_DEATH = createSoundEvent("elephantdying"); // TODO
             ENTITY_ELEPHANT_HURT = createSoundEvent("elephanthurt");
             ENTITY_FLY_AMBIENT = createSoundEvent("fly");
+            ENTITY_FLY_HURT = createSoundEvent("flyhurt");
             ENTITY_FOX_AMBIENT = createSoundEvent("foxcall");
             ENTITY_FOX_DEATH = createSoundEvent("foxdying");
             ENTITY_FOX_HURT = createSoundEvent("foxhurt");

@@ -8,6 +8,8 @@ import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class MoCEntityFirefly extends MoCEntityInsect {
@@ -37,6 +39,16 @@ public class MoCEntityFirefly extends MoCEntityInsect {
             }
         }
     }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
 
     @Override
     public boolean isFlyer() {
@@ -49,5 +61,10 @@ public class MoCEntityFirefly extends MoCEntityInsect {
             return 0.12F;
         }
         return 0.10F;
+    }
+    
+    @Override
+    public float getEyeHeight() {
+        return 0.15F;
     }
 }

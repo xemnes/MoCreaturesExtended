@@ -9,7 +9,9 @@ import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -43,25 +45,25 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("bfagalaisurticae.png");
+                return MoCreatures.proxy.getTexture("butterfly_agalais_urticae.png");
             case 2:
-                return MoCreatures.proxy.getTexture("bfargyreushyperbius.png");
+                return MoCreatures.proxy.getTexture("butterfly_argyreus_hyperbius.png");
             case 3:
-                return MoCreatures.proxy.getTexture("bfathymanefte.png");
+                return MoCreatures.proxy.getTexture("butterfly_athyma_nefte.png");
             case 4:
-                return MoCreatures.proxy.getTexture("bfcatopsiliapomona.png");
+                return MoCreatures.proxy.getTexture("butterfly_catopsilia_pomona.png");
             case 5:
-                return MoCreatures.proxy.getTexture("bfmorphopeleides.png");
+                return MoCreatures.proxy.getTexture("butterfly_morpho_peleides.png");
             case 6:
-                return MoCreatures.proxy.getTexture("bfvanessaatalanta.png");
+                return MoCreatures.proxy.getTexture("butterfly_vanessa_atalanta.png");
             case 8:
-                return MoCreatures.proxy.getTexture("mothcamptogrammabilineata.png");
+                return MoCreatures.proxy.getTexture("moth_camptogramma_bilineata.png");
             case 9:
-                return MoCreatures.proxy.getTexture("mothidiaaemula.png");
+                return MoCreatures.proxy.getTexture("moth_idia_aemula.png");
             case 10:
-                return MoCreatures.proxy.getTexture("moththyatirabatis.png");
+                return MoCreatures.proxy.getTexture("moth_thyatira_batis.png");
             default:
-                return MoCreatures.proxy.getTexture("bfpierisrapae.png");
+                return MoCreatures.proxy.getTexture("butterfly_pieris_rapae.png");
         }
     }
 
@@ -105,5 +107,20 @@ public class MoCEntityButterfly extends MoCEntityInsect {
             return 0.13F;
         }
         return 0.10F;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return null;
+    }
+    
+    @Override
+    public float getEyeHeight() {
+        return 0.1F;
     }
 }

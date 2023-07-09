@@ -6,8 +6,9 @@ package drzhark.mocreatures.entity.ambient;
 import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class MoCEntityMaggot extends MoCEntityAmbient {
@@ -29,10 +30,15 @@ public class MoCEntityMaggot extends MoCEntityAmbient {
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
     }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_SILVERFISH_STEP;
+    }
 
     @Override
-    protected Item getDropItem() {
-        return Items.SLIME_BALL;
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_SILVERFISH_STEP;
     }
 
     @Override

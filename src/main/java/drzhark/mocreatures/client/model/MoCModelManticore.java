@@ -11,10 +11,10 @@ public class MoCModelManticore extends MoCModelNewBigCat {
     @Override
     public void updateAnimationModifiers(Entity entity) {
         MoCEntityManticore bigcat = (MoCEntityManticore) entity;
-        this.isFlyer = true;
+        this.isFlyer = bigcat.isFlyer();
         this.isSaddled = bigcat.getIsRideable();
-        this.flapwings = (bigcat.wingFlapCounter != 0);
-        this.floating = (this.isFlyer && bigcat.isOnAir());
+        this.flapwings = true;
+        this.floating = (this.isFlyer && bigcat.isOnAir() && !bigcat.onGround);
         this.poisoning = bigcat.swingingTail();
         this.isRidden = (bigcat.isBeingRidden());
         this.hasMane = true;

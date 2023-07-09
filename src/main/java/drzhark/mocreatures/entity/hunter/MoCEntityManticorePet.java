@@ -3,8 +3,12 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +19,15 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
     public MoCEntityManticorePet(World world) {
         super(world);
         this.chestName = "ManticoreChest";
+    }
+
+    // TODO: Varied stats depending on type
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
     }
 
     @Override
@@ -30,13 +43,15 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("bcmanticoredark.png");
+                return MoCreatures.proxy.getTexture("manticore_dark.png");
             case 3:
-                return MoCreatures.proxy.getTexture("bcmanticoreblue.png");
+                return MoCreatures.proxy.getTexture("manticore_frost.png");
             case 4:
-                return MoCreatures.proxy.getTexture("bcmanticoregreen.png");
+                return MoCreatures.proxy.getTexture("manticore_toxic.png");
+            case 5:
+                return MoCreatures.proxy.getTexture("manticore_plain.png");
             default:
-                return MoCreatures.proxy.getTexture("bcmanticore.png");
+                return MoCreatures.proxy.getTexture("manticore_fire.png");
         }
     }
 
@@ -81,21 +96,6 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
     }
 
     @Override
-    public float calculateMaxHealth() {
-        return 40F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 7D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 8D;
-    }
-
-    @Override
     public int getMaxAge() {
         return 130;
     }
@@ -110,4 +110,24 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
         return true;
     }
 
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        switch (getType()) {
+            case 2:
+                return MoCLootTables.DARK_MANTICORE;
+            case 3:
+                return MoCLootTables.FROST_MANTICORE;
+            case 4:
+                return MoCLootTables.TOXIC_MANTICORE;
+            case 5:
+                return MoCLootTables.PLAIN_MANTICORE;
+
+            default:
+                return MoCLootTables.FIRE_MANTICORE;
+        }
+    }
 }

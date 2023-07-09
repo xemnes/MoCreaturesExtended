@@ -281,7 +281,7 @@ public class MoCEntityEgg extends EntityLiving {
                             MoCTools.tameWithName(entityplayer, entityspawn);
                         }
                     }
-                    if (getEggType() > 61 && getEggType() < 66) //manticorePets for now it uses 62 - 65
+                    if (getEggType() > 61 && getEggType() < 67) //manticorePets for now it uses 62 - 66
                     {
                         MoCEntityManticorePet entityspawn = new MoCEntityManticorePet(this.world);
                         int typeInt = getEggType() - 61;

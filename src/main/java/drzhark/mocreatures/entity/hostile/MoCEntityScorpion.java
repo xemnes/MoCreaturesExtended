@@ -69,11 +69,6 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     @Override
-    public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("scorpion_dirt.png");
-    }
-
-    @Override
     protected PathNavigate createNavigator(World worldIn) {
         return new PathNavigateClimber(this, worldIn);
     }
@@ -107,7 +102,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
 
     @Override
     public void performAnimation(int animationType) {
-        if (animationType == 0) // Tail Animation
+        if (animationType == 0) // Sting Attack
         {
             setPoisoning(true);
         } else if (animationType == 1) // Attack Animation (Claws)

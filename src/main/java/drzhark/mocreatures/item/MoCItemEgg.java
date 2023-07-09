@@ -76,7 +76,7 @@ public class MoCItemEgg extends MoCItem {
         for (int i = 41; i < 46; i++) { // scorpions
             items.add(new ItemStack(this, 1, i));
         }
-        for (int i = 50; i < 65; i++) { // wyverns, manticores
+        for (int i = 50; i < 67; i++) { // wyverns, manticores
             items.add(new ItemStack(this, 1, i));
         }
     }

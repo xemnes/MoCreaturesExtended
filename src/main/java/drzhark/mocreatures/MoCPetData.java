@@ -59,9 +59,9 @@ public class MoCPetData {
             NBTTagCompound nbt = this.tamedList.getCompoundTagAt(i);
             if (nbt.hasKey("PetId") && nbt.getInteger("PetId") == id) {
                 this.tamedList.removeTag(i);
-                this.usedPetIds.remove(new Integer(id));
+                this.usedPetIds.remove(id);
                 this.IDMap.clear(id); // clear bit so it can be reused again
-                if (this.usedPetIds.size() == 0) {
+                if (this.usedPetIds.isEmpty()) {
                     this.IDMap.clear(); // fixes bug with ID 0 not able to be used again
                 }
                 this.ownerData.setTag("PetIdData", savePetDataMap());

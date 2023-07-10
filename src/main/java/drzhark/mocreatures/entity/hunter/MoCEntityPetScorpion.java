@@ -224,11 +224,11 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (this.dataManager.get(CLIMBING).byteValue() & 1) != 0;
+        return (this.dataManager.get(CLIMBING) & 1) != 0;
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = this.dataManager.get(CLIMBING).byteValue();
+        byte b0 = this.dataManager.get(CLIMBING);
 
         if (climbing) {
             b0 = (byte) (b0 | 1);
@@ -236,7 +236,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             b0 = (byte) (b0 & -2);
         }
 
-        this.dataManager.set(CLIMBING, Byte.valueOf(b0));
+        this.dataManager.set(CLIMBING, b0);
     }
 
 
@@ -401,7 +401,6 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
                 return MoCLootTables.FROST_SCORPION;
             case 5:
                 return MoCLootTables.UNDEAD_SCORPION;
-
             default:
                 return MoCLootTables.DIRT_SCORPION;
         }
@@ -650,6 +649,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             super(scorpion, 1.0D, true);
         }
 
+        @Override
         public boolean shouldContinueExecuting() {
             float f = this.attacker.getBrightness();
 
@@ -661,6 +661,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             }
         }
 
+        @Override
         protected double getAttackReachSqr(EntityLivingBase attackTarget) {
             return 4.0F + attackTarget.width;
         }

@@ -125,7 +125,6 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
                 return MoCLootTables.TOXIC_MANTICORE;
             case 5:
                 return MoCLootTables.PLAIN_MANTICORE;
-
             default:
                 return MoCLootTables.FIRE_MANTICORE;
         }

@@ -81,6 +81,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean darkerWyvernLair;
     public boolean foggyWyvernLair;
     public boolean simpleBunnyTextures;
+    public boolean verboseEntityNames;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -179,12 +180,12 @@ public class MoCProxy implements IGuiHandler {
                 if (!cat.containsKey("biomeTypes")) {
                     cat.put("biomeTypes", new MoCProperty("biomeTypes", Arrays.toString(entityData.getBiomeTypes().toArray()), MoCProperty.Type.STRING));
                 } else {
-                    entityData.setBiomeTypes(parseBiomeTypes(cat.get("biomeTypes").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")));
+                    entityData.setBiomeTypes(parseBiomeTypes(cat.get("biomeTypes").value.replaceAll(" ", "").replaceAll("\\[", "").replaceAll("]", "").split(",")));
                 }
                 if (!cat.containsKey("blockedBiomeTypes")) {
                     cat.put("blockedBiomeTypes", new MoCProperty("blockedBiomeTypes", Arrays.toString(entityData.getBlockedBiomeTypes().toArray()), MoCProperty.Type.STRING));
                 } else {
-                    entityData.setBlockedBiomeTypes(parseBiomeTypes(cat.get("blockedBiomeTypes").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")));
+                    entityData.setBlockedBiomeTypes(parseBiomeTypes(cat.get("blockedBiomeTypes").value.replaceAll(" ", "").replaceAll("\\[", "").replaceAll("]", "").split(",")));
                 }
                 if (!cat.containsKey("canSpawn")) {
                     cat.put("canSpawn", new MoCProperty("canSpawn", Boolean.toString(entityData.getCanSpawn()), MoCProperty.Type.BOOLEAN));
@@ -194,7 +195,7 @@ public class MoCProxy implements IGuiHandler {
                 if (!cat.containsKey("dimensions")) {
                     cat.put("dimensions", new MoCProperty("dimensions", Arrays.toString(entityData.getDimensions()), MoCProperty.Type.STRING));
                 } else {
-                    entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll("\\[", "").replaceAll("]", "").split(", ")).mapToInt(Integer::parseInt).toArray());
+                    entityData.setDimensions(Arrays.stream(cat.get("dimensions").value.replaceAll(" ", "").replaceAll("\\[", "").replaceAll("]", "").split(",")).mapToInt(Integer::parseInt).toArray());
                 }
                 if (!cat.containsKey("frequency")) {
                     cat.put("frequency", new MoCProperty("frequency", Integer.toString(entityData.getFrequency()), MoCProperty.Type.INTEGER));
@@ -269,6 +270,7 @@ public class MoCProxy implements IGuiHandler {
         this.darkerWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "DarkerWyvernLair", false, "Disables sky light at the wyvern lair like in legacy versions. It is highly recommended to also have the classic wyvern lair sky enabled.").getBoolean(false);
         this.foggyWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "FoggyWyvernLair", false, "Enables extra fog at the wyvern lair like in legacy versions.").getBoolean(false);
         this.simpleBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SimpleBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
+        this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
 
         // Save
         this.mocSettingsConfig.save();

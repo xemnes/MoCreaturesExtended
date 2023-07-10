@@ -8,6 +8,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ai.EntityAIMoverHelperMoC;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
@@ -68,6 +69,15 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         this.texture = "blank.jpg";
         this.navigatorWater = new PathNavigateSwimmer(this, world);
         this.moveHelper = new EntityAIMoverHelperMoC(this);
+    }
+
+    @Override
+    public String getName() {
+        String entityString = EntityList.getEntityString(this);
+        if (!MoCreatures.proxy.verboseEntityNames || entityString == null) return super.getName();
+        String translationKey = "entity." + entityString + ".verbose.name";
+        String translatedString = I18n.format(translationKey);
+        return !translatedString.equals(translationKey) ? translatedString : super.getName();
     }
 
     @Override

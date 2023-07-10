@@ -11,6 +11,7 @@ import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
 import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
@@ -49,6 +50,15 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public MoCEntityAmbient(World world) {
         super(world);
         this.navigatorFlyer = new PathNavigateFlyer(this, world);
+    }
+
+    @Override
+    public String getName() {
+        String entityString = EntityList.getEntityString(this);
+        if (!MoCreatures.proxy.verboseEntityNames || entityString == null) return super.getName();
+        String translationKey = "entity." + entityString + ".verbose.name";
+        String translatedString = I18n.format(translationKey);
+        return !translatedString.equals(translationKey) ? translatedString : super.getName();
     }
 
     @Override

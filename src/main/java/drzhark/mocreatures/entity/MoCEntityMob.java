@@ -14,6 +14,7 @@ import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageHealth;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityWolf;
@@ -57,6 +58,15 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         this.navigatorWater = new PathNavigateSwimmer(this, world);
         this.navigatorFlyer = new PathNavigateFlyer(this, world);
         this.tasks.addTask(4, this.wander = new EntityAIWanderMoC2(this, 1.0D, 80));
+    }
+
+    @Override
+    public String getName() {
+        String entityString = EntityList.getEntityString(this);
+        if (!MoCreatures.proxy.verboseEntityNames || entityString == null) return super.getName();
+        String translationKey = "entity." + entityString + ".verbose.name";
+        String translatedString = I18n.format(translationKey);
+        return !translatedString.equals(translationKey) ? translatedString : super.getName();
     }
 
     @Override

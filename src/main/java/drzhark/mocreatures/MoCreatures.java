@@ -4,7 +4,7 @@
 package drzhark.mocreatures;
 
 import com.mojang.authlib.GameProfile;
-import drzhark.mocreatures.client.MoCClientTickHandler;
+import drzhark.mocreatures.client.MoCClientEventHooks;
 import drzhark.mocreatures.client.MoCCreativeTabs;
 import drzhark.mocreatures.client.handlers.MoCKeyHandler;
 import drzhark.mocreatures.command.CommandMoCPets;
@@ -21,7 +21,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DimensionType;
@@ -79,7 +78,7 @@ public class MoCreatures {
         proxy.configInit(event);
         proxy.initTextures();
         if (!isServer()) {
-            MinecraftForge.EVENT_BUS.register(new MoCClientTickHandler());
+            MinecraftForge.EVENT_BUS.register(new MoCClientEventHooks());
             MinecraftForge.EVENT_BUS.register(new MoCKeyHandler());
         }
         MoCEntities.registerEntities();

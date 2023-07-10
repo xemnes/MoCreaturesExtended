@@ -29,14 +29,13 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
 
     @Override
     protected void preRenderCallback(MoCEntityPetScorpion entityscorpion, float f) {
-        // Looks awkward when the scorpion has a passenger
-        /*if (entityscorpion.isOnLadder()) {
+        if (entityscorpion.isOnLadder()) {
             rotateAnimal(entityscorpion);
-        }*/
+        }
 
         if (entityscorpion.getIsSitting()) {
-            float factorY = 0.4F * (entityscorpion.getAge() / 100F);
-            GlStateManager.translate(0F, factorY, 0F);
+            float factorY = 0.4F * (entityscorpion.getAge() / 100.0F);
+            GlStateManager.translate(0.0F, factorY, 0.0F);
         }
 
         if (!entityscorpion.getIsAdult()) {
@@ -50,7 +49,7 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
     }
 
     protected void upsideDown(MoCEntityPetScorpion entityscorpion) {
-        GlStateManager.rotate(-90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(-90.0F, -1.0F, 0.0F, 0.0F);
         GlStateManager.translate(-1.5F, -0.5F, -2.5F);
     }
 
@@ -59,7 +58,8 @@ public class MoCRenderPetScorpion extends MoCRenderMoC<MoCEntityPetScorpion> {
     }
 
     protected void rotateAnimal(MoCEntityPetScorpion entityscorpion) {
-        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90.0F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(0.0F, 1.0F, 0.0F);
     }
 
     protected void stretch(MoCEntityPetScorpion entityscorpion) {

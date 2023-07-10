@@ -62,7 +62,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         setAdult(false);
         setAge(20);
         setHasBabies(false);
-        this.stepHeight = 20.0F;
+        this.stepHeight = 1.0F;
     }
 
     @Override

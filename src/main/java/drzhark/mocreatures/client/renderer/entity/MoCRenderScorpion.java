@@ -29,10 +29,9 @@ public class MoCRenderScorpion extends MoCRenderMoC<MoCEntityScorpion> {
 
     @Override
     protected void preRenderCallback(MoCEntityScorpion entityscorpion, float f) {
-        // Looks awkward when the scorpion has a passenger
-        /*if (entityscorpion.isOnLadder()) {
+        if (entityscorpion.isOnLadder()) {
             rotateAnimal(entityscorpion);
-        }*/
+        }
 
         if (!entityscorpion.getIsAdult()) {
             stretch(entityscorpion);
@@ -46,7 +45,8 @@ public class MoCRenderScorpion extends MoCRenderMoC<MoCEntityScorpion> {
     }
 
     protected void rotateAnimal(MoCEntityScorpion entityscorpion) {
-        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90.0F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(0.0F, 1.0F, 0.0F);
     }
 
     protected void stretch(MoCEntityScorpion entityscorpion) {

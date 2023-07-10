@@ -39,14 +39,32 @@ public class EntityIDFixer implements IFixableData {
             }
             compound.setInteger("TypeInt", 1);
         }
+        if (entityId.equals(MoCConstants.MOD_PREFIX + "manticore")) {
+            int entityType = compound.getInteger("TypeInt");
+            switch (entityType) {
+                case 2:
+                    compound.setString("id", MoCConstants.MOD_PREFIX + "darkmanticore");
+                    break;
+                case 3:
+                    compound.setString("id", MoCConstants.MOD_PREFIX + "frostmanticore");
+                    break;
+                case 4:
+                    compound.setString("id", MoCConstants.MOD_PREFIX + "toxicmanticore");
+                    break;
+                default:
+                    compound.setString("id", MoCConstants.MOD_PREFIX + "firemanticore");
+            }
+            compound.setInteger("TypeInt", 1);
+        }
         return compound;
     }
 
     @SubscribeEvent
     public void missingMapping(MissingMappings<EntityEntry> event) {
         ResourceLocation scorpion = new ResourceLocation(MoCConstants.MOD_ID, "scorpion");
+        ResourceLocation manticore = new ResourceLocation(MoCConstants.MOD_ID, "manticore");
         for (MissingMappings.Mapping<EntityEntry> entry : event.getAllMappings()) {
-            if (entry.key.equals(scorpion)) {
+            if (entry.key.equals(scorpion) || entry.key.equals(manticore)) {
                 entry.ignore();
             }
         }

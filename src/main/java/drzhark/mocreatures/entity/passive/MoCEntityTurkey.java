@@ -4,7 +4,6 @@
 package drzhark.mocreatures.entity.passive;
 
 import com.google.common.collect.Sets;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -29,9 +28,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Set;
-
 import javax.annotation.Nullable;
+import java.util.Set;
 
 public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(Items.WHEAT_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);

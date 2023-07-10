@@ -120,7 +120,7 @@ public class MoCEntityAnt extends MoCEntityAmbient {
         }
         return 0.15F;
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return null;
@@ -130,7 +130,7 @@ public class MoCEntityAnt extends MoCEntityAmbient {
     protected SoundEvent getHurtSound(DamageSource source) {
         return null;
     }
-    
+
     @Override
     public float getEyeHeight() {
         return 0.1F;

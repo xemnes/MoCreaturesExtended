@@ -108,7 +108,7 @@ public class MoCEntityButterfly extends MoCEntityInsect {
         }
         return 0.10F;
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return null;
@@ -118,7 +118,7 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     protected SoundEvent getHurtSound(DamageSource source) {
         return null;
     }
-    
+
     @Override
     public float getEyeHeight() {
         return 0.1F;

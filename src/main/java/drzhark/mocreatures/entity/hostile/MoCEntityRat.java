@@ -26,9 +26,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityRat extends MoCEntityMob {
 
@@ -148,7 +147,7 @@ public class MoCEntityRat extends MoCEntityMob {
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_RAT_AMBIENT;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.RAT;

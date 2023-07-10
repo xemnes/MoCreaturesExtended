@@ -75,7 +75,7 @@ public class MoCEntityCricket extends MoCEntityInsect {
             }
         }
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_CRICKET_HURT;
@@ -99,7 +99,7 @@ public class MoCEntityCricket extends MoCEntityInsect {
                 }
         }
     }
-    
+
     @Override
     public boolean isFlyer() {
         return true;
@@ -112,7 +112,7 @@ public class MoCEntityCricket extends MoCEntityInsect {
         }
         return 0.15F;
     }
-    
+
     @Override
     public float getEyeHeight() {
         return 0.15F;

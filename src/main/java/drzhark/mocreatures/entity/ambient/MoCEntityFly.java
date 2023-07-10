@@ -43,7 +43,7 @@ public class MoCEntityFly extends MoCEntityInsect {
             }
         }
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_FLY_HURT;

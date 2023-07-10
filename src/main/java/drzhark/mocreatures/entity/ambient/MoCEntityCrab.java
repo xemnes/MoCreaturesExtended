@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -19,6 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityCrab extends MoCEntityTameableAmbient {
 

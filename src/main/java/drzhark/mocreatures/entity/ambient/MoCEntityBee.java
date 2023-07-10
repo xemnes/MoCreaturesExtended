@@ -57,7 +57,7 @@ public class MoCEntityBee extends MoCEntityInsect {
         }
         return MoCSoundEvents.ENTITY_BEE_AMBIENT;
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_BEE_HURT;

@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -34,6 +32,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityTurtle extends MoCEntityTameableAnimal {
 
@@ -336,7 +336,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_TURTLE_DEATH;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.TURTLE;
@@ -360,7 +360,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
                 || getPetName().equals("michaelangelo")) {
             return MoCItems.nunchaku;
         }
-        
+
         return null;
     }
 

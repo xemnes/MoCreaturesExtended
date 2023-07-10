@@ -30,7 +30,7 @@ public class MoCEntityMaggot extends MoCEntityAmbient {
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D);
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SILVERFISH_STEP;

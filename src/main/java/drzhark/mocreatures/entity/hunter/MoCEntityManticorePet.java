@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.Entity;
@@ -13,6 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityManticorePet extends MoCEntityBigCat {
 

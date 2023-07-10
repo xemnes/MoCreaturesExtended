@@ -46,9 +46,8 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
@@ -760,7 +759,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         openMouth();
         return MoCSoundEvents.ENTITY_OSTRICH_DEATH;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.OSTRICH;
@@ -786,7 +785,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             }
             return Items.ROTTEN_FLESH;
         }
-        
+
         return null;
     }
 

@@ -111,7 +111,7 @@ public class MoCEntitySnail extends MoCEntityAmbient {
             this.prevRenderYawOffset = this.renderYawOffset = this.rotationYaw = this.prevRotationYaw;
         }
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SILVERFISH_STEP;

@@ -6,7 +6,7 @@ package drzhark.mocreatures;
 import net.minecraft.util.ResourceLocation;
 
 public class MoCLootTables {
-	// Manticores
+    // Manticores
     public static final ResourceLocation DARK_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/dark_manticore");
     public static final ResourceLocation FIRE_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/fire_manticore");
     public static final ResourceLocation FROST_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/frost_manticore");
@@ -17,7 +17,7 @@ public class MoCLootTables {
     public static final ResourceLocation RAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/rat");
     // Sea Creatures
     public static final ResourceLocation CRAB = new ResourceLocation(MoCConstants.MOD_ID, "entities/crab");
-	// Scorpions
+    // Scorpions
     public static final ResourceLocation CAVE_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/cave_scorpion");
     public static final ResourceLocation DIRT_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/dirt_scorpion");
     public static final ResourceLocation FIRE_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/fire_scorpion");

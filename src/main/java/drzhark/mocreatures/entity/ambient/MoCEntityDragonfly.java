@@ -75,7 +75,7 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
             }
         }
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_DRAGONFLY_HURT;

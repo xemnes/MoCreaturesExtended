@@ -60,12 +60,12 @@ public class MoCEntityRoach extends MoCEntityInsect {
     public boolean isNotScared() {
         return getIsFlying();
     }
-    
+
     @Override
     public float getEyeHeight() {
         return 0.1F;
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_CRICKET_HURT;

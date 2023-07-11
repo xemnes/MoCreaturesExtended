@@ -3,12 +3,14 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,9 +18,7 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -56,9 +56,9 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     @Override
     public ResourceLocation getTexture() {
         if (getIsAdult()) {
-            return MoCreatures.proxy.getTexture("boara.png");
+            return MoCreatures.proxy.getTexture("boar_dark_brown.png");
         }
-        return MoCreatures.proxy.getTexture("boarb.png");
+        return MoCreatures.proxy.getTexture("boar_light_brown.png");
 
     }
 
@@ -84,16 +84,6 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-
-        if (this.rand.nextInt(2) == 0) {
-            return Items.PORKCHOP;
-        }
-
-        return MoCItems.animalHide;
-    }
-
-    @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_PIG_AMBIENT;
     }
@@ -106,6 +96,11 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_PIG_DEATH;
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.BOAR;
     }
 
     @Override

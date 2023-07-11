@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -11,9 +14,8 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -47,6 +49,7 @@ public class MoCEntityDuck extends MoCEntityAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
+    // TODO: Fix death sound
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_DUCK_DEATH;
@@ -60,6 +63,11 @@ public class MoCEntityDuck extends MoCEntityAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_DUCK_AMBIENT;
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.DUCK;
     }
 
     @Override
@@ -92,10 +100,5 @@ public class MoCEntityDuck extends MoCEntityAnimal {
 
     @Override
     public void fall(float f, float f1) {
-    }
-
-    @Override
-    protected Item getDropItem() {
-        return Items.FEATHER;
     }
 }

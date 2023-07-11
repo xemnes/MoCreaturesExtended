@@ -24,6 +24,8 @@ public class MoCLootTables {
     public static final ResourceLocation FROST_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/frost_scorpion");
     public static final ResourceLocation UNDEAD_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/undead_scorpion");
     //
+    public static final ResourceLocation BOAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/boar");
+    public static final ResourceLocation DUCK = new ResourceLocation(MoCConstants.MOD_ID, "entities/duck");
     public static final ResourceLocation OSTRICH = new ResourceLocation(MoCConstants.MOD_ID, "entities/ostrich");
     public static final ResourceLocation TURKEY = new ResourceLocation(MoCConstants.MOD_ID, "entities/turkey");
     public static final ResourceLocation TURTLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/turtle");

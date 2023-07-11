@@ -13,7 +13,9 @@ import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,7 +26,7 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
 
     public MoCEntityCrab(World world) {
         super(world);
-        setSize(0.3F, 0.3F);
+        setSize(0.45F, 0.3F);
         setAge(50 + this.rand.nextInt(50));
     }
 
@@ -122,5 +124,15 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     @Override
     public boolean isNotScared() {
         return this.getIsTamed();
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return null;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return null;
     }
 }

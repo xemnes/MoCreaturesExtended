@@ -31,6 +31,7 @@ public class MoCRecipes {
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked, 1), 0.35F);
+            GameRegistry.addSmelting(MoCItems.venisonRaw, new ItemStack(MoCItems.venisonCooked, 1), 0.35F);
 
             GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet, 1), 0.35F);
 
@@ -76,17 +77,23 @@ public class MoCRecipes {
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.ratCooked);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.cookedTurkey);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.turtlecooked);
+            OreDictionary.registerOre("listAllmeatcooked", MoCItems.venisonCooked);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.crabraw);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.ostrichraw);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.ratRaw);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.rawTurkey);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.turtleraw);
+            OreDictionary.registerOre("listAllmeatraw", MoCItems.venisonRaw);
             OreDictionary.registerOre("listAllturkeycooked", MoCItems.cookedTurkey);
             OreDictionary.registerOre("listAllturkeyraw", MoCItems.rawTurkey);
+            OreDictionary.registerOre("listAllvenisoncooked", MoCItems.venisonCooked);
+            OreDictionary.registerOre("listAllvenisonraw", MoCItems.venisonRaw);
             OreDictionary.registerOre("foodTurkeyraw", MoCItems.rawTurkey);
             OreDictionary.registerOre("foodTurtlecooked", MoCItems.turtlecooked);
             OreDictionary.registerOre("foodTurtleraw", MoCItems.turtleraw);
             OreDictionary.registerOre("foodTurtlesoup", MoCItems.turtlesoup);
+            OreDictionary.registerOre("foodVenisoncooked", MoCItems.venisonCooked);
+            OreDictionary.registerOre("foodVenisonraw", MoCItems.venisonRaw);
         }
     }
 }

@@ -60,6 +60,8 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.rawTurkey, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.AIR, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.turtlecooked, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.CRAFT, 1));
         proxy.registerObjectTag(new ItemStack(MoCItems.turtleraw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.WATER, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.venisonCooked, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.CRAFT, 1));
+        proxy.registerObjectTag(new ItemStack(MoCItems.venisonRaw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.WATER, 5));
         // Items - Misc
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletbone, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.UNDEAD, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletbonefull, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.UNDEAD, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));

@@ -96,9 +96,11 @@ public class MoCItems {
     public static final MoCItemFood ratCooked = new MoCItemFood("ratcooked", 4, 0.5F, true);
     public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
     public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
-    public static final MoCItemFood turtleraw = new MoCItemFood("turtleraw", 2, 0.2F, true);
     public static final MoCItemFood turtlecooked = new MoCItemFood("turtlecooked", 6, 0.7F, true);
+    public static final MoCItemFood turtleraw = new MoCItemFood("turtleraw", 2, 0.2F, true);
     public static final MoCItemFood turtlesoup = new MoCItemTurtleSoup("turtlesoup", 8, 0.8F, false);
+    public static final MoCItemFood venisonCooked = new MoCItemFood("venisoncooked", 8, 0.9F, true);
+    public static final MoCItemFood venisonRaw = new MoCItemFood("venisonraw", 3, 0.4F, true);
     // Weapons
     public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", Item.ToolMaterial.IRON);
     public static final MoCItemSword sai = new MoCItemSword("sai", Item.ToolMaterial.IRON);
@@ -251,6 +253,8 @@ public class MoCItems {
                     ratRaw,
                     ratCooked,
                     ratBurger,
+                    venisonRaw,
+                    venisonCooked,
 
                     chitinCave,
                     chitin,

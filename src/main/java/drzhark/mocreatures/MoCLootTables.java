@@ -6,7 +6,7 @@ package drzhark.mocreatures;
 import net.minecraft.util.ResourceLocation;
 
 public class MoCLootTables {
-	// Animals
+    // Animals
     public static final ResourceLocation BIRD = new ResourceLocation(MoCConstants.MOD_ID, "entities/bird");
     public static final ResourceLocation BOAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/boar");
     public static final ResourceLocation BUNNY = new ResourceLocation(MoCConstants.MOD_ID, "entities/bunny");

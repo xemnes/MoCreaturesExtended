@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -20,7 +21,6 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -37,6 +37,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityBird extends MoCEntityTameableAnimal {
 
@@ -252,11 +254,6 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return Items.FEATHER;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_BIRD_DEATH;
     }
@@ -285,6 +282,11 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
         } else {
             return MoCSoundEvents.ENTITY_BIRD_AMBIENT_RED;
         }
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.BIRD;
     }
 
     @Override

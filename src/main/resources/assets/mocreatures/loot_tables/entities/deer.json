@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "mocreatures:ostrichraw",
+          "name": "minecraft:beef",
           "weight": 1,
           "functions": [
             {
@@ -40,18 +40,18 @@
       ]
     },
     {
-      "name": "feather",
+      "name": "leather",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
-          "name": "minecraft:feather",
+          "name": "minecraft:leather",
           "weight": 1,
           "functions": [
             {
               "function": "set_count",
               "count": {
-                "min": 1,
+                "min": 0,
                 "max": 2
               }
             },

@@ -6,16 +6,9 @@
       "entries": [
         {
           "type": "item",
-          "name": "mocreatures:ostrichraw",
+          "name": "minecraft:rabbit",
           "weight": 1,
           "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
-            },
             {
               "function": "furnace_smelt",
               "conditions": [
@@ -29,6 +22,13 @@
               ]
             },
             {
+              "function": "set_count",
+              "count": {
+                "min": 0,
+                "max": 1
+              }
+            },
+            {
               "function": "looting_enchant",
               "count": {
                 "min": 0,
@@ -40,19 +40,19 @@
       ]
     },
     {
-      "name": "feather",
+      "name": "hide",
       "rolls": 1,
       "entries": [
         {
           "type": "item",
-          "name": "minecraft:feather",
+          "name": "minecraft:rabbit_hide",
           "weight": 1,
           "functions": [
             {
               "function": "set_count",
               "count": {
-                "min": 1,
-                "max": 2
+                "min": 0,
+                "max": 1
               }
             },
             {
@@ -63,6 +63,27 @@
               }
             }
           ]
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "killed_by_player"
+        },
+        {
+          "condition": "random_chance_with_looting",
+          "chance": 0.1,
+          "looting_multiplier": 0.03
+        }
+      ],
+      "name": "foot",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:rabbit_foot",
+          "weight": 1
         }
       ]
     }

@@ -3,11 +3,13 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -16,7 +18,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -237,11 +238,6 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.fur;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_RABBIT_DEATH;
     }
@@ -249,6 +245,11 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return MoCSoundEvents.ENTITY_RABBIT_HURT;
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.MOLE;
     }
 
     @Override

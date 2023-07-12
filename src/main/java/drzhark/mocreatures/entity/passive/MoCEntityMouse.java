@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
@@ -14,8 +17,6 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -98,11 +99,6 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return Items.WHEAT_SEEDS;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_MOUSE_DEATH;
     }
@@ -115,6 +111,11 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_MOUSE_AMBIENT;
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.MOUSE;
     }
 
     @Override

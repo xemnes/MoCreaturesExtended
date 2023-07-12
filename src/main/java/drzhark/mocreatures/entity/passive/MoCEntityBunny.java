@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.passive;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -33,6 +34,8 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityBunny extends MoCEntityTameableAnimal {
 
@@ -158,6 +161,15 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_RABBIT_AMBIENT;
+    }
+    
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+        
+        return MoCLootTables.BUNNY;
     }
 
     @Override

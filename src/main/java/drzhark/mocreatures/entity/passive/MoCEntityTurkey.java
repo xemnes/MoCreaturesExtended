@@ -37,7 +37,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     public MoCEntityTurkey(World world) {
         super(world);
         setSize(0.8F, 1.0F);
-        this.texture = "turkey.png";
+        setAdult(true);
     }
 
     @Override
@@ -108,6 +108,10 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
 
     @Nullable
     protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+        
         return MoCLootTables.TURKEY;
     }
 

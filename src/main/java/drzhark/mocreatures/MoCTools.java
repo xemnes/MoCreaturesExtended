@@ -76,7 +76,6 @@ public class MoCTools {
     /**
      * Spawns entities during world gen
      */
-    @SuppressWarnings("deprecation")
     public static void performCustomWorldGenSpawning(World world, Biome biome, int centerX, int centerZ, int diameterX, int diameterZ, Random random, List<Biome.SpawnListEntry> spawnList, EntityLiving.SpawnPlacementType placementType) {
         if (spawnList == null || spawnList.isEmpty()) return;
         while (random.nextFloat() < Math.min(biome.getSpawningChance() * MoCreatures.proxy.spawnMultiplier, 0.5F)) {

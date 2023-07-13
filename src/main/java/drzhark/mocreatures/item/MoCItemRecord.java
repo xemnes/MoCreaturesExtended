@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCItemRecord extends ItemRecord {
 
-    public static ResourceLocation RECORD_SHUFFLE_RESOURCE = new ResourceLocation("mocreatures", "shuffling");
+    public static ResourceLocation RECORD_SHUFFLE_RESOURCE = new ResourceLocation(MoCConstants.MOD_ID, "shuffling");
 
     public MoCItemRecord(String name, SoundEvent soundEvent) {
         super(name, soundEvent);

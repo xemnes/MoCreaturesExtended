@@ -178,7 +178,6 @@ public class MoCItemWeapon extends MoCItem {
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
-    @SuppressWarnings("deprecation")
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {

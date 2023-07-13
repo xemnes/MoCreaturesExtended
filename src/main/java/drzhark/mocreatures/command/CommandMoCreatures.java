@@ -4,10 +4,7 @@
 package drzhark.mocreatures.command;
 
 import com.mojang.authlib.GameProfile;
-import drzhark.mocreatures.MoCEntityData;
-import drzhark.mocreatures.MoCPetData;
-import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.*;
 import drzhark.mocreatures.configuration.MoCConfigCategory;
 import drzhark.mocreatures.configuration.MoCConfiguration;
 import drzhark.mocreatures.configuration.MoCProperty;
@@ -116,7 +113,7 @@ public class CommandMoCreatures extends CommandBase {
 
     @Override
     public String getName() {
-        return "mocreatures";
+        return MoCConstants.MOD_ID;
     }
 
     @Override

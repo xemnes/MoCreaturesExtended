@@ -117,7 +117,7 @@ public class MoCPetMapData extends WorldSavedData {
         if (DimensionManager.getWorld(0) != null) {
             ISaveHandler saveHandler = DimensionManager.getWorld(0).getSaveHandler();
             try {
-                File file1 = saveHandler.getMapFileFromName("mocreatures");
+                File file1 = saveHandler.getMapFileFromName(MoCConstants.MOD_ID);
                 NBTTagCompound nbttagcompound = new NBTTagCompound();
                 this.writeToNBT(nbttagcompound);
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();

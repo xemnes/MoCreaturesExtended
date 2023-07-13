@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -23,6 +21,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityDeer extends MoCEntityTameableAnimal {
 
@@ -109,13 +109,13 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
             return MoCSoundEvents.ENTITY_DEER_AMBIENT;
         }
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         if (!getIsAdult()) {
             return null;
         }
-        
+
         return MoCLootTables.DEER;
     }
 

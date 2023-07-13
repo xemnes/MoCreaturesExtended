@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
@@ -18,6 +16,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityDuck extends MoCEntityAnimal {
 
@@ -64,7 +64,7 @@ public class MoCEntityDuck extends MoCEntityAnimal {
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_DUCK_AMBIENT;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.DUCK;

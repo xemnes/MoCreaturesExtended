@@ -111,7 +111,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
         if (!getIsAdult()) {
             return null;
         }
-        
+
         return MoCLootTables.TURKEY;
     }
 

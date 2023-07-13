@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -27,6 +25,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityMole extends MoCEntityTameableAnimal {
 
@@ -246,7 +246,7 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
     protected SoundEvent getHurtSound(DamageSource source) {
         return MoCSoundEvents.ENTITY_RABBIT_HURT;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.MOLE;

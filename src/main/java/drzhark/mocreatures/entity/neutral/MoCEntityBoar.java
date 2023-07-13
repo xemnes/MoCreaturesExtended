@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
@@ -23,6 +21,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityBoar extends MoCEntityAnimal {
 
@@ -97,7 +97,7 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_PIG_DEATH;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.BOAR;

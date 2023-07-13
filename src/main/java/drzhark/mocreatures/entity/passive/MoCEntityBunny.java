@@ -33,9 +33,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityBunny extends MoCEntityTameableAnimal {
 
@@ -162,13 +161,13 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_RABBIT_AMBIENT;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         if (!getIsAdult()) {
             return null;
         }
-        
+
         return MoCLootTables.BUNNY;
     }
 

@@ -36,9 +36,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityBird extends MoCEntityTameableAnimal {
 
@@ -283,7 +282,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             return MoCSoundEvents.ENTITY_BIRD_AMBIENT_RED;
         }
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.BIRD;

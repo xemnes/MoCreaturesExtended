@@ -125,7 +125,7 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     public boolean isNotScared() {
         return this.getIsTamed();
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return null;

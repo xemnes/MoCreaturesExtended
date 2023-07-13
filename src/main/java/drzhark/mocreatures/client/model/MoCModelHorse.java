@@ -41,7 +41,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class MoCModelNewHorse extends ModelBase {
+public class MoCModelHorse extends ModelBase {
 
     ModelRenderer Head;
     ModelRenderer UMouth;
@@ -112,7 +112,7 @@ public class MoCModelNewHorse extends ModelBase {
     //private float fMov2;
     //private boolean kneeSwitch;
 
-    public MoCModelNewHorse() {
+    public MoCModelHorse() {
         this.textureWidth = 128;
         this.textureHeight = 128;
 

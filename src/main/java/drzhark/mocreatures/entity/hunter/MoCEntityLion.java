@@ -36,6 +36,9 @@ public class MoCEntityLion extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
+        if (MoCreatures.proxy.legacyBigCatModels) {
+            return MoCreatures.proxy.getTexture("lionf.png");
+        }
         switch (getType()) {
             case 2:
             case 3:

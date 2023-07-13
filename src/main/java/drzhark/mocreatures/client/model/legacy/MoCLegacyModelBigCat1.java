@@ -1,4 +1,4 @@
-package drzhark.mocreatures.client.model;
+package drzhark.mocreatures.client.model.legacy;
 
 import net.minecraft.client.model.ModelQuadruped;
 import net.minecraft.client.model.ModelRenderer;
@@ -6,9 +6,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class MoCModelOldBigCat1 extends ModelQuadruped {
+public class MoCLegacyModelBigCat1 extends ModelQuadruped {
 
-    public MoCModelOldBigCat1() {
+    public MoCLegacyModelBigCat1() {
         super(12, 0.0F);
         this.head = new ModelRenderer(this, 20, 0);
         this.head.addBox(-7F, -8F, -2F, 14, 14, 8, 0.0F);

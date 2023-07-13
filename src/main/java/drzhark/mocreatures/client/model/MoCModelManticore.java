@@ -6,7 +6,7 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.hostile.MoCEntityManticore;
 import net.minecraft.entity.Entity;
 
-public class MoCModelManticore extends MoCModelNewBigCat {
+public class MoCModelManticore extends MoCModelBigCat {
 
     @Override
     public void updateAnimationModifiers(Entity entity) {

@@ -82,6 +82,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean foggyWyvernLair;
     public boolean simpleBunnyTextures;
     public boolean verboseEntityNames;
+    public boolean legacyBigCatModels;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -271,6 +272,7 @@ public class MoCProxy implements IGuiHandler {
         this.foggyWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "FoggyWyvernLair", false, "Enables extra fog at the wyvern lair like in legacy versions.").getBoolean(false);
         this.simpleBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SimpleBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
+        this.legacyBigCatModels = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigCatModels", false, "Enables simple big cat models and textures like in legacy versions.").getBoolean(false);
 
         // Save
         this.mocSettingsConfig.save();

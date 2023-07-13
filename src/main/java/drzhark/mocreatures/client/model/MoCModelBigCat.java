@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class MoCModelNewBigCat extends ModelBase {
+public class MoCModelBigCat extends ModelBase {
 
     private final float radianF = 57.29578F;
     private final float lLegMov = 0F;
@@ -111,7 +111,7 @@ public class MoCModelNewBigCat extends ModelBase {
     private boolean diving;
     private boolean isSitting;
 
-    public MoCModelNewBigCat() {
+    public MoCModelBigCat() {
         this.textureWidth = 128;
         this.textureHeight = 128;
 

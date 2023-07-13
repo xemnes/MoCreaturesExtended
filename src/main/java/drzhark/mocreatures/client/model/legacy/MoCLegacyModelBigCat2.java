@@ -1,4 +1,4 @@
-package drzhark.mocreatures.client.model;
+package drzhark.mocreatures.client.model.legacy;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class MoCModelOldBigCat2 extends ModelBase {
+public class MoCLegacyModelBigCat2 extends ModelBase {
 
     public boolean sitting;
     public boolean tamed;
@@ -23,7 +23,7 @@ public class MoCModelOldBigCat2 extends ModelBase {
     ModelRenderer leg4;
     ModelRenderer collar;
 
-    public MoCModelOldBigCat2() {
+    public MoCLegacyModelBigCat2() {
         this.ears = new ModelRenderer(this, 16, 25);
         this.ears.addBox(-4F, -7F, -3F, 8, 4, 1, 0.0F);
         this.ears.setRotationPoint(0.0F, 4F, -8F);

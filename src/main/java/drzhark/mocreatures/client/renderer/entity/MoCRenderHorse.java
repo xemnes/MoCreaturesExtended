@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.model.MoCModelNewHorse;
+import drzhark.mocreatures.client.model.MoCModelHorse;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
@@ -11,9 +11,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class MoCRenderNewHorse extends MoCRenderMoC<MoCEntityHorse> {
+public class MoCRenderHorse extends MoCRenderMoC<MoCEntityHorse> {
 
-    public MoCRenderNewHorse(MoCModelNewHorse modelbase) {
+    public MoCRenderHorse(MoCModelHorse modelbase) {
         super(modelbase, 0.5F);
     }
 

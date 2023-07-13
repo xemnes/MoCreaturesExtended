@@ -1,11 +1,12 @@
-package drzhark.mocreatures.client.renderer.entity;
+package drzhark.mocreatures.client.renderer.entity.legacy;
 
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.MoCClientProxy;
-import drzhark.mocreatures.client.model.MoCModelOldBigCat1;
-import drzhark.mocreatures.client.model.MoCModelOldBigCat2;
+import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat1;
+import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat2;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -13,14 +14,13 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class MoCRenderOldBigCat extends RenderLiving<MoCEntityBigCat> {
+public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
 
-    public MoCModelOldBigCat2 bigcat1;
+    public MoCLegacyModelBigCat2 bigcat1;
 
-    public MoCRenderOldBigCat(MoCModelOldBigCat2 modelbigcat2, MoCModelOldBigCat1 modelbigcat1, float f) {
+    public MoCLegacyRenderBigCat(MoCLegacyModelBigCat2 modelbigcat2, MoCLegacyModelBigCat1 modelbigcat1, float f) {
         super(MoCClientProxy.mc.getRenderManager(), modelbigcat2, f);
         this.addLayer(new LayerMoCBigCat(this));
         this.bigcat1 = modelbigcat2;
@@ -46,16 +46,16 @@ public class MoCRenderOldBigCat extends RenderLiving<MoCEntityBigCat> {
                 s = s + entitybigcat.getPetName();
                 float f7 = 0.1F;
                 FontRenderer fontrenderer = getFontRendererFromRenderManager();
-                GL11.glPushMatrix();
-                GL11.glTranslatef((float) d + 0.0F, (float) d1 + f7, (float) d2);
-                GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                GL11.glRotatef(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(-f3, -f3, f3);
-                GL11.glDisable(2896 /* GL_LIGHTING */);
+                GlStateManager.pushMatrix();
+                GlStateManager.translate((float) d + 0.0F, (float) d1 + f7, (float) d2);
+                GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                GlStateManager.scale(-f3, -f3, f3);
+                GlStateManager.disableLighting();
                 Tessellator tessellator1 = Tessellator.getInstance();
                 byte byte0 = -60;
                 if (flag1) {
-                    GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.disableTexture2D();
                     if (!flag) {
                         byte0 += 8;
                     }
@@ -82,14 +82,14 @@ public class MoCRenderOldBigCat extends RenderLiving<MoCEntityBigCat> {
                     tessellator1.getBuffer().pos(f11 - 20F, -6 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                     tessellator1.getBuffer().pos(f11 - 20F, -10 + byte0, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
                     tessellator1.draw();
-                    GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.enableTexture2D();
                 }
                 if (flag) {
-                    GL11.glDepthMask(false);
-                    GL11.glDisable(2929 /* GL_DEPTH_TEST */);
-                    GL11.glEnable(3042 /* GL_BLEND */);
-                    GL11.glBlendFunc(770, 771);
-                    GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.depthMask(false);
+                    GlStateManager.disableDepth();
+                    GlStateManager.enableBlend();
+                    GlStateManager.blendFunc(770, 771);
+                    GlStateManager.disableTexture2D();
                     tessellator1.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
                     int i = fontrenderer.getStringWidth(s) / 2;
                     tessellator1.getBuffer().pos(-i - 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
@@ -97,16 +97,16 @@ public class MoCRenderOldBigCat extends RenderLiving<MoCEntityBigCat> {
                     tessellator1.getBuffer().pos(i + 1, 8 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
                     tessellator1.getBuffer().pos(i + 1, -1 + byte0, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
                     tessellator1.draw();
-                    GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+                    GlStateManager.enableTexture2D();
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);
-                    GL11.glEnable(2929 /* GL_DEPTH_TEST */);
-                    GL11.glDepthMask(true);
+                    GlStateManager.enableDepth();
+                    GlStateManager.depthMask(true);
                     fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, -1);
-                    GL11.glDisable(3042 /* GL_BLEND */);
-                    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                    GlStateManager.disableBlend();
+                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 }
-                GL11.glEnable(2896 /* GL_LIGHTING */);
-                GL11.glPopMatrix();
+                GlStateManager.enableLighting();
+                GlStateManager.popMatrix();
             }
         }
 
@@ -129,20 +129,20 @@ public class MoCRenderOldBigCat extends RenderLiving<MoCEntityBigCat> {
         if (entitybigcat.getIsAdult()) {
             f = 1.0F;
         }
-        GL11.glScalef(f, f, f);
+        GlStateManager.scale(f, f, f);
     }
 
     private class LayerMoCBigCat implements LayerRenderer<MoCEntityBigCat> {
 
-        private final MoCRenderOldBigCat mocRenderer;
-        private final MoCModelOldBigCat1 mocModel = new MoCModelOldBigCat1();
+        private final MoCLegacyRenderBigCat mocRenderer;
+        private final MoCLegacyModelBigCat1 mocModel = new MoCLegacyModelBigCat1();
 
-        public LayerMoCBigCat(MoCRenderOldBigCat render) {
+        public LayerMoCBigCat(MoCLegacyRenderBigCat render) {
             this.mocRenderer = render;
         }
 
         public void doRenderLayer(MoCEntityBigCat entitybigcat, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
-            if (entitybigcat.getType() == 2 && entitybigcat.getIsAdult()) {
+            if ((entitybigcat.getType() == 2 || entitybigcat.getType() == 3) && entitybigcat.getIsAdult()) {
                 bindTexture(MoCreatures.proxy.getTexture("lionb.png"));
             } else {
                 bindTexture(MoCreatures.proxy.getTexture("lionc.png"));

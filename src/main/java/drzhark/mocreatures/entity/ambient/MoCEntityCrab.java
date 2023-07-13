@@ -57,15 +57,15 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("crab_blue.png");
+                return MoCreatures.proxy.getModelTexture("crab_blue.png");
             case 3:
-                return MoCreatures.proxy.getTexture("crab_spotted.png");
+                return MoCreatures.proxy.getModelTexture("crab_spotted.png");
             case 4:
-                return MoCreatures.proxy.getTexture("crab_green.png");
+                return MoCreatures.proxy.getModelTexture("crab_green.png");
             case 5:
-                return MoCreatures.proxy.getTexture("crab_russet.png");
+                return MoCreatures.proxy.getModelTexture("crab_russet.png");
             default:
-                return MoCreatures.proxy.getTexture("crab_red.png");
+                return MoCreatures.proxy.getModelTexture("crab_red.png");
         }
     }
 

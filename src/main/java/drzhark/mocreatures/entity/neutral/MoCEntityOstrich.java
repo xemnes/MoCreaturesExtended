@@ -300,33 +300,33 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             }
 
             if ((this.transformCounter % 5) == 0) {
-                return MoCreatures.proxy.getTexture(newText);
+                return MoCreatures.proxy.getModelTexture(newText);
             }
             if (this.transformCounter > 50 && (this.transformCounter % 3) == 0) {
-                return MoCreatures.proxy.getTexture(newText);
+                return MoCreatures.proxy.getModelTexture(newText);
             }
             if (this.transformCounter > 75 && (this.transformCounter % 4) == 0) {
-                return MoCreatures.proxy.getTexture(newText);
+                return MoCreatures.proxy.getModelTexture(newText);
             }
         }
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("ostrichc.png");
+                return MoCreatures.proxy.getModelTexture("ostrichc.png");
             case 2:
-                return MoCreatures.proxy.getTexture("ostrichb.png");
+                return MoCreatures.proxy.getModelTexture("ostrichb.png");
             case 4:
-                return MoCreatures.proxy.getTexture("ostrichd.png");
+                return MoCreatures.proxy.getModelTexture("ostrichd.png");
             case 5:
-                return MoCreatures.proxy.getTexture("ostriche.png");
+                return MoCreatures.proxy.getModelTexture("ostriche.png");
             case 6:
-                return MoCreatures.proxy.getTexture("ostrichf.png");
+                return MoCreatures.proxy.getModelTexture("ostrichf.png");
             case 7:
-                return MoCreatures.proxy.getTexture("ostrichg.png");
+                return MoCreatures.proxy.getModelTexture("ostrichg.png");
             case 8:
-                return MoCreatures.proxy.getTexture("ostrichh.png");
+                return MoCreatures.proxy.getModelTexture("ostrichh.png");
             default:
-                return MoCreatures.proxy.getTexture("ostricha.png");
+                return MoCreatures.proxy.getModelTexture("ostricha.png");
         }
     }
 

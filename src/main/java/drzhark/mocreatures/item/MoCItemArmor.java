@@ -4,7 +4,6 @@
 package drzhark.mocreatures.item;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.MoCProxy;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCItems;
@@ -83,7 +82,7 @@ public class MoCItemArmor extends ItemArmor {
             tempArmorTexture = "scorpu_2.png";
         }
 
-        return "mocreatures:" + MoCProxy.ARMOR_TEXTURE + tempArmorTexture;
+        return MoCreatures.proxy.getArmorTexture(tempArmorTexture).toString();
     }
 
     /**

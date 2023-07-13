@@ -74,9 +74,9 @@ public class MoCEntityEnt extends MoCEntityAnimal {
     @Override
     public ResourceLocation getTexture() {
         if (getType() == 2) {
-            return MoCreatures.proxy.getTexture("ent_birch.png");
+            return MoCreatures.proxy.getModelTexture("ent_birch.png");
         }
-        return MoCreatures.proxy.getTexture("ent_oak.png");
+        return MoCreatures.proxy.getModelTexture("ent_oak.png");
     }
 
     @Override

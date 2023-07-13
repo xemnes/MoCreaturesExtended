@@ -31,7 +31,7 @@ public class MoCEntityFireManticore extends MoCEntityManticore {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("manticore_fire.png");
+        return MoCreatures.proxy.getModelTexture("manticore_fire.png");
     }
 
     @Override

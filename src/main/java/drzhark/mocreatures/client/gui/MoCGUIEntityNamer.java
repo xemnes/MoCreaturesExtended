@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.gui;
 
-import drzhark.mocreatures.MoCProxy;
+import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.IMoCTameable;
@@ -26,7 +26,7 @@ import java.io.IOException;
 public class MoCGUIEntityNamer extends GuiScreen {
 
     private static final TextureManager textureManager = MoCClientProxy.mc.getTextureManager();
-    private static final ResourceLocation TEXTURE_MOCNAME = new ResourceLocation("mocreatures", MoCProxy.GUI_TEXTURE + "mocname.png");
+    private static final ResourceLocation TEXTURE_MOCNAME = MoCreatures.proxy.getGuiTexture("mocname.png");
     private final IMoCEntity namedEntity;
     protected String screenTitle;
     protected int xSize;

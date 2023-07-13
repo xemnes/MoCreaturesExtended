@@ -734,13 +734,13 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     public ResourceLocation getEffectTexture() {
         switch (getGolemState()) {
             case 1:
-                return MoCreatures.proxy.getTexture("golemeffect1.png");
+                return MoCreatures.proxy.getModelTexture("golemeffect1.png");
             case 2:
-                return MoCreatures.proxy.getTexture("golemeffect2.png");
+                return MoCreatures.proxy.getModelTexture("golemeffect2.png");
             case 3:
-                return MoCreatures.proxy.getTexture("golemeffect3.png");
+                return MoCreatures.proxy.getModelTexture("golemeffect3.png");
             case 4:
-                return MoCreatures.proxy.getTexture("golemeffect4.png");
+                return MoCreatures.proxy.getModelTexture("golemeffect4.png");
             default:
                 return null;
         }

@@ -16,7 +16,7 @@ public class MoCEntityHippoTang extends MoCEntitySmallFish {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("smallfish_hippotang.png");
+        return MoCreatures.proxy.getModelTexture("smallfish_hippotang.png");
     }
 
     @Override

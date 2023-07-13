@@ -28,7 +28,8 @@ public class MoCEntityLiard extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("bcliard.png");
+        if (MoCreatures.proxy.legacyBigCatModels) return MoCreatures.proxy.getModelTexture("liard.png");
+        return MoCreatures.proxy.getModelTexture("bcliard.png");
     }
 
     @Override

@@ -93,7 +93,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
             case 23://undead horse
 
                 if (!MoCreatures.proxy.getAnimateTextures()) {
-                    return MoCreatures.proxy.getTexture("horseundead.png");
+                    return MoCreatures.proxy.getModelTexture("horseundead.png");
                 }
                 String baseTex = "horseundead";
                 int max = 79;
@@ -112,17 +112,17 @@ public class MoCEntityHorseMob extends MoCEntityMob {
                 iteratorTex = iteratorTex.substring(0, 1);
                 String decayTex = String.valueOf(getAge() / 100);
                 decayTex = decayTex.substring(0, 1);
-                return MoCreatures.proxy.getTexture(baseTex + decayTex + iteratorTex + ".png");
+                return MoCreatures.proxy.getModelTexture(baseTex + decayTex + iteratorTex + ".png");
 
             case 26:
-                return MoCreatures.proxy.getTexture("horseskeleton.png");
+                return MoCreatures.proxy.getModelTexture("horseskeleton.png");
 
             case 32:
-                return MoCreatures.proxy.getTexture("horsebat.png");
+                return MoCreatures.proxy.getModelTexture("horsebat.png");
 
             case 38:
                 if (!MoCreatures.proxy.getAnimateTextures()) {
-                    return MoCreatures.proxy.getTexture("horsenightmare1.png");
+                    return MoCreatures.proxy.getModelTexture("horsenightmare1.png");
                 }
                 this.textCounter++;
                 if (this.textCounter < 10) {
@@ -136,10 +136,10 @@ public class MoCEntityHorseMob extends MoCEntityMob {
                 NTB = NTB.substring(0, 1);
                 String NTC = ".png";
 
-                return MoCreatures.proxy.getTexture(NTA + NTB + NTC);
+                return MoCreatures.proxy.getModelTexture(NTA + NTB + NTC);
 
             default:
-                return MoCreatures.proxy.getTexture("horseundead.png");
+                return MoCreatures.proxy.getModelTexture("horseundead.png");
         }
     }
 

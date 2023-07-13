@@ -30,7 +30,7 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("bearbrown.png");
+        return MoCreatures.proxy.getModelTexture("bearbrown.png");
     }
 
     @Override

@@ -70,29 +70,29 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("jellyfishb.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishb.png");
             case 3:
-                return MoCreatures.proxy.getTexture("jellyfishc.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishc.png");
             case 4:
-                return MoCreatures.proxy.getTexture("jellyfishd.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishd.png");
             case 5:
-                return MoCreatures.proxy.getTexture("jellyfishe.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishe.png");
             case 6:
-                return MoCreatures.proxy.getTexture("jellyfishf.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishf.png");
             case 7:
-                return MoCreatures.proxy.getTexture("jellyfishg.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishg.png");
             case 8:
-                return MoCreatures.proxy.getTexture("jellyfishh.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishh.png");
             case 9:
-                return MoCreatures.proxy.getTexture("jellyfishi.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishi.png");
             case 10:
-                return MoCreatures.proxy.getTexture("jellyfishj.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishj.png");
             case 11:
-                return MoCreatures.proxy.getTexture("jellyfishk.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishk.png");
             case 12:
-                return MoCreatures.proxy.getTexture("jellyfishl.png");
+                return MoCreatures.proxy.getModelTexture("jellyfishl.png");
             default:
-                return MoCreatures.proxy.getTexture("jellyfisha.png");
+                return MoCreatures.proxy.getModelTexture("jellyfisha.png");
         }
     }
 

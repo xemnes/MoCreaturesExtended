@@ -150,10 +150,27 @@ public class MoCProxy implements IGuiHandler {
         return 0;
     }
 
-    public void initTextures() {
+    public ResourceLocation getArmorTexture(String texture) {
+        return null;
     }
 
-    public ResourceLocation getTexture(String texture) {
+    public ResourceLocation getBlockTexture(String texture) {
+        return null;
+    }
+
+    public ResourceLocation getItemTexture(String texture) {
+        return null;
+    }
+
+    public ResourceLocation getModelTexture(String texture) {
+        return null;
+    }
+
+    public ResourceLocation getGuiTexture(String texture) {
+        return null;
+    }
+
+    public ResourceLocation getMiscTexture(String texture) {
         return null;
     }
 

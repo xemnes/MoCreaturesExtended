@@ -97,7 +97,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture(this.texture);
+        return MoCreatures.proxy.getModelTexture(this.texture);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("scorpion_dirt.png");
+        return MoCreatures.proxy.getModelTexture("scorpion_dirt.png");
     }
 
     @Override

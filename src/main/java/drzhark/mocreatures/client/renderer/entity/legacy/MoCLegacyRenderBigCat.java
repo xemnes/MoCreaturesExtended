@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.client.renderer.entity.legacy;
 
 import drzhark.mocreatures.MoCreatures;
@@ -133,6 +136,7 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
         GlStateManager.scale(f, f, f);
     }
 
+    // Render mane
     private class LayerMoCBigCat implements LayerRenderer<MoCEntityBigCat> {
 
         private final MoCLegacyRenderBigCat mocRenderer;
@@ -143,10 +147,14 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
         }
 
         public void doRenderLayer(MoCEntityBigCat entitybigcat, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
-            if (entitybigcat instanceof MoCEntityLion && (entitybigcat.getType() == 2 || entitybigcat.getType() == 3) && entitybigcat.getIsAdult()) {
-                bindTexture(MoCreatures.proxy.getTexture("lionb.png"));
+            if (entitybigcat instanceof MoCEntityLion && entitybigcat.hasMane()) {
+                if (entitybigcat.getType() == 7) {
+                    bindTexture(MoCreatures.proxy.getModelTexture("liond.png"));
+                } else {
+                    bindTexture(MoCreatures.proxy.getModelTexture("lionb.png"));
+                }
             } else {
-                bindTexture(MoCreatures.proxy.getTexture("lionc.png"));
+                bindTexture(MoCreatures.proxy.getModelTexture("lionc.png"));
             }
             this.mocModel.setModelAttributes(this.mocRenderer.getMainModel());
             this.mocModel.setLivingAnimations(entitybigcat, f, f1, f2);
@@ -157,6 +165,5 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
         public boolean shouldCombineTextures() {
             return true;
         }
-
     }
 }

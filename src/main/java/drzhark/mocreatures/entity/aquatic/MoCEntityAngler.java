@@ -16,7 +16,7 @@ public class MoCEntityAngler extends MoCEntitySmallFish {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("smallfish_angler.png");
+        return MoCreatures.proxy.getModelTexture("smallfish_angler.png");
     }
 
     @Override

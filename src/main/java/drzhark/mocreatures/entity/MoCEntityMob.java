@@ -85,7 +85,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture(this.texture);
+        return MoCreatures.proxy.getModelTexture(this.texture);
     }
 
     protected double getAttackStrenght() {

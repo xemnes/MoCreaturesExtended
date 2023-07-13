@@ -45,25 +45,25 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("butterfly_agalais_urticae.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_agalais_urticae.png");
             case 2:
-                return MoCreatures.proxy.getTexture("butterfly_argyreus_hyperbius.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_argyreus_hyperbius.png");
             case 3:
-                return MoCreatures.proxy.getTexture("butterfly_athyma_nefte.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_athyma_nefte.png");
             case 4:
-                return MoCreatures.proxy.getTexture("butterfly_catopsilia_pomona.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_catopsilia_pomona.png");
             case 5:
-                return MoCreatures.proxy.getTexture("butterfly_morpho_peleides.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_morpho_peleides.png");
             case 6:
-                return MoCreatures.proxy.getTexture("butterfly_vanessa_atalanta.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_vanessa_atalanta.png");
             case 8:
-                return MoCreatures.proxy.getTexture("moth_camptogramma_bilineata.png");
+                return MoCreatures.proxy.getModelTexture("moth_camptogramma_bilineata.png");
             case 9:
-                return MoCreatures.proxy.getTexture("moth_idia_aemula.png");
+                return MoCreatures.proxy.getModelTexture("moth_idia_aemula.png");
             case 10:
-                return MoCreatures.proxy.getTexture("moth_thyatira_batis.png");
+                return MoCreatures.proxy.getModelTexture("moth_thyatira_batis.png");
             default:
-                return MoCreatures.proxy.getTexture("butterfly_pieris_rapae.png");
+                return MoCreatures.proxy.getModelTexture("butterfly_pieris_rapae.png");
         }
     }
 

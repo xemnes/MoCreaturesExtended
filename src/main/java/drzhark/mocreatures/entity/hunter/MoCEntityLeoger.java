@@ -28,7 +28,8 @@ public class MoCEntityLeoger extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("bcleoger.png");
+        if (MoCreatures.proxy.legacyBigCatModels) return MoCreatures.proxy.getModelTexture("leoger.png");
+        return MoCreatures.proxy.getModelTexture("bcleoger.png");
     }
 
     @Override

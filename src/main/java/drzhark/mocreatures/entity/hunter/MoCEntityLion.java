@@ -28,7 +28,7 @@ public class MoCEntityLion extends MoCEntityBigCat {
             if (rand.nextInt(20) == 0) {
                 setType(rand.nextInt(2) + 6);//white lions
             } else {
-                setType(this.rand.nextInt(2) + 1);
+                setType(rand.nextInt(2) + 1);
             }
         }
         super.selectType();
@@ -37,24 +37,31 @@ public class MoCEntityLion extends MoCEntityBigCat {
     @Override
     public ResourceLocation getTexture() {
         if (MoCreatures.proxy.legacyBigCatModels) {
-            return MoCreatures.proxy.getTexture("lionf.png");
+            switch (getType()) {
+                case 6:
+                case 7:
+                case 8:
+                    return MoCreatures.proxy.getModelTexture("lione.png");
+                default:
+                    return MoCreatures.proxy.getModelTexture("lionf.png");
+            }
         }
         switch (getType()) {
             case 2:
             case 3:
-                return MoCreatures.proxy.getTexture("bcmalelion.png");
+                return MoCreatures.proxy.getModelTexture("bcmalelion.png");
             case 6:
             case 7:
             case 8:
-                return MoCreatures.proxy.getTexture("bcwhitelion.png");
+                return MoCreatures.proxy.getModelTexture("bcwhitelion.png");
             default:
-                return MoCreatures.proxy.getTexture("bcfemalelion.png");
+                return MoCreatures.proxy.getModelTexture("bcfemalelion.png");
         }
     }
 
     @Override
     public boolean hasMane() {
-        return getIsAdult() && ((this.getType() >= 2 && getType() < 4) || this.getType() == 7);
+        return this.getIsAdult() && (this.getType() == 2 || this.getType() == 3 || this.getType() == 7);
     }
 
     @Override
@@ -70,8 +77,7 @@ public class MoCEntityLion extends MoCEntityBigCat {
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && getIsTamed() && (getType() == 2 || getType() == 7)
-                && (stack.getItem() == MoCItems.essencelight)) {
+        if (!stack.isEmpty() && getIsTamed() && (getType() == 2 || getType() == 7) && (stack.getItem() == MoCItems.essencelight)) {
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));

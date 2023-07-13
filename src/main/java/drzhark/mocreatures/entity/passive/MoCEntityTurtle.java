@@ -94,7 +94,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
             tempText = "turtlem.png";
         }
 
-        return MoCreatures.proxy.getTexture(tempText);
+        return MoCreatures.proxy.getModelTexture(tempText);
     }
 
     public boolean getIsHiding() {

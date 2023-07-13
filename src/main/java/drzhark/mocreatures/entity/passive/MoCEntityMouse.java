@@ -64,11 +64,11 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("miceb.png");
+                return MoCreatures.proxy.getModelTexture("miceb.png");
             case 3:
-                return MoCreatures.proxy.getTexture("micew.png");
+                return MoCreatures.proxy.getModelTexture("micew.png");
             default:
-                return MoCreatures.proxy.getTexture("miceg.png");
+                return MoCreatures.proxy.getModelTexture("miceg.png");
         }
     }
 

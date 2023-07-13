@@ -34,7 +34,7 @@ public class MoCEntityStingRay extends MoCEntityRay {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("stingray.png");
+        return MoCreatures.proxy.getModelTexture("stingray.png");
     }
 
     @Override

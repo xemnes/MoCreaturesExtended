@@ -56,9 +56,9 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     @Override
     public ResourceLocation getTexture() {
         if (getIsAdult()) {
-            return MoCreatures.proxy.getTexture("boar_dark_brown.png");
+            return MoCreatures.proxy.getModelTexture("boar_dark_brown.png");
         }
-        return MoCreatures.proxy.getTexture("boar_light_brown.png");
+        return MoCreatures.proxy.getModelTexture("boar_light_brown.png");
 
     }
 

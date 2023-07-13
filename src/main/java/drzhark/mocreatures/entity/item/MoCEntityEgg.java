@@ -51,7 +51,7 @@ public class MoCEntityEgg extends EntityLiving {
     }
 
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("egg.png");
+        return MoCreatures.proxy.getModelTexture("egg.png");
     }
 
     @Override

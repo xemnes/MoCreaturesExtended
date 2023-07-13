@@ -46,7 +46,7 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("smallfish_piranha.png");
+        return MoCreatures.proxy.getModelTexture("smallfish_piranha.png");
     }
 
     protected Entity findPlayerToAttack() {

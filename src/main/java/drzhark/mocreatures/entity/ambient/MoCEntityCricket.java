@@ -46,9 +46,9 @@ public class MoCEntityCricket extends MoCEntityInsect {
     @Override
     public ResourceLocation getTexture() {
         if (getType() == 1) {
-            return MoCreatures.proxy.getTexture("cricket_bright_green.png");
+            return MoCreatures.proxy.getModelTexture("cricket_bright_green.png");
         } else {
-            return MoCreatures.proxy.getTexture("cricket_green.png");
+            return MoCreatures.proxy.getModelTexture("cricket_green.png");
         }
     }
 

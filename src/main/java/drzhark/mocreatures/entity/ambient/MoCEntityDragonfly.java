@@ -53,13 +53,13 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("dragonfly_green.png");
+                return MoCreatures.proxy.getModelTexture("dragonfly_green.png");
             case 2:
-                return MoCreatures.proxy.getTexture("dragonfly_cyan.png");
+                return MoCreatures.proxy.getModelTexture("dragonfly_cyan.png");
             case 3:
-                return MoCreatures.proxy.getTexture("dragonfly_red.png");
+                return MoCreatures.proxy.getModelTexture("dragonfly_red.png");
             default:
-                return MoCreatures.proxy.getTexture("dragonfly_blue.png");
+                return MoCreatures.proxy.getModelTexture("dragonfly_blue.png");
         }
     }
 

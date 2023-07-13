@@ -60,17 +60,17 @@ public class MoCEntitySnail extends MoCEntityAmbient {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("snail_green.png");
+                return MoCreatures.proxy.getModelTexture("snail_green.png");
             case 3:
-                return MoCreatures.proxy.getTexture("snail_yellow.png");
+                return MoCreatures.proxy.getModelTexture("snail_yellow.png");
             case 4:
-                return MoCreatures.proxy.getTexture("snail_red.png");
+                return MoCreatures.proxy.getModelTexture("snail_red.png");
             case 5:
-                return MoCreatures.proxy.getTexture("slug_golden.png");
+                return MoCreatures.proxy.getModelTexture("slug_golden.png");
             case 6:
-                return MoCreatures.proxy.getTexture("slug_black.png");
+                return MoCreatures.proxy.getModelTexture("slug_black.png");
             default:
-                return MoCreatures.proxy.getTexture("snail_brown.png");
+                return MoCreatures.proxy.getModelTexture("snail_brown.png");
         }
     }
 

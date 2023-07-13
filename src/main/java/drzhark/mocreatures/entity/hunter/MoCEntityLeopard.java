@@ -56,14 +56,14 @@ public class MoCEntityLeopard extends MoCEntityBigCat {
     public ResourceLocation getTexture() {
         if (MoCreatures.proxy.legacyBigCatModels) {
             if (getType() == 2) {
-                return MoCreatures.proxy.getTexture("leopard.png");
+                return MoCreatures.proxy.getModelTexture("leopard.png");
             }
-            return MoCreatures.proxy.getTexture("cheetah.png");
+            return MoCreatures.proxy.getModelTexture("cheetah.png");
         }
         if (getType() == 2) {
-            return MoCreatures.proxy.getTexture("bcsnowleopard.png");
+            return MoCreatures.proxy.getModelTexture("bcsnowleopard.png");
         }
-        return MoCreatures.proxy.getTexture("bcleopard.png");
+        return MoCreatures.proxy.getModelTexture("bcleopard.png");
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MoCEntityLeopard extends MoCEntityBigCat {
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         if (mate instanceof MoCEntityPanther && mate.getType() == 1) {
-            return "Pantard";//"Panther";
+            return "Panthard";//"Panther";
         }
         if (mate instanceof MoCEntityTiger && mate.getType() == 1) {
             return "Leoger";//"Tiger";

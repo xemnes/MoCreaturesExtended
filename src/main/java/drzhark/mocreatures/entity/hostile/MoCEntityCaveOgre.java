@@ -18,7 +18,7 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("ogre_cave.png");
+        return MoCreatures.proxy.getModelTexture("ogre_cave.png");
     }
 
     /**

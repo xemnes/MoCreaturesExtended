@@ -28,7 +28,8 @@ public class MoCEntityPanthger extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("bcpanthger.png");
+        if (MoCreatures.proxy.legacyBigCatModels) return MoCreatures.proxy.getModelTexture("panthger.png");
+        return MoCreatures.proxy.getModelTexture("bcpanthger.png");
     }
 
     @Override
@@ -53,7 +54,7 @@ public class MoCEntityPanthger extends MoCEntityBigCat {
 
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
-        return "Panthgerd";
+        return "Panthger";
     }
 
     @Override

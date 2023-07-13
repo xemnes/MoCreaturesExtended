@@ -101,17 +101,17 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     public ResourceLocation getTexture() {
         if (this.getIsHumanForm()) {
-            return MoCreatures.proxy.getTexture("wereblank.png");
+            return MoCreatures.proxy.getModelTexture("wereblank.png");
         }
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getTexture("werewolf_black.png");
+                return MoCreatures.proxy.getModelTexture("werewolf_black.png");
             case 3:
-                return MoCreatures.proxy.getTexture("werewolf_white.png");
+                return MoCreatures.proxy.getModelTexture("werewolf_white.png");
             case 4:
                 if (!MoCreatures.proxy.getAnimateTextures()) {
-                    return MoCreatures.proxy.getTexture("werewolf_fire1.png");
+                    return MoCreatures.proxy.getModelTexture("werewolf_fire1.png");
                 }
                 this.textCounter++;
                 if (this.textCounter < 10) {
@@ -125,9 +125,9 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                 NTB = NTB.substring(0, 1);
                 String NTC = ".png";
 
-                return MoCreatures.proxy.getTexture(NTA + NTB + NTC);
+                return MoCreatures.proxy.getModelTexture(NTA + NTB + NTC);
             default:
-                return MoCreatures.proxy.getTexture("werewolf_brown.png");
+                return MoCreatures.proxy.getModelTexture("werewolf_brown.png");
         }
     }
 

@@ -104,21 +104,21 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("pussycatb.png");
+                return MoCreatures.proxy.getModelTexture("pussycatb.png");
             case 3:
-                return MoCreatures.proxy.getTexture("pussycatc.png");
+                return MoCreatures.proxy.getModelTexture("pussycatc.png");
             case 4:
-                return MoCreatures.proxy.getTexture("pussycatd.png");
+                return MoCreatures.proxy.getModelTexture("pussycatd.png");
             case 5:
-                return MoCreatures.proxy.getTexture("pussycate.png");
+                return MoCreatures.proxy.getModelTexture("pussycate.png");
             case 6:
-                return MoCreatures.proxy.getTexture("pussycatf.png");
+                return MoCreatures.proxy.getModelTexture("pussycatf.png");
             case 7:
-                return MoCreatures.proxy.getTexture("pussycatg.png");
+                return MoCreatures.proxy.getModelTexture("pussycatg.png");
             case 8:
-                return MoCreatures.proxy.getTexture("pussycath.png");
+                return MoCreatures.proxy.getModelTexture("pussycath.png");
             default:
-                return MoCreatures.proxy.getTexture("pussycata.png");
+                return MoCreatures.proxy.getModelTexture("pussycata.png");
         }
     }
 
@@ -276,36 +276,36 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     public ResourceLocation getEmoteIcon() {
         switch (getKittyState()) {
             case -1:
-                return MoCreatures.proxy.getTexture("emoticon.png"); // Blank
+                return MoCreatures.proxy.getMiscTexture("emoticon.png"); // Blank
             case 3:
-                return MoCreatures.proxy.getTexture("emoticon3.png"); // Food
+                return MoCreatures.proxy.getMiscTexture("emoticon3.png"); // Food
             case 4:
-                return MoCreatures.proxy.getTexture("emoticon4.png"); // Happy
+                return MoCreatures.proxy.getMiscTexture("emoticon4.png"); // Happy
             case 5:
-                return MoCreatures.proxy.getTexture("emoticon5.png"); // Litter Box
+                return MoCreatures.proxy.getMiscTexture("emoticon5.png"); // Litter Box
             case 7:
-                return MoCreatures.proxy.getTexture("emoticon7.png"); // Very Happy
+                return MoCreatures.proxy.getMiscTexture("emoticon7.png"); // Very Happy
             case 8:
-                return MoCreatures.proxy.getTexture("emoticon8.png"); // Very, Very Happy
+                return MoCreatures.proxy.getMiscTexture("emoticon8.png"); // Very, Very Happy
             case 9:
             case 18:
-                return MoCreatures.proxy.getTexture("emoticon9.png"); // In Love
+                return MoCreatures.proxy.getMiscTexture("emoticon9.png"); // In Love
             case 10:
             case 21:
-                return MoCreatures.proxy.getTexture("emoticon10.png"); // Pleased
+                return MoCreatures.proxy.getMiscTexture("emoticon10.png"); // Pleased
             case 11:
-                return MoCreatures.proxy.getTexture("emoticon11.png"); // Wondering
+                return MoCreatures.proxy.getMiscTexture("emoticon11.png"); // Wondering
             case 12:
-                return MoCreatures.proxy.getTexture("emoticon12.png"); // Sleeping
+                return MoCreatures.proxy.getMiscTexture("emoticon12.png"); // Sleeping
             case 13:
-                return MoCreatures.proxy.getTexture("emoticon13.png"); // Angry
+                return MoCreatures.proxy.getMiscTexture("emoticon13.png"); // Angry
             case 16:
-                return MoCreatures.proxy.getTexture("emoticon16.png"); // Tree
+                return MoCreatures.proxy.getMiscTexture("emoticon16.png"); // Tree
             case 17:
-                return MoCreatures.proxy.getTexture("emoticon17.png"); // Scared
+                return MoCreatures.proxy.getMiscTexture("emoticon17.png"); // Scared
             case 19:
             case 20:
-                return MoCreatures.proxy.getTexture("emoticon19.png"); // In Labor
+                return MoCreatures.proxy.getMiscTexture("emoticon19.png"); // In Labor
             case 0:
             case 1:
             case 2:
@@ -313,7 +313,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             case 14:
             case 15:
             default:
-                return MoCreatures.proxy.getTexture("emoticon1.png"); // Neutral
+                return MoCreatures.proxy.getMiscTexture("emoticon1.png"); // Neutral
         }
     }
 
@@ -404,7 +404,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         return obj;
     }
 
-    // Mojang changed offsets in 1.12 so this needs to be reviewed
     @Override
     public double getYOffset() {
         if (this.getRidingEntity() instanceof EntityPlayer && this.world.isRemote) {
@@ -875,7 +874,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         changeKittyState(13);
                     }
                     break;
-                case 15: // '\017'
+                case 15: // Picked up by player
                     if (this.onGround) {
                         changeKittyState(7);
                     }
@@ -883,7 +882,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         this.rotationYaw = this.getRidingEntity().rotationYaw + 90F;
                     }
                     break;
-                case 16: // '\020'
+                case 16: // Look for nearby tree
                     this.kittytimer++;
                     if (this.kittytimer > 500 && !getOnTree()) {
                         changeKittyState(7);
@@ -1149,7 +1148,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         nbttagcompound.setInteger("KittyState", getKittyState());
     }
 
-    //drops medallion on death
     @Override
     public void onDeath(DamageSource damagesource) {
         if (!this.world.isRemote && getIsTamed()) {

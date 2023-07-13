@@ -63,7 +63,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture(this.texture);
+        return MoCreatures.proxy.getModelTexture(this.texture);
     }
 
     @Override

@@ -23,8 +23,8 @@ public class MoCEntityPanther extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
-        if (MoCreatures.proxy.legacyBigCatModels) return MoCreatures.proxy.getTexture("panther.png");
-        return MoCreatures.proxy.getTexture("bcpuma.png");
+        if (MoCreatures.proxy.legacyBigCatModels) return MoCreatures.proxy.getModelTexture("panther.png");
+        return MoCreatures.proxy.getModelTexture("bcpuma.png");
     }
 
     @Override

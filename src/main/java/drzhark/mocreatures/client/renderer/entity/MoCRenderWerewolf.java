@@ -51,21 +51,21 @@ public class MoCRenderWerewolf extends RenderLiving<MoCEntityWerewolf> {
             int myType = entity.getType();
 
             if (!entity.getIsHumanForm()) {
-                bindTexture(MoCreatures.proxy.getTexture("wereblank.png"));
+                bindTexture(MoCreatures.proxy.getModelTexture("wereblank.png"));
             } else {
                 switch (myType) {
 
                     case 1:
-                        bindTexture(MoCreatures.proxy.getTexture("werehuman_dude.png"));
+                        bindTexture(MoCreatures.proxy.getModelTexture("werehuman_dude.png"));
                         break;
                     case 2:
-                        bindTexture(MoCreatures.proxy.getTexture("werehuman_classic.png"));
+                        bindTexture(MoCreatures.proxy.getModelTexture("werehuman_classic.png"));
                         break;
                     case 4:
-                        bindTexture(MoCreatures.proxy.getTexture("werehuman_woman.png"));
+                        bindTexture(MoCreatures.proxy.getModelTexture("werehuman_woman.png"));
                         break;
                     default:
-                        bindTexture(MoCreatures.proxy.getTexture("werehuman_oldie.png"));
+                        bindTexture(MoCreatures.proxy.getModelTexture("werehuman_oldie.png"));
                 }
             }
 

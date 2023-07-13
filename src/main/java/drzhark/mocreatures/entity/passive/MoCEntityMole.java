@@ -53,7 +53,7 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("mole.png");
+        return MoCreatures.proxy.getModelTexture("mole.png");
     }
 
     @Override

@@ -821,7 +821,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (getArmorType() == 2) armorTex = "gold.png";
             if (getArmorType() == 3) armorTex = "diamond.png";
             if (getArmorType() == 4) armorTex = "crystaline.png";
-            return MoCreatures.proxy.getTexture(tempTexture.replace(".png", armorTex));
+            return MoCreatures.proxy.getModelTexture(tempTexture.replace(".png", armorTex));
         }
 
         if (this.isUndead() && this.getType() < 26) {
@@ -850,12 +850,12 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
             String decayTex = String.valueOf(getAge() / 100);
             decayTex = decayTex.substring(0, 1);
-            return MoCreatures.proxy.getTexture(baseTex + decayTex + iteratorTex + ".png");
+            return MoCreatures.proxy.getModelTexture(baseTex + decayTex + iteratorTex + ".png");
         }
 
         // if animate textures is off, return plain textures
         if (!MoCreatures.proxy.getAnimateTextures()) {
-            return MoCreatures.proxy.getTexture(tempTexture);
+            return MoCreatures.proxy.getModelTexture(tempTexture);
         }
 
         if (this.isNightmare()) {
@@ -868,7 +868,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             NTB = NTB.substring(0, 1);
             String NTC = ".png";
 
-            return MoCreatures.proxy.getTexture(NTA + NTB + NTC);
+            return MoCreatures.proxy.getModelTexture(NTA + NTB + NTC);
         }
 
         if (this.transformCounter != 0 && this.transformType != 0) {
@@ -937,10 +937,10 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }
 
             if (this.transformCounter > 75 && this.transformCounter % 4 == 0)
-                return MoCreatures.proxy.getTexture(newText);
+                return MoCreatures.proxy.getModelTexture(newText);
         }
 
-        return MoCreatures.proxy.getTexture(tempTexture);
+        return MoCreatures.proxy.getModelTexture(tempTexture);
     }
 
     /**

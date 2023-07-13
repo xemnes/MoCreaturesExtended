@@ -16,7 +16,7 @@ public class MoCEntityCod extends MoCEntityMediumFish {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("mediumfish_cod.png");
+        return MoCreatures.proxy.getModelTexture("mediumfish_cod.png");
     }
 
     @Override

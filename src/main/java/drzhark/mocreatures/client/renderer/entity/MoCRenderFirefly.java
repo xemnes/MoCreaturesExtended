@@ -59,7 +59,7 @@ public class MoCRenderFirefly extends MoCRenderInsect<MoCEntityFirefly> {
         }
 
         protected void setTailBrightness(MoCEntityFirefly entityliving, float par3) {
-            this.mocRenderer.bindTexture(MoCreatures.proxy.getTexture("firefly_glow.png"));
+            this.mocRenderer.bindTexture(MoCreatures.proxy.getModelTexture("firefly_glow.png"));
             float var4 = 1.0F;
             GlStateManager.enableBlend();
             GlStateManager.disableAlpha();

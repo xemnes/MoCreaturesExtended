@@ -49,13 +49,33 @@ public class MoCClientProxy extends MoCProxy {
     }
 
     @Override
-    public void initTextures() {
-        mocTextures.loadTextures();
+    public ResourceLocation getArmorTexture(String texture) {
+        return mocTextures.getArmorTexture(texture);
     }
 
     @Override
-    public ResourceLocation getTexture(String texture) {
-        return mocTextures.getTexture(texture);
+    public ResourceLocation getBlockTexture(String texture) {
+        return mocTextures.getBlockTexture(texture);
+    }
+
+    @Override
+    public ResourceLocation getItemTexture(String texture) {
+        return mocTextures.getItemTexture(texture);
+    }
+
+    @Override
+    public ResourceLocation getModelTexture(String texture) {
+        return mocTextures.getModelTexture(texture);
+    }
+
+    @Override
+    public ResourceLocation getGuiTexture(String texture) {
+        return mocTextures.getGuiTexture(texture);
+    }
+
+    @Override
+    public ResourceLocation getMiscTexture(String texture) {
+        return mocTextures.getMiscTexture(texture);
     }
 
     @SuppressWarnings({"deprecation", "unchecked", "rawtypes"})

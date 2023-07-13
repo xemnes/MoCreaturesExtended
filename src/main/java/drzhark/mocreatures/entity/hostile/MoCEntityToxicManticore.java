@@ -32,7 +32,7 @@ public class MoCEntityToxicManticore extends MoCEntityManticore {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("manticore_toxic.png");
+        return MoCreatures.proxy.getModelTexture("manticore_toxic.png");
     }
 
     @Override

@@ -45,7 +45,7 @@ public class MoCEntityHellRat extends MoCEntityRat {
         }
         String textNumber = String.valueOf(this.textCounter);
         textNumber = textNumber.substring(0, 1);
-        return MoCreatures.proxy.getTexture("hellrat" + textNumber + ".png");
+        return MoCreatures.proxy.getModelTexture("hellrat" + textNumber + ".png");
     }
 
     @Nullable

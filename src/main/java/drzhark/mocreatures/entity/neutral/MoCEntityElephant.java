@@ -149,15 +149,15 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("elephantindian.png");
+                return MoCreatures.proxy.getModelTexture("elephantindian.png");
             case 3:
-                return MoCreatures.proxy.getTexture("mammoth.png");
+                return MoCreatures.proxy.getModelTexture("mammoth.png");
             case 4:
-                return MoCreatures.proxy.getTexture("mammothsonghua.png");
+                return MoCreatures.proxy.getModelTexture("mammothsonghua.png");
             case 5:
-                return MoCreatures.proxy.getTexture("elephantindianpretty.png");
+                return MoCreatures.proxy.getModelTexture("elephantindianpretty.png");
             default:
-                return MoCreatures.proxy.getTexture("elephantafrican.png");
+                return MoCreatures.proxy.getModelTexture("elephantafrican.png");
         }
     }
 

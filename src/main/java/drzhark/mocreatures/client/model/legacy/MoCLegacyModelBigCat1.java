@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.client.model.legacy;
 
 import net.minecraft.client.model.ModelQuadruped;

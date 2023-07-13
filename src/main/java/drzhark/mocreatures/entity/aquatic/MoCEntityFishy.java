@@ -65,25 +65,25 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getTexture("fishy2.png");
+                return MoCreatures.proxy.getModelTexture("fishy2.png");
             case 3:
-                return MoCreatures.proxy.getTexture("fishy3.png");
+                return MoCreatures.proxy.getModelTexture("fishy3.png");
             case 4:
-                return MoCreatures.proxy.getTexture("fishy4.png");
+                return MoCreatures.proxy.getModelTexture("fishy4.png");
             case 5:
-                return MoCreatures.proxy.getTexture("fishy5.png");
+                return MoCreatures.proxy.getModelTexture("fishy5.png");
             case 6:
-                return MoCreatures.proxy.getTexture("fishy6.png");
+                return MoCreatures.proxy.getModelTexture("fishy6.png");
             case 7:
-                return MoCreatures.proxy.getTexture("fishy7.png");
+                return MoCreatures.proxy.getModelTexture("fishy7.png");
             case 8:
-                return MoCreatures.proxy.getTexture("fishy8.png");
+                return MoCreatures.proxy.getModelTexture("fishy8.png");
             case 9:
-                return MoCreatures.proxy.getTexture("fishy9.png");
+                return MoCreatures.proxy.getModelTexture("fishy9.png");
             case 10:
-                return MoCreatures.proxy.getTexture("fishy10.png");
+                return MoCreatures.proxy.getModelTexture("fishy10.png");
             default:
-                return MoCreatures.proxy.getTexture("fishy1.png");
+                return MoCreatures.proxy.getModelTexture("fishy1.png");
         }
     }
 

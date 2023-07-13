@@ -28,7 +28,7 @@ public class MoCEntityLither extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getTexture("bclither.png");
+        return MoCreatures.proxy.getModelTexture("bclither.png");
     }
 
     @Override

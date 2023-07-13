@@ -5,6 +5,7 @@ import drzhark.mocreatures.client.MoCClientProxy;
 import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat1;
 import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat2;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
+import drzhark.mocreatures.entity.hunter.MoCEntityLion;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -142,7 +143,7 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
         }
 
         public void doRenderLayer(MoCEntityBigCat entitybigcat, float f, float f1, float f2, float f3, float f4, float f5, float f6) {
-            if ((entitybigcat.getType() == 2 || entitybigcat.getType() == 3) && entitybigcat.getIsAdult()) {
+            if (entitybigcat instanceof MoCEntityLion && (entitybigcat.getType() == 2 || entitybigcat.getType() == 3) && entitybigcat.getIsAdult()) {
                 bindTexture(MoCreatures.proxy.getTexture("lionb.png"));
             } else {
                 bindTexture(MoCreatures.proxy.getTexture("lionc.png"));

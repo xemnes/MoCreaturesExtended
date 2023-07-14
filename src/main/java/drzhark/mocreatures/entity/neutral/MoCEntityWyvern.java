@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCPetData;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -640,6 +643,15 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         return MoCSoundEvents.ENTITY_WYVERN_AMBIENT;
     }
 
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.WYVERN;
+    }
+
     @Override
     public int getTalkInterval() {
         return 400;
@@ -809,6 +821,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         super.makeEntityDive();
     }
 
+    // TODO: Remove this once wyvern eggs are overhauled
     @Override
     protected void dropFewItems(boolean flag, int x) {
         int chance = MoCreatures.proxy.wyvernEggDropChance;

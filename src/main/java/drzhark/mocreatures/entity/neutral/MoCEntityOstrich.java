@@ -73,6 +73,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     public MoCEntityOstrich(World world) {
         super(world);
         setSize(1.0F, 1.6F);
+        setAdult(true);
         setAge(35);
         this.eggCounter = this.rand.nextInt(1000) + 1000;
         this.stepHeight = 1.0F;
@@ -762,6 +763,10 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
     @Nullable
     protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
         return MoCLootTables.OSTRICH;
     }
 

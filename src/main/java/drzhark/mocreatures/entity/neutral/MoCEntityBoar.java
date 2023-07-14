@@ -29,8 +29,8 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     public MoCEntityBoar(World world) {
         super(world);
         setSize(0.9F, 0.8F);
-        setAge(this.rand.nextInt(15) + 45);
         setAdult(this.rand.nextInt(4) != 0);
+        setAge(this.rand.nextInt(15) + 45);
     }
 
     @Override
@@ -56,9 +56,9 @@ public class MoCEntityBoar extends MoCEntityAnimal {
     @Override
     public ResourceLocation getTexture() {
         if (getIsAdult()) {
-            return MoCreatures.proxy.getModelTexture("boar_dark_brown.png");
+            return MoCreatures.proxy.getModelTexture("boar.png");
         }
-        return MoCreatures.proxy.getModelTexture("boar_light_brown.png");
+        return MoCreatures.proxy.getModelTexture("boar_baby.png");
 
     }
 
@@ -100,6 +100,10 @@ public class MoCEntityBoar extends MoCEntityAnimal {
 
     @Nullable
     protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
         return MoCLootTables.BOAR;
     }
 

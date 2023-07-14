@@ -12,19 +12,25 @@ public class MoCLootTables {
     public static final ResourceLocation BUNNY = new ResourceLocation(MoCConstants.MOD_ID, "entities/bunny");
     public static final ResourceLocation DEER = new ResourceLocation(MoCConstants.MOD_ID, "entities/deer");
     public static final ResourceLocation DUCK = new ResourceLocation(MoCConstants.MOD_ID, "entities/duck");
+    public static final ResourceLocation GOAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/goat");
+    public static final ResourceLocation KITTY = new ResourceLocation(MoCConstants.MOD_ID, "entities/kitty");
     public static final ResourceLocation MOLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/mole");
-    public static final ResourceLocation MOUSE = new ResourceLocation(MoCConstants.MOD_ID, "entities/mouse");
     public static final ResourceLocation OSTRICH = new ResourceLocation(MoCConstants.MOD_ID, "entities/ostrich");
     public static final ResourceLocation TURKEY = new ResourceLocation(MoCConstants.MOD_ID, "entities/turkey");
     public static final ResourceLocation TURTLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/turtle");
+    // Bears
+    public static final ResourceLocation PANDA_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/panda_bear");
+    // Dragons
+    public static final ResourceLocation WYVERN = new ResourceLocation(MoCConstants.MOD_ID, "entities/wyvern"); // Currently empty as a placeholder
     // Manticores
     public static final ResourceLocation DARK_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/dark_manticore");
     public static final ResourceLocation FIRE_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/fire_manticore");
     public static final ResourceLocation FROST_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/frost_manticore");
     public static final ResourceLocation PLAIN_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/plain_manticore");
     public static final ResourceLocation TOXIC_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/toxic_manticore");
-    // Rats
+    // Rodents
     public static final ResourceLocation HELL_RAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/hell_rat");
+    public static final ResourceLocation MOUSE = new ResourceLocation(MoCConstants.MOD_ID, "entities/mouse");
     public static final ResourceLocation RAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/rat");
     // Sea Creatures
     public static final ResourceLocation CRAB = new ResourceLocation(MoCConstants.MOD_ID, "entities/crab");

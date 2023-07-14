@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -30,7 +31,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -47,6 +47,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
@@ -268,11 +270,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         }
     }
 
-    @Override
-    protected Item getDropItem() {
-        return null;
-    }
-
     public ResourceLocation getEmoteIcon() {
         switch (getKittyState()) {
             case -1:
@@ -333,6 +330,15 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         } else {
             return MoCSoundEvents.ENTITY_KITTY_HURT;
         }
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.KITTY;
     }
 
     @Override

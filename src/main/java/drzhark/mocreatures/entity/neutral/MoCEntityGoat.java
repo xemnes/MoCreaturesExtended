@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -20,7 +23,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -53,6 +55,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     public MoCEntityGoat(World world) {
         super(world);
         setSize(0.8F, 1F);
+        setAdult(true);
         setAge(70);
     }
 
@@ -586,9 +589,13 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         return MoCSoundEvents.ENTITY_GOAT_DEATH;
     }
 
-    @Override
-    protected Item getDropItem() {
-        return Items.LEATHER;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.GOAT;
     }
 
     @Override

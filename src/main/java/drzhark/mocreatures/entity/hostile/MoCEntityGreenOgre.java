@@ -3,9 +3,10 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -28,8 +29,8 @@ public class MoCEntityGreenOgre extends MoCEntityOgre {
         return MoCreatures.proxy.ogreStrength;
     }
 
-    @Override
-    protected Item getDropItem() {
-        return Item.getItemFromBlock(Blocks.OBSIDIAN);
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.GREEN_OGRE;
     }
 }

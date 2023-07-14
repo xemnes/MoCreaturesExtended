@@ -3,9 +3,10 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -44,8 +45,8 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
         return 50F;
     }
 
-    @Override
-    protected Item getDropItem() {
-        return Items.DIAMOND;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.CAVE_OGRE;
     }
 }

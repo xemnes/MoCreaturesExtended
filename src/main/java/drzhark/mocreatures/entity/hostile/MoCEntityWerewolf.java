@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -14,9 +15,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -192,62 +191,6 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     }
 
     @Override
-    protected Item getDropItem() {
-        int i = this.rand.nextInt(12);
-        if (getIsHumanForm()) {
-            switch (i) {
-                case 0: // '\0'
-                    return Items.WOODEN_SHOVEL;
-
-                case 1: // '\001'
-                    return Items.WOODEN_AXE;
-
-                case 2: // '\002'
-                    return Items.WOODEN_SWORD;
-
-                case 3: // '\003'
-                    return Items.WOODEN_HOE;
-
-                case 4: // '\004'
-                    return Items.WOODEN_PICKAXE;
-            }
-            return Items.STICK;
-        }
-        switch (i) {
-            case 0: // '\0'
-                return Items.IRON_HOE;
-
-            case 1: // '\001'
-                return Items.IRON_SHOVEL;
-
-            case 2: // '\002'
-                return Items.IRON_AXE;
-
-            case 3: // '\003'
-                return Items.IRON_PICKAXE;
-
-            case 4: // '\004'
-                return Items.IRON_SWORD;
-
-            case 5: // '\005'
-                return Items.STONE_HOE;
-
-            case 6: // '\006'
-                return Items.STONE_SHOVEL;
-
-            case 7: // '\007'
-                return Items.STONE_AXE;
-
-            case 8: // '\b'
-                return Items.STONE_PICKAXE;
-
-            case 9: // '\t'
-                return Items.STONE_SWORD;
-        }
-        return Items.GOLDEN_APPLE;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         if (getIsHumanForm()) {
             return MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_DEATH_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
@@ -277,29 +220,17 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         }
     }
 
-    public boolean IsNight() {
-        return !this.world.isDaytime();
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (getIsHumanForm()) {
+            return MoCLootTables.WEREHUMAN;
+        }
+
+        return MoCLootTables.WEREWOLF;
     }
 
-    @Override
-    public void onDeath(DamageSource damagesource) {
-        Entity entity = damagesource.getTrueSource();
-        if ((this.scoreValue > 0) && (entity != null)) {
-            entity.awardKillScore(this, this.scoreValue, damagesource);
-        }
-        if (entity != null) {
-            entity.onKillEntity(this);
-        }
-
-        if (!this.world.isRemote) {
-            for (int i = 0; i < 2; i++) {
-                Item item = getDropItem();
-                if (item != null) {
-                    dropItem(item, 1);
-                }
-            }
-
-        }
+    public boolean IsNight() {
+        return !this.world.isDaytime();
     }
 
     @Override

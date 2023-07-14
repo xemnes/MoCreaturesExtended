@@ -3,13 +3,15 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -32,9 +34,9 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
     }
 
-    @Override
-    protected Item getDropItem() {
-        return Items.REDSTONE;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.FLAME_WRAITH;
     }
 
     @Override

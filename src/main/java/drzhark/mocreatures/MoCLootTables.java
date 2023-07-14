@@ -18,6 +18,7 @@ public class MoCLootTables {
     public static final ResourceLocation OSTRICH = new ResourceLocation(MoCConstants.MOD_ID, "entities/ostrich");
     public static final ResourceLocation TURKEY = new ResourceLocation(MoCConstants.MOD_ID, "entities/turkey");
     public static final ResourceLocation TURTLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/turtle");
+    public static final ResourceLocation WILD_WOLF = new ResourceLocation(MoCConstants.MOD_ID, "entities/wild_wolf");
     // Bears
     public static final ResourceLocation PANDA_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/panda_bear");
     // Dragons
@@ -28,6 +29,10 @@ public class MoCLootTables {
     public static final ResourceLocation FROST_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/frost_manticore");
     public static final ResourceLocation PLAIN_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/plain_manticore");
     public static final ResourceLocation TOXIC_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/toxic_manticore");
+    // Ogres
+    public static final ResourceLocation CAVE_OGRE = new ResourceLocation(MoCConstants.MOD_ID, "entities/cave_ogre");
+    public static final ResourceLocation FIRE_OGRE = new ResourceLocation(MoCConstants.MOD_ID, "entities/fire_ogre");
+    public static final ResourceLocation GREEN_OGRE = new ResourceLocation(MoCConstants.MOD_ID, "entities/green_ogre");
     // Rodents
     public static final ResourceLocation HELL_RAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/hell_rat");
     public static final ResourceLocation MOUSE = new ResourceLocation(MoCConstants.MOD_ID, "entities/mouse");
@@ -40,4 +45,10 @@ public class MoCLootTables {
     public static final ResourceLocation FIRE_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/fire_scorpion");
     public static final ResourceLocation FROST_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/frost_scorpion");
     public static final ResourceLocation UNDEAD_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/undead_scorpion");
+    // Undead
+    public static final ResourceLocation FLAME_WRAITH = new ResourceLocation(MoCConstants.MOD_ID, "entities/flame_wraith");
+    public static final ResourceLocation WRAITH = new ResourceLocation(MoCConstants.MOD_ID, "entities/wraith");
+    // Werewolves
+    public static final ResourceLocation WEREHUMAN = new ResourceLocation(MoCConstants.MOD_ID, "entities/werehuman");
+    public static final ResourceLocation WEREWOLF = new ResourceLocation(MoCConstants.MOD_ID, "entities/werewolf");
 }

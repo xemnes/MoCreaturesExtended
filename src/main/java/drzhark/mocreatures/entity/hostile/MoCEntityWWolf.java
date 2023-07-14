@@ -3,13 +3,13 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.hunter.MoCEntityBear;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +24,6 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -37,6 +36,8 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityWWolf extends MoCEntityMob {
 
     public int mouthCounter;
@@ -45,6 +46,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
     public MoCEntityWWolf(World world) {
         super(world);
         setSize(0.9F, 1.3F);
+        setAdult(true);
     }
 
     @Override
@@ -149,11 +151,6 @@ public class MoCEntityWWolf extends MoCEntityMob {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.fur;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_WOLF_DEATH;
     }
@@ -168,6 +165,15 @@ public class MoCEntityWWolf extends MoCEntityMob {
     protected SoundEvent getAmbientSound() {
         openMouth();
         return MoCSoundEvents.ENTITY_WOLF_AMBIENT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.WILD_WOLF;
     }
 
     @Override

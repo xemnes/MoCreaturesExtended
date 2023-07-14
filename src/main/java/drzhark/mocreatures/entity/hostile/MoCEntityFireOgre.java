@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.init.MoCItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -42,12 +42,8 @@ public class MoCEntityFireOgre extends MoCEntityOgre {
         }
     }
 
-    @Override
-    protected Item getDropItem() {
-        boolean flag = (this.rand.nextInt(100) < MoCreatures.proxy.rareItemDropChance);
-        if (!flag) {
-            return Item.getItemFromBlock(Blocks.FIRE);
-        }
-        return MoCItems.heartfire;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.FIRE_OGRE;
     }
 }

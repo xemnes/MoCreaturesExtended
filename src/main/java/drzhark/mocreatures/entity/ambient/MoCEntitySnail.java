@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
@@ -120,6 +123,11 @@ public class MoCEntitySnail extends MoCEntityAmbient {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.ENTITY_SILVERFISH_STEP;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.SNAIL;
     }
 
     @Override

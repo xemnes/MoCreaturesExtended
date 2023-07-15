@@ -7,6 +7,17 @@ import net.minecraft.util.ResourceLocation;
 
 // TODO: Ents, Elephants, Horses, Horse Mobs, Snakes
 public class MoCLootTables {
+    // Ambient - All of these are empty, they're mainly for modpack developers
+    public static final ResourceLocation ANT = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/ant");
+    public static final ResourceLocation BEE = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/bee");
+    public static final ResourceLocation BUTTERFLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/butterfly");
+    public static final ResourceLocation CRICKET = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/cricket");
+    public static final ResourceLocation DRAGONFLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/dragonfly");
+    public static final ResourceLocation FIREFLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/firefly");
+    public static final ResourceLocation FLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/fly");
+    public static final ResourceLocation MAGGOT = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/maggot");
+    public static final ResourceLocation ROACH = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/roach");
+    public static final ResourceLocation SNAIL = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/snail");
     // Animals
     public static final ResourceLocation BIRD = new ResourceLocation(MoCConstants.MOD_ID, "entities/bird");
     public static final ResourceLocation BOAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/boar");

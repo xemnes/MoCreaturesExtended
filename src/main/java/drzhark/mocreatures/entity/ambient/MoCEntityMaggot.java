@@ -3,11 +3,15 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -39,6 +43,11 @@ public class MoCEntityMaggot extends MoCEntityAmbient {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.ENTITY_SILVERFISH_STEP;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.MAGGOT;
     }
 
     @Override

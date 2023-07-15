@@ -32,6 +32,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         super(world);
         this.texture = "shark.png";
         setSize(1.7F, 0.8F);
+        setAdult(true);
         setAge(60 + this.rand.nextInt(100));
     }
 
@@ -76,6 +77,10 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
 
     @Nullable
     protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
         return MoCLootTables.SHARK;
     }
 

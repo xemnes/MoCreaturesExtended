@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
@@ -13,6 +16,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -129,6 +133,11 @@ public class MoCEntityAnt extends MoCEntityAmbient {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return null;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.ANT;
     }
 
     @Override

@@ -39,6 +39,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     public MoCEntityFishy(World world) {
         super(world);
         setSize(0.3F, 0.3F);
+        setAdult(true);
         setAge(50 + this.rand.nextInt(50));
     }
 
@@ -119,6 +120,10 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
     @Nullable
     protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
         return MoCLootTables.FISHY;
     }
 

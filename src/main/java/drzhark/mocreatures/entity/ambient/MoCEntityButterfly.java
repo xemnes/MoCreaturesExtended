@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import net.minecraft.entity.ai.EntityAIFollow;
@@ -117,6 +120,11 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return null;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.BUTTERFLY;
     }
 
     @Override

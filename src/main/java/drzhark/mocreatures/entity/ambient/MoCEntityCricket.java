@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
@@ -84,6 +87,11 @@ public class MoCEntityCricket extends MoCEntityInsect {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.CRICKET;
     }
 
     @Override

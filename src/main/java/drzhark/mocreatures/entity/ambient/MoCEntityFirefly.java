@@ -3,12 +3,16 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -48,6 +52,11 @@ public class MoCEntityFirefly extends MoCEntityInsect {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return MoCSoundEvents.ENTITY_CRICKET_HURT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.FIREFLY;
     }
 
     @Override

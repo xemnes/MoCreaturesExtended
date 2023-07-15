@@ -7,6 +7,9 @@
 
 package drzhark.mocreatures.entity.ambient;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -18,6 +21,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -66,6 +70,11 @@ public class MoCEntityBee extends MoCEntityInsect {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return MoCSoundEvents.ENTITY_BEE_HURT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.BEE;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class MoCEntityLitterBox extends EntityLiving {
 
     public MoCEntityLitterBox(World world) {
         super(world);
-        setSize(1.0F, 0.3F);
+        setSize(1.0F, 0.15F);
     }
 
     public ResourceLocation getTexture() {
@@ -103,12 +103,8 @@ public class MoCEntityLitterBox extends EntityLiving {
     }
 
     @Override
-    public double getYOffset() {
-        if (this.getRidingEntity() instanceof EntityPlayer) {
-            return this.getRidingEntity().isSneaking() ? 0.25 : 0.5F;
-        }
-        return super.getYOffset();
-
+    public double getMountedYOffset() {
+        return -0.1D;
     }
 
     @Override
@@ -118,7 +114,8 @@ public class MoCEntityLitterBox extends EntityLiving {
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && (stack.getItem() == Item.getItemFromBlock(Blocks.SAND))) {
+        if (!stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(Blocks.SAND)) {
+            MoCTools.playCustomSound(this, SoundEvents.BLOCK_SAND_PLACE);
             stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
@@ -129,7 +126,7 @@ public class MoCEntityLitterBox extends EntityLiving {
         }
         if (player.isSneaking() && this.getRidingEntity() == null) {
             player.inventory.addItemStackToInventory(new ItemStack(MoCItems.litterbox));
-            this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.2F, (((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F) + 1.0F) * 2.0F);
+            MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEM_PICKUP, 0.2F);
             setDead();
             return true;
         }

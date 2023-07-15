@@ -35,13 +35,13 @@ public class MoCEntityKittyBed extends EntityLiving {
 
     public MoCEntityKittyBed(World world) {
         super(world);
-        setSize(1.0F, 0.3F);
+        setSize(1.0F, 0.15F);
         this.milklevel = 0.0F;
     }
 
     public MoCEntityKittyBed(World world, double d, double d1, double d2) {
         super(world);
-        setSize(1.0F, 0.3F);
+        setSize(1.0F, 0.15F);
         this.milklevel = 0.0F;
     }
 
@@ -137,12 +137,8 @@ public class MoCEntityKittyBed extends EntityLiving {
     }
 
     @Override
-    public double getYOffset() {
-        if (this.getRidingEntity() instanceof EntityPlayer) {
-            return this.getRidingEntity().isSneaking() ? 0.25 : 0.5F;
-        }
-
-        return super.getYOffset();
+    public double getMountedYOffset() {
+        return -0.1D;
     }
 
     @Override
@@ -172,7 +168,7 @@ public class MoCEntityKittyBed extends EntityLiving {
         if (player.isSneaking() && this.getRidingEntity() == null) {
             final int color = getSheetColor();
             player.inventory.addItemStackToInventory(new ItemStack(MoCItems.kittybed[color], 1));
-            this.playSound(SoundEvents.ENTITY_ITEM_PICKUP, 0.2F, (((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F) + 1.0F) * 2.0F);
+            MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEM_PICKUP, 0.2F);
             setDead();
             return true;
         }

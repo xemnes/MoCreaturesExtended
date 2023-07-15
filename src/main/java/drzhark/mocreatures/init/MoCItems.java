@@ -87,15 +87,15 @@ public class MoCItems {
     public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
-    public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
     public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 6, 0.8F, true);
     public static final MoCItemFood omelet = new MoCItemFood("omelet", 3, 0.5F, false);
-    public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
     public static final MoCItemFood ostrichcooked = new MoCItemFood("ostrichcooked", 7, 0.8F, true);
     public static final MoCItemFood ratBurger = new MoCItemFood("ratburger", 9, 0.5F, false);
     public static final MoCItemFood ratCooked = new MoCItemFood("ratcooked", 4, 0.5F, true);
-    public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
-    public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30, 0), 0.8F);
+    public static final MoCItemFood ratRaw = (MoCItemFood) new MoCItemFood("ratraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
+    public static final MoCItemFood rawTurkey = (MoCItemFood) new MoCItemFood("turkeyraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
     public static final MoCItemFood turtlecooked = new MoCItemFood("turtlecooked", 6, 0.7F, true);
     public static final MoCItemFood turtleraw = new MoCItemFood("turtleraw", 2, 0.2F, true);
     public static final MoCItemFood turtlesoup = new MoCItemTurtleSoup("turtlesoup", 8, 0.8F, false);

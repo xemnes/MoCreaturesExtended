@@ -3,12 +3,14 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIHunt;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -18,11 +20,11 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -40,6 +42,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         super(world);
         this.texture = "crocodile.png";
         setSize(1.4F, 0.6F); //it was 2.0, 0.6F
+        setAdult(true);
         setAge(50 + this.rand.nextInt(50));
         setTamed(false);
     }
@@ -328,9 +331,13 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         return MoCSoundEvents.ENTITY_CROCODILE_AMBIENT;
     }
 
-    @Override
-    protected Item getDropItem() {
-        return MoCItems.hideCroc;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.CROCODILE;
     }
 
     public boolean isSpinning() {

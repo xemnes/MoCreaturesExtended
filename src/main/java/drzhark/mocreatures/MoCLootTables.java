@@ -5,23 +5,41 @@ package drzhark.mocreatures;
 
 import net.minecraft.util.ResourceLocation;
 
-// TODO: Ents, Elephants, Horses, Horse Mobs
+// TODO: Ents, Elephants, Horses, Horse Mobs, Snakes
 public class MoCLootTables {
     // Animals
     public static final ResourceLocation BIRD = new ResourceLocation(MoCConstants.MOD_ID, "entities/bird");
     public static final ResourceLocation BOAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/boar");
     public static final ResourceLocation BUNNY = new ResourceLocation(MoCConstants.MOD_ID, "entities/bunny");
+    public static final ResourceLocation CROCODILE = new ResourceLocation(MoCConstants.MOD_ID, "entities/crocodile");
     public static final ResourceLocation DEER = new ResourceLocation(MoCConstants.MOD_ID, "entities/deer");
     public static final ResourceLocation DUCK = new ResourceLocation(MoCConstants.MOD_ID, "entities/duck");
+    public static final ResourceLocation FOX = new ResourceLocation(MoCConstants.MOD_ID, "entities/fox");
     public static final ResourceLocation GOAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/goat");
     public static final ResourceLocation KITTY = new ResourceLocation(MoCConstants.MOD_ID, "entities/kitty");
+    public static final ResourceLocation KOMODO_DRAGON = new ResourceLocation(MoCConstants.MOD_ID, "entities/komodo_dragon");
     public static final ResourceLocation MOLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/mole");
     public static final ResourceLocation OSTRICH = new ResourceLocation(MoCConstants.MOD_ID, "entities/ostrich");
+    public static final ResourceLocation RACCOON = new ResourceLocation(MoCConstants.MOD_ID, "entities/raccoon");
     public static final ResourceLocation TURKEY = new ResourceLocation(MoCConstants.MOD_ID, "entities/turkey");
     public static final ResourceLocation TURTLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/turtle");
     public static final ResourceLocation WILD_WOLF = new ResourceLocation(MoCConstants.MOD_ID, "entities/wild_wolf");
     // Bears
+    public static final ResourceLocation BLACK_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/black_bear");
+    public static final ResourceLocation GRIZZLY_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/grizzly_bear");
     public static final ResourceLocation PANDA_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/panda_bear");
+    public static final ResourceLocation POLAR_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/polar_bear");
+    // Big Cats
+    public static final ResourceLocation LEOGER = new ResourceLocation(MoCConstants.MOD_ID, "entities/leoger");
+    public static final ResourceLocation LEOPARD = new ResourceLocation(MoCConstants.MOD_ID, "entities/leopard");
+    public static final ResourceLocation LIARD = new ResourceLocation(MoCConstants.MOD_ID, "entities/liard");
+    public static final ResourceLocation LIGER = new ResourceLocation(MoCConstants.MOD_ID, "entities/liger");
+    public static final ResourceLocation LION = new ResourceLocation(MoCConstants.MOD_ID, "entities/lion");
+    public static final ResourceLocation LITHER = new ResourceLocation(MoCConstants.MOD_ID, "entities/lither");
+    public static final ResourceLocation PANTHARD = new ResourceLocation(MoCConstants.MOD_ID, "entities/panthard");
+    public static final ResourceLocation PANTHER = new ResourceLocation(MoCConstants.MOD_ID, "entities/panther");
+    public static final ResourceLocation PANTHGER = new ResourceLocation(MoCConstants.MOD_ID, "entities/panthger");
+    public static final ResourceLocation TIGER = new ResourceLocation(MoCConstants.MOD_ID, "entities/tiger");
     // Dragons
     public static final ResourceLocation WYVERN = new ResourceLocation(MoCConstants.MOD_ID, "entities/wyvern"); // Currently empty as a placeholder
     // Manticores

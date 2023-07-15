@@ -214,11 +214,6 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.bigcatclaw;
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         openMouth();
         if (getIsAdult()) {

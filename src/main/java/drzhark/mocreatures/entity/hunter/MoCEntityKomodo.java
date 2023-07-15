@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
@@ -29,6 +32,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
@@ -46,7 +50,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         setSize(1.6F, 0.5F);
         this.texture = "komododragon.png";
         setTamed(false);
-        setAdult(false);
+        setAdult(true);
         this.stepHeight = 1.0F;
 
         if (this.rand.nextInt(6) == 0) {
@@ -111,6 +115,15 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         return MoCSoundEvents.ENTITY_SNAKE_AMBIENT;
     }
 
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.KOMODO_DRAGON;
+    }
+
     @Override
     public int getTalkInterval() {
         return 500;
@@ -170,21 +183,6 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
         {
             this.sitCounter = 1;
             this.getNavigator().clearPath();
-        }
-    }
-
-    @Override
-    protected void dropFewItems(boolean flag, int x) {
-        boolean flag2 = (getAge() > 90 && this.rand.nextInt(5) == 0);
-
-        if (flag2) {
-            int j = this.rand.nextInt(2) + 1;
-            for (int k = 0; k < j; k++) {
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, 33), 0.0F);
-            }
-        } else {
-
-            entityDropItem(new ItemStack(MoCItems.hideCroc, 1, 0), 0.0F);
         }
     }
 

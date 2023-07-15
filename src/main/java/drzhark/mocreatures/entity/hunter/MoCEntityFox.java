@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
@@ -16,7 +19,6 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -151,11 +153,6 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.fur;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_FOX_DEATH;
     }
@@ -168,6 +165,15 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_FOX_AMBIENT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.FOX;
     }
 
     @Override

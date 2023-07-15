@@ -260,11 +260,6 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.animalHide;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_BEAR_DEATH;
     }

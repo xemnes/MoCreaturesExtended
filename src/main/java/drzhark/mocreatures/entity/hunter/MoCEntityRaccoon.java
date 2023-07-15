@@ -3,10 +3,12 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,10 +17,10 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
@@ -102,11 +104,6 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected Item getDropItem() {
-        return MoCItems.fur;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_RACCOON_DEATH;
     }
@@ -119,6 +116,15 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_RACCOON_AMBIENT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.RACCOON;
     }
 
     @Override

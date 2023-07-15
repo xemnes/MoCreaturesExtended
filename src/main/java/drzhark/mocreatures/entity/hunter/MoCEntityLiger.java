@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
@@ -65,6 +68,15 @@ public class MoCEntityLiger extends MoCEntityBigCat {
         }
 
         return super.processInteract(player, hand);
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
+        return MoCLootTables.LIGER;
     }
 
     @Override

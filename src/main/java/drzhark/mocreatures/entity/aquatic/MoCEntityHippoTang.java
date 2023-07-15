@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -19,8 +22,8 @@ public class MoCEntityHippoTang extends MoCEntitySmallFish {
         return MoCreatures.proxy.getModelTexture("smallfish_hippotang.png");
     }
 
-    @Override
-    protected int getEggNumber() {
-        return 85;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.HIPPO_TANG;
     }
 }

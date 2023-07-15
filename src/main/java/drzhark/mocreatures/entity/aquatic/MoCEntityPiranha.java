@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ai.EntityAIFollowHerd;
 import drzhark.mocreatures.init.MoCItems;
@@ -81,16 +84,8 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
         return true;
     }
 
-    @Override
-    protected void dropFewItems(boolean flag, int x) {
-        int i = this.rand.nextInt(100);
-        if (i < 70) {
-            entityDropItem(new ItemStack(Items.FISH, 1, 0), 0.0F);
-        } else {
-            int j = this.rand.nextInt(2);
-            for (int k = 0; k < j; k++) {
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, 90), 0.0F);
-            }
-        }
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.PIRANHA;
     }
 }

@@ -57,11 +57,6 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     }
 
     @Override
-    protected Item getDropItem() {
-        return Items.GUNPOWDER;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MoCreatures.proxy.classicWraithSounds ? MoCSoundEvents.ENTITY_WRAITH_DEATH_LEGACY : MoCSoundEvents.ENTITY_WRAITH_DEATH;
     }

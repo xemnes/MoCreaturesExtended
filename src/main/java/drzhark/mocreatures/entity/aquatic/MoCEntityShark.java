@@ -3,13 +3,13 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAquatic;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.entity.item.MoCEntityEgg;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,11 +18,13 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityShark extends MoCEntityTameableAquatic {
 
@@ -72,20 +74,9 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         }
     }
 
-    @Override
-    protected void dropFewItems(boolean flag, int x) {
-        int i = this.rand.nextInt(100);
-        if (i < 90) {
-            int j = this.rand.nextInt(3) + 1;
-            for (int l = 0; l < j; l++) {
-                entityDropItem(new ItemStack(MoCItems.sharkteeth, 1, 0), 0.0F);
-            }
-        } else if ((this.world.getDifficulty().getId() > 0) && (getAge() > 150)) {
-            int k = this.rand.nextInt(3);
-            for (int i1 = 0; i1 < k; i1++) {
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, 11), 0.0F);
-            }
-        }
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.SHARK;
     }
 
     protected Entity findPlayerToAttack() {

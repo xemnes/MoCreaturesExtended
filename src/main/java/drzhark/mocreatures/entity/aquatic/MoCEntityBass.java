@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -19,9 +22,8 @@ public class MoCEntityBass extends MoCEntityMediumFish {
         return MoCreatures.proxy.getModelTexture("mediumfish_bass.png");
     }
 
-    @Override
-    protected int getEggNumber() {
-        return 72;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.BASS;
     }
-
 }

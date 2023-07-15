@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -35,6 +38,11 @@ public class MoCEntityStingRay extends MoCEntityRay {
     @Override
     public ResourceLocation getTexture() {
         return MoCreatures.proxy.getModelTexture("stingray.png");
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.STINGRAY;
     }
 
     @Override

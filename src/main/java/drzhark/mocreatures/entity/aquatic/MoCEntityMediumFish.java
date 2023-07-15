@@ -60,24 +60,6 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
     }
 
     @Override
-    protected void dropFewItems(boolean flag, int x) {
-        int i = this.rand.nextInt(100);
-        entityDropItem(new ItemStack(Items.FISH, 1, 0), 0.0F);
-        if (i < 70) {
-            // Moved drops out of here.
-        } else {
-            int j = this.rand.nextInt(2);
-            for (int k = 0; k < j; k++) {
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, getEggNumber()), 0.0F);
-            }
-        }
-    }
-
-    protected int getEggNumber() {
-        return 70;
-    }
-
-    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 

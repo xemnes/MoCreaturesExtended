@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
@@ -113,13 +116,9 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
         }
     }
 
-    @Override
-    protected Item getDropItem() {
-        boolean flag = this.rand.nextInt(2) == 0;
-        if (flag) {
-            return Items.SLIME_BALL;
-        }
-        return null;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.JELLYFISH;
     }
 
     @Override

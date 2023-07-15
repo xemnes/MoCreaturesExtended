@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
@@ -16,7 +17,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
@@ -27,6 +27,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
@@ -105,7 +107,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     protected void dropFewItems(boolean flag, int x) {
         int i = this.rand.nextInt(100);
         if (i < 70) {
-            entityDropItem(new ItemStack(Items.FISH, 1, 0), 0.0F);
+            //entityDropItem(new ItemStack(Items.FISH, 1, 0), 0.0F);
         } else {
             int j = this.rand.nextInt(2);
             for (int k = 0; k < j; k++) {
@@ -113,6 +115,11 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
             }
 
         }
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.FISHY;
     }
 
     @Override

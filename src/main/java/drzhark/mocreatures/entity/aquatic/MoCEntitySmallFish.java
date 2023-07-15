@@ -8,10 +8,7 @@ import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -99,19 +96,6 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
     @Override
     protected boolean canBeTrappedInNet() {
         return true;
-    }
-
-    @Override
-    protected void dropFewItems(boolean flag, int x) {
-        int i = this.rand.nextInt(100);
-        if (i < 70) {
-            entityDropItem(new ItemStack(Items.FISH, 1, 0), 0.0F);
-        } else {
-            int j = this.rand.nextInt(2);
-            for (int k = 0; k < j; k++) {
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, getEggNumber()), 0.0F);
-            }
-        }
     }
 
     @Override
@@ -206,9 +190,5 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
             return 0.1F;
         }
         return 0F;
-    }
-
-    protected int getEggNumber() {
-        return 80;
     }
 }

@@ -5,6 +5,7 @@ package drzhark.mocreatures;
 
 import net.minecraft.util.ResourceLocation;
 
+// TODO: Ents, Elephants, Horses, Horse Mobs
 public class MoCLootTables {
     // Animals
     public static final ResourceLocation BIRD = new ResourceLocation(MoCConstants.MOD_ID, "entities/bird");
@@ -38,7 +39,24 @@ public class MoCLootTables {
     public static final ResourceLocation MOUSE = new ResourceLocation(MoCConstants.MOD_ID, "entities/mouse");
     public static final ResourceLocation RAT = new ResourceLocation(MoCConstants.MOD_ID, "entities/rat");
     // Sea Creatures
-    public static final ResourceLocation CRAB = new ResourceLocation(MoCConstants.MOD_ID, "entities/crab");
+    public static final ResourceLocation ANCHOVY = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/anchovy");
+    public static final ResourceLocation ANGELFISH = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/angelfish");
+    public static final ResourceLocation ANGLERFISH = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/anglerfish");
+    public static final ResourceLocation BASS = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/bass");
+    public static final ResourceLocation CLOWNFISH = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/clownfish");
+    public static final ResourceLocation COD = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/cod");
+    public static final ResourceLocation CRAB = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/crab");
+    public static final ResourceLocation DOLPHIN = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/dolphin");
+    public static final ResourceLocation FISHY = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/fishy");
+    public static final ResourceLocation GOLDFISH = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/goldfish");
+    public static final ResourceLocation HIPPO_TANG = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/hippo_tang");
+    public static final ResourceLocation JELLYFISH = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/jellyfish");
+    public static final ResourceLocation MANDARINFISH = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/mandarinfish");
+    public static final ResourceLocation MANTA_RAY = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/manta_ray"); // Currently empty as a placeholder
+    public static final ResourceLocation PIRANHA = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/piranha");
+    public static final ResourceLocation SALMON = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/salmon");
+    public static final ResourceLocation SHARK = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/shark");
+    public static final ResourceLocation STINGRAY = new ResourceLocation(MoCConstants.MOD_ID, "entities/aquatic/stingray"); // Currently empty as a placeholder
     // Scorpions
     public static final ResourceLocation CAVE_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/cave_scorpion");
     public static final ResourceLocation DIRT_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/dirt_scorpion");

@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
@@ -18,7 +19,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -32,6 +32,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 import java.util.List;
 import java.util.UUID;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
@@ -246,9 +248,9 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
         return MoCSoundEvents.ENTITY_DOLPHIN_UPSET;
     }
 
-    @Override
-    protected Item getDropItem() {
-        return Items.FISH;
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.DOLPHIN;
     }
 
     @Override

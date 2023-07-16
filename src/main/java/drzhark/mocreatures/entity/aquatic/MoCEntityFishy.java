@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 
 public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
-    public static final String[] fishNames = {"Blue", "Orange", "Cyan", "Greeny", "Green", "Purple", "Yellow", "Striped", "Yellowy", "Red"};
+    public static final String[] fishNames = {"Blue", "Orange", "Light Blue", "Lime", "Green", "Purple", "Yellow", "Cyan", "Striped", "Red"};
     private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.createKey(MoCEntityFishy.class, DataSerializers.BOOLEAN);
     public int gestationtime;
 
@@ -68,25 +68,25 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("fishy2.png");
+                return MoCreatures.proxy.getModelTexture("fishy_orange.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("fishy3.png");
+                return MoCreatures.proxy.getModelTexture("fishy_light_blue.png");
             case 4:
-                return MoCreatures.proxy.getModelTexture("fishy4.png");
+                return MoCreatures.proxy.getModelTexture("fishy_lime.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("fishy5.png");
+                return MoCreatures.proxy.getModelTexture("fishy_green.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("fishy6.png");
+                return MoCreatures.proxy.getModelTexture("fishy_purple.png");
             case 7:
-                return MoCreatures.proxy.getModelTexture("fishy7.png");
+                return MoCreatures.proxy.getModelTexture("fishy_yellow.png");
             case 8:
-                return MoCreatures.proxy.getModelTexture("fishy8.png");
+                return MoCreatures.proxy.getModelTexture("fishy_cyan.png");
             case 9:
-                return MoCreatures.proxy.getModelTexture("fishy9.png");
+                return MoCreatures.proxy.getModelTexture("fishy_striped.png");
             case 10:
-                return MoCreatures.proxy.getModelTexture("fishy10.png");
+                return MoCreatures.proxy.getModelTexture("fishy_red.png");
             default:
-                return MoCreatures.proxy.getModelTexture("fishy1.png");
+                return MoCreatures.proxy.getModelTexture("fishy_blue.png");
         }
     }
 

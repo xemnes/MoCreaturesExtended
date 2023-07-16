@@ -286,18 +286,18 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     @Override
     public ResourceLocation getTexture() {
         if (this.transformCounter != 0 && this.transformType > 4) {
-            String newText = "ostricha.png";
+            String newText = "ostrich_male.png";
             if (this.transformType == 5) {
-                newText = "ostriche.png";
+                newText = "ostrich_fire.png";
             }
             if (this.transformType == 6) {
-                newText = "ostrichf.png";
+                newText = "ostrich_dark.png";
             }
             if (this.transformType == 7) {
-                newText = "ostrichg.png";
+                newText = "ostrich_undead.png";
             }
             if (this.transformType == 8) {
-                newText = "ostrichh.png";
+                newText = "ostrich_light.png";
             }
 
             if ((this.transformCounter % 5) == 0) {
@@ -313,21 +313,21 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getModelTexture("ostrichc.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_baby.png");
             case 2:
-                return MoCreatures.proxy.getModelTexture("ostrichb.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_female.png");
             case 4:
-                return MoCreatures.proxy.getModelTexture("ostrichd.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_white.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("ostriche.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_fire.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("ostrichf.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_dark.png");
             case 7:
-                return MoCreatures.proxy.getModelTexture("ostrichg.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_undead.png");
             case 8:
-                return MoCreatures.proxy.getModelTexture("ostrichh.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_light.png");
             default:
-                return MoCreatures.proxy.getModelTexture("ostricha.png");
+                return MoCreatures.proxy.getModelTexture("ostrich_male.png");
         }
     }
 

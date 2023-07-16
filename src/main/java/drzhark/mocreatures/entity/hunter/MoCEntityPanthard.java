@@ -31,8 +31,9 @@ public class MoCEntityPanthard extends MoCEntityBigCat {
 
     @Override
     public ResourceLocation getTexture() {
-        if (MoCreatures.proxy.legacyBigCatModels) return MoCreatures.proxy.getModelTexture("panthard.png");
-        return MoCreatures.proxy.getModelTexture("bcpanthard.png");
+        if (MoCreatures.proxy.legacyBigCatModels)
+            return MoCreatures.proxy.getModelTexture("big_cat_panthard_legacy.png");
+        return MoCreatures.proxy.getModelTexture("big_cat_panthard.png");
     }
 
     @Override

@@ -73,12 +73,12 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
 
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("deerf.png");
+                return MoCreatures.proxy.getModelTexture("deer_doe.png");
             case 3:
                 setAdult(false);
-                return MoCreatures.proxy.getModelTexture("deerb.png");
+                return MoCreatures.proxy.getModelTexture("deer_fawn.png");
             default:
-                return MoCreatures.proxy.getModelTexture("deer.png");
+                return MoCreatures.proxy.getModelTexture("deer_stag.png");
         }
     }
 

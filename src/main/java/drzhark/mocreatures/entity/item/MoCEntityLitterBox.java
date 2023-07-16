@@ -42,7 +42,7 @@ public class MoCEntityLitterBox extends EntityLiving {
     }
 
     public ResourceLocation getTexture() {
-        return MoCreatures.proxy.getModelTexture("litterbox.png");
+        return MoCreatures.proxy.getModelTexture("litter_box.png");
     }
 
     @Override

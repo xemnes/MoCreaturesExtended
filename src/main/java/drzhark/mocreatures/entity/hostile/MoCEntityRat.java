@@ -77,11 +77,11 @@ public class MoCEntityRat extends MoCEntityMob {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("ratbl.png");
+                return MoCreatures.proxy.getModelTexture("rat_black.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("ratw.png");
+                return MoCreatures.proxy.getModelTexture("rat_white.png");
             default:
-                return MoCreatures.proxy.getModelTexture("ratb.png");
+                return MoCreatures.proxy.getModelTexture("rat_brown.png");
         }
     }
 

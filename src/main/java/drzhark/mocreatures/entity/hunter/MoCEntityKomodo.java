@@ -48,7 +48,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     public MoCEntityKomodo(World world) {
         super(world);
         setSize(1.6F, 0.5F);
-        this.texture = "komododragon.png";
+        this.texture = "komodo_dragon.png";
         setTamed(false);
         setAdult(true);
         this.stepHeight = 1.0F;

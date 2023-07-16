@@ -78,20 +78,19 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
         String tempText = "turtle.png";
 
         if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
-            tempText = "turtled.png";
+            tempText = "turtle_donatello.png";
         }
 
         if (getPetName().equals("Leonardo") || getPetName().equals("leonardo")) {
-            tempText = "turtlel.png";
+            tempText = "turtle_leonardo.png";
         }
 
-        if (getPetName().equals("Rafael") || getPetName().equals("rafael") || getPetName().equals("raphael") || getPetName().equals("Raphael")) {
-            tempText = "turtler.png";
+        if (getPetName().equals("raphael") || getPetName().equals("Raphael")) {
+            tempText = "turtle_raphael.png";
         }
 
-        if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo") || getPetName().equals("Michaelangelo")
-                || getPetName().equals("michaelangelo")) {
-            tempText = "turtlem.png";
+        if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo")) {
+            tempText = "turtle_michelangelo.png";
         }
 
         return MoCreatures.proxy.getModelTexture(tempText);

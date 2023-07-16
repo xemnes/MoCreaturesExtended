@@ -253,15 +253,15 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     public ResourceLocation getTexture() {
         if (this.transformCounter != 0 && this.transformType > 5) {
-            String newText = "wyverndark.png";
+            String newText = "wyvern_mother_dark.png";
             if (this.transformType == 6) {
-                newText = "wyvernundead.png";
+                newText = "wyvern_mother_undead.png";
             }
             if (this.transformType == 7) {
-                newText = "wyvernlight.png";
+                newText = "wyvern_mother_light.png";
             }
             if (this.transformType == 8) {
-                newText = "wyverndark.png";
+                newText = "wyvern_mother_dark.png";
             }
 
             if ((this.transformCounter % 5) == 0) {
@@ -278,29 +278,29 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getModelTexture("wyvernjungle.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_jungle.png");
             case 2:
-                return MoCreatures.proxy.getModelTexture("wyvernmix.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_swamp.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("wyvernsand.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_sand.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("wyvernmother.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_mother.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("wyvernundead.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_mother_undead.png");
             case 7:
-                return MoCreatures.proxy.getModelTexture("wyvernlight.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_mother_light.png");
             case 8:
-                return MoCreatures.proxy.getModelTexture("wyverndark.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_mother_dark.png");
             case 9:
-                return MoCreatures.proxy.getModelTexture("wyvernarctic.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_arctic.png");
             case 10:
-                return MoCreatures.proxy.getModelTexture("wyverncave.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_cave.png");
             case 11:
-                return MoCreatures.proxy.getModelTexture("wyvernmountain.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_mountain.png");
             case 12:
-                return MoCreatures.proxy.getModelTexture("wyvernsea.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_sea.png");
             default:
-                return MoCreatures.proxy.getModelTexture("wyvernsun.png");
+                return MoCreatures.proxy.getModelTexture("wyvern_sun.png");
         }
     }
 

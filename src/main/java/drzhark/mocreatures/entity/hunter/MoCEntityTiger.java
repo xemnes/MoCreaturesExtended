@@ -43,17 +43,17 @@ public class MoCEntityTiger extends MoCEntityBigCat {
             switch (getType()) {
                 case 2:
                 case 3:
-                    return MoCreatures.proxy.getModelTexture("tigerw.png");
+                    return MoCreatures.proxy.getModelTexture("big_cat_white_tiger_legacy.png");
                 default:
-                    return MoCreatures.proxy.getModelTexture("tiger.png");
+                    return MoCreatures.proxy.getModelTexture("big_cat_tiger_legacy.png");
             }
         }
         switch (getType()) {
             case 2:
             case 3:
-                return MoCreatures.proxy.getModelTexture("bcwhitetiger.png");
+                return MoCreatures.proxy.getModelTexture("big_cat_white_tiger.png");
             default:
-                return MoCreatures.proxy.getModelTexture("bctiger.png");
+                return MoCreatures.proxy.getModelTexture("big_cat_tiger.png");
         }
     }
 

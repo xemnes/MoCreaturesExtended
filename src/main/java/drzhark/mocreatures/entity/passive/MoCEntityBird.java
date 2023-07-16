@@ -96,17 +96,17 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
         switch (getType()) {
             case 1:
-                return MoCreatures.proxy.getModelTexture("birdwhite.png");
+                return MoCreatures.proxy.getModelTexture("bird_white.png");
             case 2:
-                return MoCreatures.proxy.getModelTexture("birdblack.png");
+                return MoCreatures.proxy.getModelTexture("bird_black.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("birdgreen.png");
+                return MoCreatures.proxy.getModelTexture("bird_green.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("birdyellow.png");
+                return MoCreatures.proxy.getModelTexture("bird_yellow.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("birdred.png");
+                return MoCreatures.proxy.getModelTexture("bird_red.png");
             default:
-                return MoCreatures.proxy.getModelTexture("birdblue.png");
+                return MoCreatures.proxy.getModelTexture("bird_blue.png");
         }
     }
 

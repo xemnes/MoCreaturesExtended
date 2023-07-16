@@ -87,17 +87,17 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("dolphin2.png");
+                return MoCreatures.proxy.getModelTexture("dolphin_green.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("dolphin3.png");
+                return MoCreatures.proxy.getModelTexture("dolphin_purple.png");
             case 4:
-                return MoCreatures.proxy.getModelTexture("dolphin4.png");
+                return MoCreatures.proxy.getModelTexture("dolphin_black.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("dolphin5.png");
+                return MoCreatures.proxy.getModelTexture("dolphin_pink.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("dolphin6.png");
+                return MoCreatures.proxy.getModelTexture("dolphin_white.png");
             default:
-                return MoCreatures.proxy.getModelTexture("dolphin.png");
+                return MoCreatures.proxy.getModelTexture("dolphin_blue.png");
         }
     }
 

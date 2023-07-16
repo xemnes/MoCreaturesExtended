@@ -44,21 +44,21 @@ public class MoCEntityLion extends MoCEntityBigCat {
                 case 6:
                 case 7:
                 case 8:
-                    return MoCreatures.proxy.getModelTexture("lione.png");
+                    return MoCreatures.proxy.getModelTexture("big_cat_white_lion_legacy.png");
                 default:
-                    return MoCreatures.proxy.getModelTexture("lionf.png");
+                    return MoCreatures.proxy.getModelTexture("big_cat_lion_legacy.png");
             }
         }
         switch (getType()) {
             case 2:
             case 3:
-                return MoCreatures.proxy.getModelTexture("bcmalelion.png");
+                return MoCreatures.proxy.getModelTexture("big_cat_lion_male.png");
             case 6:
             case 7:
             case 8:
-                return MoCreatures.proxy.getModelTexture("bcwhitelion.png");
+                return MoCreatures.proxy.getModelTexture("big_cat_white_lion.png");
             default:
-                return MoCreatures.proxy.getModelTexture("bcfemalelion.png");
+                return MoCreatures.proxy.getModelTexture("big_cat_lion_female.png");
         }
     }
 

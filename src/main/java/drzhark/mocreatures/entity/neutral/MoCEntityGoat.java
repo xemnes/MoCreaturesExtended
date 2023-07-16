@@ -139,17 +139,17 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("goat2.png");
+                return MoCreatures.proxy.getModelTexture("goat_light_brown.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("goat3.png");
+                return MoCreatures.proxy.getModelTexture("goat_spotted_brown.png");
             case 4:
-                return MoCreatures.proxy.getModelTexture("goat4.png");
+                return MoCreatures.proxy.getModelTexture("goat_spotted_gray.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("goat5.png");
+                return MoCreatures.proxy.getModelTexture("goat_gray.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("goat6.png");
+                return MoCreatures.proxy.getModelTexture("goat_brown.png");
             default:
-                return MoCreatures.proxy.getModelTexture("goat1.png");
+                return MoCreatures.proxy.getModelTexture("goat_white.png");
         }
     }
 

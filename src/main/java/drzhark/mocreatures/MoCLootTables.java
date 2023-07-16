@@ -53,6 +53,9 @@ public class MoCLootTables {
     public static final ResourceLocation TIGER = new ResourceLocation(MoCConstants.MOD_ID, "entities/tiger");
     // Dragons
     public static final ResourceLocation WYVERN = new ResourceLocation(MoCConstants.MOD_ID, "entities/wyvern"); // Currently empty as a placeholder
+    // Golems
+    public static final ResourceLocation BIG_GOLEM = new ResourceLocation(MoCConstants.MOD_ID, "entities/big_golem");
+    public static final ResourceLocation MINI_GOLEM = new ResourceLocation(MoCConstants.MOD_ID, "entities/mini_golem");
     // Manticores
     public static final ResourceLocation DARK_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/dark_manticore");
     public static final ResourceLocation FIRE_MANTICORE = new ResourceLocation(MoCConstants.MOD_ID, "entities/fire_manticore");
@@ -94,6 +97,7 @@ public class MoCLootTables {
     public static final ResourceLocation UNDEAD_SCORPION = new ResourceLocation(MoCConstants.MOD_ID, "entities/undead_scorpion");
     // Undead
     public static final ResourceLocation FLAME_WRAITH = new ResourceLocation(MoCConstants.MOD_ID, "entities/flame_wraith");
+    public static final ResourceLocation SILVER_SKELETON = new ResourceLocation(MoCConstants.MOD_ID, "entities/silver_skeleton");
     public static final ResourceLocation WRAITH = new ResourceLocation(MoCConstants.MOD_ID, "entities/wraith");
     // Werewolves
     public static final ResourceLocation WEREHUMAN = new ResourceLocation(MoCConstants.MOD_ID, "entities/werehuman");

@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -20,6 +23,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -67,15 +71,6 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
         }
 
         super.onLivingUpdate();
-    }
-
-    @Override
-    protected Item getDropItem() {
-        if (this.rand.nextInt(10) == 0) {
-            return MoCItems.silversword;
-        }
-        return Items.BONE;
-
     }
 
     @Override
@@ -145,6 +140,11 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     @Override
     protected void playStepSound(BlockPos pos, Block block) {
         this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.SILVER_SKELETON;
     }
 
     @Override

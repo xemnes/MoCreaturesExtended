@@ -85,6 +85,9 @@ public class MoCItems {
     public static final MoCItem scrollFreedom = new MoCItem("scrolloffreedom");
     public static final MoCItem scrollOfSale = new MoCItem("scrollofsale");
     public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
+    public static final MoCItem ancientSilverScrap = new MoCItem("ancientsilverscrap");
+    public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
+    public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
@@ -203,6 +206,10 @@ public class MoCItems {
                     staffPortal,
                     staffTeleport,
                     builderHammer,
+
+                    ancientSilverScrap,
+                    ancientSilverIngot,
+                    ancientSilverNugget,
 
                     nunchaku,
                     sai,

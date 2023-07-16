@@ -1,6 +1,7 @@
 package drzhark.mocreatures.compat.thermalexpansion;
 
 import cofh.core.util.helpers.ItemHelper;
+import cofh.thermalexpansion.util.managers.device.FactorizerManager;
 import cofh.thermalexpansion.util.managers.device.TapperManager;
 import cofh.thermalexpansion.util.managers.machine.PulverizerManager;
 import cofh.thermalexpansion.util.managers.machine.SawmillManager;
@@ -18,10 +19,14 @@ import net.minecraftforge.fluids.FluidStack;
 public class ThermalExpansionIntegration {
 
     public static void addRecipes() {
+        // Factorizer
+        FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverIngot, 9), new ItemStack(MoCBlocks.mocDirt));
+        FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverNugget, 9), new ItemStack(MoCItems.ancientSilverIngot));
+
         // Induction Smelter
         int energy = 6_000;
         SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.tusksIron), new ItemStack(Items.IRON_INGOT), 2);
-        SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.silversword), ItemMaterial.ingotSilver, 2);
+        SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.silversword), new ItemStack(MoCItems.ancientSilverIngot), 2);
 
         // Pulverizer
         energy = 3_000;
@@ -33,6 +38,7 @@ public class ThermalExpansionIntegration {
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.tusksDiamond), new ItemStack(Items.DIAMOND), 2);
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.horsearmorcrystal), new ItemStack(Items.DIAMOND), 2);
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.sugarlump), new ItemStack(Items.SUGAR), 4);
+        PulverizerManager.addRecipe(2000, new ItemStack(MoCItems.ancientSilverScrap), ItemMaterial.dustSilver);
         PulverizerManager.addRecipe(energy, new ItemStack(MoCItems.medallion), new ItemStack(Items.LEATHER), new ItemStack(Items.GOLD_INGOT), 25);
         // Chitin Armor
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.scorpHelmetDirt), new ItemStack(MoCItems.chitin), 2);

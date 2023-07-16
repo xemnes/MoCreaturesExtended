@@ -71,6 +71,7 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletghostfull, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.SOUL, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletpegasus, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.AIR, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletpegasusfull, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.AIR, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.ancientSilverScrap, 1, 0), new AspectList().add(Aspect.DESIRE, 5).add(Aspect.EARTH, 5).add(Aspect.METAL, 10));
         proxy.registerObjectTag(new ItemStack(MoCItems.animalHide, 1, 0), new AspectList().add(Aspect.BEAST, 6).add(Aspect.PROTECT, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.bigcatclaw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 2));
         proxy.registerObjectTag(new ItemStack(MoCItems.chitin, 1, 0), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.EARTH, 5));

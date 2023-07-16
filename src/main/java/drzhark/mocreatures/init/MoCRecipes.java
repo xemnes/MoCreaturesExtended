@@ -25,11 +25,13 @@ public class MoCRecipes {
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 0), new ItemStack(Items.COAL, 1, 1), 0.15F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
 
+            GameRegistry.addSmelting(MoCItems.ancientSilverScrap, new ItemStack(MoCItems.ancientSilverIngot, 1), 1.0F);
             GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey, 1), 0.35F);
+            GameRegistry.addSmelting(MoCItems.silversword, new ItemStack(MoCItems.ancientSilverNugget, 1), 0.25F);
             GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.venisonRaw, new ItemStack(MoCItems.venisonCooked, 1), 0.35F);
 
@@ -54,6 +56,8 @@ public class MoCRecipes {
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinNether);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinUndead);
             OreDictionary.registerOre("egg", new ItemStack(MoCItems.mocegg, 1, OreDictionary.WILDCARD_VALUE));
+            OreDictionary.registerOre("ingotSilver", MoCItems.ancientSilverIngot);
+            OreDictionary.registerOre("nuggetSilver", MoCItems.ancientSilverNugget);
             OreDictionary.registerOre("record", MoCItems.recordshuffle);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingCave);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingDirt);

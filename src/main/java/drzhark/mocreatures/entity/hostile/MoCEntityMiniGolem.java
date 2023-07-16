@@ -3,6 +3,9 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import javax.annotation.Nullable;
+
+import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.item.MoCEntityThrowableRock;
@@ -19,6 +22,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -177,6 +181,11 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_GOLEM_AMBIENT;
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.MINI_GOLEM;
     }
 
     @Override

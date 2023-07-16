@@ -96,30 +96,31 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     @Override
     public void selectType() {
         if (getType() == 0) {
-            setType(this.rand.nextInt(8) + 1);
+            setType(this.rand.nextInt(9) + 1);
         }
     }
 
     @Override
     public ResourceLocation getTexture() {
-
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("pussycatb.png");
+                return MoCreatures.proxy.getModelTexture("kitty_gray.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("pussycatc.png");
+                return MoCreatures.proxy.getModelTexture("kitty_black.png");
             case 4:
-                return MoCreatures.proxy.getModelTexture("pussycatd.png");
+                return MoCreatures.proxy.getModelTexture("kitty_calico.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("pussycate.png");
+                return MoCreatures.proxy.getModelTexture("kitty_tuxedo.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("pussycatf.png");
+                return MoCreatures.proxy.getModelTexture("kitty_white_black.png");
             case 7:
-                return MoCreatures.proxy.getModelTexture("pussycatg.png");
+                return MoCreatures.proxy.getModelTexture("kitty_white.png");
             case 8:
-                return MoCreatures.proxy.getModelTexture("pussycath.png");
+                return MoCreatures.proxy.getModelTexture("kitty_orange_tabby.png");
+            case 9:
+                return MoCreatures.proxy.getModelTexture("kitty_cream_dark.png");
             default:
-                return MoCreatures.proxy.getModelTexture("pussycata.png");
+                return MoCreatures.proxy.getModelTexture("kitty_cream.png");
         }
     }
 

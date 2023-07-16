@@ -122,21 +122,21 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("snake2.png");
+                return MoCreatures.proxy.getModelTexture("snake_brown.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("snake3.png");
+                return MoCreatures.proxy.getModelTexture("snake_orange.png");
             case 4:
-                return MoCreatures.proxy.getModelTexture("snake4.png");
+                return MoCreatures.proxy.getModelTexture("snake_green_bright.png");
             case 5:
-                return MoCreatures.proxy.getModelTexture("snake5.png");
+                return MoCreatures.proxy.getModelTexture("snake_coral.png");
             case 6:
-                return MoCreatures.proxy.getModelTexture("snake6.png");
+                return MoCreatures.proxy.getModelTexture("snake_cobra.png");
             case 7:
-                return MoCreatures.proxy.getModelTexture("snake7.png");
+                return MoCreatures.proxy.getModelTexture("snake_rattle.png");
             case 8:
-                return MoCreatures.proxy.getModelTexture("snake8.png");
+                return MoCreatures.proxy.getModelTexture("snake_python.png");
             default:
-                return MoCreatures.proxy.getModelTexture("snake1.png");
+                return MoCreatures.proxy.getModelTexture("snake_green_dark.png");
         }
     }
 

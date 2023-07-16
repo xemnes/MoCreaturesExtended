@@ -20,7 +20,7 @@ public class ThermalExpansionIntegration {
 
     public static void addRecipes() {
         // Factorizer
-        FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverIngot, 9), new ItemStack(MoCBlocks.mocDirt));
+        //FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverIngot, 9), new ItemStack(MoCBlocks.mocDirt));
         FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverNugget, 9), new ItemStack(MoCItems.ancientSilverIngot));
 
         // Induction Smelter

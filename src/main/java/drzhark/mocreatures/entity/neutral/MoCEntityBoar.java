@@ -28,9 +28,11 @@ public class MoCEntityBoar extends MoCEntityAnimal {
 
     public MoCEntityBoar(World world) {
         super(world);
-        setSize(0.9F, 0.8F);
+        setSize(0.9F, 0.9F);
         setAdult(this.rand.nextInt(4) != 0);
-        setAge(this.rand.nextInt(15) + 45);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(this.rand.nextInt(15) + 45);
+        setAge(60);
     }
 
     @Override
@@ -125,4 +127,7 @@ public class MoCEntityBoar extends MoCEntityAnimal {
         return getAge() * 0.01F;
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.75F;
+    }
 }

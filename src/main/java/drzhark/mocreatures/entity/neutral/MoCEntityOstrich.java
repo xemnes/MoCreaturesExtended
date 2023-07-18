@@ -72,7 +72,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
     public MoCEntityOstrich(World world) {
         super(world);
-        setSize(1.0F, 1.6F);
+        setSize(0.8F, 2.225F);
         setAdult(true);
         setAge(35);
         this.eggCounter = this.rand.nextInt(1000) + 1000;
@@ -965,5 +965,9 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
     @Override
     public int getMaxAge() {
         return 20;
+    }
+
+    public float getEyeHeight() {
+        return this.height;
     }
 }

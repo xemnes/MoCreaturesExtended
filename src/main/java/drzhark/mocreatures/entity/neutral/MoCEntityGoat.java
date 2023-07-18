@@ -54,7 +54,8 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
 
     public MoCEntityGoat(World world) {
         super(world);
-        setSize(0.8F, 1F);
+        // TODO: Separate hitbox for female goats
+        setSize(0.8F, 0.9F);
         setAdult(true);
         setAge(70);
     }
@@ -606,5 +607,9 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     @Override
     public float getAIMoveSpeed() {
         return 0.15F;
+    }
+
+    public float getEyeHeight() {
+        return this.height;
     }
 }

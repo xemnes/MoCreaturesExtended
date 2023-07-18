@@ -75,7 +75,8 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         setAdult(true);
         setTamed(false);
         setAge(50);
-        setSize(1.1F, 3F); //TODO 
+        // TODO: Different hitboxes for each elephant type
+        setSize(1.1F, 3F);
         this.stepHeight = 1.0F;
 
         if (!this.world.isRemote) {

@@ -24,6 +24,7 @@ public class MoCEntityPandaBear extends MoCEntityBear {
 
     public MoCEntityPandaBear(World world) {
         super(world);
+        setSize(0.8F, 1.05F);
     }
 
     @Override
@@ -164,5 +165,10 @@ public class MoCEntityPandaBear extends MoCEntityBear {
     @Override
     public boolean compatibleMate(Entity mate) {
         return mate instanceof MoCEntityPandaBear;
+    }
+
+    // TODO: Change depending on whether it's sitting or not
+    public float getEyeHeight() {
+        return this.height * 0.76F;
     }
 }

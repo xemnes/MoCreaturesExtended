@@ -314,4 +314,8 @@ public class MoCEntityEnt extends MoCEntityAnimal {
     protected boolean canTriggerWalking() {
         return false;
     }
+
+    public float getEyeHeight() {
+        return this.height * 0.73F;
+    }
 }

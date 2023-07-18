@@ -69,16 +69,19 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 
     public MoCEntityWyvern(World world) {
         super(world);
-        setSize(1.9F, 1.7F);
-        setAdult(false);
+        setSize(1.45F, 1.55F);
+        setAdult(true);
         setTamed(false);
         this.stepHeight = 1.0F;
 
-        if (this.rand.nextInt(6) == 0) {
+        // TODO: Make hitboxes adjust depending on size
+        /*if (this.rand.nextInt(6) == 0) {
             setAge(50 + this.rand.nextInt(50));
         } else {
             setAge(80 + this.rand.nextInt(20));
-        }
+        }*/
+
+        setAge(80);
     }
 
     @Override
@@ -980,5 +983,9 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     protected boolean canBeTrappedInNet() {
         return this.getIsTamed() && !this.getIsGhost();
+    }
+
+    public float getEyeHeight() {
+        return this.height;
     }
 }

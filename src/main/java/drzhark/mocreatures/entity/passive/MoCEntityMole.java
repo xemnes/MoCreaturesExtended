@@ -247,13 +247,17 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
         return MoCSoundEvents.ENTITY_RABBIT_HURT;
     }
 
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return null;
+    }
+    
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.MOLE;
     }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return null;
+    
+    public float getEyeHeight() {
+        return this.height * 0.525F;
     }
 }

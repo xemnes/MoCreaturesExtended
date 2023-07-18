@@ -87,7 +87,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     public MoCEntityHorse(World world) {
         super(world);
-        setSize(1.4F, 1.6F);
+        this.setSize(1.3964844F, 1.6F);
         this.gestationTime = 0;
         this.eatenPumpkin = false;
         this.nightmareInt = 0;
@@ -2331,5 +2331,9 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     public void makeEntityJump() {
         wingFlap();
         super.makeEntityJump();
+    }
+    
+    public float getEyeHeight() {
+        return this.height;
     }
 }

@@ -55,7 +55,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
     public MoCEntityBird(World world) {
         super(world);
-        setSize(0.4F, 0.3F);
+        setSize(0.5F, 0.9F);
         this.collidedVertically = true;
         this.wingb = 0.0F;
         this.wingc = 0.0F;
@@ -521,5 +521,9 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     @Override
     public boolean canRidePlayer() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.75F;
     }
 }

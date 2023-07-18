@@ -45,9 +45,11 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
 
     public MoCEntityTurtle(World world) {
         super(world);
-        setSize(0.6F, 0.4F);
-        setAdult(false);
-        setAge(60 + this.rand.nextInt(50));
+        setSize(0.6F, 0.425F);
+        setAdult(true);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(60 + this.rand.nextInt(50));
+        setAge(90);
     }
 
     @Override
@@ -338,6 +340,10 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
 
     @Nullable
     protected ResourceLocation getLootTable() {
+        if (!getIsAdult()) {
+            return null;
+        }
+
         return MoCLootTables.TURTLE;
     }
 
@@ -429,5 +435,9 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     @Override
     public boolean canRidePlayer() {
         return true;
+    }
+    
+    public float getEyeHeight() {
+        return this.height * 0.525F;
     }
 }

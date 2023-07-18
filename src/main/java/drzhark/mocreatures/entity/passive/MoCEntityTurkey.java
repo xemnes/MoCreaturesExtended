@@ -36,7 +36,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
 
     public MoCEntityTurkey(World world) {
         super(world);
-        setSize(0.8F, 1.0F);
+        setSize(0.6F, 0.9F);
         setAdult(true);
     }
 
@@ -224,5 +224,9 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
         } else {
             super.handleStatusUpdate(id);
         }
+    }
+    
+    public float getEyeHeight() {
+        return this.height;
     }
 }

@@ -31,7 +31,7 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
     public MoCEntityDeer(World world) {
         super(world);
         setAge(75);
-        setSize(0.9F, 1.3F);
+        setSize(0.9F, 1.425F);
         setAdult(true);
         setTamed(false);
     }
@@ -193,5 +193,9 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
             return 1.3F;
         }
         return getAge() * 0.01F;
+    }
+    
+    public float getEyeHeight() {
+        return this.height;
     }
 }

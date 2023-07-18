@@ -101,4 +101,8 @@ public class MoCEntityDuck extends MoCEntityAnimal {
     @Override
     public void fall(float f, float f1) {
     }
+    
+    public float getEyeHeight() {
+        return this.height;
+    }
 }

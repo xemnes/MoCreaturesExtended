@@ -32,7 +32,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
 
     public MoCEntityMouse(World world) {
         super(world);
-        setSize(0.3F, 0.3F);
+        setSize(0.45F, 0.3F);
     }
 
     @Override
@@ -169,5 +169,9 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     @Override
     public boolean canRidePlayer() {
         return true;
+    }
+    
+    public float getEyeHeight() {
+        return this.height * 0.575F;
     }
 }

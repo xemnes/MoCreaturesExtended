@@ -87,7 +87,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     public MoCEntityHorse(World world) {
         super(world);
-        this.setSize(1.3964844F, 1.6F);
+        setSize(1.3964844F, 1.6F);
         this.gestationTime = 0;
         this.eatenPumpkin = false;
         this.nightmareInt = 0;

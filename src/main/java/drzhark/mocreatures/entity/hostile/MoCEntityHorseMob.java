@@ -36,7 +36,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
 
     public MoCEntityHorseMob(World world) {
         super(world);
-        setSize(1.4F, 1.6F);
+        setSize(1.3964844F, 1.6F);
     }
 
     @Override
@@ -392,5 +392,9 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         double newPosZ = this.posZ - (dist * Math.cos(this.renderYawOffset / 57.29578F));
         passenger.setPosition(newPosX, this.posY + getMountedYOffset() + passenger.getYOffset(), newPosZ);
         passenger.rotationYaw = this.rotationYaw;
+    }
+
+    public float getEyeHeight() {
+        return this.height;
     }
 }

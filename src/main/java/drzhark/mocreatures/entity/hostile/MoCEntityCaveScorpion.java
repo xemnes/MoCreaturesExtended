@@ -20,7 +20,6 @@ public class MoCEntityCaveScorpion extends MoCEntityScorpion {
 
     public MoCEntityCaveScorpion(World world) {
         super(world, 2);
-        setSize(1.4F, 0.9F);
     }
 
     @Override

@@ -23,7 +23,6 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
     public MoCEntityFlameWraith(World world) {
         super(world);
         this.texture = "flame_wraith.png";
-        setSize(1.5F, 1.5F);
         this.isImmuneToFire = true;
         this.burningTime = 30;
     }
@@ -31,7 +30,7 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
     }
 
     @Nullable

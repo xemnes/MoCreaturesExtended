@@ -34,7 +34,7 @@ public class MoCEntityOgre extends MoCEntityMob {
 
     public MoCEntityOgre(World world) {
         super(world);
-        setSize(1.9F, 3F);
+        setSize(1.8F, 3.05F);
     }
 
     @Override
@@ -214,5 +214,9 @@ public class MoCEntityOgre extends MoCEntityMob {
     public boolean attackEntityAsMob(Entity entityIn) {
         startArmSwingAttack();
         return super.attackEntityAsMob(entityIn);
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.91F;
     }
 }

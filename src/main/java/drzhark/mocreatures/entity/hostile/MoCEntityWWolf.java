@@ -45,7 +45,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
 
     public MoCEntityWWolf(World world) {
         super(world);
-        setSize(0.9F, 1.3F);
+        setSize(0.8F, 1.1F);
         setAdult(true);
     }
 
@@ -207,5 +207,9 @@ public class MoCEntityWWolf extends MoCEntityMob {
                 }
             }
         }
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.98F;
     }
 }

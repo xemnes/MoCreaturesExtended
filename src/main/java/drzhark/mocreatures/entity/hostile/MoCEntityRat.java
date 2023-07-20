@@ -33,7 +33,7 @@ public class MoCEntityRat extends MoCEntityMob {
 
     public MoCEntityRat(World world) {
         super(world);
-        setSize(0.5F, 0.5F);
+        setSize(0.58F, 0.455F);
     }
 
     @Override
@@ -161,5 +161,9 @@ public class MoCEntityRat extends MoCEntityMob {
     @Override
     public boolean shouldAttackPlayers() {
         return (this.getBrightness() < 0.5F) && super.shouldAttackPlayers();
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.5F;
     }
 }

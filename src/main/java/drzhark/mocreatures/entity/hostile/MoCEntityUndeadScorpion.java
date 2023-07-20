@@ -19,7 +19,6 @@ public class MoCEntityUndeadScorpion extends MoCEntityScorpion {
 
     public MoCEntityUndeadScorpion(World world) {
         super(world, 5);
-        setSize(1.4F, 0.9F);
     }
 
     @Override

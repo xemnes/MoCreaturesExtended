@@ -19,7 +19,6 @@ public class MoCEntityFrostScorpion extends MoCEntityScorpion {
 
     public MoCEntityFrostScorpion(World world) {
         super(world, 4);
-        setSize(1.4F, 0.9F);
     }
 
     @Override

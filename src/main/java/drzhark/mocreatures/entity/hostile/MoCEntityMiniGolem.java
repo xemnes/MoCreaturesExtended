@@ -37,7 +37,7 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     public MoCEntityMiniGolem(World world) {
         super(world);
         this.texture = "mini_golem.png";
-        setSize(1.0F, 1.0F);
+        setSize(0.9F, 1.2F);
     }
 
     @Override
@@ -191,5 +191,9 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     @Override
     protected boolean isHarmedByDaylight() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

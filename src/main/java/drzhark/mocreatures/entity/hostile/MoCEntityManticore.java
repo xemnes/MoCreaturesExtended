@@ -30,7 +30,7 @@ public class MoCEntityManticore extends MoCEntityMob {
 
     public MoCEntityManticore(World world) {
         super(world);
-        setSize(1.5F, 1.7F);
+        setSize(1.35F, 1.45F);
     }
 
     @Override
@@ -263,5 +263,9 @@ public class MoCEntityManticore extends MoCEntityMob {
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.94F;
     }
 }

@@ -17,7 +17,6 @@ public class MoCEntityFireScorpion extends MoCEntityScorpion {
 
     public MoCEntityFireScorpion(World world) {
         super(world, 3);
-        setSize(1.4F, 0.9F);
         this.isImmuneToFire = true;
     }
 

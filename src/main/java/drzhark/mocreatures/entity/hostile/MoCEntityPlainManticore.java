@@ -19,7 +19,6 @@ public class MoCEntityPlainManticore extends MoCEntityManticore {
 
     public MoCEntityPlainManticore(World world) {
         super(world);
-        setSize(1.4F, 1.6F);
     }
 
     @Override

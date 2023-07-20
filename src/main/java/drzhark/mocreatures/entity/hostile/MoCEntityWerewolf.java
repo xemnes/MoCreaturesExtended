@@ -42,7 +42,8 @@ public class MoCEntityWerewolf extends MoCEntityMob {
 
     public MoCEntityWerewolf(World world) {
         super(world);
-        setSize(0.9F, 1.6F);
+        // TODO: Change hitbox depending on form
+        setSize(0.7F, 2.0F);
         this.transforming = false;
         this.tcounter = 0;
         setHumanForm(true);
@@ -307,11 +308,13 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         if (getIsHumanForm()) {
             setHumanForm(false);
             this.setHealth(40);
+            setSize(0.6F, 2.125F);
             this.transforming = false;
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         } else {
             setHumanForm(true);
             this.setHealth(15);
+            setSize(0.6F, 2.125F);
             this.transforming = false;
             this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         }
@@ -346,5 +349,9 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             this.isImmuneToFire = true;
         }
         return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    public float getEyeHeight() {
+        return getIsHumanForm() ? this.height * 0.885F : this.height;
     }
 }

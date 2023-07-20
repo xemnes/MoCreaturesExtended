@@ -19,8 +19,6 @@ import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -37,8 +35,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
         super(world);
         this.collidedVertically = false;
         this.texture = "wraith.png";
-        setSize(1.5F, 1.5F);
-        this.isImmuneToFire = false;
+        setSize(0.6F, 2.0F);
     }
 
     @Override
@@ -52,7 +49,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(this.world.getDifficulty().getId() == 1 ? 2.0D : 3.0D); // setAttackStrength
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
@@ -147,5 +144,9 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     @Override
     protected boolean isHarmedByDaylight() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.86F;
     }
 }

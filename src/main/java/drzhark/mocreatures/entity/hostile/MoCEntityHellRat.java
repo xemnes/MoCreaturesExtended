@@ -17,7 +17,7 @@ public class MoCEntityHellRat extends MoCEntityRat {
 
     public MoCEntityHellRat(World world) {
         super(world);
-        setSize(0.7F, 0.7F);
+        setSize(0.88F, 0.755F);
         this.isImmuneToFire = true;
     }
 
@@ -52,5 +52,9 @@ public class MoCEntityHellRat extends MoCEntityRat {
     @Override
     protected ResourceLocation getLootTable() {
         return MoCLootTables.HELL_RAT;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.485F;
     }
 }

@@ -19,7 +19,6 @@ public class MoCEntityToxicManticore extends MoCEntityManticore {
 
     public MoCEntityToxicManticore(World world) {
         super(world);
-        setSize(1.4F, 1.6F);
     }
 
     @Override

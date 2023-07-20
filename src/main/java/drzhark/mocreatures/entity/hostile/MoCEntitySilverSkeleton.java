@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityMob;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.Block;
@@ -19,9 +18,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -37,7 +34,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     public MoCEntitySilverSkeleton(World world) {
         super(world);
         this.texture = "silver_skeleton.png";
-        setSize(0.9F, 1.4F);
+        setSize(0.6F, 2.125F);
     }
 
     @Override
@@ -150,5 +147,9 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     @Override
     protected boolean isHarmedByDaylight() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.905F;
     }
 }

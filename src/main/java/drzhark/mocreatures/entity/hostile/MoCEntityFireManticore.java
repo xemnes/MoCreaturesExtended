@@ -17,7 +17,6 @@ public class MoCEntityFireManticore extends MoCEntityManticore {
 
     public MoCEntityFireManticore(World world) {
         super(world);
-        setSize(1.4F, 1.6F);
         this.isImmuneToFire = true;
     }
 

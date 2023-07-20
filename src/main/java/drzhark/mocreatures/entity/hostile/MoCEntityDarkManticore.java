@@ -20,7 +20,6 @@ public class MoCEntityDarkManticore extends MoCEntityManticore {
 
     public MoCEntityDarkManticore(World world) {
         super(world);
-        setSize(1.4F, 1.6F);
     }
 
     @Override

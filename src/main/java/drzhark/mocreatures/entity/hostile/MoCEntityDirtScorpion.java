@@ -18,7 +18,6 @@ public class MoCEntityDirtScorpion extends MoCEntityScorpion {
 
     public MoCEntityDirtScorpion(World world) {
         super(world, 1);
-        setSize(1.4F, 0.9F);
     }
 
     @Override

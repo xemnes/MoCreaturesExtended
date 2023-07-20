@@ -4,6 +4,7 @@
 package drzhark.mocreatures.client.model;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
@@ -38,44 +39,55 @@ public class MoCModelRat extends ModelBase {
     public ModelRenderer BodyF;
 
     public MoCModelRat() {
-        this.Head = new ModelRenderer(this, 0, 0);
-        this.Head.addBox(-1.5F, -1F, -6F, 3, 4, 6, 0.0F);
-        this.Head.setRotationPoint(0.0F, 18F, -9F);
-        this.EarR = new ModelRenderer(this, 16, 26);
-        this.EarR.addBox(-3.5F, -3F, -2F, 3, 3, 1, 0.0F);
-        this.EarR.setRotationPoint(0.0F, 18F, -9F);
-        this.EarL = new ModelRenderer(this, 24, 26);
-        this.EarL.addBox(0.5F, -3F, -2F, 3, 3, 1, 0.0F);
-        this.EarL.setRotationPoint(0.0F, 18F, -9F);
-        this.WhiskerR = new ModelRenderer(this, 24, 16);
-        this.WhiskerR.addBox(-4.5F, -1F, -6F, 3, 3, 1, 0.0F);
-        this.WhiskerR.setRotationPoint(0.0F, 18F, -9F);
-        this.WhiskerL = new ModelRenderer(this, 24, 20);
-        this.WhiskerL.addBox(1.5F, -1F, -6F, 3, 3, 1, 0.0F);
-        this.WhiskerL.setRotationPoint(0.0F, 18F, -9F);
-        this.Body = new ModelRenderer(this, 24, 0);
-        this.Body.addBox(-4F, -3F, -3F, 8, 8, 8, 0.0F);
-        this.Body.setRotationPoint(0.0F, 19F, 0.0F);
-        this.Body.rotateAngleX = 1.570796F;
-        this.Tail = new ModelRenderer(this, 56, 0);
-        this.Tail.addBox(-1F, 0.0F, -1F, 2, 18, 2, 0.0F);
-        this.Tail.setRotationPoint(0.0F, 19F, 5F);
-        this.Tail.rotateAngleX = 1.570796F;
-        this.FrontL = new ModelRenderer(this, 0, 18);
-        this.FrontL.addBox(-2F, 0.0F, -3F, 2, 1, 4, 0.0F);
-        this.FrontL.setRotationPoint(3F, 22F, -7F);
-        this.FrontR = new ModelRenderer(this, 0, 18);
-        this.FrontR.addBox(0.0F, 0.0F, -3F, 2, 1, 4, 0.0F);
-        this.FrontR.setRotationPoint(-3F, 22F, -7F);
-        this.RearL = new ModelRenderer(this, 0, 24);
-        this.RearL.addBox(-2F, 0.0F, -4F, 2, 1, 5, 0.0F);
-        this.RearL.setRotationPoint(4F, 22F, 2.0F);
-        this.RearR = new ModelRenderer(this, 0, 24);
-        this.RearR.addBox(0.0F, 0.0F, -4F, 2, 1, 5, 0.0F);
-        this.RearR.setRotationPoint(-4F, 22F, 2.0F);
-        this.BodyF = new ModelRenderer(this, 32, 16);
-        this.BodyF.addBox(-3F, -3F, -7F, 6, 6, 6, 0.0F);
-        this.BodyF.setRotationPoint(0.0F, 19F, -2F);
+        Head = new ModelRenderer(this);
+        Head.setRotationPoint(0.0F, 18.0F, -9.0F);
+        Head.cubeList.add(new ModelBox(Head, 0, 0, -1.5F, 0.0F, -6.0F, 3, 4, 6, 0.0F, false));
+
+        EarR = new ModelRenderer(this);
+        EarR.setRotationPoint(0.0F, 18.0F, -9.0F);
+        EarR.cubeList.add(new ModelBox(EarR, 16, 26, -3.5F, -2.0F, -2.0F, 3, 3, 1, 0.0F, false));
+
+        EarL = new ModelRenderer(this);
+        EarL.setRotationPoint(0.0F, 18.0F, -9.0F);
+        EarL.cubeList.add(new ModelBox(EarL, 24, 26, 0.5F, -2.0F, -2.0F, 3, 3, 1, 0.0F, false));
+
+        WhiskerR = new ModelRenderer(this);
+        WhiskerR.setRotationPoint(0.0F, 18.0F, -9.0F);
+        WhiskerR.cubeList.add(new ModelBox(WhiskerR, 24, 16, -4.5F, 0.0F, -6.0F, 3, 3, 1, 0.0F, false));
+
+        WhiskerL = new ModelRenderer(this);
+        WhiskerL.setRotationPoint(0.0F, 18.0F, -9.0F);
+        WhiskerL.cubeList.add(new ModelBox(WhiskerL, 24, 20, 1.5F, 0.0F, -6.0F, 3, 3, 1, 0.0F, false));
+
+        Body = new ModelRenderer(this);
+        Body.setRotationPoint(0.0F, 19.0F, 0.0F);
+        setRotationAngle(Body, 1.5708F, 0.0F, 0.0F);
+        Body.cubeList.add(new ModelBox(Body, 24, 0, -4.0F, -3.0F, -4.0F, 8, 8, 8, 0.0F, false));
+
+        Tail = new ModelRenderer(this);
+        Tail.setRotationPoint(0.0F, 19.0F, 5.0F);
+        setRotationAngle(Tail, 1.5708F, 0.0F, 0.0F);
+        Tail.cubeList.add(new ModelBox(Tail, 56, 0, -1.0F, 0.0F, -2.0F, 2, 18, 2, 0.0F, false));
+
+        FrontL = new ModelRenderer(this);
+        FrontL.setRotationPoint(3.0F, 22.0F, -7.0F);
+        FrontL.cubeList.add(new ModelBox(FrontL, 0, 18, -2.0F, 1.0F, -3.0F, 2, 1, 4, 0.0F, false));
+
+        FrontR = new ModelRenderer(this);
+        FrontR.setRotationPoint(-3.0F, 22.0F, -7.0F);
+        FrontR.cubeList.add(new ModelBox(FrontR, 0, 18, 0.0F, 1.0F, -3.0F, 2, 1, 4, 0.0F, false));
+
+        RearL = new ModelRenderer(this);
+        RearL.setRotationPoint(4.0F, 22.0F, 2.0F);
+        RearL.cubeList.add(new ModelBox(RearL, 0, 24, -2.0F, 1.0F, -4.0F, 2, 1, 5, 0.0F, false));
+
+        RearR = new ModelRenderer(this);
+        RearR.setRotationPoint(-4.0F, 22.0F, 2.0F);
+        RearR.cubeList.add(new ModelBox(RearR, 0, 24, 0.0F, 1.0F, -4.0F, 2, 1, 5, 0.0F, false));
+
+        BodyF = new ModelRenderer(this);
+        BodyF.setRotationPoint(0.0F, 19.0F, -2.0F);
+        BodyF.cubeList.add(new ModelBox(BodyF, 32, 16, -3.0F, -2.0F, -7.0F, 6, 6, 6, 0.0F, false));
     }
 
     @Override
@@ -94,6 +106,12 @@ public class MoCModelRat extends ModelBase {
         this.RearL.render(f5);
         this.RearR.render(f5);
         this.BodyF.render(f5);
+    }
+
+    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {

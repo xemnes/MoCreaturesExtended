@@ -537,20 +537,14 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (getIsTamed() && (getType() > 1) && !stack.isEmpty() && !getIsRideable() && (stack.getItem() == MoCItems.horsesaddle || stack.getItem() instanceof ItemSaddle)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             setRideable(true);
             return true;
         }
 
         if (!getIsFertile() && !stack.isEmpty() && getType() == 2 && stack.getItem() == Items.MELON_SEEDS) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
 
             openMouth();
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
@@ -565,7 +559,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.getIsTamed() && getType() > 1 && stack.getItem() == MoCItems.essencedarkness) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -581,7 +575,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.getIsTamed() && getType() > 1 && stack.getItem() == MoCItems.essenceundead) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -597,7 +591,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.getIsTamed() && getType() > 1 && stack.getItem() == MoCItems.essencelight) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -613,7 +607,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.getIsTamed() && getType() > 1 && stack.getItem() == MoCItems.essencefire) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -632,10 +626,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             if (colorInt == 0) {
                 colorInt = 16;
             }
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             dropFlag();
             setFlagColor((byte) colorInt);
@@ -643,10 +634,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && (getType() > 1) && getIsTamed() && !getIsChested() && (stack.getItem() == Item.getItemFromBlock(Blocks.CHEST))) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
 
             //entityplayer.inventory.addItemStackToInventory(new ItemStack(MoCreatures.key));
             setIsChested(true);

@@ -417,10 +417,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && getIsAdult() && !getIsRideable()
                 && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
         }
@@ -435,7 +432,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
             // Fire Scorpion (Essence of Fire)
             if (stack.getItem() == MoCItems.essencefire && this.getType() != 3) {
-                stack.shrink(1);
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
                 if (stack.isEmpty()) {
                     player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
                 } else {
@@ -448,7 +445,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
             // Undead Scorpion (Essence of Undead)
             if (!stack.isEmpty() && this.getIsTamed() && !this.isBeingRidden() && !this.isRiding() && this.transformCounter < 1 && stack.getItem() == MoCItems.essenceundead && this.getType() != 5) {
-                stack.shrink(1);
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
                 if (stack.isEmpty()) {
                     player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
                 } else {
@@ -461,7 +458,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.getIsTamed() && !this.isBeingRidden() && !this.isRiding() && stack.getItem() == MoCItems.essencedarkness) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {

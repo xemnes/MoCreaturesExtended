@@ -1240,8 +1240,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && !getIsRideable() && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
         }
@@ -1250,8 +1249,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (getArmorType() == 0) MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             dropArmor();
             setArmorType((byte) 1);
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
@@ -1259,8 +1257,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (getArmorType() == 0) MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             dropArmor();
             setArmorType((byte) 2);
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
@@ -1268,8 +1265,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (getArmorType() == 0) MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             dropArmor();
             setArmorType((byte) 3);
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
@@ -1277,14 +1273,13 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (getArmorType() == 0) MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_ON);
             dropArmor();
             setArmorType((byte) 4);
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
         // transform to undead, or heal undead horse
         if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.essenceundead) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             else player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
 
@@ -1310,7 +1305,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         // to transform to nightmares: only pure breeds
         if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.essencefire) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             else player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
 
@@ -1328,7 +1323,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         // transform to dark pegasus
         if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.essencedarkness) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             else player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
 
@@ -1349,7 +1344,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.essencelight) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -1453,8 +1448,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                     break;
             }
 
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             eatingHorse();
             return true;
         }
@@ -1471,8 +1465,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             return true;
         }
         if (!stack.isEmpty() && (stack.getItem() == Items.WHEAT) && !isMagicHorse() && !isUndead()) {
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 setTemper(getTemper() + 25);
                 if (getTemper() > getMaxTemper()) setTemper(getMaxTemper() - 5);
@@ -1484,8 +1477,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && (stack.getItem() == MoCItems.sugarlump) && !isMagicHorse() && !isUndead()) {
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 setTemper(getTemper() + 25);
                 if (getTemper() > getMaxTemper()) setTemper(getMaxTemper() - 5);
@@ -1497,8 +1489,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && (stack.getItem() == Items.BREAD) && !isMagicHorse() && !isUndead()) {
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 setTemper(getTemper() + 100);
                 if (getTemper() > getMaxTemper()) setTemper(getMaxTemper() - 5);
@@ -1510,8 +1501,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && ((stack.getItem() == Items.APPLE) || (stack.getItem() == Items.GOLDEN_APPLE)) && !isMagicHorse() && !isUndead()) {
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) MoCTools.tameWithName(player, this);
             this.setHealth(getMaxHealth());
             eatingHorse();
@@ -1521,18 +1511,14 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == Item.getItemFromBlock(Blocks.CHEST)) && (isBagger())) {
             if (getIsChested()) return false;
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
 
-            //entityplayer.inventory.addItemStackToInventory(new ItemStack(MoCreatures.key));
             setIsChested(true);
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             return true;
         }
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.haystack)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) player.setHeldItem(hand, ItemStack.EMPTY);
-            // eatinghaystack = true;
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setSitting(true);
             eatingHorse();
             if (!isMagicHorse() && !isUndead()) this.setHealth(getMaxHealth());
@@ -1551,7 +1537,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 && ((stack.getItem() == Item.getItemFromBlock(Blocks.PUMPKIN)) || (stack.getItem() == Items.MUSHROOM_STEW)
                 || (stack.getItem() == Items.CAKE) || (stack.getItem() == Items.GOLDEN_CARROT))) {
             if (!getIsAdult() || isMagicHorse() || isUndead()) return false;
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.getItem() == Items.MUSHROOM_STEW) {
                 if (stack.isEmpty()) player.setHeldItem(hand, new ItemStack(Items.BOWL));
                 else player.inventory.addItemStackToInventory(new ItemStack(Items.BOWL));

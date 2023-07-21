@@ -47,7 +47,7 @@ public class MoCEntityLiger extends MoCEntityBigCat {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && getIsTamed() && (getType() == 1) && (stack.getItem() == MoCItems.essencelight)) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {

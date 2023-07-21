@@ -305,10 +305,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == Items.CAKE) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             this.temper += 2;
             this.setHealth(getMaxHealth());
@@ -319,10 +316,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == MoCItems.sugarlump) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             this.temper += 1;
             this.setHealth(getMaxHealth());
@@ -334,10 +328,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && getArmorType() == 0 && stack.getItem() == MoCItems.elephantHarness) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             setArmorType((byte) 1);
             return true;
@@ -345,10 +336,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && getArmorType() >= 1 && getStorage() == 0
                 && stack.getItem() == MoCItems.elephantChest) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             //entityplayer.inventory.addItemStackToInventory(new ItemStack(MoCreatures.key));
             setStorage((byte) 1);
@@ -357,10 +345,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         // second storage unit
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && getArmorType() >= 1 && getStorage() == 1
                 && stack.getItem() == MoCItems.elephantChest) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             setStorage((byte) 2);
             return true;
@@ -368,10 +353,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         // third storage unit for small mammoths
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && (getType() == 3) && getArmorType() >= 1 && getStorage() == 2
                 && stack.getItem() == Item.getItemFromBlock(Blocks.CHEST)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             setStorage((byte) 3);
             return true;
@@ -379,10 +361,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         // fourth storage unit for small mammoths
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && (getType() == 3) && getArmorType() >= 1 && getStorage() == 3
                 && stack.getItem() == Item.getItemFromBlock(Blocks.CHEST)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             setStorage((byte) 4);
             return true;
@@ -391,10 +370,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         //giving a garment to an indian elephant with a harness will make it pretty
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && getArmorType() == 1 && getType() == 2
                 && stack.getItem() == MoCItems.elephantGarment) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             setArmorType((byte) 2);
             setType(5);
@@ -404,10 +380,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         //giving a howdah to a pretty indian elephant with a garment will attach the howdah
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && getArmorType() == 2 && getType() == 5
                 && stack.getItem() == MoCItems.elephantHowdah) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ROPING);
             setArmorType((byte) 3);
             return true;
@@ -416,20 +389,14 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         //giving a platform to a ? mammoth with harness will attach the platform
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && getArmorType() == 1 && getType() == 4
                 && stack.getItem() == MoCItems.mammothPlatform) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_OFF);
             setArmorType((byte) 3);
             return true;
         }
 
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && stack.getItem() == MoCItems.tusksWood) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_OFF);
             dropTusks();
             this.tuskUses = (byte) stack.getItemDamage();
@@ -438,10 +405,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && stack.getItem() == MoCItems.tusksIron) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_OFF);
             dropTusks();
             this.tuskUses = (byte) stack.getItemDamage();
@@ -450,10 +414,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && stack.getItem() == MoCItems.tusksDiamond) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ARMOR_OFF);
             dropTusks();
             this.tuskUses = (byte) stack.getItemDamage();

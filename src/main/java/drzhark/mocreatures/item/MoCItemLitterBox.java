@@ -24,7 +24,7 @@ public class MoCItemLitterBox extends MoCItem {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCEntityLitterBox litterBox = new MoCEntityLitterBox(world);
             litterBox.setPosition(player.posX, player.posY, player.posZ);
             world.spawnEntity(litterBox);

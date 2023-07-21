@@ -442,10 +442,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 MoCTools.tameWithName(player, this);
             }
             if (getIsTamed()) {
-                stack.shrink(1);
-                if (stack.isEmpty()) {
-                    player.setHeldItem(hand, ItemStack.EMPTY);
-                }
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
                 changeKittyState(3);
                 this.setHealth(getMaxHealth());
                 return true;
@@ -453,20 +450,14 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             return false;
         }
         if (getKittyState() == 7 && !stack.isEmpty() && (stack.getItem() == Items.CAKE || stack.getItem() == Items.FISH || stack.getItem() == Items.COOKED_FISH)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_EATING);
             this.setHealth(getMaxHealth());
             changeKittyState(9);
             return true;
         }
         if (getKittyState() == 11 && !stack.isEmpty() && stack.getItem() == MoCItems.woolball) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setKittyState(8);
             if (!this.world.isRemote) {
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY + 1.0D, this.posZ, new ItemStack(MoCItems.woolball, 1));
@@ -481,10 +472,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             return true;
         }
         if (getKittyState() == 13 && !stack.isEmpty() && stack.getItem() == Items.FISH || stack.getItem() == Items.COOKED_FISH) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_EATING);
             this.setHealth(getMaxHealth());
             changeKittyState(7);

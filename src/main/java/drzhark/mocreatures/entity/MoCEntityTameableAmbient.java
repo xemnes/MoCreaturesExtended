@@ -164,10 +164,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         //before ownership check
         if (getIsTamed() && ((stack.getItem() == MoCItems.scrollOfOwner)) && MoCreatures.proxy.enableResetOwnership
                 && MoCTools.isThisPlayerAnOP(player)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
@@ -192,10 +189,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
 
         //sets it free, untamed
         if (getIsTamed() && stack.getItem() == MoCItems.scrollFreedom) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
@@ -212,10 +206,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
 
         //removes owner, any other player can claim it by renaming it
         if (getIsTamed() && stack.getItem() == MoCItems.scrollOfSale) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
@@ -227,10 +218,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         }
 
         if (getIsTamed() && isMyHealFood(stack)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             if (!this.world.isRemote) {
                 this.setHealth(getMaxHealth());
@@ -255,10 +243,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
 
         //heals
         if (getIsTamed() && isMyHealFood(stack)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             if (!this.world.isRemote) {
                 this.setHealth(getMaxHealth());

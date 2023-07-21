@@ -29,7 +29,7 @@ public class MoCItemEgg extends MoCItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
-        stack.shrink(1);
+        if (!player.capabilities.isCreativeMode) stack.shrink(1);
         if (!world.isRemote && player.onGround) {
             int i = stack.getItemDamage();
             if (i == 30) {

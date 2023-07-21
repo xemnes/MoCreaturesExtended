@@ -158,10 +158,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         //before ownership check
         if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollOfOwner)) && MoCreatures.proxy.enableResetOwnership
                 && MoCTools.isThisPlayerAnOP(player)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
@@ -178,10 +175,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
         //sets it free, untamed
         if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollFreedom))) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
@@ -198,10 +192,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
 
         //removes owner, any other player can claim it by renaming it
         if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollOfSale))) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
@@ -238,10 +229,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
 
         //heals
         if (!stack.isEmpty() && getIsTamed() && (this.getHealth() != this.getMaxHealth()) && isMyHealFood(stack)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             if (!this.world.isRemote) {
                 this.setHealth(getMaxHealth());

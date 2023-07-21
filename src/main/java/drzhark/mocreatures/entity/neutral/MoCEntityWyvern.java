@@ -434,10 +434,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && !getIsRideable() && getAge() > 90 && this.getIsTamed() && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
         }
@@ -448,10 +445,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             }
             dropArmor();
             setArmorType((byte) 1);
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
 
             return true;
         }
@@ -462,10 +456,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             }
             dropArmor();
             setArmorType((byte) 2);
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
@@ -475,18 +466,12 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             }
             dropArmor();
             setArmorType((byte) 3);
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
         if (!stack.isEmpty() && getIsTamed() && getAge() > 90 && !getIsChested() && (stack.getItem() == Item.getItemFromBlock(Blocks.CHEST))) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setIsChested(true);
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             return true;
@@ -520,7 +505,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && !this.getIsGhost() && (stack.getItem() == MoCItems.essencelight) && getIsTamed() && getAge() > 90 && getType() < 5) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -540,7 +525,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.transformCounter == 0 && !this.getIsGhost() && getType() == 5 && (stack.getItem() == MoCItems.essenceundead) && getIsTamed()) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -554,7 +539,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.transformCounter == 0 && !this.getIsGhost() && getType() == 5 && (stack.getItem() == MoCItems.essencelight) && getIsTamed()) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {
@@ -568,7 +553,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && this.transformCounter == 0 && !this.getIsGhost() && getType() == 5 && (stack.getItem() == MoCItems.essencedarkness) && getIsTamed()) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (stack.isEmpty()) {
                 player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
             } else {

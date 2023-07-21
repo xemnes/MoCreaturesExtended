@@ -452,11 +452,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 setHasAmulet(true);
                 MoCTools.tameWithName(player, this);
             }
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-                return true;
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
@@ -464,11 +460,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             if (!this.world.isRemote) {
                 setHasAmulet(true);
             }
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-                return true;
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return true;
         }
 
@@ -477,10 +469,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             return true;
         }
         if (!stack.isEmpty() && getIsTamed() && (MoCTools.isItemEdibleforCarnivores(stack.getItem()))) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             this.setHealth(getMaxHealth());
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             setIsHunting(false);
@@ -489,10 +478,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         }
         if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getAge() > 80)
                 && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
         }
@@ -515,10 +501,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && getIsTamed() && getIsAdult() && !getIsChested() && (stack.getItem() == Item.getItemFromBlock(Blocks.CHEST))) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setIsChested(true);
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             return true;

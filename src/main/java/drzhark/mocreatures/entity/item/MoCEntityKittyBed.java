@@ -146,7 +146,7 @@ public class MoCEntityKittyBed extends EntityLiving {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && !getHasFood() && !getHasMilk()) {
             if (stack.getItem() == MoCItems.petfood) {
-                stack.shrink(1);
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGFOOD);
                 setHasMilk(false);
                 setHasFood(true);

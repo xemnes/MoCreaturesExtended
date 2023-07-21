@@ -117,10 +117,7 @@ public class MoCEntityLitterBox extends EntityLiving {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(Blocks.SAND)) {
             MoCTools.playCustomSound(this, SoundEvents.BLOCK_SAND_PLACE);
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setUsedLitter(false);
             this.litterTime = 0;
             return true;

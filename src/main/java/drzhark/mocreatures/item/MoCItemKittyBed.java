@@ -30,7 +30,7 @@ public class MoCItemKittyBed extends MoCItem {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
-            stack.shrink(1);
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCEntityKittyBed kittyBed = new MoCEntityKittyBed(world, this.sheetType);
             kittyBed.setPosition(player.posX, player.posY, player.posZ);
             world.spawnEntity(kittyBed);

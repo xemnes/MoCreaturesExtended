@@ -36,7 +36,7 @@ public class MoCRenderKittyBed extends RenderLiving<MoCEntityKittyBed> {
         this.kittybed.hasMilk = entitykittybed.getHasMilk();
         this.kittybed.hasFood = entitykittybed.getHasFood();
         this.kittybed.pickedUp = entitykittybed.getPickedUp();
-        this.kittybed.milklevel = entitykittybed.milklevel;
+        this.kittybed.milklevel = entitykittybed.milkLevel;
     }
 
     @Override

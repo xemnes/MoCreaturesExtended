@@ -3,8 +3,10 @@
  */
 package drzhark.mocreatures.item;
 
+import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -28,16 +30,11 @@ public class MoCItemKittyBed extends MoCItem {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
-            MoCEntityKittyBed entitykittybed = new MoCEntityKittyBed(world, this.sheetType);
-            entitykittybed.setPosition(player.posX, player.posY, player.posZ);
-            world.spawnEntity(entitykittybed);
-            entitykittybed.motionY += world.rand.nextFloat() * 0.05F;
-            entitykittybed.motionX += (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
-            entitykittybed.motionZ += (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
             stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
-            }
+            MoCEntityKittyBed kittyBed = new MoCEntityKittyBed(world, this.sheetType);
+            kittyBed.setPosition(player.posX, player.posY, player.posZ);
+            world.spawnEntity(kittyBed);
+            MoCTools.playCustomSound(kittyBed, SoundEvents.BLOCK_WOOD_PLACE);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }

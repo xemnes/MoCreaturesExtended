@@ -3,8 +3,10 @@
  */
 package drzhark.mocreatures.item;
 
+import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -23,12 +25,10 @@ public class MoCItemLitterBox extends MoCItem {
         final ItemStack stack = player.getHeldItem(hand);
         if (!world.isRemote) {
             stack.shrink(1);
-            MoCEntityLitterBox entitylitterbox = new MoCEntityLitterBox(world);
-            entitylitterbox.setPosition(player.posX, player.posY, player.posZ);
-            player.world.spawnEntity(entitylitterbox);
-            entitylitterbox.motionY += world.rand.nextFloat() * 0.05F;
-            entitylitterbox.motionX += (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
-            entitylitterbox.motionZ += (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
+            MoCEntityLitterBox litterBox = new MoCEntityLitterBox(world);
+            litterBox.setPosition(player.posX, player.posY, player.posZ);
+            world.spawnEntity(litterBox);
+            MoCTools.playCustomSound(litterBox, SoundEvents.BLOCK_WOOD_PLACE);
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }

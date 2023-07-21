@@ -1706,7 +1706,7 @@ public class MoCTools {
         }
     }
 
-    public boolean isInsideOfMaterial(Material material, Entity entity) {
+    public static boolean isInsideOfMaterial(Material material, Entity entity) {
         double d = entity.posY + entity.getEyeHeight();
         int i = MathHelper.floor(entity.posX);
         int j = MathHelper.floor(MathHelper.floor(d));
@@ -1722,7 +1722,7 @@ public class MoCTools {
         }
     }
 
-    public int countEntities(Class<? extends EntityLiving> class1, World world) {
+    public static int countEntities(Class<? extends EntityLiving> class1, World world) {
         int i = 0;
         for (int j = 0; j < world.loadedEntityList.size(); j++) {
             Entity entity = world.loadedEntityList.get(j);
@@ -1730,7 +1730,12 @@ public class MoCTools {
                 i++;
             }
         }
-
         return i;
+    }
+
+    public static double roundToNearest90Degrees(double degrees) {
+        double radians = Math.toRadians(degrees);
+        double roundedRadians = Math.round(radians / (Math.PI / 2)) * (Math.PI / 2);
+        return Math.toDegrees(roundedRadians);
     }
 }

@@ -34,11 +34,12 @@ public class MoCEntityLitterBox extends EntityLiving {
 
     private static final DataParameter<Boolean> PICKED_UP = EntityDataManager.createKey(MoCEntityLitterBox.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> USED_LITTER = EntityDataManager.createKey(MoCEntityLitterBox.class, DataSerializers.BOOLEAN);
-    public int littertime;
+    public int litterTime;
 
     public MoCEntityLitterBox(World world) {
         super(world);
         setSize(1.0F, 0.15F);
+        setNoAI(true);
     }
 
     public ResourceLocation getTexture() {
@@ -48,7 +49,7 @@ public class MoCEntityLitterBox extends EntityLiving {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D); // setMaxHealth
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
     }
 
     @Override
@@ -121,33 +122,27 @@ public class MoCEntityLitterBox extends EntityLiving {
                 player.setHeldItem(hand, ItemStack.EMPTY);
             }
             setUsedLitter(false);
-            this.littertime = 0;
-            return true;
-        }
-        if (player.isSneaking() && this.getRidingEntity() == null) {
-            player.inventory.addItemStackToInventory(new ItemStack(MoCItems.litterbox));
-            MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEM_PICKUP, 0.2F);
-            setDead();
+            this.litterTime = 0;
             return true;
         }
         if (this.getRidingEntity() == null) {
-            if (this.startRiding(player)) {
-                setPickedUp(true);
-                this.rotationYaw = player.rotationYaw;
+            if (player.isSneaking()) {
+                player.inventory.addItemStackToInventory(new ItemStack(MoCItems.litterbox));
+                MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEM_PICKUP, 0.2F);
+                setDead();
+            } else {
+                setRotationYawHead((float) MoCTools.roundToNearest90Degrees(this.rotationYawHead) + 90.0F);
+                MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEMFRAME_ROTATE_ITEM);
             }
-
             return true;
         }
-
         return true;
     }
 
     @Override
     public void move(MoverType type, double d, double d1, double d2) {
-        if ((this.getRidingEntity() != null) || !this.onGround || !MoCreatures.proxy.staticLitter) {
-            if (!this.world.isRemote) {
-                super.move(type, d, d1, d2);
-            }
+        if (!this.world.isRemote && (getRidingEntity() != null || !this.onGround || !MoCreatures.proxy.staticLitter)) {
+            super.move(type, d, d1, d2);
         }
     }
 
@@ -157,43 +152,44 @@ public class MoCEntityLitterBox extends EntityLiving {
         if (this.onGround) {
             setPickedUp(false);
         }
-        if (getUsedLitter() && !this.world.isRemote) {
-            this.littertime++;
-            this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(12D, 4D, 12D));
-            for (Entity entity : list) {
-                if (!(entity instanceof EntityMob)) {
-                    continue;
+        if (getUsedLitter()) {
+            if (!this.world.isRemote) {
+                this.litterTime++;
+                List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(12D, 4D, 12D));
+                for (Entity entity : list) {
+                    if (!(entity instanceof EntityMob)) {
+                        continue;
+                    }
+                    EntityMob entityMob = (EntityMob) entity;
+                    entityMob.setAttackTarget(this);
+                    if (entityMob instanceof EntityCreeper) {
+                        ((EntityCreeper) entityMob).setCreeperState(-1);
+                    }
+                    if (entityMob instanceof MoCEntityOgre) {
+                        ((MoCEntityOgre) entityMob).smashCounter = 0;
+                    }
                 }
-                EntityMob entitymob = (EntityMob) entity;
-                entitymob.setAttackTarget(this);
-                if (entitymob instanceof EntityCreeper) {
-                    ((EntityCreeper) entitymob).setCreeperState(-1);
-                }
-                if (entitymob instanceof MoCEntityOgre) {
-                    ((MoCEntityOgre) entitymob).smashCounter = 0;
-                }
+            } else {
+                this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
             }
-
         }
-        if (this.littertime > 5000 && !this.world.isRemote) {
+        if (this.litterTime > 5000 && !this.world.isRemote) {
             setUsedLitter(false);
-            this.littertime = 0;
+            this.litterTime = 0;
         }
-
         if (this.isRiding()) MoCTools.dismountSneakingPlayer(this);
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-        nbttagcompound = MoCTools.getEntityData(this);
-        nbttagcompound.setBoolean("UsedLitter", getUsedLitter());
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        compound = MoCTools.getEntityData(this);
+        compound.setBoolean("UsedLitter", getUsedLitter());
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-        nbttagcompound = MoCTools.getEntityData(this);
-        setUsedLitter(nbttagcompound.getBoolean("UsedLitter"));
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        compound = MoCTools.getEntityData(this);
+        setUsedLitter(compound.getBoolean("UsedLitter"));
     }
 
     @Override

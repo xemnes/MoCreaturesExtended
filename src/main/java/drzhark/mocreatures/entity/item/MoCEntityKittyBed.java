@@ -31,18 +31,20 @@ public class MoCEntityKittyBed extends EntityLiving {
     private static final DataParameter<Boolean> HAS_FOOD = EntityDataManager.createKey(MoCEntityKittyBed.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> PICKED_UP = EntityDataManager.createKey(MoCEntityKittyBed.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> SHEET_COLOR = EntityDataManager.createKey(MoCEntityKittyBed.class, DataSerializers.VARINT);
-    public float milklevel;
+    public float milkLevel;
 
     public MoCEntityKittyBed(World world) {
         super(world);
         setSize(1.0F, 0.15F);
-        this.milklevel = 0.0F;
+        setNoAI(true);
+        this.milkLevel = 0.0F;
     }
 
     public MoCEntityKittyBed(World world, double d, double d1, double d2) {
         super(world);
         setSize(1.0F, 0.15F);
-        this.milklevel = 0.0F;
+        setNoAI(true);
+        this.milkLevel = 0.0F;
     }
 
     public MoCEntityKittyBed(World world, int i) {
@@ -57,7 +59,7 @@ public class MoCEntityKittyBed extends EntityLiving {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D); // setMaxHealth
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
     }
 
     @Override
@@ -99,11 +101,6 @@ public class MoCEntityKittyBed extends EntityLiving {
 
     public void setSheetColor(int i) {
         this.dataManager.set(SHEET_COLOR, i);
-        //this.bedColor = EnumDyeColor.byMetadata(i).getUnlocalizedName().toLowerCase();
-    }
-
-    public boolean attackEntityFrom(Entity entity, int i) {
-        return false;
     }
 
     @Override
@@ -123,8 +120,7 @@ public class MoCEntityKittyBed extends EntityLiving {
 
     @Override
     public boolean canEntityBeSeen(Entity entity) {
-        return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + getEyeHeight(), this.posZ),
-                new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
+        return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + getEyeHeight(), this.posZ), new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
     }
 
     @Override
@@ -148,48 +144,41 @@ public class MoCEntityKittyBed extends EntityLiving {
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && (stack.getItem() == Items.MILK_BUCKET)) {
-            player.setHeldItem(hand, new ItemStack(Items.BUCKET, 1));
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGMILK);
-            setHasMilk(true);
-            setHasFood(false);
-            return true;
-        }
-        if (!stack.isEmpty() && !getHasFood() && (stack.getItem() == MoCItems.petfood)) {
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, ItemStack.EMPTY);
+        if (!stack.isEmpty() && !getHasFood() && !getHasMilk()) {
+            if (stack.getItem() == MoCItems.petfood) {
+                stack.shrink(1);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGFOOD);
+                setHasMilk(false);
+                setHasFood(true);
+            } else if (stack.getItem() == Items.MILK_BUCKET) {
+                player.setHeldItem(hand, new ItemStack(Items.BUCKET, 1));
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGMILK);
+                setHasMilk(true);
+                setHasFood(false);
             }
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGFOOD);
-            setHasMilk(false);
-            setHasFood(true);
-            return true;
-        }
-        if (player.isSneaking() && this.getRidingEntity() == null) {
-            final int color = getSheetColor();
-            player.inventory.addItemStackToInventory(new ItemStack(MoCItems.kittybed[color], 1));
-            MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEM_PICKUP, 0.2F);
-            setDead();
             return true;
         }
         if (this.getRidingEntity() == null) {
-            if (this.startRiding(player)) {
-                this.rotationYaw = player.rotationYaw;
-                setPickedUp(true);
+            if (player.isSneaking()) {
+                final int color = getSheetColor();
+                player.inventory.addItemStackToInventory(new ItemStack(MoCItems.kittybed[color], 1));
+                if (getHasFood()) player.inventory.addItemStackToInventory(new ItemStack(MoCItems.petfood, 1));
+                else if (getHasMilk()) player.inventory.addItemStackToInventory(new ItemStack(Items.MILK_BUCKET, 1));
+                MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEM_PICKUP, 0.2F);
+                setDead();
+            } else {
+                setRotationYawHead((float) MoCTools.roundToNearest90Degrees(this.rotationYawHead) + 90.0F);
+                MoCTools.playCustomSound(this, SoundEvents.ENTITY_ITEMFRAME_ROTATE_ITEM);
             }
-
             return true;
         }
-
         return true;
     }
 
     @Override
     public void move(MoverType type, double d, double d1, double d2) {
-        if ((this.getRidingEntity() != null) || !this.onGround || !MoCreatures.proxy.staticBed) {
-            if (!this.world.isRemote) {
-                super.move(type, d, d1, d2);
-            }
+        if (!this.world.isRemote && (this.getRidingEntity() != null || !this.onGround || !MoCreatures.proxy.staticBed)) {
+            super.move(type, d, d1, d2);
         }
     }
 
@@ -199,10 +188,10 @@ public class MoCEntityKittyBed extends EntityLiving {
         if (this.onGround) {
             setPickedUp(false);
         }
-        if ((getHasMilk() || getHasFood()) && (this.isBeingRidden()) && !this.world.isRemote) {
-            this.milklevel += 0.003F;
-            if (this.milklevel > 2.0F) {
-                this.milklevel = 0.0F;
+        if (!this.world.isRemote && (getHasMilk() || getHasFood()) && this.isBeingRidden()) {
+            this.milkLevel += 0.003F;
+            if (this.milkLevel > 2.0F) {
+                this.milkLevel = 0.0F;
                 setHasMilk(false);
                 setHasFood(false);
             }
@@ -211,27 +200,19 @@ public class MoCEntityKittyBed extends EntityLiving {
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-        setHasMilk(nbttagcompound.getBoolean("HasMilk"));
-        setSheetColor(nbttagcompound.getInteger("SheetColour"));
-        setHasFood(nbttagcompound.getBoolean("HasFood"));
-        this.milklevel = nbttagcompound.getFloat("MilkLevel");
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        setHasMilk(compound.getBoolean("HasMilk"));
+        setSheetColor(compound.getInteger("SheetColour"));
+        setHasFood(compound.getBoolean("HasFood"));
+        this.milkLevel = compound.getFloat("MilkLevel");
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-        nbttagcompound.setBoolean("HasMilk", getHasMilk());
-        nbttagcompound.setInteger("SheetColour", getSheetColor());
-        nbttagcompound.setBoolean("HasFood", getHasFood());
-        nbttagcompound.setFloat("MilkLevel", this.milklevel);
-    }
-
-    @Override
-    public void onLivingUpdate() {
-        this.moveStrafing = 0.0F;
-        this.moveForward = 0.0F;
-        this.randomYawVelocity = 0.0F;
-        super.onLivingUpdate();
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        compound.setBoolean("HasMilk", getHasMilk());
+        compound.setInteger("SheetColour", getSheetColor());
+        compound.setBoolean("HasFood", getHasFood());
+        compound.setFloat("MilkLevel", this.milkLevel);
     }
 
     @Override

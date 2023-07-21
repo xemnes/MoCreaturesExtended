@@ -693,7 +693,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     MoCEntityLitterBox litterBox1 = (MoCEntityLitterBox) this.getRidingEntity();
                     if (litterBox1 != null) {
                         litterBox1.setUsedLitter(true);
-                        litterBox1.littertime = 0;
+                        litterBox1.litterTime = 0;
                     }
                     this.dismountRidingEntity();
                     changeKittyState(7);

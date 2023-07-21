@@ -53,8 +53,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BYTE);
     private static final DataParameter<Integer> KITTY_STATE = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.VARINT);
     private final int[] treeCoord = {-1, -1, -1};
-    private int kittytimer;
-    private int madtimer;
+    private int kittyTimer;
+    private int madTimer;
     private boolean foundTree;
     private boolean isSwinging;
     private boolean onTree;
@@ -66,8 +66,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         setAdult(true);
         setAge(40);
         setKittyState(1);
-        this.kittytimer = 0;
-        this.madtimer = this.rand.nextInt(5);
+        this.kittyTimer = 0;
+        this.madTimer = this.rand.nextInt(5);
         this.foundTree = false;
     }
 
@@ -247,7 +247,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     private void changeKittyState(int i) {
         setKittyState(i);
         setSitting(false);
-        this.kittytimer = 0;
+        this.kittyTimer = 0;
         setOnTree(false);
         this.foundTree = false;
         setAttackTarget(null);
@@ -613,8 +613,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 3: // Looking for kitty bed to rest
-                    this.kittytimer++;
-                    if (this.kittytimer > 500) {
+                    this.kittyTimer++;
+                    if (this.kittyTimer > 500) {
                         if (this.rand.nextInt(200) < 1) {
                             changeKittyState(13);
                             break;
@@ -660,8 +660,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 5: // Looking for litter box
-                    this.kittytimer++;
-                    if ((this.kittytimer > 2000) && (this.rand.nextInt(1000) < 1)) {
+                    this.kittyTimer++;
+                    if ((this.kittyTimer > 2000) && (this.rand.nextInt(1000) < 1)) {
                         changeKittyState(13);
                         break;
                     }
@@ -681,8 +681,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 6: // Doing business in litter box
-                    this.kittytimer++;
-                    if (this.kittytimer <= 300) {
+                    this.kittyTimer++;
+                    if (this.kittyTimer <= 300) {
                         if (this.rand.nextInt(40) < 1) {
                             MoCTools.playCustomSound(this, SoundEvents.BLOCK_SAND_BREAK);
                         }
@@ -713,7 +713,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         }
                     }
                     // When wet
-                    if (this.inWater && this.rand.nextInt(500) < 1) {
+                    if (this.isWet() && this.rand.nextInt(500) < 1) {
                         changeKittyState(13);
                         break;
                     }
@@ -756,7 +756,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 9: // Looking for mate
-                    this.kittytimer++;
+                    this.kittyTimer++;
                     if (this.rand.nextInt(50) < 1) {
                         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(16D, 6D, 16D));
                         int j = 0;
@@ -775,7 +775,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                             j++;
                         } while (true);
                     }
-                    if (this.kittytimer > 2000) {
+                    if (this.kittyTimer > 2000) {
                         changeKittyState(7);
                     }
                     break;
@@ -848,8 +848,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 12: // Lying down at night
-                    this.kittytimer++;
-                    if (this.world.isDaytime() || ((this.kittytimer > 500) && (this.rand.nextInt(500) < 1))) {
+                    this.kittyTimer++;
+                    if (this.world.isDaytime() || (this.kittyTimer > 500 && this.rand.nextInt(500) < 1)) {
                         changeKittyState(7);
                         break;
                     }
@@ -866,11 +866,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         if (f7 < 1.5F) {
                             swingArm();
                             if (this.rand.nextInt(20) < 1) {
-                                this.madtimer--;
+                                this.madTimer--;
                                 getAttackTarget().attackEntityFrom(DamageSource.causeMobDamage(this), 1);
-                                if (this.madtimer < 1) {
+                                if (this.madTimer < 1) {
                                     changeKittyState(7);
-                                    this.madtimer = this.rand.nextInt(5);
+                                    this.madTimer = this.rand.nextInt(5);
                                 }
                             }
                         }
@@ -912,9 +912,12 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 16: // Looking for nearby tree
-                    kittytimer++;
-                    if (kittytimer > 500 && !getOnTree()) {
+                    kittyTimer++;
+                    if (kittyTimer > 500 && !getOnTree()) {
                         changeKittyState(7);
+                    }
+                    if (kittyTimer > 1000 && getOnTree()) {
+                        setKittyState(17);
                     }
                     if (!getOnTree()) {
                         if (!foundTree && rand.nextInt(50) < 1) {
@@ -939,20 +942,18 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         motionZ = (dZ / distance) * 0.05D;
                         // Climbing through leaves
                         if (!onGround && collidedHorizontally) {
-                            // Check if there‘s a leaf block above that the kitty should climb through
-                            BlockPos posAbove = getPosition().up();
                             // Disable collision checks while climbing through leaves
-                            noClip = world.getBlockState(posAbove).getMaterial() == Material.LEAVES;
+                            noClip = world.getBlockState(getPosition()).getMaterial() == Material.LEAVES || world.getBlockState(getPosition().up()).getMaterial() == Material.LEAVES;
                         }
                         // Reached the top of the tree
                         else if (!world.getBlockState(getPosition()).causesSuffocation()) {
                             // Re-enable collision checks after climbing through leaves
                             noClip = false;
+                            pushOutOfBlocks(this.posX, (getEntityBoundingBox().minY + getEntityBoundingBox().maxY) / 2.0D, this.posZ);
                             // Check if the block below is leaves
                             BlockPos posBelow = getPosition().down();
                             if (world.getBlockState(posBelow).getMaterial() == Material.LEAVES) {
                                 setOnTree(true);
-                                setKittyState(17);
                             }
                         }
                     }
@@ -975,9 +976,9 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         }
                         float f10 = getDistance(kitty);
                         if (f10 < 5F) {
-                            this.kittytimer++;
+                            this.kittyTimer++;
                         }
-                        if (this.kittytimer > 500 && this.rand.nextInt(50) < 1) {
+                        if (this.kittyTimer > 500 && this.rand.nextInt(50) < 1) {
                             ((MoCEntityKitty) getAttackTarget()).changeKittyState(7);
                             changeKittyState(19);
                         }
@@ -1007,8 +1008,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         break;
                     }
                     this.rotationYaw = 180F;
-                    this.kittytimer++;
-                    if (this.kittytimer <= 1000) {
+                    this.kittyTimer++;
+                    if (this.kittyTimer <= 1000) {
                         break;
                     }
                     int i2 = this.rand.nextInt(3) + 1;
@@ -1029,8 +1030,8 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     changeKittyState(21);
                     break;
                 case 21: // Defending kittens
-                    this.kittytimer++;
-                    if (this.kittytimer > 2000) {
+                    this.kittyTimer++;
+                    if (this.kittyTimer > 2000) {
                         List<Entity> list2 = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(24D, 8D, 24D));
                         int i3 = 0;
                         for (Entity entity2 : list2) {
@@ -1042,7 +1043,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                             changeKittyState(7);
                             break;
                         }
-                        this.kittytimer = 1000;
+                        this.kittyTimer = 1000;
                     }
                     if (getAttackTarget() instanceof EntityPlayer && this.rand.nextInt(300) < 1) {
                         setAttackTarget(null);

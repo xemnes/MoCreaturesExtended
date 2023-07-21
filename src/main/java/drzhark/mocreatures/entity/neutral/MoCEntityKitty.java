@@ -16,9 +16,7 @@ import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,7 +26,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -42,7 +39,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
@@ -54,6 +50,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HUNGRY = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> EMO = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BYTE);
     private static final DataParameter<Integer> KITTY_STATE = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.VARINT);
     private final int[] treeCoord = {-1, -1, -1};
     private int kittytimer;
@@ -130,6 +127,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         this.dataManager.register(SITTING, Boolean.FALSE);
         this.dataManager.register(HUNGRY, Boolean.FALSE);
         this.dataManager.register(EMO, Boolean.FALSE);
+        this.dataManager.register(CLIMBING, (byte) 0);
         this.dataManager.register(KITTY_STATE, 0);
     }
 
@@ -141,7 +139,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         this.dataManager.set(KITTY_STATE, i);
     }
 
-    @Override
     public boolean getIsSitting() {
         return this.dataManager.get(SITTING);
     }
@@ -180,6 +177,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     public void setSwinging(boolean var1) {
         this.isSwinging = var1;
+    }
+
+    @Override
+    public float getEyeHeight() {
+        return this.height * 0.9F;
     }
 
     @Override
@@ -530,11 +532,23 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public boolean isOnLadder() {
-        if (getKittyState() == 16) {
-            return this.collidedHorizontally && getOnTree();
+        return this.isBesideClimbableBlock();
+    }
+
+    public boolean isBesideClimbableBlock() {
+        return (this.dataManager.get(CLIMBING) & 1) != 0;
+    }
+
+    public void setBesideClimbableBlock(boolean climbing) {
+        byte b0 = this.dataManager.get(CLIMBING);
+
+        if (climbing) {
+            b0 = (byte) (b0 | 1);
         } else {
-            return super.isOnLadder();
+            b0 = (byte) (b0 & -2);
         }
+
+        this.dataManager.set(CLIMBING, b0);
     }
 
     @Override
@@ -559,7 +573,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 setHungry(true);
             }
 
-            label0:
             switch (getKittyState()) {
                 case -1:
                 case 23:
@@ -584,7 +597,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     float f = entityItem.getDistance(this);
                     if (f > 2.0F) {
-                        getMyOwnPath(entityItem, f);
+                        setPathToEntity(entityItem, f);
                     }
                     if (f < 2.0F && this.deathTime < 1) {
                         entityItem.setDead();
@@ -620,7 +633,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     float f5 = kittyBed.getDistance(this);
                     if (f5 > 2.0F) {
-                        getMyOwnPath(kittyBed, f5);
+                        setPathToEntity(kittyBed, f5);
                     }
                     if (f5 < 2.0F && this.startRiding(kittyBed)) {
                         changeKittyState(4);
@@ -630,7 +643,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 case 4: // Sitting in kitty bed
                     if (this.getRidingEntity() != null) {
                         MoCEntityKittyBed kittyBed1 = (MoCEntityKittyBed) this.getRidingEntity();
-                        if ((kittyBed1 != null) && !kittyBed1.getHasMilk() && !kittyBed1.getHasFood()) {
+                        if (kittyBed1 != null && !kittyBed1.getHasMilk() && !kittyBed1.getHasFood()) {
                             this.setHealth(getMaxHealth());
                             this.dismountRidingEntity();
                             changeKittyState(5);
@@ -661,7 +674,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     float f6 = litterBox.getDistance(this);
                     if (f6 > 2.0F) {
-                        getMyOwnPath(litterBox, f6);
+                        setPathToEntity(litterBox, f6);
                     }
                     if (f6 < 2.0F && this.startRiding(litterBox)) {
                         changeKittyState(6);
@@ -693,46 +706,53 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         EntityPlayer player = this.world.getClosestPlayerToEntity(this, 12D);
                         if (player != null) {
                             ItemStack stack = player.inventory.getCurrentItem();
-                            if (!stack.isEmpty() && (stack.getItem() == MoCItems.woolball)) {
+                            if (!stack.isEmpty() && stack.getItem() == MoCItems.woolball) {
                                 changeKittyState(11);
                                 break;
                             }
                         }
                     }
-                    if (this.inWater && (this.rand.nextInt(500) < 1)) {
+                    // When wet
+                    if (this.inWater && this.rand.nextInt(500) < 1) {
                         changeKittyState(13);
                         break;
                     }
-                    if (this.rand.nextInt(500) < 1 && !this.world.isDaytime()) {
+                    // When nighttime
+                    if (!this.world.isDaytime() && this.rand.nextInt(500) < 1) {
                         changeKittyState(12);
                         break;
                     }
-                    if (this.rand.nextInt(2000) < 1) {
+                    // When injured or random
+                    if (getHealth() < getMaxHealth() || this.rand.nextInt(3000) < 1) {
                         changeKittyState(3);
                         break;
                     }
-                    if (this.rand.nextInt(4000) < 1) {
+                    // When outside
+                    if (this.world.canSeeSky(getPosition()) && this.rand.nextInt(4000) < 1) {
                         changeKittyState(16);
                     }
                     break;
                 case 8: // Playing with wool ball
-                    if (this.inWater && this.rand.nextInt(200) < 1) {
-                        changeKittyState(13);
+                    if (this.rand.nextInt(200) < 1) {
+                        if (this.inWater) {
+                            changeKittyState(13);
+                        } else {
+                            changeKittyState(7);
+                        }
                         break;
                     }
-                    if (this.itemAttackTarget != null && getAttackTarget() != null) {
-                        float f1 = getDistance(getAttackTarget());
+                    if (this.itemAttackTarget != null) {
+                        float f1 = getDistance(itemAttackTarget);
                         if (f1 < 1.5F) {
                             swingArm();
                             if (this.rand.nextInt(10) < 1) {
-                                float force = 0.3F;
-                                if (getType() == 10) force = 0.2F;
-                                MoCTools.bigsmack(this, this.itemAttackTarget, force);
+                                float force = 0.2F;
+                                if (getType() == 10) force = 0.1F;
+                                MoCTools.bigSmack(this, itemAttackTarget, force);
                             }
+                        } else {
+                            setPathToEntity(itemAttackTarget, f1);
                         }
-                    }
-                    if (getAttackTarget() == null || this.rand.nextInt(1000) < 1) {
-                        changeKittyState(7);
                     }
                     break;
                 case 9: // Looking for mate
@@ -793,7 +813,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         if (f2 < 1.5F) {
                             swingArm();
                             if (this.rand.nextInt(10) < 1) {
-                                MoCTools.bigsmack(this, this.itemAttackTarget, 0.2F);
+                                MoCTools.bigSmack(this, this.itemAttackTarget, 0.2F);
                             }
                         }
                     }
@@ -812,7 +832,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         swingArm();
                     }
                     break;
-                case 11: // Looking for player with wool ball
+                case 11: // Looking for player holding wool ball
                     EntityPlayer player1 = this.world.getClosestPlayerToEntity(this, 18D);
                     if ((player1 == null) || (this.rand.nextInt(10) != 0)) {
                         break;
@@ -891,81 +911,51 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         this.rotationYaw = this.getRidingEntity().rotationYaw + 90F;
                     }
                     break;
-                case 16: // Looking for nearby tree - TODO: Not working, needs overhaul
-                    this.kittytimer++;
-                    if (this.kittytimer > 500 && !getOnTree()) {
+                case 16: // Looking for nearby tree
+                    kittytimer++;
+                    if (kittytimer > 500 && !getOnTree()) {
                         changeKittyState(7);
                     }
                     if (!getOnTree()) {
-                        if (!this.foundTree && (this.rand.nextInt(50) < 1)) {
-                            int[] ai = MoCTools.ReturnNearestMaterialCoord(this, Material.WOOD, 18D, 4D);
-                            if (ai[0] != -1) {
-                                int i1 = 0;
-                                do {
-                                    if (i1 >= 20) {
-                                        break;
-                                    }
-                                    IBlockState blockstate = this.world.getBlockState(new BlockPos(ai[0], ai[1] + i1, ai[2]));
-                                    if ((blockstate.getMaterial() == Material.LEAVES)) {
-                                        this.foundTree = true;
-                                        this.treeCoord[0] = ai[0];
-                                        this.treeCoord[1] = ai[1];
-                                        this.treeCoord[2] = ai[2];
-                                        break;
-                                    }
-                                    i1++;
-                                } while (true);
+                        if (!foundTree && rand.nextInt(50) < 1) {
+                            BlockPos treeTop = MoCTools.getTreeTop(world, this, 18);
+                            if (treeTop != null) {
+                                treeCoord[0] = treeTop.getX();
+                                treeCoord[1] = treeTop.getY();
+                                treeCoord[2] = treeTop.getZ();
+                                foundTree = true;
                             }
                         }
-                        if (!this.foundTree || this.rand.nextInt(10) != 0) {
-                            break;
-                        }
-                        Path pathEntity = this.navigator.getPathToXYZ(this.treeCoord[0], this.treeCoord[1], this.treeCoord[2]);
-
+                        Path pathEntity = navigator.getPathToXYZ(treeCoord[0], treeCoord[1], treeCoord[2]);
                         if (pathEntity != null) {
-                            this.navigator.setPath(pathEntity, 2F);
+                            navigator.setPath(pathEntity, 1.5D);
                         }
-                        double double1 = getDistanceSq(this.treeCoord[0], this.treeCoord[1], this.treeCoord[2]);
-                        if (double1 < 7D) {
-                            setOnTree(true);
+                        double dX = treeCoord[0] + 0.5D - posX;
+                        double dY = treeCoord[1] + 0.5D - (posY + getEyeHeight());
+                        double dZ = treeCoord[2] + 0.5D - posZ;
+                        double distance = Math.sqrt(dX * dX + dY * dY + dZ * dZ);
+                        // Climbing the tree
+                        motionX = (dX / distance) * 0.05D;
+                        motionZ = (dZ / distance) * 0.05D;
+                        // Climbing through leaves
+                        if (!onGround && collidedHorizontally) {
+                            // Check if there‘s a leaf block above that the kitty should climb through
+                            BlockPos posAbove = getPosition().up();
+                            // Disable collision checks while climbing through leaves
+                            noClip = world.getBlockState(posAbove).getMaterial() == Material.LEAVES;
                         }
-                        break;
-                    }
-                    int l = this.treeCoord[0];
-                    int j1 = this.treeCoord[1];
-                    int l1 = this.treeCoord[2];
-                    faceItem(l, j1, l1, 30F);
-                    if ((j1 - MathHelper.floor(this.posY)) > 2) {
-                        this.motionY += 0.029999999999999999D;
-                    }
-
-                    if (this.posX < l) {
-                        this.motionX += 0.01D;
-                    } else {
-                        this.motionX -= 0.01D;
-                    }
-                    if (this.posZ < l1) {
-                        this.motionZ += 0.01D;
-                    } else {
-                        this.motionZ -= 0.01D;
-                    }
-                    if (this.onGround || !this.collidedHorizontally || !this.collidedVertically) {
-                        break;
-                    }
-                    int i4 = 0;
-                    do {
-                        BlockPos pos = new BlockPos(this.treeCoord[0], this.treeCoord[1] + i4, this.treeCoord[2]);
-                        Block block = this.world.getBlockState(pos).getBlock();
-                        if (block == Blocks.AIR) {
-                            setLocationAndAngles(this.treeCoord[0], this.treeCoord[1] + i4, this.treeCoord[2], this.rotationYaw, this.rotationPitch);
-                            changeKittyState(17);
-                            this.treeCoord[0] = -1;
-                            this.treeCoord[1] = -1;
-                            this.treeCoord[2] = -1;
-                            break label0;
+                        // Reached the top of the tree
+                        else if (!world.getBlockState(getPosition()).causesSuffocation()) {
+                            // Re-enable collision checks after climbing through leaves
+                            noClip = false;
+                            // Check if the block below is leaves
+                            BlockPos posBelow = getPosition().down();
+                            if (world.getBlockState(posBelow).getMaterial() == Material.LEAVES) {
+                                setOnTree(true);
+                                setKittyState(17);
+                            }
                         }
-                        i4++;
-                    } while (i4 < 30);
+                    }
                     break;
                 case 17: // Looking for player nearby
                     EntityPlayer player3 = this.world.getClosestPlayerToEntity(this, 2D);
@@ -1005,7 +995,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     float f11 = kittyBed2.getDistance(this);
                     if (f11 > 2.0F) {
-                        getMyOwnPath(kittyBed2, f11);
+                        setPathToEntity(kittyBed2, f11);
                     }
                     if (f11 < 2.0F && this.startRiding(kittyBed2)) {
                         changeKittyState(20);
@@ -1082,6 +1072,9 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 setSwinging(false);
                 this.swingProgress = 0.0F;
             }
+        }
+        if (!this.world.isRemote && getKittyState() == 16) {
+            this.setBesideClimbableBlock(this.collidedHorizontally);
         }
     }
 

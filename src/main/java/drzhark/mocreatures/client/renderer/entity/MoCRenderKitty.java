@@ -122,9 +122,8 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
     }
 
     protected void rotateAnimal(MoCEntityKitty entitykitty) {
-        if (!entitykitty.onGround) {
-            GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
-        }
+        GlStateManager.rotate(90F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(0.0F, 0.5F, 0.0F);
     }
 
     protected void stretch(MoCEntityKitty entitykitty) {

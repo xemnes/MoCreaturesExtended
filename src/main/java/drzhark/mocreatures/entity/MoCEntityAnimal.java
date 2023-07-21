@@ -490,10 +490,10 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         return par1 + var4;
     }
 
-    public void getMyOwnPath(Entity entity, float f) {
-        Path pathentity = this.getNavigator().getPathToEntityLiving(entity);
-        if (pathentity != null) {
-            this.getNavigator().setPath(pathentity, 1D);
+    public void setPathToEntity(Entity entity, float distance) {
+        Path pathEntity = this.getNavigator().getPathToEntityLiving(entity);
+        if (pathEntity != null) {
+            this.getNavigator().setPath(pathEntity, 1D);
         }
     }
 
@@ -539,7 +539,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
                 }
             }
         } else {
-            this.navigator.setPath(pathentity, 16F);
+            this.navigator.setPath(pathentity, 1D);
         }
     }
 

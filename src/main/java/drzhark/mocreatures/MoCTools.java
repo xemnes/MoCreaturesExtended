@@ -196,7 +196,7 @@ public class MoCTools {
         world.spawnEntity(entityitem);
     }
 
-    public static void bigsmack(Entity entity, Entity entity1, float force) {
+    public static void bigSmack(Entity entity, Entity entity1, float force) {
         double d = entity.posX - entity1.posX;
         double d1;
         for (d1 = entity.posZ - entity1.posZ; ((d * d) + (d1 * d1)) < 0.0001D; d1 = (Math.random() - Math.random()) * 0.01D) {
@@ -223,7 +223,7 @@ public class MoCTools {
             }
 
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
-            bigsmack(entityattacker, entitytarget, 0.6F);
+            bigSmack(entityattacker, entitytarget, 0.6F);
             playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
             //todo tuck sound!!
         }
@@ -237,7 +237,7 @@ public class MoCTools {
             }
 
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
-            bigsmack(entityattacker, entitytarget, 0.6F);
+            bigSmack(entityattacker, entitytarget, 0.6F);
             playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
             //todo tuck sound!!
         }
@@ -383,7 +383,7 @@ public class MoCTools {
         return Math.sqrt((l * l) + (i1 * i1) + (j1 * j1));
     }
 
-    public static int[] ReturnNearestMaterialCoord(Entity entity, Material material, Double double1, Double yOff) {
+    public static int[] returnNearestMaterialCoord(Entity entity, Material material, Double double1, Double yOff) {
         double shortestDistance = -1D;
         double distance;
         int x = -9999;
@@ -435,7 +435,7 @@ public class MoCTools {
         return (new int[]{x, y, z});
     }
 
-    public static int[] ReturnNearestBlockCoord(Entity entity, Block block1, Double dist) {
+    public static int[] returnNearestBlockCoord(Entity entity, Block block1, Double dist) {
         double shortestDistance = -1D;
         double distance;
         int x = -9999;
@@ -487,6 +487,35 @@ public class MoCTools {
         return (new int[]{x, y, z});
     }
 
+    public static BlockPos getTreeTop(World world, Entity entity, int range) {
+        BlockPos entityPos = new BlockPos(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ);
+        // Search for wood blocks around the entity within the specified range
+        for (int x = -range; x <= range; x++) {
+            for (int y = -range; y <= range; y++) {
+                for (int z = -range; z <= range; z++) {
+                    BlockPos pos = entityPos.add(x, y, z);
+                    IBlockState blockState = world.getBlockState(pos);
+                    if (blockState.getMaterial() == Material.WOOD) {
+                        // Iterate upwards from the wood block to find the topmost leaf block or air block
+                        for (int yOffset = 1; yOffset < 256; yOffset++) {
+                            BlockPos currentPos = pos.up(yOffset);
+                            IBlockState currentState = world.getBlockState(currentPos);
+                            if (currentState.getMaterial() == Material.AIR) {
+                                // Found the topmost leaf block or air block, return its position
+                                return currentPos;
+                            } else if (currentState.getMaterial() != Material.LEAVES) {
+                                // Found a block that is not leaves or air, stop searching
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Return null if no suitable block was found
+        return null;
+    }
+
     public static void MoveCreatureToXYZ(EntityCreature movingEntity, int x, int y, int z, float f) {
         //TODO works?
         Path pathentity = movingEntity.getNavigator().getPathToXYZ(x, y, z);
@@ -496,7 +525,7 @@ public class MoCTools {
     }
 
     public static void MoveToWater(EntityCreature entity) {
-        int[] ai = MoCTools.ReturnNearestMaterialCoord(entity, Material.WATER, 20D, 2D);
+        int[] ai = MoCTools.returnNearestMaterialCoord(entity, Material.WATER, 20D, 2D);
         if (ai[0] > -1000) {
             MoCTools.MoveCreatureToXYZ(entity, ai[0], ai[1], ai[2], 24F);
         }
@@ -1494,10 +1523,10 @@ public class MoCTools {
         }
     }
 
-    public static void getPathToEntity(EntityLiving creatureToMove, Entity entityTarget, float f) {
+    public static void setPathToEntity(EntityLiving creatureToMove, Entity entityTarget, float distance) {
         Path pathentity = creatureToMove.getNavigator().getPathToEntityLiving(entityTarget);
-        if (pathentity != null && f < 12F) {
-            creatureToMove.getNavigator().setPath(pathentity, 1.0D); //TODO check if 1.0D is proper speed.
+        if (pathentity != null && distance < 12F) {
+            creatureToMove.getNavigator().setPath(pathentity, 1D);
         }
     }
 

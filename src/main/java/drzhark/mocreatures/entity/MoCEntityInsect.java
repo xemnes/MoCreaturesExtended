@@ -79,7 +79,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
         if (!this.world.isRemote) {
             if (isAttractedToLight() && this.rand.nextInt(50) == 0) {
-                int[] ai = MoCTools.ReturnNearestBlockCoord(this, Blocks.TORCH, 8D);
+                int[] ai = MoCTools.returnNearestBlockCoord(this, Blocks.TORCH, 8D);
                 if (ai[0] > -1000) {
                     this.getNavigator().tryMoveToXYZ(ai[0], ai[1], ai[2], 1.0D);
                 }

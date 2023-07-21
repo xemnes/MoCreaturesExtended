@@ -272,7 +272,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
                         int k = MathHelper.floor(entityitem.posZ);
                         faceLocation(i, j, k, 30F);
 
-                        getMyOwnPath(entityitem, f);
+                        setPathToEntity(entityitem, f);
                         return;
                     }
                     if (f < 2.0F && this.deathTime == 0 && this.rand.nextInt(50) == 0) {
@@ -327,7 +327,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     public boolean attackEntityAsMob(Entity entityIn) {
         this.attacking = 30;
         if (entityIn instanceof MoCEntityGoat) {
-            MoCTools.bigsmack(this, entityIn, 0.4F);
+            MoCTools.bigSmack(this, entityIn, 0.4F);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_SMACK);
             if (this.rand.nextInt(3) == 0) {
                 calm();
@@ -335,7 +335,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
             }
             return false;
         }
-        MoCTools.bigsmack(this, entityIn, 0.8F);
+        MoCTools.bigSmack(this, entityIn, 0.8F);
         if (this.rand.nextInt(3) == 0) {
             calm();
         }

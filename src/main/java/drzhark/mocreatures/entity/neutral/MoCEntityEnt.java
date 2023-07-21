@@ -294,14 +294,14 @@ public class MoCEntityEnt extends MoCEntityAnimal {
             attackTime = 200;
             this.world.playSoundAtEntity(this, "mocreatures:goatsmack", 1.0F, 1.0F + ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F));
             entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3);
-            MoCTools.bigsmack(this, entity, 2F);
+            MoCTools.bigSmack(this, entity, 2F);
         }
     }*/
 
     @Override
     protected void applyEnchantments(EntityLivingBase entityLivingBaseIn, Entity entityIn) {
         MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_SMACK);
-        MoCTools.bigsmack(this, entityIn, 1F);
+        MoCTools.bigSmack(this, entityIn, 1F);
         super.applyEnchantments(entityLivingBaseIn, entityIn);
     }
 

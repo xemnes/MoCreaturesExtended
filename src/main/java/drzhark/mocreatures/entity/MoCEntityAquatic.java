@@ -658,7 +658,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
             if (fishHook != null && fishHook.caughtEntity == null) {
                 float f = fishHook.getDistance(this);
                 if (f > 1) {
-                    MoCTools.getPathToEntity(this, fishHook, f);
+                    MoCTools.setPathToEntity(this, fishHook, f);
                 } else {
                     fishHook.caughtEntity = this;
                     this.fishHooked = true;

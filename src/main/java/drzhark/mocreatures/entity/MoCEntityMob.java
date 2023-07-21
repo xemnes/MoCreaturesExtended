@@ -426,7 +426,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
             }
         } else {
-            this.navigator.setPath(pathentity, 16F);
+            this.navigator.setPath(pathentity, 1D);
         }
     }*/
 

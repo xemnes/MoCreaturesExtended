@@ -362,7 +362,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
                 }
             }
         } else {
-            this.navigator.setPath(pathentity, 16F);
+            this.navigator.setPath(pathentity, 1D);
         }
     }
 

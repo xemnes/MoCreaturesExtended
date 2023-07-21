@@ -345,7 +345,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
             if (entityitem != null) {
                 float f = entityitem.getDistance(this);
                 if (f > 2.0F) {
-                    getMyOwnPath(entityitem, f);
+                    setPathToEntity(entityitem, f);
                 }
                 if (f < 2.0F && this.deathTime == 0) {
                     entityitem.setDead();

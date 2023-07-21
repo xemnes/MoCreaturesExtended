@@ -417,7 +417,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 /*if (entityplayer1.isBeingRidden()
                         && (entityplayer1.riddenByEntity instanceof MoCEntityMouse || entityplayer1.riddenByEntity instanceof MoCEntityBird)) {
                     PathEntity pathentity = this.navigator.getPathToEntityLiving(entityplayer1);
-                    this.navigator.setPath(pathentity, 16F);
+                    this.navigator.setPath(pathentity, 1D);
                     setPissed(false);
                     this.hissCounter = 0;
                 }*/

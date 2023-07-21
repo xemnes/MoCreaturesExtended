@@ -138,7 +138,7 @@ public class MoCEntityKittyBed extends EntityLiving {
 
     @Override
     public double getMountedYOffset() {
-        return -0.1D;
+        return 0.0D;
     }
 
     @Override

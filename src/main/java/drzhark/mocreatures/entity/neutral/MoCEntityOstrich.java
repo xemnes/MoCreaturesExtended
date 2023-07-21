@@ -486,7 +486,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
                 MoCEntityEgg myEgg = (MoCEntityEgg) getBoogey(8D);
                 if ((myEgg != null) && (MoCTools.getSqDistanceTo(myEgg, this.posX, this.posY, this.posZ) > 4D)) {
                     Path pathentity = this.navigator.getPathToPos(myEgg.getPosition());
-                    this.navigator.setPath(pathentity, 16F);
+                    this.navigator.setPath(pathentity, 1D);
                 }
                 //didn't find egg
                 if (myEgg == null) {

@@ -1533,8 +1533,8 @@ public class MoCTools {
             int j1 = (j + runningEntity.world.rand.nextInt(3)) - runningEntity.world.rand.nextInt(3);
             int k1 = (k + runningEntity.world.rand.nextInt(4)) - runningEntity.world.rand.nextInt(4);
             BlockPos pos = new BlockPos(i1, j1, k1);
-            if ((j1 > 4) && ((runningEntity.world.getBlockState(pos).getBlock() == Blocks.AIR) || (runningEntity.world.getBlockState(pos).getBlock() == Blocks.SNOW)) && (runningEntity.world.getBlockState(pos.down()).getBlock() != Blocks.AIR)) {
-                runningEntity.getNavigator().tryMoveToXYZ(i1, j1, k1, 3D);
+            if (j1 > 4 && (runningEntity.world.getBlockState(pos).getBlock() == Blocks.AIR || (runningEntity.world.getBlockState(pos).getBlock() == Blocks.SNOW && runningEntity.world.getBlockState(pos.down()).getBlock() != Blocks.AIR))) {
+                runningEntity.getNavigator().tryMoveToXYZ(i1, j1, k1, 2.5D);
                 break;
             }
             l++;

@@ -924,11 +924,12 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     break;
                 case 16: // Looking for nearby tree
                     kittyTimer++;
-                    if (kittyTimer > 500 && !getOnTree()) {
-                        changeKittyState(7);
-                    }
-                    if (kittyTimer > 1000 && getOnTree()) {
-                        setKittyState(17);
+                    if (kittyTimer > 500) {
+                        if (!getOnTree()) {
+                            changeKittyState(7);
+                        } else {
+                            setKittyState(17);
+                        }
                     }
                     if (!getOnTree()) {
                         if (!foundTree && rand.nextInt(50) < 1) {
@@ -1149,6 +1150,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         setSitting(compound.getBoolean("Sitting"));
+        setKittyState(compound.getInteger("KittyState"));
         setTemper(compound.getInteger("Temper"));
     }
 

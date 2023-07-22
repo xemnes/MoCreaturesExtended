@@ -205,7 +205,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public float getEyeHeight() {
-        return this.height * 0.9F;
+        return this.height * 0.8F;
     }
 
     @Override

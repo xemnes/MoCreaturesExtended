@@ -542,7 +542,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     @Override
     public boolean checkSpawningBiome() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
-        Biome currentbiome = MoCTools.Biomekind(this.world, pos);
+        Biome currentbiome = MoCTools.biomeKind(this.world, pos);
 
         // African
         if (BiomeDictionary.hasType(currentbiome, Type.SANDY) || BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) {

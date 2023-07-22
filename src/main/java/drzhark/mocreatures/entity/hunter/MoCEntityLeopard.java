@@ -43,7 +43,7 @@ public class MoCEntityLeopard extends MoCEntityBigCat {
         int k = MathHelper.floor(this.posZ);
         BlockPos pos = new BlockPos(i, j, k);
 
-        Biome currentbiome = MoCTools.Biomekind(this.world, pos);
+        Biome currentbiome = MoCTools.biomeKind(this.world, pos);
         try {
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {
                 setType(2); //snow leopard

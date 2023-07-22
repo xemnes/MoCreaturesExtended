@@ -150,12 +150,12 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
 
         //TODO replace with move to water AI
         if (!this.world.isRemote && this.rand.nextInt(500) == 0 && !this.waterbound && !getIsSitting() && !isSwimming()) {
-            MoCTools.MoveToWater(this);
+            MoCTools.moveToWater(this);
         }
 
         if (this.waterbound) {
             if (!isInsideOfMaterial(Material.WATER)) {
-                MoCTools.MoveToWater(this);
+                MoCTools.moveToWater(this);
             } else {
                 this.waterbound = false;
             }

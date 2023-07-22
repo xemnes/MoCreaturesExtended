@@ -148,7 +148,7 @@ public class MoCEntityOgre extends MoCEntityMob {
     }
 
     /**
-     * Starts counter to perform the DestroyBlast and synchronizes animations with clients
+     * Starts counter to perform the destroyBlast and synchronizes animations with clients
      */
     protected void startDestroyBlast() {
         this.smashCounter = 1;
@@ -163,7 +163,7 @@ public class MoCEntityOgre extends MoCEntityMob {
         if (this.deathTime > 0) {
             return;
         }
-        MoCTools.DestroyBlast(this, this.posX, this.posY + 1.0D, this.posZ, getDestroyForce(), isFireStarter());
+        MoCTools.destroyBlast(this, this.posX, this.posY + 1.0D, this.posZ, getDestroyForce(), isFireStarter());
     }
 
     /**

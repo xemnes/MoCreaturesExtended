@@ -552,7 +552,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
          *
          */
         try {
-            Biome currentbiome = MoCTools.Biomekind(this.world, pos);
+            Biome currentbiome = MoCTools.biomeKind(this.world, pos);
             int l = this.rand.nextInt(10);
 
             if (BiomeDictionary.hasType(currentbiome, Type.SNOWY)) {

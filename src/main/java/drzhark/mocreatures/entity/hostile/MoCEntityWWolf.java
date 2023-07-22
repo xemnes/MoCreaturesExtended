@@ -119,7 +119,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         int j = MathHelper.floor(getEntityBoundingBox().minY);
         int k = MathHelper.floor(this.posZ);
 
-        Biome biome = MoCTools.Biomekind(this.world, new BlockPos(i, j, k));
+        Biome biome = MoCTools.biomeKind(this.world, new BlockPos(i, j, k));
         if (BiomeDictionary.hasType(biome, Type.SNOWY)) {
             setType(3);
         }

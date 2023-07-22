@@ -75,7 +75,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     @Override
     public boolean checkSpawningBiome() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
-        Biome currentbiome = MoCTools.Biomekind(this.world, pos);
+        Biome currentbiome = MoCTools.biomeKind(this.world, pos);
 
         try {
             if (BiomeDictionary.hasType(currentbiome, Type.MESA)) {

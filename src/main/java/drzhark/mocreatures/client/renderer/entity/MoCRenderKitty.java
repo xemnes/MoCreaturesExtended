@@ -32,7 +32,7 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
     @Override
     public void doRender(MoCEntityKitty entitykitty, double d, double d1, double d2, float f, float f1) {
         super.doRender(entitykitty, d, d1, d2, f, f1);
-        boolean flag2 = MoCreatures.proxy.getDisplayPetIcons();
+        boolean displayPetIcons = MoCreatures.proxy.getDisplayPetIcons();
         if (entitykitty.renderName()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
@@ -51,7 +51,7 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
                 GlStateManager.disableLighting();
                 Tessellator tessellator = Tessellator.getInstance();
 
-                if (flag2 && entitykitty.getIsEmo()) {
+                if (displayPetIcons && entitykitty.getShowEmoteIcon()) {
                     this.bindTexture(entitykitty.getEmoteIcon());
                     int i = -90;
                     int k = 32;

@@ -17,10 +17,7 @@ import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
@@ -39,6 +36,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
@@ -52,6 +50,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     private static final DataParameter<Boolean> EMO = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BYTE);
     private static final DataParameter<Integer> KITTY_STATE = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> TEMPER = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.VARINT);
     private final int[] treeCoord = {-1, -1, -1};
     private int kittyTimer;
     private int madTimer;
@@ -129,6 +128,23 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         this.dataManager.register(EMO, Boolean.FALSE);
         this.dataManager.register(CLIMBING, (byte) 0);
         this.dataManager.register(KITTY_STATE, 0);
+        this.dataManager.register(TEMPER, 0);
+    }
+
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
+        switch (this.world.rand.nextInt(3)) {
+            case 0: // NEUTRAL
+                setTemper(0);
+                break;
+            case 1: // DOCILE
+                setTemper(1);
+                break;
+            case 2: // DEFIANT
+                setTemper(2);
+                break;
+        }
+        return super.onInitialSpawn(difficulty, livingdata);
     }
 
     public int getKittyState() {
@@ -139,6 +155,14 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         this.dataManager.set(KITTY_STATE, i);
     }
 
+    public int getTemper() {
+        return this.dataManager.get(TEMPER);
+    }
+
+    public void setTemper(int i) {
+        this.dataManager.set(TEMPER, i);
+    }
+
     public boolean getIsSitting() {
         return this.dataManager.get(SITTING);
     }
@@ -147,11 +171,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         return this.dataManager.get(HUNGRY);
     }
 
-    public boolean getIsEmo() {
+    public boolean getShowEmoteIcon() {
         return this.dataManager.get(EMO);
     }
 
-    public void setIsEmo(boolean flag) {
+    public void setShowEmoteIcon(boolean flag) {
         this.dataManager.set(EMO, flag);
     }
 
@@ -305,12 +329,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             case 19:
             case 20:
                 return MoCreatures.proxy.getMiscTexture("emoticon19.png"); // In Labor
-            case 0:
-            case 1:
-            case 2:
-            case 6:
-            case 14:
-            case 15:
             default:
                 return MoCreatures.proxy.getMiscTexture("emoticon1.png"); // Neutral
         }
@@ -549,7 +567,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 super.onLivingUpdate();
             }
             if (this.rand.nextInt(200) < 1) {
-                setIsEmo(!getIsEmo());
+                setShowEmoteIcon(!getShowEmoteIcon());
             }
             if (!getIsAdult() && this.rand.nextInt(200) < 1) {
                 setAge(getAge() + 1);
@@ -570,13 +588,10 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     break;
                 case 1: // Untamed
                     if (this.rand.nextInt(10) < 1) {
-                        EntityLivingBase entityLiving = getBoogey(6D);
-                        if (entityLiving != null) {
-                            MoCTools.runLikeHell(this, entityLiving);
-                        }
+                        changeKittyState(2);
                         break;
                     }
-                    if (!getIsHungry() || (this.rand.nextInt(10) != 0)) {
+                    if (!getIsHungry() || this.rand.nextInt(10) != 0) {
                         break;
                     }
                     EntityItem entityItem = getClosestItem(this, 10D, Items.COOKED_FISH, Items.COOKED_FISH);
@@ -591,13 +606,17 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         entityItem.setDead();
                         MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_EATING);
                         setHungry(false);
-                        setKittyState(2);
+                        changeKittyState(2);
                     }
                     break;
                 case 2: // Scared
                     EntityLivingBase living1 = getBoogey(6D);
                     if (living1 != null) {
                         MoCTools.runLikeHell(this, living1);
+                    }
+                    if (this.rand.nextInt(200) < 1) {
+                        changeKittyState(1);
+                        break;
                     }
                     break;
                 case 3: // Looking for kitty bed to rest
@@ -616,7 +635,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         break;
                     }
                     MoCEntityKittyBed kittyBed = (MoCEntityKittyBed) getKittyStuff(this, 18D, false);
-                    if ((kittyBed == null) || (kittyBed.isBeingRidden()) || (!kittyBed.getHasMilk() && !kittyBed.getHasFood())) {
+                    if (kittyBed == null || kittyBed.isBeingRidden() || (!kittyBed.getHasMilk() && !kittyBed.getHasFood())) {
                         break;
                     }
                     float f5 = kittyBed.getDistance(this);
@@ -721,7 +740,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 8: // Playing with wool ball
-                    if (this.rand.nextInt(200) < 1) {
+                    if (this.rand.nextInt(getTemper() == 2 ? 300 : 200) < 1) {
                         if (this.inWater) {
                             changeKittyState(13);
                         } else {
@@ -735,6 +754,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                             swingArm();
                             if (this.rand.nextInt(10) < 1) {
                                 float force = 0.2F;
+                                if (getTemper() == 2) force = 0.3F;
                                 if (getType() == 10) force = 0.1F;
                                 MoCTools.bigSmack(this, itemAttackTarget, force);
                             }
@@ -847,6 +867,9 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                     break;
                 case 13: // Aggressive behavior
+                    if (getTemper() == 1 || (getTemper() == 0 && this.rand.nextInt(2) < 1)) {
+                        changeKittyState(7);
+                    }
                     setHungry(false);
                     setAttackTarget(this.world.getClosestPlayerToEntity(this, 18D));
                     if (getAttackTarget() != null) {
@@ -946,7 +969,10 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         }
                     }
                     break;
-                case 17: // Looking for player nearby
+                case 17: // Stuck on tree, looking for player nearby
+                    if (getTemper() == 2 || (getTemper() == 0 && this.rand.nextInt(2) < 1)) {
+                        changeKittyState(7);
+                    }
                     EntityPlayer player3 = this.world.getClosestPlayerToEntity(this, 2D);
                     if (player3 != null) {
                         changeKittyState(7);
@@ -1003,11 +1029,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     int i2 = this.rand.nextInt(3) + 1;
                     for (int l2 = 0; l2 < i2; l2++) {
                         MoCEntityKitty kitty1 = new MoCEntityKitty(this.world);
-                        int babytype = this.getType();
+                        int babyType = this.getType();
                         if (this.rand.nextInt(2) < 1) {
-                            babytype = (this.rand.nextInt(8) + 1);
+                            babyType = (this.rand.nextInt(8) + 1);
                         }
-                        kitty1.setType(babytype);
+                        kitty1.setType(babyType);
                         kitty1.setPosition(this.posX, this.posY, this.posZ);
                         this.world.spawnEntity(kitty1);
                         MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
@@ -1120,17 +1146,18 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-        super.readEntityFromNBT(nbttagcompound);
-        setSitting(nbttagcompound.getBoolean("Sitting"));
-        setKittyState(nbttagcompound.getInteger("KittyState"));
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        setSitting(compound.getBoolean("Sitting"));
+        setTemper(compound.getInteger("Temper"));
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-        super.writeEntityToNBT(nbttagcompound);
-        nbttagcompound.setBoolean("Sitting", getIsSitting());
-        nbttagcompound.setInteger("KittyState", getKittyState());
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setBoolean("Sitting", getIsSitting());
+        compound.setInteger("KittyState", getKittyState());
+        compound.setInteger("Temper", getTemper());
     }
 
     @Override

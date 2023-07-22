@@ -1515,30 +1515,30 @@ public class MoCTools {
     }
 
     public static void runLikeHell(EntityLiving runningEntity, Entity boogey) {
+        Random rand = runningEntity.getRNG();
+
         double d = runningEntity.posX - boogey.posX;
         double d1 = runningEntity.posZ - boogey.posZ;
         double d2 = Math.atan2(d, d1);
-        d2 += (runningEntity.world.rand.nextFloat() - runningEntity.world.rand.nextFloat()) * 0.75D;
+        d2 += (rand.nextFloat() - rand.nextFloat()) * 0.75D;
         double d3 = runningEntity.posX + (Math.sin(d2) * 8D);
         double d4 = runningEntity.posZ + (Math.cos(d2) * 8D);
+
         int i = MathHelper.floor(d3);
         int j = MathHelper.floor(runningEntity.getEntityBoundingBox().minY);
         int k = MathHelper.floor(d4);
-        int l = 0;
-        do {
-            if (l >= 16) {
-                break;
-            }
-            int i1 = (i + runningEntity.world.rand.nextInt(4)) - runningEntity.world.rand.nextInt(4);
-            int j1 = (j + runningEntity.world.rand.nextInt(3)) - runningEntity.world.rand.nextInt(3);
-            int k1 = (k + runningEntity.world.rand.nextInt(4)) - runningEntity.world.rand.nextInt(4);
+
+        for (int l = 0; l < 16; l++) {
+            int i1 = i + rand.nextInt(4) - rand.nextInt(4);
+            int j1 = j + rand.nextInt(3) - rand.nextInt(3);
+            int k1 = k + rand.nextInt(4) - rand.nextInt(4);
             BlockPos pos = new BlockPos(i1, j1, k1);
-            if (j1 > 4 && (runningEntity.world.getBlockState(pos).getBlock() == Blocks.AIR || (runningEntity.world.getBlockState(pos).getBlock() == Blocks.SNOW && runningEntity.world.getBlockState(pos.down()).getBlock() != Blocks.AIR))) {
+
+            if (j1 > 4 && ((runningEntity.world.getBlockState(pos).getBlock() == Blocks.AIR || runningEntity.world.getBlockState(pos).getBlock() == Blocks.SNOW) && runningEntity.world.getBlockState(pos.down()).getBlock() != Blocks.AIR)) {
                 runningEntity.getNavigator().tryMoveToXYZ(i1, j1, k1, 2.5D);
                 break;
             }
-            l++;
-        } while (true);
+        }
     }
 
     /**

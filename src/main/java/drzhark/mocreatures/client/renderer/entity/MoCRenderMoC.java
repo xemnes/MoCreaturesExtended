@@ -21,6 +21,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
 
+    private float prevPitch;
+    private float prevRoll;
+    private float prevYaw;
+
     public MoCRenderMoC(ModelBase modelbase, float f) {
         super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
     }
@@ -113,13 +117,30 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
     protected void preRenderCallback(T entityliving, float f) {
         IMoCEntity mocreature = (IMoCEntity) entityliving;
         super.preRenderCallback(entityliving, f);
-        //adjustOffsets is not working well
-        //adjustOffsets(mocreature.getAdjustedXOffset(), mocreature.getAdjustedYOffset(), mocreature.getAdjustedZOffset());
+        // Interpolation factor for smoother animations
+        float interpolationFactor = 0.05F;
+        // Interpolate pitch, roll, and yaw
+        float interpolatedPitch = prevPitch + (mocreature.pitchRotationOffset() - prevPitch) * interpolationFactor;
+        float interpolatedRoll = prevRoll + (mocreature.rollRotationOffset() - prevRoll) * interpolationFactor;
+        float interpolatedYaw = prevYaw + (mocreature.yawRotationOffset() - prevYaw) * interpolationFactor;
+        // Apply the interpolated transformations
+        if (interpolatedPitch != 0) {
+            GlStateManager.rotate(interpolatedPitch, -1.0F, 0.0F, 0.0F);
+        }
+        if (interpolatedRoll != 0) {
+            GlStateManager.rotate(interpolatedRoll, 0F, 0F, -1.0F);
+        }
+        if (interpolatedYaw != 0) {
+            GlStateManager.rotate(interpolatedYaw, 0.0F, -1.0F, 0.0F);
+        }
+        // Save the current values for the next frame's interpolation
+        prevPitch = interpolatedPitch;
+        prevRoll = interpolatedRoll;
+        prevYaw = interpolatedYaw;
         adjustPitch(mocreature);
         adjustRoll(mocreature);
         adjustYaw(mocreature);
         stretch(mocreature);
-        //super.preRenderCallback(entityliving, f);
     }
 
     /**

@@ -47,7 +47,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
     public void initGui() {
         this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        this.buttonList.add(new GuiButton(0, (this.width / 2) - 100, (this.height / 4) + 120, "Done")); //1.5
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, (this.height - (this.ySize + 16)) / 2 + 150, "Done")); //1.5
     }
 
     public void updateName() {
@@ -74,8 +74,8 @@ public class MoCGUIEntityNamer extends GuiScreen {
         int l = (this.width - this.xSize) / 2;
         int i1 = (this.height - (this.ySize + 16)) / 2;
         drawTexturedModalRect(l, i1, 0, 0, this.xSize, this.ySize);
-        drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 100, 0xffffff);
-        drawCenteredString(this.fontRenderer, this.nameToSet, this.width / 2, 120, 0xffffff);
+        drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, (this.height - (this.ySize + 16)) / 2 + 29, 0xffffff);
+        drawCenteredString(this.fontRenderer, this.nameToSet + "_", this.width / 2, (this.height - (this.ySize + 16)) / 2 + 74, 0xffffff);
         super.drawScreen(i, j, f);
     }
 

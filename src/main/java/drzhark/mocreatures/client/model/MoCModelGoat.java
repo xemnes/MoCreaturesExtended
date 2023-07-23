@@ -22,6 +22,10 @@ public class MoCModelGoat extends ModelBase {
     public int earMov;
     public int tailMov;
     public int eatMov;
+    public float prevTailAngleX;
+    public float prevLEarAngleX;
+    public float prevREarAngleX;
+    public float prevMouthAngleX;
     ModelRenderer Leg1;
     ModelRenderer Leg2;
     ModelRenderer Leg3;
@@ -56,25 +60,17 @@ public class MoCModelGoat extends ModelBase {
         this.Leg1.addBox(-1F, 0F, -1F, 2, 7, 2);
         this.Leg1.setRotationPoint(2F, 17F, -6F);
 
-        // Leg1.mirror = true;
-
         this.Leg2 = new ModelRenderer(this, 0, 23);
         this.Leg2.addBox(-1F, 0F, -1F, 2, 7, 2);
         this.Leg2.setRotationPoint(-2F, 17F, -6F);
-
-        // Leg2.mirror = true;
 
         this.Leg3 = new ModelRenderer(this, 0, 23);
         this.Leg3.addBox(-1F, 0F, -1F, 2, 7, 2);
         this.Leg3.setRotationPoint(-2F, 17F, 6F);
 
-        // Leg3.mirror = true;
-
         this.Leg4 = new ModelRenderer(this, 0, 23);
         this.Leg4.addBox(-1F, 0F, -1F, 2, 7, 2);
         this.Leg4.setRotationPoint(2F, 17F, 6F);
-
-        // Leg4.mirror = true;
 
         this.Body = new ModelRenderer(this, 20, 8);
         this.Body.addBox(-3F, -4F, -8F, 6, 8, 16);
@@ -88,13 +84,9 @@ public class MoCModelGoat extends ModelBase {
         this.LEar.addBox(1.5F, -2F, 0F, 2, 1, 1);
         this.LEar.setRotationPoint(0F, 8F, -12F);
 
-        // LEar.mirror = true;
-
         this.REar = new ModelRenderer(this, 52, 8);
         this.REar.addBox(-3.5F, -2F, 0F, 2, 1, 1);
         this.REar.setRotationPoint(0F, 8F, -12F);
-
-        // REar.mirror = true;
 
         this.Head = new ModelRenderer(this, 52, 16);
         this.Head.addBox(-1.5F, -2F, -2F, 3, 5, 3);
@@ -164,7 +156,6 @@ public class MoCModelGoat extends ModelBase {
         this.Tits = new ModelRenderer(this, 18, 0);
         this.Tits.addBox(-2.5F, 0F, -2F, 5, 1, 4);
         this.Tits.setRotationPoint(0F, 17F, 3F);
-
     }
 
     @Override
@@ -182,16 +173,8 @@ public class MoCModelGoat extends ModelBase {
             this.Tits.render(f5);
         }
         GlStateManager.pushMatrix();
-
         if (this.attacking != 0) {
-            // float yOff = f5*((2.0F*attacking)/45F)-1.33333F;
-            // float zOff = f5*(attacking/9F)-3.33333F;
-
-            // 0.3! yOff = (3F*attacking/450F) - (3F*3F/45F);
-            // float yOff = 0.3F;
-            // yOff = (3F*attacking/450F) - (3F*3F/45F);
             float yOff = (this.attacking / 150F) - (1F / 5F);
-            // float zOff = 0.1F;
             float zOff = (this.attacking / 450F) - (1F / 15F);
             GlStateManager.translate(0.0F, yOff, -zOff);
         }
@@ -199,7 +182,6 @@ public class MoCModelGoat extends ModelBase {
         this.REar.render(f5);
         this.Head.render(f5);
         this.Nose.render(f5);
-
         if (this.typeInt > 1) {
             if (this.age > 0.7) {
                 this.RHorn1.render(f5);
@@ -222,12 +204,8 @@ public class MoCModelGoat extends ModelBase {
             if (this.age > 0.9) {
                 this.RHorn5.render(f5);
                 this.LHorn5.render(f5);
-
-                // Goatie.render(f5);
             }
         }
-        // mouth movement
-        // GlStateManager.translate(eatMov, 0.0F, 0.0F);
         if (this.eatMov != 0 && !this.bleat) {
             GlStateManager.translate(this.eatMov / 100F, 0.0F, 0.0F);
         }
@@ -236,32 +214,23 @@ public class MoCModelGoat extends ModelBase {
         }
         this.Tongue.render(f5);
         this.Mouth.render(f5);
-
         GlStateManager.popMatrix();
-
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
-        //super.setRotationAngles(f, f1, f2, f3, f4, f5);
         this.Leg1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
         this.Leg2.rotateAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.4F * f1;
         this.Leg3.rotateAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.4F * f1;
         this.Leg4.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
         float baseAngle = (30 / 57.29578F) + (f4 / 57.29578F);
-
-        // neck = -30 to 30
-        // head 30 to 75
-
         if (f3 > 20F) {
             f3 = 20F;
         }
         if (f3 < -20F) {
             f3 = -20F;
         }
-        this.Head.rotateAngleY = (f3 / 57.29578F);// * 0.6F; //fixes SMP bug
+        this.Head.rotateAngleY = (f3 / 57.29578F);
         this.Neck.rotateAngleX = -30 / 57.29578F;
-        this.Tail.rotateAngleX = this.tailMov / 57.29578F;
-
         this.Head.rotateAngleX = baseAngle;
         if (this.bleat) {
             this.Head.rotateAngleX = -15 / 57.29578F;
@@ -271,21 +240,9 @@ public class MoCModelGoat extends ModelBase {
             this.Neck.rotateAngleX = ((1.33F * this.attacking) - 70) / 57.29578F;
             if (this.legMov != 0) {
                 this.Leg1.rotateAngleX = this.legMov / 57.29578F;
-                // leg -20 to + 30
-                // 0 to -20 normal speed
-                // -20 to 30 fast x2 or x3
             }
         }
-
-        this.LEar.rotateAngleX = this.Head.rotateAngleX;
-        this.REar.rotateAngleX = this.Head.rotateAngleX;
-        if (!this.bleat && this.attacking == 0) {
-            this.LEar.rotateAngleX = baseAngle + (this.earMov / 57.29578F);
-            this.REar.rotateAngleX = baseAngle + (this.earMov / 57.29578F);
-        }
-
         this.Nose.rotateAngleX = this.Head.rotateAngleX;
-        this.Mouth.rotateAngleX = this.Head.rotateAngleX;
         this.Tongue.rotateAngleX = this.Head.rotateAngleX;
         this.Goatie.rotateAngleX = this.Head.rotateAngleX;
         this.RHorn1.rotateAngleX = this.Head.rotateAngleX;
@@ -298,13 +255,10 @@ public class MoCModelGoat extends ModelBase {
         this.LHorn4.rotateAngleX = this.Head.rotateAngleX;
         this.RHorn5.rotateAngleX = this.Head.rotateAngleX;
         this.LHorn5.rotateAngleX = this.Head.rotateAngleX;
-        if (this.bleat)// && !attacking)
-        {
-            this.Mouth.rotateAngleX = 0.0F;
+        if (this.bleat) {
             this.Tongue.rotateAngleX = -5 / 57.29578F;
             this.Goatie.rotateAngleX = 0.0F;
         }
-
         this.Nose.rotateAngleY = this.Head.rotateAngleY;
         this.Mouth.rotateAngleY = this.Head.rotateAngleY;
         this.Tongue.rotateAngleY = this.Head.rotateAngleY;
@@ -321,5 +275,31 @@ public class MoCModelGoat extends ModelBase {
         this.LHorn4.rotateAngleY = this.Head.rotateAngleY;
         this.RHorn5.rotateAngleY = this.Head.rotateAngleY;
         this.LHorn5.rotateAngleY = this.Head.rotateAngleY;
+
+        // Interpolation factor for smoother animations
+        float interpolationFactor = 0.05F;
+
+        // Tail movement with interpolation
+        float targetTailAngleX = this.tailMov / 57.29578F;
+        float interpolatedTailAngleX = this.prevTailAngleX + (targetTailAngleX - this.prevTailAngleX) * interpolationFactor;
+        this.Tail.rotateAngleX = interpolatedTailAngleX;
+
+        // Ears movement with interpolation
+        float targetEarAngleX = (!this.bleat && this.attacking == 0) ? baseAngle + (this.earMov / 57.29578F) : this.Head.rotateAngleX;
+        float interpolatedLEarAngleX = this.prevLEarAngleX + (targetEarAngleX - this.prevLEarAngleX) * interpolationFactor;
+        float interpolatedREarAngleX = this.prevREarAngleX + (targetEarAngleX - this.prevREarAngleX) * interpolationFactor;
+        this.LEar.rotateAngleX = interpolatedLEarAngleX;
+        this.REar.rotateAngleX = interpolatedREarAngleX;
+
+        // Mouth movement with interpolation
+        float targetMouthAngleX = this.bleat ? 0.0F : (this.attacking != 0 ? this.attacking / 57.29578F : baseAngle);
+        float interpolatedMouthAngleX = this.prevMouthAngleX + (targetMouthAngleX - this.prevMouthAngleX) * interpolationFactor;
+        this.Mouth.rotateAngleX = interpolatedMouthAngleX;
+
+        // Save the current values for the next frame's interpolation
+        this.prevTailAngleX = interpolatedTailAngleX;
+        this.prevLEarAngleX = interpolatedLEarAngleX;
+        this.prevREarAngleX = interpolatedREarAngleX;
+        this.prevMouthAngleX = interpolatedMouthAngleX;
     }
 }

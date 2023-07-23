@@ -37,7 +37,6 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     protected void preRenderCallback(MoCEntityGoat entitygoat, float f) {
         GlStateManager.translate(0.0F, this.depth, 0.0F);
         stretch(entitygoat);
-
     }
 
     @Override
@@ -50,7 +49,6 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
         this.tempGoat.earMov = entitygoat.earMovement();
         this.tempGoat.tailMov = entitygoat.tailMovement();
         this.tempGoat.eatMov = entitygoat.mouthMovement();
-
         super.doRender(entitygoat, d, d1, d2, f, f1);
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitygoat.getPetName()).isEmpty();
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
@@ -119,7 +117,6 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                 GlStateManager.popMatrix();
             }
         }
-
     }
 
     protected void stretch(MoCEntityGoat entitygoat) {

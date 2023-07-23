@@ -47,17 +47,19 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
     public MoCEntityKomodo(World world) {
         super(world);
-        setSize(1.6F, 0.5F);
+        setSize(1.25F, 0.9F);
         this.texture = "komodo_dragon.png";
         setTamed(false);
         setAdult(true);
         this.stepHeight = 1.0F;
 
-        if (this.rand.nextInt(6) == 0) {
+        // TODO: Make hitboxes adjust depending on size
+        /*if (this.rand.nextInt(6) == 0) {
             setAge(30 + this.rand.nextInt(40));
         } else {
             setAge(90 + this.rand.nextInt(20));
-        }
+        }*/
+        setAge(90);
     }
 
     @Override
@@ -348,5 +350,9 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     public boolean isSwimming() {
         return this.isInWater();
+    }
+
+    public float getEyeHeight() {
+        return !this.isMovementCeased() ? this.height * 0.7F : this.height * 0.365F;
     }
 }

@@ -21,6 +21,7 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
 
     public MoCEntityGrizzlyBear(World world) {
         super(world);
+        setSize(1.125F, 1.57F);
     }
 
     @Override
@@ -134,5 +135,9 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
     @Override
     public boolean compatibleMate(Entity mate) {
         return mate instanceof MoCEntityGrizzlyBear;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.76F;
     }
 }

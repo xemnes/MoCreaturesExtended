@@ -22,6 +22,7 @@ public class MoCEntityLiger extends MoCEntityBigCat {
 
     public MoCEntityLiger(World world) {
         super(world);
+        setSize(1.35F, 1.43525F);
     }
 
     @Override
@@ -128,5 +129,9 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     @Override
     public boolean isFlyer() {
         return this.getType() == 2;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

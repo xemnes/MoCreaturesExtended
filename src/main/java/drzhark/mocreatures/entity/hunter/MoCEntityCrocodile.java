@@ -18,6 +18,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
@@ -41,9 +42,11 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
     public MoCEntityCrocodile(World world) {
         super(world);
         this.texture = "crocodile.png";
-        setSize(1.4F, 0.6F); //it was 2.0, 0.6F
+        setSize(0.9F, 0.5F);
         setAdult(true);
-        setAge(50 + this.rand.nextInt(50));
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(50 + this.rand.nextInt(50));
+        setAge(80);
         setTamed(false);
     }
 
@@ -55,6 +58,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, true));
         this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 
     }
 
@@ -382,5 +386,9 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
     @Override
     public boolean isReadyToHunt() {
         return this.isNotScared() && !this.isMovementCeased() && !this.isBeingRidden() && !this.getHasCaughtPrey();
+    }
+
+    public float getEyeHeight() {
+        return !this.isMovementCeased() ? this.height * 0.7F : this.height * 0.39F;
     }
 }

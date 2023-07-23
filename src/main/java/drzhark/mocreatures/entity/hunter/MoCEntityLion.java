@@ -22,6 +22,8 @@ public class MoCEntityLion extends MoCEntityBigCat {
 
     public MoCEntityLion(World world) {
         super(world);
+        // TODO: Separate hitbox for the lioness
+        setSize(1.25F, 1.275F);
     }
 
     @Override
@@ -235,5 +237,9 @@ public class MoCEntityLion extends MoCEntityBigCat {
             return false;
         }
         return entity.height < 2F && entity.width < 2F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

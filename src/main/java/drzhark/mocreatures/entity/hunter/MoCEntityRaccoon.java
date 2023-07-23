@@ -28,9 +28,11 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
 
     public MoCEntityRaccoon(World world) {
         super(world);
-        setSize(0.5F, 0.6F);
+        setSize(0.6F, 0.525F);
         this.texture = "raccoon.png";
-        setAge(50 + this.rand.nextInt(15));
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(50 + this.rand.nextInt(15));
+        setAge(60);
 
         setAdult(this.rand.nextInt(3) != 0);
     }
@@ -160,5 +162,9 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
     @Override
     public boolean isReadyToHunt() {
         return this.getIsAdult() && !this.isMovementCeased();
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.86F;
     }
 }

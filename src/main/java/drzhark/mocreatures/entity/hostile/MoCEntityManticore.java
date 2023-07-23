@@ -266,6 +266,6 @@ public class MoCEntityManticore extends MoCEntityMob {
     }
 
     public float getEyeHeight() {
-        return this.height * 0.94F;
+        return this.height * 0.945F;
     }
 }

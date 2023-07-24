@@ -31,9 +31,11 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     public MoCEntityShark(World world) {
         super(world);
         this.texture = "shark.png";
-        setSize(1.7F, 0.8F);
+        setSize(1.55F, 0.725F);
         setAdult(true);
-        setAge(60 + this.rand.nextInt(100));
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(60 + this.rand.nextInt(100));
+        setAge(160);
     }
 
     @Override
@@ -175,5 +177,9 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     @Override
     public boolean isNotScared() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.61F;
     }
 }

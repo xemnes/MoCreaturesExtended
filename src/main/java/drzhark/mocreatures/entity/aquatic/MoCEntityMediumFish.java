@@ -18,8 +18,10 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
 
     public MoCEntityMediumFish(World world) {
         super(world);
-        setSize(0.6F, 0.3F);
-        setAge(30 + this.rand.nextInt(70));
+        setSize(0.7f, 0.45f);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(30 + this.rand.nextInt(70));
+        setAge(100);
     }
 
     public static MoCEntityMediumFish createEntity(World world, int type) {
@@ -73,7 +75,7 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
 
     @Override
     public float getSizeFactor() {
-        return getAge() * 0.01F;
+        return getAge() * 0.0081F;
     }
 
     @Override
@@ -157,5 +159,9 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
     @Override
     public boolean isNotScared() {
         return getIsTamed();
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.775F;
     }
 }

@@ -114,6 +114,8 @@ public class MoCModelMediumFish extends ModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        float scale = 0.0715F;
+
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5);
         MoCEntityMediumFish mediumFish = (MoCEntityMediumFish) entity;
@@ -122,22 +124,22 @@ public class MoCModelMediumFish extends ModelBase {
         float zOffset = mediumFish.getAdjustedZOffset();
         GlStateManager.pushMatrix();
         GlStateManager.translate(xOffset, yOffset, zOffset);
-        this.Head.render(f5);
-        this.LowerHead.render(f5);
-        this.Nose.render(f5);
-        this.MouthBottom.render(f5);
-        this.MouthBottomB.render(f5);
-        this.Body.render(f5);
-        this.BackUp.render(f5);
-        this.BackDown.render(f5);
-        this.Tail.render(f5);
-        this.TailFin.render(f5);
-        this.RightPectoralFin.render(f5);
-        this.LeftPectoralFin.render(f5);
-        this.UpperFin.render(f5);
-        this.LowerFin.render(f5);
-        this.RightLowerFin.render(f5);
-        this.LeftLowerFin.render(f5);
+        this.Head.render(scale);
+        this.LowerHead.render(scale);
+        this.Nose.render(scale);
+        this.MouthBottom.render(scale);
+        this.MouthBottomB.render(scale);
+        this.Body.render(scale);
+        this.BackUp.render(scale);
+        this.BackDown.render(scale);
+        this.Tail.render(scale);
+        this.TailFin.render(scale);
+        this.RightPectoralFin.render(scale);
+        this.LeftPectoralFin.render(scale);
+        this.UpperFin.render(scale);
+        this.LowerFin.render(scale);
+        this.RightLowerFin.render(scale);
+        this.LeftLowerFin.render(scale);
         GlStateManager.popMatrix();
     }
 

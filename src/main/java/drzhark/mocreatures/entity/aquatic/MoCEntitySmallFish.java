@@ -16,12 +16,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
 
-    public static final String[] fishNames = {"Anchovy", "Angelfish", "Angler", "Clownfish", "Goldfish", "Hippotang", "Manderin"};
+    public static final String[] fishNames = {"Anchovy", "Angelfish", "Angler", "Clownfish", "Goldfish", "Hippo Tang", "Mandarinfish"};
 
     public MoCEntitySmallFish(World world) {
         super(world);
-        setSize(0.3F, 0.3F);
-        setAge(70 + this.rand.nextInt(30));
+        setSize(0.5f, 0.3f);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(70 + this.rand.nextInt(30));
+        setAge(100);
     }
 
     public static MoCEntitySmallFish createEntity(World world, int type) {
@@ -190,5 +192,9 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
             return 0.1F;
         }
         return 0F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.45F;
     }
 }

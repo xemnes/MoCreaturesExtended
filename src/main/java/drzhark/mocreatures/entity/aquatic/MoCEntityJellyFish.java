@@ -25,8 +25,10 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
     public MoCEntityJellyFish(World world) {
         super(world);
-        setSize(0.3F, 0.5F);
-        setAge(50 + (this.rand.nextInt(50)));
+        setSize(0.45F, 0.575F);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(50 + (this.rand.nextInt(50)));
+        setAge(100);
     }
 
     @Override
@@ -145,5 +147,9 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     @Override
     protected boolean canBeTrappedInNet() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.85F;
     }
 }

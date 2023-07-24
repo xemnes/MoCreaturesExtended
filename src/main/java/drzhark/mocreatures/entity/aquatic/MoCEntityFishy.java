@@ -38,9 +38,10 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
     public MoCEntityFishy(World world) {
         super(world);
-        setSize(0.3F, 0.3F);
+        setSize(0.5f, 0.3f);
         setAdult(true);
-        setAge(50 + this.rand.nextInt(50));
+        //setAge(50 + this.rand.nextInt(50));
+        setAge(100);
     }
 
     @Override
@@ -252,7 +253,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
     @Override
     public float getSizeFactor() {
-        return getAge() * 0.01F;
+        return getAge() * 0.006F;
     }
 
     @Override
@@ -269,5 +270,9 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
             return 0.2F;
         }
         return -0.5F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.65F;
     }
 }

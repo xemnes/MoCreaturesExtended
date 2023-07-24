@@ -39,6 +39,7 @@ public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
 
     protected void rotateAnimal(T entityrat) {
         GlStateManager.rotate(90.0F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(0.0F, 0.4F, 0.0F);
     }
 
     protected void stretch(T entityrat) {

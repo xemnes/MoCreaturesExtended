@@ -34,7 +34,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     public MoCEntityWraith(World world) {
         super(world);
         this.collidedVertically = false;
-        this.texture = "wraith.png";
+        this.texture = MoCreatures.proxy.alphaWraithEyes ? "wraith_alpha.png" : "wraith.png";
         setSize(0.6F, 2.0F);
     }
 

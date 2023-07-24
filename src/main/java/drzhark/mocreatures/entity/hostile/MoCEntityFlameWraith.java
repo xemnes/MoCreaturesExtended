@@ -6,6 +6,7 @@ package drzhark.mocreatures.entity.hostile;
 import javax.annotation.Nullable;
 
 import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -22,7 +23,7 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
 
     public MoCEntityFlameWraith(World world) {
         super(world);
-        this.texture = "wraith_flame.png";
+        this.texture = MoCreatures.proxy.alphaWraithEyes ? "wraith_flame_alpha.png" : "wraith_flame.png";
         this.isImmuneToFire = true;
         this.burningTime = 30;
     }

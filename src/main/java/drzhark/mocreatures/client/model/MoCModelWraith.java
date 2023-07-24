@@ -6,6 +6,7 @@ package drzhark.mocreatures.client.model;
 import drzhark.mocreatures.entity.hostile.MoCEntityWraith;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -17,36 +18,58 @@ public class MoCModelWraith extends ModelBiped {
     private int attackCounter;
 
     public MoCModelWraith() {
-        //TODO 4.1 FIX
-        super(12F, 0.0F, 64, 32);
-        this.leftArmPose = ModelBiped.ArmPose.EMPTY;
-        this.rightArmPose = ModelBiped.ArmPose.EMPTY;
-        this.isSneak = false;
-        this.bipedHead = new ModelRenderer(this, 0, 40);
-        this.bipedHead.addBox(-4F, -8F, -4F, 1, 1, 1, 0.0F);
+        textureWidth = 64;
+        textureHeight = 40;
+        this.bipedHead = new ModelRenderer(this, 0, 0);
+        this.bipedHead.addBox(-4F, -8F, -4F, 8, 8, 8, 0.0F);
         this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.bipedHeadwear = new ModelRenderer(this, 0, 0);
-        this.bipedHeadwear.addBox(-5F, -8F, -4F, 8, 8, 8, 0.0F);
-        this.bipedHeadwear.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.bipedBody = new ModelRenderer(this, 36, 0);
-        this.bipedBody.addBox(-6F, 0.0F, -2F, 10, 20, 4, 0.0F);
+        this.bipedBody = new ModelRenderer(this, 16, 16);
+        this.bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 20, 4, 0.0F);
         this.bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.bipedRightArm = new ModelRenderer(this, 16, 16);
-        this.bipedRightArm.addBox(-5F, -2F, -2F, 4, 12, 4, 0.0F);
-        this.bipedRightArm.setRotationPoint(-5F, 2.0F, 0.0F);
-        this.bipedLeftArm = new ModelRenderer(this, 16, 16);
+        this.bipedRightArm = new ModelRenderer(this, 40, 16);
+        this.bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
+        this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
+        this.bipedLeftArm = new ModelRenderer(this, 40, 16);
         this.bipedLeftArm.mirror = true;
-        this.bipedLeftArm.addBox(-1F, -2F, -2F, 4, 12, 4, 0.0F);
-        this.bipedLeftArm.setRotationPoint(5F, 2.0F, 0.0F);
-        this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-        this.bipedRightLeg.addBox(-2F, 0.0F, -2F, 2, 2, 2, 0.0F);
-        this.bipedRightLeg.setRotationPoint(-2F, 12F, 0.0F);
-        this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
-        this.bipedLeftLeg.mirror = true;
-        this.bipedLeftLeg.addBox(-2F, 0.0F, -2F, 2, 2, 2, 0.0F);
-        this.bipedLeftLeg.setRotationPoint(2.0F, 12F, 0.0F);
+        this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
+        this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
     }
 
+    @Override
+    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+        GlStateManager.pushMatrix();
+
+        if (this.isChild) {
+            GlStateManager.scale(0.75F, 0.75F, 0.75F);
+            GlStateManager.translate(0.0F, 16.0F * scale, 0.0F);
+            this.bipedHead.render(scale);
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
+            GlStateManager.scale(0.5F, 0.5F, 0.5F);
+            GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+            this.bipedBody.render(scale);
+            this.bipedRightArm.render(scale);
+            this.bipedLeftArm.render(scale);
+            this.bipedRightLeg.render(scale);
+            this.bipedLeftLeg.render(scale);
+        } else {
+            if (entityIn.isSneaking()) {
+                GlStateManager.translate(0.0F, 0.2F, 0.0F);
+            }
+
+            this.bipedHead.render(scale);
+            this.bipedBody.render(scale);
+            this.bipedRightArm.render(scale);
+            this.bipedLeftArm.render(scale);
+            this.bipedRightLeg.render(scale);
+            this.bipedLeftLeg.render(scale);
+        }
+
+        GlStateManager.popMatrix();
+    }
+
+    // TODO: Fix this
     @Override
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity par7Entity) {
 

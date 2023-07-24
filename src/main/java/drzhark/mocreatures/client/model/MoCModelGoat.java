@@ -277,7 +277,7 @@ public class MoCModelGoat extends ModelBase {
         this.LHorn5.rotateAngleY = this.Head.rotateAngleY;
 
         // Interpolation factor for smoother animations
-        float interpolationFactor = 0.05F;
+        float interpolationFactor = 0.1F;
 
         // Tail movement with interpolation
         float targetTailAngleX = this.tailMov / 57.29578F;

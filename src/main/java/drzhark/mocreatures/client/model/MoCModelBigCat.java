@@ -668,7 +668,7 @@ public class MoCModelBigCat extends ModelBase {
         //f5 = ?
 
         // Interpolation factor for smoother animations
-        float interpolationFactor = 0.05F;
+        float interpolationFactor = 0.1F;
 
         float RLegXRot = MathHelper.cos((f * 0.8F) + 3.141593F) * 0.8F * f1;
         float LLegXRot = MathHelper.cos(f * 0.8F) * 0.8F * f1;

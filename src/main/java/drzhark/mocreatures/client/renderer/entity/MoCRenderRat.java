@@ -32,13 +32,13 @@ public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
 
     @Override
     protected void preRenderCallback(T entityrat, float f) {
-        if (entityrat.climbing()) {
+        if (entityrat.isOnLadder()) {
             rotateAnimal(entityrat);
         }
     }
 
     protected void rotateAnimal(T entityrat) {
-        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90.0F, -1.0F, 0.0F, 0.0F);
     }
 
     protected void stretch(T entityrat) {

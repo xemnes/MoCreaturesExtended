@@ -15,9 +15,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -54,7 +56,9 @@ public class MoCEntityWWolf extends MoCEntityMob {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new MoCEntityWWolf.AIWolfTarget<>(this, EntityPlayer.class));
+        this.targetTasks.addTask(3, new MoCEntityWWolf.AIWolfTarget<>(this, EntityIronGolem.class));
     }
 
     @Override
@@ -206,6 +210,41 @@ public class MoCEntityWWolf extends MoCEntityMob {
                     break;
                 }
             }
+        }
+    }
+
+    static class AIWolfAttack extends EntityAIAttackMelee {
+        public AIWolfAttack(MoCEntityWWolf wolf) {
+            super(wolf, 1.0D, true);
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            float f = this.attacker.getBrightness();
+
+            if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
+                this.attacker.setAttackTarget(null);
+                return false;
+            } else {
+                return super.shouldContinueExecuting();
+            }
+        }
+
+        @Override
+        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
+            return 4.0F + attackTarget.width;
+        }
+    }
+
+    static class AIWolfTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+        public AIWolfTarget(MoCEntityWWolf wolf, Class<T> classTarget) {
+            super(wolf, classTarget, true);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            float f = this.taskOwner.getBrightness();
+            return f < 0.5F && super.shouldExecute();
         }
     }
 

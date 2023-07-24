@@ -126,6 +126,15 @@ public class MoCEntityRat extends MoCEntityMob {
     }
 
     @Override
+    protected SoundEvent getFallSound(int heightIn) {
+        return null;
+    }
+
+    @Override
+    public void fall(float distance, float damageMultiplier) {
+    }
+
+    @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         Entity entity = damagesource.getTrueSource();
         if (entity instanceof EntityLivingBase) {

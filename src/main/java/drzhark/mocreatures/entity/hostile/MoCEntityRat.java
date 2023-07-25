@@ -162,7 +162,7 @@ public class MoCEntityRat extends MoCEntityMob {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_RAT_DEATH;
+        return MoCreatures.proxy.legacyRatDeathSound ? MoCSoundEvents.ENTITY_RAT_DEATH_LEGACY : MoCSoundEvents.ENTITY_RAT_DEATH;
     }
 
     @Override

@@ -817,6 +817,12 @@
       "mocreatures:raccoonhurt2"
     ]
   },
+  "ratdyinglegacy": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:ratdyinglegacy"
+    ]
+  },
   "ratdying": {
     "category": "neutral",
     "sounds": [

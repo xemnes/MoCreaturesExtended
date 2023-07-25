@@ -147,6 +147,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_RACCOON_AMBIENT;
     public static final SoundEvent ENTITY_RACCOON_DEATH;
     public static final SoundEvent ENTITY_RACCOON_HURT;
+    public static final SoundEvent ENTITY_RAT_DEATH_LEGACY;
     public static final SoundEvent ENTITY_RAT_AMBIENT;
     public static final SoundEvent ENTITY_RAT_DEATH;
     public static final SoundEvent ENTITY_RAT_HURT;
@@ -328,6 +329,7 @@ public class MoCSoundEvents {
             ENTITY_RACCOON_AMBIENT = createSoundEvent("raccoongrunt");
             ENTITY_RACCOON_DEATH = createSoundEvent("raccoondying");
             ENTITY_RACCOON_HURT = createSoundEvent("raccoonhurt");
+            ENTITY_RAT_DEATH_LEGACY = createSoundEvent("ratdyinglegacy");
             ENTITY_RAT_AMBIENT = createSoundEvent("ratgrunt");
             ENTITY_RAT_DEATH = createSoundEvent("ratdying");
             ENTITY_RAT_HURT = createSoundEvent("rathurt");

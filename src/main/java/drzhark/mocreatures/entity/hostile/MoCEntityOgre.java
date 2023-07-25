@@ -14,9 +14,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -40,9 +42,11 @@ public class MoCEntityOgre extends MoCEntityMob {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new MoCEntityOgre.AIOgreAttack(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new MoCEntityOgre.AIOgreTarget<>(this, EntityPlayer.class));
+        this.targetTasks.addTask(3, new MoCEntityOgre.AIOgreTarget<>(this, EntityIronGolem.class));
     }
 
     @Override
@@ -214,6 +218,41 @@ public class MoCEntityOgre extends MoCEntityMob {
     public boolean attackEntityAsMob(Entity entityIn) {
         startArmSwingAttack();
         return super.attackEntityAsMob(entityIn);
+    }
+
+    static class AIOgreAttack extends EntityAIAttackMelee {
+        public AIOgreAttack(MoCEntityOgre ogre) {
+            super(ogre, 1.0D, true);
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            float f = this.attacker.getBrightness();
+
+            if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
+                this.attacker.setAttackTarget(null);
+                return false;
+            } else {
+                return super.shouldContinueExecuting();
+            }
+        }
+
+        @Override
+        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
+            return 4.0F + attackTarget.width;
+        }
+    }
+
+    static class AIOgreTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+        public AIOgreTarget(MoCEntityOgre ogre, Class<T> classTarget) {
+            super(ogre, classTarget, true);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            float f = this.taskOwner.getBrightness();
+            return f < 0.5F && super.shouldExecute();
+        }
     }
 
     public float getEyeHeight() {

@@ -20,10 +20,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -67,9 +69,11 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new MoCEntityGolem.AIGolemAttack(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new MoCEntityGolem.AIGolemTarget<>(this, EntityPlayer.class));
+        this.targetTasks.addTask(3, new MoCEntityGolem.AIGolemTarget<>(this, EntityIronGolem.class));
     }
 
     @Override
@@ -793,6 +797,41 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     @Override
     public boolean getCanSpawnHere() {
         return (super.getCanSpawnHere() && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ))) && (this.posY > 50D));
+    }
+
+    static class AIGolemAttack extends EntityAIAttackMelee {
+        public AIGolemAttack(MoCEntityGolem golem) {
+            super(golem, 1.0D, true);
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            float f = this.attacker.getBrightness();
+
+            if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
+                this.attacker.setAttackTarget(null);
+                return false;
+            } else {
+                return super.shouldContinueExecuting();
+            }
+        }
+
+        @Override
+        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
+            return 4.0F + attackTarget.width;
+        }
+    }
+
+    static class AIGolemTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+        public AIGolemTarget(MoCEntityGolem golem, Class<T> classTarget) {
+            super(golem, classTarget, true);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            float f = this.taskOwner.getBrightness();
+            return f < 0.5F && super.shouldExecute();
+        }
     }
 
     public float getEyeHeight() {

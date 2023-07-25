@@ -54,7 +54,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new MoCEntityWWolf.AIWolfAttack(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new MoCEntityWWolf.AIWolfTarget<>(this, EntityPlayer.class));
@@ -129,6 +129,11 @@ public class MoCEntityWWolf extends MoCEntityMob {
         }
         selectType();
         return true;
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
     }
 
     //TODO move this

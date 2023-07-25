@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/scrollofsale"
+    "layer0": "mocreatures:items/scroll_of_sale"
   }
 }

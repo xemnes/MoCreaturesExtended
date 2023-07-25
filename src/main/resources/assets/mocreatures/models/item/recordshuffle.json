@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/recordshuffle"
+    "layer0": "mocreatures:items/record_shuffle"
   }
 }

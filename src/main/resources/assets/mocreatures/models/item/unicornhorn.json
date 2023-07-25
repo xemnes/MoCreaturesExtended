@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/unicornhorn"
+    "layer0": "mocreatures:items/unicorn_horn"
   }
 }

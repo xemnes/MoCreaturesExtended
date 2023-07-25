@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/sharkteeth"
+    "layer0": "mocreatures:items/shark_teeth"
   }
 }

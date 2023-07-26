@@ -217,15 +217,6 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     }
 
     @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public boolean checkSpawningBiome() {
         return true;
     }

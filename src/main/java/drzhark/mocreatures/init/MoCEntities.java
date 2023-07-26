@@ -322,7 +322,7 @@ public class MoCEntities {
                     spawnBiomes.add(biome);
 
                     if (MoCreatures.proxy.debug) {
-                        MoCreatures.LOGGER.debug("Entity {} is valid for biome {}", entityData.getEntityName(), biome.getBiomeName());
+                        MoCreatures.LOGGER.debug("Entity {} is valid for biome {}", entityData.getEntityName(), biome.biomeName);
                     }
                 }
             }

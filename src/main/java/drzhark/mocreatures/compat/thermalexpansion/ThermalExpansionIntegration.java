@@ -8,7 +8,6 @@ import cofh.thermalexpansion.util.managers.machine.SawmillManager;
 import cofh.thermalexpansion.util.managers.machine.SmelterManager;
 import cofh.thermalfoundation.init.TFFluids;
 import cofh.thermalfoundation.item.ItemMaterial;
-import drzhark.mocreatures.init.MoCBlocks;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,14 +18,10 @@ import net.minecraftforge.fluids.FluidStack;
 public class ThermalExpansionIntegration {
 
     public static void addRecipes() {
-        // Factorizer
-        //FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverIngot, 9), new ItemStack(MoCBlocks.mocDirt));
-        FactorizerManager.addDefaultRecipe(new ItemStack(MoCItems.ancientSilverNugget, 9), new ItemStack(MoCItems.ancientSilverIngot));
 
         // Induction Smelter
         int energy = 6_000;
         SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.tusksIron), new ItemStack(Items.IRON_INGOT), 2);
-        SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.silversword), new ItemStack(MoCItems.ancientSilverIngot), 2);
 
         // Pulverizer
         energy = 3_000;
@@ -38,7 +33,6 @@ public class ThermalExpansionIntegration {
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.tusksDiamond), new ItemStack(Items.DIAMOND), 2);
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.horsearmorcrystal), new ItemStack(Items.DIAMOND), 2);
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.sugarlump), new ItemStack(Items.SUGAR), 4);
-        PulverizerManager.addRecipe(2000, new ItemStack(MoCItems.ancientSilverScrap), ItemMaterial.dustSilver);
         PulverizerManager.addRecipe(energy, new ItemStack(MoCItems.medallion), new ItemStack(Items.LEATHER), new ItemStack(Items.GOLD_INGOT), 25);
         // Chitin Armor
         PulverizerManager.addRecycleRecipe(energy, new ItemStack(MoCItems.scorpHelmetDirt), new ItemStack(MoCItems.chitin), 2);
@@ -65,10 +59,6 @@ public class ThermalExpansionIntegration {
 
         // Sawmill
         energy = 1_500;
-        SawmillManager.addRecipe(energy, new ItemStack(MoCBlocks.mocLog, 1, 0), new ItemStack(MoCBlocks.mocPlank, 6, 0), ItemMaterial.dustWood, 100);
-        SawmillManager.addRecipe(energy, new ItemStack(MoCBlocks.mocLog, 1, 1), new ItemStack(MoCBlocks.mocPlank, 6, 1), ItemMaterial.dustWood, 100);
-        TapperManager.addStandardMapping(new ItemStack(MoCBlocks.mocLog, 1, 0), new FluidStack(TFFluids.fluidResin, 100));
-        TapperManager.addStandardMapping(new ItemStack(MoCBlocks.mocLog, 1, 1), new FluidStack(TFFluids.fluidResin, 100));
         SawmillManager.addRecycleRecipe(energy, new ItemStack(MoCItems.horsesaddle), new ItemStack(Items.LEATHER), 3);
         SawmillManager.addRecycleRecipe(energy, new ItemStack(MoCItems.whip), new ItemStack(Items.LEATHER), 3);
         SawmillManager.addRecipe(energy, new ItemStack(MoCItems.elephantChest), new ItemStack(Blocks.CHEST), new ItemStack(MoCItems.animalHide), 50);

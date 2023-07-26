@@ -4,6 +4,7 @@
 package drzhark.mocreatures.client.model;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,28 +21,18 @@ public class MoCModelEgg extends ModelBase {
     ModelRenderer Egg5;
 
     public MoCModelEgg() {
-        //textureWidth = 64;
-        //textureHeight = 32;
 
-        this.Egg1 = new ModelRenderer(this, 0, 0);
-        this.Egg1.addBox(0F, 0F, 0F, 3, 3, 3);
-        this.Egg1.setRotationPoint(0F, 20F, 0F);
+        Egg1 = new ModelRenderer(this);
+        Egg1.setRotationPoint(0.0F, 20.0F, 0.0F);
+        Egg1.cubeList.add(new ModelBox(Egg1, 0, 4, 0.0F, 0.0F, 0.0F, 4, 3, 4, 0.0F, false));
 
-        this.Egg2 = new ModelRenderer(this, 10, 0);
-        this.Egg2.addBox(0F, 0F, 0F, 2, 1, 2);
-        this.Egg2.setRotationPoint(0.5F, 19.5F, 0.5F);
+        Egg2 = new ModelRenderer(this);
+        Egg2.setRotationPoint(0.5F, 19.5F, 0.5F);
+        Egg2.cubeList.add(new ModelBox(Egg2, 2, 3, 0.0F, -1.5F, 0.0F, 3, 6, 3, 0.0F, false));
 
-        this.Egg3 = new ModelRenderer(this, 30, 0);
-        this.Egg3.addBox(0F, 0F, 0F, 2, 1, 2);
-        this.Egg3.setRotationPoint(0.5F, 22.5F, 0.5F);
-
-        this.Egg4 = new ModelRenderer(this, 24, 0);
-        this.Egg4.addBox(0F, 0F, 0F, 1, 2, 2);
-        this.Egg4.setRotationPoint(-0.5F, 20.5F, 0.5F);
-
-        this.Egg5 = new ModelRenderer(this, 18, 0);
-        this.Egg5.addBox(0F, 0F, 0F, 1, 2, 2);
-        this.Egg5.setRotationPoint(2.5F, 20.5F, 0.5F);
+        Egg3 = new ModelRenderer(this);
+        Egg3.setRotationPoint(0.5F, 22.5F, 0.5F);
+        Egg3.cubeList.add(new ModelBox(Egg3, 4, 2, 0.5F, -5.5F, 0.5F, 2, 1, 2, 0.0F, false));
 
     }
 
@@ -52,8 +43,6 @@ public class MoCModelEgg extends ModelBase {
         this.Egg1.render(f5);
         this.Egg2.render(f5);
         this.Egg3.render(f5);
-        this.Egg4.render(f5);
-        this.Egg5.render(f5);
     }
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {

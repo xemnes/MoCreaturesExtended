@@ -81,7 +81,7 @@ dependencies {
     runtimeOnly "curse.maven:codechicken-lib-1-8-242818:2779848"
     runtimeOnly "curse.maven:cofh-world-271384:2920434"
     runtimeOnly "curse.maven:ichunutil-229060:2801262"
-    runtimeOnly "curse.maven:jei-238222:4538010"
+    deobfCompile "curse.maven:jei-238222:4538010"
     runtimeOnly "curse.maven:redstone-flux-270789:2920436"
     runtimeOnly "curse.maven:shadowfacts-forgelin-248453:2785465"
     runtimeOnly "curse.maven:tesla-core-lib-254602:3438487"

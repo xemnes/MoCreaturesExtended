@@ -14,6 +14,7 @@ import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAppear;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -217,15 +218,20 @@ public class MoCItemPetAmulet extends MoCItem {
      */
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        for (String s : I18n.format(stack.getItem().getTranslationKey() + ".desc").split("\\\\n")) {
+            if (I18n.hasKey(stack.getItem().getTranslationKey() + ".desc")) {
+                tooltip.add(TextFormatting.GRAY + s);
+            }
+        }
         initAndReadNBT(stack);
         if (!this.spawnClass.equals("")) {
-            tooltip.add(TextFormatting.AQUA + this.spawnClass);
+            tooltip.add(TextFormatting.WHITE + "Type: " + TextFormatting.AQUA + this.spawnClass);
         }
         if (!this.name.equals("")) {
-            tooltip.add(TextFormatting.BLUE + this.name);
+            tooltip.add(TextFormatting.WHITE + "Name: " + TextFormatting.YELLOW + this.name);
         }
         if (!this.ownerName.equals("")) {
-            tooltip.add(TextFormatting.DARK_BLUE + "Owned by " + this.ownerName);
+            tooltip.add(TextFormatting.WHITE + "Owner: " + TextFormatting.GREEN + this.ownerName);
         }
     }
 

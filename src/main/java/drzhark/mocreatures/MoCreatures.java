@@ -13,7 +13,6 @@ import drzhark.mocreatures.command.CommandMoCTP;
 import drzhark.mocreatures.command.CommandMoCreatures;
 import drzhark.mocreatures.compat.CompatHandler;
 import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
-import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
 import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -90,9 +89,6 @@ public class MoCreatures {
         proxy.mocSettingsConfig.save();
         proxy.registerRenderers();
         proxy.registerRenderInformation();
-        WYVERN_LAIR = DimensionType.register("Wyvern Lair", "_wyvern_lair", wyvernLairDimensionID, WorldProviderWyvernEnd.class, false);
-        DimensionManager.registerDimension(wyvernLairDimensionID, WYVERN_LAIR);
-        MoCTerrainEventHooks.addBiomeTypes();
         MoCEntities.registerSpawns();
         MoCTerrainEventHooks.buildWorldGenSpawnLists();
         CompatHandler.init();

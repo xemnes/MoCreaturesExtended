@@ -37,14 +37,11 @@ public class MoCItems {
     public static final MoCItem mocegg = new MoCItemEgg("mocegg");
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
     public static final MoCItem whip = new MoCItemWhip("whip");
-    public static final MoCItem staffPortal = new ItemStaffPortal("staffportal");
-    public static final MoCItem staffTeleport = new ItemStaffTeleport("staffteleport");
     public static final MoCItem medallion = new MoCItem("medallion");
     public static final MoCItemKittyBed[] kittybed = new MoCItemKittyBed[16];
     public static final MoCItem litterbox = new MoCItemLitterBox("kittylitter");
     public static final MoCItem woolball = new MoCItem("woolball");
     public static final MoCItem petfood = new MoCItem("petfood");
-    public static final MoCItem builderHammer = new ItemBuilderHammer("builderhammer");
     public static final MoCItem hideCroc = new MoCItem("reptilehide");
     public static final MoCItem fur = new MoCItem("fur");
     public static final MoCItem essencedarkness = new MoCItem("essencedarkness");
@@ -85,9 +82,6 @@ public class MoCItems {
     public static final MoCItem scrollFreedom = new MoCItem("scrolloffreedom");
     public static final MoCItem scrollOfSale = new MoCItem("scrollofsale");
     public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
-    public static final MoCItem ancientSilverScrap = new MoCItem("ancientsilverscrap");
-    public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
-    public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
@@ -111,8 +105,6 @@ public class MoCItems {
     public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
     static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 0, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
-    static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 304, 9.5F, 3.0F, 19);
-    public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
     static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", SCORPC, 4);
     static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
@@ -170,7 +162,6 @@ public class MoCItems {
     public static final MoCItemArmor helmetHide = new MoCItemArmor("hidehelmet", hideARMOR, 4, EntityEquipmentSlot.HEAD);
     public static final MoCItemArmor legsHide = new MoCItemArmor("hidelegs", hideARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor bootsHide = new MoCItemArmor("hideboots", hideARMOR, 4, EntityEquipmentSlot.FEET);
-    static ArmorMaterial silverARMOR = EnumHelper.addArmorMaterial("silverARMOR", "silverARMOR", 15, new int[]{2, 6, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F); // unused
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
     public static class RegistrationHandler {
@@ -203,20 +194,12 @@ public class MoCItems {
                     turtleraw,
                     turtlecooked,
                     turtlesoup,
-                    staffPortal,
-                    staffTeleport,
-                    builderHammer,
-
-                    ancientSilverScrap,
-                    ancientSilverIngot,
-                    ancientSilverNugget,
 
                     nunchaku,
                     sai,
                     bo,
                     katana,
                     sharksword,
-                    silversword,
 
                     essencedarkness,
                     essencefire,

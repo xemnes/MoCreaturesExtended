@@ -17,6 +17,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -95,6 +96,8 @@ public class MoCEntityPandaBear extends MoCEntityBear {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && (stack.getItem() == MoCItems.sugarlump || stack.getItem() == Items.REEDS)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
+
+            playTameEffect(EnumParticleTypes.VILLAGER_HAPPY);
 
             if (!this.world.isRemote) {
                 MoCTools.tameWithName(player, this);

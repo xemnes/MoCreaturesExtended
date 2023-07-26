@@ -36,10 +36,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -306,6 +303,8 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == Items.CAKE) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
+
+            playTameEffect(EnumParticleTypes.VILLAGER_HAPPY);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             this.temper += 2;
             this.setHealth(getMaxHealth());
@@ -317,6 +316,8 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == MoCItems.sugarlump) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
+
+            playTameEffect(EnumParticleTypes.VILLAGER_HAPPY);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             this.temper += 1;
             this.setHealth(getMaxHealth());

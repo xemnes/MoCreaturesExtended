@@ -2,7 +2,6 @@ package drzhark.mocreatures.compat.industrialforegoing;
 
 import com.buuz135.industrial.api.extractor.ExtractorEntry;
 import com.buuz135.industrial.proxy.FluidsRegistry;
-import drzhark.mocreatures.init.MoCBlocks;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -25,13 +24,6 @@ public class IndustrialForegoingIntegration {
                 new ItemStack(MoCItems.heartdarkness),
                 new ItemStack(MoCItems.heartfire),
                 new ItemStack(MoCItems.heartundead)
-        };
-    }
-
-    public static ExtractorEntry[] getLatexEntries() {
-        return new ExtractorEntry[]{
-                new ExtractorEntry(new ItemStack(MoCBlocks.mocLog, 1, 0), new FluidStack(FluidsRegistry.LATEX, 1)),
-                new ExtractorEntry(new ItemStack(MoCBlocks.mocLog, 1, 1), new FluidStack(FluidsRegistry.LATEX, 1))
         };
     }
 }

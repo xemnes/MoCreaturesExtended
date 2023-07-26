@@ -166,9 +166,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             ItemStack stack = entityplayer.getHeldItemMainhand();
             if (!stack.isEmpty()) {
-                if (stack.getItem() == MoCItems.silversword) {
-                    i = 10F;
-                } else if (stack.getItem() instanceof ItemSword) {
+                if (stack.getItem() instanceof ItemSword) {
                     String swordMaterial = ((ItemSword) stack.getItem()).getToolMaterialName();
                     String swordName = stack.getItem().getTranslationKey();
                     if (swordMaterial.toLowerCase().contains("silver") || swordName.toLowerCase().contains("silver")) {

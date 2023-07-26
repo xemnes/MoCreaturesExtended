@@ -155,6 +155,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         final ItemStack stack = player.getHeldItem(hand);
+
         //before ownership check
         if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollOfOwner)) && MoCreatures.proxy.enableResetOwnership
                 && MoCTools.isThisPlayerAnOP(player)) {
@@ -269,6 +270,17 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         if (!par1) {
             particleType = EnumParticleTypes.SMOKE_NORMAL;
         }
+
+        for (int i = 0; i < 7; ++i) {
+            double d0 = this.rand.nextGaussian() * 0.02D;
+            double d1 = this.rand.nextGaussian() * 0.02D;
+            double d2 = this.rand.nextGaussian() * 0.02D;
+            this.world.spawnParticle(particleType, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D
+                    + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
+        }
+    }
+
+    public void playTameEffect(EnumParticleTypes particleType) {
 
         for (int i = 0; i < 7; ++i) {
             double d0 = this.rand.nextGaussian() * 0.02D;

@@ -33,8 +33,6 @@ public class CompatHandler {
         if (Loader.isModLoaded("industrialforegoing")) {
             for (ItemStack proteinGeneratorEntry : IndustrialForegoingIntegration.getBasicProteinGeneratorEntries())
                 IndustrialForegoingHelper.addProteinReactorEntry(new ProteinReactorEntry(proteinGeneratorEntry));
-            for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
-                IndustrialForegoingHelper.addWoodToLatex(entry);
         }
 
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);

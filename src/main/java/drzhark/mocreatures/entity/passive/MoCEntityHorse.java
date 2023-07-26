@@ -1519,7 +1519,11 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.haystack)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            setSitting(true);
+
+            if (getIsSitting()){
+                setSitting(false);
+            } else setSitting(true);
+
             eatingHorse();
             if (!isMagicHorse() && !isUndead()) this.setHealth(getMaxHealth());
             return true;

@@ -5,6 +5,8 @@ package drzhark.mocreatures.item;
 
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -12,6 +14,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCItemSword extends ItemSword {
 
@@ -58,5 +65,15 @@ public class MoCItemSword extends ItemSword {
 
         stack.damageItem(1, attacker);
         return true;
+    }
+
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+
+        for (String s : I18n.format(stack.getItem().getTranslationKey() + ".desc").split("\\\\n")) {
+            if (I18n.hasKey(stack.getItem().getTranslationKey() + ".desc")) {
+                tooltip.add(TextFormatting.GRAY + s);
+            }
+        }
     }
 }

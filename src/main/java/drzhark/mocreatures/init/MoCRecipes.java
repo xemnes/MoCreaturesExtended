@@ -22,33 +22,15 @@ public class MoCRecipes {
         @SubscribeEvent
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
 
-            GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 0), new ItemStack(Items.COAL, 1, 1), 0.15F);
-            GameRegistry.addSmelting(new ItemStack(MoCBlocks.mocLog, 1, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
-
-            GameRegistry.addSmelting(MoCItems.ancientSilverScrap, new ItemStack(MoCItems.ancientSilverIngot, 1), 1.0F);
             GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.silversword, new ItemStack(MoCItems.ancientSilverNugget, 1), 0.25F);
             GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.venisonRaw, new ItemStack(MoCItems.venisonCooked, 1), 0.35F);
 
             GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet, 1), 0.35F);
-
-            OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.mocDirt, 1, 0));
-            OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.mocDirt, 1, 1));
-            OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.mocGrass, 1, 0));
-            OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.mocGrass, 1, 1));
-            OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.mocLog, 1, 0));
-            OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.mocLog, 1, 1));
-            OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.mocPlank, 1, 0));
-            OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.mocPlank, 1, 1));
-            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.mocStone, 1, 0));
-            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.mocStone, 1, 1));
-            OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.mocLeaf, 1, 0));
-            OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.mocLeaf, 1, 1));
 
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinCave);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitin);
@@ -56,8 +38,6 @@ public class MoCRecipes {
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinNether);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinUndead);
             OreDictionary.registerOre("egg", new ItemStack(MoCItems.mocegg, 1, OreDictionary.WILDCARD_VALUE));
-            OreDictionary.registerOre("ingotSilver", MoCItems.ancientSilverIngot);
-            OreDictionary.registerOre("nuggetSilver", MoCItems.ancientSilverNugget);
             OreDictionary.registerOre("record", MoCItems.recordshuffle);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingCave);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingDirt);

@@ -1,7 +1,6 @@
 package drzhark.mocreatures.compat.thaumcraft;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.init.MoCBlocks;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,21 +17,6 @@ public class ThaumcraftIntegration {
     @SubscribeEvent
     public static void registerAspects(AspectRegistryEvent event) {
         AspectEventProxy proxy = event.register;
-        // Blocks
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocDirt, 1, 0), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocDirt, 1, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocGrass, 1, 0), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocGrass, 1, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLog, 1, 0), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLog, 1, 1), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLeaf, 1, 0), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLeaf, 1, 1), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocPlank, 1, 0), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocPlank, 1, 1), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocStone, 1, 0), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocStone, 1, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocTallGrass, 1, 0), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocTallGrass, 1, 1), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
         // Items - Armor
         proxy.registerObjectTag(new ItemStack(MoCItems.helmetCroc, 1, 0), new AspectList().add(Aspect.BEAST, 30).add(Aspect.PROTECT, 8).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.plateCroc, 1, 0), new AspectList().add(Aspect.BEAST, 46).add(Aspect.PROTECT, 20).add(Aspect.CRAFT, 6));
@@ -71,7 +55,6 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletghostfull, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.SOUL, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletpegasus, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.AIR, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.amuletpegasusfull, 1, 0), new AspectList().add(Aspect.MOTION, 10).add(Aspect.AIR, 10).add(Aspect.DESIRE, 3).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
-        proxy.registerObjectTag(new ItemStack(MoCItems.ancientSilverScrap, 1, 0), new AspectList().add(Aspect.DESIRE, 5).add(Aspect.EARTH, 5).add(Aspect.METAL, 10));
         proxy.registerObjectTag(new ItemStack(MoCItems.animalHide, 1, 0), new AspectList().add(Aspect.BEAST, 6).add(Aspect.PROTECT, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.bigcatclaw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 2));
         proxy.registerObjectTag(new ItemStack(MoCItems.chitin, 1, 0), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.EARTH, 5));
@@ -115,7 +98,6 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordNether, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.FIRE, 10).add(Aspect.AVERSION, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordUndead, 1, 0), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.DARKNESS, 10).add(Aspect.AVERSION, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.sharksword, 1, 0), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.PLANT, 8).add(Aspect.BEAST, 12));
-        proxy.registerObjectTag(new ItemStack(MoCItems.silversword, 1, 0), new AspectList().add(Aspect.AVERSION, 20).add(Aspect.METAL, 22).add(Aspect.DEATH, 12));
         proxy.registerObjectTag(new ItemStack(MoCItems.whip, 1, 0), new AspectList().add(Aspect.METAL, 5).add(Aspect.BEAST, 15).add(Aspect.ORDER, 5));
         // Entities - Animals
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "blackbear", new AspectList().add(Aspect.BEAST, 15).add(Aspect.EARTH, 15).add(Aspect.AVERSION, 10));

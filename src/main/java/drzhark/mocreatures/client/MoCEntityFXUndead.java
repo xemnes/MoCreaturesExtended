@@ -67,9 +67,9 @@ public class MoCEntityFXUndead extends Particle {
 
     private String getCurrentTexture() {
         if (this.onGround) {
-            return "fxundead1.png";
+            return "fx_undead1.png";
         }
-        return "fxundead2.png";
+        return "fx_undead2.png";
     }
 
     @Override

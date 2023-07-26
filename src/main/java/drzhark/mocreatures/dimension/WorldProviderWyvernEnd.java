@@ -153,7 +153,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
 
     // No custom sun and moon yet but the textures are both here for now
     public String getSunTexture() {
-        return MoCreatures.proxy.getMiscTexture("twinsuns.png").toString();
+        return MoCreatures.proxy.getMiscTexture("twin_suns.png").toString();
     }
 
     public String getMoonTexture() {

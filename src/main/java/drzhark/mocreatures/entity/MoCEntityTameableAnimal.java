@@ -8,6 +8,7 @@ import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCPetData;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -105,8 +106,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         //this avoids damage done by Players to a tamed creature that is not theirs
-        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && entity instanceof EntityPlayer && !entity.getUniqueID().equals(this.getOwnerId())
-                && !MoCTools.isThisPlayerAnOP((EntityPlayer) entity)) {
+        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && entity instanceof EntityPlayer && !entity.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((EntityPlayer) entity)) {
             return false;
         }
 
@@ -129,8 +129,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         //if the player interacting is not the owner, do nothing!
-        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
-                && !player.getUniqueID().equals(this.getOwnerId())) {
+        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !player.getUniqueID().equals(this.getOwnerId())) {
             player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "This pet does not belong to you."));
             return false;
         }
@@ -156,8 +155,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
 
         final ItemStack stack = player.getHeldItem(hand);
         //before ownership check
-        if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollOfOwner)) && MoCreatures.proxy.enableResetOwnership
-                && MoCTools.isThisPlayerAnOP(player)) {
+        if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollOfOwner)) && MoCreatures.proxy.enableResetOwnership && MoCTools.isThisPlayerAnOP(player)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
@@ -169,12 +167,11 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             return true;
         }
         //changes name
-        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed()
-                && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK || stack.getItem() == Items.NAME_TAG)) {
+        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK || stack.getItem() == Items.NAME_TAG)) {
             return MoCTools.tameWithName(player, this);
         }
         //sets it free, untamed
-        if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollFreedom))) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollFreedom) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
@@ -185,8 +182,11 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
                 this.setPetName("");
                 this.dropMyStuff();
                 this.setTamed(false);
+                if (this instanceof MoCEntityKitty) {
+                    MoCEntityKitty kitty = (MoCEntityKitty) this;
+                    kitty.changeKittyState(1);
+                }
             }
-
             return true;
         }
 
@@ -274,8 +274,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             double d0 = this.rand.nextGaussian() * 0.02D;
             double d1 = this.rand.nextGaussian() * 0.02D;
             double d2 = this.rand.nextGaussian() * 0.02D;
-            this.world.spawnParticle(particleType, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D
-                    + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
+            this.world.spawnParticle(particleType, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, d0, d1, d2);
         }
     }
 
@@ -380,8 +379,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         double var4 = this.rand.nextGaussian() * 0.02D;
         double var6 = this.rand.nextGaussian() * 0.02D;
 
-        this.world.spawnParticle(EnumParticleTypes.HEART, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D
-                + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var2, var4, var6);
+        this.world.spawnParticle(EnumParticleTypes.HEART, this.posX + this.rand.nextFloat() * this.width * 2.0F - this.width, this.posY + 0.5D + this.rand.nextFloat() * this.height, this.posZ + this.rand.nextFloat() * this.width * 2.0F - this.width, var2, var4, var6);
     }
 
     /**
@@ -462,8 +460,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
 
             setGestationTime(getGestationTime() + 1);
             if (!this.world.isRemote) {
-                MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHeart(this.getEntityId()),
-                        new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
+                MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHeart(this.getEntityId()), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
             }
 
             if (getGestationTime() <= 50) {

@@ -42,7 +42,7 @@ public class MoCPetMapData extends WorldSavedData {
 
     public void removeOwnerPet(IMoCTameable pet, int petId) {
         UUID owner = pet.getOwnerId();
-        if (this.petMap.containsKey(owner) && this.petMap.get(owner).removePet(petId)) {
+        if (this.petMap.get(owner) != null && this.petMap.get(owner).removePet(petId)) {
             this.markDirty();
             pet.setOwnerPetId(-1);
         }

@@ -5,6 +5,7 @@ package drzhark.mocreatures.entity.item;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
@@ -188,12 +189,15 @@ public class MoCEntityKittyBed extends EntityLiving {
         if (this.onGround) {
             setPickedUp(false);
         }
-        if (!this.world.isRemote && (getHasMilk() || getHasFood()) && this.isBeingRidden()) {
-            this.milkLevel += 0.003F;
-            if (this.milkLevel > 2.0F) {
-                this.milkLevel = 0.0F;
-                setHasMilk(false);
-                setHasFood(false);
+        if (!this.world.isRemote && (getHasMilk() || getHasFood()) && this.isBeingRidden() && getPassengers().get(0) instanceof MoCEntityKitty) {
+            MoCEntityKitty kitty = (MoCEntityKitty) getPassengers().get(0);
+            if (kitty.getKittyState() != 12) {
+                this.milkLevel += 0.003F;
+                if (this.milkLevel > 2.0F) {
+                    this.milkLevel = 0.0F;
+                    setHasMilk(false);
+                    setHasFood(false);
+                }
             }
         }
         if (this.isRiding()) MoCTools.dismountSneakingPlayer(this);

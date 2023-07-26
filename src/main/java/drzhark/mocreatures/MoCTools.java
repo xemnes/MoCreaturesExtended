@@ -1535,7 +1535,7 @@ public class MoCTools {
             BlockPos pos = new BlockPos(i1, j1, k1);
 
             if (j1 > 4 && ((runningEntity.world.getBlockState(pos).getBlock() == Blocks.AIR || runningEntity.world.getBlockState(pos).getBlock() == Blocks.SNOW) && runningEntity.world.getBlockState(pos.down()).getBlock() != Blocks.AIR)) {
-                runningEntity.getNavigator().tryMoveToXYZ(i1, j1, k1, 2.5D);
+                runningEntity.getNavigator().tryMoveToXYZ(i1, j1, k1, 1.5D);
                 break;
             }
         }

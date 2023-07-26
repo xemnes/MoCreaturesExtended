@@ -653,7 +653,7 @@ public class MoCTools {
     public static String biomeName(World world, BlockPos pos) {
         BiomeProvider biomeProvider = world.getBiomeProvider();
         Biome biome = biomeProvider.getBiome(pos);
-        return biome.getBiomeName();
+        return biome.biomeName;
     }
 
     public static Biome biomeKind(World world, BlockPos pos) {

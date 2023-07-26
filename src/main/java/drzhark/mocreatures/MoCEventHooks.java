@@ -6,17 +6,9 @@ package drzhark.mocreatures;
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
-import drzhark.mocreatures.util.CMSUtils;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.*;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -118,67 +110,6 @@ public class MoCEventHooks {
                 }
             }
         }
-    }
-
-    // used for Despawner
-    @SubscribeEvent
-    public void onLivingDespawn(LivingSpawnEvent.AllowDespawn event) {
-        if (MoCreatures.proxy.forceDespawns && !MoCreatures.isCustomSpawnerLoaded) {
-            // try to guess what we should ignore
-            // Monsters
-            if ((IMob.class.isAssignableFrom(event.getEntityLiving().getClass()) || IRangedAttackMob.class.isAssignableFrom(event.getEntityLiving().getClass())) || event.getEntityLiving().isCreatureType(EnumCreatureType.MONSTER, false)) {
-                return;
-            }
-            // Tameable
-            if (event.getEntityLiving() instanceof EntityTameable) {
-                if (((EntityTameable) event.getEntityLiving()).isTamed()) {
-                    return;
-                }
-            }
-            // Farm animals
-            if (event.getEntityLiving() instanceof EntitySheep || event.getEntityLiving() instanceof EntityPig || event.getEntityLiving() instanceof EntityCow || event.getEntityLiving() instanceof EntityChicken) {
-                // check lightlevel
-                if (isValidDespawnLightLevel(event.getEntity(), event.getWorld(), MoCreatures.proxy.minDespawnLightLevel, MoCreatures.proxy.maxDespawnLightLevel)) {
-                    return;
-                }
-            }
-            // Others
-            NBTTagCompound nbt = new NBTTagCompound();
-            event.getEntityLiving().writeToNBT(nbt);
-            if (nbt.hasKey("Owner") && !nbt.getString("Owner").equals("")) {
-                return; // ignore
-            }
-            if (nbt.hasKey("Tamed") && nbt.getBoolean("Tamed")) {
-                return; // ignore
-            }
-            // Deny Rest
-            if (event.getEntityLiving().getIdleTime() > 600) {
-                event.setResult(Result.ALLOW);
-            }
-
-            if (MoCreatures.proxy.debug) {
-                int x = MathHelper.floor(event.getEntity().posX);
-                int y = MathHelper.floor(event.getEntity().getEntityBoundingBox().minY);
-                int z = MathHelper.floor(event.getEntity().posZ);
-                MoCreatures.LOGGER.info("Forced Despawn of entity " + event.getEntityLiving() + " at " + x + ", " + y + ", " + z + ". To prevent forced despawns, use /moc forceDespawns false.");
-            }
-        }
-    }
-
-    private boolean isValidDespawnLightLevel(Entity entity, World world, int minDespawnLightLevel, int maxDespawnLightLevel) {
-        int x = MathHelper.floor(entity.posX);
-        int y = MathHelper.floor(entity.getEntityBoundingBox().minY);
-        int z = MathHelper.floor(entity.posZ);
-        int blockLightLevel = 0;
-        if (y >= 0) {
-            if (y >= 256) {
-                y = 255;
-            }
-            blockLightLevel = CMSUtils.getLightFromNeighbors(world.getChunk(x >> 4, z >> 4), x & 15, y, z & 15);
-        }
-        if (blockLightLevel < minDespawnLightLevel && maxDespawnLightLevel != -1) {
-            return false;
-        } else return blockLightLevel <= maxDespawnLightLevel || maxDespawnLightLevel == -1;
     }
 
     private BlockPos getSafeSpawnPos(EntityLivingBase entity, BlockPos near) {

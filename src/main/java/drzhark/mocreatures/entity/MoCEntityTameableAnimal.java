@@ -249,15 +249,6 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         super.setDead();
     }
 
-    @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
-        }
-    }
-
     /**
      * Play the taming effect, will either be hearts or smoke depending on
      * status

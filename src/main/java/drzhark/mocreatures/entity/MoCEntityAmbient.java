@@ -160,15 +160,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         return null;
     }
 
-    @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
-        }
-    }
-
     /**
      * called in getCanSpawnHere to make sure the right type of creature spawns
      * in the right biome i.e. snakes, rays, bears, BigCats and later wolves,

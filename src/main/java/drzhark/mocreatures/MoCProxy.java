@@ -62,13 +62,10 @@ public class MoCProxy implements IGuiHandler {
     public int wyvernEggDropChance;
     public int motherWyvernEggDropChance;
     public int particleFX;
-    public int minDespawnLightLevel = 2;
-    public int maxDespawnLightLevel = 7;
     public float ogreStrength;
     public float ogreCaveStrength;
     public float ogreFireStrength;
     public short ogreAttackRange;
-    public boolean forceDespawns;
     public boolean enableHunters;
     public boolean debug = false;
     public boolean allowInstaSpawn;
@@ -255,9 +252,6 @@ public class MoCProxy implements IGuiHandler {
         // General
         //this.allowInstaSpawn = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "AllowInstaSpawn", false, "Allows you to instantly spawn MoCreatures from GUI.").getBoolean(false);
         this.debug = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "Debug", false, "Turns on verbose logging.").getBoolean(false);
-        this.minDespawnLightLevel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "DespawnMinLightLevel", 2, "The minimum light level threshold used to determine whether or not to despawn a farm animal when ForceDespawns is enabled. Note: Configure this value in CMS if it is installed.").getInt();
-        this.maxDespawnLightLevel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "DespawnMaxLightLevel", 7, "The maximum light level threshold used to determine whether or not to despawn a farm animal when ForceDespawns is enabled. Note: Configure this value in CMS if it is installed.").getInt();
-        this.forceDespawns = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ForceDespawns", false, "Forces despawning on all creatures including vanilla for a more dynamic experience while exploring the world. If false, all passive MoCreatures will not despawn to prevent other creatures from taking over. Note: if you experience issues with farm animals despawning, adjust despawn light levels. If CMS is installed, this setting must remain true if you want MoCreatures to despawn.").getBoolean(false);
         this.maxTamed = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "MaxTamedPerPlayer", 10, "Maximum tamed creatures a player can have. Requires EnableOwnership to be enabled.").getInt();
         this.maxOPTamed = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "MaxTamedPerOP", 20, "Maximum tamed creatures an OP can have. Requires EnableOwnership to be enabled.").getInt();
         this.enableOwnership = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "EnableOwnership", false, "Assigns the player as the owner for each creature they tame. Only the owner can interact with the tamed creature.").getBoolean(false);

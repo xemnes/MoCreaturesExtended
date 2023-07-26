@@ -255,11 +255,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         }
     }
 
-    @Override
-    protected boolean canDespawn() {
-        return MoCreatures.proxy.forceDespawns && getKittyState() < 3;
-    }
-
     public void changeKittyState(int i) {
         setKittyState(i);
         setSitting(false);

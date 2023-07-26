@@ -31,7 +31,6 @@ public class MoCModelBigCat extends ModelBase {
     protected boolean hasStinger;
     protected boolean isGhost;
     protected boolean isMovingVertically;
-    //fields
     ModelRenderer RightHindFoot;
     ModelRenderer Stinger;
     ModelRenderer RightHindUpperLeg;
@@ -107,6 +106,8 @@ public class MoCModelBigCat extends ModelBase {
     ModelRenderer NeckHarness;
     ModelRenderer Collar;
     ModelRenderer StorageChest;
+    private float prevTailSwingYaw;
+    private float prevMouthAngle;
     private boolean isChested;
     private boolean diving;
     private boolean isSitting;
@@ -666,6 +667,9 @@ public class MoCModelBigCat extends ModelBase {
         //f4 = Head X movement or rotation Pitch
         //f5 = ?
 
+        // Interpolation factor for smoother animations
+        float interpolationFactor = 0.1F;
+
         float RLegXRot = MathHelper.cos((f * 0.8F) + 3.141593F) * 0.8F * f1;
         float LLegXRot = MathHelper.cos(f * 0.8F) * 0.8F * f1;
         float gallopRLegXRot = MathHelper.cos((f * 0.6F) + 3.141593F) * 0.8F * f1;
@@ -674,27 +678,21 @@ public class MoCModelBigCat extends ModelBase {
         float stingYOffset;
         float stingZOffset;
 
-        //float TailXRot = MathHelper.cos(f * 0.4F) * 0.2F * f1;
-        // cos(f * 0.4F) ==> determines the speed of the movement
-        // * 0.2F * f1 ==> determines the amplitude of the pendulum movement
-
-        //float legDisparity = (-3.141593F * f1 * 0.5F) + 3.141593F;
-        //float rLegRotFinal = MathHelper.cos(this.rLegMov) * 0.8F * f1;
-        //float lLegRotFinal = MathHelper.cos((this.rLegMov) + legDisparity) * 0.8F * f1;
-        //this.rLegMov = this.rLegMov + (f1 * 0.25F);//(MathHelper.cos((f1 * 10F) + rLegMov) * f1);
-
-        //lLegMov = lLegMov + (f1*0.05F);
-        //leg should not return to 0 when stopped, and increment based on movement speed
-        //the movement should still follow a cos function i.e. pendulum
-        //the faster the speed, the higher the increment
-
-        //TODO sync with leg movement speed
+        // Set the target tail angle based on the tail swinging state or any other conditions
+        float targetTailAngle;
         if (this.movingTail) {
-            this.Tail2.rotateAngleY = MathHelper.cos(f2 * 0.3F);
-
+            // Set the desired tail swing angle when the tail is moving
+            targetTailAngle = MathHelper.cos(f2 * 0.3F);
         } else {
-            this.Tail2.rotateAngleY = 0F;
+            // Set the target angle to 0 when the tail is not moving
+            targetTailAngle = 0F;
         }
+        // Interpolate tail swinging rotation towards the target angle
+        float interpolatedTailSwingYaw = this.prevTailSwingYaw + (targetTailAngle - this.prevTailSwingYaw) * interpolationFactor;
+        // Apply the interpolated tail swinging rotation to the tail
+        this.Tail2.rotateAngleY = interpolatedTailSwingYaw;
+        // Save the current value for the next frame's interpolation
+        this.prevTailSwingYaw = interpolatedTailSwingYaw;
 
         if (this.isSitting) {
             stingYOffset = 17F;
@@ -713,38 +711,16 @@ public class MoCModelBigCat extends ModelBase {
             this.LeftHindUpperLeg.rotateAngleX = -50F / this.radianF;
             this.RightHindFoot.rotateAngleX = 90F / this.radianF;
             this.LeftHindFoot.rotateAngleX = 90F / this.radianF;
-            //RightAnkle.rotateAngleX = 20F/radianF;
-            //RightHindLowerLeg.rotateAngleX = 20F/radianF;
             this.TailRoot.rotateAngleX = 100F / this.radianF;
             this.Tail2.rotateAngleX = 35F / this.radianF;
             this.Tail3.rotateAngleX = 10F / this.radianF;
             this.NeckHair.rotationPointY = 2F;
-            //lying
-            //NeckHair.setRotationPoint(0F, -1F, 3F);
-            /*
-             * 
-            this.Chest.rotationPointY = 16F;
-            Abdomen.rotateAngleZ= -30F/radianF;
-             */
-
-            //this.TailRoot.rotateAngleY = MathHelper.cos(f2 * 0.3F);
-            /*float tailMov = 0F;
-            float f2a = f2 % 100F;
-            if (f2a > 0 & f2a < 20) {
-                tailMov = f2a / this.radianF;
-                
-                
-            }*/
-            //this.LArm3.rotateAngleY = (9F / this.radianF) - lHand;
-            //this.LArm4.rotateAngleY = +lHand;
             this.Collar.rotateAngleX = 0F / this.radianF;
             this.Collar.rotationPointY = 7F;
             this.Collar.rotationPointZ = -4F;
-
         } else {
             stingYOffset = 8F;
             stingZOffset = 0F;
-
             this.Chest.rotationPointY = 8F;
             this.Abdomen.rotateAngleX = 0F;
             this.Chest.rotateAngleX = 0F;
@@ -758,8 +734,6 @@ public class MoCModelBigCat extends ModelBase {
             this.LeftHindUpperLeg.rotationPointY = 3F;
             this.RightHindFoot.rotateAngleX = 27F / this.radianF;
             this.LeftHindFoot.rotateAngleX = 27F / this.radianF;
-            //this.TailRoot.rotateAngleY = 0F;
-            //this.Tail2.rotateAngleY = 0F;
             this.Collar.rotationPointZ = -2F;
             this.NeckHair.rotationPointY = -0.5F;
             if (this.hasMane) {
@@ -768,39 +742,34 @@ public class MoCModelBigCat extends ModelBase {
                 this.Collar.rotationPointY = 6F;
             }
             this.Collar.rotateAngleX = (20F / this.radianF) + MathHelper.cos(f * 0.8F) * 0.5F * f1;
-            //RightAnkle.rotateAngleX = 0F;
-            //RightHindLowerLeg.rotateAngleX = 0F;
 
             boolean galloping = (f1 >= 0.97F);
             if (this.onAir || this.isGhost) {
                 if (this.isGhost || (this.isFlyer && f1 > 0)) {
                     float speedMov = (f1 * 0.5F);
-                    this.RightUpperLeg.rotateAngleX = (45F / this.radianF) + speedMov;//(15F/radianF);
-                    this.LeftUpperLeg.rotateAngleX = (45F / this.radianF) + speedMov;//(15F/radianF);
-                    this.RightHindUpperLeg.rotateAngleX = (10F / this.radianF) + speedMov;//(30F/radianF);//LLegXRot;
-                    this.LeftHindUpperLeg.rotateAngleX = (10F / this.radianF) + speedMov;//(30F/radianF);//RLegXRot;  
-                } else if (this.isMovingVertically) //only when moving up or down
-                {
+                    this.RightUpperLeg.rotateAngleX = (45F / this.radianF) + speedMov;
+                    this.LeftUpperLeg.rotateAngleX = (45F / this.radianF) + speedMov;
+                    this.RightHindUpperLeg.rotateAngleX = (10F / this.radianF) + speedMov;
+                    this.LeftHindUpperLeg.rotateAngleX = (10F / this.radianF) + speedMov;
+                } else if (this.isMovingVertically) {
                     this.RightUpperLeg.rotateAngleX = (-35F / this.radianF);
                     this.LeftUpperLeg.rotateAngleX = (-35F / this.radianF);
-                    this.RightHindUpperLeg.rotateAngleX = (35F / this.radianF);//LLegXRot;
-                    this.LeftHindUpperLeg.rotateAngleX = (35F / this.radianF);//RLegXRot;    
+                    this.RightHindUpperLeg.rotateAngleX = (35F / this.radianF);
+                    this.LeftHindUpperLeg.rotateAngleX = (35F / this.radianF);
                 }
 
             } else {
                 if (galloping) {
-
-                    this.RightUpperLeg.rotateAngleX = (15F / this.radianF) + gallopRLegXRot;//RLegXRot;
-                    this.LeftUpperLeg.rotateAngleX = (15F / this.radianF) + gallopRLegXRot;//LLegXRot;
-                    this.RightHindUpperLeg.rotateAngleX = (-25F / this.radianF) + gallopLLegXRot;//LLegXRot;
-                    this.LeftHindUpperLeg.rotateAngleX = (-25F / this.radianF) + gallopLLegXRot;//RLegXRot;
-
+                    this.RightUpperLeg.rotateAngleX = (15F / this.radianF) + gallopRLegXRot;
+                    this.LeftUpperLeg.rotateAngleX = (15F / this.radianF) + gallopRLegXRot;
+                    this.RightHindUpperLeg.rotateAngleX = (-25F / this.radianF) + gallopLLegXRot;
+                    this.LeftHindUpperLeg.rotateAngleX = (-25F / this.radianF) + gallopLLegXRot;
                     this.Abdomen.rotateAngleY = 0F;
                 } else {
-                    this.RightUpperLeg.rotateAngleX = (15F / this.radianF) + RLegXRot;//rLegRotFinal;//RLegXRot;
-                    this.LeftHindUpperLeg.rotateAngleX = (-25F / this.radianF) + RLegXRot;//rLegRotFinal;//RLegXRot;
-                    this.LeftUpperLeg.rotateAngleX = (15F / this.radianF) + LLegXRot;//lLegRotFinal;//LLegXRot;
-                    this.RightHindUpperLeg.rotateAngleX = (-25F / this.radianF) + LLegXRot;//lLegRotFinal;//LLegXRot;
+                    this.RightUpperLeg.rotateAngleX = (15F / this.radianF) + RLegXRot;
+                    this.LeftHindUpperLeg.rotateAngleX = (-25F / this.radianF) + RLegXRot;
+                    this.LeftUpperLeg.rotateAngleX = (15F / this.radianF) + LLegXRot;
+                    this.RightHindUpperLeg.rotateAngleX = (-25F / this.radianF) + LLegXRot;
                     if (!this.hasStinger) {
                         this.Abdomen.rotateAngleY = MathHelper.cos(f * 0.3F) * 0.25F * f1;
                     }
@@ -818,56 +787,40 @@ public class MoCModelBigCat extends ModelBase {
                 this.RightFootHarness.rotateAngleZ = -RLegXRot / 5F;
             }
 
-            //Tail2.rotateAngleY = LLegXRot;
-
-            //y = A * sin(w * t - k *x)
-            /*
-             * w1 = speed of wave propagation +/- as needed t = time k = number of
-             * waves A = amplitude of wave (how much will it depart from center x =
-             * position? :)A 1.3k 0.5w -3.5
-             */
-
             float TailXRot = MathHelper.cos(f * 0.4F) * 0.15F * f1;
-            //float TailXRot = MathHelper.cos(f * 0.4F) * 0.2F * f1;
-            // cos(f * 0.4F) ==> determines the speed of the movement
-            // * 0.2F * f1 ==> determines the amplitude of the pendulum movement
-
             this.TailRoot.rotateAngleX = (87F / this.radianF) + TailXRot;
             this.Tail2.rotateAngleX = (-30F / this.radianF) + TailXRot;
             this.Tail3.rotateAngleX = (-17F / this.radianF) + TailXRot;
             this.Tail4.rotateAngleX = (21F / this.radianF) + TailXRot;
             this.TailTip.rotateAngleX = (21F / this.radianF) + TailXRot;
             this.TailTusk.rotateAngleX = (21F / this.radianF) + TailXRot;
-
-        }//end of not sitting
+        }
 
         float HeadXRot = (f4 / 57.29578F);
-
-        /* if (f3 > 10F) {
-             f3 = 10F;
-         }
-         if (f3 < -10F) {
-             f3 = -10F;
-         }*/
-
-        /*
-         * f = distance walked f1 = speed 0 - 1 f2 = timer
-         */
 
         this.HeadBack.rotateAngleX = 14F / this.radianF + HeadXRot;
         this.HeadBack.rotateAngleY = (f3 / 57.29578F);
 
-        float mouthMov = 0F;
+        // Calculate the target mouth movement angle based on the openMouthCounter
+        float targetMouthAngle;
         if (this.openMouthCounter != 0) {
             if (this.openMouthCounter < 10) {
-                mouthMov = 22 + (this.openMouthCounter * 3);
+                targetMouthAngle = 22 + (this.openMouthCounter * 3);
             } else if (this.openMouthCounter > 20) {
-                mouthMov = 22 + (90 - (this.openMouthCounter * 3));
+                targetMouthAngle = 22 + (90 - (this.openMouthCounter * 3));
             } else {
-                mouthMov = 55F;
+                targetMouthAngle = 55F;
             }
+        } else {
+            // Set the target angle to 0 when the openMouthCounter is 0 (mouth closed)
+            targetMouthAngle = 0F;
         }
-        this.LowerJaw.rotateAngleX = mouthMov / this.radianF;
+        // Interpolate mouth movement towards the target angle
+        float interpolatedMouthAngle = this.prevMouthAngle + (targetMouthAngle - this.prevMouthAngle) * interpolationFactor;
+        // Apply the interpolated mouth movement angle to the LowerJaw
+        this.LowerJaw.rotateAngleX = interpolatedMouthAngle / this.radianF;
+        // Save the current value for the next frame's interpolation
+        this.prevMouthAngle = interpolatedMouthAngle;
 
         if (this.isSaddled) {
             this.LeftHarness.rotateAngleX = 25F / this.radianF + this.HeadBack.rotateAngleX;
@@ -875,28 +828,6 @@ public class MoCModelBigCat extends ModelBase {
             this.RightHarness.rotateAngleX = 25F / this.radianF + this.HeadBack.rotateAngleX;
             this.RightHarness.rotateAngleY = this.HeadBack.rotateAngleY;
         }
-
-        /*float t = f / 2;
-        boolean movetail = false;
-        if (movetail) {
-            t = f2 / 4F;
-        }
-        float A = 0.35F;//0.8F;
-        float w = 0.6F;
-        float k = 0.6F;
-
-        int i = 0;
-        float tailLat = 0F;
-        tailLat = A * MathHelper.sin(w * t - k * i++);
-        this.TailRoot.rotateAngleY = tailLat;
-        tailLat = A * MathHelper.sin(w * t - k * i++);
-        this.Tail2.rotateAngleY = tailLat;
-        tailLat = A * MathHelper.sin(w * t - k * i++);
-        this.Tail3.rotateAngleY = tailLat;
-        tailLat = A * MathHelper.sin(w * t - k * i++);
-        this.Tail4.rotateAngleY = tailLat;
-        tailLat = A * MathHelper.sin(w * t - k * i++);
-        this.TailTip.rotateAngleY = TailTusk.rotateAngleY = tailLat;*/
 
         if (this.isFlyer) {
 
@@ -906,19 +837,10 @@ public class MoCModelBigCat extends ModelBase {
              */
             float WingRot;
             if (this.flapwings) {
-                WingRot = MathHelper.cos((f2 * 0.3F) + 3.141593F) * 1.2F;// * f1;
-            } else
-            //cruising
-            {
-                WingRot = MathHelper.cos((f * 0.5F)) * 0.1F;//* 1.2F * f1;
+                WingRot = MathHelper.cos((f2 * 0.3F) + 3.141593F) * 1.2F;
+            } else {
+                WingRot = MathHelper.cos((f * 0.5F)) * 0.1F;
             }
-
-            //float WingRot = MathHelper.cos((f * 0.6662F) + 3.141593F) * f1 * 1.2F;
-            //InnerWing.setRotationPoint(5F, 3F, -6F);
-            //setRotation(InnerWing, 0F, -0.3490659F, 0F);
-            //X dist = 12
-            //OuterWing.setRotationPoint(17F, 3F, -6F);
-            //setRotation(OuterWing, 0F, -0.3228859F, 0F);
 
             if (this.floating) {
                 this.OuterWing.rotateAngleY = -0.3228859F + (WingRot / 2F);
@@ -932,17 +854,6 @@ public class MoCModelBigCat extends ModelBase {
 
             this.InnerWingR.rotationPointY = this.InnerWing.rotationPointY;
             this.InnerWingR.rotationPointZ = this.InnerWing.rotationPointZ;
-
-            //OuterWing.rotationPointX = InnerWing.rotationPointX + (MathHelper.cos(WingRot)*12F);
-            //the rotation point X rotates depending on the cos of rotation times the distance of the other block:
-            //cos (WingRot) * 12F
-            //the rotation PointX of Innerwing = 4
-            //the rotation PointX of Outerwing = 16
-            //the difference = 12.
-            // for the rotation point Y, sin is used instead.
-            //OuterWing.rotationPointX = InnerWing.rotationPointX + (MathHelper.cos(WingRot)*12F);
-            //OuterWing.rotationPointY = InnerWing.rotationPointY + (MathHelper.sin(WingRot)*12F);
-
             this.OuterWing.rotationPointX = this.InnerWing.rotationPointX + (MathHelper.cos(WingRot) * 12F);
             this.OuterWingR.rotationPointX = this.InnerWingR.rotationPointX - (MathHelper.cos(WingRot) * 12F);
 
@@ -967,37 +878,35 @@ public class MoCModelBigCat extends ModelBase {
             if (this.hasStinger) {
 
                 if (!this.poisoning) {
-                    //this.Body.rotateAngleX = 5F / this.radianF;
                     this.STailRoot.rotateAngleX = 33F / this.radianF;
-                    this.STailRoot.rotationPointY = stingYOffset;//8F;
+                    this.STailRoot.rotationPointY = stingYOffset;
                     this.STailRoot.rotationPointZ = stingZOffset;
 
                     this.STail2.rotateAngleX = 54.5F / this.radianF;
-                    this.STail2.rotationPointY = stingYOffset;//8F;
+                    this.STail2.rotationPointY = stingYOffset;
                     this.STail2.rotationPointZ = stingZOffset;
 
                     this.STail3.rotateAngleX = 95.1F / this.radianF;
-                    this.STail3.rotationPointY = stingYOffset;//8F;
+                    this.STail3.rotationPointY = stingYOffset;
                     this.STail3.rotationPointZ = stingZOffset;
 
                     this.STail4.rotateAngleX = 141.8F / this.radianF;
-                    this.STail4.rotationPointY = stingYOffset;//8F;
+                    this.STail4.rotationPointY = stingYOffset;
                     this.STail4.rotationPointZ = stingZOffset;
 
                     this.STail5.rotateAngleX = 173.9F / this.radianF;
-                    this.STail5.rotationPointY = stingYOffset;//8F;
+                    this.STail5.rotationPointY = stingYOffset;
                     this.STail5.rotationPointZ = stingZOffset;
 
                     this.StingerLump.rotateAngleX = 116.4F / this.radianF;
-                    this.StingerLump.rotationPointY = stingYOffset;//8F;
+                    this.StingerLump.rotationPointY = stingYOffset;
                     this.StingerLump.rotationPointZ = stingZOffset;
 
                     this.Stinger.rotateAngleX = 69.5F / this.radianF;
-                    this.Stinger.rotationPointY = stingYOffset;//8F;
+                    this.Stinger.rotationPointY = stingYOffset;
                     this.Stinger.rotationPointZ = stingZOffset;
 
                 } else if (!this.isSitting) {
-                    //this.Body.rotateAngleX = 50F / this.radianF;
                     this.STailRoot.rotateAngleX = 95.2F / this.radianF;
                     this.STailRoot.rotationPointY = 14.5F;
                     this.STailRoot.rotationPointZ = 2F;

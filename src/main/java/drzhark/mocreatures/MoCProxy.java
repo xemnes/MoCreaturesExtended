@@ -76,6 +76,7 @@ public class MoCProxy implements IGuiHandler {
     public double spawnMultiplier;
     public int kittyVillageChance;
     public boolean humanWerewolfSounds;
+    public boolean legacyRatDeathSound;
     public boolean classicWraithSounds;
     public boolean classicWyvernLairSky;
     public boolean darkerWyvernLair;
@@ -83,6 +84,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean simpleBunnyTextures;
     public boolean verboseEntityNames;
     public boolean legacyBigCatModels;
+    public boolean alphaWraithEyes;
     public MoCConfiguration mocSettingsConfig;
     public MoCConfiguration mocEntityConfig;
     protected File configFile;
@@ -290,6 +292,8 @@ public class MoCProxy implements IGuiHandler {
         this.simpleBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SimpleBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
         this.legacyBigCatModels = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigCatModels", false, "Enables simple big cat models and textures like in legacy versions.").getBoolean(false);
+        this.alphaWraithEyes = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AlphaWraithEyes", false, "Enables different eye colors for wraiths and flame wraiths like in alpha versions.").getBoolean(false);
+        this.legacyRatDeathSound = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyRatDeathSound", false, "Enables legacy rat death sound.").getBoolean(false);
 
         // Save
         this.mocSettingsConfig.save();

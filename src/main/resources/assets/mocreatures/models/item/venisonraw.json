@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/venisonraw"
+    "layer0": "mocreatures:items/venison_raw"
   }
 }

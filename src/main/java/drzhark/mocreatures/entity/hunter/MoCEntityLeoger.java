@@ -19,6 +19,7 @@ public class MoCEntityLeoger extends MoCEntityBigCat {
 
     public MoCEntityLeoger(World world) {
         super(world);
+        setSize(1.3F, 1.3815F);
     }
 
     @Override
@@ -108,5 +109,9 @@ public class MoCEntityLeoger extends MoCEntityBigCat {
             return false;
         }
         return entity.height < 2F && entity.width < 2F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

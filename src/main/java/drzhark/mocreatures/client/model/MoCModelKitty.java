@@ -19,6 +19,12 @@ public class MoCModelKitty extends ModelBase {
     public boolean isSitting;
     public boolean isSwinging;
     public float swingProgress;
+    public float prevSwingProgress;
+    public float prevRightArmAngleX;
+    public float prevLeftArmAngleX;
+    public float prevRightLegAngleX;
+    public float prevLeftLegAngleX;
+    public float prevTailAngleX;
     public int kittystate;
     public ModelRenderer[] headParts;
     public ModelRenderer tail;
@@ -70,7 +76,6 @@ public class MoCModelKitty extends ModelBase {
         this.headParts[9] = new ModelRenderer(this, 1, 1);
         this.headParts[9].addBox(-2.5F, -3F, -4F, 5, 4, 4, f);
         this.headParts[9].setRotationPoint(0.0F, 0.0F + f1, -2F);
-
         this.body = new ModelRenderer(this, 20, 0);
         this.body.addBox(-2.5F, -2F, -0F, 5, 5, 10, f);
         this.body.setRotationPoint(0.0F, 0.0F + f1, -2F);
@@ -101,7 +106,6 @@ public class MoCModelKitty extends ModelBase {
         this.isSwinging = kitty.getIsSwinging();
         this.swingProgress = kitty.swingProgress;
         this.kittystate = kitty.getKittyState();
-
         GlStateManager.pushMatrix();
         setRotationAngles(f, f1, f2, f3, f4, f5);
         if (this.isSitting) {
@@ -109,11 +113,9 @@ public class MoCModelKitty extends ModelBase {
             this.tail.rotateAngleZ = 0.0F;
             this.tail.rotateAngleX = -2.3F;
         }
-        //this.bipedHead.render(f5);
         for (int i = 0; i < 7; i++) {
             this.headParts[i].render(f5);
         }
-
         if (this.kittystate > 2) {
             this.headParts[7].render(f5);
         }
@@ -148,22 +150,50 @@ public class MoCModelKitty extends ModelBase {
             this.headParts[i].rotateAngleX = this.headParts[9].rotateAngleX;
         }
 
-        this.rightArm.rotateAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 2.0F * f1 * 0.5F;
-        this.leftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
-        this.rightArm.rotateAngleZ = 0.0F;
-        this.leftArm.rotateAngleZ = 0.0F;
-        this.rightLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-        this.leftLeg.rotateAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.4F * f1;
-        this.rightLeg.rotateAngleY = 0.0F;
-        this.leftLeg.rotateAngleY = 0.0F;
+        // Interpolation factor for smoother animations
+        float interpolationFactor = 0.1F;
+
+        // Right Arm movement
+        float targetRightArmAngleX;
         if (this.isSwinging) {
-            this.rightArm.rotateAngleX = -2F + this.swingProgress;
-            this.rightArm.rotateAngleY = 2.25F - (this.swingProgress * 2.0F);
+            targetRightArmAngleX = -2.0F + this.swingProgress;
         } else {
-            this.rightArm.rotateAngleY = 0.0F;
+            targetRightArmAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 2.0F * f1 * 0.5F;
         }
+        float interpolatedRightArmAngleX = this.prevRightArmAngleX + (targetRightArmAngleX - this.prevRightArmAngleX) * interpolationFactor;
+        this.rightArm.rotateAngleX = interpolatedRightArmAngleX;
+        this.rightArm.rotateAngleY = 0.0F;
+
+        // Left Arm movement
+        float targetLeftArmAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
+        float interpolatedLeftArmAngleX = this.prevLeftArmAngleX + (targetLeftArmAngleX - this.prevLeftArmAngleX) * interpolationFactor;
+        this.leftArm.rotateAngleX = interpolatedLeftArmAngleX;
         this.leftArm.rotateAngleY = 0.0F;
-        this.tail.rotateAngleX = -0.5F;
+
+        // Right Leg movement
+        float targetRightLegAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+        float interpolatedRightLegAngleX = this.prevRightLegAngleX + (targetRightLegAngleX - this.prevRightLegAngleX) * interpolationFactor;
+        this.rightLeg.rotateAngleX = interpolatedRightLegAngleX;
+        this.rightLeg.rotateAngleY = 0.0F;
+
+        // Left Leg movement
+        float targetLeftLegAngleX = MathHelper.cos((f * 0.6662F) + 3.141593F) * 1.4F * f1;
+        float interpolatedLeftLegAngleX = this.prevLeftLegAngleX + (targetLeftLegAngleX - this.prevLeftLegAngleX) * interpolationFactor;
+        this.leftLeg.rotateAngleX = interpolatedLeftLegAngleX;
+        this.leftLeg.rotateAngleY = 0.0F;
+
+        // Tail movement
+        float targetTailAngleX = -0.5F;
+        float interpolatedTailAngleX = prevTailAngleX + (targetTailAngleX - prevTailAngleX) * interpolationFactor;
+        this.tail.rotateAngleX = interpolatedTailAngleX;
         this.tail.rotateAngleZ = this.leftLeg.rotateAngleX * 0.625F;
+
+        // Save the current values for the next frame‘s interpolation
+        this.prevRightArmAngleX = interpolatedRightArmAngleX;
+        this.prevLeftArmAngleX = interpolatedLeftArmAngleX;
+        this.prevRightLegAngleX = interpolatedRightLegAngleX;
+        this.prevLeftLegAngleX = interpolatedLeftLegAngleX;
+        this.prevTailAngleX = interpolatedTailAngleX;
+        this.prevSwingProgress = this.swingProgress;
     }
 }

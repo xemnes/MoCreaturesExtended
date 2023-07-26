@@ -25,8 +25,10 @@ public class MoCEntityStingRay extends MoCEntityRay {
 
     public MoCEntityStingRay(World world) {
         super(world);
-        setSize(1.2F, 0.5F);
-        setAge(50 + (this.rand.nextInt(40)));
+        setSize(0.7F, 0.3F);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(50 + (this.rand.nextInt(40)));
+        setAge(90);
     }
 
     @Override
@@ -92,5 +94,9 @@ public class MoCEntityStingRay extends MoCEntityRay {
             }
         }
         return false;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.86F;
     }
 }

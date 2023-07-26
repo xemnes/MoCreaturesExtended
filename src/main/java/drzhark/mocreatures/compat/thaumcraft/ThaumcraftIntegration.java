@@ -35,6 +35,8 @@ public class ThaumcraftIntegration {
         // Items - Food
         proxy.registerObjectTag(new ItemStack(MoCItems.crabcooked, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.CRAFT, 1));
         proxy.registerObjectTag(new ItemStack(MoCItems.crabraw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.WATER, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.duckCooked, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.CRAFT, 1));
+        proxy.registerObjectTag(new ItemStack(MoCItems.duckRaw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.WATER, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.omelet, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.CRAFT, 1));
         proxy.registerObjectTag(new ItemStack(MoCItems.ostrichcooked, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.CRAFT, 1));
         proxy.registerObjectTag(new ItemStack(MoCItems.ostrichraw, 1, 0), new AspectList().add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.AIR, 5));

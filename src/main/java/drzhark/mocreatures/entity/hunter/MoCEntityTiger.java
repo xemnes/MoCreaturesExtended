@@ -22,6 +22,7 @@ public class MoCEntityTiger extends MoCEntityBigCat {
 
     public MoCEntityTiger(World world) {
         super(world);
+        setSize(1.25F, 1.275F);
     }
 
     @Override
@@ -186,5 +187,9 @@ public class MoCEntityTiger extends MoCEntityBigCat {
     @Override
     public float getMoveSpeed() {
         return 1.5F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

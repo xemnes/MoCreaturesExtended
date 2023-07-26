@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "mocreatures:items/scorpswordnether"
+    "layer0": "mocreatures:items/scorp_sword_nether"
   }
 }

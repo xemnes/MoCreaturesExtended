@@ -17,11 +17,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
 
-    public MoCModelKitty pussy1;
+    public MoCModelKitty kitty;
 
     public MoCRenderKitty(ModelBase modelkitty, float f) {
         super(modelkitty, f);
-        this.pussy1 = (MoCModelKitty) modelkitty;
+        this.kitty = (MoCModelKitty) modelkitty;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
             float f4 = entitykitty.getDistance(this.renderManager.renderViewEntity);
             if (f4 < 12F) {
                 float f5 = 0.2F;
-                if (this.pussy1.isSitting) {
+                if (this.kitty.isSitting) {
                     f5 = 0.4F;
                 }
 
@@ -73,10 +73,6 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
         }
     }
 
-    public void doRender2(MoCEntityKitty entitykitty, double d, double d1, double d2, float f, float f1) {
-        super.doRender(entitykitty, d, d1, d2, f, f1);
-    }
-
     @Override
     protected float handleRotationFloat(MoCEntityKitty entitykitty, float f) {
         if (!entitykitty.getIsAdult()) {
@@ -87,7 +83,6 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
 
     protected void onMaBack(MoCEntityKitty entitykitty) {
         GlStateManager.rotate(90F, 0.0F, 0.0F, -1F);
-
         if (!entitykitty.world.isRemote && (entitykitty.getRidingEntity() != null)) {
             GlStateManager.translate(-1.5F, 0.2F, -0.2F);
         } else {
@@ -103,10 +98,10 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
 
     @Override
     protected void preRenderCallback(MoCEntityKitty entitykitty, float f) {
-        this.pussy1.isSitting = entitykitty.getIsSitting();
-        this.pussy1.isSwinging = entitykitty.getIsSwinging();
-        this.pussy1.swingProgress = entitykitty.swingProgress;
-        this.pussy1.kittystate = entitykitty.getKittyState();
+        this.kitty.isSitting = entitykitty.getIsSitting();
+        this.kitty.isSwinging = entitykitty.getIsSwinging();
+        this.kitty.swingProgress = entitykitty.swingProgress;
+        this.kitty.kittystate = entitykitty.getKittyState();
         if (entitykitty.getKittyState() == 20) {
             onTheSide(entitykitty);
         }

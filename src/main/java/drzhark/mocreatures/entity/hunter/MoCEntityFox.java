@@ -35,7 +35,7 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
 
     public MoCEntityFox(World world) {
         super(world);
-        setSize(0.6F, 0.7F);
+        setSize(0.7F, 0.85F);
         setAge(this.rand.nextInt(15) + 50);
         setAdult(this.rand.nextInt(3) != 0);
     }
@@ -204,5 +204,9 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
             return 0.9F;
         }
         return 0.9F * getAge() * 0.01F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.86F;
     }
 }

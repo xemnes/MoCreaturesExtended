@@ -15,8 +15,10 @@ public class MoCEntityMantaRay extends MoCEntityRay {
 
     public MoCEntityMantaRay(World world) {
         super(world);
-        setSize(1.8F, 1F);
-        setAge(80 + (this.rand.nextInt(100)));
+        setSize(1.4F, 0.4F);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(80 + (this.rand.nextInt(100)));
+        setAge(180);
     }
 
     @Override
@@ -43,5 +45,9 @@ public class MoCEntityMantaRay extends MoCEntityRay {
     @Override
     public boolean isMantaRay() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.5875F;
     }
 }

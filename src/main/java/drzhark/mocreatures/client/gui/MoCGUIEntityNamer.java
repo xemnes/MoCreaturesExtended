@@ -26,7 +26,7 @@ import java.io.IOException;
 public class MoCGUIEntityNamer extends GuiScreen {
 
     private static final TextureManager textureManager = MoCClientProxy.mc.getTextureManager();
-    private static final ResourceLocation TEXTURE_MOCNAME = MoCreatures.proxy.getGuiTexture("mocname.png");
+    private static final ResourceLocation TEXTURE_MOCNAME = MoCreatures.proxy.getGuiTexture("pet_naming.png");
     private final IMoCEntity namedEntity;
     protected String screenTitle;
     protected int xSize;

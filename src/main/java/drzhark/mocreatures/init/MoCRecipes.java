@@ -23,6 +23,7 @@ public class MoCRecipes {
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
 
             GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked, 1), 0.35F);
+            GameRegistry.addSmelting(MoCItems.duckRaw, new ItemStack(MoCItems.duckCooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet, 1), 0.35F);
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked, 1), 0.35F);
@@ -48,6 +49,8 @@ public class MoCRecipes {
             // Pam's HarvestCraft OreDictionaries
             OreDictionary.registerOre("foodCrabcooked", MoCItems.crabcooked);
             OreDictionary.registerOre("foodCrabraw", MoCItems.crabraw);
+            OreDictionary.registerOre("foodDuckcooked", MoCItems.duckCooked);
+            OreDictionary.registerOre("foodDuckraw", MoCItems.duckRaw);
             OreDictionary.registerOre("foodOmelet", MoCItems.omelet);
             OreDictionary.registerOre("foodOstrichcooked", MoCItems.ostrichcooked);
             OreDictionary.registerOre("foodOstrichraw", MoCItems.ostrichraw);
@@ -55,14 +58,24 @@ public class MoCRecipes {
             OreDictionary.registerOre("foodRatcooked", MoCItems.ratCooked);
             OreDictionary.registerOre("foodRatraw", MoCItems.ratRaw);
             OreDictionary.registerOre("foodTurkeycooked", MoCItems.cookedTurkey);
+            OreDictionary.registerOre("foodTurkeyraw", MoCItems.rawTurkey);
+            OreDictionary.registerOre("foodTurtlecooked", MoCItems.turtlecooked);
+            OreDictionary.registerOre("foodTurtleraw", MoCItems.turtleraw);
+            OreDictionary.registerOre("foodTurtlesoup", MoCItems.turtlesoup);
+            OreDictionary.registerOre("foodVenisoncooked", MoCItems.venisonCooked);
+            OreDictionary.registerOre("foodVenisonraw", MoCItems.venisonRaw);
+            OreDictionary.registerOre("listAllduckcooked", MoCItems.duckCooked);
+            OreDictionary.registerOre("listAllduckraw", MoCItems.duckRaw);
             OreDictionary.registerOre("listAllegg", new ItemStack(MoCItems.mocegg, 1, OreDictionary.WILDCARD_VALUE));
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.crabcooked);
+            OreDictionary.registerOre("listAllmeatcooked", MoCItems.duckCooked);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.ostrichcooked);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.ratCooked);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.cookedTurkey);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.turtlecooked);
             OreDictionary.registerOre("listAllmeatcooked", MoCItems.venisonCooked);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.crabraw);
+            OreDictionary.registerOre("listAllmeatraw", MoCItems.duckRaw);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.ostrichraw);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.ratRaw);
             OreDictionary.registerOre("listAllmeatraw", MoCItems.rawTurkey);
@@ -72,12 +85,6 @@ public class MoCRecipes {
             OreDictionary.registerOre("listAllturkeyraw", MoCItems.rawTurkey);
             OreDictionary.registerOre("listAllvenisoncooked", MoCItems.venisonCooked);
             OreDictionary.registerOre("listAllvenisonraw", MoCItems.venisonRaw);
-            OreDictionary.registerOre("foodTurkeyraw", MoCItems.rawTurkey);
-            OreDictionary.registerOre("foodTurtlecooked", MoCItems.turtlecooked);
-            OreDictionary.registerOre("foodTurtleraw", MoCItems.turtleraw);
-            OreDictionary.registerOre("foodTurtlesoup", MoCItems.turtlesoup);
-            OreDictionary.registerOre("foodVenisoncooked", MoCItems.venisonCooked);
-            OreDictionary.registerOre("foodVenisonraw", MoCItems.venisonRaw);
         }
     }
 }

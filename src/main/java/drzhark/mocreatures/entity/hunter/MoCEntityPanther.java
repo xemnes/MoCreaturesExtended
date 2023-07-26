@@ -22,6 +22,7 @@ public class MoCEntityPanther extends MoCEntityBigCat {
 
     public MoCEntityPanther(World world) {
         super(world);
+        setSize(1.175F, 1.065F);
     }
 
     @Override
@@ -155,4 +156,7 @@ public class MoCEntityPanther extends MoCEntityBigCat {
         return entity.height < 1.5F && entity.width < 1.5F;
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.92F;
+    }
 }

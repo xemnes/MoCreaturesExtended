@@ -85,7 +85,9 @@ public class MoCItems {
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
-    public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 6, 0.8F, true);
+    public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 4, 0.6F, true);
+    public static final MoCItemFood duckCooked = new MoCItemFood("duckcooked", 6, 0.7F, true);
+    public static final MoCItemFood duckRaw = new MoCItemFood("duckraw", 2, 0.4F, true);
     public static final MoCItemFood omelet = new MoCItemFood("omelet", 3, 0.5F, false);
     public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
     public static final MoCItemFood ostrichcooked = new MoCItemFood("ostrichcooked", 7, 0.8F, true);
@@ -236,6 +238,8 @@ public class MoCItems {
                     animalHide,
                     rawTurkey,
                     cookedTurkey,
+                    duckRaw,
+                    duckCooked,
                     chestHide,
                     helmetHide,
                     legsHide,

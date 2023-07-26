@@ -43,8 +43,11 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
     public MoCEntityDolphin(World world) {
         super(world);
-        setSize(1.5F, 0.8F);
-        setAge(60 + this.rand.nextInt(100));
+        setSize(1.3F, 0.605F);
+        setAdult(true);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(60 + this.rand.nextInt(100));
+        setAge(120);
     }
 
     @Override
@@ -459,5 +462,9 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     @Override
     public double getMountedYOffset() {
         return this.getAge() * 0.01F * (this.height * 0.3D);
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.315F;
     }
 }

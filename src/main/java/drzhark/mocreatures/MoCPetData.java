@@ -18,7 +18,7 @@ public class MoCPetData {
 
     @SuppressWarnings("unused")
     private final UUID ownerUniqueId;
-    private final BitSet IDMap = new BitSet(Long.SIZE << 4);
+    private final BitSet idMap = new BitSet(Long.SIZE << 4);
     private final ArrayList<Integer> usedPetIds = new ArrayList<>();
     private NBTTagCompound ownerData = new NBTTagCompound();
     private NBTTagList tamedList = new NBTTagList();
@@ -55,14 +55,14 @@ public class MoCPetData {
     }
 
     public boolean removePet(int id) {
-        for (int i = 0; i < this.tamedList.tagCount(); i++) {
+        for (int i = this.tamedList.tagCount() - 1; i >= 0; i--) {
             NBTTagCompound nbt = this.tamedList.getCompoundTagAt(i);
             if (nbt.hasKey("PetId") && nbt.getInteger("PetId") == id) {
                 this.tamedList.removeTag(i);
                 this.usedPetIds.remove(id);
-                this.IDMap.clear(id); // clear bit so it can be reused again
+                this.idMap.clear(id); // clear bit so it can be reused again
                 if (this.usedPetIds.isEmpty()) {
-                    this.IDMap.clear(); // fixes bug with ID 0 not able to be used again
+                    this.idMap.clear(); // fixes bug with ID 0 not able to be used again
                 }
                 this.ownerData.setTag("PetIdData", savePetDataMap());
                 return true;
@@ -122,9 +122,9 @@ public class MoCPetData {
     public int getNextFreePetId() {
         int next = 0;
         while (true) {
-            next = this.IDMap.nextClearBit(next);
+            next = this.idMap.nextClearBit(next);
             if (this.usedPetIds.contains(next)) {
-                this.IDMap.set(next);
+                this.idMap.set(next);
             } else {
                 this.usedPetIds.add(next);
                 return next;
@@ -133,12 +133,12 @@ public class MoCPetData {
     }
 
     public NBTTagCompound savePetDataMap() {
-        int[] data = new int[(this.IDMap.length() + Integer.SIZE - 1) / Integer.SIZE];
+        int[] data = new int[(this.idMap.length() + Integer.SIZE - 1) / Integer.SIZE];
         NBTTagCompound dataMap = new NBTTagCompound();
         for (int i = 0; i < data.length; i++) {
             int val = 0;
             for (int j = 0; j < Integer.SIZE; j++) {
-                val |= this.IDMap.get(i * Integer.SIZE + j) ? (1 << j) : 0;
+                val |= this.idMap.get(i * Integer.SIZE + j) ? (1 << j) : 0;
             }
             data[i] = val;
         }
@@ -148,18 +148,18 @@ public class MoCPetData {
 
     public void loadPetDataMap(NBTTagCompound compoundTag) {
         if (compoundTag == null) {
-            this.IDMap.clear();
+            this.idMap.clear();
         } else {
             int[] intArray = compoundTag.getIntArray("PetIdArray");
             for (int i = 0; i < intArray.length; i++) {
                 for (int j = 0; j < Integer.SIZE; j++) {
-                    this.IDMap.set(i * Integer.SIZE + j, (intArray[i] & (1 << j)) != 0);
+                    this.idMap.set(i * Integer.SIZE + j, (intArray[i] & (1 << j)) != 0);
                 }
             }
             // populate our usedPetIds
             int next = 0;
             while (true) {
-                next = this.IDMap.nextClearBit(next);
+                next = this.idMap.nextClearBit(next);
                 if (!this.usedPetIds.contains(next)) {
                     this.usedPetIds.add(next);
                 } else {

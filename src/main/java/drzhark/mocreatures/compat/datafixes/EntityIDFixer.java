@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.compat.datafixes;
 
 import drzhark.mocreatures.MoCConstants;

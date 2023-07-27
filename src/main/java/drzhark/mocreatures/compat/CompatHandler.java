@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.compat;
 
 import com.buuz135.industrial.api.IndustrialForegoingHelper;

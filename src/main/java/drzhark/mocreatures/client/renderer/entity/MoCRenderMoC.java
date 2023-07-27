@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,68 +40,72 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
         IMoCEntity entityMoC = (IMoCEntity) entity;
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entityMoC.getPetName().isEmpty());
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        if (entityMoC.renderName()) {
-            float f2 = 1.6F;
-            float f3 = 0.01666667F * f2;
-            float f5 = ((Entity) entityMoC).getDistance(this.renderManager.renderViewEntity);
-            if (f5 < 16F) {
-                String s = "";
-                s = s + entityMoC.getPetName();
-                float f7 = 0.1F;
-                FontRenderer fontrenderer = getFontRendererFromRenderManager();
-                GlStateManager.pushMatrix();
-                GlStateManager.translate((float) d + 0.0F, (float) d1 + f7, (float) d2);
-                GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
-                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                GlStateManager.scale(-f3, -f3, f3);
-                GlStateManager.disableLighting();
-                Tessellator tessellator1 = Tessellator.getInstance();
-                int yOff = entityMoC.nameYOffset();
-                if (flag1) {
-                    GlStateManager.disableTexture2D();
-                    if (!flag) {
-                        yOff += 8;
+        EntityPlayer player = MoCreatures.proxy.getPlayer();
+
+        if (player.isSneaking()) {
+            if (entityMoC.renderName()) {
+                float f2 = 1.6F;
+                float f3 = 0.01666667F * f2;
+                float f5 = ((Entity) entityMoC).getDistance(this.renderManager.renderViewEntity);
+                if (f5 < 16F) {
+                    String s = "";
+                    s = s + entityMoC.getPetName();
+                    float f7 = 0.1F;
+                    FontRenderer fontrenderer = getFontRendererFromRenderManager();
+                    GlStateManager.pushMatrix();
+                    GlStateManager.translate((float) d + 0.0F, (float) d1 + f7, (float) d2);
+                    GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
+                    GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                    GlStateManager.scale(-f3, -f3, f3);
+                    GlStateManager.disableLighting();
+                    Tessellator tessellator1 = Tessellator.getInstance();
+                    int yOff = entityMoC.nameYOffset();
+                    if (flag1) {
+                        GlStateManager.disableTexture2D();
+                        if (!flag) {
+                            yOff += 8;
+                        }
+                        tessellator1.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
+                        // might break SSP
+                        float f8 = ((EntityLiving) entityMoC).getHealth();
+                        float f9 = ((EntityLiving) entityMoC).getMaxHealth();
+                        float f10 = f8 / f9;
+                        float f11 = 40F * f10;
+                        tessellator1.getBuffer().pos(-20F + f11, -10 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(-20F + f11, -6 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(20D, -6 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(20D, -10 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(-20D, -10 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(-20D, -6 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(f11 - 20F, -6 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
+                        tessellator1.getBuffer().pos(f11 - 20F, -10 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
+                        tessellator1.draw();
+                        GlStateManager.enableTexture2D();
                     }
-                    tessellator1.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
-                    // might break SSP
-                    float f8 = ((EntityLiving) entityMoC).getHealth();
-                    float f9 = ((EntityLiving) entityMoC).getMaxHealth();
-                    float f10 = f8 / f9;
-                    float f11 = 40F * f10;
-                    tessellator1.getBuffer().pos(-20F + f11, -10 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(-20F + f11, -6 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(20D, -6 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(20D, -10 + yOff, 0.0D).color(0.7F, 0.0F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(-20D, -10 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(-20D, -6 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(f11 - 20F, -6 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
-                    tessellator1.getBuffer().pos(f11 - 20F, -10 + yOff, 0.0D).color(0.0F, 0.7F, 0.0F, 1.0F).endVertex();
-                    tessellator1.draw();
-                    GlStateManager.enableTexture2D();
+                    if (flag) {
+                        GlStateManager.depthMask(false);
+                        GlStateManager.disableDepth();
+                        GlStateManager.enableBlend();
+                        GlStateManager.blendFunc(770, 771);
+                        GlStateManager.disableTexture2D();
+                        tessellator1.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
+                        int i = fontrenderer.getStringWidth(s) / 2;
+                        tessellator1.getBuffer().pos(-i - 1, -1 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                        tessellator1.getBuffer().pos(-i - 1, 8 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                        tessellator1.getBuffer().pos(i + 1, 8 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                        tessellator1.getBuffer().pos(i + 1, -1 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                        tessellator1.draw();
+                        GlStateManager.enableTexture2D();
+                        fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, yOff, 0x20ffffff);
+                        GlStateManager.enableDepth();
+                        GlStateManager.depthMask(true);
+                        fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, yOff, -1);
+                        GlStateManager.disableBlend();
+                        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                    }
+                    GlStateManager.enableLighting();
+                    GlStateManager.popMatrix();
                 }
-                if (flag) {
-                    GlStateManager.depthMask(false);
-                    GlStateManager.disableDepth();
-                    GlStateManager.enableBlend();
-                    GlStateManager.blendFunc(770, 771);
-                    GlStateManager.disableTexture2D();
-                    tessellator1.getBuffer().begin(7, DefaultVertexFormats.POSITION_COLOR);
-                    int i = fontrenderer.getStringWidth(s) / 2;
-                    tessellator1.getBuffer().pos(-i - 1, -1 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-                    tessellator1.getBuffer().pos(-i - 1, 8 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-                    tessellator1.getBuffer().pos(i + 1, 8 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-                    tessellator1.getBuffer().pos(i + 1, -1 + yOff, 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-                    tessellator1.draw();
-                    GlStateManager.enableTexture2D();
-                    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, yOff, 0x20ffffff);
-                    GlStateManager.enableDepth();
-                    GlStateManager.depthMask(true);
-                    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, yOff, -1);
-                    GlStateManager.disableBlend();
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                }
-                GlStateManager.enableLighting();
-                GlStateManager.popMatrix();
             }
         }
 

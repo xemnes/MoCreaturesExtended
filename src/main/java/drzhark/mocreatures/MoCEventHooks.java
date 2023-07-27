@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -48,7 +49,7 @@ public class MoCEventHooks {
 
         // Make sure doMobSpawning is off if CMS is installed
         GameRules gameRule = event.getWorld().getGameRules();
-        if (MoCreatures.isCustomSpawnerLoaded) {
+        if (Loader.isModLoaded("customspawner")) {
             gameRule.setOrCreateGameRule("doMobSpawning", "false");
             if (MoCreatures.proxy.debug) {
                 MoCreatures.LOGGER.debug("Changed doMobSpawning to false since CMS was loaded!");

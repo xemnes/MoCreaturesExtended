@@ -321,3 +321,8 @@ entity.mocreatures:wildpolarbear.name=Wild Polar Bear
 entity.mocreatures:wraith.name=Wraith
 entity.mocreatures:wwolf.name=Wild Wolf
 entity.mocreatures:wyvern.name=Wyvern
+
+# MESSAGES
+msg.mocreatures.compat.cms=Custom Mob Spawner detected!
+msg.mocreatures.compat.cms1=Mo' Creatures Extended is built around the vanilla spawner, Custom Mob Spawner is no longer needed.
+msg.mocreatures.compat.cms2=It is advisable to remove Custom Mob Spawner to avoid negative impact on gameplay.

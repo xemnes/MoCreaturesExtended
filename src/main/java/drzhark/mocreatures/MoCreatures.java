@@ -28,7 +28,6 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -53,7 +52,6 @@ public class MoCreatures {
     public static MoCreatures instance;
     @SidedProxy(clientSide = "drzhark.mocreatures.client.MoCClientProxy", serverSide = "drzhark.mocreatures.MoCProxy")
     public static MoCProxy proxy;
-    public static boolean isCustomSpawnerLoaded = false;
     public static GameProfile MOCFAKEPLAYER = new GameProfile(UUID.fromString("6E379B45-1111-2222-3333-2FE1A88BCD66"), "[MoCreatures]");
     public static DimensionType WYVERN_LAIR;
     public static int wyvernLairDimensionID;
@@ -102,7 +100,6 @@ public class MoCreatures {
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        isCustomSpawnerLoaded = Loader.isModLoaded("customspawner");
         CompatHandler.postInit();
     }
 

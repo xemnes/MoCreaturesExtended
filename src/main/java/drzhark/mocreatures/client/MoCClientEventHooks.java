@@ -3,15 +3,20 @@
  */
 package drzhark.mocreatures.client;
 
+import drzhark.mocreatures.compat.CompatScreen;
 import drzhark.mocreatures.entity.hostile.MoCEntityScorpion;
 import drzhark.mocreatures.entity.hunter.MoCEntityPetScorpion;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Type;
@@ -71,6 +76,14 @@ public class MoCClientEventHooks {
         Entity mount = rider.getRidingEntity();
         if (mount instanceof MoCEntityScorpion || mount instanceof MoCEntityPetScorpion) {
             GlStateManager.popMatrix();
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public void displayCompatScreen(GuiOpenEvent event) {
+        if (event.getGui() instanceof GuiMainMenu && CompatScreen.showScreen && Loader.isModLoaded("customspawner")) {
+            event.setGui(new CompatScreen());
+            CompatScreen.showScreen = false;
         }
     }
 }

@@ -78,7 +78,7 @@ public class MoCEntities {
     public static EntityEntry TIGER = createEntityEntry(MoCEntityTiger.class, "Tiger", 12476160, 2956299, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry TURTLE = createEntityEntry(MoCEntityTurtle.class, "Turtle", 6505237, 10524955, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry TURKEY = createEntityEntry(MoCEntityTurkey.class, "Turkey", 12268098, 6991322, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry WILDHORSE = createEntityEntry(MoCEntityHorse.class, "WildHorse", 12623485, 15656192, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry WILDHORSE = createEntityEntry(MoCEntityHorse.class, "WildHorse", 9204829, 11379712, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry WYVERN = createEntityEntry(MoCEntityWyvern.class, "Wyvern", 11440923, 15526339, EntityLiving.SpawnPlacementType.ON_GROUND);
     /**
      * Monster

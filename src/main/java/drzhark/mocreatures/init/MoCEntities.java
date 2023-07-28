@@ -89,14 +89,14 @@ public class MoCEntities {
     public static EntityEntry FIRE_OGRE = createEntityEntry(MoCEntityFireOgre.class, "FireOgre", 6882304, 16430080, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry GREEN_OGRE = createEntityEntry(MoCEntityGreenOgre.class, "GreenOgre", 1607501, 2032997, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry BIG_GOLEM = createEntityEntry(MoCEntityGolem.class, "BigGolem", 4868682, 52411, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry HORSEMOB = createEntityEntry(MoCEntityHorseMob.class, "HorseMob", 16711680, 9320590, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry HORSEMOB = createEntityEntry(MoCEntityHorseMob.class, "HorseMob", 6326628, 12369062, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry HELLRAT = createEntityEntry(MoCEntityHellRat.class, "HellRat", 1049090, 15956249, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry DARK_MANTICORE = createEntityEntry(MoCEntityDarkManticore.class, "DarkManticore", 3289650, 657930, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry FIRE_MANTICORE = createEntityEntry(MoCEntityFireManticore.class, "FireManticore", 7148552, 2819585, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry FROST_MANTICORE = createEntityEntry(MoCEntityFrostManticore.class, "FrostManticore", 3559006, 2041389, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry PLAIN_MANTICORE = createEntityEntry(MoCEntityPlainManticore.class, "PlainManticore", 7623465, 5510656, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry TOXIC_MANTICORE = createEntityEntry(MoCEntityToxicManticore.class, "ToxicManticore", 6252034, 3365689, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry MINI_GOLEM = createEntityEntry(MoCEntityMiniGolem.class, "MiniGolem", 8512741, 7895160, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry MINI_GOLEM = createEntityEntry(MoCEntityMiniGolem.class, "MiniGolem", 7895160, 8512741, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry RAT = createEntityEntry(MoCEntityRat.class, "Rat", 3685435, 15838633, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry SILVER_SKELETON = createEntityEntry(MoCEntitySilverSkeleton.class, "SilverSkeleton", 13421750, 8158847, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry CAVE_SCORPION = createEntityEntry(MoCEntityCaveScorpion.class, "CaveScorpion", 789516, 3223866, EntityLiving.SpawnPlacementType.ON_GROUND);
@@ -110,23 +110,23 @@ public class MoCEntities {
     /**
      * Aquatic
      */
-    public static EntityEntry ANCHOVY = createEntityEntry(MoCEntityAnchovy.class, "Anchovy", 5665535, 205, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry ANGELFISH = createEntityEntry(MoCEntityAngelFish.class, "AngelFish", 5665535, 7434694, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry ANGLER = createEntityEntry(MoCEntityAngler.class, "Angler", 5665535, 10, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry BASS = createEntityEntry(MoCEntityBass.class, "Bass", 33023, 2372490, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry CLOWNFISH = createEntityEntry(MoCEntityClownFish.class, "ClownFish", 5665535, 14772545, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry COD = createEntityEntry(MoCEntityCod.class, "Cod", 33023, 16622, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry DOLPHIN = createEntityEntry(MoCEntityDolphin.class, "Dolphin", 33023, 15631086, EntityLiving.SpawnPlacementType.IN_WATER);//, 0x2600, 0x052500);
-    public static EntityEntry FISHY = createEntityEntry(MoCEntityFishy.class, "Fishy", 5665535, 65407, EntityLiving.SpawnPlacementType.IN_WATER);//, 0x2600, 0x052500);
-    public static EntityEntry GOLDFISH = createEntityEntry(MoCEntityGoldFish.class, "GoldFish", 5665535, 15656192, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry HIPPOTANG = createEntityEntry(MoCEntityHippoTang.class, "HippoTang", 5665535, 2037680, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry JELLYFISH = createEntityEntry(MoCEntityJellyFish.class, "JellyFish", 33023, 14772545, EntityLiving.SpawnPlacementType.IN_WATER);//, 0x2600, 0x052500);
-    public static EntityEntry MANDERIN = createEntityEntry(MoCEntityManderin.class, "Manderin", 5665535, 12623485, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry PIRANHA = createEntityEntry(MoCEntityPiranha.class, "Piranha", 33023, 16711680, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry SALMON = createEntityEntry(MoCEntitySalmon.class, "Salmon", 33023, 12623485, EntityLiving.SpawnPlacementType.IN_WATER);
-    public static EntityEntry MANTARAY = createEntityEntry(MoCEntityMantaRay.class, "MantaRay", 33023, 9141102, EntityLiving.SpawnPlacementType.IN_WATER);//14772545, 9141102);
-    public static EntityEntry SHARK = createEntityEntry(MoCEntityShark.class, "Shark", 33023, 9013643, EntityLiving.SpawnPlacementType.IN_WATER);//, 0x2600, 0x052500);
-    public static EntityEntry STINGRAY = createEntityEntry(MoCEntityStingRay.class, "StingRay", 33023, 6053069, EntityLiving.SpawnPlacementType.IN_WATER);//14772545, 9141102);
+    public static EntityEntry ANCHOVY = createEntityEntry(MoCEntityAnchovy.class, "Anchovy", 7039838, 12763545, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry ANGELFISH = createEntityEntry(MoCEntityAngelFish.class, "AngelFish", 12040119, 15970609, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry ANGLER = createEntityEntry(MoCEntityAngler.class, "Angler", 5257257, 6225864, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry BASS = createEntityEntry(MoCEntityBass.class, "Bass", 4341299, 10051649, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry CLOWNFISH = createEntityEntry(MoCEntityClownFish.class, "ClownFish", 16439491, 15425029, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry COD = createEntityEntry(MoCEntityCod.class, "Cod", 5459520, 14600592, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry DOLPHIN = createEntityEntry(MoCEntityDolphin.class, "Dolphin", 4086148, 11251396, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry FISHY = createEntityEntry(MoCEntityFishy.class, "Fishy", 5665535, 2037680, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry GOLDFISH = createEntityEntry(MoCEntityGoldFish.class, "GoldFish", 15577089, 16735257, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry HIPPOTANG = createEntityEntry(MoCEntityHippoTang.class, "HippoTang", 4280267, 12893441, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry JELLYFISH = createEntityEntry(MoCEntityJellyFish.class, "JellyFish", 12758461, 9465021, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry MANDERIN = createEntityEntry(MoCEntityManderin.class, "Manderin", 14764801, 5935359, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry PIRANHA = createEntityEntry(MoCEntityPiranha.class, "Piranha", 10756121, 3160114, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry SALMON = createEntityEntry(MoCEntitySalmon.class, "Salmon", 5262951, 10716540, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry MANTARAY = createEntityEntry(MoCEntityMantaRay.class, "MantaRay", 5791360, 11580358, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry SHARK = createEntityEntry(MoCEntityShark.class, "Shark", 3817558, 11580358, EntityLiving.SpawnPlacementType.IN_WATER);
+    public static EntityEntry STINGRAY = createEntityEntry(MoCEntityStingRay.class, "StingRay", 3679519, 8418674, EntityLiving.SpawnPlacementType.IN_WATER);
     /**
      * Ambient
      */

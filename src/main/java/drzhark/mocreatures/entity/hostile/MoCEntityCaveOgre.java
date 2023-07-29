@@ -3,13 +3,13 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityCaveOgre extends MoCEntityOgre {
 

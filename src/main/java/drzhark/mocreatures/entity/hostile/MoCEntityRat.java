@@ -11,11 +11,7 @@ import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
@@ -210,6 +206,10 @@ public class MoCEntityRat extends MoCEntityMob {
         }
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.5F;
+    }
+
     static class AIRatAttack extends EntityAIAttackMelee {
         public AIRatAttack(MoCEntityRat rat) {
             super(rat, 1.0D, true);
@@ -243,9 +243,5 @@ public class MoCEntityRat extends MoCEntityMob {
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.5F;
     }
 }

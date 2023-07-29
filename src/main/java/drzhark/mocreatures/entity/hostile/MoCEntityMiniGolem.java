@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -14,11 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
@@ -29,6 +23,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityMiniGolem extends MoCEntityMob {
 
@@ -193,6 +189,10 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
         return MoCLootTables.MINI_GOLEM;
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.92F;
+    }
+
     static class AIGolemAttack extends EntityAIAttackMelee {
         public AIGolemAttack(MoCEntityMiniGolem golem) {
             super(golem, 1.0D, true);
@@ -226,9 +226,5 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.92F;
     }
 }

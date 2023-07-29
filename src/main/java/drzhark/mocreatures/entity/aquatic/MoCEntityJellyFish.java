@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -20,6 +18,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
@@ -118,7 +118,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
             }
         }
     }
-    
+
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_SLIME_ATTACK;

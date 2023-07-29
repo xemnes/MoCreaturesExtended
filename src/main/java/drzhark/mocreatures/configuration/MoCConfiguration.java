@@ -418,7 +418,7 @@ public class MoCConfiguration {
 
                                 case '>':
                                     if (tmpList == null) {
-                                        throw new RuntimeException(String.format("Corrupted config detected! Malformed list MoCProperty \"%s:%d\". Please delete your MoCreatures/CMS configs and restart to fix error.", this.fileName, lineNum));
+                                        throw new RuntimeException(String.format("Corrupted config detected! Malformed list MoCProperty \"%s:%d\". Please delete your MoCreatures configs and restart to fix error.", this.fileName, lineNum));
                                     }
                                     currentCat.set(name, new MoCProperty(name, tmpList, type));
                                     name = null;
@@ -427,13 +427,13 @@ public class MoCConfiguration {
                                     break;
 
                                 default:
-                                    throw new RuntimeException(String.format("Corrupted config detected! Unknown character '%s' in '%s:%d'. Please delete your MoCreatures/CMS configs and restart to fix error.", line.charAt(i), this.fileName, lineNum));
+                                    throw new RuntimeException(String.format("Corrupted config detected! Unknown character '%s' in '%s:%d'. Please delete your MoCreatures configs and restart to fix error.", line.charAt(i), this.fileName, lineNum));
                             }
                         }
                     }
 
                     if (quoted) {
-                        throw new RuntimeException(String.format("Corrupted config detected! Unmatched quote in '%s:%d'. Please delete your MoCreatures/CMS configs and restart to fix error.", this.fileName, lineNum));
+                        throw new RuntimeException(String.format("Corrupted config detected! Unmatched quote in '%s:%d'. Please delete your MoCreatures configs and restart to fix error.", this.fileName, lineNum));
                     } else if (tmpList != null && !skip) {
                         tmpList.add(line.trim());
                     }

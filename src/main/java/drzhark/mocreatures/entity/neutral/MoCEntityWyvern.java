@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCPetData;
 import drzhark.mocreatures.MoCTools;
@@ -46,6 +44,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityWyvern extends MoCEntityTameableAnimal {
 

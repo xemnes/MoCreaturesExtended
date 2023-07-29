@@ -26,9 +26,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityFishy extends MoCEntityTameableAquatic {
 

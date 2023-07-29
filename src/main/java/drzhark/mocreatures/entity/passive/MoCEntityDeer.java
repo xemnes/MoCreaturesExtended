@@ -194,7 +194,7 @@ public class MoCEntityDeer extends MoCEntityTameableAnimal {
         }
         return getAge() * 0.01F;
     }
-    
+
     public float getEyeHeight() {
         return this.height;
     }

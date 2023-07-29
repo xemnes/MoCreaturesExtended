@@ -9,14 +9,12 @@ import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -45,15 +43,6 @@ public class MoCEventHooks {
             DimensionManager.getWorld(0).getMapStorage().saveAllData();
             MoCreatures.instance.mapData = data;
             MoCreatures.proxy.worldInitDone = true;
-        }
-
-        // Make sure doMobSpawning is off if CMS is installed
-        GameRules gameRule = event.getWorld().getGameRules();
-        if (Loader.isModLoaded("customspawner")) {
-            gameRule.setOrCreateGameRule("doMobSpawning", "false");
-            if (MoCreatures.proxy.debug) {
-                MoCreatures.LOGGER.debug("Changed doMobSpawning to false since CMS was loaded!");
-            }
         }
     }
 

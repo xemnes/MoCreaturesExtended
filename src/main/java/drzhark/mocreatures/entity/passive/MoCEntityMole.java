@@ -251,12 +251,12 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
     protected SoundEvent getAmbientSound() {
         return null;
     }
-    
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.MOLE;
     }
-    
+
     public float getEyeHeight() {
         return this.height * 0.525F;
     }

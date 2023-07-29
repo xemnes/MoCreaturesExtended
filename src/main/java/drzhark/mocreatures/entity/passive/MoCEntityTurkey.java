@@ -225,7 +225,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
             super.handleStatusUpdate(id);
         }
     }
-    
+
     public float getEyeHeight() {
         return this.height;
     }

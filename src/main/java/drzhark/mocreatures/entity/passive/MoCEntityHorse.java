@@ -2318,7 +2318,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         wingFlap();
         super.makeEntityJump();
     }
-    
+
     public float getEyeHeight() {
         return this.height;
     }

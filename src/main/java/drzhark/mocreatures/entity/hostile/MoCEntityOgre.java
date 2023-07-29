@@ -13,11 +13,7 @@ import drzhark.mocreatures.network.message.MoCMessageExplode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -220,6 +216,10 @@ public class MoCEntityOgre extends MoCEntityMob {
         return super.attackEntityAsMob(entityIn);
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.91F;
+    }
+
     static class AIOgreAttack extends EntityAIAttackMelee {
         public AIOgreAttack(MoCEntityOgre ogre) {
             super(ogre, 1.0D, true);
@@ -253,9 +253,5 @@ public class MoCEntityOgre extends MoCEntityMob {
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.91F;
     }
 }

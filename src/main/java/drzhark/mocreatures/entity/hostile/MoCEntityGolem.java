@@ -19,11 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,10 +43,9 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpawnData {
 
@@ -446,8 +441,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
      */
     public void saveGolemCube(byte slot, byte value) {
         this.golemCubes[slot] = value;
-        if (!this.world.isRemote && MoCreatures.proxy.worldInitDone) // Fixes CMS initialization during world load
-        {
+        if (!this.world.isRemote && MoCreatures.proxy.worldInitDone) {
             MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageTwoBytes(this.getEntityId(), slot, value), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
         }
     }
@@ -799,6 +793,10 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         return (super.getCanSpawnHere() && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ))) && (this.posY > 50D));
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.935F;
+    }
+
     static class AIGolemAttack extends EntityAIAttackMelee {
         public AIGolemAttack(MoCEntityGolem golem) {
             super(golem, 1.0D, true);
@@ -832,9 +830,5 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.935F;
     }
 }

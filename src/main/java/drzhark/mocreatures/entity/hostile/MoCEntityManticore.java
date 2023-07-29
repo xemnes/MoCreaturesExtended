@@ -230,6 +230,10 @@ public class MoCEntityManticore extends MoCEntityMob {
         return 1.4F;
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.945F;
+    }
+
     static class AIManticoreAttack extends EntityAIAttackMelee {
         public AIManticoreAttack(MoCEntityManticore manticore) {
             super(manticore, 1.0D, true);
@@ -263,9 +267,5 @@ public class MoCEntityManticore extends MoCEntityMob {
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.945F;
     }
 }

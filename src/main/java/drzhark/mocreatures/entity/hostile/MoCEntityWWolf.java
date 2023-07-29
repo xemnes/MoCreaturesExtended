@@ -14,11 +14,7 @@ import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
@@ -36,9 +32,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityWWolf extends MoCEntityMob {
 
@@ -218,6 +213,10 @@ public class MoCEntityWWolf extends MoCEntityMob {
         }
     }
 
+    public float getEyeHeight() {
+        return this.height * 0.98F;
+    }
+
     static class AIWolfAttack extends EntityAIAttackMelee {
         public AIWolfAttack(MoCEntityWWolf wolf) {
             super(wolf, 1.0D, true);
@@ -251,9 +250,5 @@ public class MoCEntityWWolf extends MoCEntityMob {
             float f = this.taskOwner.getBrightness();
             return f < 0.5F && super.shouldExecute();
         }
-    }
-
-    public float getEyeHeight() {
-        return this.height * 0.98F;
     }
 }

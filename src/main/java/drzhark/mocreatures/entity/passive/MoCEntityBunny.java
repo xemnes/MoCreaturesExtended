@@ -298,7 +298,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
     public boolean canRidePlayer() {
         return true;
     }
-    
+
     public float getEyeHeight() {
         return this.height * 0.675F;
     }

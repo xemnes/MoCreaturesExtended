@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
@@ -25,6 +23,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
 {

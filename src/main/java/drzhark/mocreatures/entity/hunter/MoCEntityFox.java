@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -30,6 +28,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityFox extends MoCEntityTameableAnimal {
 

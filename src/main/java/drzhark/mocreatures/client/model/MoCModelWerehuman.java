@@ -8,9 +8,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class MoCModelWereHuman extends ModelBiped {
+public class MoCModelWerehuman extends ModelBiped {
 
-    public MoCModelWereHuman() {
+    public MoCModelWerehuman() {
         //TODO 4.1 FIX
         super(0.0F, 0.0F, 64, 32);
     }

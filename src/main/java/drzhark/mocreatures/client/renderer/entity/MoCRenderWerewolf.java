@@ -5,8 +5,8 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.MoCClientProxy;
-import drzhark.mocreatures.client.model.MoCModelWere;
-import drzhark.mocreatures.client.model.MoCModelWereHuman;
+import drzhark.mocreatures.client.model.MoCModelWerewolf;
+import drzhark.mocreatures.client.model.MoCModelWerehuman;
 import drzhark.mocreatures.entity.hostile.MoCEntityWerewolf;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -18,12 +18,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class MoCRenderWerewolf extends RenderLiving<MoCEntityWerewolf> {
 
-    private final MoCModelWere tempWerewolf;
+    private final MoCModelWerewolf tempWerewolf;
 
-    public MoCRenderWerewolf(MoCModelWereHuman modelwerehuman, ModelBase modelbase, float f) {
+    public MoCRenderWerewolf(MoCModelWerehuman modelwerehuman, ModelBase modelbase, float f) {
         super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
         this.addLayer(new LayerMoCWereHuman(this));
-        this.tempWerewolf = (MoCModelWere) modelbase;
+        this.tempWerewolf = (MoCModelWerewolf) modelbase;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MoCRenderWerewolf extends RenderLiving<MoCEntityWerewolf> {
     private class LayerMoCWereHuman implements LayerRenderer<MoCEntityWerewolf> {
 
         private final MoCRenderWerewolf mocRenderer;
-        private final MoCModelWereHuman mocModel = new MoCModelWereHuman();
+        private final MoCModelWerehuman mocModel = new MoCModelWerehuman();
 
         public LayerMoCWereHuman(MoCRenderWerewolf render) {
             this.mocRenderer = render;

@@ -5,23 +5,26 @@ package drzhark.mocreatures.client.model;
 
 import drzhark.mocreatures.entity.hostile.MoCEntityManticore;
 import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class MoCModelManticore extends MoCModelBigCat {
 
     @Override
     public void updateAnimationModifiers(Entity entity) {
-        MoCEntityManticore bigcat = (MoCEntityManticore) entity;
-        this.isFlyer = bigcat.isFlyer();
-        this.isSaddled = bigcat.getIsRideable();
+        MoCEntityManticore manticore = (MoCEntityManticore) entity;
+        this.isFlyer = manticore.isFlyer();
+        this.isSaddled = manticore.getIsRideable();
         this.flapwings = true;
-        this.floating = (this.isFlyer && bigcat.isOnAir() && !bigcat.onGround);
-        this.poisoning = bigcat.swingingTail();
-        this.isRidden = (bigcat.isBeingRidden());
+        this.floating = this.isFlyer && manticore.isOnAir() && !manticore.onGround;
+        this.poisoning = manticore.swingingTail();
+        this.isRidden = manticore.isBeingRidden();
         this.hasMane = true;
         this.hasSaberTeeth = true;
-        this.onAir = (bigcat.isOnAir());
+        this.onAir = manticore.isOnAir();
         this.hasStinger = true;
-        this.isMovingVertically = bigcat.motionY != 0 && !bigcat.onGround;
+        this.isMovingVertically = manticore.motionY != 0 && !manticore.onGround;
         this.hasChest = false;
         this.isTamed = false;
     }

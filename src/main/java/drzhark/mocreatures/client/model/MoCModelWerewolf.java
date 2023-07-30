@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class MoCModelWere extends ModelBase {
+public class MoCModelWerewolf extends ModelBase {
 
     public boolean hunched;
     ModelRenderer Head;
@@ -59,7 +59,7 @@ public class MoCModelWere extends ModelBase {
     ModelRenderer LFinger4;
     ModelRenderer LFinger5;
 
-    public MoCModelWere() {
+    public MoCModelWerewolf() {
         this.textureWidth = 64;
         this.textureHeight = 128;
 

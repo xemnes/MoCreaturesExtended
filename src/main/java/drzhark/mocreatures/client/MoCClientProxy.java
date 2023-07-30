@@ -100,7 +100,7 @@ public class MoCClientProxy extends MoCProxy {
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityWWolf.class, new MoCRenderWWolf(new MoCModelWolf(), 0.7F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityWraith.class, new MoCRenderWraith(new MoCModelWraith(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFlameWraith.class, new MoCRenderWraith(new MoCModelWraith(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(MoCEntityWerewolf.class, new MoCRenderWerewolf(new MoCModelWereHuman(), new MoCModelWere(), 0.7F));
+        RenderingRegistry.registerEntityRenderingHandler(MoCEntityWerewolf.class, new MoCRenderWerewolf(new MoCModelWerehuman(), new MoCModelWerewolf(), 0.7F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFox.class, new MoCRenderMoC(new MoCModelFox(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityShark.class, new MoCRenderShark(new MoCModelShark(), 0.6F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityDolphin.class, new MoCRenderDolphin(new MoCModelDolphin(), 0.6F));
@@ -162,7 +162,7 @@ public class MoCClientProxy extends MoCProxy {
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFrostManticore.class, new MoCRenderMoC(new MoCModelManticore(), 0.7F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityPlainManticore.class, new MoCRenderMoC(new MoCModelManticore(), 0.7F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityToxicManticore.class, new MoCRenderMoC(new MoCModelManticore(), 0.7F));
-        RenderingRegistry.registerEntityRenderingHandler(MoCEntityManticorePet.class, new MoCRenderMoC(new MoCModelManticore(), 0.7F));
+        RenderingRegistry.registerEntityRenderingHandler(MoCEntityManticorePet.class, new MoCRenderMoC(new MoCModelManticorePet(), 0.7F));
 
         if (MoCreatures.proxy.legacyBigCatModels) {
             RenderingRegistry.registerEntityRenderingHandler(MoCEntityLeoger.class, new MoCLegacyRenderBigCat(new MoCLegacyModelBigCat2(), new MoCLegacyModelBigCat1(), 0.5F));

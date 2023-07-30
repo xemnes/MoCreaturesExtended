@@ -1164,4 +1164,9 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         }
         super.setLeashHolder(entityIn, sendAttachNotification);
     }
+
+    @Override
+    public boolean isEntityInsideOpaqueBlock() {
+        return !this.isRiding() && super.isEntityInsideOpaqueBlock();
+    }
 }

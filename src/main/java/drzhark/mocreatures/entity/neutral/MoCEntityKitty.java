@@ -48,7 +48,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HUNGRY = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> EMO = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BYTE);
+    private static final DataParameter<Boolean> CLIMBING = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> KITTY_STATE = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> TEMPER = EntityDataManager.createKey(MoCEntityKitty.class, DataSerializers.VARINT);
     private final int[] treeCoord = {-1, -1, -1};
@@ -126,7 +126,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         this.dataManager.register(SITTING, Boolean.FALSE);
         this.dataManager.register(HUNGRY, Boolean.FALSE);
         this.dataManager.register(EMO, Boolean.FALSE);
-        this.dataManager.register(CLIMBING, (byte) 0);
+        this.dataManager.register(CLIMBING, Boolean.FALSE);
         this.dataManager.register(KITTY_STATE, 0);
         this.dataManager.register(TEMPER, 0);
     }
@@ -513,17 +513,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (this.dataManager.get(CLIMBING) & 1) != 0;
+        return this.dataManager.get(CLIMBING);
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = this.dataManager.get(CLIMBING);
-        if (climbing) {
-            b0 = (byte) (b0 | 1);
-        } else {
-            b0 = (byte) (b0 & -2);
-        }
-        this.dataManager.set(CLIMBING, b0);
+        this.dataManager.set(CLIMBING, climbing);
     }
 
     @Override

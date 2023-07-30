@@ -44,7 +44,7 @@ import javax.annotation.Nullable;
 
 public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
-    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BYTE);
+    private static final DataParameter<Boolean> CLIMBING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> IS_SITTING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
@@ -155,7 +155,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(CLIMBING, (byte) 0);
+        this.dataManager.register(CLIMBING, Boolean.FALSE);
         this.dataManager.register(HAS_BABIES, Boolean.FALSE);
         this.dataManager.register(IS_SITTING, Boolean.FALSE);
         this.dataManager.register(RIDEABLE, Boolean.FALSE);
@@ -224,21 +224,12 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (this.dataManager.get(CLIMBING) & 1) != 0;
+        return this.dataManager.get(CLIMBING);
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = this.dataManager.get(CLIMBING);
-
-        if (climbing) {
-            b0 = (byte) (b0 | 1);
-        } else {
-            b0 = (byte) (b0 & -2);
-        }
-
-        this.dataManager.set(CLIMBING, b0);
+        this.dataManager.set(CLIMBING, climbing);
     }
-
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {

@@ -34,7 +34,7 @@ import java.util.List;
 
 public class MoCEntityRat extends MoCEntityMob {
 
-    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityScorpion.class, DataSerializers.BYTE);
+    private static final DataParameter<Boolean> CLIMBING = EntityDataManager.createKey(MoCEntityRat.class, DataSerializers.BOOLEAN);
 
     public MoCEntityRat(World world) {
         super(world);
@@ -67,7 +67,7 @@ public class MoCEntityRat extends MoCEntityMob {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(CLIMBING, (byte) 0);
+        this.dataManager.register(CLIMBING, Boolean.FALSE);
     }
 
     @Override
@@ -182,19 +182,11 @@ public class MoCEntityRat extends MoCEntityMob {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (this.dataManager.get(CLIMBING) & 1) != 0;
+        return this.dataManager.get(CLIMBING);
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = this.dataManager.get(CLIMBING);
-
-        if (climbing) {
-            b0 = (byte) (b0 | 1);
-        } else {
-            b0 = (byte) (b0 & -2);
-        }
-
-        this.dataManager.set(CLIMBING, b0);
+        this.dataManager.set(CLIMBING, climbing);
     }
 
     @Override

@@ -360,12 +360,13 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     @Override
     public boolean getCanSpawnHere() {
         boolean willSpawn;
-        boolean debug = false;
-        willSpawn = this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0
+        boolean debug = MoCreatures.proxy.debug;
+        willSpawn = this.world.canSeeSky(new BlockPos(this))
+                && this.world.checkNoEntityCollision(this.getEntityBoundingBox())
+                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty()
                 && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
         if (willSpawn && debug)
-            System.out.println("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
+            MoCreatures.LOGGER.info("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 

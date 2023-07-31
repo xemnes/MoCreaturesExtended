@@ -279,7 +279,7 @@
     "category": "neutral",
     "sounds": [
       "mocreatures:donkey_grunt1",
-      "mocreatures:donkey{grunt2"
+      "mocreatures:donkey_grunt2"
     ]
   },
   "donkeyhurt": {
@@ -324,7 +324,7 @@
   "duckplop": {
     "category": "neutral",
     "sounds": [
-      "minecraft:entity/chicken/egg"
+      "mob/chicken/plop"
     ]
   },
   "eating": {

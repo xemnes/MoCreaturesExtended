@@ -13,6 +13,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,7 +31,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
 
     @Override
     public IChunkGenerator createChunkGenerator() {
-        return new ChunkGeneratorWyvernLair(this.world, false, this.world.getSeed());
+        return FMLLaunchHandler.isDeobfuscatedEnvironment() ? new ChunkGeneratorWyvernSkylands(this.world, this.world.getSeed()) : new ChunkGeneratorWyvernLair(this.world, false, this.world.getSeed());
     }
 
     private void setCustomSky() {

@@ -499,6 +499,28 @@
       "mocreatures:golem_step"
     ]
   },
+  "hellratdying": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:hell_rat_dying"
+    ]
+  },
+  "hellratgrunt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:hell_rat_grunt1",
+      "mocreatures:hell_rat_grunt2",
+      "mocreatures:hell_rat_grunt3",
+      "mocreatures:hell_rat_grunt4"
+    ]
+  },
+  "hellrathurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:hell_rat_hurt1",
+      "mocreatures:hell_rat_hurt2"
+    ]
+  },
   "horsedying": {
     "category": "neutral",
     "sounds": [

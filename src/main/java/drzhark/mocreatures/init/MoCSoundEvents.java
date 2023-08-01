@@ -90,6 +90,9 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GOLEM_HURT;
     public static final SoundEvent ENTITY_GOLEM_SHOOT;
     public static final SoundEvent ENTITY_GOLEM_WALK;
+    public static final SoundEvent ENTITY_HELL_RAT_AMBIENT;
+    public static final SoundEvent ENTITY_HELL_RAT_DEATH;
+    public static final SoundEvent ENTITY_HELL_RAT_HURT;
     public static final SoundEvent ENTITY_HORSE_MAD;
     public static final SoundEvent ENTITY_HORSE_AMBIENT;
     //public static final SoundEvent ENTITY_HORSE_AMBIENT_DONKEY;
@@ -272,6 +275,9 @@ public class MoCSoundEvents {
             ENTITY_GOLEM_HURT = createSoundEvent("golemhurt");
             ENTITY_GOLEM_SHOOT = createSoundEvent("golemshoot");
             ENTITY_GOLEM_WALK = createSoundEvent("golemwalk");
+            ENTITY_HELL_RAT_AMBIENT = createSoundEvent("hellratgrunt");
+            ENTITY_HELL_RAT_DEATH = createSoundEvent("hellratdying");
+            ENTITY_HELL_RAT_HURT = createSoundEvent("hellrathurt");
             ENTITY_HORSE_MAD = createSoundEvent("horsemad");
             ENTITY_HORSE_AMBIENT = createSoundEvent("horsegrunt");
             //ENTITY_HORSE_AMBIENT_DONKEY = createSoundEvent("horsegrunt"); // TODO

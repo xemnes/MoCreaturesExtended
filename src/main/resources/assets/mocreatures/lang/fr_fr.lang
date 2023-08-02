@@ -1,20 +1,13 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
-tile.MoCDirt.ogre_lair.name=Terre de la tanière des Ogres
-tile.MoCDirt.wyvern_lair.name=Terre de la tanière des Wyvernes
-tile.MoCGrass.ogre_lair.name=Bloc d'herbe de la tanière des Ogres
-tile.MoCGrass.wyvern_lair.name=Bloc d'herbe de la tanière des Wyvernes
-tile.MoCLeaves.ogre_lair.name=Feuilles de la tanière des Ogres
-tile.MoCLeaves.wyvern_lair.name=Feuilles de la tanière des Wyvernes
-tile.MoCLog.ogre_lair.name=Bois de la tanière des Ogres
-tile.MoCLog.wyvern_lair.name=Bois de la tanière des Wyvernes
-tile.MoCStone.ogre_lair.name=Roche de la tanière des Ogres
-tile.MoCStone.wyvern_lair.name=Roche de la tanière des Wyvernes
-tile.MoCTallGrass.ogre_lair.name=Herbe de la tanière des Ogres
-tile.MoCTallGrass.wyvern_lair.name=Herbe de la tanière des Wyvernes
-tile.MoCWoodPlank.ogre_lair.name=Planches de la tanière des Ogres
-tile.MoCWoodPlank.wyvern_lair.name=Planches de la tanière des Wyvernes
+tile.mocreatures.wyvern_dirt.name=Terre de la tanière des Wyvernes
+tile.mocreatures.wyvern_grass.name=Bloc d'herbe de la tanière des Wyvernes
+tile.mocreatures.wyvern_leaves.name=Feuilles de la tanière des Wyvernes
+tile.mocreatures.wyvern_log.name=Bois de la tanière des Wyvernes
+tile.mocreatures.wyvern_stone.name=Roche de la tanière des Wyvernes
+tile.mocreatures.wyvern_tallgrass.name=Herbe de la tanière des Wyvernes
+tile.mocreatures.wyvern_planks.name=Planches de la tanière des Wyvernes
 
 # ITEMS
 item.amuletbone.name=Amulette en os

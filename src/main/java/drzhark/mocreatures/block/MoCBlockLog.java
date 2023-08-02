@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,10 +12,10 @@ import net.minecraft.world.IBlockAccess;
 
 import java.util.Random;
 
-public class MoCBlockLog extends MoCBlock {
+public class MoCBlockLog extends Block {
 
-    public MoCBlockLog(String name) {
-        super(name, Material.WOOD);
+    public MoCBlockLog() {
+        super(Material.WOOD);
         this.setSoundType(SoundType.WOOD);
     }
 

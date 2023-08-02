@@ -37,10 +37,10 @@ public class BiomeGenWyvernLair extends Biome {
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 3));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 2, 3));
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 2, 2));
-        this.topBlock = MoCBlocks.mocGrass.getStateFromMeta(0);
-        this.fillerBlock = MoCBlocks.mocDirt.getStateFromMeta(0);
-        this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.mocLog.getStateFromMeta(0), MoCBlocks.mocLeaf.getStateFromMeta(0), 2, 30, 10);
-        this.worldGenShrub = new WorldGenShrub(MoCBlocks.mocLeaf.getStateFromMeta(0), MoCBlocks.mocLog.getStateFromMeta(0)); // Currently does nothing
+        this.topBlock = MoCBlocks.wyvernGrass.getDefaultState();
+        this.fillerBlock = MoCBlocks.wyvernDirt.getDefaultState();
+        this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.wyvernLog.getDefaultState(), MoCBlocks.wyvernLeaves.getDefaultState(), 2, 30, 10);
+        this.worldGenShrub = new WorldGenShrub(MoCBlocks.wyvernLeaves.getDefaultState(), MoCBlocks.wyvernLog.getDefaultState()); // Currently does nothing
         this.decorator = new BiomeWyvernDecorator();
     }
 
@@ -55,7 +55,7 @@ public class BiomeGenWyvernLair extends Biome {
 
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random) {
-        return new WorldGenWyvernGrass(MoCBlocks.mocTallGrass.getStateFromMeta(0));
+        return new WorldGenWyvernGrass(MoCBlocks.wyvernTallGrass.getDefaultState());
     }
 
     @Override

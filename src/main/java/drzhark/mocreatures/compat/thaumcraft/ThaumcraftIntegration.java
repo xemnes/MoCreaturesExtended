@@ -22,20 +22,13 @@ public class ThaumcraftIntegration {
     public static void registerAspects(AspectRegistryEvent event) {
         AspectEventProxy proxy = event.register;
         // Blocks
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocDirt, 1, 0), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocDirt, 1, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocGrass, 1, 0), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocGrass, 1, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLog, 1, 0), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLog, 1, 1), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLeaf, 1, 0), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocLeaf, 1, 1), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocPlank, 1, 0), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocPlank, 1, 1), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocStone, 1, 0), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocStone, 1, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocTallGrass, 1, 0), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.mocTallGrass, 1, 1), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernDirt, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernGrass, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernLog, 1), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernLeaves, 1), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernPlanks, 1), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernStone, 1), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernTallGrass, 1), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
         // Items - Armor
         proxy.registerObjectTag(new ItemStack(MoCItems.helmetCroc, 1, 0), new AspectList().add(Aspect.BEAST, 30).add(Aspect.PROTECT, 8).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.plateCroc, 1, 0), new AspectList().add(Aspect.BEAST, 46).add(Aspect.PROTECT, 20).add(Aspect.CRAFT, 6));

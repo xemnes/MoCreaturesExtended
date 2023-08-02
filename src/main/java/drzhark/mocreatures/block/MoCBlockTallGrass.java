@@ -21,21 +21,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class MoCBlockTallGrass extends MoCBlockBush implements IShearable {
+public class MoCBlockTallGrass extends BlockBush implements IShearable {
 
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
 
-    public MoCBlockTallGrass(String name) {
-        super(name, Material.VINE);
+    public MoCBlockTallGrass() {
+        super(Material.VINE);
         this.setCreativeTab(MoCreatures.tabMoC);
         this.setSoundType(SoundType.PLANT);
-    }
-
-    public MoCBlockTallGrass(String name, boolean lighted) {
-        this(name);
-        if (lighted) {
-            this.setLightLevel(0.8F);
-        }
     }
 
     @Override
@@ -43,10 +36,6 @@ public class MoCBlockTallGrass extends MoCBlockBush implements IShearable {
         return AABB;
     }
 
-    /**
-     * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i'
-     * (inclusive).
-     */
     @Override
     public int quantityDroppedWithBonus(int par1, Random par2Random) {
         return 1 + par2Random.nextInt(par1 * 2 + 1);
@@ -59,13 +48,13 @@ public class MoCBlockTallGrass extends MoCBlockBush implements IShearable {
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return new ArrayList<>(Collections.singletonList(new ItemStack(MoCBlocks.mocTallGrass)));
+        return new ArrayList<>(Collections.singletonList(new ItemStack(MoCBlocks.wyvernTallGrass)));
     }
 
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         Block soil = worldIn.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.mocGrass || soil == MoCBlocks.mocDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
+        return soil == MoCBlocks.wyvernGrass || soil == MoCBlocks.wyvernDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
     }
 
     @Override

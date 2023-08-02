@@ -1,5 +1,5 @@
 {
-  "parent": "mocreatures:block/ogre_grass",
+  "parent": "mocreatures:block/wyvern_planks",
   "display": {
     "third_person": {
       "rotation": [
@@ -8,7 +8,7 @@
         170
       ],
       "translation": [
-        0,
+        0.0,
         1.5,
         -2.75
       ],

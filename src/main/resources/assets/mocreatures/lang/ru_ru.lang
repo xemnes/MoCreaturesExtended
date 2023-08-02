@@ -1,20 +1,13 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
-tile.MoCDirt.ogre_lair.name=Земля логова огра
-tile.MoCDirt.wyvern_lair.name=Земля логова виверны
-tile.MoCGrass.ogre_lair.name=Трава логова огра
-tile.MoCGrass.wyvern_lair.name=Трава логова виверны
-tile.MoCLeaves.ogre_lair.name=Листва логова огра
-tile.MoCLeaves.wyvern_lair.name=Листва логова виверны
-tile.MoCLog.ogre_lair.name=Древесина логова огра
-tile.MoCLog.wyvern_lair.name=Древесина логова виверны
-tile.MoCStone.ogre_lair.name=Камень логова огра
-tile.MoCStone.wyvern_lair.name=Камень логова виверны
-tile.MoCTallGrass.ogre_lair.name=Высокая трава логова огра
-tile.MoCTallGrass.wyvern_lair.name=Высокая трава логова виверны
-tile.MoCWoodPlank.ogre_lair.name=Доски логова огра
-tile.MoCWoodPlank.wyvern_lair.name=Доски логова виверны
+tile.mocreatures.wyvern_dirt.name=Земля логова виверны
+tile.mocreatures.wyvern_grass.name=Трава логова виверны
+tile.mocreatures.wyvern_leaves.name=Листва логова виверны
+tile.mocreatures.wyvern_log.name=Древесина логова виверны
+tile.mocreatures.wyvern_stone.name=Камень логова виверны
+tile.mocreatures.wyvern_tallgrass.name=Высокая трава логова виверны
+tile.mocreatures.wyvern_planks.name=Доски логова виверны
 
 # ITEMS
 item.amuletbone.name=Костный амулет

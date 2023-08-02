@@ -1,20 +1,13 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
-tile.MoCDirt.ogre_lair.name=Ogre Lair Dirt
-tile.MoCDirt.wyvern_lair.name=Wyvern Lair Dirt
-tile.MoCGrass.ogre_lair.name=Ogre Lair Grass Block
-tile.MoCGrass.wyvern_lair.name=Wyvern Lair Grass Block
-tile.MoCLeaves.ogre_lair.name=Ogre Lair Leaves
-tile.MoCLeaves.wyvern_lair.name=Wyvern Lair Leaves
-tile.MoCLog.ogre_lair.name=Ogre Lair Log
-tile.MoCLog.wyvern_lair.name=Wyvern Lair Log
-tile.MoCStone.ogre_lair.name=Ogre Lair Stone
-tile.MoCStone.wyvern_lair.name=Wyvern Lair Stone
-tile.MoCTallGrass.ogre_lair.name=Ogre Lair Grass
-tile.MoCTallGrass.wyvern_lair.name=Wyvern Lair Grass
-tile.MoCWoodPlank.ogre_lair.name=Ogre Lair Wood Planks
-tile.MoCWoodPlank.wyvern_lair.name=Wyvern Lair Wood Planks
+tile.mocreatures.wyvern_dirt.name=Wyvern Lair Dirt
+tile.mocreatures.wyvern_grass.name=Wyvern Lair Grass Block
+tile.mocreatures.wyvern_leaves.name=Wyvern Lair Leaves
+tile.mocreatures.wyvern_log.name=Wyvern Lair Log
+tile.mocreatures.wyvern_stone.name=Wyvern Lair Stone
+tile.mocreatures.wyvern_tallgrass.name=Wyvern Lair Grass
+tile.mocreatures.wyvern_planks.name=Wyvern Lair Wood Planks
 
 # ITEMS
 item.amuletbone.name=Bone Amulet

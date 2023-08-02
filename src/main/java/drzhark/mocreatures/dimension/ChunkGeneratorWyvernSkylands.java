@@ -113,7 +113,7 @@ public class ChunkGeneratorWyvernSkylands implements IChunkGenerator {
                             double terrainDensity = noiseValue1;
                             double terrainDensityIncrease = (noiseValue2 - noiseValue1) * terrainDensityIncreaseScale;
                             for (int j2 = 0; j2 < 8; j2++) {
-                                primer.setBlockState(z, y, x, terrainDensity > 0.0D ? MoCBlocks.mocStone.getDefaultState() : Blocks.AIR.getDefaultState());
+                                primer.setBlockState(z, y, x, terrainDensity > 0.0D ? MoCBlocks.wyvernStone.getDefaultState() : Blocks.AIR.getDefaultState());
                                 x++;
                                 terrainDensity += terrainDensityIncrease;
                             }
@@ -137,17 +137,17 @@ public class ChunkGeneratorWyvernSkylands implements IChunkGenerator {
             for (int z = 0; z < 16; z++) {
                 int biomeBlocksNoiseValue = (int) (biomeBlocksNoiseArray[x + z * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
                 int biomeBlocksLeft = -1;
-                Block topBlock = MoCBlocks.mocGrass;
-                Block fillerBlock = MoCBlocks.mocDirt;
+                Block topBlock = MoCBlocks.wyvernGrass;
+                Block fillerBlock = MoCBlocks.wyvernDirt;
                 for (int y = 127; y >= 0; y--) {
                     Block block = primer.getBlockState(x, y, z).getBlock();
                     if (block == Blocks.AIR) {
                         biomeBlocksLeft = -1;
-                    } else if (block == MoCBlocks.mocStone) {
+                    } else if (block == MoCBlocks.wyvernStone) {
                         if (biomeBlocksLeft == -1) {
                             if (biomeBlocksNoiseValue <= 0) {
                                 topBlock = Blocks.AIR;
-                                fillerBlock = MoCBlocks.mocStone;
+                                fillerBlock = MoCBlocks.wyvernStone;
                             }
                             biomeBlocksLeft = biomeBlocksNoiseValue;
                             primer.setBlockState(x, y, z, topBlock.getDefaultState());

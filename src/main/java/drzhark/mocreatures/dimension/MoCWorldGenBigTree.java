@@ -214,7 +214,7 @@ public class MoCWorldGenBigTree extends WorldGenAbstractTree {
 
         for (int var5 = par2 + this.leafDistanceLimit; var4 < var5; ++var4) {
             float var6 = this.leafSize(var4 - par2);
-            this.func_150529_a(par1, var4, par3, var6, (byte) 1, MoCBlocks.mocLeaf);
+            this.func_150529_a(par1, var4, par3, var6, (byte) 1, MoCBlocks.wyvernLeaves);
         }
     }
 
@@ -396,7 +396,7 @@ public class MoCWorldGenBigTree extends WorldGenAbstractTree {
             System.out.println("invalid tree location option b = " +  iblockstate2.getBlock());
         }
         */
-        if (block != MoCBlocks.mocDirt && block != MoCBlocks.mocGrass) {
+        if (block != MoCBlocks.wyvernDirt && block != MoCBlocks.wyvernGrass) {
             return false;
         } else {
             int var4 = this.checkBlockLine(var1, var2);

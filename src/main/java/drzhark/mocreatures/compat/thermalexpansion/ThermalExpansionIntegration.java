@@ -68,10 +68,10 @@ public class ThermalExpansionIntegration {
 
         // Sawmill
         energy = 1_500;
-        SawmillManager.addRecipe(energy, new ItemStack(MoCBlocks.mocLog, 1, 0), new ItemStack(MoCBlocks.mocPlank, 6, 0), ItemMaterial.dustWood, 100);
-        SawmillManager.addRecipe(energy, new ItemStack(MoCBlocks.mocLog, 1, 1), new ItemStack(MoCBlocks.mocPlank, 6, 1), ItemMaterial.dustWood, 100);
-        TapperManager.addStandardMapping(new ItemStack(MoCBlocks.mocLog, 1, 0), new FluidStack(TFFluids.fluidResin, 100));
-        TapperManager.addStandardMapping(new ItemStack(MoCBlocks.mocLog, 1, 1), new FluidStack(TFFluids.fluidResin, 100));
+        SawmillManager.addRecipe(energy, new ItemStack(MoCBlocks.wyvernLog, 1, 0), new ItemStack(MoCBlocks.wyvernPlanks, 6, 0), ItemMaterial.dustWood, 100);
+        SawmillManager.addRecipe(energy, new ItemStack(MoCBlocks.wyvernLog, 1, 1), new ItemStack(MoCBlocks.wyvernPlanks, 6, 1), ItemMaterial.dustWood, 100);
+        TapperManager.addStandardMapping(new ItemStack(MoCBlocks.wyvernLog, 1, 0), new FluidStack(TFFluids.fluidResin, 100));
+        TapperManager.addStandardMapping(new ItemStack(MoCBlocks.wyvernLog, 1, 1), new FluidStack(TFFluids.fluidResin, 100));
         SawmillManager.addRecycleRecipe(energy, new ItemStack(MoCItems.horsesaddle), new ItemStack(Items.LEATHER), 3);
         SawmillManager.addRecycleRecipe(energy, new ItemStack(MoCItems.whip), new ItemStack(Items.LEATHER), 3);
         SawmillManager.addRecipe(energy, new ItemStack(MoCItems.elephantChest), new ItemStack(Blocks.CHEST), new ItemStack(MoCItems.animalHide), 50);

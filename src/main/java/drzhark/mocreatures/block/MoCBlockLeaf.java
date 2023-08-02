@@ -3,8 +3,8 @@
  */
 package drzhark.mocreatures.block;
 
-import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,13 +20,11 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class MoCBlockLeaf extends MoCBlock {
+public class MoCBlockLeaf extends Block {
 
-    public MoCBlockLeaf(String name) {
-        super(name, Material.LEAVES);
+    public MoCBlockLeaf() {
+        super(Material.LEAVES);
         setTickRandomly(true);
-        this.setCreativeTab(MoCreatures.tabMoC);
-        this.setTranslationKey(name);
         this.setSoundType(SoundType.PLANT);
     }
 
@@ -49,7 +47,7 @@ public class MoCBlockLeaf extends MoCBlock {
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, @Nullable ItemStack stack) {
         if (!worldIn.isRemote && !stack.isEmpty() && stack.getItem() == Items.SHEARS) {
             player.addStat(StatList.getBlockStats(this), 1);
-            spawnAsEntity(worldIn, pos, new ItemStack(MoCBlocks.mocLeaf, 1, 0));
+            spawnAsEntity(worldIn, pos, new ItemStack(MoCBlocks.wyvernLeaves, 1, 0));
         } else {
             super.harvestBlock(worldIn, player, pos, state, te, stack);
         }

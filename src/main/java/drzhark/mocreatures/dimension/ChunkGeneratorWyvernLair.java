@@ -33,9 +33,9 @@ import java.util.List;
 import java.util.Random;
 
 public class ChunkGeneratorWyvernLair implements IChunkGenerator {
-    protected static final IBlockState WYVERN_STONE = MoCBlocks.mocStone.getDefaultState();
-    protected static final IBlockState WYVERN_DIRT = MoCBlocks.mocDirt.getDefaultState();
-    protected static final IBlockState WYVERN_GRASS = MoCBlocks.mocGrass.getDefaultState();
+    protected static final IBlockState WYVERN_STONE = MoCBlocks.wyvernStone.getDefaultState();
+    protected static final IBlockState WYVERN_DIRT = MoCBlocks.wyvernDirt.getDefaultState();
+    protected static final IBlockState WYVERN_GRASS = MoCBlocks.wyvernGrass.getDefaultState();
     protected static final IBlockState AIR = Blocks.AIR.getDefaultState();
     /**
      * RNG.

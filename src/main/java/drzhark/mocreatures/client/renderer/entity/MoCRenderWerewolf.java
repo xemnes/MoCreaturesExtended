@@ -5,8 +5,8 @@ package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.MoCClientProxy;
-import drzhark.mocreatures.client.model.MoCModelWerewolf;
 import drzhark.mocreatures.client.model.MoCModelWerehuman;
+import drzhark.mocreatures.client.model.MoCModelWerewolf;
 import drzhark.mocreatures.entity.hostile.MoCEntityWerewolf;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;

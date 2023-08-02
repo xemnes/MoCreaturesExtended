@@ -83,7 +83,7 @@ public class MoCEntityHellRat extends MoCEntityRat {
         boolean flag = super.attackEntityAsMob(entityIn);
 
         if (flag && entityIn instanceof EntityLivingBase) {
-            ((EntityLivingBase) entityIn).setFire(5);
+            entityIn.setFire(5);
         }
 
         return flag;

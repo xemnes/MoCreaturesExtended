@@ -62,4 +62,8 @@ public class MoCEntityMaggot extends MoCEntityAmbient {
     @Override
     public void jump() {
     }
+    
+    public float getEyeHeight() {
+        return this.height * 0.45F;
+    }
 }

@@ -394,7 +394,8 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         passenger.rotationYaw = this.rotationYaw;
     }
 
+    // Adjusted to avoid most of the roof suffocation for now
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.9F;
     }
 }

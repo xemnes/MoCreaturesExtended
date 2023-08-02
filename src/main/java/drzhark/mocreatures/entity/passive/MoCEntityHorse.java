@@ -2319,7 +2319,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         super.makeEntityJump();
     }
 
+    // Adjusted to avoid most of the roof suffocation for now
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.9F;
     }
 }

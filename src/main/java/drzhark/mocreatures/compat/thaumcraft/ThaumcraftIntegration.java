@@ -26,6 +26,7 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvgrass), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodLog), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 5));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodPlanks), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodSapling), new AspectList().add(Aspect.PLANT, 15).add(Aspect.AURA, 5));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.tallWyvgrass), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
         // Items - Armor

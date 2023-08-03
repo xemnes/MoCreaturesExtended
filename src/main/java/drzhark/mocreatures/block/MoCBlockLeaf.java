@@ -131,7 +131,7 @@ public class MoCBlockLeaf extends BlockLeaves {
     @Override
     public Item getItemDropped(final IBlockState state, final Random rand, final int fortune) {
         if (this == MoCBlocks.wyvwoodLeaves) {
-            return Item.getItemFromBlock(Blocks.SAPLING);
+            return Item.getItemFromBlock(MoCBlocks.wyvwoodSapling);
         } else {
             return Item.getItemFromBlock(Blocks.SAPLING);
         }

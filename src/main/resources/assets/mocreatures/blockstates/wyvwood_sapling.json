@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cross",
+    "textures": {
+      "cross": "mocreatures:blocks/sapling_wyvwood",
+      "item": "#cross"
+    }
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "stage=0": [
+      {
+        "cross": "mocreatures:blocks/sapling_wyvwood"
+      }
+    ],
+    "stage=1": [
+      {
+        "cross": "mocreatures:blocks/sapling_wyvwood"
+      }
+    ]
+  }
+}

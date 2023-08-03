@@ -43,6 +43,7 @@ public class MoCRecipes {
             OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvwoodPlanks, 1));
             OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvstone, 1));
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvwoodLeaves, 1));
+            OreDictionary.registerOre("treeSapling", new ItemStack(MoCBlocks.wyvwoodSapling, 1));
 
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinCave);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitin);

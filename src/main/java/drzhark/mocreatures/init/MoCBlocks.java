@@ -40,6 +40,8 @@ public class MoCBlocks {
     public static Block wyvdirt;
     @GameRegistry.ObjectHolder("wyvwood_leaves")
     public static Block wyvwoodLeaves;
+    @GameRegistry.ObjectHolder("wyvwood_sapling")
+    public static Block wyvwoodSapling;
     @GameRegistry.ObjectHolder("wyvwood_log")
     public static Block wyvwoodLog;
     @GameRegistry.ObjectHolder("tall_wyvgrass")
@@ -54,6 +56,7 @@ public class MoCBlocks {
                 setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.5F),
                 setup(new MoCBlockDirt(MapColor.DIRT), "wyvdirt").setHardness(0.6F),
                 setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 20), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
+                setup(new MoCBlockSapling(MapColor.FOLIAGE, true), "wyvwood_sapling").setHardness(0.0F),
                 setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
                 setup(new MoCBlockPlanks(MapColor.DIAMOND, false), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F)

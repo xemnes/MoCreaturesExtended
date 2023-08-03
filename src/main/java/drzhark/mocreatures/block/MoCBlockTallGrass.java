@@ -23,18 +23,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 public class MoCBlockTallGrass extends BlockBush implements IShearable {
 
-    boolean flammable;
-
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+    boolean flammable;
 
     public MoCBlockTallGrass(MapColor mapColor, boolean flammable) {
         super(Material.VINE, mapColor);
@@ -82,9 +80,9 @@ public class MoCBlockTallGrass extends BlockBush implements IShearable {
     public int quantityDroppedWithBonus(int par1, Random par2Random) {
         return 1 + par2Random.nextInt(par1 * 2 + 1);
     }
-    
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return null;
     }
 

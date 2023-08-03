@@ -69,7 +69,6 @@ public class MoCBlocks {
         ForgeRegistries.BLOCKS.getValues().stream()
                 .filter(block -> block.getRegistryName().getNamespace().equals(MoCConstants.MOD_ID))
                 .forEach(block -> registry.register(setup(new ItemBlock(block), block.getRegistryName())));
-
     }
 
     @SideOnly(Side.CLIENT)

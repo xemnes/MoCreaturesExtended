@@ -5,8 +5,8 @@ package drzhark.mocreatures.block;
 
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.BlockPlanks.EnumType;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -28,10 +28,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-
-import javax.annotation.Nullable;
 
 public class MoCBlockLeaf extends BlockLeaves {
 
@@ -66,10 +65,7 @@ public class MoCBlockLeaf extends BlockLeaves {
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         if (!Minecraft.getMinecraft().gameSettings.fancyGraphics) {
-            if (!(blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockLeaves)) {
-                return true;
-            }
-            return false;
+            return !(blockAccess.getBlockState(pos.offset(side)).getBlock() instanceof BlockLeaves);
         }
         return true;
     }

@@ -8,7 +8,6 @@ import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -27,16 +26,16 @@ import java.util.Random;
 
 public class MoCBlockSapling extends BlockBush implements IGrowable {
 
-    boolean flammable;
-
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
+    public boolean flammable;
 
     public MoCBlockSapling(MapColor mapColor, boolean flammable) {
         super(Material.PLANTS, mapColor);
+        this.flammable = flammable;
         this.setCreativeTab(MoCreatures.tabMoC);
         this.setSoundType(SoundType.PLANT);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
     }
 
     public MoCBlockSapling(Material material, MapColor mapColor) {
@@ -83,7 +82,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
     }
 
     public void grow(World world, BlockPos pos, IBlockState state, Random rand) {
-        if (((Integer) state.getValue(STAGE)).intValue() == 0) {
+        if (state.getValue(STAGE) == 0) {
             world.setBlockState(pos, state.cycleProperty(STAGE), 4);
         } else {
             this.generateTree(world, pos, state, rand);
@@ -99,26 +98,21 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         int j = 0;
         boolean flag = false;
 
-        check:
-        {
-            // 2x2 saplings
-            if (state.getBlock() == MoCBlocks.wyvwoodSapling) {
-                for (i = 0; i >= -1; --i) {
-                    for (j = 0; j >= -1; --j) {
-                        if (this.isTwoByTwoOfType(world, pos, i, j, MoCBlocks.wyvwoodSapling)) {
-                            worldgenerator = new WorldGenMegaPineTree(false, rand.nextBoolean()); // Placeholder
-                            flag = true;
-                            break check;
-                        }
+        // 2x2 saplings
+        if (state.getBlock() == MoCBlocks.wyvwoodSapling) {
+            for (i = 0; i >= -1; --i) {
+                for (j = 0; j >= -1; --j) {
+                    if (this.isTwoByTwoOfType(world, pos, i, j, MoCBlocks.wyvwoodSapling)) {
+                        worldgenerator = new WorldGenMegaPineTree(false, rand.nextBoolean()); // Placeholder
+                        flag = true;
                     }
                 }
-
-                // Single sapling
-                if (!flag && state.getBlock() == MoCBlocks.wyvwoodSapling) {
-                    i = 0;
-                    j = 0;
-                    worldgenerator = new WorldGenTaiga2(false); // Placeholder
-                }
+            }
+            // Single sapling
+            if (!flag) {
+                i = 0;
+                j = 0;
+                worldgenerator = new WorldGenTaiga2(false); // Placeholder
             }
         }
 
@@ -156,10 +150,6 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         return iblockstate.getBlock() == type;
     }
 
-    public int damageDropped(IBlockState state) {
-        return 0;
-    }
-
     public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient) {
         return true;
     }
@@ -177,18 +167,17 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
     }
 
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(STAGE).intValue();
+        return state.getValue(STAGE);
     }
 
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{STAGE});
+        return new BlockStateContainer(this, STAGE);
     }
 
-    // TODO: A better way of doing this
     @Override
     public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
         Block soil = world.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.wyvgrass || soil == MoCBlocks.wyvdirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
+        return soil instanceof MoCBlockGrass || soil instanceof MoCBlockDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
     }
 
     @Override

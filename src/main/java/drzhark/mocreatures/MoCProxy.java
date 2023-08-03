@@ -76,7 +76,6 @@ public class MoCProxy implements IGuiHandler {
     public boolean legacyRatDeathSound;
     public boolean classicWraithSounds;
     public boolean classicWyvernLairSky;
-    public boolean darkerWyvernLair;
     public boolean foggyWyvernLair;
     public boolean simpleBunnyTextures;
     public boolean verboseEntityNames;
@@ -281,7 +280,6 @@ public class MoCProxy implements IGuiHandler {
         this.humanWerewolfSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "HumanWerewolfSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);
         this.classicWraithSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ClassicWraithSounds", false, "Enables legacy wraith sounds.").getBoolean(false);
         this.classicWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ClassicWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
-        this.darkerWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "DarkerWyvernLair", false, "Disables sky light at the wyvern lair like in legacy versions. It is highly recommended to also have the classic wyvern lair sky enabled.").getBoolean(false);
         this.foggyWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "FoggyWyvernLair", false, "Enables extra fog at the wyvern lair like in legacy versions.").getBoolean(false);
         this.simpleBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SimpleBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);

@@ -8,6 +8,7 @@ import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.block.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -26,35 +27,36 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
+@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
 @GameRegistry.ObjectHolder(MoCConstants.MOD_ID)
 public class MoCBlocks {
 
-    @GameRegistry.ObjectHolder("wyvern_stone")
-    public static Block wyvernStone;
-    @GameRegistry.ObjectHolder("wyvern_grass")
-    public static Block wyvernGrass;
-    @GameRegistry.ObjectHolder("wyvern_dirt")
-    public static Block wyvernDirt;
-    @GameRegistry.ObjectHolder("wyvern_leaves")
-    public static Block wyvernLeaves;
-    @GameRegistry.ObjectHolder("wyvern_log")
-    public static Block wyvernLog;
-    @GameRegistry.ObjectHolder("wyvern_tallgrass")
-    public static Block wyvernTallGrass;
-    @GameRegistry.ObjectHolder("wyvern_planks")
-    public static Block wyvernPlanks;
+    @GameRegistry.ObjectHolder("wyvstone")
+    public static Block wyvstone;
+    @GameRegistry.ObjectHolder("wyvgrass")
+    public static Block wyvgrass;
+    @GameRegistry.ObjectHolder("wyvdirt")
+    public static Block wyvdirt;
+    @GameRegistry.ObjectHolder("wyvwood_leaves")
+    public static Block wyvwoodLeaves;
+    @GameRegistry.ObjectHolder("wyvwood_log")
+    public static Block wyvwoodLog;
+    @GameRegistry.ObjectHolder("tall_wyvgrass")
+    public static Block tallWyvgrass;
+    @GameRegistry.ObjectHolder("wyvwood_planks")
+    public static Block wyvwoodPlanks;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(
-                setup(new MoCBlockRock(), "wyvern_stone").setHardness(1.5F).setResistance(10.0F),
-                setup(new MoCBlockGrass(), "wyvern_grass").setHardness(0.5F),
-                setup(new MoCBlockDirt(), "wyvern_dirt").setHardness(0.6F),
-                setup(new MoCBlockLeaf(), "wyvern_leaves").setHardness(0.2F).setLightOpacity(1),
-                setup(new MoCBlockLog(), "wyvern_log").setHardness(2.0F),
-                setup(new MoCBlockTallGrass(), "wyvern_tallgrass").setHardness(0.0F),
-                setup(new MoCBlockPlanks(), "wyvern_planks").setHardness(2.0F).setResistance(5.0F)
+                setup(new MoCBlockRock(MapColor.STONE), "wyvstone").setHardness(1.5F).setResistance(10.0F),
+                setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.5F),
+                setup(new MoCBlockDirt(MapColor.DIRT), "wyvdirt").setHardness(0.6F),
+                setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 20), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
+                setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
+                setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
+                setup(new MoCBlockPlanks(MapColor.DIAMOND, false), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F)
         );
     }
 

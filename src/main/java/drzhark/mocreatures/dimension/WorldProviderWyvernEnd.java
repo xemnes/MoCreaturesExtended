@@ -24,7 +24,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     @Override
     protected void init() {
         this.biomeProvider = new BiomeProviderWyvernLair(MoCBiomes.WyvernLairBiome, 0.5F, 0.0F);
-        this.hasSkyLight = !MoCreatures.proxy.darkerWyvernLair;
+        this.hasSkyLight = true;
         setDimension(MoCreatures.wyvernLairDimensionID);
         setCustomSky();
     }

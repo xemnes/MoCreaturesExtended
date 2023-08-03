@@ -1,7 +1,11 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "mocreatures:wyvern_stone"
+    "model": "cross",
+    "textures": {
+      "cross": "mocreatures:blocks/tall_grass_wyvern",
+      "item": "#cross"
+    }
   },
   "variants": {
     "normal": [

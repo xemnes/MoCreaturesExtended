@@ -37,10 +37,10 @@ public class BiomeGenWyvernLair extends Biome {
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 3));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 2, 3));
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 2, 2));
-        this.topBlock = MoCBlocks.wyvernGrass.getDefaultState();
-        this.fillerBlock = MoCBlocks.wyvernDirt.getDefaultState();
-        this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.wyvernLog.getDefaultState(), MoCBlocks.wyvernLeaves.getDefaultState(), 2, 30, 10);
-        this.worldGenShrub = new WorldGenShrub(MoCBlocks.wyvernLeaves.getDefaultState(), MoCBlocks.wyvernLog.getDefaultState()); // Currently does nothing
+        this.topBlock = MoCBlocks.wyvgrass.getDefaultState();
+        this.fillerBlock = MoCBlocks.wyvdirt.getDefaultState();
+        this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getDefaultState(), 2, 30, 10);
+        this.worldGenShrub = new WorldGenShrub(MoCBlocks.wyvwoodLeaves.getDefaultState(), MoCBlocks.wyvwoodLog.getDefaultState()); // Currently does nothing
         this.decorator = new BiomeWyvernDecorator();
     }
 
@@ -55,7 +55,7 @@ public class BiomeGenWyvernLair extends Biome {
 
     @Override
     public WorldGenerator getRandomWorldGenForGrass(Random par1Random) {
-        return new WorldGenWyvernGrass(MoCBlocks.wyvernTallGrass.getDefaultState());
+        return new WorldGenWyvernGrass(MoCBlocks.tallWyvgrass.getDefaultState());
     }
 
     @Override
@@ -66,17 +66,6 @@ public class BiomeGenWyvernLair extends Biome {
     @Override
     public void decorate(World par1World, Random par2Random, BlockPos pos) {
         super.decorate(par1World, par2Random, pos);
-
-        // Commented out, currently has issues with floating vines around trees and on the ground
-        //
-        /*WorldGenVines var5 = new WorldGenVines();
-
-        for (int var6 = 0; var6 < 50; ++var6) {
-            int var7 = par2Random.nextInt(16) + 8;
-            byte var8 = 64;
-            int var9 = par2Random.nextInt(16) + 8;
-            var5.generate(par1World, par2Random, pos.add(var7, var8, var9));
-        }*/
     }
 
     @Override

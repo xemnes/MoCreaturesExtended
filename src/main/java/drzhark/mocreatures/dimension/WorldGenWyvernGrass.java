@@ -46,6 +46,6 @@ public class WorldGenWyvernGrass extends WorldGenerator {
 
     public boolean canGrassStay(World worldIn, BlockPos pos) {
         Block soil = worldIn.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.wyvernGrass || soil == MoCBlocks.wyvernDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
+        return soil == MoCBlocks.wyvgrass || soil == MoCBlocks.wyvdirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
     }
 }

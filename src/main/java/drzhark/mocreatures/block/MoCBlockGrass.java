@@ -6,6 +6,7 @@ package drzhark.mocreatures.block;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -15,16 +16,20 @@ import java.util.Random;
 
 public class MoCBlockGrass extends Block {
 
-    public MoCBlockGrass() {
-        super(Material.GRASS);
+    public MoCBlockGrass(MapColor mapColor) {
+        super(Material.GRASS, mapColor);
         setTickRandomly(true);
         this.setSoundType(SoundType.PLANT);
+    }
+
+    public MoCBlockGrass(Material material, MapColor mapColor) {
+        super(material, mapColor);
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (!worldIn.isRemote) {
             if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2) {
-                worldIn.setBlockState(pos, MoCBlocks.wyvernDirt.getDefaultState());
+                worldIn.setBlockState(pos, MoCBlocks.wyvdirt.getDefaultState());
             } else {
                 if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
                     for (int i = 0; i < 4; ++i) {
@@ -32,9 +37,9 @@ public class MoCBlockGrass extends Block {
                         IBlockState blockstate = worldIn.getBlockState(blockpos1.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos1);
 
-                        if (iblockstate1.getBlock() == MoCBlocks.wyvernDirt && worldIn.getLightFromNeighbors(blockpos1.up()) >= 4
+                        if (iblockstate1.getBlock() == MoCBlocks.wyvdirt && worldIn.getLightFromNeighbors(blockpos1.up()) >= 4
                                 && blockstate.getLightOpacity(worldIn, blockpos1.up()) <= 2) {
-                            worldIn.setBlockState(blockpos1, MoCBlocks.wyvernGrass.getDefaultState());
+                            worldIn.setBlockState(blockpos1, MoCBlocks.wyvgrass.getDefaultState());
                         }
                     }
                 }

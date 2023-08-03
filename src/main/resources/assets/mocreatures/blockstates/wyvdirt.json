@@ -1,7 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "mocreatures:wyvern_tallgrass"
+    "model": "cube_all",
+    "textures": {
+      "all": "mocreatures:blocks/dirt_wyvern"
+    }
   },
   "variants": {
     "normal": [

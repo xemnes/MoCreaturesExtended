@@ -1,13 +1,13 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
-tile.mocreatures.wyvern_dirt.name=Terre de la tanière des Wyvernes
-tile.mocreatures.wyvern_grass.name=Bloc d'herbe de la tanière des Wyvernes
-tile.mocreatures.wyvern_leaves.name=Feuilles de la tanière des Wyvernes
-tile.mocreatures.wyvern_log.name=Bois de la tanière des Wyvernes
-tile.mocreatures.wyvern_stone.name=Roche de la tanière des Wyvernes
-tile.mocreatures.wyvern_tallgrass.name=Herbe de la tanière des Wyvernes
-tile.mocreatures.wyvern_planks.name=Planches de la tanière des Wyvernes
+tile.mocreatures.wyvdirt.name=Terre de la tanière des Wyvernes
+tile.mocreatures.wyvgrass.name=Bloc d'herbe de la tanière des Wyvernes
+tile.mocreatures.wyvwood_leaves.name=Feuilles de la tanière des Wyvernes
+tile.mocreatures.wyvwood_log.name=Bois de la tanière des Wyvernes
+tile.mocreatures.wyvstone.name=Roche de la tanière des Wyvernes
+tile.mocreatures.tall_wyvgrass.name=Herbe de la tanière des Wyvernes
+tile.mocreatures.wyvwood_planks.name=Planches de la tanière des Wyvernes
 
 # ITEMS
 item.amuletbone.name=Amulette en os

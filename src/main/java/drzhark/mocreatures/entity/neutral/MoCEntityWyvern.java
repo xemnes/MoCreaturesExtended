@@ -971,6 +971,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     }
 
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.925F;
     }
 }

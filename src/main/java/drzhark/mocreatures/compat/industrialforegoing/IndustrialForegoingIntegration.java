@@ -33,8 +33,7 @@ public class IndustrialForegoingIntegration {
 
     public static ExtractorEntry[] getLatexEntries() {
         return new ExtractorEntry[]{
-                new ExtractorEntry(new ItemStack(MoCBlocks.wyvernLog, 1, 0), new FluidStack(FluidsRegistry.LATEX, 1)),
-                new ExtractorEntry(new ItemStack(MoCBlocks.wyvernLog, 1, 1), new FluidStack(FluidsRegistry.LATEX, 1))
+                new ExtractorEntry(new ItemStack(MoCBlocks.wyvwoodLog), new FluidStack(FluidsRegistry.LATEX, 1)),
         };
     }
 }

@@ -6,9 +6,16 @@ package drzhark.mocreatures.block;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.*;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -21,14 +28,49 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 public class MoCBlockTallGrass extends BlockBush implements IShearable {
+
+    boolean flammable;
 
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
 
-    public MoCBlockTallGrass() {
-        super(Material.VINE);
+    public MoCBlockTallGrass(MapColor mapColor, boolean flammable) {
+        super(Material.VINE, mapColor);
         this.setCreativeTab(MoCreatures.tabMoC);
         this.setSoundType(SoundType.PLANT);
+    }
+
+    public MoCBlockTallGrass(Material material, MapColor mapColor) {
+        super(material, mapColor);
+    }
+
+    public boolean isFlammable() {
+        return flammable;
+    }
+
+    @Override
+    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        if (isFlammable()) {
+            return Blocks.TALLGRASS.getFlammability(world, pos, face);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        if (isFlammable()) {
+            return Blocks.TALLGRASS.getFireSpreadSpeed(world, pos, face);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public Block.EnumOffsetType getOffsetType() {
+        return Block.EnumOffsetType.XYZ;
     }
 
     @Override
@@ -40,6 +82,21 @@ public class MoCBlockTallGrass extends BlockBush implements IShearable {
     public int quantityDroppedWithBonus(int par1, Random par2Random) {
         return 1 + par2Random.nextInt(par1 * 2 + 1);
     }
+    
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return null;
+    }
+
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        if (!worldIn.isRemote && stack.getItem() == Items.SHEARS) {
+            player.addStat(StatList.getBlockStats(this));
+            spawnAsEntity(worldIn, pos, new ItemStack(this));
+        } else {
+            super.harvestBlock(worldIn, player, pos, state, te, stack);
+        }
+    }
 
     @Override
     public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
@@ -48,13 +105,19 @@ public class MoCBlockTallGrass extends BlockBush implements IShearable {
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return new ArrayList<>(Collections.singletonList(new ItemStack(MoCBlocks.wyvernTallGrass)));
+        return new ArrayList<>(Collections.singletonList(new ItemStack(this, 1, 0)));
     }
 
     @Override
+    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
+        return true;
+    }
+
+    // TODO: A better way of doing this
+    @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         Block soil = worldIn.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.wyvernGrass || soil == MoCBlocks.wyvernDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
+        return soil == MoCBlocks.wyvgrass || soil == MoCBlocks.wyvdirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
     }
 
     @Override

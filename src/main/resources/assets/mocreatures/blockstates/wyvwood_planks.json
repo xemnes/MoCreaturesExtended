@@ -1,7 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "mocreatures:wyvern_dirt"
+    "model": "cube_all",
+    "textures": {
+      "all": "mocreatures:blocks/wood_planks_wyvwood"
+    }
   },
   "variants": {
     "normal": [

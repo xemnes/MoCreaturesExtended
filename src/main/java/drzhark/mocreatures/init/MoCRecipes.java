@@ -22,7 +22,7 @@ public class MoCRecipes {
         @SubscribeEvent
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
 
-            GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvernLog, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
+            GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvwoodLog, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
 
             GameRegistry.addSmelting(MoCItems.ancientSilverScrap, new ItemStack(MoCItems.ancientSilverIngot, 1), 1.0F);
             GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked, 1), 0.35F);
@@ -37,12 +37,12 @@ public class MoCRecipes {
 
             GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet, 1), 0.35F);
 
-            OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.wyvernDirt, 1));
-            OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.wyvernGrass, 1));
-            OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.wyvernLog, 1));
-            OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvernPlanks, 1));
-            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvernStone, 1));
-            OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvernLeaves, 1));
+            OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.wyvdirt, 1));
+            OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.wyvgrass, 1));
+            OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.wyvwoodLog, 1));
+            OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvwoodPlanks, 1));
+            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvstone, 1));
+            OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvwoodLeaves, 1));
 
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinCave);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitin);

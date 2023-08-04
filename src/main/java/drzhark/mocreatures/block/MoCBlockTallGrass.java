@@ -4,7 +4,6 @@
 package drzhark.mocreatures.block;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -111,11 +110,10 @@ public class MoCBlockTallGrass extends BlockBush implements IShearable {
         return true;
     }
 
-    // TODO: A better way of doing this
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         Block soil = worldIn.getBlockState(pos.down()).getBlock();
-        return soil == MoCBlocks.wyvgrass || soil == MoCBlocks.wyvdirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
+        return soil instanceof MoCBlockGrass || soil instanceof MoCBlockDirt || soil instanceof BlockGrass || soil instanceof BlockDirt || soil instanceof BlockFarmland;
     }
 
     @Override

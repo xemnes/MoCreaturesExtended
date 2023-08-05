@@ -1,6 +1,9 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
+tile.mocreatures.cobbled_wyvstone.name=Cobbled Wyvstone
+tile.mocreatures.cobbled_deep_wyvstone.name=Cobbled Deep Wyvstone
+tile.mocreatures.deep_wyvstone.name=Deep Wyvstone
 tile.mocreatures.wyvdirt.name=Wyvdirt
 tile.mocreatures.wyvgrass.name=Wyvgrass Block
 tile.mocreatures.wyvwood_leaves.name=Wyvwood Leaves

@@ -22,6 +22,9 @@ public class ThaumcraftIntegration {
     public static void registerAspects(AspectRegistryEvent event) {
         AspectEventProxy proxy = event.register;
         // Blocks
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbled_deep_wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1).add(Aspect.ENTROPY, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbled_wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1).add(Aspect.ENTROPY, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.deep_wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvdirt), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvgrass), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodLog), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 5));

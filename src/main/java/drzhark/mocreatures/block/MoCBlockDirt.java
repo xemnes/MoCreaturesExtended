@@ -12,8 +12,8 @@ public class MoCBlockDirt extends Block {
 
     public MoCBlockDirt(MapColor mapColor) {
         super(Material.GROUND, mapColor);
-        setTickRandomly(true);
         this.setSoundType(SoundType.GROUND);
+        this.setHarvestLevel("shovel", 0);
     }
 
     public MoCBlockDirt(Material material, MapColor mapColor) {

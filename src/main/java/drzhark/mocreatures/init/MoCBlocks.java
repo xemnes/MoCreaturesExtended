@@ -32,6 +32,12 @@ import javax.annotation.Nonnull;
 @GameRegistry.ObjectHolder(MoCConstants.MOD_ID)
 public class MoCBlocks {
 
+    @GameRegistry.ObjectHolder("cobbled_wyvstone")
+    public static Block cobbled_wyvstone;
+    @GameRegistry.ObjectHolder("cobbled_deep_wyvstone")
+    public static Block cobbled_deep_wyvstone;
+    @GameRegistry.ObjectHolder("deep_wyvstone")
+    public static Block deep_wyvstone;
     @GameRegistry.ObjectHolder("wyvstone")
     public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvgrass")
@@ -52,6 +58,9 @@ public class MoCBlocks {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(
+                setup(new MoCBlockRock(MapColor.STONE), "cobbled_wyvstone").setHardness(1.5F).setResistance(10.0F),
+                setup(new MoCBlockRock(MapColor.STONE), "cobbled_deep_wyvstone").setHardness(1.5F).setResistance(10.0F),
+                setup(new MoCBlockRock(MapColor.STONE), "deep_wyvstone").setHardness(1.5F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "wyvstone").setHardness(1.5F).setResistance(10.0F),
                 setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.5F),
                 setup(new MoCBlockDirt(MapColor.DIRT), "wyvdirt").setHardness(0.6F),

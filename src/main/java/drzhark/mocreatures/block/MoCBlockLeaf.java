@@ -42,7 +42,6 @@ public class MoCBlockLeaf extends BlockLeaves {
         this.mapColor = mapColor;
         this.flammable = flammable;
         this.saplingDropChance = saplingDropChance;
-        setTickRandomly(true);
         setSoundType(SoundType.PLANT);
     }
 

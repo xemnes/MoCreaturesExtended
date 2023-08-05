@@ -22,28 +22,33 @@ public class MoCRecipes {
         @SubscribeEvent
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
 
-            GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvwoodLog, 1), new ItemStack(Items.COAL, 1, 1), 0.15F);
+        	GameRegistry.addSmelting(new ItemStack(MoCBlocks.cobbled_deep_wyvstone), new ItemStack(MoCBlocks.deep_wyvstone), 0.1F);
+        	GameRegistry.addSmelting(new ItemStack(MoCBlocks.cobbled_wyvstone), new ItemStack(MoCBlocks.wyvstone), 0.1F);
+        	GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvwoodLog), new ItemStack(Items.COAL, 1, 1), 0.15F);
 
-            GameRegistry.addSmelting(MoCItems.ancientSilverScrap, new ItemStack(MoCItems.ancientSilverIngot, 1), 1.0F);
-            GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.duckRaw, new ItemStack(MoCItems.duckCooked, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.silversword, new ItemStack(MoCItems.ancientSilverNugget, 1), 0.25F);
-            GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked, 1), 0.35F);
-            GameRegistry.addSmelting(MoCItems.venisonRaw, new ItemStack(MoCItems.venisonCooked, 1), 0.35F);
+            GameRegistry.addSmelting(MoCItems.ancientSilverScrap, new ItemStack(MoCItems.ancientSilverIngot), 1.0F);
+            GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked), 0.35F);
+            GameRegistry.addSmelting(MoCItems.duckRaw, new ItemStack(MoCItems.duckCooked), 0.35F);
+            GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked), 0.35F);
+            GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet), 0.35F);
+            GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked), 0.35F);
+            GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey), 0.35F);
+            GameRegistry.addSmelting(MoCItems.silversword, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
+            GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked), 0.35F);
+            GameRegistry.addSmelting(MoCItems.venisonRaw, new ItemStack(MoCItems.venisonCooked), 0.35F);
 
-            GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet, 1), 0.35F);
+            GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet), 0.35F);
 
-            OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.wyvdirt, 1));
-            OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.wyvgrass, 1));
-            OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.wyvwoodLog, 1));
-            OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvwoodPlanks, 1));
-            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvstone, 1));
-            OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvwoodLeaves, 1));
-            OreDictionary.registerOre("treeSapling", new ItemStack(MoCBlocks.wyvwoodSapling, 1));
+            OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbled_deep_wyvstone));
+            OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbled_wyvstone));
+            OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.wyvdirt));
+            OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.wyvgrass));
+            OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.wyvwoodLog));
+            OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvwoodPlanks));
+            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.deep_wyvstone));
+            OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvstone));
+            OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvwoodLeaves));
+            OreDictionary.registerOre("treeSapling", new ItemStack(MoCBlocks.wyvwoodSapling));
 
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinCave);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitin);

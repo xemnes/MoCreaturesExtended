@@ -71,6 +71,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         this.moveHelper = new EntityAIMoverHelperMoC(this);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public String getName() {
         String entityString = EntityList.getEntityString(this);

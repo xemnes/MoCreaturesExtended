@@ -37,6 +37,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -73,6 +75,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         this.navigatorFlyer = new PathNavigateFlyer(this, world);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public String getName() {
         String entityString = EntityList.getEntityString(this);

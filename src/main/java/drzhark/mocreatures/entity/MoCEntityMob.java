@@ -32,6 +32,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -60,6 +62,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         this.tasks.addTask(4, this.wander = new EntityAIWanderMoC2(this, 1.0D, 80));
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public String getName() {
         String entityString = EntityList.getEntityString(this);

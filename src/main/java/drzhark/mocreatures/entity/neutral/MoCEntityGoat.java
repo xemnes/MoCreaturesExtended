@@ -604,6 +604,6 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     }
 
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.945F;
     }
 }

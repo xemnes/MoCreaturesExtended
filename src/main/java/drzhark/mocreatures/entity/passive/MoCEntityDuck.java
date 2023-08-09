@@ -103,6 +103,6 @@ public class MoCEntityDuck extends MoCEntityAnimal {
     }
 
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.945F;
     }
 }

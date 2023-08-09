@@ -214,7 +214,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
     }
 
     public float getEyeHeight() {
-        return this.height * 0.98F;
+        return this.height * 0.945F;
     }
 
     static class AIWolfAttack extends EntityAIAttackMelee {

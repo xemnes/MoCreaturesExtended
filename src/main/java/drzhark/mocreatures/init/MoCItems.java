@@ -88,6 +88,7 @@ public class MoCItems {
     public static final MoCItem ancientSilverScrap = new MoCItem("ancientsilverscrap");
     public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
+    public static final MoCItem firestoneChunk = new MoCItem("firestonechunk");
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
@@ -212,6 +213,7 @@ public class MoCItems {
                     ancientSilverScrap,
                     ancientSilverIngot,
                     ancientSilverNugget,
+                    firestoneChunk,
 
                     nunchaku,
                     sai,

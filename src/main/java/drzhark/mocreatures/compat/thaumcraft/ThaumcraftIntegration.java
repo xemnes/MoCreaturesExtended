@@ -22,9 +22,13 @@ public class ThaumcraftIntegration {
     public static void registerAspects(AspectRegistryEvent event) {
         AspectEventProxy proxy = event.register;
         // Blocks
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbled_deep_wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1).add(Aspect.ENTROPY, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbled_wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1).add(Aspect.ENTROPY, 1));
-        proxy.registerObjectTag(new ItemStack(MoCBlocks.deep_wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.ancientOre), new AspectList().add(Aspect.DEATH, 15).add(Aspect.EARTH, 5));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbledDeepWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbledWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.deepWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.firestone), new AspectList().add(Aspect.FIRE, 30).add(Aspect.LIGHT, 15));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.mossyCobbledDeepWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 3).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.mossyCobbledWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 3).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvdirt), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvgrass), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodLog), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 5));
@@ -84,6 +88,7 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.essencefire), new AspectList().add(Aspect.FIRE, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencelight), new AspectList().add(Aspect.AURA, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essenceundead), new AspectList().add(Aspect.UNDEAD, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
+        proxy.registerObjectTag(new ItemStack(MoCItems.firestoneChunk), new AspectList().add(Aspect.FIRE, 10).add(Aspect.LIGHT, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.fishnet), new AspectList().add(Aspect.BEAST, 26).add(Aspect.WATER, 3).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.fishnetfull), new AspectList().add(Aspect.BEAST, 26).add(Aspect.WATER, 3).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.fur), new AspectList().add(Aspect.BEAST, 6).add(Aspect.PROTECT, 4));

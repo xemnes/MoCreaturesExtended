@@ -1,10 +1,20 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
+tile.mocreatures.ancient_ore.name=Ancient Ore
+tile.mocreatures.ancient_silver_block.name=Block of Ancient Silver
 tile.mocreatures.cobbled_wyvstone.name=Cobbled Wyvstone
 tile.mocreatures.cobbled_deep_wyvstone.name=Cobbled Deep Wyvstone
 tile.mocreatures.deep_wyvstone.name=Deep Wyvstone
+tile.mocreatures.firestone.name=Firestone
+tile.mocreatures.mossy_cobbled_wyvstone.name=Mossy Cobbled Wyvstone
+tile.mocreatures.mossy_cobbled_deep_wyvstone.name=Mossy Cobbled Deep Wyvstone
 tile.mocreatures.wyvdirt.name=Wyvdirt
+tile.mocreatures.wyvern_diamond_ore.name=Wyvern Diamond Ore
+tile.mocreatures.wyvern_emerald_ore.name=Wyvern Emerald Ore
+tile.mocreatures.wyvern_gold_ore.name=Wyvern Gold Ore
+tile.mocreatures.wyvern_iron_ore.name=Wyvern Iron Ore
+tile.mocreatures.wyvern_lapis_ore.name=Wyvern Lapis Lazuli Ore
 tile.mocreatures.wyvgrass.name=Wyvgrass Block
 tile.mocreatures.wyvwood_leaves.name=Wyvwood Leaves
 tile.mocreatures.wyvwood_log.name=Wyvwood Log
@@ -44,6 +54,7 @@ item.essencedarkness.name=Essence of Darkness
 item.essencefire.name=Essence of Fire
 item.essencelight.name=Essence of Light
 item.essenceundead.name=Essence of Undead
+item.firestonechunk.name=Firestone Chunk
 item.fishnet.name=Fishing Net
 item.fishnetfull.name=Fishing Net
 item.fur.name=Fur

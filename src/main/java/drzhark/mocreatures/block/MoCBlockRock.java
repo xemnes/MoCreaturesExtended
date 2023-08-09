@@ -26,12 +26,10 @@ public class MoCBlockRock extends Block {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        if (this == MoCBlocks.deep_wyvstone) {
-            return MoCBlocks.cobbled_deep_wyvstone.getItemDropped(MoCBlocks.cobbled_deep_wyvstone.getDefaultState(), rand, fortune);
-        }
-
-        if (this == MoCBlocks.wyvstone) {
-            return MoCBlocks.cobbled_wyvstone.getItemDropped(MoCBlocks.cobbled_wyvstone.getDefaultState(), rand, fortune);
+        if (this == MoCBlocks.deepWyvstone) {
+            return MoCBlocks.cobbledDeepWyvstone.getItemDropped(MoCBlocks.cobbledDeepWyvstone.getDefaultState(), rand, fortune);
+        } else if (this == MoCBlocks.wyvstone) {
+            return MoCBlocks.cobbledWyvstone.getItemDropped(MoCBlocks.cobbledWyvstone.getDefaultState(), rand, fortune);
         } else {
             return Item.getItemFromBlock(this);
         }

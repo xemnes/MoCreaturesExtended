@@ -87,6 +87,7 @@ public class MoCModelSmallFish extends ModelBase {
         float zOffset = smallFish.getAdjustedZOffset();
         GlStateManager.pushMatrix();
         GlStateManager.translate(xOffset, yOffset, zOffset);
+        GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
         this.BodyFlat.render(scale);
         this.BodyRomboid.render(scale);
         this.MidBodyFin.render(scale);

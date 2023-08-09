@@ -127,6 +127,7 @@ public class MoCModelMediumFish extends ModelBase {
         float zOffset = mediumFish.getAdjustedZOffset();
         GlStateManager.pushMatrix();
         GlStateManager.translate(xOffset, yOffset, zOffset);
+        GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
         this.Head.render(scale);
         this.LowerHead.render(scale);
         this.Nose.render(scale);

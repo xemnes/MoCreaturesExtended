@@ -22,6 +22,7 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
 
     public MoCEntityPiranha(World world) {
         super(world);
+        experienceValue = 3;
     }
 
     @Override
@@ -57,6 +58,11 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
             }
         }
         return null;
+    }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

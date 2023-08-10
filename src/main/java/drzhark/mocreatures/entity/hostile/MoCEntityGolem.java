@@ -59,6 +59,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         super(world);
         this.texture = "golem.png";
         this.setSize(1.8F, 4.3F);
+        experienceValue = 20;
     }
 
     @Override

@@ -82,7 +82,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         if (!this.world.isRemote) {
             setAdult(this.rand.nextInt(4) != 0);
         }
-        
+
         experienceValue = 10;
     }
 
@@ -164,7 +164,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getModelTexture("elephant_african.png");
         }
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return experienceValue;

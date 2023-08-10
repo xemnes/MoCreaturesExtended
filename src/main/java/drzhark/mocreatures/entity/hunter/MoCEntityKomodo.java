@@ -60,6 +60,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
             setAge(90 + this.rand.nextInt(20));
         }*/
         setAge(90);
+        experienceValue = 5;
     }
 
     @Override
@@ -76,9 +77,10 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(5.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.5D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.18D);
     }
 
@@ -97,6 +99,11 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     public boolean getIsRideable() {
         return this.dataManager.get(RIDEABLE);
+    }
+
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

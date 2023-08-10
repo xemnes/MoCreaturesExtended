@@ -48,6 +48,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         //setAge(50 + this.rand.nextInt(50));
         setAge(80);
         setTamed(false);
+        experienceValue = 5;
     }
 
     @Override
@@ -66,8 +67,9 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
@@ -101,6 +103,11 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
 
     public void setBiting(boolean flag) {
         this.dataManager.set(IS_BITING, flag);
+    }
+
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

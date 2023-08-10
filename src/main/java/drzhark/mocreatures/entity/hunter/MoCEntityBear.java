@@ -53,7 +53,8 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         setSize(1.2F, 1.5F);
         setAge(55);
         setAdult(this.rand.nextInt(4) != 0);
-        this.stepHeight = 1.0F;
+        stepHeight = 1.0F;
+        experienceValue = 5;
     }
 
     @Override
@@ -72,10 +73,8 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
     }
 
     /**
@@ -129,10 +128,6 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
     @Override
     public void selectType() {
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
-        this.setHealth(getMaxHealth());
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
             setAge(getMaxAge());
         }
@@ -146,22 +141,9 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         return 1.0F;
     }
 
-    public float calculateMaxHealth() {
-        return 30;
-    }
-
-    /**
-     * Returns the distance at which the bear attacks prey
-     */
-    public double getAttackRange() {
-        return 8D;
-    }
-
-    /**
-     * The damage the bear does
-     */
-    public int getAttackStrength() {
-        return 2;
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

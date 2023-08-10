@@ -10,6 +10,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.neutral.MoCEntityPandaBear;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -23,6 +24,14 @@ public class MoCEntityBlackBear extends MoCEntityBear {
     public MoCEntityBlackBear(World world) {
         super(world);
         setSize(0.85F, 1.175F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override
@@ -56,11 +65,10 @@ public class MoCEntityBlackBear extends MoCEntityBear {
         return 6D * factor;
     }
 
-    @Override
-    public int getAttackStrength() {
+    /*public int getAttackStrength() {
         int factor = (this.world.getDifficulty().getId());
         return 2 * factor;
-    }
+    }*/
 
     @Override
     public boolean shouldAttackPlayers() {

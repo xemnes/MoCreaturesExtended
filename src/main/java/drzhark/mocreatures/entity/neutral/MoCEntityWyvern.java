@@ -115,7 +115,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         this.dataManager.register(GHOST, Boolean.FALSE);
         this.dataManager.register(ARMOR_TYPE, 0);// armor 0 by default, 1 metal, 2 gold, 3 diamond, 4 crystaline
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return experienceValue;

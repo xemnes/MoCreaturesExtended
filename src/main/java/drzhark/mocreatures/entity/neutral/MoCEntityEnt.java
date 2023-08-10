@@ -81,7 +81,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         }
         return MoCreatures.proxy.getModelTexture("ent_oak.png");
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return experienceValue;

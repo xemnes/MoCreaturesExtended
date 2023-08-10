@@ -67,6 +67,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         this.bodyswing = 2F;
         this.movInt = this.rand.nextInt(10);
         setAge(50 + this.rand.nextInt(50));
+        experienceValue = 3;
     }
 
     @Override
@@ -138,6 +139,11 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             default:
                 return MoCreatures.proxy.getModelTexture("snake_green_dark.png");
         }
+    }
+
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

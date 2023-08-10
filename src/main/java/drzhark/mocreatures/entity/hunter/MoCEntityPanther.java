@@ -9,6 +9,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,14 @@ public class MoCEntityPanther extends MoCEntityBigCat {
     public MoCEntityPanther(World world) {
         super(world);
         setSize(1.175F, 1.065F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
     }
 
     @Override
@@ -122,21 +131,6 @@ public class MoCEntityPanther extends MoCEntityBigCat {
                 || (mate instanceof MoCEntityPanther && ((MoCEntityPanther) mate).getType() == 1)
                 || (mate instanceof MoCEntityTiger && ((MoCEntityTiger) mate).getType() == 1)
                 || (mate instanceof MoCEntityLion && ((MoCEntityLion) mate).getType() == 2);
-    }
-
-    @Override
-    public float calculateMaxHealth() {
-        return 25F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 6D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 8D;
     }
 
     @Override

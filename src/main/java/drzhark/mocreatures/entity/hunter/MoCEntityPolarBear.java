@@ -9,6 +9,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -22,6 +23,14 @@ public class MoCEntityPolarBear extends MoCEntityBear {
     public MoCEntityPolarBear(World world) {
         super(world);
         setSize(1.5F, 1.834F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override
@@ -47,11 +56,6 @@ public class MoCEntityPolarBear extends MoCEntityBear {
         return 140;
     }
 
-    @Override
-    public float calculateMaxHealth() {
-        return 50;
-    }
-
     public double getAttackRange() {
         int factor = 1;
         if (this.world.getDifficulty().getId() > 1) {
@@ -60,11 +64,10 @@ public class MoCEntityPolarBear extends MoCEntityBear {
         return 8D * factor;
     }
 
-    @Override
-    public int getAttackStrength() {
+    /*public int getAttackStrength() {
         int factor = (this.world.getDifficulty().getId());
         return 4 * factor;
-    }
+    }*/
 
     @Override
     public boolean shouldAttackPlayers() {

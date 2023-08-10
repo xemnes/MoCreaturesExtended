@@ -8,6 +8,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.IMoCTameable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +21,14 @@ public class MoCEntityLither extends MoCEntityBigCat {
     public MoCEntityLither(World world) {
         super(world);
         setSize(1.175F, 1.17F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
     }
 
     @Override
@@ -78,21 +87,6 @@ public class MoCEntityLither extends MoCEntityBigCat {
     @Override
     public boolean compatibleMate(Entity mate) {
         return false;
-    }
-
-    @Override
-    public float calculateMaxHealth() {
-        return 25F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 6D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 8D;
     }
 
     @Override

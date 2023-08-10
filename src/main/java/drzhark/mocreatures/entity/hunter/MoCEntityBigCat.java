@@ -66,7 +66,8 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         setAge(45);
         setSize(1.4F, 1.3F);
         setAdult(this.rand.nextInt(4) != 0);
-        this.stepHeight = 1.0F;
+        stepHeight = 1.0F;
+        experienceValue = 5;
     }
 
     @Override
@@ -83,22 +84,12 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0D);
     }
 
-    /**
-     * Sets the type and texture of a BigCat if not set already.
-     */
     @Override
     public void selectType() {
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
-        this.setHealth(getMaxHealth());
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
             setAge(getMaxAge());
         }
@@ -107,22 +98,6 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     @Override
     public double getCustomSpeed() {
         return 2D;
-    }
-
-    public float getMoveSpeed() {
-        return 1.6F;
-    }
-
-    public float calculateMaxHealth() {
-        return 20F;
-    }
-
-    public double calculateAttackDmg() {
-        return 5D;
-    }
-
-    public double getAttackRange() {
-        return 6D;
     }
 
     /**
@@ -180,6 +155,11 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     public void setRideable(boolean flag) {
         this.dataManager.set(RIDEABLE, flag);
+    }
+
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     // Method used for receiving damage from another source

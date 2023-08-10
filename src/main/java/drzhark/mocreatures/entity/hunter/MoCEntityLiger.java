@@ -9,6 +9,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,14 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     public MoCEntityLiger(World world) {
         super(world);
         setSize(1.35F, 1.43525F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
     }
 
     @Override
@@ -93,21 +102,6 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     @Override
     public boolean compatibleMate(Entity mate) {
         return false;
-    }
-
-    @Override
-    public float calculateMaxHealth() {
-        return 35F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 8D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 10D;
     }
 
     @Override

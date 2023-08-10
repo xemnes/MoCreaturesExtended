@@ -9,6 +9,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -27,11 +28,19 @@ public class MoCEntityLion extends MoCEntityBigCat {
     }
 
     @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
+    }
+
+    @Override
     public void selectType() {
 
         if (getType() == 0) {
             if (rand.nextInt(20) == 0) {
-                setType(rand.nextInt(2) + 6);//white lions
+                setType(rand.nextInt(2) + 6); // White Lion
             } else {
                 setType(rand.nextInt(2) + 1);
             }
@@ -118,13 +127,13 @@ public class MoCEntityLion extends MoCEntityBigCat {
     @Override
     public String getOffspringClazz(IMoCTameable mate) {
         if (mate instanceof MoCEntityTiger && mate.getType() < 3) {
-            return "Liger";//return 4; //liger"
+            return "Liger"; // Liger
         }
         if (getType() == 2 && mate instanceof MoCEntityLeopard && mate.getType() == 1) {
-            return "Liard";//return 9; //liard
+            return "Liard"; // Liard
         }
         if (getType() == 2 && mate instanceof MoCEntityPanther && mate.getType() == 1) {
-            return "Lither";//return 5; //lither
+            return "Lither"; // Lither
         }
         return "Lion";
     }
@@ -133,13 +142,13 @@ public class MoCEntityLion extends MoCEntityBigCat {
     public int getOffspringTypeInt(IMoCTameable mate) {
         int x = 0;
         if (mate instanceof MoCEntityTiger && mate.getType() < 3) {
-            return 1;//4; //liger
+            return 1; // Liger
         }
         if (getType() == 2 && mate instanceof MoCEntityLeopard && mate.getType() == 1) {
-            return 1;//9; //liard
+            return 1; // Liard
         }
         if (getType() == 2 && mate instanceof MoCEntityPanther && mate.getType() == 1) {
-            return 1;//5; //lither
+            return 1; // Lither
         }
         if (mate instanceof MoCEntityLion) {
             int lionMateType = mate.getType();
@@ -193,38 +202,30 @@ public class MoCEntityLion extends MoCEntityBigCat {
         return (this.getType() < 3 || this.getType() == 6 || this.getType() == 7) && super.readytoBreed();
     }
 
-    @Override
     public float calculateMaxHealth() {
+        // ?
         if (this.getType() == 2 || this.getType() == 7) {
             return 35F;
         }
+        // ?
         if (this.getType() == 4) {
             return 40F;
         }
+        // ?
         return 30F;
     }
 
     @Override
-    public double calculateAttackDmg() {
-        return 7D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        if (this.getType() == 1 || this.getType() == 6) {
-            return 12D;
-        }
-        return 8D;
-    }
-
-    @Override
     public int getMaxAge() {
+        // ?
         if (getType() == 1 || getType() == 6) {
             return 110;
         }
+        // ?
         if (getType() == 9) {
             return 100;
         }
+        // ?
         return 120;
     }
 

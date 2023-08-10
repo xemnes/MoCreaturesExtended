@@ -9,6 +9,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,14 @@ public class MoCEntityTiger extends MoCEntityBigCat {
     public MoCEntityTiger(World world) {
         super(world);
         setSize(1.25F, 1.275F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
     }
 
     @Override
@@ -50,10 +59,10 @@ public class MoCEntityTiger extends MoCEntityBigCat {
             }
         }
         switch (getType()) {
-            case 2:
-            case 3:
+            case 2: // White Tiger
+            case 3: // Winged White Tiger
                 return MoCreatures.proxy.getModelTexture("big_cat_white_tiger.png");
-            default:
+            default: // Orange Tiger
                 return MoCreatures.proxy.getModelTexture("big_cat_tiger.png");
         }
     }
@@ -120,13 +129,13 @@ public class MoCEntityTiger extends MoCEntityBigCat {
     @Override
     public int getOffspringTypeInt(IMoCTameable mate) {
         if (mate instanceof MoCEntityLion && mate.getType() == 2) {
-            return 1;//4; //liger
+            return 1; // Liger
         }
         if (mate instanceof MoCEntityLeopard && mate.getType() == 1) {
-            return 1;//4; //leoger
+            return 1; // Leoger
         }
         if (mate instanceof MoCEntityPanther && mate.getType() == 1) {
-            return 1;//4; //panthger
+            return 1; // Panthger
         }
         return this.getType();
     }
@@ -144,32 +153,34 @@ public class MoCEntityTiger extends MoCEntityBigCat {
         return this.getType() < 3 && super.readytoBreed();
     }
 
-    @Override
-    public float calculateMaxHealth() {
-        if (this.getType() == 2) {
-            return 40F;
+    public double calculateMaxHealth() {
+        // White Tiger
+        if (this.getType() == 2 || this.getType() == 3) {
+            return 40.0D;
         }
-        return 35F;
+        // Orange Tiger
+        else {
+            return 35.0D;
+        }
     }
 
-    @Override
+
     public double calculateAttackDmg() {
-        if (this.getType() == 2) {
-            return 8D;
+        // White Tiger
+        if (this.getType() == 2 || this.getType() == 3) {
+            return 8.0D;
         }
-        return 7D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 8D;
+        // Orange Tiger
+        return 7.0D;
     }
 
     @Override
     public int getMaxAge() {
-        if (getType() > 2) {
+        // White Tiger
+        if (this.getType() == 2 || this.getType() == 3) {
             return 130;
         }
+        // Orange Tiger
         return 120;
     }
 
@@ -182,11 +193,6 @@ public class MoCEntityTiger extends MoCEntityBigCat {
             return false;
         }
         return entity.height < 2F && entity.width < 2F;
-    }
-
-    @Override
-    public float getMoveSpeed() {
-        return 1.5F;
     }
 
     public float getEyeHeight() {

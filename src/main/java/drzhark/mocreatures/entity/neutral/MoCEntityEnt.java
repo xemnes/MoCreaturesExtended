@@ -45,6 +45,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
         super(world);
         setSize(1.4F, 7F);
         this.stepHeight = 2F;
+        experienceValue = 10;
     }
 
     @Override
@@ -58,10 +59,12 @@ public class MoCEntityEnt extends MoCEntityAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(7.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 
     @Override
@@ -77,6 +80,11 @@ public class MoCEntityEnt extends MoCEntityAnimal {
             return MoCreatures.proxy.getModelTexture("ent_birch.png");
         }
         return MoCreatures.proxy.getModelTexture("ent_oak.png");
+    }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

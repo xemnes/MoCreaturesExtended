@@ -82,6 +82,8 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         if (!this.world.isRemote) {
             setAdult(this.rand.nextInt(4) != 0);
         }
+        
+        experienceValue = 10;
     }
 
     @Override
@@ -96,10 +98,11 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 
     @Override
@@ -160,6 +163,11 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             default:
                 return MoCreatures.proxy.getModelTexture("elephant_african.png");
         }
+    }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     public float calculateMaxHealth() {

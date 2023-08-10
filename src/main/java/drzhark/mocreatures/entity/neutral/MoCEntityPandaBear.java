@@ -10,6 +10,7 @@ import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.hunter.MoCEntityBear;
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -25,6 +26,15 @@ public class MoCEntityPandaBear extends MoCEntityBear {
     public MoCEntityPandaBear(World world) {
         super(world);
         setSize(0.8F, 1.05F);
+    }
+    
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override
@@ -51,18 +61,8 @@ public class MoCEntityPandaBear extends MoCEntityBear {
     }
 
     @Override
-    public float calculateMaxHealth() {
-        return 20;
-    }
-
-    @Override
     public boolean isReadyToHunt() {
         return false;
-    }
-
-    @Override
-    public int getAttackStrength() {
-        return 1;
     }
 
     @Override

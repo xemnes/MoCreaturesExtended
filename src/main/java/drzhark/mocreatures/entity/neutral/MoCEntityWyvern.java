@@ -82,6 +82,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         }*/
 
         setAge(80);
+        experienceValue = 20;
     }
 
     @Override
@@ -97,10 +98,11 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
     }
 
     @Override
@@ -112,6 +114,11 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         this.dataManager.register(FLYING, Boolean.FALSE);
         this.dataManager.register(GHOST, Boolean.FALSE);
         this.dataManager.register(ARMOR_TYPE, 0);// armor 0 by default, 1 metal, 2 gold, 3 diamond, 4 crystaline
+    }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override
@@ -223,26 +230,17 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     }
 
     public double calculateMaxHealth() {
-        if (this.getType() == 6 || this.getType() == 7 || this.getType() == 8) {
-            return 60D;
-        }
-        if (this.getType() == 5) {
-            return 80D;
-        }
         if (this.getType() == 13) {
-            return 100D;
+            return 100.0D;
         }
-        return 40D;
+        return 80.0D;
     }
 
     public double calculateAttackDmg() {
-        if (this.getType() == 6 || this.getType() == 7 || this.getType() == 8 || this.getType() == 13) {
-            return 8D;
-        }
         if (this.getType() == 5) {
-            return 12D;
+            return 12.0D;
         }
-        return 5D;
+        return 10.0D;
     }
 
     /**

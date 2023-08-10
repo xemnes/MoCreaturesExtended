@@ -35,6 +35,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         // TODO: Make hitboxes adjust depending on size
         //setAge(60 + this.rand.nextInt(100));
         setAge(160);
+        experienceValue = 5;
     }
 
     @Override
@@ -57,6 +58,11 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     @Override
     protected void entityInit() {
         super.entityInit();
+    }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override

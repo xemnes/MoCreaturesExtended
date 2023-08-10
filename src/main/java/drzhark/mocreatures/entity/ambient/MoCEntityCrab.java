@@ -13,6 +13,7 @@ import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -68,6 +69,11 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
             default:
                 return MoCreatures.proxy.getModelTexture("crab_red.png");
         }
+    }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return 1 + this.world.rand.nextInt(3);
     }
 
     @Nullable

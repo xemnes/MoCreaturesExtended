@@ -100,6 +100,11 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
             return null;
         }
     }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return 1 + this.world.rand.nextInt(3);
+    }
 
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {

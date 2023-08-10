@@ -178,6 +178,11 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
             setAdult(true);
         }
     }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return 1 + this.world.rand.nextInt(3);
+    }
 
     @Override
     public boolean getIsTamed() {

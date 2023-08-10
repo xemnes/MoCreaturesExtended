@@ -858,9 +858,6 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         return 300;
     }
 
-    /**
-     * Get the experience points the entity currently has.
-     */
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return 1 + this.world.rand.nextInt(3);

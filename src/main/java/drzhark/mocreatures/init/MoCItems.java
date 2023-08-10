@@ -38,13 +38,14 @@ public class MoCItems {
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
     public static final MoCItem whip = new MoCItemWhip("whip");
     public static final MoCItem staffPortal = new ItemStaffPortal("staffportal");
-    public static final MoCItem staffTeleport = new ItemStaffTeleport("staffteleport");
     public static final MoCItem medallion = new MoCItem("medallion");
     public static final MoCItemKittyBed[] kittybed = new MoCItemKittyBed[16];
     public static final MoCItem litterbox = new MoCItemLitterBox("kittylitter");
     public static final MoCItem woolball = new MoCItem("woolball");
     public static final MoCItem petfood = new MoCItem("petfood");
-    public static final MoCItem builderHammer = new ItemBuilderHammer("builderhammer");
+    // Both disabled until we figure out what to do with them
+    //public static final MoCItem staffTeleport = new ItemStaffTeleport("staffteleport");
+    //public static final MoCItem builderHammer = new ItemBuilderHammer("builderhammer");
     public static final MoCItem hideCroc = new MoCItem("reptilehide");
     public static final MoCItem fur = new MoCItem("fur");
     public static final MoCItem essencedarkness = new MoCItem("essencedarkness");
@@ -207,8 +208,8 @@ public class MoCItems {
                     turtlecooked,
                     turtlesoup,
                     staffPortal,
-                    staffTeleport,
-                    builderHammer,
+                    /*staffTeleport,
+                    builderHammer,*/
 
                     ancientSilverScrap,
                     ancientSilverIngot,

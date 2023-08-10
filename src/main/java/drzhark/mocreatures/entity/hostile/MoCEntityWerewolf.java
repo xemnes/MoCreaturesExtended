@@ -48,6 +48,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         this.transforming = false;
         this.tcounter = 0;
         setHumanForm(true);
+        experienceValue = 10;
     }
 
     @Override
@@ -64,7 +65,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.5D);
     }
 
     @Override

@@ -35,6 +35,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
         super(world);
         this.texture = "silver_skeleton.png";
         setSize(0.6F, 2.125F);
+        experienceValue = 5 + this.world.rand.nextInt(4);
     }
 
     @Override
@@ -49,8 +50,9 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(9.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
     }
 
     @Override

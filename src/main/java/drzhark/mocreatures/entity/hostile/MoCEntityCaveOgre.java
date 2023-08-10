@@ -5,6 +5,7 @@ package drzhark.mocreatures.entity.hostile;
 
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,6 +16,14 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
 
     public MoCEntityCaveOgre(World world) {
         super(world);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9.0D);
     }
 
     @Override
@@ -38,11 +47,6 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
     @Override
     public boolean getCanSpawnHere() {
         return super.getCanSpawnHere() && !this.world.canSeeSky(new BlockPos(this)) && (this.posY < 50.0D);
-    }
-
-    @Override
-    public float calculateMaxHealth() {
-        return 50F;
     }
 
     @Nullable

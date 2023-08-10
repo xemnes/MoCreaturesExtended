@@ -53,6 +53,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
         if (!this.world.isRemote && getType != 3 && getType != 5) {
             setHasBabies(this.getIsAdult() && this.rand.nextInt(4) == 0);
         }
+        experienceValue = 5;
     }
 
     @Override

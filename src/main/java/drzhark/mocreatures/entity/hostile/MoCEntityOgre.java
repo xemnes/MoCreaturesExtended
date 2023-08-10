@@ -33,6 +33,7 @@ public class MoCEntityOgre extends MoCEntityMob {
     public MoCEntityOgre(World world) {
         super(world);
         setSize(1.8F, 3.05F);
+        experienceValue = 12;
     }
 
     @Override
@@ -48,9 +49,8 @@ public class MoCEntityOgre extends MoCEntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 
     @Override
@@ -58,10 +58,6 @@ public class MoCEntityOgre extends MoCEntityMob {
         if (getType() == 0) {
             setType(this.rand.nextInt(2) + 1);
         }
-    }
-
-    public float calculateMaxHealth() {
-        return 35F;
     }
 
     @Override

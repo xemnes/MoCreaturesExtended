@@ -39,6 +39,7 @@ public class MoCEntityRat extends MoCEntityMob {
     public MoCEntityRat(World world) {
         super(world);
         setSize(0.58F, 0.455F);
+        experienceValue = 5;
     }
 
     @Override

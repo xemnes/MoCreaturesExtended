@@ -26,12 +26,14 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
         this.texture = MoCreatures.proxy.alphaWraithEyes ? "wraith_flame_alpha.png" : "wraith_flame.png";
         this.isImmuneToFire = true;
         this.burningTime = 30;
+        experienceValue = 7;
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
     }
 
     @Nullable

@@ -18,6 +18,7 @@ public class MoCEntityFireScorpion extends MoCEntityScorpion {
     public MoCEntityFireScorpion(World world) {
         super(world, 3);
         this.isImmuneToFire = true;
+        experienceValue = 7;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class MoCEntityFireScorpion extends MoCEntityScorpion {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.34D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(5.0D);
     }
 
     @Override

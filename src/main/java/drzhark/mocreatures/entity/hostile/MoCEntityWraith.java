@@ -36,6 +36,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
         this.collidedVertically = false;
         this.texture = MoCreatures.proxy.alphaWraithEyes ? "wraith_alpha.png" : "wraith.png";
         setSize(0.6F, 2.0F);
+        experienceValue = 5;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(this.world.getDifficulty().getId() == 1 ? 2.0D : 3.0D); // setAttackStrength
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }

@@ -31,6 +31,7 @@ public class MoCEntityManticore extends MoCEntityMob {
     public MoCEntityManticore(World world) {
         super(world);
         setSize(1.35F, 1.45F);
+        experienceValue = 5;
     }
 
     @Override

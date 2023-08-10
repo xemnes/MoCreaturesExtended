@@ -37,6 +37,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
     public MoCEntityHorseMob(World world) {
         super(world);
         setSize(1.3964844F, 1.6F);
+        experienceValue = 5;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
     }
 
     @Override

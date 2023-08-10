@@ -18,6 +18,7 @@ public class MoCEntityFireManticore extends MoCEntityManticore {
     public MoCEntityFireManticore(World world) {
         super(world);
         this.isImmuneToFire = true;
+        experienceValue = 10;
     }
 
     @Override

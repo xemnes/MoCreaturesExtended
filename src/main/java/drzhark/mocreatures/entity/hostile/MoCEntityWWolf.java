@@ -44,6 +44,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         super(world);
         setSize(0.8F, 1.1F);
         setAdult(true);
+        experienceValue = 5;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.5D);
     }
 
     @Override

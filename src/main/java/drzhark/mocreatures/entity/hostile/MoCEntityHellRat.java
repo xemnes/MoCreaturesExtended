@@ -25,6 +25,7 @@ public class MoCEntityHellRat extends MoCEntityRat {
         super(world);
         setSize(0.88F, 0.755F);
         this.isImmuneToFire = true;
+        experienceValue = 7;
     }
 
     @Override

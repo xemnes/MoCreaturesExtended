@@ -7,15 +7,11 @@
       },
       {
         "index": 1,
-        "time": 4
+        "time": 16
       },
       {
-        "index": 2,
-        "time": 10
-      },
-      {
-        "index": 1,
-        "time": 4
+        "index": 0,
+        "time": 16
       }
     ],
     "interpolate": true

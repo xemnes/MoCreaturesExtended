@@ -21,6 +21,7 @@ tile.mocreatures.wyvwood_log.name=Wyvwood Log
 tile.mocreatures.wyvstone.name=Wyvstone
 tile.mocreatures.tall_wyvgrass.name=Wyvgrass
 tile.mocreatures.wyvwood_planks.name=Wyvwood Planks
+tile.mocreatures.wyvwood_sapling.name=Wyvwood Sapling
 
 # ITEMS
 item.amuletbone.name=Bone Amulet
@@ -205,6 +206,7 @@ item.scrollofowner.name=Scroll of Reset Owner
 item.scrollofsale.name=Scroll of Sale
 item.sharksword.name=Shark Sword
 item.sharkteeth.name=Shark Tooth
+item.silveraxe.name=Ancient Silver Axe
 item.silversword.name=Ancient Silver Sword
 item.staffportal.name=Wyvern Portal Staff
 item.staffteleport.name=Teleport Staff

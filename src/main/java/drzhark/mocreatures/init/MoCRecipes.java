@@ -53,6 +53,7 @@ public class MoCRecipes {
             GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet), 0.35F);
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked), 0.35F);
             GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey), 0.35F);
+            GameRegistry.addSmelting(MoCItems.silveraxe, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
             GameRegistry.addSmelting(MoCItems.silversword, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
             GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked), 0.35F);
             GameRegistry.addSmelting(MoCItems.venisonRaw, new ItemStack(MoCItems.venisonCooked), 0.35F);

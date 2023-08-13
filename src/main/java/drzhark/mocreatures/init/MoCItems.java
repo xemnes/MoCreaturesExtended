@@ -117,6 +117,7 @@ public class MoCItems {
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
     static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 304, 9.5F, 3.0F, 19);
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
+    public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.2F);
     static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", SCORPC, 4);
     static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
@@ -222,6 +223,7 @@ public class MoCItems {
                     katana,
                     sharksword,
                     silversword,
+                    silveraxe,
 
                     essencedarkness,
                     essencefire,

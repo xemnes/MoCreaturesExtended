@@ -73,7 +73,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        if (!getIsFlying() && this.motionY < 0.0D) {
+        if (!this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
 

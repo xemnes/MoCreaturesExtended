@@ -115,6 +115,7 @@ public class MoCItems {
     public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
     static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 0, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
+    public static final MoCItemAxe sharkaxe = new MoCItemAxe("sharkaxe", SHARK, 9.5F, 1.0F);
     static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 304, 9.5F, 3.0F, 19);
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
     public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.1F);
@@ -226,6 +227,7 @@ public class MoCItems {
                     sai,
                     bo,
                     katana,
+                    sharkaxe,
                     sharksword,
                     silversword,
                     silveraxe,

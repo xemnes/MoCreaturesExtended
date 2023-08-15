@@ -30,6 +30,8 @@ public class MoCRecipes {
                 event.setBurnTime(2400); // 12 items
             } else if (event.getItemStack().getItem() == MoCItems.heartfire) {
                 event.setBurnTime(3200); // 16 items
+            } else if (event.getItemStack().getItem() == MoCItems.sharkaxe | event.getItemStack().getItem() == MoCItems.sharksword) {
+            	event.setBurnTime(200); // 1 item
             }
         }
 

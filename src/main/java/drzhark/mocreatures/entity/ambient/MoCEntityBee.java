@@ -83,11 +83,6 @@ public class MoCEntityBee extends MoCEntityInsect {
     }
 
     @Override
-    protected float getSoundVolume() {
-        return 0.1F;
-    }
-
-    @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (super.attackEntityFrom(damagesource, i)) {
             Entity entity = damagesource.getTrueSource();

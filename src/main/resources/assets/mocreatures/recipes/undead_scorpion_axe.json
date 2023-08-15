@@ -2,7 +2,7 @@
   "type": "forge:ore_shaped",
   "pattern": [
     "SC",
-    "SG",
+    "CG",
     " C"
   ],
   "key": {

@@ -117,17 +117,22 @@ public class MoCItems {
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
     static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 304, 9.5F, 3.0F, 19);
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
-    public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.2F);
-    static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
+    public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.1F);
+    static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 0, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", SCORPC, 4);
-    static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
+    public static final MoCItemAxe scorpAxeCave = new MoCItemAxe("scorpaxecave", SCORPC, 9.5F, 1.0F, 4);
+    static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 0, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
     public static final MoCItemSword scorpSwordFrost = new MoCItemSword("scorpswordfrost", SCORPF, 2);
-    static ToolMaterial SCORPN = EnumHelper.addToolMaterial("SCORPN", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinNether));
+    public static final MoCItemAxe scorpAxeFrost = new MoCItemAxe("scorpaxefrost", SCORPF, 9.5F, 1.0F, 2);
+    static ToolMaterial SCORPN = EnumHelper.addToolMaterial("SCORPN", 0, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinNether));
     public static final MoCItemSword scorpSwordNether = new MoCItemSword("scorpswordnether", SCORPN, 3);
-    static ToolMaterial SCORPD = EnumHelper.addToolMaterial("SCORPD", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitin));
+    public static final MoCItemAxe scorpAxeNether = new MoCItemAxe("scorpaxenether", SCORPN, 9.5F, 1.0F, 3);
+    static ToolMaterial SCORPD = EnumHelper.addToolMaterial("SCORPD", 0, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitin));
     public static final MoCItemSword scorpSwordDirt = new MoCItemSword("scorpsworddirt", SCORPD, 1);
-    static ToolMaterial SCORPU = EnumHelper.addToolMaterial("SCORPU", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinUndead));
+    public static final MoCItemAxe scorpAxeDirt = new MoCItemAxe("scorpaxedirt", SCORPD, 9.5F, 1.0F, 1);
+    static ToolMaterial SCORPU = EnumHelper.addToolMaterial("SCORPU", 0, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinUndead));
     public static final MoCItemSword scorpSwordUndead = new MoCItemSword("scorpswordundead", SCORPU, 5);
+    public static final MoCItemAxe scorpAxeUndead = new MoCItemAxe("scorpaxeundead", SCORPU, 9.5F, 1.0F, 5);
     static ToolMaterial STING = EnumHelper.addToolMaterial("STING", 0, 8, 6.0F, 0.0F, 5);
     public static final MoCItemWeapon scorpStingCave = new MoCItemWeapon("scorpstingcave", STING, 4);
     public static final MoCItemWeapon scorpStingFrost = new MoCItemWeapon("scorpstingfrost", STING, 2);
@@ -279,10 +284,15 @@ public class MoCItems {
                     chitinUndead,
 
                     scorpSwordCave,
+                    scorpAxeCave,
                     scorpSwordDirt,
+                    scorpAxeDirt,
                     scorpSwordNether,
+                    scorpAxeNether,
                     scorpSwordFrost,
+                    scorpAxeFrost,
                     scorpSwordUndead,
+                    scorpAxeUndead,
 
                     scorpHelmetCave,
                     scorpPlateCave,

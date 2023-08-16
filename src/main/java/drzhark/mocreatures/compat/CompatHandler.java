@@ -56,8 +56,24 @@ public class CompatHandler {
                 }
                 file.delete();
                 tempFile.renameTo(file);
-                System.out.println("MIA config file modified successfully!");
             }
+            file = new File(Launch.minecraftHome, "config" + File.separator + "mia" + File.separator + "base.cfg");
+            if (Files.exists(file.toPath())) {
+                File tempFile = new File(Launch.minecraftHome, "config" + File.separator + "mia" + File.separator + "base_temp.cfg");
+                String targetConfigEntry = "Replaces all raw meat drops with cooked ones";
+                try (BufferedReader br = new BufferedReader(new FileReader(file)); BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        if (line.contains(targetConfigEntry)) {
+                            line = line.replace("=true", "=false");
+                        }
+                        bw.write(line + "\n");
+                    }
+                }
+                file.delete();
+                tempFile.renameTo(file);
+            }
+            System.out.println("MIA config files modified successfully!");
         } catch (Exception ignored) {
         }
     }
@@ -78,7 +94,6 @@ public class CompatHandler {
             for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
-
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
     }
 

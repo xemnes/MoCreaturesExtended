@@ -53,7 +53,7 @@ public class MoCEntities {
     public static EntityEntry DEER = createEntityEntry(MoCEntityDeer.class, "Deer", 11572843, 13752020, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry ELEPHANT = createEntityEntry(MoCEntityElephant.class, "Elephant", 4274216, 9337176, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry ENT = createEntityEntry(MoCEntityEnt.class, "Ent", 9794886, 5800509, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry FILCH_LIZARD = !Loader.isModLoaded("primitivemobs") ? createEntityEntry(MoCEntityFilchLizard.class, "FilchLizard", 9930060, 5580310, EntityLiving.SpawnPlacementType.ON_GROUND) : null;
+    public static EntityEntry FILCH_LIZARD = createEntityEntry(MoCEntityFilchLizard.class, "FilchLizard", 9930060, 5580310, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry FOX = createEntityEntry(MoCEntityFox.class, "Fox", 15966491, 4009236, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry GOAT = createEntityEntry(MoCEntityGoat.class, "Goat", 15262682, 4404517, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry GRIZZLY_BEAR = createEntityEntry(MoCEntityGrizzlyBear.class, "GrizzlyBear", 3547151, 11371099, EntityLiving.SpawnPlacementType.ON_GROUND);
@@ -209,8 +209,7 @@ public class MoCEntities {
         MoCreatures.mocEntityMap.put("Duck", new MoCEntityData("Duck", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityDuck.class, 12, 2, 4), new ArrayList<>(Arrays.asList(Type.RIVER, Type.LUSH))));
         MoCreatures.mocEntityMap.put("Elephant", new MoCEntityData("Elephant", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityElephant.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.SANDY, Type.JUNGLE, Type.SAVANNA, Type.SNOWY)), new ArrayList<>(Arrays.asList(Type.MESA))));
         MoCreatures.mocEntityMap.put("Ent", new MoCEntityData("Ent", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityEnt.class, 5, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST))));
-        if (!Loader.isModLoaded("primitivemobs"))
-            MoCreatures.mocEntityMap.put("FilchLizard", new MoCEntityData("FilchLizard", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityFilchLizard.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.SAVANNA, Type.SANDY, Type.MESA))));
+        MoCreatures.mocEntityMap.put("FilchLizard", new MoCEntityData("FilchLizard", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityFilchLizard.class, 6, 1, 2), new ArrayList<>(Arrays.asList(Type.SAVANNA, Type.SANDY, Type.MESA))));
         MoCreatures.mocEntityMap.put("Fox", new MoCEntityData("Fox", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityFox.class, 10, 1, 1), new ArrayList<>(Arrays.asList(Type.FOREST, Type.SNOWY, Type.CONIFEROUS))));
         MoCreatures.mocEntityMap.put("Goat", new MoCEntityData("Goat", 2, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityGoat.class, 12, 1, 3), new ArrayList<>(Arrays.asList(Type.PLAINS, STEEP))));
         MoCreatures.mocEntityMap.put("Kitty", new MoCEntityData("Kitty", 3, overworld, EnumCreatureType.CREATURE, new SpawnListEntry(MoCEntityKitty.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.PLAINS, Type.FOREST)))); // spawns in villages

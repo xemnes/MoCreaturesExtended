@@ -102,8 +102,7 @@ public class MoCClientProxy extends MoCProxy {
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityWraith.class, new MoCRenderWraith(new MoCModelWraith(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFlameWraith.class, new MoCRenderWraith(new MoCModelWraith(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityWerewolf.class, new MoCRenderWerewolf(new MoCModelWerehuman(), new MoCModelWerewolf(), 0.7F));
-        if (!Loader.isModLoaded("primitivemobs"))
-            RenderingRegistry.registerEntityRenderingHandler(MoCEntityFilchLizard.class, new MoCRenderFilchLizard(new MoCModelFilchLizard(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(MoCEntityFilchLizard.class, new MoCRenderFilchLizard(new MoCModelFilchLizard(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFox.class, new MoCRenderMoC(new MoCModelFox(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityShark.class, new MoCRenderShark(new MoCModelShark(), 0.6F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityDolphin.class, new MoCRenderDolphin(new MoCModelDolphin(), 0.6F));

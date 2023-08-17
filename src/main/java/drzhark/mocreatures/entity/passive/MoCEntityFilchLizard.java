@@ -391,7 +391,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
                 this.resetTask();
                 return false;
             }
-            if (temptingPlayer.capabilities.isCreativeMode || !this.temptedEntity.getHeldItemMainhand().isEmpty()) {
+            if (!this.temptedEntity.getHeldItemMainhand().isEmpty()) {
                 return false;
             }
             this.temptingPlayer = this.temptedEntity.getEntityWorld().getClosestPlayerToEntity(this.temptedEntity, 10.0D);
@@ -457,6 +457,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
          */
         public void updateTask() {
             this.temptedEntity.getLookHelper().setLookPositionWithEntity(this.temptingPlayer, (float) (this.temptedEntity.getHorizontalFaceSpeed() + 20), (float) this.temptedEntity.getVerticalFaceSpeed());
+            if (temptingPlayer.capabilities.isCreativeMode) return;
             if (this.temptedEntity.getDistanceSq(this.temptingPlayer) < 3.25D) {
                 this.temptedEntity.getNavigator().clearPath();
                 for (int i = 0; i < this.temptingPlayer.inventory.getSizeInventory(); i++) {

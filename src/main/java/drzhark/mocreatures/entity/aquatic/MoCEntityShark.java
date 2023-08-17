@@ -59,7 +59,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     protected void entityInit() {
         super.entityInit();
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return experienceValue;

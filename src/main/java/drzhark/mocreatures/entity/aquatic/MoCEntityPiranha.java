@@ -59,7 +59,7 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
         }
         return null;
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return experienceValue;

@@ -70,7 +70,7 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
                 return MoCreatures.proxy.getModelTexture("crab_red.png");
         }
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return 1 + this.world.rand.nextInt(3);

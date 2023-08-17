@@ -266,6 +266,7 @@ entity.mocreatures:duck.verbose.name=Mallard Duck
 entity.mocreatures:egg.name=Egg
 entity.mocreatures:elephant.name=Elephant
 entity.mocreatures:ent.name=Ent
+entity.mocreatures:filchlizard.name=Filch Lizard
 entity.mocreatures:firefly.name=Firefly
 entity.mocreatures:firemanticore.name=Fire Manticore
 entity.mocreatures:fireogre.name=Fire Ogre

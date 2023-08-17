@@ -35,6 +35,8 @@ public class MoCLootTables {
     public static final ResourceLocation TURKEY = new ResourceLocation(MoCConstants.MOD_ID, "entities/turkey");
     public static final ResourceLocation TURTLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/turtle");
     public static final ResourceLocation WILD_WOLF = new ResourceLocation(MoCConstants.MOD_ID, "entities/wild_wolf");
+    public static final ResourceLocation FILCHLIZARD_STEAL = new ResourceLocation(MoCConstants.MOD_ID, "entities/filchlizard_steal");
+    public static final ResourceLocation FILCHLIZARD_SPAWN = new ResourceLocation(MoCConstants.MOD_ID, "entities/filchlizard_spawn");
     // Bears
     public static final ResourceLocation BLACK_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/black_bear");
     public static final ResourceLocation GRIZZLY_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/grizzly_bear");

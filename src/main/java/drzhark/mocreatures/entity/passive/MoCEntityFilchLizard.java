@@ -9,7 +9,6 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityLivingData;
@@ -17,7 +16,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -49,6 +47,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
         this.inventoryHandsDropChances[0] = 0f;
         this.inventoryHandsDropChances[1] = 0f;
         this.setSize(0.6f, 0.5f);
+        this.experienceValue = 3;
     }
 
     @Override
@@ -108,6 +107,11 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
             this.setSize(0.6f, 0.3f);
         }
     }
+    
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
+    }
 
     @Nullable
     protected ResourceLocation getSpawnLootTable() {
@@ -123,7 +127,8 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25000000417232513D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override

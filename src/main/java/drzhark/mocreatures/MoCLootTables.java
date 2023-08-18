@@ -35,8 +35,6 @@ public class MoCLootTables {
     public static final ResourceLocation TURKEY = new ResourceLocation(MoCConstants.MOD_ID, "entities/turkey");
     public static final ResourceLocation TURTLE = new ResourceLocation(MoCConstants.MOD_ID, "entities/turtle");
     public static final ResourceLocation WILD_WOLF = new ResourceLocation(MoCConstants.MOD_ID, "entities/wild_wolf");
-    public static final ResourceLocation FILCHLIZARD_STEAL = new ResourceLocation(MoCConstants.MOD_ID, "entities/filchlizard_steal");
-    public static final ResourceLocation FILCHLIZARD_SPAWN = new ResourceLocation(MoCConstants.MOD_ID, "entities/filchlizard_spawn");
     // Bears
     public static final ResourceLocation BLACK_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/black_bear");
     public static final ResourceLocation GRIZZLY_BEAR = new ResourceLocation(MoCConstants.MOD_ID, "entities/grizzly_bear");
@@ -55,6 +53,10 @@ public class MoCLootTables {
     public static final ResourceLocation TIGER = new ResourceLocation(MoCConstants.MOD_ID, "entities/tiger");
     // Dragons
     public static final ResourceLocation WYVERN = new ResourceLocation(MoCConstants.MOD_ID, "entities/wyvern"); // Currently empty as a placeholder
+    // Filch Lizard
+    public static final ResourceLocation FILCH_LIZARD = new ResourceLocation(MoCConstants.MOD_ID, "entities/filch_lizard/filch_lizard"); // Currently empty as a placeholder
+    public static final ResourceLocation FILCH_LIZARD_SPAWN = new ResourceLocation(MoCConstants.MOD_ID, "entities/filch_lizard/filch_lizard_spawn");
+    public static final ResourceLocation FILCH_LIZARD_STEAL = new ResourceLocation(MoCConstants.MOD_ID, "entities/filch_lizard/filch_lizard_steal");
     // Golems
     public static final ResourceLocation BIG_GOLEM = new ResourceLocation(MoCConstants.MOD_ID, "entities/big_golem");
     public static final ResourceLocation MINI_GOLEM = new ResourceLocation(MoCConstants.MOD_ID, "entities/mini_golem");

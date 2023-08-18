@@ -36,6 +36,8 @@ public class MoCBlocks {
     public static Block ancientOre;
     @GameRegistry.ObjectHolder("ancient_silver_block")
     public static Block ancientSilverBlock;
+    @GameRegistry.ObjectHolder("carved_silver_sandstone")
+    public static Block carvedSilverSandstone;
     @GameRegistry.ObjectHolder("cobbled_wyvstone")
     public static Block cobbledWyvstone;
     @GameRegistry.ObjectHolder("cobbled_deep_wyvstone")
@@ -44,10 +46,20 @@ public class MoCBlocks {
     public static Block deepWyvstone;
     @GameRegistry.ObjectHolder("firestone")
     public static Block firestone;
+    @GameRegistry.ObjectHolder("gleaming_glass")
+    public static Block gleamingGlass;
     @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone")
     public static Block mossyCobbledWyvstone;
     @GameRegistry.ObjectHolder("mossy_cobbled_deep_wyvstone")
     public static Block mossyCobbledDeepWyvstone;
+    @GameRegistry.ObjectHolder("silver_sand")
+    public static Block silverSand;
+    @GameRegistry.ObjectHolder("silver_sandstone")
+    public static Block silverSandstone;
+    @GameRegistry.ObjectHolder("smooth_silver_sandstone")
+    public static Block smoothSilverSandstone;
+    @GameRegistry.ObjectHolder("tall_wyvgrass")
+    public static Block tallWyvgrass;
     @GameRegistry.ObjectHolder("wyvern_diamond_ore")
     public static Block wyvernDiamondOre;
     @GameRegistry.ObjectHolder("wyvern_emerald_ore")
@@ -70,8 +82,6 @@ public class MoCBlocks {
     public static Block wyvwoodSapling;
     @GameRegistry.ObjectHolder("wyvwood_log")
     public static Block wyvwoodLog;
-    @GameRegistry.ObjectHolder("tall_wyvgrass")
-    public static Block tallWyvgrass;
     @GameRegistry.ObjectHolder("wyvwood_planks")
     public static Block wyvwoodPlanks;
 
@@ -85,6 +95,11 @@ public class MoCBlocks {
                 setup(new MoCBlockRock(MapColor.STONE), "deep_wyvstone").setHardness(3.0F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "mossy_cobbled_wyvstone").setHardness(1.5F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "mossy_cobbled_deep_wyvstone").setHardness(1.5F).setResistance(10.0F),
+                setup(new MoCBlockGlass(), "gleaming_glass").setHardness(0.4F),
+                setup(new MoCBlockSand(MapColor.CLAY), "silver_sand").setHardness(0.6F),
+                setup(new MoCBlockRock(MapColor.CLAY), "silver_sandstone").setHardness(1.2F),
+                setup(new MoCBlockRock(MapColor.CLAY), "carved_silver_sandstone").setHardness(1.2F),
+                setup(new MoCBlockRock(MapColor.CLAY), "smooth_silver_sandstone").setHardness(1.2F),
                 setup(new MoCBlockOre(MapColor.STONE), "ancient_ore").setHardness(3.0F).setResistance(5.0F),
                 setup(new MoCBlockFirestone(MapColor.ADOBE), "firestone").setHardness(3.0F).setLightLevel(0.5F),
                 setup(new MoCBlockOre(MapColor.STONE), "wyvern_diamond_ore").setHardness(4.5F).setResistance(5.0F),
@@ -92,7 +107,7 @@ public class MoCBlocks {
                 setup(new MoCBlockOre(MapColor.STONE), "wyvern_gold_ore").setHardness(3.0F).setResistance(5.0F),
                 setup(new MoCBlockOre(MapColor.STONE), "wyvern_iron_ore").setHardness(3.0F).setResistance(5.0F),
                 setup(new MoCBlockOre(MapColor.STONE), "wyvern_lapis_ore").setHardness(1.5F).setResistance(5.0F),
-                setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.5F),
+                setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.7F),
                 setup(new MoCBlockDirt(MapColor.DIRT), "wyvdirt").setHardness(0.6F),
                 setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 20), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
                 setup(new MoCBlockSapling(MapColor.FOLIAGE, true), "wyvwood_sapling").setHardness(0.0F),

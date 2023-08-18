@@ -8,6 +8,8 @@ import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.IEntityLivingData;
@@ -15,6 +17,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -70,11 +73,13 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:
-                return MoCreatures.proxy.getModelTexture("filchlizard_sand.png");
+                return MoCreatures.proxy.getModelTexture("lizard_filch_sand.png");
             case 3:
-                return MoCreatures.proxy.getModelTexture("filchlizard_sand_red.png");
+                return MoCreatures.proxy.getModelTexture("lizard_filch_sand_red.png");
+            case 4:
+                return MoCreatures.proxy.getModelTexture("lizard_filch_sand_silver.png");
             default:
-                return MoCreatures.proxy.getModelTexture("filchlizard.png");
+                return MoCreatures.proxy.getModelTexture("lizard_filch.png");
         }
     }
 
@@ -86,6 +91,8 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
             setType(2);
         } else if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA)) {
             setType(3);
+        } else if (this.dimension == MoCreatures.proxy.wyvernDimension) {
+            setType(4);
         } else {
             setType(1);
         }
@@ -104,12 +111,12 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
 
     @Nullable
     protected ResourceLocation getSpawnLootTable() {
-        return MoCLootTables.FILCHLIZARD_SPAWN;
+        return MoCLootTables.FILCH_LIZARD_SPAWN;
     }
 
     @Nullable
     protected ResourceLocation getStealLootTable() {
-        return MoCLootTables.FILCHLIZARD_STEAL;
+        return MoCLootTables.FILCH_LIZARD_STEAL;
     }
 
     @Override
@@ -338,6 +345,16 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
         }
     }
 
+    // Sneaky...
+    @Override
+    protected void playStepSound(BlockPos pos, Block block) {
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.FILCH_LIZARD;
+    }
+
     public class EntityAIStealFromPlayer extends EntityAIBase {
         /**
          * The entity using this AI that is tempted by the player.
@@ -465,7 +482,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
                     if (!item.isEmpty()) {
                         for (ItemStack itemstack : temptItem) {
                             if (itemstack != null && !itemstack.isEmpty() && itemstack.getItem() == item.getItem() && itemstack.getMetadata() == item.getMetadata()) {
-                                MoCTools.playCustomSound(this.temptedEntity, SoundEvents.ENTITY_CHICKEN_EGG);
+                                MoCTools.playCustomSound(this.temptedEntity, SoundEvents.ENTITY_ITEM_PICKUP);
                                 ItemStack loot = item.copy();
                                 this.temptedEntity.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, loot);
                                 item.shrink(1);

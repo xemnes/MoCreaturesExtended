@@ -31,7 +31,7 @@ public class MoCRecipes {
             } else if (event.getItemStack().getItem() == MoCItems.heartfire) {
                 event.setBurnTime(3200); // 16 items
             } else if (event.getItemStack().getItem() == MoCItems.sharkaxe | event.getItemStack().getItem() == MoCItems.sharksword) {
-            	event.setBurnTime(200); // 1 item
+                event.setBurnTime(200); // 1 item
             }
         }
 
@@ -41,6 +41,7 @@ public class MoCRecipes {
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.ancientOre), new ItemStack(Items.DYE, 3, 15), 0.2F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.cobbledDeepWyvstone), new ItemStack(MoCBlocks.deepWyvstone), 0.1F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.cobbledWyvstone), new ItemStack(MoCBlocks.wyvstone), 0.1F);
+            GameRegistry.addSmelting(new ItemStack(MoCBlocks.silverSand), new ItemStack(MoCBlocks.gleamingGlass), 0.1F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvernDiamondOre), new ItemStack(Items.DIAMOND), 1.0F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvernEmeraldOre), new ItemStack(Items.EMERALD), 1.0F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvernGoldOre), new ItemStack(Items.GOLD_INGOT), 1.0F);
@@ -62,6 +63,8 @@ public class MoCRecipes {
 
             GameRegistry.addSmelting(Items.EGG, new ItemStack(MoCItems.omelet), 0.35F);
 
+            OreDictionary.registerOre("blockGlass", new ItemStack(MoCBlocks.gleamingGlass));
+            OreDictionary.registerOre("blockGlassColorless", new ItemStack(MoCBlocks.gleamingGlass));
             OreDictionary.registerOre("blockSilver", new ItemStack(MoCBlocks.ancientSilverBlock));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledDeepWyvstone));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledWyvstone));
@@ -74,6 +77,10 @@ public class MoCRecipes {
             OreDictionary.registerOre("oreIron", new ItemStack(MoCBlocks.wyvernIronOre));
             OreDictionary.registerOre("oreLapis", new ItemStack(MoCBlocks.wyvernLapisOre));
             OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvwoodPlanks));
+            OreDictionary.registerOre("sand", new ItemStack(MoCBlocks.silverSand));
+            OreDictionary.registerOre("sandstone", new ItemStack(MoCBlocks.carvedSilverSandstone));
+            OreDictionary.registerOre("sandstone", new ItemStack(MoCBlocks.silverSandstone));
+            OreDictionary.registerOre("sandstone", new ItemStack(MoCBlocks.smoothSilverSandstone));
             OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.deepWyvstone));
             OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvstone));
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvwoodLeaves));

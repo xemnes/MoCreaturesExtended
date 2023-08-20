@@ -138,7 +138,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
 
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
-        if (rand.nextInt(100 / 25) == 0) {
+        if (rand.nextInt(100 / MoCreatures.proxy.filchLizardSpawnItemChance) == 0) {
             while (this.getHeldItemMainhand().isEmpty() && !getEntityWorld().isRemote) {
                 this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getCustomLootItem(this, this.getSpawnLootTable(), new ItemStack(Items.IRON_INGOT)));
             }

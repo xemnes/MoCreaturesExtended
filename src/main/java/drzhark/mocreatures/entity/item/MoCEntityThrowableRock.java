@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -109,7 +110,7 @@ public class MoCEntityThrowableRock extends Entity {
     @Override
     public void onEntityUpdate() {
         Entity master = getMaster();
-        if (this.rockTimer-- <= -50 && getBehavior() == 0 || this.ticksExisted > 600) transformToItem();
+        if (this.rockTimer-- <= -50 && getBehavior() == 0 || master == null) transformToItem();
 
         // held TRocks don't need to adjust its position
         if (getBehavior() == 1) return;
@@ -222,7 +223,7 @@ public class MoCEntityThrowableRock extends Entity {
     public void transformToItem() {
         // don't drop rocks if mob griefing is set to false, prevents duping
         if (!this.world.isRemote && MoCTools.mobGriefing(this.world) && MoCreatures.proxy.golemDestroyBlocks) {
-            EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(this.getState().getBlock(), 1, this.getState().getBlock().getMetaFromState(this.getState())));
+            EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(Item.getItemFromBlock(this.getState().getBlock())));
             entityitem.setDefaultPickupDelay();
             entityitem.setAgeToCreativeDespawnTime();
             this.world.spawnEntity(entityitem);

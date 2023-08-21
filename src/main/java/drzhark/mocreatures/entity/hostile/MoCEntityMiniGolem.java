@@ -87,17 +87,15 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
         super.onLivingUpdate();
 
         if (!this.world.isRemote) {
-            setIsAngry(this.getAttackTarget() != null);
+            setIsAngry(getAttackTarget() != null);
 
-            if (getIsAngry() && this.getAttackTarget() != null) {
-                if (!getHasRock() && this.rand.nextInt(30) == 0) {
-                    acquireTRock();
-                }
+            if (getIsAngry() && getAttackTarget() != null && !getHasRock() && this.rand.nextInt(30) == 0) {
+                acquireTRock();
+            }
 
-                if (getHasRock()) {
-                    this.getNavigator().clearPath();
-                    attackWithTRock();
-                }
+            if (getHasRock()) {
+                getNavigator().clearPath();
+                attackWithTRock();
             }
         }
     }
@@ -125,11 +123,6 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
         setHasRock(true);
     }
 
-    @Override
-    public boolean isMovementCeased() {
-        return getHasRock() && this.getAttackTarget() != null;
-    }
-
     /**
      *
      */
@@ -147,6 +140,8 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
             //throws a newly spawned TRock and destroys the held TRock
             if (this.getAttackTarget() != null && this.getDistance(this.getAttackTarget()) < 48F) {
                 MoCTools.throwStone(this, this.getAttackTarget(), this.tempRock.getState(), 10D, 0.25D);
+            } else {
+                this.tempRock.transformToItem();
             }
 
             this.tempRock.setDead();

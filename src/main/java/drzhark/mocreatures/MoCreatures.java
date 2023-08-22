@@ -12,6 +12,7 @@ import drzhark.mocreatures.command.CommandMoCSpawn;
 import drzhark.mocreatures.command.CommandMoCTP;
 import drzhark.mocreatures.command.CommandMoCreatures;
 import drzhark.mocreatures.compat.CompatHandler;
+import drzhark.mocreatures.compat.datafixes.BlockIDFixer;
 import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
 import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
 import drzhark.mocreatures.init.MoCEntities;
@@ -95,6 +96,7 @@ public class MoCreatures {
         MoCTerrainEventHooks.buildWorldGenSpawnLists();
         CompatHandler.init();
         ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(MoCConstants.MOD_ID, MoCConstants.DATAFIXER_VERSION);
+        modFixer.registerFix(FixTypes.BLOCK_ENTITY, new BlockIDFixer());
         modFixer.registerFix(FixTypes.ENTITY, new EntityIDFixer());
     }
 

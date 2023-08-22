@@ -4,6 +4,7 @@
 package drzhark.mocreatures.block;
 
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.dimension.MoCWorldGenBigTree;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;
@@ -13,29 +14,31 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenMegaPineTree;
-import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 import java.util.Random;
 
+// TODO: Fix the trees growing regardless of other trees being too close
 public class MoCBlockSapling extends BlockBush implements IGrowable {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.1D, 0.0D, 0.1D, 0.9D, 0.8D, 0.9D);
     public boolean flammable;
+    private EnumWoodType woodType;
 
-    public MoCBlockSapling(MapColor mapColor, boolean flammable) {
+    public MoCBlockSapling(EnumWoodType woodType, MapColor mapColor, boolean flammable) {
         super(Material.PLANTS, mapColor);
         this.flammable = flammable;
         this.setCreativeTab(MoCreatures.tabMoC);
         this.setSoundType(SoundType.PLANT);
         this.setDefaultState(this.blockState.getBaseState().withProperty(STAGE, 0));
+        this.woodType = woodType;
     }
 
     public MoCBlockSapling(Material material, MapColor mapColor) {
@@ -89,32 +92,34 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         }
     }
 
-    // TODO: Better way of doing this
     public void generateTree(final World world, final BlockPos pos, final IBlockState state, final Random rand) {
         if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
-
-        WorldGenerator worldgenerator = null;
+        WorldGenerator generator = null;
         int i = 0;
         int j = 0;
         boolean flag = false;
 
-        // Currently buggy at the moment
-        // 2x2 saplings
-        if (state.getBlock() == MoCBlocks.wyvwoodSapling) {
-            for (i = 0; i >= -1; --i) {
-                for (j = 0; j >= -1; --j) {
-                    if (this.isTwoByTwoOfType(world, pos, i, j, MoCBlocks.wyvwoodSapling)) {
-                        worldgenerator = new WorldGenMegaPineTree(false, rand.nextBoolean()); // Placeholder
-                        flag = true;
+        // 2x2 sapling
+        switch (this.woodType) {
+            case WYVWOOD:
+                check:
+                for (i = 0; i >= -1; --i) {
+                    for (j = 0; j >= -1; --j) {
+                        if (this.isTwoByTwoOfType(world, pos, i, j, EnumWoodType.WYVWOOD)) {
+                            generator = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getDefaultState(), 2, 30, 10);
+                            flag = true;
+                            break check;
+                        }
                     }
                 }
-            }
-            // Single sapling
-            if (!flag) {
-                i = 0;
-                j = 0;
-                worldgenerator = new WorldGenTaiga2(false); // Placeholder
-            }
+
+                // Single sapling
+                if (!flag) {
+                    return;
+                }
+                break;
+            default:
+                break;
         }
 
         IBlockState air = Blocks.AIR.getDefaultState();
@@ -128,7 +133,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
             world.setBlockState(pos, state, 4);
         }
 
-        if (!worldgenerator.generate(world, rand, pos.add(i, 0, j))) {
+        if (!generator.generate(world, rand, pos.add(i, 0, j))) {
             if (flag) {
                 world.setBlockState(pos.add(i, 0, j), air, 4);
                 world.setBlockState(pos.add(i + 1, 0, j), air, 4);
@@ -142,13 +147,22 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
 
 
     // Trees that utilize 2x2 Saplings
-    private boolean isTwoByTwoOfType(World world, BlockPos pos, int xOffset, int zOffset, Block type) {
+    private boolean isTwoByTwoOfType(World world, BlockPos pos, int xOffset, int zOffset, EnumWoodType type) {
         return this.isTypeAt(world, pos.add(xOffset, 0, zOffset), type) && this.isTypeAt(world, pos.add(xOffset + 1, 0, zOffset), type) && this.isTypeAt(world, pos.add(xOffset, 0, zOffset + 1), type) && this.isTypeAt(world, pos.add(xOffset + 1, 0, zOffset + 1), type);
     }
 
-    public boolean isTypeAt(final World world, final BlockPos pos, final Block type) {
-        final IBlockState iblockstate = world.getBlockState(pos);
-        return iblockstate.getBlock() == type;
+    public EnumWoodType getWoodType() {
+        return woodType;
+    }
+
+    public boolean isTypeAt(final World world, final BlockPos pos, final EnumWoodType type) {
+        final IBlockState state = world.getBlockState(pos);
+
+        if (state.getBlock() instanceof MoCBlockSapling) {
+            return ((MoCBlockSapling) state.getBlock()).getWoodType() == type;
+        } else {
+            return false;
+        }
     }
 
     public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient) {
@@ -189,5 +203,38 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
             return true;
         }
         return super.canPlaceBlockAt(world, pos) && soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, this);
+    }
+
+    public static enum EnumWoodType implements IStringSerializable {
+        WYVWOOD(0, "wyvwood");
+
+        private int meta;
+        private final String name;
+
+        private EnumWoodType(int meta, String name) {
+            this.meta = meta;
+            this.name = name;
+        }
+
+        public int getMetadata() {
+            return this.meta;
+        }
+
+        public String toString() {
+            return this.name;
+        }
+
+        public static EnumWoodType byMeta(int meta) {
+            for (EnumWoodType woodType : EnumWoodType.values()) {
+                if (woodType.meta == meta) {
+                    return woodType;
+                }
+            }
+            return EnumWoodType.WYVWOOD;
+        }
+
+        public String getName() {
+            return this.name;
+        }
     }
 }

@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.block.*;
+import drzhark.mocreatures.block.MoCBlockSapling.EnumWoodType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -110,7 +111,7 @@ public class MoCBlocks {
                 setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.7F),
                 setup(new MoCBlockDirt(MapColor.DIRT), "wyvdirt").setHardness(0.6F),
                 setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 20), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
-                setup(new MoCBlockSapling(MapColor.FOLIAGE, true), "wyvwood_sapling").setHardness(0.0F),
+                setup(new MoCBlockSapling(EnumWoodType.WYVWOOD, MapColor.FOLIAGE, true), "wyvwood_sapling").setHardness(0.0F),
                 setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
                 setup(new MoCBlockPlanks(MapColor.DIAMOND, true), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F)

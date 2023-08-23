@@ -286,6 +286,7 @@ entity.mocreatures:frostscorpion.name=Frost Scorpion
 entity.mocreatures:goat.name=Goat
 entity.mocreatures:goat.verbose.name=Saanen Goat
 entity.mocreatures:goldfish.name=Goldfish
+entity.mocreatures:grasshopper.name=Grasshopper
 entity.mocreatures:greenogre.name=Green Ogre
 entity.mocreatures:grizzlybear.name=Grizzly Bear
 entity.mocreatures:hellrat.name=Hell Rat

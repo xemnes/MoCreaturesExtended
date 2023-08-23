@@ -6,7 +6,7 @@ package drzhark.mocreatures.entity.ambient;
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityAmbient;
+import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollow;
@@ -15,18 +15,16 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 
 import javax.annotation.Nullable;
 
-public class MoCEntityCricket extends MoCEntityAmbient {
+public class MoCEntityGrasshopper extends MoCEntityInsect {
 
     private int jumpCounter;
     private int soundCounter;
 
-    public MoCEntityCricket(World world) {
+    public MoCEntityGrasshopper(World world) {
         super(world);
-        setSize(0.4F, 0.3F);
     }
 
     @Override
@@ -38,8 +36,6 @@ public class MoCEntityCricket extends MoCEntityAmbient {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
     }
 
@@ -58,9 +54,9 @@ public class MoCEntityCricket extends MoCEntityAmbient {
     @Override
     public ResourceLocation getTexture() {
         if (getType() == 1) {
-            return MoCreatures.proxy.getModelTexture("cricket_light_brown.png");
+            return MoCreatures.proxy.getModelTexture("grasshopper_bright_green.png");
         } else {
-            return MoCreatures.proxy.getModelTexture("cricket_brown.png");
+            return MoCreatures.proxy.getModelTexture("grasshopper_olive_green.png");
         }
     }
 
@@ -68,6 +64,14 @@ public class MoCEntityCricket extends MoCEntityAmbient {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
+            if (getIsFlying() || !this.onGround) {
+                EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5D);
+                if (ep != null && --this.soundCounter == -1) {
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GRASSHOPPER_FLY);
+                    this.soundCounter = 10;
+                }
+            }
+
             if (this.jumpCounter > 0 && ++this.jumpCounter > 30) {
                 this.jumpCounter = 0;
             }
@@ -76,26 +80,27 @@ public class MoCEntityCricket extends MoCEntityAmbient {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        if (!world.isDaytime()) {
-            return world.rand.nextDouble() <= 0.1D ? MoCSoundEvents.ENTITY_CRICKET_AMBIENT : null;
+        if (world.isDaytime()) {
+            // TODO: Add grasshopper daytime ambient sound
+            return world.rand.nextDouble() <= 0.1D ? MoCSoundEvents.ENTITY_GRASSHOPPER_CHIRP : null;
         } else {
-            return world.rand.nextDouble() <= 0.1D ? MoCSoundEvents.ENTITY_CRICKET_CHIRP : null;
+            return world.rand.nextDouble() <= 0.1D ? MoCSoundEvents.ENTITY_GRASSHOPPER_CHIRP : null;
         }
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+        return MoCSoundEvents.ENTITY_GRASSHOPPER_HURT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+        return MoCSoundEvents.ENTITY_GRASSHOPPER_HURT;
     }
 
     @Nullable
     protected ResourceLocation getLootTable() {
-        return MoCLootTables.CRICKET;
+        return MoCLootTables.GRASSHOPPER;
     }
 
     @Override
@@ -110,6 +115,11 @@ public class MoCEntityCricket extends MoCEntityAmbient {
                     this.jumpCounter = 1;
                 }
         }
+    }
+
+    @Override
+    public boolean isFlyer() {
+        return true;
     }
 
     @Override

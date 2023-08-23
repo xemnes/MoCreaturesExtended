@@ -15,6 +15,7 @@ public class MoCLootTables {
     public static final ResourceLocation DRAGONFLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/dragonfly");
     public static final ResourceLocation FIREFLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/firefly");
     public static final ResourceLocation FLY = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/fly");
+    public static final ResourceLocation GRASSHOPPER = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/grasshopper");
     public static final ResourceLocation MAGGOT = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/maggot");
     public static final ResourceLocation ROACH = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/roach");
     public static final ResourceLocation SNAIL = new ResourceLocation(MoCConstants.MOD_ID, "entities/ambient/snail");

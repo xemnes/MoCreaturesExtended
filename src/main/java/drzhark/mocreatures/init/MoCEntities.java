@@ -134,10 +134,11 @@ public class MoCEntities {
     public static EntityEntry BEE = createEntityEntry(MoCEntityBee.class, "Bee", 15912747, 526604, EntityLiving.SpawnPlacementType.IN_AIR);
     public static EntityEntry BUTTERFLY = createEntityEntry(MoCEntityButterfly.class, "ButterFly", 12615169, 2956801, EntityLiving.SpawnPlacementType.IN_AIR);
     public static EntityEntry CRAB = createEntityEntry(MoCEntityCrab.class, "Crab", 11880978, 15514213, EntityLiving.SpawnPlacementType.ON_GROUND);
-    public static EntityEntry CRICKET = createEntityEntry(MoCEntityCricket.class, "Cricket", 7830593, 3747075, EntityLiving.SpawnPlacementType.ON_GROUND);
+    public static EntityEntry CRICKET = createEntityEntry(MoCEntityCricket.class, "Cricket", 4071430, 8612672, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry DRAGONFLY = createEntityEntry(MoCEntityDragonfly.class, "DragonFly", 665770, 2207231, EntityLiving.SpawnPlacementType.IN_AIR);
     public static EntityEntry FIREFLY = createEntityEntry(MoCEntityFirefly.class, "Firefly", 2102294, 8501028, EntityLiving.SpawnPlacementType.IN_AIR);
     public static EntityEntry FLY = createEntityEntry(MoCEntityFly.class, "Fly", 1184284, 11077640, EntityLiving.SpawnPlacementType.IN_AIR);
+    public static EntityEntry GRASSHOPPER = createEntityEntry(MoCEntityGrasshopper.class, "Grasshopper", 7830593, 3747075, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry MAGGOT = createEntityEntry(MoCEntityMaggot.class, "Maggot", 14076037, 6839592, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry SNAIL = createEntityEntry(MoCEntitySnail.class, "Snail", 10850932, 7225384, EntityLiving.SpawnPlacementType.ON_GROUND);
     public static EntityEntry ROACH = createEntityEntry(MoCEntityRoach.class, "Roach", 5185289, 10245148, EntityLiving.SpawnPlacementType.ON_GROUND);
@@ -283,6 +284,7 @@ public class MoCEntities {
         MoCreatures.mocEntityMap.put("DragonFly", new MoCEntityData("DragonFly", 2, overworldWyvernLair, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityDragonfly.class, 9, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.PLAINS, Type.SWAMP, Type.BEACH, Type.WET, WYVERN_LAIR))));
         MoCreatures.mocEntityMap.put("Firefly", new MoCEntityData("Firefly", 3, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityFirefly.class, 9, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.SWAMP, Type.LUSH, Type.DENSE, WYVERN_LAIR))));
         MoCreatures.mocEntityMap.put("Fly", new MoCEntityData("Fly", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityFly.class, 12, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.MESA, Type.WET, Type.SWAMP, Type.HOT))));
+        MoCreatures.mocEntityMap.put("Grasshopper", new MoCEntityData("Grasshopper", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityGrasshopper.class, 10, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.PLAINS, Type.SAVANNA))));
         MoCreatures.mocEntityMap.put("Maggot", new MoCEntityData("Maggot", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityMaggot.class, 8, 1, 2), new ArrayList<>(Arrays.asList(Type.JUNGLE, Type.MESA, Type.WET, Type.SWAMP, Type.HOT))));
         MoCreatures.mocEntityMap.put("Snail", new MoCEntityData("Snail", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntitySnail.class, 10, 1, 2), new ArrayList<>(Arrays.asList(Type.FOREST, Type.JUNGLE, Type.DENSE, Type.LUSH))));
         MoCreatures.mocEntityMap.put("Roach", new MoCEntityData("Roach", 2, overworld, EnumCreatureType.AMBIENT, new SpawnListEntry(MoCEntityRoach.class, 10, 1, 2), new ArrayList<>(Arrays.asList(Type.HOT, Type.WASTELAND))));

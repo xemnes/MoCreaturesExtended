@@ -117,16 +117,18 @@
       "mocreatures:bird_yellow5"
     ]
   },
-  "cricket": {
+  "cricketambient": {
     "category": "neutral",
     "sounds": [
       "mocreatures:cricket_ambient"
     ]
   },
-  "cricketfly": {
+  "cricketchirp": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cricket_fly"
+      "mocreatures:cricket_chirp1",
+      "mocreatures:cricket_chirp2",
+      "mocreatures:cricket_chirp3"
     ]
   },
   "crickethurt": {
@@ -491,6 +493,32 @@
     "category": "hostile",
     "sounds": [
       "mocreatures:golem_step"
+    ]
+  },
+  "grasshopperambient": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:grasshopper_ambient"
+    ]
+  },
+  "grasshopperchirp": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:grasshopper_chirp1",
+      "mocreatures:grasshopper_chirp2",
+      "mocreatures:grasshopper_chirp3"
+    ]
+  },
+  "grasshopperfly": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:grasshopper_fly"
+    ]
+  },
+  "grasshopperhurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:grasshopper_hurt"
     ]
   },
   "hellratdying": {

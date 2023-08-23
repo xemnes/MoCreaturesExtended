@@ -99,7 +99,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         int j = 0;
         boolean flag = false;
 
-        // 2x2 sapling
+        // 2x2 saplings
         switch (this.woodType) {
             case WYVWOOD:
                 check:

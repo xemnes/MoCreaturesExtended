@@ -24,7 +24,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 
 import java.util.Random;
 
-// TODO: Fix the trees growing regardless of other trees being too close
 public class MoCBlockSapling extends BlockBush implements IGrowable {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
@@ -92,7 +91,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         }
     }
 
-    public void generateTree(final World world, final BlockPos pos, final IBlockState state, final Random rand) {
+    public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
         if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
         WorldGenerator generator = null;
         int i = 0;
@@ -118,6 +117,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
                     return;
                 }
                 break;
+
             default:
                 break;
         }
@@ -130,15 +130,15 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
             world.setBlockState(pos.add(i, 0, j + 1), air, 4);
             world.setBlockState(pos.add(i + 1, 0, j + 1), air, 4);
         } else {
-            world.setBlockState(pos, state, 4);
+            world.setBlockState(pos, air, 4);
         }
 
         if (!generator.generate(world, rand, pos.add(i, 0, j))) {
             if (flag) {
-                world.setBlockState(pos.add(i, 0, j), air, 4);
-                world.setBlockState(pos.add(i + 1, 0, j), air, 4);
-                world.setBlockState(pos.add(i, 0, j + 1), air, 4);
-                world.setBlockState(pos.add(i + 1, 0, j + 1), air, 4);
+                world.setBlockState(pos.add(i, 0, j), state, 4);
+                world.setBlockState(pos.add(i + 1, 0, j), state, 4);
+                world.setBlockState(pos.add(i, 0, j + 1), state, 4);
+                world.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
             } else {
                 world.setBlockState(pos, state, 4);
             }

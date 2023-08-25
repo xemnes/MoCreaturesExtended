@@ -22,7 +22,7 @@ public class MoCEntityGreenOgre extends MoCEntityOgre {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.5D);
     }
 
     @Override

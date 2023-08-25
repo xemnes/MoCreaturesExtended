@@ -168,7 +168,7 @@ public class MoCEntityTiger extends MoCEntityBigCat {
     public double calculateAttackDmg() {
         // White Tiger
         if (this.getType() == 2 || this.getType() == 3) {
-            return 8.0D;
+            return 7.5D;
         }
         // Orange Tiger
         return 7.0D;

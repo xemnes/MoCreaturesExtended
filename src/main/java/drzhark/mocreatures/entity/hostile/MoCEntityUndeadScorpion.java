@@ -26,7 +26,7 @@ public class MoCEntityUndeadScorpion extends MoCEntityScorpion {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.325D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.5D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(4.0D);
     }
 

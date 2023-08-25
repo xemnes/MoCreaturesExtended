@@ -24,7 +24,7 @@ public class MoCEntityFireOgre extends MoCEntityOgre {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(65.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(9.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.5D);
     }
 
     @Override

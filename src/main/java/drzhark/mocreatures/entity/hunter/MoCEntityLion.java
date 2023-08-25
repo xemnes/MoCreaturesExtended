@@ -228,6 +228,15 @@ public class MoCEntityLion extends MoCEntityBigCat {
         // ?
         return 120;
     }
+    
+    public double calculateAttackDmg() {
+        // White Lion
+        if (this.getType() == 6 || this.getType() == 7 || this.getType() == 8) {
+            return 7.5D;
+        }
+        // Lion
+        return 7.0D;
+    }
 
     @Override
     public boolean canAttackTarget(EntityLivingBase entity) {

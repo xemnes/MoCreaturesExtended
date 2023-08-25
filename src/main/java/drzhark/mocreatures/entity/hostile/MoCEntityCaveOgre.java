@@ -23,7 +23,7 @@ public class MoCEntityCaveOgre extends MoCEntityOgre {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
     }
 
     @Override

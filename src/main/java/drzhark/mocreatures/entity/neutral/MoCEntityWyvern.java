@@ -102,7 +102,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9.0D);
     }
 
     @Override

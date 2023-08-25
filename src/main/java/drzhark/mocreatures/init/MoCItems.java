@@ -228,8 +228,8 @@ public class MoCItems {
                     sai,
                     bo,
                     katana,
-                    sharkaxe,
                     sharksword,
+                    sharkaxe,
                     silversword,
                     silveraxe,
 

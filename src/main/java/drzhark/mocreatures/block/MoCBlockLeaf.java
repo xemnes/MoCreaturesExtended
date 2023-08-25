@@ -167,35 +167,4 @@ public class MoCBlockLeaf extends BlockLeaves {
             }
         }
     }
-
-    @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        Random rand = world instanceof World ? ((World) world).rand : new Random();
-        int chance = this.getSaplingDropChance(state);
-
-        if (fortune > 0) {
-            chance -= 2 << fortune;
-            if (chance < 10) chance = 10;
-        }
-
-        if (rand.nextInt(chance) == 0) {
-            ItemStack drop = new ItemStack(getItemDropped(state, rand, fortune), 1, damageDropped(state));
-            if (!drop.isEmpty())
-                drops.add(drop);
-        }
-
-        chance = 200;
-        if (fortune > 0) {
-            chance -= 10 << fortune;
-            if (chance < 40) chance = 40;
-        }
-
-        this.captureDrops(true);
-
-        if (world instanceof World) {
-            this.dropApple((World) world, pos, state, chance);
-        }
-
-        drops.addAll(this.captureDrops(false));
-    }
 }

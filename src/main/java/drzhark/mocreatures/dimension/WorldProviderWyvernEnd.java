@@ -3,12 +3,15 @@
  */
 package drzhark.mocreatures.dimension;
 
+import java.util.Random;
+
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCBiomes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProviderSurface;
 import net.minecraft.world.chunk.Chunk;
@@ -133,6 +136,24 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
     // No bed explosions allowed
     @Override
     public WorldSleepResult canSleepAt(EntityPlayer player, BlockPos pos) {
+        Random message = player.world.rand;
+        int random;
+        random = message.nextInt(4);
+        switch (random) {
+            case 0:
+                player.sendStatusMessage(new TextComponentTranslation("msg.mocreatures.bed1"), true);
+                break;
+            case 1:
+                player.sendStatusMessage(new TextComponentTranslation("msg.mocreatures.bed2"), true);
+                break;
+            case 2:
+                player.sendStatusMessage(new TextComponentTranslation("msg.mocreatures.bed3"), true);
+                break;
+            case 3:
+                player.sendStatusMessage(new TextComponentTranslation("msg.mocreatures.bed4"), true);
+                break;
+        }
+
         return WorldSleepResult.DENY;
     }
 

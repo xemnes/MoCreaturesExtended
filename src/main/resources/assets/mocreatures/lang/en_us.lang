@@ -346,6 +346,10 @@ entity.mocreatures:wwolf.name=Wild Wolf
 entity.mocreatures:wyvern.name=Wyvern
 
 # MESSAGES
+msg.mocreatures.bed1=You consider it, but decide against sleeping.
+msg.mocreatures.bed2=The bed feels cold to the touch.
+msg.mocreatures.bed3=A sense of urgency overtakes you. You can't sleep here.
+msg.mocreatures.bed4=At least it doesn't explode.
 msg.mocreatures.compat.cms=Custom Mob Spawner detected!
 msg.mocreatures.compat.cms1=Mo' Creatures Extended is built around the vanilla spawner, Custom Mob Spawner is no longer needed.
 msg.mocreatures.compat.cms2=Please consider removing Custom Mob Spawner to avoid negative impact on gameplay.

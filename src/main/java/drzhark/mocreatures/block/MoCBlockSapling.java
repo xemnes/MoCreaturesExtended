@@ -91,7 +91,8 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         }
     }
 
-    public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
+    @SuppressWarnings("deprecation")
+	public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
         if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
         WorldGenerator generator = null;
         int i = 0;
@@ -105,7 +106,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
                 for (i = 0; i >= -1; --i) {
                     for (j = 0; j >= -1; --j) {
                         if (this.isTwoByTwoOfType(world, pos, i, j, EnumWoodType.WYVWOOD)) {
-                            generator = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getDefaultState(), 2, 30, 10);
+                            generator = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getStateFromMeta(0), 2, 30, 10);
                             flag = true;
                             break check;
                         }

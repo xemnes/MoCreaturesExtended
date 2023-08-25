@@ -25,7 +25,8 @@ public class BiomeGenWyvernLair extends Biome {
     private final MoCWorldGenBigTree wyvernGenBigTree;
     private final WorldGenShrub worldGenShrub;
 
-    public BiomeGenWyvernLair(Biome.BiomeProperties biomeProperties) {
+    @SuppressWarnings("deprecation")
+	public BiomeGenWyvernLair(Biome.BiomeProperties biomeProperties) {
         super(biomeProperties);
         this.spawnableCreatureList.clear();
         this.spawnableMonsterList.clear();
@@ -39,7 +40,7 @@ public class BiomeGenWyvernLair extends Biome {
         this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 2, 2));
         this.topBlock = MoCBlocks.wyvgrass.getDefaultState();
         this.fillerBlock = MoCBlocks.wyvdirt.getDefaultState();
-        this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getDefaultState(), 2, 30, 10);
+        this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getStateFromMeta(0), 2, 30, 10);
         this.worldGenShrub = new WorldGenShrub(MoCBlocks.wyvwoodLeaves.getDefaultState(), MoCBlocks.wyvwoodLog.getDefaultState()); // Currently does nothing
         this.decorator = new BiomeWyvernDecorator();
     }

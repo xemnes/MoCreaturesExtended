@@ -6,24 +6,30 @@ package drzhark.mocreatures.entity.ambient;
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAmbient;
-import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
+import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
-import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class MoCEntityCrab extends MoCEntityTameableAmbient {
+public class MoCEntityCrab extends MoCEntityTameableAnimal {
 
     public MoCEntityCrab(World world) {
         super(world);
@@ -33,10 +39,12 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
 
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.0D));
-        this.tasks.addTask(1, new EntityAIFleeFromEntityMoC(this, entity -> !(entity instanceof MoCEntityCrab) && (entity.height > 0.3F || entity.width > 0.3F), 6.0F, 0.6D, 1D));
-        this.tasks.addTask(3, new EntityAIFollowOwnerPlayer(this, 0.8D, 6F, 5F));
-        this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
+        this.tasks.addTask(1, new EntityAIFollowOwnerPlayer(this, 0.8D, 6F, 5F));
+        this.tasks.addTask(4, new EntityAIWanderMoC2(this, 1.0D));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(6, new EntityAILookIdle(this));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
     }
 
     @Override
@@ -45,6 +53,8 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+        this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5D);
     }
 
     @Override
@@ -82,6 +92,11 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     }
 
     @Override
+    public boolean isCreatureType(EnumCreatureType type, boolean forSpawnCount) {
+        return type == EnumCreatureType.AMBIENT;
+    }
+
+    @Override
     public boolean isOnLadder() {
         return this.collidedHorizontally;
     }
@@ -92,6 +107,21 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
 
     @Override
     public void jump() {
+    }
+
+    @Override
+    protected void collideWithEntity(Entity entity) {
+        if (entity instanceof EntityPlayer && this.getAttackTarget() == null && !(entity.world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+            entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1.5F);
+        }
+
+        super.collideWithEntity(entity);
+    }
+
+    @Override
+    public boolean attackEntityAsMob(Entity entity) {
+        this.playSound(MoCSoundEvents.ENTITY_GOAT_SMACK, 1.0F, 2.0F);
+        return super.attackEntityAsMob(entity);
     }
 
     @SideOnly(Side.CLIENT)
@@ -123,11 +153,6 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient {
     @Override
     public int nameYOffset() {
         return -20;
-    }
-
-    @Override
-    public boolean isNotScared() {
-        return this.getIsTamed();
     }
 
     @Override

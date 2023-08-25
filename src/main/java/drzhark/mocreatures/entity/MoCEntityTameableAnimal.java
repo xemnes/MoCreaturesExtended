@@ -190,6 +190,21 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             return true;
         }
 
+        //stores in fishnet
+        if (stack.getItem() == MoCItems.fishnet && stack.getItemDamage() == 0 && this.canBeTrappedInNet()) {
+            player.setHeldItem(hand, ItemStack.EMPTY);
+            if (!this.world.isRemote) {
+                MoCPetData petData = MoCreatures.instance.mapData.getPetData(this.getOwnerId());
+                if (petData != null) {
+                    petData.setInAmulet(this.getOwnerPetId(), true);
+                }
+                MoCTools.dropAmulet(this, 1, player);
+                this.isDead = true;
+            }
+
+            return true;
+        }
+
         //removes owner, any other player can claim it by renaming it
         if (!stack.isEmpty() && getIsTamed() && ((stack.getItem() == MoCItems.scrollOfSale))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);

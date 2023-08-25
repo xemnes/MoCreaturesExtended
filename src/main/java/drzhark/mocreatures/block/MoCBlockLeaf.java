@@ -4,6 +4,7 @@
 package drzhark.mocreatures.block;
 
 import drzhark.mocreatures.init.MoCBlocks;
+import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.SoundType;
@@ -22,6 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -43,11 +45,6 @@ public class MoCBlockLeaf extends BlockLeaves {
         this.flammable = flammable;
         this.saplingDropChance = saplingDropChance;
         setSoundType(SoundType.PLANT);
-    }
-
-    @Override
-    public int quantityDropped(Random random) {
-        return random.nextInt(saplingDropChance) == 0 ? 1 : 0;
     }
 
     @Override
@@ -155,5 +152,50 @@ public class MoCBlockLeaf extends BlockLeaves {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand).withProperty(DECAYABLE, false);
+    }
+
+    @Override
+    protected int getSaplingDropChance(IBlockState state) {
+        return saplingDropChance;
+    }
+
+    @Override
+    protected void dropApple(final World world, final BlockPos pos, final IBlockState state, final int chance) {
+        if (world.rand.nextInt(chance) == 0) {
+            if (this == MoCBlocks.wyvwoodLeaves) {
+                spawnAsEntity(world, pos, new ItemStack(MoCItems.mysticPear));
+            }
+        }
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        Random rand = world instanceof World ? ((World) world).rand : new Random();
+        int chance = this.getSaplingDropChance(state);
+
+        if (fortune > 0) {
+            chance -= 2 << fortune;
+            if (chance < 10) chance = 10;
+        }
+
+        if (rand.nextInt(chance) == 0) {
+            ItemStack drop = new ItemStack(getItemDropped(state, rand, fortune), 1, damageDropped(state));
+            if (!drop.isEmpty())
+                drops.add(drop);
+        }
+
+        chance = 200;
+        if (fortune > 0) {
+            chance -= 10 << fortune;
+            if (chance < 40) chance = 40;
+        }
+
+        this.captureDrops(true);
+
+        if (world instanceof World) {
+            this.dropApple((World) world, pos, state, chance);
+        }
+
+        drops.addAll(this.captureDrops(false));
     }
 }

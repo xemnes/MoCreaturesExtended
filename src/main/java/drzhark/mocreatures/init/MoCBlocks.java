@@ -110,7 +110,7 @@ public class MoCBlocks {
                 setup(new MoCBlockOre(MapColor.STONE), "wyvern_lapis_ore").setHardness(1.5F).setResistance(5.0F),
                 setup(new MoCBlockGrass(MapColor.BLUE_STAINED_HARDENED_CLAY), "wyvgrass").setHardness(0.7F),
                 setup(new MoCBlockDirt(MapColor.DIRT), "wyvdirt").setHardness(0.6F),
-                setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 20), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
+                setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 100), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
                 setup(new MoCBlockSapling(EnumWoodType.WYVWOOD, MapColor.FOLIAGE, true), "wyvwood_sapling").setHardness(0.0F),
                 setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),

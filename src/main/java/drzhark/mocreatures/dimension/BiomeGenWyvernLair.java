@@ -26,7 +26,7 @@ public class BiomeGenWyvernLair extends Biome {
     private final WorldGenShrub worldGenShrub;
 
     @SuppressWarnings("deprecation")
-	public BiomeGenWyvernLair(Biome.BiomeProperties biomeProperties) {
+    public BiomeGenWyvernLair(Biome.BiomeProperties biomeProperties) {
         super(biomeProperties);
         this.spawnableCreatureList.clear();
         this.spawnableMonsterList.clear();

@@ -56,7 +56,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
     }
-    
+
     @Override
     protected PathNavigate createNavigator(World worldIn) {
         return new PathNavigateClimber(this, worldIn);
@@ -130,7 +130,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     protected ResourceLocation getLootTable() {
         return MoCLootTables.MOUSE;
     }
-    
+
     @Override
     protected SoundEvent getFallSound(int heightIn) {
         return null;
@@ -170,7 +170,7 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     public boolean isOnLadder() {
         return this.isBesideClimbableBlock();
     }
-    
+
     public boolean isBesideClimbableBlock() {
         return this.dataManager.get(CLIMBING);
     }

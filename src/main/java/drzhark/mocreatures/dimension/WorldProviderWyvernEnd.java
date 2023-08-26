@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.dimension;
 
-import java.util.Random;
-
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCBiomes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +17,8 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 //this one is a copy of the end world provider
 

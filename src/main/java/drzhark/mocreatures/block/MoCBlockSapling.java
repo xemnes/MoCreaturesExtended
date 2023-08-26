@@ -92,7 +92,7 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
     }
 
     @SuppressWarnings("deprecation")
-	public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
+    public void generateTree(World world, BlockPos pos, IBlockState state, Random rand) {
         if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
         WorldGenerator generator = null;
         int i = 0;
@@ -206,23 +206,15 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
         return super.canPlaceBlockAt(world, pos) && soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, this);
     }
 
-    public static enum EnumWoodType implements IStringSerializable {
+    public enum EnumWoodType implements IStringSerializable {
         WYVWOOD(0, "wyvwood");
 
-        private int meta;
         private final String name;
+        private final int meta;
 
-        private EnumWoodType(int meta, String name) {
+        EnumWoodType(int meta, String name) {
             this.meta = meta;
             this.name = name;
-        }
-
-        public int getMetadata() {
-            return this.meta;
-        }
-
-        public String toString() {
-            return this.name;
         }
 
         public static EnumWoodType byMeta(int meta) {
@@ -232,6 +224,14 @@ public class MoCBlockSapling extends BlockBush implements IGrowable {
                 }
             }
             return EnumWoodType.WYVWOOD;
+        }
+
+        public int getMetadata() {
+            return this.meta;
+        }
+
+        public String toString() {
+            return this.name;
         }
 
         public String getName() {

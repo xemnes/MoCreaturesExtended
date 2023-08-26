@@ -23,6 +23,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
         super(world);
         setSize(0.4F, 0.3F);
         this.moveHelper = new EntityFlyHelper(this);
+        this.navigatorFlyer = new PathNavigateFlying(this, world);
     }
 
     @Override

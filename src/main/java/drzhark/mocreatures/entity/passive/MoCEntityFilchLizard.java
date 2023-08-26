@@ -107,7 +107,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
             this.setSize(0.6f, 0.3f);
         }
     }
-    
+
     @Override
     protected int getExperiencePoints(EntityPlayer player) {
         return experienceValue;
@@ -194,6 +194,16 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
             arrayOfItems = new ItemStack[]{defaultItem};
         }
         return arrayOfItems;
+    }
+
+    // Sneaky...
+    @Override
+    protected void playStepSound(BlockPos pos, Block block) {
+    }
+
+    @Nullable
+    protected ResourceLocation getLootTable() {
+        return MoCLootTables.FILCH_LIZARD;
     }
 
     static class AIAvoidWhenNasty extends EntityAIAvoidEntity {
@@ -348,16 +358,6 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
         public boolean isRunning() {
             return this.isRunning;
         }
-    }
-
-    // Sneaky...
-    @Override
-    protected void playStepSound(BlockPos pos, Block block) {
-    }
-
-    @Nullable
-    protected ResourceLocation getLootTable() {
-        return MoCLootTables.FILCH_LIZARD;
     }
 
     public class EntityAIStealFromPlayer extends EntityAIBase {

@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.block;
 
-import java.util.Random;
-
 import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -13,6 +11,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.Random;
 
 public class MoCBlockFirestone extends Block {
 

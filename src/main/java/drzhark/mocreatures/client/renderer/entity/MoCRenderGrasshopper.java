@@ -19,7 +19,7 @@ public class MoCRenderGrasshopper extends MoCRenderMoC<MoCEntityGrasshopper> {
 
     @Override
     protected void preRenderCallback(MoCEntityGrasshopper entity, float par2) {
-    	rotateGrasshopper(entity);
+        rotateGrasshopper(entity);
     }
 
     protected void rotateGrasshopper(MoCEntityGrasshopper entity) {

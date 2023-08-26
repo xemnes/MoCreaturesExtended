@@ -3,8 +3,6 @@
  */
 package drzhark.mocreatures.block;
 
-import java.util.Random;
-
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -12,6 +10,8 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+
+import java.util.Random;
 
 public class MoCBlockRock extends Block {
 

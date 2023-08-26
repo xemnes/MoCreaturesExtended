@@ -30,11 +30,11 @@ public class MoCRenderMouse extends MoCRenderMoC<MoCEntityMouse> {
 
     @Override
     protected void preRenderCallback(MoCEntityMouse entitymouse, float f) {
-    	// When mice are picked up
+        // When mice are picked up
         if (entitymouse.upsideDown()) {
             upsideDown(entitymouse);
         }
-        
+
         if (entitymouse.isOnLadder()) {
             rotateAnimal(entitymouse);
         }

@@ -29,14 +29,11 @@ public class MoCEntityTiger extends MoCEntityBigCat {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
     }
 
     @Override
     public void selectType() {
-
         if (getType() == 0) {
             if (this.rand.nextInt(20) == 0) {
                 setType(2);
@@ -45,6 +42,9 @@ public class MoCEntityTiger extends MoCEntityBigCat {
             }
         }
         super.selectType();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
+        this.setHealth(getMaxHealth());
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
     }
 
     @Override
@@ -163,7 +163,6 @@ public class MoCEntityTiger extends MoCEntityBigCat {
             return 35.0D;
         }
     }
-
 
     public double calculateAttackDmg() {
         // White Tiger

@@ -30,14 +30,11 @@ public class MoCEntityLion extends MoCEntityBigCat {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
     }
 
     @Override
     public void selectType() {
-
         if (getType() == 0) {
             if (rand.nextInt(20) == 0) {
                 setType(rand.nextInt(2) + 6); // White Lion
@@ -46,6 +43,9 @@ public class MoCEntityLion extends MoCEntityBigCat {
             }
         }
         super.selectType();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
+        this.setHealth(getMaxHealth());
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(calculateAttackDmg());
     }
 
     @Override
@@ -228,7 +228,7 @@ public class MoCEntityLion extends MoCEntityBigCat {
         // ?
         return 120;
     }
-    
+
     public double calculateAttackDmg() {
         // White Lion
         if (this.getType() == 6 || this.getType() == 7 || this.getType() == 8) {

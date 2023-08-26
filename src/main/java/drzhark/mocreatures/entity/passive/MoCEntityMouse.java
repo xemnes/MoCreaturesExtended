@@ -15,6 +15,11 @@ import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNavigateClimber;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +34,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import javax.annotation.Nullable;
 
 public class MoCEntityMouse extends MoCEntityAnimal {
+    private static final DataParameter<Boolean> CLIMBING = EntityDataManager.createKey(MoCEntityMouse.class, DataSerializers.BOOLEAN);
 
     public MoCEntityMouse(World world) {
         super(world);
@@ -49,6 +55,17 @@ public class MoCEntityMouse extends MoCEntityAnimal {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
+    }
+    
+    @Override
+    protected PathNavigate createNavigator(World worldIn) {
+        return new PathNavigateClimber(this, worldIn);
+    }
+
+    @Override
+    protected void entityInit() {
+        super.entityInit();
+        this.dataManager.register(CLIMBING, Boolean.FALSE);
     }
 
     @Override
@@ -94,10 +111,6 @@ public class MoCEntityMouse extends MoCEntityAnimal {
         return this.getRidingEntity() != null;
     }
 
-    public boolean climbing() {
-        return !this.onGround && isOnLadder();
-    }
-
     @Override
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_MOUSE_DEATH;
@@ -116,6 +129,11 @@ public class MoCEntityMouse extends MoCEntityAnimal {
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.MOUSE;
+    }
+    
+    @Override
+    protected SoundEvent getFallSound(int heightIn) {
+        return null;
     }
 
     @Override
@@ -150,8 +168,26 @@ public class MoCEntityMouse extends MoCEntityAnimal {
 
     @Override
     public boolean isOnLadder() {
-        return this.collidedHorizontally;
+        return this.isBesideClimbableBlock();
     }
+    
+    public boolean isBesideClimbableBlock() {
+        return this.dataManager.get(CLIMBING);
+    }
+
+    public void setBesideClimbableBlock(boolean climbing) {
+        this.dataManager.set(CLIMBING, climbing);
+    }
+
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        if (!this.world.isRemote) {
+            this.setBesideClimbableBlock(this.collidedHorizontally);
+        }
+    }
+
 
     @Override
     public void onLivingUpdate() {

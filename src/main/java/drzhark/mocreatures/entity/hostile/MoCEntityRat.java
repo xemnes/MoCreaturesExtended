@@ -88,11 +88,6 @@ public class MoCEntityRat extends MoCEntityMob {
     }
 
     @Override
-    protected double getAttackStrenght() {
-        return 1D;
-    }
-
-    @Override
     public ResourceLocation getTexture() {
         switch (getType()) {
             case 2:

@@ -353,3 +353,21 @@ msg.mocreatures.bed4=At least it doesn't explode.
 msg.mocreatures.compat.cms=Custom Mob Spawner detected!
 msg.mocreatures.compat.cms1=Mo' Creatures Extended is built around the vanilla spawner, Custom Mob Spawner is no longer needed.
 msg.mocreatures.compat.cms2=Please consider removing Custom Mob Spawner to avoid negative impact on gameplay.
+
+# INFO
+info.mocreatures.setbonus=Set Bonus:
+info.mocreatures.setbonusscorp1=Permanent Health Boost II
+info.mocreatures.setbonusscorp2=Permanent Resistance
+info.mocreatures.setbonusscorp3=Permanent Fire Resistance
+info.mocreatures.setbonusscorp4=Permanent Night Vision
+info.mocreatures.setbonusscorp5=Permanent Strength
+info.mocreatures.stingaxe1=Inflicts Poison II on the target for 15 seconds
+info.mocreatures.stingaxe2=Inflicts Slowness on the target for 15 seconds
+info.mocreatures.stingaxe3=Burns the target for 15 seconds
+info.mocreatures.stingaxe4=Inflicts Weakness on the target (Nausea on players) for 15 seconds
+info.mocreatures.stingaxe5=Inflicts Wither on the target (Blindness on players) for 15 seconds
+info.mocreatures.stingdefault1=Inflicts Poison II on the target for 10 seconds
+info.mocreatures.stingdefault2=Inflicts Slowness on the target for 10 seconds
+info.mocreatures.stingdefault3=Burns the target for 10 seconds
+info.mocreatures.stingdefault4=Inflicts Weakness on the target (Nausea on players) for 10 seconds
+info.mocreatures.stingdefault5=Inflicts Wither on the target (Blindness on players) for 10 seconds

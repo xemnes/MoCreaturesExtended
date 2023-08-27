@@ -3,8 +3,13 @@
  */
 package drzhark.mocreatures.item;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -12,6 +17,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCItemAxe extends ItemAxe {
 
@@ -58,5 +69,29 @@ public class MoCItemAxe extends ItemAxe {
 
         stack.damageItem(2, attacker);
         return true;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        switch (this.specialWeaponType) {
+            case 1: // Poison 2
+                tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe1").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                break;
+            case 2: // Slowness
+                tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe2").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                break;
+            case 3: // Fire
+                tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe3").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                break;
+            case 4: // Weakness (Nausea for players)
+                tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe4").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                break;
+            case 5: // Wither (Blindness for players)
+                tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe5").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                break;
+            default:
+                break;
+        }
     }
 }

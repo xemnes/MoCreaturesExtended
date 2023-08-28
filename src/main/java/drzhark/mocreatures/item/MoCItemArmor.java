@@ -3,10 +3,6 @@
  */
 package drzhark.mocreatures.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
@@ -23,6 +19,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCItemArmor extends ItemArmor {
 

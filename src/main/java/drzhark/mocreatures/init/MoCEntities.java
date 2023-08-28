@@ -9,6 +9,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ambient.*;
 import drzhark.mocreatures.entity.aquatic.*;
 import drzhark.mocreatures.entity.hostile.*;
+import drzhark.mocreatures.entity.hunter.MoCEntitySnake;
 import drzhark.mocreatures.entity.hunter.*;
 import drzhark.mocreatures.entity.item.MoCEntityEgg;
 import drzhark.mocreatures.entity.item.MoCEntityKittyBed;

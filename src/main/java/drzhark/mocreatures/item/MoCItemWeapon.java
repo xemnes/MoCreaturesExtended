@@ -3,10 +3,6 @@
  */
 package drzhark.mocreatures.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockWeb;
 import net.minecraft.block.material.Material;
@@ -33,6 +29,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCItemWeapon extends MoCItem {
 

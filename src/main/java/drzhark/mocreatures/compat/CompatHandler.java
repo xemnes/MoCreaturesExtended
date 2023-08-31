@@ -9,6 +9,7 @@ import com.buuz135.industrial.api.recipe.ProteinReactorEntry;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.compat.futuremc.FutureMCIntegration;
 import drzhark.mocreatures.compat.industrialforegoing.IndustrialForegoingIntegration;
+import drzhark.mocreatures.compat.jer.JERIntegration;
 import drzhark.mocreatures.compat.morph.MorphIntegration;
 import drzhark.mocreatures.compat.thaumcraft.ThaumcraftIntegration;
 import drzhark.mocreatures.compat.thermalexpansion.ThermalExpansionIntegration;
@@ -95,6 +96,7 @@ public class CompatHandler {
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
+        if (Loader.isModLoaded("jeresources")) JERIntegration.init();
     }
 
     public static void postInit() {

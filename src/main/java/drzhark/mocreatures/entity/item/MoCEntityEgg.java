@@ -127,7 +127,7 @@ public class MoCEntityEgg extends EntityLiving {
                 }
 
                 if (this.tCounter == 5) {
-                    NotifyEggHatching();
+                    notifyEggHatching();
                 }
 
                 if (this.tCounter >= 30) {
@@ -198,7 +198,7 @@ public class MoCEntityEgg extends EntityLiving {
                 }
 
                 if (this.tCounter == 5) {
-                    NotifyEggHatching();
+                    notifyEggHatching();
                 }
 
                 if (this.tCounter >= 30) {
@@ -303,11 +303,10 @@ public class MoCEntityEgg extends EntityLiving {
         }
     }
 
-    private void NotifyEggHatching() {
+    private void notifyEggHatching() {
         EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 24D);
         if (entityplayer != null) {
-            entityplayer.sendMessage(new TextComponentTranslation("Egg hatching soon! KEEP WATCH! The hatched creature located @ "
-                    + (int) this.posX + ", " + (int) this.posY + ", " + (int) this.posZ + " will be lost if you leave area"));
+            entityplayer.sendMessage(new TextComponentTranslation("msg.mocreatures.egg", (int) this.posX, (int) this.posY, (int) this.posZ));
         }
     }
 

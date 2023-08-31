@@ -28,6 +28,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -123,14 +124,18 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             if (!this.world.isRemote) {
                 // Remove when client is updated
                 ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
-                player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "This pet does not belong to you."));
+                ITextComponent message = new TextComponentTranslation("msg.mocreatures.foreignpet");
+                message.getStyle().setColor(TextFormatting.RED);
+                player.sendMessage(message);
             }
             return false;
         }
 
         //if the player interacting is not the owner, do nothing!
         if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !player.getUniqueID().equals(this.getOwnerId())) {
-            player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "This pet does not belong to you."));
+            ITextComponent message = new TextComponentTranslation("msg.mocreatures.foreignpet");
+            message.getStyle().setColor(TextFormatting.RED);
+            player.sendMessage(message);
             return false;
         }
 

@@ -353,6 +353,8 @@ msg.mocreatures.bed4=At least it doesn't explode.
 msg.mocreatures.compat.cms=Custom Mob Spawner detected!
 msg.mocreatures.compat.cms1=Mo' Creatures Extended is built around the vanilla spawner, Custom Mob Spawner is no longer needed.
 msg.mocreatures.compat.cms2=Please consider removing Custom Mob Spawner to avoid negative impact on gameplay.
+msg.mocreatures.egg=Egg hatching soon! KEEP WATCH! The hatched creature located at %s, %s, %s will be lost if you leave the area.
+msg.mocreatures.foreignpet=This pet does not belong to you.
 
 # INFO
 info.mocreatures.setbonus=Set Bonus:

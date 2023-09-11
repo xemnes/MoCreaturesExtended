@@ -197,10 +197,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         Biome currentbiome = MoCTools.biomeKind(this.world, pos);
         String s = MoCTools.biomeName(this.world, pos);
         try {
-            if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) && this.rand.nextInt(10) == 0) setType(60); // zebra
             if (BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) setType(60); // zebra
-            if (s.toLowerCase().contains("prairie"))
-                setType(this.rand.nextInt(5) + 1); // prairies spawn only regular horses, no zebras there
         } catch (Exception ignored) {
         }
         return true;

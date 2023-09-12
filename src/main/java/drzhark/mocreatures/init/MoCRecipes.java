@@ -100,10 +100,10 @@ public class MoCRecipes {
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingFrost);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingNether);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingUndead);
-            
+
             // Fish's Undead Rising OreDictionaries
             OreDictionary.registerOre("heartUndying", MoCItems.heartundead);
-            
+
             // Pam's HarvestCraft OreDictionaries
             OreDictionary.registerOre("foodCrabcooked", MoCItems.crabcooked);
             OreDictionary.registerOre("foodCrabraw", MoCItems.crabraw);

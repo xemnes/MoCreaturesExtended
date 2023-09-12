@@ -10,6 +10,7 @@ import drzhark.mocreatures.entity.ambient.*;
 import drzhark.mocreatures.entity.aquatic.*;
 import drzhark.mocreatures.entity.hostile.*;
 import drzhark.mocreatures.entity.hunter.*;
+import drzhark.mocreatures.entity.neutral.MoCEntityBoar;
 import drzhark.mocreatures.entity.neutral.*;
 import drzhark.mocreatures.entity.passive.*;
 import jeresources.api.IJERAPI;

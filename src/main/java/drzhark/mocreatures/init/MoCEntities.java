@@ -16,6 +16,7 @@ import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
 import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
 import drzhark.mocreatures.entity.item.MoCEntityThrowableRock;
 import drzhark.mocreatures.entity.neutral.*;
+import drzhark.mocreatures.entity.neutral.MoCEntityBoar;
 import drzhark.mocreatures.entity.passive.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList.EntityEggInfo;

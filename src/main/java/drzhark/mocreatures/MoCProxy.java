@@ -56,7 +56,6 @@ public class MoCProxy implements IGuiHandler {
     public int wyvernDimension;
     public int maxTamed;
     public int maxOPTamed;
-    public int zebraChance;
     public int ostrichEggDropChance;
     public int rareItemDropChance;
     public int wyvernEggDropChance;
@@ -73,12 +72,12 @@ public class MoCProxy implements IGuiHandler {
     public boolean worldInitDone = false;
     public double spawnMultiplier;
     public int kittyVillageChance;
-    public boolean humanWerewolfSounds;
+    public boolean legacyWerehumanSounds;
     public boolean legacyRatDeathSound;
-    public boolean classicWraithSounds;
-    public boolean classicWyvernLairSky;
+    public boolean legacyWraithSounds;
+    public boolean legacyWyvernLairSky;
     public boolean foggyWyvernLair;
-    public boolean simpleBunnyTextures;
+    public boolean legacyBunnyTextures;
     public boolean verboseEntityNames;
     public boolean legacyBigCatModels;
     public boolean alphaWraithEyes;
@@ -258,7 +257,6 @@ public class MoCProxy implements IGuiHandler {
         this.enableResetOwnership = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "EnableResetOwnerScroll", false, "Allows players to remove a tamed creature's owner, essentially untaming it.").getBoolean(false);
         this.easyHorseBreeding = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasyHorseBreeding", false, "Guarantees a new horse mix on every breed.").getBoolean(false);
         this.elephantBulldozer = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ElephantBulldozer", true, "Makes elephants destroy blocks in front of them when riding.").getBoolean(true);
-        this.zebraChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ZebraChance", 10, "The percentage for spawning a zebra.").getInt();
         this.ostrichEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "OstrichEggDropChance", 3, "The percentage for ostriches to drop an egg.").getInt();
         this.staticBed = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticBed", true, "Makes the kitty bed not pushable.").getBoolean(true);
         this.staticLitter = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticLitter", true, "Makes the kitty litter box not pushable.").getBoolean(true);
@@ -279,11 +277,11 @@ public class MoCProxy implements IGuiHandler {
         this.wyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17, "The dimension ID of the wyvern lair.").getInt();
         this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 2.0D, "Multiplier for entity spawns during world generation.").getDouble(2.0D);
         this.kittyVillageChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KittyVillageChance", 15, "The percentage for kitties spawning in village chunks.").getInt();
-        this.humanWerewolfSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "HumanWerewolfSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);
-        this.classicWraithSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ClassicWraithSounds", false, "Enables legacy wraith sounds.").getBoolean(false);
-        this.classicWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ClassicWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
+        this.legacyWerehumanSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyWerehumanSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);
+        this.legacyWraithSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyWraithSounds", false, "Enables legacy wraith sounds.").getBoolean(false);
+        this.legacyWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "LegacyWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
         this.foggyWyvernLair = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "FoggyWyvernLair", false, "Enables extra fog at the wyvern lair like in legacy versions.").getBoolean(false);
-        this.simpleBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SimpleBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
+        this.legacyBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
         this.legacyBigCatModels = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigCatModels", false, "Enables simple big cat models and textures like in legacy versions.").getBoolean(false);
         this.alphaWraithEyes = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AlphaWraithEyes", false, "Enables different eye colors for wraiths and flame wraiths like in alpha versions.").getBoolean(false);

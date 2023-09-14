@@ -195,7 +195,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
     public boolean checkSpawningBiome() {
         BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(getEntityBoundingBox().minY), this.posZ);
         Biome currentbiome = MoCTools.biomeKind(this.world, pos);
-        String s = MoCTools.biomeName(this.world, pos);
         try {
             if (BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) setType(60); // zebra
         } catch (Exception ignored) {
@@ -2111,10 +2110,9 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (getType() == 0) {
             if (this.rand.nextInt(5) == 0) setAdult(false);
             int j = this.rand.nextInt(100);
-            int i = MoCreatures.proxy.zebraChance;
-            if (j <= (33 - i)) setType(6);
-            else if (j <= (66 - i)) setType(7);
-            else if (j <= (99 - i)) setType(8);
+            if (j <= (33)) setType(6);
+            else if (j <= (66)) setType(7);
+            else if (j <= (99)) setType(8);
             else setType(60);// zebra
         }
     }

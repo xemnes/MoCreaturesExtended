@@ -43,13 +43,13 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
         }
 
         // It'll do for now until the custom sky renderer is ever expanded upon
-        if (MoCreatures.proxy.classicWyvernLairSky) setSkyRenderer(new MoCSkyRenderer());
+        if (MoCreatures.proxy.legacyWyvernLairSky) setSkyRenderer(new MoCSkyRenderer());
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
-        return MoCreatures.proxy.classicWyvernLairSky ? null : super.calcSunriseSunsetColors(celestialAngle, partialTicks);
+        return MoCreatures.proxy.legacyWyvernLairSky ? null : super.calcSunriseSunsetColors(celestialAngle, partialTicks);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class WorldProviderWyvernEnd extends WorldProviderSurface {
         float var4 = MathHelper.cos(par1 * (float) Math.PI * 2.0F) * 2.0F + 0.5F;
 
         // Classic Sky
-        if (MoCreatures.proxy.classicWyvernLairSky) {
+        if (MoCreatures.proxy.legacyWyvernLairSky) {
             if (var4 < 0.0F) {
                 var4 = 0.0F;
             }

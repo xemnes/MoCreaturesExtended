@@ -6,7 +6,6 @@ package drzhark.mocreatures.entity.ambient;
 import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
-import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,12 +23,6 @@ public class MoCEntityButterfly extends MoCEntityInsect {
 
     public MoCEntityButterfly(World world) {
         super(world);
-    }
-
-    @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
     }
 
     @Override

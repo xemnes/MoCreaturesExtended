@@ -60,7 +60,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     private boolean updateDivingDepth = false;
     private double divingDepth;
 
-    public MoCEntityAquatic(World world) {
+    protected MoCEntityAquatic(World world) {
         super(world);
         this.outOfWater = 0;
         setTemper(50);
@@ -403,8 +403,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
             if (!this.getNavigator().noPath())// && !updateDivingDepth)
             {
                 if (!this.updateDivingDepth) {
-                    float targetDepth =
-                            (MoCTools.distanceToSurface(this.moveHelper.getX(), this.moveHelper.getY(), this.moveHelper.getZ(), this.world));
+                    float targetDepth = (MoCTools.distanceToSurface(this.moveHelper.getX(), this.moveHelper.getY(), this.moveHelper.getZ(), this.world));
                     setNewDivingDepth(targetDepth);
                     this.updateDivingDepth = true;
                 }
@@ -555,8 +554,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
 
     @Override
     public boolean renderName() {
-        return MoCreatures.proxy.getDisplayPetName()
-                && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
     }
 
     /*@Override
@@ -965,9 +963,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         if (!entityIn.isInWater()) {
             return false;
         }
-        boolean flag =
-                entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-                        .getAttributeValue()));
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
         if (flag) {
             this.applyEnchantments(this, entityIn);
         }
@@ -1035,8 +1031,7 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     public void setLeashHolder(Entity entityIn, boolean sendAttachNotification) {
         if (this.getIsTamed() && entityIn instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityIn;
-            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
-                    && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
+            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
                 return;
             }
         }

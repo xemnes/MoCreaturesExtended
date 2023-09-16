@@ -5,7 +5,6 @@ package drzhark.mocreatures.entity;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
 import drzhark.mocreatures.entity.item.MoCEntityEgg;
 import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
 import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
@@ -24,7 +23,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.Path;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -47,11 +45,9 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
 
     protected String texture;
     protected boolean riderIsDisconnecting;
-    protected PathNavigate navigatorFlyer;
 
-    public MoCEntityAmbient(World world) {
+    protected MoCEntityAmbient(World world) {
         super(world);
-        this.navigatorFlyer = new PathNavigateFlyer(this, world);
     }
 
     @SideOnly(Side.CLIENT)
@@ -110,8 +106,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
 
     @Override
     public boolean renderName() {
-        return MoCreatures.proxy.getDisplayPetName()
-                && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
     }
 
     @Override
@@ -347,9 +342,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
             for (int l = 0; l <= 4; l++) {
                 for (int i1 = 0; i1 <= 4; i1++) {
                     BlockPos pos = new BlockPos(i, j, k);
-                    if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.world.getBlockState(pos.add(l, -1, i1)).isNormalCube()
-                            && !this.world.getBlockState(pos.add(l, 0, i1)).isNormalCube()
-                            && !this.world.getBlockState(pos.add(l, 1, i1)).isNormalCube()) {
+                    if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.world.getBlockState(pos.add(l, -1, i1)).isNormalCube() && !this.world.getBlockState(pos.add(l, 0, i1)).isNormalCube() && !this.world.getBlockState(pos.add(l, 1, i1)).isNormalCube()) {
                         setLocationAndAngles((i + l) + 0.5F, k, (j + i1) + 0.5F, this.rotationYaw, this.rotationPitch);
                         return;
                     }
@@ -364,10 +357,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public boolean getCanSpawnHere() {
         boolean willSpawn;
         boolean debug = MoCreatures.proxy.debug;
-        willSpawn = this.world.canSeeSky(new BlockPos(this))
-                && this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty()
-                && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
+        willSpawn = this.world.canSeeSky(new BlockPos(this)) && this.world.checkNoEntityCollision(this.getEntityBoundingBox()) && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty() && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
         if (willSpawn && debug)
             MoCreatures.LOGGER.info("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
@@ -561,9 +551,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     public boolean isOnAir() {
-        return (this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 0.2D), MathHelper
-                .floor(this.posZ))) && this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper
-                .floor(this.posY - 1.2D), MathHelper.floor(this.posZ))));
+        return (this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 0.2D), MathHelper.floor(this.posZ))) && this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 1.2D), MathHelper.floor(this.posZ))));
     }
 
     @Override
@@ -767,8 +755,7 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public void setLeashHolder(Entity entityIn, boolean sendAttachNotification) {
         if (this.getIsTamed() && entityIn instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityIn;
-            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
-                    && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
+            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
                 return;
             }
         }

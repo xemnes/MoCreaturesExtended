@@ -53,7 +53,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     protected PathNavigate navigatorFlyer;
     protected EntityAIWanderMoC2 wander;
 
-    public MoCEntityMob(World world) {
+    protected MoCEntityMob(World world) {
         super(world);
         this.texture = "blank.jpg";
         this.moveHelper = new EntityAIMoverHelperMoC(this);
@@ -221,16 +221,13 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
             }*/
 
             if (getIsTamed() && this.rand.nextInt(200) == 0) {
-                MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHealth(this.getEntityId(), this.getHealth()), new TargetPoint(
-                        this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
+                MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHealth(this.getEntityId(), this.getHealth()), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
             }
 
             if (this.isHarmedByDaylight()) {
                 if (this.world.isDaytime()) {
                     float var1 = this.getBrightness();
-                    if (var1 > 0.5F
-                            && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY),
-                            MathHelper.floor(this.posZ))) && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
+                    if (var1 > 0.5F && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ))) && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
                         this.setFire(8);
                     }
                 }
@@ -263,8 +260,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i) {
         if (!this.world.isRemote && getIsTamed()) {
-            MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHealth(this.getEntityId(), this.getHealth()), new TargetPoint(
-                    this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
+            MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHealth(this.getEntityId(), this.getHealth()), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
         }
         return super.attackEntityFrom(damagesource, i);
     }
@@ -355,8 +351,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
     @Override
     public boolean renderName() {
-        return MoCreatures.proxy.getDisplayPetName()
-                && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
     }
 
     /*protected Vec3d findPossibleShelter() {
@@ -507,9 +502,7 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
-        boolean flag =
-                entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
-                        .getAttributeValue()));
+        boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), ((int) this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue()));
         if (flag) {
             this.applyEnchantments(this, entityIn);
         }

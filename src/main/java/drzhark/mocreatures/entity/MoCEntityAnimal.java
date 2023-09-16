@@ -65,7 +65,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     private double divingDepth;
     private boolean randomAttributesUpdated; //used to update divingDepth on world load
 
-    public MoCEntityAnimal(World world) {
+    protected MoCEntityAnimal(World world) {
         super(world);
         this.riderIsDisconnecting = false;
         this.isTameable = false;

@@ -33,7 +33,7 @@ public class MoCRenderKitty extends MoCRenderMoC<MoCEntityKitty> {
     public void doRender(MoCEntityKitty entitykitty, double d, double d1, double d2, float f, float f1) {
         super.doRender(entitykitty, d, d1, d2, f, f1);
         boolean displayPetIcons = MoCreatures.proxy.getDisplayPetIcons();
-        if (entitykitty.renderName()) {
+        if (entitykitty.getIsTamed()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitykitty.getDistance(this.renderManager.renderViewEntity);

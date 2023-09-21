@@ -47,7 +47,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
     public void initGui() {
         this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, (this.height - (this.ySize + 16)) / 2 + 150, "Done")); //1.5
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, (this.height - (this.ySize + 16)) / 2 + 150, "Done"));
     }
 
     public void updateName() {
@@ -61,7 +61,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
         if (!guibutton.enabled) {
             return;
         }
-        if ((guibutton.id == 0) && (this.nameToSet != null) && (!this.nameToSet.equals(""))) {
+        if (guibutton.id == 0 && this.nameToSet != null) {
             updateName();
         }
     }
@@ -81,22 +81,17 @@ public class MoCGUIEntityNamer extends GuiScreen {
 
     @Override
     public void handleKeyboardInput() throws IOException {
-        if (Keyboard.getEventKeyState()) {
-            if (Keyboard.getEventKey() == 28) // Handle Enter Key
-            {
-                updateName();
-            }
+        if (Keyboard.getEventKeyState() && Keyboard.getEventKey() == 28) { // Handle Enter Key
+            updateName();
         }
         super.handleKeyboardInput();
     }
 
     @Override
     protected void keyTyped(char c, int i) {
-        if ((i == 14) && (this.nameToSet.length() > 0)) {
+        if (i == 14) { // Handle Backspace Key
             this.nameToSet = this.nameToSet.substring(0, this.nameToSet.length() - 1);
-        }
-        if (!ChatAllowedCharacters.isAllowedCharacter(c) || (this.nameToSet.length() >= 15)) {
-        } else {
+        } else if (ChatAllowedCharacters.isAllowedCharacter(c)) {
             this.nameToSet = this.nameToSet + c;
         }
     }

@@ -41,7 +41,7 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitybigcat.getPetName()).isEmpty();
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
 
-        if (entitybigcat.renderName()) {
+        if (entitybigcat.getIsTamed()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f5 = entitybigcat.getDistance(this.renderManager.renderViewEntity);

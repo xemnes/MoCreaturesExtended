@@ -29,7 +29,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitydolphin.getPetName().isEmpty());
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
         //boolean flag2 = MoCreatures.proxy.getdisplayPetIcons();
-        if (entitydolphin.renderName()) {
+        if (entitydolphin.getIsTamed()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitydolphin.getDistance(this.renderManager.renderViewEntity);
@@ -98,7 +98,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
 
     public void doRender2(MoCEntityDolphin entitydolphin, double d, double d1, double d2, float f, float f1) {
         super.doRender(entitydolphin, d, d1, d2, f, f1);
-        if (entitydolphin.renderName()) {
+        if (entitydolphin.getIsTamed()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitydolphin.getDistance(this.renderManager.renderViewEntity);

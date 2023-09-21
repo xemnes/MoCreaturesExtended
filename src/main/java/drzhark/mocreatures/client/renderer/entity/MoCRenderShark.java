@@ -28,7 +28,7 @@ public class MoCRenderShark extends RenderLiving<MoCEntityShark> {
         super.doRender(entityshark, d, d1, d2, f, f1);
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entityshark.getPetName().isEmpty());
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        if (entityshark.renderName()) {
+        if (entityshark.getIsTamed()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entityshark.getDistance(this.renderManager.renderViewEntity);
@@ -96,7 +96,7 @@ public class MoCRenderShark extends RenderLiving<MoCEntityShark> {
 
     public void doRender2(MoCEntityShark entityshark, double d, double d1, double d2, float f, float f1) {
         super.doRender(entityshark, d, d1, d2, f, f1);
-        if (entityshark.renderName()) {
+        if (entityshark.getIsTamed()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entityshark.getDistance(this.renderManager.renderViewEntity);

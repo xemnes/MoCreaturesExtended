@@ -34,7 +34,6 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     public MoCEntityWraith(World world) {
         super(world);
         this.collidedVertically = false;
-        this.texture = MoCreatures.proxy.alphaWraithEyes ? "wraith_alpha.png" : "wraith.png";
         setSize(0.6F, 2.0F);
         experienceValue = 5;
     }
@@ -52,6 +51,28 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    }
+
+    @Override
+    public void selectType() {
+        if (getType() == 0) {
+            int i = this.rand.nextInt(100);
+            if (i < 5) {
+                setType(2);
+                setCustomNameTag("Scratch");
+            } else {
+                setType(1);
+            }
+        }
+    }
+
+    @Override
+    public ResourceLocation getTexture() {
+        if (getType() == 2) {
+            return MoCreatures.proxy.getModelTexture("wraith_scratch.png");
+        } else {
+            return MoCreatures.proxy.getModelTexture(MoCreatures.proxy.alphaWraithEyes ? "wraith_alpha.png" : "wraith.png");
+        }
     }
 
     @Override

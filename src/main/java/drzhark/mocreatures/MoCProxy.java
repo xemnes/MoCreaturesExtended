@@ -43,6 +43,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean alphaWraithEyes;
     public boolean alwaysNamePets;
     public boolean animateTextures;
+    public boolean armorSetEffects;
     public boolean attackHorses;
     public boolean attackWolves;
     public boolean debug = false;
@@ -66,6 +67,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean staticBed;
     public boolean staticLitter;
     public boolean verboseEntityNames;
+    public boolean weaponEffects;
     public boolean worldInitDone = false;
     public double spawnMultiplier;
     public float ogreCaveStrength;
@@ -255,6 +257,7 @@ public class MoCProxy implements IGuiHandler {
         //this.allowInstaSpawn = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "AllowInstaSpawn", false, "Allows you to instantly spawn MoCreatures from GUI.").getBoolean(false);
         this.alphaWraithEyes = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AlphaWraithEyes", false, "Enables different eye colors for wraiths and flame wraiths like in alpha versions.").getBoolean(false);
         this.alwaysNamePets = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "AlwaysNamePets", true, "Displays a GUI to name a pet when taming.").getBoolean(true);
+        this.armorSetEffects = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ArmorSetEffects", true, "Applies potion effects when wearing full scorpion armor sets.").getBoolean(true);
         this.attackHorses = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackHorses", false, "Allows creatures to attack horses.").getBoolean(false);
         this.attackWolves = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackWolves", false, "Allows creatures to attack wolves.").getBoolean(false);
         this.debug = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "Debug", false, "Turns on verbose logging.").getBoolean(false);
@@ -288,6 +291,7 @@ public class MoCProxy implements IGuiHandler {
         this.staticBed = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticBed", true, "Makes the kitty bed not pushable.").getBoolean(true);
         this.staticLitter = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticLitter", true, "Makes the kitty litter box not pushable.").getBoolean(true);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
+        this.weaponEffects = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "WeaponEffects", true, "Applies potion effects when dealing damage with scorpion weapons.").getBoolean(true);
         this.wyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17, "The dimension ID of the wyvern lair.").getInt();
         this.wyvernEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WyvernEggDropChance", 33, "The percentage for wyverns to drop an egg.").getInt();
 

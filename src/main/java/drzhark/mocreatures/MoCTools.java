@@ -1002,37 +1002,38 @@ public class MoCTools {
     }
 
     public static void updatePlayerArmorEffects(EntityPlayer player) {
-        ItemStack[] mystack = new ItemStack[4];
-        mystack[0] = player.getItemStackFromSlot(EntityEquipmentSlot.FEET); //boots
-        mystack[1] = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS); //legs
-        mystack[2] = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST); //plate
-        mystack[3] = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD); //helmet
+        if (!MoCreatures.proxy.armorSetEffects) return;
+
+        Item boots = player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem(); // Boots
+        Item legs = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS).getItem(); // Leggings
+        Item plate = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem(); // Chestplate
+        Item helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem(); // Helmet
 
         // Cave Scorpion Armor Set Effect - Night Vision
-        if (mystack[0].getItem() == MoCItems.scorpBootsCave && mystack[1].getItem() == MoCItems.scorpLegsCave && mystack[2].getItem() == MoCItems.scorpPlateCave && mystack[3].getItem() == MoCItems.scorpHelmetCave) {
+        if (boots == MoCItems.scorpBootsCave && legs == MoCItems.scorpLegsCave && plate == MoCItems.scorpPlateCave && helmet == MoCItems.scorpHelmetCave) {
             player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0));
             return;
         }
 
         // Fire Scorpion Armor Set Effect - Fire Resistance
-        if (mystack[0].getItem() == MoCItems.scorpBootsNether && mystack[1].getItem() == MoCItems.scorpLegsNether && mystack[2].getItem() == MoCItems.scorpPlateNether && mystack[3].getItem() == MoCItems.scorpHelmetNether) {
+        if (boots == MoCItems.scorpBootsNether && legs == MoCItems.scorpLegsNether && plate == MoCItems.scorpPlateNether && helmet == MoCItems.scorpHelmetNether) {
             player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 0));
             return;
         }
 
         // Frost Scorpion Armor Set Effect - Resistance
-        if (mystack[0].getItem() == MoCItems.scorpBootsFrost && mystack[1].getItem() == MoCItems.scorpLegsFrost && mystack[2].getItem() == MoCItems.scorpPlateFrost && mystack[3].getItem() == MoCItems.scorpHelmetFrost) {
+        if (boots == MoCItems.scorpBootsFrost && legs == MoCItems.scorpLegsFrost && plate == MoCItems.scorpPlateFrost && helmet == MoCItems.scorpHelmetFrost) {
             player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 0));
             return;
         }
 
         // Dirt Scorpion Armor Set Effect - Health Boost
-        if (mystack[0].getItem() == MoCItems.scorpBootsDirt && mystack[1].getItem() == MoCItems.scorpLegsDirt && mystack[2].getItem() == MoCItems.scorpPlateDirt && mystack[3].getItem() == MoCItems.scorpHelmetDirt) {
+        if (boots == MoCItems.scorpBootsDirt && legs == MoCItems.scorpLegsDirt && plate == MoCItems.scorpPlateDirt && helmet == MoCItems.scorpHelmetDirt) {
             player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1));
         }
 
         // Undead Scorpion Armor Set Effect - Strength
-        if (mystack[0].getItem() == MoCItems.scorpBootsUndead && mystack[1].getItem() == MoCItems.scorpLegsUndead && mystack[2].getItem() == MoCItems.scorpPlateUndead && mystack[3].getItem() == MoCItems.scorpHelmetUndead) {
+        if (boots == MoCItems.scorpBootsUndead && legs == MoCItems.scorpLegsUndead && plate == MoCItems.scorpPlateUndead && helmet == MoCItems.scorpHelmetUndead) {
             player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0));
         }
     }

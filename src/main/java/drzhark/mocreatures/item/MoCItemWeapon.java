@@ -4,6 +4,7 @@
 package drzhark.mocreatures.item;
 
 import com.google.common.collect.Multimap;
+import drzhark.mocreatures.MoCreatures;
 import net.minecraft.block.BlockWeb;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -67,25 +68,27 @@ public class MoCItemWeapon extends MoCItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        int timer = 10; // In seconds
-        switch (this.specialWeaponType) {
-            case 1: // Poison 2
-                target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
-                break;
-            case 2: // Slowness
-                target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
-                break;
-            case 3: // Fire
-                target.setFire(timer);
-                break;
-            case 4: // Weakness (Nausea for players)
-                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
-                break;
-            case 5: // Wither (Blindness for players)
-                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.BLINDNESS : MobEffects.WITHER, timer * 20, 0));
-                break;
-            default:
-                break;
+        if (MoCreatures.proxy.weaponEffects) {
+            int timer = 10; // In seconds
+            switch (this.specialWeaponType) {
+                case 1: // Poison 2
+                    target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
+                    break;
+                case 2: // Slowness
+                    target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
+                    break;
+                case 3: // Fire
+                    target.setFire(timer);
+                    break;
+                case 4: // Weakness (Nausea for players)
+                    target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
+                    break;
+                case 5: // Wither (Blindness for players)
+                    target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.BLINDNESS : MobEffects.WITHER, timer * 20, 0));
+                    break;
+                default:
+                    break;
+            }
         }
 
         stack.damageItem(1, attacker);
@@ -169,24 +172,26 @@ public class MoCItemWeapon extends MoCItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        switch (this.specialWeaponType) {
-            case 1: // Poison 2
-                tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault1").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
-                break;
-            case 2: // Slowness
-                tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault2").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
-                break;
-            case 3: // Fire
-                tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault3").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
-                break;
-            case 4: // Weakness (Nausea for players)
-                tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault4").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
-                break;
-            case 5: // Wither (Blindness for players)
-                tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault5").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
-                break;
-            default:
-                break;
+        if (MoCreatures.proxy.weaponEffects) {
+            switch (this.specialWeaponType) {
+                case 1: // Poison 2
+                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault1").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    break;
+                case 2: // Slowness
+                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault2").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    break;
+                case 3: // Fire
+                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault3").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    break;
+                case 4: // Weakness (Nausea for players)
+                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault4").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    break;
+                case 5: // Wither (Blindness for players)
+                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingdefault5").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

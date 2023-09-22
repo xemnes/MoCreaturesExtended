@@ -1714,7 +1714,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     private boolean nearMusicBox() {
         // only works server side
-        if (this.world.isRemote && !MoCreatures.proxy.easterEggs) return false;
+        if (this.world.isRemote || !MoCreatures.proxy.easterEggs) return false;
         boolean flag = false;
         TileEntityJukebox jukebox = MoCTools.nearJukeBoxRecord(this, 6D);
         if (jukebox != null) {

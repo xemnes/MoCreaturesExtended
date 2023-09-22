@@ -80,20 +80,22 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     public ResourceLocation getTexture() {
         String tempText = "turtle.png";
 
-        if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
-            tempText = "turtle_donatello.png";
-        }
+        if (MoCreatures.proxy.easterEggs) {
+            if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
+                tempText = "turtle_donatello.png";
+            }
 
-        if (getPetName().equals("Leonardo") || getPetName().equals("leonardo")) {
-            tempText = "turtle_leonardo.png";
-        }
+            if (getPetName().equals("Leonardo") || getPetName().equals("leonardo")) {
+                tempText = "turtle_leonardo.png";
+            }
 
-        if (getPetName().equals("raphael") || getPetName().equals("Raphael")) {
-            tempText = "turtle_raphael.png";
-        }
+            if (getPetName().equals("raphael") || getPetName().equals("Raphael")) {
+                tempText = "turtle_raphael.png";
+            }
 
-        if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo")) {
-            tempText = "turtle_michelangelo.png";
+            if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo")) {
+                tempText = "turtle_michelangelo.png";
+            }
         }
 
         return MoCreatures.proxy.getModelTexture(tempText);
@@ -348,23 +350,26 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
         return MoCLootTables.TURTLE;
     }
 
+    // TODO: Remove this after the weapons get reworked
     @Override
     protected Item getDropItem() {
-        if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
-            return MoCItems.bo;
-        }
+        if (MoCreatures.proxy.easterEggs) { 
+            if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
+                return MoCItems.bo;
+            }
 
-        if (getPetName().equals("Leonardo") || getPetName().equals("leonardo")) {
-            return MoCItems.katana;
-        }
+            if (getPetName().equals("Leonardo") || getPetName().equals("leonardo")) {
+                return MoCItems.katana;
+            }
 
-        if (getPetName().equals("Rafael") || getPetName().equals("rafael") || getPetName().equals("raphael") || getPetName().equals("Raphael")) {
-            return MoCItems.sai;
-        }
+            if (getPetName().equals("Rafael") || getPetName().equals("rafael") || getPetName().equals("raphael") || getPetName().equals("Raphael")) {
+                return MoCItems.sai;
+            }
 
-        if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo") || getPetName().equals("Michaelangelo")
-                || getPetName().equals("michaelangelo")) {
-            return MoCItems.nunchaku;
+            if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo") || getPetName().equals("Michaelangelo")
+                    || getPetName().equals("michaelangelo")) {
+                return MoCItems.nunchaku;
+            }
         }
 
         return null;

@@ -51,6 +51,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean displayPetHealth;
     public boolean displayPetIcons;
     public boolean displayPetName;
+    public boolean easterEggs;
     public boolean easyHorseBreeding;
     public boolean elephantBulldozer;
     public boolean enableHunters;
@@ -262,6 +263,7 @@ public class MoCProxy implements IGuiHandler {
         this.attackWolves = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackWolves", false, "Allows creatures to attack wolves.").getBoolean(false);
         this.debug = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "Debug", false, "Turns on verbose logging.").getBoolean(false);
         this.destroyDrops = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "DestroyDrops", false, "Destroys animal drops when not killed by a player.").getBoolean(false);
+        this.easterEggs = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasterEggs", true, "Not for the more serious lore friendly players.").getBoolean(true);
         this.easyHorseBreeding = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasyHorseBreeding", false, "Guarantees a new horse mix on every breed.").getBoolean(false);
         this.elephantBulldozer = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ElephantBulldozer", true, "Makes elephants destroy blocks in front of them when riding.").getBoolean(true);
         this.enableHunters = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EnableHunters", true, "Allows creatures to attack other creatures. Not recommended if despawning is off.").getBoolean(true);

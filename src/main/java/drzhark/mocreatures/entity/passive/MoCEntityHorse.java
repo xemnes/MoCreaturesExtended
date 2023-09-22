@@ -1450,7 +1450,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         }
 
         // zebra easter egg
-        if (!stack.isEmpty() && (this.getType() == 60) && stack.getItem() instanceof ItemRecord) {
+        if (!stack.isEmpty() && (this.getType() == 60) && stack.getItem() instanceof ItemRecord && MoCreatures.proxy.easterEggs) {
             player.setHeldItem(hand, ItemStack.EMPTY);
             if (!this.world.isRemote) {
                 EntityItem entityitem1 = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(MoCItems.recordshuffle, 1));
@@ -1714,7 +1714,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     private boolean nearMusicBox() {
         // only works server side
-        if (this.world.isRemote) return false;
+        if (this.world.isRemote && !MoCreatures.proxy.easterEggs) return false;
         boolean flag = false;
         TileEntityJukebox jukebox = MoCTools.nearJukeBoxRecord(this, 6D);
         if (jukebox != null) {

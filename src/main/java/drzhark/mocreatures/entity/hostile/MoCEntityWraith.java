@@ -57,7 +57,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     public void selectType() {
         if (getType() == 0) {
             int i = this.rand.nextInt(100);
-            if (i < 5) {
+            if (i < 5 && MoCreatures.proxy.easterEggs) {
                 setType(2);
                 setCustomNameTag("Scratch");
             } else {

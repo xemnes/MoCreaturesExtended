@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.hostile.MoCEntityWraith;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderWraith extends RenderLiving<MoCEntityWraith> {
 
     public MoCRenderWraith(ModelBiped modelbiped, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbiped, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbiped, f);
     }
 
     @Override

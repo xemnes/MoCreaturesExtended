@@ -3,8 +3,8 @@
  */
 package drzhark.mocreatures.compat.jer;
 
-import drzhark.mocreatures.MoCEntityData;
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.entity.MoCEntityData;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ambient.*;
 import drzhark.mocreatures.entity.aquatic.*;

@@ -4,19 +4,24 @@
 package drzhark.mocreatures;
 
 import com.mojang.authlib.GameProfile;
-import drzhark.mocreatures.client.MoCClientEventHooks;
-import drzhark.mocreatures.client.MoCCreativeTabs;
-import drzhark.mocreatures.client.handlers.MoCKeyHandler;
-import drzhark.mocreatures.command.CommandMoCPets;
-import drzhark.mocreatures.command.CommandMoCSpawn;
-import drzhark.mocreatures.command.CommandMoCTP;
-import drzhark.mocreatures.command.CommandMoCreatures;
+import drzhark.mocreatures.event.MoCEventHooksClient;
+import drzhark.mocreatures.init.MoCCreativeTabs;
+import drzhark.mocreatures.client.MoCKeyHandler;
+import drzhark.mocreatures.network.command.CommandMoCPets;
+import drzhark.mocreatures.network.command.CommandMoCSpawn;
+import drzhark.mocreatures.network.command.CommandMoCTP;
+import drzhark.mocreatures.network.command.CommandMoCreatures;
 import drzhark.mocreatures.compat.CompatHandler;
 import drzhark.mocreatures.compat.datafixes.BlockIDFixer;
 import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
-import drzhark.mocreatures.dimension.WorldProviderWyvernEnd;
+import drzhark.mocreatures.dimension.world.MoCWorldProviderWyvernLair;
+import drzhark.mocreatures.entity.MoCEntityData;
+import drzhark.mocreatures.entity.tameable.MoCPetMapData;
+import drzhark.mocreatures.event.MoCEventHooks;
+import drzhark.mocreatures.event.MoCEventHooksTerrain;
 import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.network.MoCMessageHandler;
+import drzhark.mocreatures.proxy.MoCProxy;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -51,7 +56,7 @@ public class MoCreatures {
     public static final String MOC_LOGO = TextFormatting.WHITE + "[" + TextFormatting.AQUA + MoCConstants.MOD_NAME + TextFormatting.WHITE + "]";
     @Instance(MoCConstants.MOD_ID)
     public static MoCreatures instance;
-    @SidedProxy(clientSide = "drzhark.mocreatures.client.MoCClientProxy", serverSide = "drzhark.mocreatures.MoCProxy")
+    @SidedProxy(clientSide = "drzhark.mocreatures.proxy.MoCProxyClient", serverSide = "drzhark.mocreatures.proxy.MoCProxy")
     public static MoCProxy proxy;
     public static GameProfile MOCFAKEPLAYER = new GameProfile(UUID.fromString("6E379B45-1111-2222-3333-2FE1A88BCD66"), "[MoCreatures]");
     public static DimensionType WYVERN_LAIR;
@@ -61,10 +66,6 @@ public class MoCreatures {
     public static Int2ObjectOpenHashMap<Class<? extends EntityLiving>> instaSpawnerMap = new Int2ObjectOpenHashMap<>();
     public MoCPetMapData mapData;
 
-    public static void updateSettings() {
-        proxy.readGlobalConfigValues();
-    }
-
     public static boolean isServer() {
         return (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER);
     }
@@ -73,10 +74,10 @@ public class MoCreatures {
     public void preInit(FMLPreInitializationEvent event) {
         MoCMessageHandler.init();
         MinecraftForge.EVENT_BUS.register(new MoCEventHooks());
-        MinecraftForge.TERRAIN_GEN_BUS.register(new MoCTerrainEventHooks());
+        MinecraftForge.TERRAIN_GEN_BUS.register(new MoCEventHooksTerrain());
         proxy.configInit(event);
         if (!isServer()) {
-            MinecraftForge.EVENT_BUS.register(new MoCClientEventHooks());
+            MinecraftForge.EVENT_BUS.register(new MoCEventHooksClient());
             MinecraftForge.EVENT_BUS.register(new MoCKeyHandler());
         }
         MoCEntities.registerEntities();
@@ -89,11 +90,11 @@ public class MoCreatures {
         proxy.mocSettingsConfig.save();
         proxy.registerRenderers();
         proxy.registerRenderInformation();
-        WYVERN_LAIR = DimensionType.register("Wyvern Lair", "_wyvern_lair", wyvernLairDimensionID, WorldProviderWyvernEnd.class, false);
+        WYVERN_LAIR = DimensionType.register("Wyvern Lair", "_wyvern_lair", wyvernLairDimensionID, MoCWorldProviderWyvernLair.class, false);
         DimensionManager.registerDimension(wyvernLairDimensionID, WYVERN_LAIR);
-        MoCTerrainEventHooks.addBiomeTypes();
+        MoCEventHooksTerrain.addBiomeTypes();
         MoCEntities.registerSpawns();
-        MoCTerrainEventHooks.buildWorldGenSpawnLists();
+        MoCEventHooksTerrain.buildWorldGenSpawnLists();
         CompatHandler.init();
         ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(MoCConstants.MOD_ID, MoCConstants.DATAFIXER_VERSION);
         modFixer.registerFix(FixTypes.BLOCK_ENTITY, new BlockIDFixer());

@@ -4,11 +4,11 @@
 package drzhark.mocreatures.entity.hunter;
 
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import drzhark.mocreatures.inventory.MoCAnimalChest;
+import drzhark.mocreatures.entity.inventory.MoCAnimalChest;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.entity.Entity;

@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelGoat;
 import drzhark.mocreatures.entity.neutral.MoCEntityGoat;
 import net.minecraft.client.gui.FontRenderer;
@@ -24,7 +24,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     float depth = 0F;
 
     public MoCRenderGoat(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
         this.tempGoat = (MoCModelGoat) modelbase;
     }
 

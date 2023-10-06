@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.dimension;
 
+import drzhark.mocreatures.dimension.world.MoCWorldGenPortal;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -246,7 +246,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     }
 
     @Override
-    protected SoundEvent getUpsetSound() {
+    protected SoundEvent getAngrySound() {
         return MoCSoundEvents.ENTITY_DOLPHIN_UPSET;
     }
 
@@ -327,7 +327,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
             if ((!this.isBeingRidden()) && (this.deathTime == 0) && (!getIsTamed() || getIsHungry())) {
                 EntityItem entityitem = getClosestFish(this, 12D);
                 if (entityitem != null) {
-                    MoveToNextEntity(entityitem);
+                    moveToNextEntity(entityitem);
                     EntityItem entityitem1 = getClosestFish(this, 2D);
                     if ((this.rand.nextInt(20) == 0) && (entityitem1 != null) && (this.deathTime == 0)) {
 

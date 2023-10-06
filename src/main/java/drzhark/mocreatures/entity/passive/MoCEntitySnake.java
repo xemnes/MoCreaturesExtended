@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import net.minecraft.world.World;
 
 // Just here for makeshift MIA compatibility

@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ResourceLocation;

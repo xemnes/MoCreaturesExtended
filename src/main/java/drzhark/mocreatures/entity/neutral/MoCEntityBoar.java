@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;

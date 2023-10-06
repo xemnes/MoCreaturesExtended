@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCSoundEvents;

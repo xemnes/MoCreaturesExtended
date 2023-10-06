@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelWerehuman;
 import drzhark.mocreatures.client.model.MoCModelWerewolf;
 import drzhark.mocreatures.entity.hostile.MoCEntityWerewolf;
@@ -21,7 +21,7 @@ public class MoCRenderWerewolf extends RenderLiving<MoCEntityWerewolf> {
     private final MoCModelWerewolf tempWerewolf;
 
     public MoCRenderWerewolf(MoCModelWerehuman modelwerehuman, ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
         this.addLayer(new LayerMoCWereHuman(this));
         this.tempWerewolf = (MoCModelWerewolf) modelbase;
     }

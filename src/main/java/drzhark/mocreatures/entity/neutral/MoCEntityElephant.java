@@ -5,12 +5,12 @@ package drzhark.mocreatures.entity.neutral;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import drzhark.mocreatures.inventory.MoCAnimalChest;
+import drzhark.mocreatures.entity.inventory.MoCAnimalChest;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.Block;
@@ -722,7 +722,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public void Riding() {
+    public void riding() {
         if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));

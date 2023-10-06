@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.network.message;
 
-import drzhark.mocreatures.MoCPetData;
+import drzhark.mocreatures.entity.tameable.MoCPetData;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

@@ -4,9 +4,9 @@
 package drzhark.mocreatures.client.gui;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageUpdatePetName;
 import net.minecraft.client.gui.GuiButton;
@@ -25,7 +25,7 @@ import java.io.IOException;
 @SideOnly(Side.CLIENT)
 public class MoCGUIEntityNamer extends GuiScreen {
 
-    private static final TextureManager textureManager = MoCClientProxy.mc.getTextureManager();
+    private static final TextureManager textureManager = MoCProxyClient.mc.getTextureManager();
     private static final ResourceLocation TEXTURE_MOCNAME = MoCreatures.proxy.getGuiTexture("pet_naming.png");
     private final IMoCEntity namedEntity;
     protected String screenTitle;

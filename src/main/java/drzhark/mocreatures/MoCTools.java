@@ -3,18 +3,17 @@
  */
 package drzhark.mocreatures;
 
-import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
-import drzhark.mocreatures.entity.MoCEntityAnimal;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.*;
 import drzhark.mocreatures.entity.ambient.MoCEntityMaggot;
 import drzhark.mocreatures.entity.hostile.MoCEntityOgre;
 import drzhark.mocreatures.entity.hostile.MoCEntitySilverSkeleton;
+import drzhark.mocreatures.entity.inventory.MoCAnimalChest;
 import drzhark.mocreatures.entity.item.MoCEntityThrowableRock;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import drzhark.mocreatures.inventory.MoCAnimalChest;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageNameGUI;
 import net.minecraft.block.Block;
@@ -30,7 +29,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -70,6 +69,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MoCTools {
 
@@ -145,14 +145,13 @@ public class MoCTools {
      */
     public static void spawnSlimes(World world, Entity entity) {
         if (!world.isRemote) {
-            //changed so it only spawns 0 - 1 slime, as it now spaws also big slimes
+            //changed so it only spawns 0 - 1 slime, as it now spawns also big slimes
             int var2 = 1 + world.rand.nextInt(1);
 
             for (int i = 0; i < var2; ++i) {
                 float var4 = (i % 2 - 0.5F) * 1 / 4.0F;
                 float var5 = ((float) i / 2 - 0.5F) * 1 / 4.0F;
                 EntitySlime var6 = new EntitySlime(world);
-                //var6.setSlimeSize(1);  TODO FIX
                 var6.setLocationAndAngles(entity.posX + var4, entity.posY + 0.5D, entity.posZ + var5, world.rand.nextFloat() * 360.0F, 0.0F);
                 world.spawnEntity(var6);
             }
@@ -168,16 +167,6 @@ public class MoCTools {
         }
         dropCustomItem(entity, world, new ItemStack(MoCItems.horsesaddle, 1));
         entity.setRideable(false);
-    }
-
-    /**
-     * Drops chest block
-     */
-    public static void dropBags(MoCEntityAnimal entity, World world) {
-        if (world.isRemote) {
-            return;
-        }
-        dropCustomItem(entity, world, new ItemStack(Blocks.CHEST, 1));
     }
 
     /**
@@ -225,7 +214,6 @@ public class MoCTools {
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
             bigSmack(entityattacker, entitytarget, 0.6F);
             playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
-            //todo tuck sound!!
         }
     }
 
@@ -239,7 +227,6 @@ public class MoCTools {
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
             bigSmack(entityattacker, entitytarget, 0.6F);
             playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
-            //todo tuck sound!!
         }
     }
 
@@ -261,79 +248,12 @@ public class MoCTools {
         }
     }
 
-    public static void spawnNearPlayerbyName(EntityPlayer player, String eName, int numberToSpawn) {
-        WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(player.world.provider.getDimensionType().getId());
-
-        for (int i = 0; i < numberToSpawn; i++) {
-            EntityLiving entityToSpawn = null;
-            try {
-                MoCEntityData entityData = MoCreatures.mocEntityMap.get(eName);
-                Class<? extends EntityLiving> myClass = entityData.getEntityClass();
-                entityToSpawn = myClass.getConstructor(World.class).newInstance(world);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (entityToSpawn != null) {
-                entityToSpawn.onInitialSpawn(player.world.getDifficultyForLocation(new BlockPos(entityToSpawn)), null); // onSpawnWithEgg
-                entityToSpawn.setLocationAndAngles(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
-                world.spawnEntity(entityToSpawn);
-            }
-        }
-    }
-
     public static void playCustomSound(Entity entity, SoundEvent customSound) {
         playCustomSound(entity, customSound, 1.0F);
     }
 
     public static void playCustomSound(Entity entity, SoundEvent customSound, float volume) {
         entity.playSound(customSound, volume, 1.0F + ((entity.world.rand.nextFloat() - entity.world.rand.nextFloat()) * 0.2F));
-    }
-
-    public static boolean isNearMaterialWithDistance(Entity entity, Double double1, Material mat) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(double1);
-        int i = MathHelper.floor(axisalignedbb.minX);
-        int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
-        int k = MathHelper.floor(axisalignedbb.minY);
-        int l = MathHelper.floor(axisalignedbb.maxY + 1.0D);
-        int i1 = MathHelper.floor(axisalignedbb.minZ);
-        int j1 = MathHelper.floor(axisalignedbb.maxZ + 1.0D);
-        for (int k1 = i; k1 < j; k1++) {
-            for (int l1 = k; l1 < l; l1++) {
-                for (int i2 = i1; i2 < j1; i2++) {
-                    IBlockState blockstate = entity.world.getBlockState(new BlockPos(k1, l1, i2));
-                    if ((blockstate.getBlock() != Blocks.AIR) && (blockstate.getMaterial() == mat)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNearBlockName(Entity entity, Double dist, String blockName) {
-        AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().grow(dist, dist / 2D, dist);
-        int i = MathHelper.floor(axisalignedbb.minX);
-        int j = MathHelper.floor(axisalignedbb.maxX + 1.0D);
-        int k = MathHelper.floor(axisalignedbb.minY);
-        int l = MathHelper.floor(axisalignedbb.maxY + 1.0D);
-        int i1 = MathHelper.floor(axisalignedbb.minZ);
-        int j1 = MathHelper.floor(axisalignedbb.maxZ + 1.0D);
-        for (int k1 = i; k1 < j; k1++) {
-            for (int l1 = k; l1 < l; l1++) {
-                for (int i2 = i1; i2 < j1; i2++) {
-                    IBlockState blockstate = entity.world.getBlockState(new BlockPos(k1, l1, i2));
-                    if (blockstate.getBlock() != Blocks.AIR) {
-                        String nameToCheck;
-                        nameToCheck = blockstate.getBlock().getTranslationKey();
-                        if (!nameToCheck.equals("") && nameToCheck.equals(blockName)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     public static TileEntityJukebox nearJukeBoxRecord(Entity entity, Double dist) {
@@ -531,52 +451,6 @@ public class MoCTools {
         return origAngle % 360F;
     }
 
-    public static void slideEntityToXYZ(Entity entity, int x, int y, int z) {
-        if (entity != null) {
-            if (entity.posY < y) {
-                entity.motionY += 0.14999999999999999D;
-            }
-            if (entity.posX < x) {
-                double d = x - entity.posX;
-                if (d > 0.5D) {
-                    entity.motionX += 0.050000000000000003D;
-                }
-            } else {
-                double d1 = entity.posX - x;
-                if (d1 > 0.5D) {
-                    entity.motionX -= 0.050000000000000003D;
-                }
-            }
-            if (entity.posZ < z) {
-                double d2 = z - entity.posZ;
-                if (d2 > 0.5D) {
-                    entity.motionZ += 0.050000000000000003D;
-                }
-            } else {
-                double d3 = entity.posZ - z;
-                if (d3 > 0.5D) {
-                    entity.motionZ -= 0.050000000000000003D;
-                }
-            }
-        }
-    }
-
-    public static float distanceToSurface(Entity entity) {
-        int i = MathHelper.floor(entity.posX);
-        int j = MathHelper.floor(entity.posY);
-        int k = MathHelper.floor(entity.posZ);
-        IBlockState blockstate = entity.world.getBlockState(new BlockPos(i, j, k));
-        if (blockstate.getBlock() != Blocks.AIR && blockstate.getMaterial() == Material.WATER) {
-            for (int x = 1; x < 64; x++) {
-                blockstate = entity.world.getBlockState(new BlockPos(i, j + x, k));
-                if (blockstate.getBlock() == Blocks.AIR || blockstate.getMaterial() != Material.WATER) {
-                    return x;
-                }
-            }
-        }
-        return 0F;
-    }
-
     public static double waterSurfaceAtGivenPosition(double posX, double posY, double posZ, World worldIn) {
         int i = MathHelper.floor(posX);
         int j = MathHelper.floor(posY);
@@ -627,29 +501,6 @@ public class MoCTools {
         return 0;
     }
 
-    public static void disorientEntity(Entity entity) {
-        double rotD = 0;
-        double motD = 0;
-        double d = entity.world.rand.nextGaussian();
-        double d1 = 0.1D * d;
-        motD = (0.2D * d1) + ((1.0D - 0.2D) * motD);
-        entity.motionX += motD;
-        entity.motionZ += motD;
-        double d2 = 0.78D * d;
-        rotD = (0.125D * d2) + ((1.0D - 0.125D) * rotD);
-        entity.rotationYaw += rotD;
-        entity.rotationPitch += rotD;
-    }
-
-    public static void slowEntity(Entity entity) {
-        entity.motionX *= 0.8D;
-        entity.motionZ *= 0.8D;
-    }
-
-    public static int colorize(int i) {
-        return ~i & 0xf;
-    }
-
     public static String biomeName(World world, BlockPos pos) {
         BiomeProvider biomeProvider = world.getBiomeProvider();
         Biome biome = biomeProvider.getBiome(pos);
@@ -677,117 +528,6 @@ public class MoCTools {
                 entityitem.setDead();
             }
         }
-    }
-
-    public static void repelMobs(Entity entity1, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().grow(dist, 4D, dist));
-        for (Entity entity : list) {
-            if (!(entity instanceof EntityMob)) {
-                continue;
-            }
-            EntityMob entitymob = (EntityMob) entity;
-            entitymob.setAttackTarget(null);
-            //entitymob.entityLivingToAttack = null;
-            entitymob.getNavigator().clearPath();
-        }
-    }
-
-    /**
-     * Drops the important stuff to get going fast
-     */
-    public static void dropGoodies(World world, Entity entity) {
-        if (world.isRemote) {
-            return;
-        }
-
-        EntityItem entityitem = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.LOG, 16));
-        entityitem.setDefaultPickupDelay();
-        world.spawnEntity(entityitem);
-
-        EntityItem entityitem2 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.DIAMOND, 64));
-        entityitem2.setDefaultPickupDelay();
-        world.spawnEntity(entityitem2);
-
-        EntityItem entityitem3 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.PUMPKIN, 6));
-        entityitem3.setDefaultPickupDelay();
-        world.spawnEntity(entityitem3);
-
-        EntityItem entityitem4 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.COBBLESTONE, 64));
-        entityitem4.setDefaultPickupDelay();
-        world.spawnEntity(entityitem4);
-
-        EntityItem entityitem5 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.APPLE, 24));
-        entityitem5.setDefaultPickupDelay();
-        world.spawnEntity(entityitem5);
-
-        EntityItem entityitem6 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.LEATHER, 64));
-        entityitem6.setDefaultPickupDelay();
-        world.spawnEntity(entityitem6);
-
-        EntityItem entityitem7 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.recordshuffle, 6));
-        entityitem7.setDefaultPickupDelay();
-        world.spawnEntity(entityitem7);
-
-        EntityItem entityitem8 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.IRON_INGOT, 64));
-        entityitem8.setDefaultPickupDelay();
-        world.spawnEntity(entityitem8);
-
-        EntityItem entityitem9 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.GOLD_INGOT, 12));
-        entityitem9.setDefaultPickupDelay();
-        world.spawnEntity(entityitem9);
-
-        EntityItem entityitem10 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.STRING, 32));
-        entityitem10.setDefaultPickupDelay();
-        world.spawnEntity(entityitem10);
-
-        EntityItem entityitem12 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.RED_FLOWER, 6));
-        entityitem12.setDefaultPickupDelay();
-        world.spawnEntity(entityitem12);
-
-        EntityItem entityitem13 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.BLAZE_ROD, 12));
-        entityitem13.setDefaultPickupDelay();
-        world.spawnEntity(entityitem13);
-
-        EntityItem entityitem14 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.ENDER_PEARL, 12));
-        entityitem14.setDefaultPickupDelay();
-        world.spawnEntity(entityitem14);
-
-        EntityItem entityitem15 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.GHAST_TEAR, 12));
-        entityitem15.setDefaultPickupDelay();
-        world.spawnEntity(entityitem15);
-
-        EntityItem entityitem16 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.LAPIS_BLOCK, 2));
-        entityitem16.setDefaultPickupDelay();
-        world.spawnEntity(entityitem16);
-
-        EntityItem entityitem17 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Items.BONE, 12));
-        entityitem17.setDefaultPickupDelay();
-        world.spawnEntity(entityitem17);
-
-        EntityItem entityitem18 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.unicornhorn, 16));
-        entityitem18.setDefaultPickupDelay();
-        world.spawnEntity(entityitem18);
-
-        EntityItem entityitem19 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Blocks.FIRE, 32));
-        entityitem19.setDefaultPickupDelay();
-        world.spawnEntity(entityitem19);
-
-        EntityItem entityitem20 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.essencedarkness, 6));
-        entityitem20.setDefaultPickupDelay();
-        world.spawnEntity(entityitem20);
-
-        EntityItem entityitem21 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.essenceundead, 6));
-        entityitem21.setDefaultPickupDelay();
-        world.spawnEntity(entityitem21);
-
-        EntityItem entityitem22 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(MoCItems.essencefire, 6));
-        entityitem22.setDefaultPickupDelay();
-        world.spawnEntity(entityitem22);
-
-        EntityItem entityitem23 = new EntityItem(world, entity.posX, entity.posY, entity.posZ, new ItemStack(Item.getItemFromBlock(Blocks.WOOL), 6, 15));
-        entityitem23.setDefaultPickupDelay();
-        world.spawnEntity(entityitem23);
-
     }
 
     public static boolean mobGriefing(World world) {
@@ -933,7 +673,7 @@ public class MoCTools {
                     blockstate.getBlock().dropBlockAsItemWithChance(entity.world, chunkposition, blockstate, 0.3F, 1);
                     entity.world.setBlockToAir(chunkposition);
                     // pass explosion instance to fix BlockTNT NPEs
-                    Explosion explosion = new Explosion(entity.world, null, chunkposition.getX(), chunkposition.getY(), chunkposition.getZ(), 3f, false, false);
+                    Explosion explosion = new Explosion(entity.world, entity, chunkposition.getX(), chunkposition.getY(), chunkposition.getZ(), 3f, false, false);
                     blockstate.getBlock().onBlockExploded(entity.world, chunkposition, explosion);
                 }
             }
@@ -955,50 +695,6 @@ public class MoCTools {
                 }
             }
         }
-    }
-
-    public static int despawnVanillaAnimals(World world) {
-        return despawnVanillaAnimals(world, null);
-    }
-
-    @SuppressWarnings("rawtypes")
-    public static int despawnVanillaAnimals(World world, List[] classList) {
-        int count = 0;
-        for (int j = 0; j < world.loadedEntityList.size(); j++) {
-            Entity entity = world.loadedEntityList.get(j);
-            if ((entity instanceof EntityCow || entity instanceof EntitySheep || entity instanceof EntityPig || entity instanceof EntityChicken || entity instanceof EntitySquid || entity instanceof EntityWolf)) {
-                count += entityDespawnCheck(world, (EntityLiving) entity);
-            }
-        }
-        return count;
-    }
-
-    protected static int entityDespawnCheck(World world, EntityLiving entityliving)//to keep a copy
-    {
-        int count = 0;
-        EntityPlayer entityplayer = world.getClosestPlayerToEntity(entityliving, -1D);
-        if (entityplayer != null) //entityliving.canDespawn() &&
-        {
-            double d = entityplayer.posX - entityliving.posX;
-            double d1 = entityplayer.posY - entityliving.posY;
-            double d2 = entityplayer.posZ - entityliving.posZ;
-            double d3 = d * d + d1 * d1 + d2 * d2;
-            if (d3 > 16384D) {
-                entityliving.setDead();
-                count++;
-            }
-
-            if (entityliving.getIdleTime() > 600 && world.rand.nextInt(800) == 0) {
-                if (d3 < 1024D) {
-                    //TODO test!
-                    entityliving.attackEntityFrom(DamageSource.causeMobDamage(null), 0);
-                } else {
-                    entityliving.setDead();
-                    count++;
-                }
-            }
-        }
-        return count;
     }
 
     public static void updatePlayerArmorEffects(EntityPlayer player) {
@@ -1038,43 +734,6 @@ public class MoCTools {
         }
     }
 
-    /**
-     * Finds a random block around the entity and returns the block's ID will
-     * destroy the block in the process the block will be the top one of that
-     * layer, without any other block around it
-     *
-     * @param entity   = the Entity around which the block is searched
-     * @param distance = the distance around the entity used to look for the
-     *                 block
-     */
-    public static int destroyRandomBlock(Entity entity, double distance) {
-        int l = (int) (distance * distance * distance);
-        for (int i = 0; i < l; i++) {
-            int x = (int) (entity.posX + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 2));
-            int y = (int) (entity.posY + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 4));
-            int z = (int) (entity.posZ + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 2));
-            BlockPos pos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
-            IBlockState blockstate = entity.world.getBlockState(pos.up());
-            IBlockState blockstate1 = entity.world.getBlockState(pos);
-
-            if (blockstate.getBlock() != Blocks.AIR && blockstate1.getBlock() == Blocks.AIR) {
-                if (mobGriefing(entity.world)) {
-                    BlockEvent.BreakEvent event = null;
-                    if (!entity.world.isRemote) {
-                        event = new BlockEvent.BreakEvent(entity.world, pos.up(), blockstate, FakePlayerFactory.get((WorldServer) entity.world, MoCreatures.MOCFAKEPLAYER));
-                    }
-                    if (event != null && !event.isCanceled()) {
-                        entity.world.setBlockToAir(pos);
-                    }
-                }
-                return Block.getIdFromBlock(blockstate.getBlock());
-            }
-        }
-        return 0;
-    }
-
-    //apparently not needed anymore since vanilla does sync mounts?
-
     public static IBlockState destroyRandomBlockWithIBlockState(Entity entity, double distance) {
         int l = (int) (distance * distance * distance);
         for (int i = 0; i < l; i++) {
@@ -1110,81 +769,6 @@ public class MoCTools {
         return null;
     }
 
-    /**
-     * Finds a random block around the entity and returns the coordinates the
-     * block will be the top one of that layer, without any other block around
-     * it
-     *
-     * @param entity   = the Entity around which the block is searched
-     * @param distance = the distance around the entity used to look for the
-     *                 block
-     */
-    public static int[] getRandomBlockCoords(Entity entity, double distance) {
-        int tempX = -9999;
-        int tempY = -1;
-        int tempZ = -1;
-        int ii = (int) (distance * distance * (distance / 2));
-        for (int i = 0; i < ii; i++) {
-            int x = (int) (entity.posX + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 2));
-            int y = (int) (entity.posY + entity.world.rand.nextInt((int) (distance / 2)) - (int) (distance / 4));
-            int z = (int) (entity.posZ + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 2));
-            BlockPos pos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
-            IBlockState blockstate1 = entity.world.getBlockState(pos.up()); // +Y
-            IBlockState blockstate2 = entity.world.getBlockState(pos);
-            IBlockState blockstate3 = entity.world.getBlockState(pos.east()); // +X
-            IBlockState blockstate4 = entity.world.getBlockState(pos.west()); // -X
-            IBlockState blockstate5 = entity.world.getBlockState(pos.down()); // -Y
-            IBlockState blockstate6 = entity.world.getBlockState(pos.south()); // -Z
-            IBlockState blockstate7 = entity.world.getBlockState(pos.north()); // +Z
-
-            float tX = x - (float) entity.posX;
-            float tY = y - (float) entity.posY;
-            float tZ = z - (float) entity.posZ;
-            float spawnDist = tX * tX + tY * tY + tZ * tZ;
-
-            if (allowedBlock(Block.getIdFromBlock(blockstate1.getBlock())) && (blockstate2.getBlock() == Blocks.AIR || blockstate3.getBlock() == Blocks.AIR || blockstate4.getBlock() == Blocks.AIR || blockstate5.getBlock() == Blocks.AIR || blockstate6.getBlock() == Blocks.AIR || blockstate7.getBlock() == Blocks.AIR) && spawnDist > 100F) {
-                tempX = x;
-                tempY = y;
-                tempZ = z;
-                break;
-            }
-        }
-        return (new int[]{tempX, tempY, tempZ});
-    }
-
-    public static BlockPos getRandomBlockPos(Entity entity, double distance) {
-        int tempX = -9999;
-        int tempY = -1;
-        int tempZ = -1;
-        int ii = (int) (distance * distance * (distance / 2));
-        for (int i = 0; i < ii; i++) {
-            int x = (int) (entity.posX + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 2));
-            int y = (int) (entity.posY + entity.world.rand.nextInt((int) (distance / 2)) - (int) (distance / 4));
-            int z = (int) (entity.posZ + entity.world.rand.nextInt((int) (distance)) - (int) (distance / 2));
-            BlockPos pos = new BlockPos(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
-            IBlockState blockstate1 = entity.world.getBlockState(pos.up()); // +Y
-            IBlockState blockstate2 = entity.world.getBlockState(pos);
-            IBlockState blockstate3 = entity.world.getBlockState(pos.east()); // +X
-            IBlockState blockstate4 = entity.world.getBlockState(pos.west()); // -X
-            IBlockState blockstate5 = entity.world.getBlockState(pos.down()); // -Y
-            IBlockState blockstate6 = entity.world.getBlockState(pos.south()); // -Z
-            IBlockState blockstate7 = entity.world.getBlockState(pos.north()); // +Z
-
-            float tX = x - (float) entity.posX;
-            float tY = y - (float) entity.posY;
-            float tZ = z - (float) entity.posZ;
-            float spawnDist = tX * tX + tY * tY + tZ * tZ;
-
-            if (allowedBlock(Block.getIdFromBlock(blockstate1.getBlock())) && (blockstate2.getBlock() == Blocks.AIR || blockstate3.getBlock() == Blocks.AIR || blockstate4.getBlock() == Blocks.AIR || blockstate5.getBlock() == Blocks.AIR || blockstate6.getBlock() == Blocks.AIR || blockstate7.getBlock() == Blocks.AIR) && spawnDist > 100F) {
-                tempX = x;
-                tempY = y;
-                tempZ = z;
-                break;
-            }
-        }
-        return new BlockPos(MathHelper.floor(tempX), MathHelper.floor(tempY), MathHelper.floor(tempZ));
-    }
-
     public static BlockPos getRandomSurfaceBlockPos(Entity entity, int distance) {
         BlockPos pos = entity.getPosition();
         World world = entity.getEntityWorld();
@@ -1194,25 +778,6 @@ public class MoCTools {
         int y = world.getHeight(new BlockPos(x, 0, z)).getY() - 1;
 
         return new BlockPos(x, y, z);
-    }
-
-    public static boolean allowedBlock(int id) {
-        return id != 0 && id != 7 //bedrock
-                && id != 8 //water
-                && id != 9 //water
-                && id != 10//lava
-                && id != 11//lava
-                && id != 23//dispenser
-                && id != 37//plant
-                && id != 38//plant
-                && id != 50//torch
-                && id != 51//fire
-                && id != 54//chest
-                && (id < 63 || id > 77) && id != 95//lockedchest
-                && id != 90//portal
-                && id != 93//redstone
-                && id != 94//redstone
-                && id < 134;//the rest
     }
 
     /**
@@ -1268,12 +833,12 @@ public class MoCTools {
     /**
      * Destroys blocks in front of entity
      *
-     * @param distance: used to calculate the distance where the target block is
-     *                  located
-     * @param strength: int 1 - 3. Checked against block hardness, also used to
-     *                  calculate how many blocks are recovered
-     * @param height:   how many rows of blocks are destroyed in front of the
-     *                  entity
+     * @param distance used to calculate the distance where the target block is
+     *                 located
+     * @param strength int 1 - 3. Checked against block hardness, also used to
+     *                 calculate how many blocks are recovered
+     * @param height   how many rows of blocks are destroyed in front of the
+     *                 entity
      * @return the count of blocks destroyed
      */
     public static int destroyBlocksInFront(Entity entity, double distance, int strength, int height) {
@@ -1455,40 +1020,6 @@ public class MoCTools {
         return null;
     }
 
-    /**
-     * Returns the right full empty based on the MoCEntityAnimal passed. Used
-     * when the amulet empties its contents
-     */
-    public static ItemStack getProperEmptyAmulet(MoCEntityAnimal entity) {
-        if (entity instanceof MoCEntityHorse) {
-            if (entity.getType() == 26 || entity.getType() == 27 || entity.getType() == 28) {
-                return new ItemStack(MoCItems.amuletbone, 1, 0);
-            }
-            if (entity.getType() > 49 && entity.getType() < 60) {
-                return new ItemStack(MoCItems.amuletfairy, 1, 0);
-            }
-            if (entity.getType() == 39 || entity.getType() == 40) {
-                return new ItemStack(MoCItems.amuletpegasus, 1, 0);
-            }
-            if (entity.getType() == 21 || entity.getType() == 22) {
-                return new ItemStack(MoCItems.amuletghost, 1, 0);
-            }
-        }
-        return null;
-    }
-
-    public static int countPlayersInDimension(WorldServer world, int dimension) {
-        int playersInDimension = 0;
-        for (int j = 0; j < world.playerEntities.size(); ++j) {
-            EntityPlayerMP entityplayermp = (EntityPlayerMP) world.playerEntities.get(j);
-
-            if (entityplayermp.dimension == dimension) {
-                playersInDimension++;
-            }
-        }
-        return playersInDimension;
-    }
-
     public static boolean isThisPlayerAnOP(EntityPlayer player) {
         if (player.world.isRemote) {
             return false;
@@ -1568,7 +1099,7 @@ public class MoCTools {
         }
         NBTTagCompound nbt = new NBTTagCompound();
         entity.writeToNBT(nbt);
-        if (nbt.hasKey("Owner") && !nbt.getString("Owner").equals("")) {
+        if (nbt.hasKey("Owner") && !nbt.getString("Owner").isEmpty()) {
             return true; // ignore
         }
         return nbt.hasKey("Tamed") && nbt.getBoolean("Tamed"); // ignore
@@ -1688,17 +1219,6 @@ public class MoCTools {
         } else {
             return false;
         }
-    }
-
-    public static int countEntities(Class<? extends EntityLiving> class1, World world) {
-        int i = 0;
-        for (int j = 0; j < world.loadedEntityList.size(); j++) {
-            Entity entity = world.loadedEntityList.get(j);
-            if (class1.isAssignableFrom(entity.getClass())) {
-                i++;
-            }
-        }
-        return i;
     }
 
     public static double roundToNearest90Degrees(double degrees) {

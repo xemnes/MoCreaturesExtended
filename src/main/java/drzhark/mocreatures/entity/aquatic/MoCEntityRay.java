@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;

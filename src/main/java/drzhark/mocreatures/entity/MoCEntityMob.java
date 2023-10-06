@@ -36,7 +36,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.UUID;
 
 public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
@@ -46,8 +45,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     protected static final DataParameter<Integer> AGE = EntityDataManager.createKey(MoCEntityMob.class, DataSerializers.VARINT);
     protected static final DataParameter<String> NAME_STR = EntityDataManager.createKey(MoCEntityMob.class, DataSerializers.STRING);
     protected boolean divePending;
-    protected int maxHealth;
-    protected float moveSpeed;
     protected String texture;
     protected PathNavigate navigatorWater;
     protected PathNavigate navigatorFlyer;
@@ -59,7 +56,8 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         this.moveHelper = new EntityAIMoverHelperMoC(this);
         this.navigatorWater = new PathNavigateSwimmer(this, world);
         this.navigatorFlyer = new PathNavigateFlyer(this, world);
-        this.tasks.addTask(4, this.wander = new EntityAIWanderMoC2(this, 1.0D, 80));
+        this.wander = new EntityAIWanderMoC2(this, 1.0D, 80);
+        this.tasks.addTask(4, this.wander);
     }
 
     @SideOnly(Side.CLIENT)
@@ -180,27 +178,10 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         boolean willSpawn = super.getCanSpawnHere();
         boolean debug = MoCreatures.proxy.debug;
         if (willSpawn && debug)
-            System.out.println("Mob: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
+            MoCreatures.LOGGER.info("Mob: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 
-    // TODO move this to a class accessible by MocEntityMob and MoCentityAnimals
-    protected EntityLivingBase getClosestEntityLiving(Entity entity, double d) {
-        double d1 = -1D;
-        EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
-        for (Entity entity1 : list) {
-            if (entitiesToIgnore(entity1)) continue;
-            double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-            if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1)) && ((EntityLivingBase) entity1).canEntityBeSeen(entity)) {
-                d1 = d2;
-                entityliving = (EntityLivingBase) entity1;
-            }
-        }
-        return entityliving;
-    }
-
-    //TODO REMOVE
     public boolean entitiesToIgnore(Entity entity) {
         if ((!(entity instanceof EntityLiving)) || (entity instanceof EntityMob) || (entity instanceof MoCEntityEgg))
             return true;
@@ -215,21 +196,14 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     @Override
     public void onLivingUpdate() {
         if (!this.world.isRemote) {
-
-            /*if (forceUpdates() && this.rand.nextInt(1000) == 0) {
-                MoCTools.forceDataSync(this);
-            }*/
-
             if (getIsTamed() && this.rand.nextInt(200) == 0) {
                 MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHealth(this.getEntityId(), this.getHealth()), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
             }
 
-            if (this.isHarmedByDaylight()) {
-                if (this.world.isDaytime()) {
-                    float var1 = this.getBrightness();
-                    if (var1 > 0.5F && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ))) && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
-                        this.setFire(8);
-                    }
+            if (this.isHarmedByDaylight() && this.world.isDaytime()) {
+                float var1 = this.getBrightness();
+                if (var1 > 0.5F && this.world.canBlockSeeSky(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ))) && this.rand.nextFloat() * 30.0F < (var1 - 0.4F) * 2.0F) {
+                    this.setFire(8);
                 }
             }
             if (getAge() == 0) setAge(getMaxAge() - 10); //fixes tiny creatures spawned by error
@@ -275,7 +249,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     @Override
     public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
         super.writeEntityToNBT(nbttagcompound);
-        //nbttagcompound = MoCTools.getEntityData(this);
         nbttagcompound.setBoolean("Adult", getIsAdult());
         nbttagcompound.setInteger("Edad", getAge());
         nbttagcompound.setString("Name", getPetName());
@@ -286,7 +259,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     @Override
     public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
         super.readEntityFromNBT(nbttagcompound);
-        //nbttagcompound = MoCTools.getEntityData(this);
         setAdult(nbttagcompound.getBoolean("Adult"));
         setAge(nbttagcompound.getInteger("Edad"));
         setPetName(nbttagcompound.getString("Name"));
@@ -351,25 +323,8 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
     @Override
     public boolean renderName() {
-        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().isEmpty() && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
     }
-
-    /*protected Vec3d findPossibleShelter() {
-        Random var1 = this.getRNG();
-
-        for (int var2 = 0; var2 < 10; ++var2) {
-            int var3 = MathHelper.floor(this.posX + var1.nextInt(20) - 10.0D);
-            int var4 = MathHelper.floor(this.getEntityBoundingBox().minY + var1.nextInt(6) - 3.0D);
-            int var5 = MathHelper.floor(this.posZ + var1.nextInt(20) - 10.0D);
-            BlockPos pos = new BlockPos(var3, var4, var5);
-
-            if (!this.world.canBlockSeeSky(pos) && this.getBlockPathWeight(pos) < 0.0F) {
-                return new Vec3d(var3, var4, var5);
-            }
-        }
-
-        return null;
-    }*/
 
     @Override
     public void makeEntityJump() {
@@ -403,33 +358,6 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     @Override
     public float getAdjustedYOffset() {
         return 0F;
-    }
-
-    /*protected void getPathOrWalkableBlock(Entity entity, float f) {
-        Path pathentity = this.navigator.getPathToPos(entity.getPosition());
-        if ((pathentity == null) && (f > 12F)) {
-            int i = MathHelper.floor(entity.posX) - 2;
-            int j = MathHelper.floor(entity.posZ) - 2;
-            int k = MathHelper.floor(entity.getEntityBoundingBox().minY);
-            for (int l = 0; l <= 4; l++) {
-                for (int i1 = 0; i1 <= 4; i1++) {
-                    if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3))
-                            && this.world.getBlockState(new BlockPos(i + l, k - 1, j + i1)).isNormalCube()
-                            && !this.world.getBlockState(new BlockPos(i + l, k, j + i1)).isNormalCube()
-                            && !this.world.getBlockState(new BlockPos(i + l, k + 1, j + i1)).isNormalCube()) {
-                        setLocationAndAngles((i + l) + 0.5F, k, (j + i1) + 0.5F, this.rotationYaw, this.rotationPitch);
-                        return;
-                    }
-                }
-
-            }
-        } else {
-            this.navigator.setPath(pathentity, 1D);
-        }
-    }*/
-
-    public int getArmorType() {
-        return 0;
     }
 
     @Override

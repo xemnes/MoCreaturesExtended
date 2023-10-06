@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelLitterBox;
 import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -17,7 +17,7 @@ public class MoCRenderLitterBox extends RenderLiving<MoCEntityLitterBox> {
     public MoCModelLitterBox litterbox;
 
     public MoCRenderLitterBox(MoCModelLitterBox modellitterbox, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modellitterbox, f);
+        super(MoCProxyClient.mc.getRenderManager(), modellitterbox, f);
         this.litterbox = modellitterbox;
     }
 

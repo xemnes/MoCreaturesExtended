@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.hostile.MoCEntityRat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
 
     public MoCRenderRat(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
     }
 
     @Override

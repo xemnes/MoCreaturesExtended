@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.IMoCEntity;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
@@ -26,7 +26,7 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
     private float prevYaw;
 
     public MoCRenderMoC(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
     }
 
     @Override

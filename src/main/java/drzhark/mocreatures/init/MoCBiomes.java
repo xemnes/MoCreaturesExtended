@@ -4,7 +4,7 @@
 package drzhark.mocreatures.init;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.dimension.BiomeGenWyvernLair;
+import drzhark.mocreatures.dimension.biome.MoCBiomeGenWyvernLair;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraftforge.common.BiomeDictionary;
@@ -18,7 +18,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(MoCConstants.MOD_ID)
 public class MoCBiomes {
 
-    public static Biome WyvernLairBiome = new BiomeGenWyvernLair(new BiomeProperties("Wyvern Isles")
+    public static Biome WyvernLairBiome = new MoCBiomeGenWyvernLair(new BiomeProperties("Wyvern Isles")
             .setBaseHeight(0.3F)
             .setHeightVariation(1.5F)
             .setTemperature(0.25F)

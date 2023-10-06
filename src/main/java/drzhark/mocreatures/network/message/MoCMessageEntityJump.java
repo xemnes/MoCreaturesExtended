@@ -24,7 +24,7 @@ public class MoCMessageEntityJump implements IMessage, IMessageHandler<MoCMessag
 
     @Override
     public IMessage onMessage(MoCMessageEntityJump message, MessageContext ctx) {
-        if (ctx.getServerHandler().player.getRidingEntity() != null && ctx.getServerHandler().player.getRidingEntity() instanceof IMoCEntity) {
+        if (ctx.getServerHandler().player.getRidingEntity() instanceof IMoCEntity) {
             ((IMoCEntity) ctx.getServerHandler().player.getRidingEntity()).makeEntityJump();
         }
         return null;

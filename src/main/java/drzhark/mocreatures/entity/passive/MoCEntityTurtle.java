@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.init.MoCItems;
@@ -353,7 +353,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     // TODO: Remove this after the weapons get reworked
     @Override
     protected Item getDropItem() {
-        if (MoCreatures.proxy.easterEggs) { 
+        if (MoCreatures.proxy.easterEggs) {
             if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
                 return MoCItems.bo;
             }

@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelKittyBed;
 import drzhark.mocreatures.client.model.MoCModelKittyBed2;
 import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
@@ -25,7 +25,7 @@ public class MoCRenderKittyBed extends RenderLiving<MoCEntityKittyBed> {
     private int mycolor;
 
     public MoCRenderKittyBed(MoCModelKittyBed modelkittybed, MoCModelKittyBed2 modelkittybed2, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelkittybed, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelkittybed, f);
         this.kittybed = modelkittybed;
         this.addLayer(new LayerMoCKittyBed(this));
     }

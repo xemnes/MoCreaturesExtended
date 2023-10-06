@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

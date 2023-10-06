@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.aquatic.MoCEntityDolphin;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
 
     public MoCRenderDolphin(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
     }
 
     @Override

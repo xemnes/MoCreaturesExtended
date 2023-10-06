@@ -54,11 +54,6 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     }
 
     @Override
-    public boolean isFlyingAlone() {
-        return getIsFlying();
-    }
-
-    @Override
     public float getEyeHeight() {
         return 0.2F;
     }

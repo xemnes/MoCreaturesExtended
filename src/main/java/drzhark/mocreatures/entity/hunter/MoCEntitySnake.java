@@ -5,7 +5,7 @@ package drzhark.mocreatures.entity.hunter;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIHunt;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;

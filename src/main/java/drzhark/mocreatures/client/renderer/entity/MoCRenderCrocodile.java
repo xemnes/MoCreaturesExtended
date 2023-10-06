@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelCrocodile;
 import drzhark.mocreatures.entity.hunter.MoCEntityCrocodile;
 import net.minecraft.block.material.Material;
@@ -21,7 +21,7 @@ public class MoCRenderCrocodile extends RenderLiving<MoCEntityCrocodile> {
     public MoCModelCrocodile croc;
 
     public MoCRenderCrocodile(MoCModelCrocodile modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
         this.croc = modelbase;
     }
 

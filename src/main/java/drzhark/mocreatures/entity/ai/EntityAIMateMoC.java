@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.ai;
 
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.passive.MoCEntityTurkey;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityAgeable;

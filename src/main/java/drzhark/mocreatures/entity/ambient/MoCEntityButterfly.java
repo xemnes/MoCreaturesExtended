@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import net.minecraft.init.Blocks;

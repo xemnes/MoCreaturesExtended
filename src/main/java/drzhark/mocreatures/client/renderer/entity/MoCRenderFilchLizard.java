@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.passive.MoCEntityFilchLizard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
@@ -20,7 +20,7 @@ import net.minecraft.util.ResourceLocation;
 public class MoCRenderFilchLizard extends RenderLiving<MoCEntityFilchLizard> {
 
     public MoCRenderFilchLizard(ModelBase modelBase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelBase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelBase, f);
         this.addLayer(new LayerHeldItemCustom(this));
     }
 

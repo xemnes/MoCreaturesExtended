@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.entity.ai;
 
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 

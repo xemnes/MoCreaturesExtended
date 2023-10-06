@@ -4,7 +4,7 @@
 package drzhark.mocreatures.init;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.MoCEntityData;
+import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ambient.*;
 import drzhark.mocreatures.entity.aquatic.*;

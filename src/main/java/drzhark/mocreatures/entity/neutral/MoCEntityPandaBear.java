@@ -3,12 +3,12 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.entity.hunter.MoCEntityBear;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;

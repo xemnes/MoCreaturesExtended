@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.item.MoCEntityThrowableRock;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

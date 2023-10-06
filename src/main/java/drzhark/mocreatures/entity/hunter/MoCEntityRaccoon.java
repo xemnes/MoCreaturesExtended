@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

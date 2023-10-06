@@ -3,8 +3,8 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;

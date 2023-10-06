@@ -3,8 +3,8 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 

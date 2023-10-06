@@ -3,9 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;

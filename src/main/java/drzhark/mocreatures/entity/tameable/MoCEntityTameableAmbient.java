@@ -5,9 +5,9 @@ package drzhark.mocreatures.entity.tameable;
 
 import com.google.common.base.Optional;
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.MoCEntityAmbient;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -167,7 +167,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         }
 
         //before ownership check
-        if (getIsTamed() && (stack.getItem() == MoCItems.scrollOfOwner) && MoCreatures.proxy.enableResetOwnership
+        if (getIsTamed() && stack.getItem() == MoCItems.scrollOfOwner && MoCreatures.proxy.enableResetOwnership
                 && MoCTools.isThisPlayerAnOP(player)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
@@ -264,7 +264,7 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
             return true;
         }
 
-        return false;
+        return null;
     }
 
     // Fixes despawn issue when chunks unload and duplicated mounts when disconnecting on servers

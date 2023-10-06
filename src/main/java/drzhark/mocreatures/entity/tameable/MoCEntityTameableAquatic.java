@@ -5,9 +5,9 @@ package drzhark.mocreatures.entity.tameable;
 
 import com.google.common.base.Optional;
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.entity.MoCEntityAquatic;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.MoCEntityAquatic;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
@@ -168,7 +168,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
 
         final ItemStack stack = player.getHeldItem(hand);
         //before ownership check
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.scrollOfOwner) && MoCreatures.proxy.enableResetOwnership
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfOwner && MoCreatures.proxy.enableResetOwnership
                 && MoCTools.isThisPlayerAnOP(player)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
@@ -194,7 +194,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         //sets it free, untamed
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.scrollFreedom)) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollFreedom) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
@@ -211,7 +211,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         //removes owner, any other player can claim it by renaming it
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.scrollOfSale)) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfSale) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
@@ -249,7 +249,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
             return true;
         }
 
-        return false;
+        return null;
     }
 
     // Fixes despawn issue when chunks unload and duplicated mounts when disconnecting on servers

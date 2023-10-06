@@ -69,7 +69,6 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MoCTools {
 

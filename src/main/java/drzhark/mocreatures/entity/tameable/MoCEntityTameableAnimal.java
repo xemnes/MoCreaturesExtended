@@ -5,9 +5,9 @@ package drzhark.mocreatures.entity.tameable;
 
 import com.google.common.base.Optional;
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -160,7 +160,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
 
         final ItemStack stack = player.getHeldItem(hand);
         //before ownership check
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.scrollOfOwner) && MoCreatures.proxy.enableResetOwnership && MoCTools.isThisPlayerAnOP(player)) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfOwner && MoCreatures.proxy.enableResetOwnership && MoCTools.isThisPlayerAnOP(player)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
@@ -211,7 +211,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         //removes owner, any other player can claim it by renaming it
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.scrollOfSale)) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfSale) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
@@ -239,7 +239,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             return true;
         }
 
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == Items.SHEARS)) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == Items.SHEARS) {
             if (!this.world.isRemote) {
                 dropMyStuff();
             }
@@ -248,7 +248,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         //heals
-        if (!stack.isEmpty() && getIsTamed() && (this.getHealth() != this.getMaxHealth()) && isMyHealFood(stack)) {
+        if (!stack.isEmpty() && getIsTamed() && this.getHealth() != this.getMaxHealth() && isMyHealFood(stack)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
             if (!this.world.isRemote) {
@@ -257,7 +257,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             return true;
         }
 
-        return false;
+        return null;
     }
 
     // Fixes despawn issue when chunks unload and duplicated mounts when disconnecting on servers

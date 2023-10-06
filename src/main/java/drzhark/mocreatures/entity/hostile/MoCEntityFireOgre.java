@@ -3,8 +3,8 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;

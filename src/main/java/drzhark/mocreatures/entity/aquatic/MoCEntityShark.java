@@ -30,7 +30,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     public MoCEntityShark(World world) {
         super(world);
         this.texture = "shark.png";
-        setSize(1.55F, 0.725F);
+        setSize(1.65F, 0.9F);
         setAdult(true);
         // TODO: Make hitboxes adjust depending on size
         //setAge(60 + this.rand.nextInt(100));
@@ -107,9 +107,7 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         EntityLivingBase entityliving = null;
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
         for (Entity o : list) {
-            if (!(o instanceof EntityLivingBase) || (o instanceof MoCEntityAquatic) || (o instanceof MoCEntityEgg)
-                    || (o instanceof EntityPlayer) || ((o instanceof EntityWolf) && !(MoCreatures.proxy.attackWolves))
-                    || ((o instanceof MoCEntityHorse) && !(MoCreatures.proxy.attackHorses))) {
+            if (!(o instanceof EntityLivingBase) || (o instanceof MoCEntityAquatic) || (o instanceof MoCEntityEgg) || (o instanceof EntityPlayer) || ((o instanceof EntityWolf) && !(MoCreatures.proxy.attackWolves)) || ((o instanceof MoCEntityHorse) && !(MoCreatures.proxy.attackHorses))) {
                 continue;
             } else {
                 if ((o instanceof MoCEntityDolphin)) {

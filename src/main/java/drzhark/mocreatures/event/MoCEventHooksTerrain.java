@@ -82,8 +82,6 @@ public class MoCEventHooksTerrain {
 
             MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, creatureSpawnMap.get(biome), EntityLiving.SpawnPlacementType.ON_GROUND);
             MoCTools.performCustomWorldGenSpawning(world, biome, centerX, centerZ, 16, 16, rand, waterCreatureSpawnMap.get(biome), EntityLiving.SpawnPlacementType.IN_WATER);
-
-            event.setResult(Event.Result.DENY);
         }
     }
 }

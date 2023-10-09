@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.dimension.chunk;
 
 import drzhark.mocreatures.MoCTools;
@@ -21,7 +24,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import java.util.List;
 import java.util.Random;
 
-public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
+public class MoCChunkGeneratorWyvernSkylandsOld implements IChunkGenerator {
     private final World world;
     private final Random rand;
     private final NoiseGeneratorOctaves terrainNoise1;
@@ -30,7 +33,7 @@ public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
     private final NoiseGeneratorOctaves biomeBlocksNoise;
     private final MapGenCaves mapGenCaves = new MapGenCaves();
 
-    public MoCChunkGeneratorWyvernSkylands(World world, long seed) {
+    public MoCChunkGeneratorWyvernSkylandsOld(World world, long seed) {
         this.world = world;
         this.rand = new Random(seed);
         this.terrainNoise1 = new NoiseGeneratorOctaves(rand, 16);
@@ -40,12 +43,13 @@ public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
     }
 
     @Override
-    public Chunk generateChunk(int x, int z) {
+    public Chunk generateChunk(int chunkX, int chunkZ) {
         ChunkPrimer primer = new ChunkPrimer();
-        generateStone(x, z, primer);
-        replaceBiomeBlocks(x, z, primer);
-        mapGenCaves.generate(world, x, z, primer);
-        Chunk chunk = new Chunk(world, primer, x, z);
+        Biome[] biomes = world.getBiomeProvider().getBiomes(new Biome[0], chunkX * 16, chunkZ * 16, 16, 16);
+        setBlocksInChunk(chunkX, chunkZ, primer);
+        replaceBiomeBlocks(chunkX, chunkZ, primer, biomes);
+        mapGenCaves.generate(world, chunkX, chunkZ, primer);
+        Chunk chunk = new Chunk(world, primer, chunkX, chunkZ);
         chunk.generateSkylightMap();
         return chunk;
     }
@@ -85,7 +89,7 @@ public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
         return noiseArray;
     }
 
-    private void generateStone(int chunkX, int chunkZ, ChunkPrimer primer) {
+    private void setBlocksInChunk(int chunkX, int chunkZ, ChunkPrimer primer) {
         double[] noiseArray = getNoiseArray(chunkX * 2, 0, chunkZ * 2, 3, 33, 3);
         for (int i1 = 0; i1 < 2; i1++) {
             for (int j1 = 0; j1 < 2; j1++) {
@@ -130,30 +134,34 @@ public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
         }
     }
 
-    private void replaceBiomeBlocks(int xChunk, int zChunk, ChunkPrimer primer) {
+    private void replaceBiomeBlocks(int xChunk, int zChunk, ChunkPrimer primer, Biome[] biomes) {
         double scale = 0.03125D;
         double[] biomeBlocksNoiseArray = biomeBlocksNoise.generateNoiseOctaves(new double[256], xChunk * 16, zChunk * 16, 0, 16, 16, 1, scale * 2D, scale * 2D, scale * 2D);
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
+                Biome biome = biomes[x + z * 16];
                 int biomeBlocksNoiseValue = (int) (biomeBlocksNoiseArray[x + z * 16] / 3D + 3D + rand.nextDouble() * 0.25D);
                 int biomeBlocksLeft = -1;
-                Block topBlock = MoCBlocks.wyvgrass;
-                Block fillerBlock = MoCBlocks.wyvdirt;
+                Block topBlock = biome.topBlock.getBlock();
+                Block fillerBlock = biome.fillerBlock.getBlock();
                 for (int y = 127; y >= 0; y--) {
                     Block block = primer.getBlockState(x, y, z).getBlock();
-                    if (block == Blocks.AIR) {
-                        biomeBlocksLeft = -1;
-                    } else if (block == MoCBlocks.wyvstone) {
+                    if (block == Blocks.AIR) biomeBlocksLeft = -1;
+                    else if (block == MoCBlocks.wyvstone) {
                         if (biomeBlocksLeft == -1) {
                             if (biomeBlocksNoiseValue <= 0) {
                                 topBlock = Blocks.AIR;
-                                fillerBlock = MoCBlocks.wyvstone;
+                                fillerBlock = Blocks.STONE;
                             }
                             biomeBlocksLeft = biomeBlocksNoiseValue;
-                            primer.setBlockState(x, y, z, topBlock.getDefaultState());
+                            primer.setBlockState(x, y, z, y >= 0 ? topBlock.getDefaultState() : fillerBlock.getDefaultState());
                         } else if (biomeBlocksLeft > 0) {
                             biomeBlocksLeft--;
                             primer.setBlockState(x, y, z, fillerBlock.getDefaultState());
+                            if (biomeBlocksLeft == 0 && fillerBlock == Blocks.SAND) {
+                                biomeBlocksLeft = rand.nextInt(4);
+                                fillerBlock = Blocks.SANDSTONE;
+                            }
                         }
                     }
                 }
@@ -167,8 +175,8 @@ public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
         ForgeEventFactory.onChunkPopulate(true, this, world, rand, x, z, false);
         int var4 = x * 16;
         int var5 = z * 16;
-        BlockPos blockpos = new BlockPos(var4 + 16, 0, var5 + 16);
-        Biome var6 = world.getBiome(blockpos);
+        BlockPos chunkWorldPos = new BlockPos(var4, 0, var5);
+        Biome biome = world.getBiome(chunkWorldPos.add(16, 0, 16));
         boolean var11 = false;
         int var12;
         int var13;
@@ -187,8 +195,8 @@ public class MoCChunkGeneratorWyvernSkylands implements IChunkGenerator {
                 (new WorldGenLakes(Blocks.LAVA)).generate(world, rand, new BlockPos(var12, var13, var14));
             }
         }
-        var6.decorate(world, rand, new BlockPos(var4, 0, var5));
-        MoCTools.performCustomWorldGenSpawning(world, var6, var4 + 8, var5 + 8, 16, 16, rand, world.getBiome(blockpos).getSpawnableList(EnumCreatureType.CREATURE), EntityLiving.SpawnPlacementType.ON_GROUND);
+        biome.decorate(world, rand, new BlockPos(var4, 0, var5));
+        MoCTools.performCustomWorldGenSpawning(world, biome, var4 + 8, var5 + 8, 16, 16, rand, world.getBiome(chunkWorldPos).getSpawnableList(EnumCreatureType.CREATURE), EntityLiving.SpawnPlacementType.ON_GROUND);
         ForgeEventFactory.onChunkPopulate(false, this, world, rand, x, z, false);
         BlockFalling.fallInstantly = false;
     }

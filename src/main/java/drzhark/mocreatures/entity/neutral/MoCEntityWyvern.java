@@ -341,15 +341,13 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             if (!isMovementCeased() && !this.getIsTamed() && this.rand.nextInt(300) == 0) {
                 setIsFlying(!getIsFlying());
             }
+
             if (isMovementCeased() && getIsFlying()) {
                 setIsFlying(false);
             }
 
             if (getAttackTarget() != null && (!this.getIsTamed() || this.getRidingEntity() != null) && !isMovementCeased() && this.rand.nextInt(20) == 0) {
                 setIsFlying(true);
-            }
-            if (!getIsTamed() && this.dimension == MoCreatures.wyvernLairDimensionID && (this.rand.nextInt(50) == 0) && this.posY < 10D) {
-                this.setDead();
             }
 
             if (getIsFlying() && this.getNavigator().noPath() && !isMovementCeased() && this.getAttackTarget() == null && rand.nextInt(30) == 0) {

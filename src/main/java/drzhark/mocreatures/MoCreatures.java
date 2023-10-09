@@ -14,7 +14,7 @@ import drzhark.mocreatures.network.command.CommandMoCreatures;
 import drzhark.mocreatures.compat.CompatHandler;
 import drzhark.mocreatures.compat.datafixes.BlockIDFixer;
 import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
-import drzhark.mocreatures.dimension.world.MoCWorldProviderWyvernLair;
+import drzhark.mocreatures.dimension.MoCWorldProviderWyvernSkylands;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetMapData;
 import drzhark.mocreatures.event.MoCEventHooks;
@@ -59,8 +59,8 @@ public class MoCreatures {
     @SidedProxy(clientSide = "drzhark.mocreatures.proxy.MoCProxyClient", serverSide = "drzhark.mocreatures.proxy.MoCProxy")
     public static MoCProxy proxy;
     public static GameProfile MOCFAKEPLAYER = new GameProfile(UUID.fromString("6E379B45-1111-2222-3333-2FE1A88BCD66"), "[MoCreatures]");
-    public static DimensionType WYVERN_LAIR;
-    public static int wyvernLairDimensionID;
+    public static DimensionType WYVERN_SKYLANDS;
+    public static int wyvernSkylandsDimensionID;
     public static Object2ObjectLinkedOpenHashMap<String, MoCEntityData> mocEntityMap = new Object2ObjectLinkedOpenHashMap<>();
     public static Object2ObjectOpenHashMap<Class<? extends EntityLiving>, MoCEntityData> entityMap = new Object2ObjectOpenHashMap<>();
     public static Int2ObjectOpenHashMap<Class<? extends EntityLiving>> instaSpawnerMap = new Int2ObjectOpenHashMap<>();
@@ -86,12 +86,12 @@ public class MoCreatures {
 
     @EventHandler
     public void load(FMLInitializationEvent event) {
-        wyvernLairDimensionID = proxy.wyvernDimension;
+        wyvernSkylandsDimensionID = proxy.wyvernDimension;
         proxy.mocSettingsConfig.save();
         proxy.registerRenderers();
         proxy.registerRenderInformation();
-        WYVERN_LAIR = DimensionType.register("Wyvern Lair", "_wyvern_lair", wyvernLairDimensionID, MoCWorldProviderWyvernLair.class, false);
-        DimensionManager.registerDimension(wyvernLairDimensionID, WYVERN_LAIR);
+        WYVERN_SKYLANDS = DimensionType.register("Wyvern Skylands", "_wyvern_skylands", wyvernSkylandsDimensionID, MoCWorldProviderWyvernSkylands.class, false);
+        DimensionManager.registerDimension(wyvernSkylandsDimensionID, WYVERN_SKYLANDS);
         MoCEventHooksTerrain.addBiomeTypes();
         MoCEntities.registerSpawns();
         MoCEventHooksTerrain.buildWorldGenSpawnLists();

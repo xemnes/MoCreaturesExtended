@@ -4,11 +4,11 @@
 package drzhark.mocreatures.init;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.dimension.biome.MoCBiomeGenWyvernLair;
+import drzhark.mocreatures.dimension.biome.MoCBiomeWyvernIsles;
+import drzhark.mocreatures.dimension.biome.MoCBiomeWyvernIslesDesert;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,7 +18,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(MoCConstants.MOD_ID)
 public class MoCBiomes {
 
-    public static Biome WyvernLairBiome = new MoCBiomeGenWyvernLair(new BiomeProperties("Wyvern Isles")
+    public static Biome wyvernIsles = new MoCBiomeWyvernIsles(new BiomeProperties("Wyvern Isles")
+            .setBaseHeight(0.3F)
+            .setHeightVariation(1.5F)
+            .setTemperature(0.25F)
+            .setWaterColor(0x775757));
+
+    public static Biome wyvernDesertIsles = new MoCBiomeWyvernIslesDesert(new BiomeProperties("Wyvern Desert Isles")
             .setBaseHeight(0.3F)
             .setHeightVariation(1.5F)
             .setTemperature(0.25F)
@@ -30,14 +36,13 @@ public class MoCBiomes {
         @SubscribeEvent
         public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
             final IForgeRegistry<Biome> registry = event.getRegistry();
-            registerBiome(registry, WyvernLairBiome, "wyvernbiome", BiomeManager.BiomeType.COOL, 10, MoCEntities.WYVERN_LAIR);
+            registerBiome(registry, wyvernIsles, "wyvern_isles", MoCEntities.WYVERN_LAIR);
+            registerBiome(registry, wyvernDesertIsles, "wyvern_desert_isles", MoCEntities.WYVERN_LAIR);
         }
 
-        private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeManager.BiomeType biomeType, final int weight, final BiomeDictionary.Type... types) {
+        private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeDictionary.Type... types) {
             registry.register(biome.setRegistryName(MoCConstants.MOD_ID, biomeName));
             BiomeDictionary.addTypes(biome, types);
-            // Avoid registering with BiomeManager so wyvern lair does not generate in other dimensions
-            //BiomeManager.addBiome(biomeType, new BiomeManager.BiomeEntry(biome, weight));
         }
     }
 }

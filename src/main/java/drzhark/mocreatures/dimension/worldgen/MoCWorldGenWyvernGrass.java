@@ -1,7 +1,7 @@
 /*
  * GNU GENERAL PUBLIC LICENSE Version 3
  */
-package drzhark.mocreatures.dimension.world;
+package drzhark.mocreatures.dimension.worldgen;
 
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.Block;

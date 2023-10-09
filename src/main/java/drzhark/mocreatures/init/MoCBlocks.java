@@ -34,7 +34,7 @@ import javax.annotation.Nonnull;
 public class MoCBlocks {
 
     @GameRegistry.ObjectHolder("ancient_ore")
-    public static Block ancientOre;
+    public static MoCBlockOre ancientOre;
     @GameRegistry.ObjectHolder("ancient_silver_block")
     public static Block ancientSilverBlock;
     @GameRegistry.ObjectHolder("carved_silver_sandstone")
@@ -62,15 +62,15 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("tall_wyvgrass")
     public static Block tallWyvgrass;
     @GameRegistry.ObjectHolder("wyvern_diamond_ore")
-    public static Block wyvernDiamondOre;
+    public static MoCBlockOre wyvernDiamondOre;
     @GameRegistry.ObjectHolder("wyvern_emerald_ore")
-    public static Block wyvernEmeraldOre;
+    public static MoCBlockOre wyvernEmeraldOre;
     @GameRegistry.ObjectHolder("wyvern_gold_ore")
-    public static Block wyvernGoldOre;
+    public static MoCBlockOre wyvernGoldOre;
     @GameRegistry.ObjectHolder("wyvern_iron_ore")
-    public static Block wyvernIronOre;
+    public static MoCBlockOre wyvernIronOre;
     @GameRegistry.ObjectHolder("wyvern_lapis_ore")
-    public static Block wyvernLapisOre;
+    public static MoCBlockOre wyvernLapisOre;
     @GameRegistry.ObjectHolder("wyvstone")
     public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvgrass")

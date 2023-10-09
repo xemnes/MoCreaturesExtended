@@ -4,7 +4,7 @@
 package drzhark.mocreatures.block;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.dimension.world.MoCWorldGenBigTree;
+import drzhark.mocreatures.dimension.worldgen.MoCWorldGenBigTree;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.material.MapColor;

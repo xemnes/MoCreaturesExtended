@@ -5,9 +5,9 @@ package drzhark.mocreatures.dimension.biome;
 
 import net.minecraft.world.biome.BiomeDecorator;
 
-public class MoCBiomeWyvernLairDecorator extends BiomeDecorator {
+public class MoCBiomeWyvernIslesDecorator extends BiomeDecorator {
 
-    public MoCBiomeWyvernLairDecorator() {
+    public MoCBiomeWyvernIslesDecorator() {
         this.generateFalls = true;
         this.grassPerChunk = 2;
         this.flowersPerChunk = -999;

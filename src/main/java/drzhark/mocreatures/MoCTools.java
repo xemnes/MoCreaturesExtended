@@ -3,7 +3,8 @@
  */
 package drzhark.mocreatures;
 
-import drzhark.mocreatures.entity.*;
+import drzhark.mocreatures.entity.IMoCEntity;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.ambient.MoCEntityMaggot;
 import drzhark.mocreatures.entity.hostile.MoCEntityOgre;
 import drzhark.mocreatures.entity.hostile.MoCEntitySilverSkeleton;
@@ -51,10 +52,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldEntitySpawner;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.Chunk;

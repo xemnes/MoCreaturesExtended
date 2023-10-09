@@ -3,14 +3,15 @@
  */
 package drzhark.mocreatures.dimension.biome;
 
-import drzhark.mocreatures.dimension.world.MoCWorldGenBigTree;
-import drzhark.mocreatures.dimension.world.MoCWorldGenWyvernGrass;
+import drzhark.mocreatures.dimension.worldgen.MoCWorldGenBigTree;
+import drzhark.mocreatures.dimension.worldgen.MoCWorldGenWyvernGrass;
+import drzhark.mocreatures.dimension.worldgen.MoCWorldGenWyvernNest;
 import drzhark.mocreatures.entity.ambient.MoCEntityDragonfly;
 import drzhark.mocreatures.entity.hunter.MoCEntitySnake;
 import drzhark.mocreatures.entity.neutral.MoCEntityWyvern;
 import drzhark.mocreatures.entity.passive.MoCEntityBunny;
 import drzhark.mocreatures.init.MoCBlocks;
-import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -22,13 +23,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class MoCBiomeGenWyvernLair extends Biome {
+public class MoCBiomeWyvernIsles extends Biome {
 
     private final MoCWorldGenBigTree wyvernGenBigTree;
     private final WorldGenShrub worldGenShrub;
 
     @SuppressWarnings("deprecation")
-    public MoCBiomeGenWyvernLair(Biome.BiomeProperties biomeProperties) {
+    public MoCBiomeWyvernIsles(Biome.BiomeProperties biomeProperties) {
         super(biomeProperties);
         this.spawnableCreatureList.clear();
         this.spawnableMonsterList.clear();
@@ -39,12 +40,11 @@ public class MoCBiomeGenWyvernLair extends Biome {
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 6, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 3));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 2, 3));
-        this.spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 1, 1, 1));
         this.topBlock = MoCBlocks.wyvgrass.getDefaultState();
         this.fillerBlock = MoCBlocks.wyvdirt.getDefaultState();
         this.wyvernGenBigTree = new MoCWorldGenBigTree(false, MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getStateFromMeta(0), 2, 30, 10);
-        this.worldGenShrub = new WorldGenShrub(MoCBlocks.wyvwoodLeaves.getDefaultState(), MoCBlocks.wyvwoodLog.getDefaultState()); // Currently does nothing
-        this.decorator = new MoCBiomeWyvernLairDecorator();
+        this.worldGenShrub = new WorldGenShrub(MoCBlocks.wyvwoodLog.getDefaultState(), MoCBlocks.wyvwoodLeaves.getDefaultState());
+        this.decorator = new MoCBiomeWyvernIslesDecorator();
     }
 
     @Override
@@ -62,13 +62,17 @@ public class MoCBiomeGenWyvernLair extends Biome {
     }
 
     @Override
-    public boolean canRain() {
-        return false;
-    }
+    public void decorate(World world, Random random, BlockPos pos) {
+        super.decorate(world, random, pos);
 
-    @Override
-    public void decorate(World par1World, Random par2Random, BlockPos pos) {
-        super.decorate(par1World, par2Random, pos);
+        if (random.nextInt(100) == 0) {
+            int i = random.nextInt(16) + 8;
+            int j = random.nextInt(16) + 8;
+            BlockPos blockpos = world.getHeight(pos.add(i, 0, j));
+            if (world.getBlockState(blockpos.down()).getMaterial() != Material.AIR) {
+                (new MoCWorldGenWyvernNest()).generate(world, random, blockpos);
+            }
+        }
     }
 
     @Override

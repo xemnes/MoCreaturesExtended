@@ -1,7 +1,7 @@
 /*
  * GNU GENERAL PUBLIC LICENSE Version 3
  */
-package drzhark.mocreatures.dimension.world;
+package drzhark.mocreatures.dimension.worldgen;
 
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.Block;
@@ -265,13 +265,16 @@ public class MoCWorldGenBigTree extends WorldGenAbstractTree {
      * list.
      */
     void generateLeaves() {
-        int var1 = 0;
+        try {
+            int var1 = 0;
 
-        for (int var2 = this.leafNodes.length; var1 < var2; ++var1) {
-            int var3 = this.leafNodes[var1][0];
-            int var4 = this.leafNodes[var1][1];
-            int var5 = this.leafNodes[var1][2];
-            this.generateLeafNode(var3, var4, var5);
+            for (int var2 = this.leafNodes.length; var1 < var2; ++var1) {
+                int var3 = this.leafNodes[var1][0];
+                int var4 = this.leafNodes[var1][1];
+                int var5 = this.leafNodes[var1][2];
+                this.generateLeafNode(var3, var4, var5);
+            }
+        } catch (Exception ignored) {
         }
     }
 

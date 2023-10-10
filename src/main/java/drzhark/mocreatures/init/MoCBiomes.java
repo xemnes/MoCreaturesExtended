@@ -19,15 +19,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class MoCBiomes {
 
     public static Biome wyvernIsles = new MoCBiomeWyvernIsles(new BiomeProperties("Wyvern Isles")
-            .setBaseHeight(0.3F)
-            .setHeightVariation(1.5F)
+            .setBaseHeight(1.0F)
+            .setHeightVariation(0.5F)
             .setTemperature(0.25F)
             .setWaterColor(0x775757));
 
-    public static Biome wyvernDesertIsles = new MoCBiomeWyvernIslesDesert(new BiomeProperties("Wyvern Desert Isles")
+    public static Biome wyvernDesertIsles = new MoCBiomeWyvernIslesDesert(new BiomeProperties("Shifting Sands")
             .setBaseHeight(0.3F)
-            .setHeightVariation(1.5F)
-            .setTemperature(0.25F)
+            .setHeightVariation(0.2F)
+            .setTemperature(0.4F)
             .setWaterColor(0x775757));
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
@@ -36,8 +36,8 @@ public class MoCBiomes {
         @SubscribeEvent
         public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
             final IForgeRegistry<Biome> registry = event.getRegistry();
-            registerBiome(registry, wyvernIsles, "wyvern_isles", MoCEntities.WYVERN_LAIR);
-            registerBiome(registry, wyvernDesertIsles, "wyvern_desert_isles", MoCEntities.WYVERN_LAIR);
+            registerBiome(registry, wyvernIsles, "wyvern_isles", MoCEntities.WYVERN_LAIR, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.COLD);
+            registerBiome(registry, wyvernDesertIsles, "wyvern_desert_isles", MoCEntities.WYVERN_LAIR, BiomeDictionary.Type.MAGICAL, BiomeDictionary.Type.COLD, BiomeDictionary.Type.SANDY);
         }
 
         private static <T extends Biome> void registerBiome(final IForgeRegistry<Biome> registry, final T biome, final String biomeName, final BiomeDictionary.Type... types) {

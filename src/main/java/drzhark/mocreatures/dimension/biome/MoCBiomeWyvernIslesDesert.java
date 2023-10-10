@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.dimension.biome;
 
-import drzhark.mocreatures.entity.ambient.MoCEntityDragonfly;
+import drzhark.mocreatures.entity.ambient.MoCEntityGrasshopper;
 import drzhark.mocreatures.entity.hunter.MoCEntitySnake;
 import drzhark.mocreatures.entity.neutral.MoCEntityWyvern;
-import drzhark.mocreatures.entity.passive.MoCEntityBunny;
+import drzhark.mocreatures.entity.passive.MoCEntityFilchLizard;
 import drzhark.mocreatures.init.MoCBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,8 +29,8 @@ public class MoCBiomeWyvernIslesDesert extends Biome {
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
         this.modSpawnableLists.clear();
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityBunny.class, 6, 2, 4));
-        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityDragonfly.class, 6, 2, 4));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityFilchLizard.class, 6, 2, 4));
+        this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityGrasshopper.class, 6, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntitySnake.class, 6, 1, 3));
         this.spawnableCreatureList.add(new SpawnListEntry(MoCEntityWyvern.class, 12, 2, 3));
         this.topBlock = MoCBlocks.silverSand.getDefaultState();
@@ -108,18 +108,18 @@ public class MoCBiomeWyvernIslesDesert extends Biome {
     @Override
     @SideOnly(Side.CLIENT)
     public int getModdedBiomeFoliageColor(final int original) {
-        return 0x4F4569;
+        return 0x8C95A5;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public int getModdedBiomeGrassColor(final int original) {
-        return 0x4F4569;
+        return 0x8C95A5;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public int getSkyColorByTemp(final float currentTemperature) {
-        return 0x8C95FF;
+        return 0xADB7CC;
     }
 }

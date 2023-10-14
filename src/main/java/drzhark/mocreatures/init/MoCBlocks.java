@@ -71,6 +71,8 @@ public class MoCBlocks {
     public static MoCBlockOre wyvernIronOre;
     @GameRegistry.ObjectHolder("wyvern_lapis_ore")
     public static MoCBlockOre wyvernLapisOre;
+    @GameRegistry.ObjectHolder("wyvern_nest_block")
+    public static MoCBlockNest wyvernNestBlock;
     @GameRegistry.ObjectHolder("wyvstone")
     public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvgrass")
@@ -114,7 +116,8 @@ public class MoCBlocks {
                 setup(new MoCBlockSapling(EnumWoodType.WYVWOOD, MapColor.FOLIAGE, true), "wyvwood_sapling").setHardness(0.0F),
                 setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
-                setup(new MoCBlockPlanks(MapColor.DIAMOND, true), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F)
+                setup(new MoCBlockPlanks(MapColor.DIAMOND, true), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F),
+                setup(new MoCBlockNest(), "wyvern_nest_block").setHardness(0.5F)
         );
     }
 
@@ -137,12 +140,12 @@ public class MoCBlocks {
     }
 
     @Nonnull
-    public static <T extends IForgeRegistryEntry> T setup(T entry, String name) {
+    public static <T extends IForgeRegistryEntry<T>> T setup(T entry, String name) {
         return setup(entry, new ResourceLocation(MoCConstants.MOD_ID, name));
     }
 
     @Nonnull
-    public static <T extends IForgeRegistryEntry> T setup(T entry, ResourceLocation registryName) {
+    public static <T extends IForgeRegistryEntry<T>> T setup(T entry, ResourceLocation registryName) {
         Preconditions.checkNotNull(entry, "Entry to setup must not be null!");
         Preconditions.checkNotNull(registryName, "Registry name to assign must not be null!");
         entry.setRegistryName(registryName);

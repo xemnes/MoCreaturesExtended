@@ -52,7 +52,6 @@ public class MoCItemFood extends ItemFood {
     @Override
     protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
         if (this == MoCItems.mysticPear) {
-            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 10 * 20, 0));
             player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10 * 20, 1));
             player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 10 * 20, 1));
         }

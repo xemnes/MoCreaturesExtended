@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "mocreatures:ratraw",
+          "name": "minecraft:coal",
           "weight": 1,
           "functions": [
             {
@@ -17,23 +17,15 @@
               }
             },
             {
-              "function": "furnace_smelt",
-              "conditions": [
-                {
-                  "condition": "entity_properties",
-                  "entity": "this",
-                  "properties": {
-                    "on_fire": true
-                  }
-                }
-              ]
-            },
-            {
               "function": "looting_enchant",
               "count": {
                 "min": 0,
                 "max": 1
               }
+            },
+            {
+              "function": "set_data",
+              "data": 0
             }
           ]
         }

@@ -33,7 +33,7 @@ public class MoCItems {
     public static final MoCItem horsesaddle = new MoCItemHorseSaddle("horsesaddle");
     public static final MoCItem sharkteeth = new MoCItem("sharkteeth");
     public static final MoCItem haystack = new MoCItemHayStack("haystack");
-    public static final MoCItemSugarLump sugarlump = new MoCItemSugarLump("sugarlump");
+    public static final MoCItemFood sugarlump = (MoCItemFood) new MoCItemFood("sugarlump", 2, 0.1F, false, 12).setPotionEffect(new PotionEffect(MobEffects.NAUSEA, 4 * 20, 0), 0.15F);
     public static final MoCItem mocegg = new MoCItemEgg("mocegg");
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
     public static final MoCItem whip = new MoCItemWhip("whip");
@@ -90,6 +90,7 @@ public class MoCItems {
     public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
     public static final MoCItem firestoneChunk = new MoCItem("firestonechunk");
+    public static final MoCItemCrabClaw brackishClaw = new MoCItemCrabClaw("brackish_claw", 768, 15, 0.0F, 1, 2.0F);
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
@@ -338,7 +339,8 @@ public class MoCItems {
                     scrollOfSale,
                     scrollOfOwner,
                     crabraw,
-                    crabcooked
+                    crabcooked,
+                    brackishClaw
             ));
 
             final IForgeRegistry<Item> registry = event.getRegistry();

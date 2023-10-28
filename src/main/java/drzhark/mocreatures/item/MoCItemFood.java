@@ -22,7 +22,6 @@ public class MoCItemFood extends ItemFood {
         this.setCreativeTab(MoCreatures.tabMoC);
         this.setRegistryName(MoCConstants.MOD_ID, name);
         this.setTranslationKey(name);
-        this.maxStackSize = 32;
     }
 
     public MoCItemFood(String name, int amount, float saturation, boolean isWolfFood) {
@@ -54,6 +53,10 @@ public class MoCItemFood extends ItemFood {
         if (this == MoCItems.mysticPear) {
             player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 10 * 20, 1));
             player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 10 * 20, 1));
+        }
+        
+        if (this == MoCItems.sugarlump) {
+            player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 4 * 20, 0));
         }
 
         super.onFoodEaten(stack, world, player);

@@ -11,6 +11,7 @@ import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -21,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -282,6 +284,12 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             return MoCSoundEvents.ENTITY_BIRD_AMBIENT_RED;
         }
     }
+    
+    // TODO: Add unique sound event
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 1.0F);
+    }
 
     @Nullable
     protected ResourceLocation getLootTable() {
@@ -327,6 +335,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
         return super.processInteract(player, hand);
     }
 
+    // TODO: Add updated flap ai based on vanilla's parrot
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();

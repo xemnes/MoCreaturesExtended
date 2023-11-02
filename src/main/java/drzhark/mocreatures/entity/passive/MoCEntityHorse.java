@@ -57,6 +57,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("deprecation")
 public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityHorse.class, DataSerializers.BOOLEAN);
@@ -504,6 +505,34 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.getType() == 60 || this.getType() == 61) return MoCSoundEvents.ENTITY_HORSE_HURT_ZEBRA;
         if (this.getType() > 64 && this.getType() < 68) return MoCSoundEvents.ENTITY_HORSE_DEATH_DONKEY;
         return MoCSoundEvents.ENTITY_HORSE_DEATH;
+    }
+    
+    @Override
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+        if (!blockIn.getDefaultState().getMaterial().isLiquid()) {
+            SoundType soundtype = blockIn.getSoundType();
+
+            if (this.world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER) {
+                soundtype = Blocks.SNOW_LAYER.getSoundType();
+            }
+
+            /*if (this.isBeingRidden() && this.canGallop) {
+                ++this.gallopTime;
+
+                if (this.gallopTime > 5 && this.gallopTime % 3 == 0) {
+                    this.playGallopSound(soundtype);
+                }
+                else if (this.gallopTime <= 5) {
+                    this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+                }
+            }*/
+            else if (soundtype == SoundType.WOOD) {
+                this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+            }
+            else {
+                this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+            }
+        }
     }
 
     @Override

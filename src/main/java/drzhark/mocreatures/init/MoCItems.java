@@ -33,7 +33,7 @@ public class MoCItems {
     public static final MoCItem horsesaddle = new MoCItemHorseSaddle("horsesaddle");
     public static final MoCItem sharkteeth = new MoCItem("sharkteeth");
     public static final MoCItem haystack = new MoCItemHayStack("haystack");
-    public static final MoCItemFood sugarlump = (MoCItemFood) new MoCItemFood("sugarlump", 2, 0.1F, false, 12).setPotionEffect(new PotionEffect(MobEffects.NAUSEA, 4 * 20, 0), 0.15F);
+    public static final MoCItemFood sugarlump = (MoCItemFood) new MoCItemFood("sugarlump", 1, 0.1F, false, 12).setPotionEffect(new PotionEffect(MobEffects.NAUSEA, 4 * 20, 0), 0.15F);
     public static final MoCItem mocegg = new MoCItemEgg("mocegg");
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
     public static final MoCItem whip = new MoCItemWhip("whip");

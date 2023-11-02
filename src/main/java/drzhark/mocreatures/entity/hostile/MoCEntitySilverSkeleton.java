@@ -136,6 +136,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
         return EnumCreatureAttribute.UNDEAD;
     }
 
+    // TODO: Add unique step sound
     @Override
     protected void playStepSound(BlockPos pos, Block block) {
         this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);

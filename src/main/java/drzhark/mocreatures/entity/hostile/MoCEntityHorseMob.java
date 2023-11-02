@@ -8,6 +8,8 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,7 +18,9 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class MoCEntityHorseMob extends MoCEntityMob {
 
     public int mouthCounter;
@@ -164,6 +169,23 @@ public class MoCEntityHorseMob extends MoCEntityMob {
             stand();
         }
         return MoCSoundEvents.ENTITY_HORSE_AMBIENT_UNDEAD;
+    }
+    
+    @Override
+	protected void playStepSound(BlockPos pos, Block blockIn) {
+        if (!blockIn.getDefaultState().getMaterial().isLiquid()) {
+            SoundType soundtype = blockIn.getSoundType();
+
+            if (this.world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER) {
+                soundtype = Blocks.SNOW_LAYER.getSoundType();
+            }
+            else if (soundtype == SoundType.WOOD) {
+                this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+            }
+            else {
+                this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+            }
+        }
     }
 
     public boolean isOnAir() {

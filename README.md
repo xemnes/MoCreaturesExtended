@@ -21,7 +21,8 @@
 - Some assets used from their texture repository ~ MCThe_Paragon (Malcolm Riley)
 - New Shark Model ~ Foreck
 
-**Other Contributors:**
+**Additional Contributors:**
 
 - French Translation ~ nocturni
+- German Translation ~ magiczocker10
 - Donkey & Mule Texture Tweaks ~ Deino

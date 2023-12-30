@@ -1134,6 +1134,9 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public void dropMyStuff() {
+        for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {
+            System.out.println(ste + "\n");
+        }
         if (!this.world.isRemote && getIsTamed()) {
             MoCTools.dropCustomItem(this, this.world, new ItemStack(MoCItems.medallion, 1));
         }

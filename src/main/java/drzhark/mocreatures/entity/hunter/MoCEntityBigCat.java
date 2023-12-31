@@ -124,7 +124,6 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
     @Override
     public boolean getIsSitting() {
-        System.out.println("getIsSitting(): SITTING? "+ this.dataManager.get(SITTING));
         return this.dataManager.get(SITTING);
     }
 

@@ -23,6 +23,7 @@ public class MoCModelManticorePet extends MoCModelManticore {
         this.hasSaberTeeth = true;
         this.onAir = manticorePet.isOnAir();
         this.hasStinger = true;
+        this.isSitting = manticorePet.getIsSitting();
         this.isMovingVertically = manticorePet.motionY != 0 && !manticorePet.onGround;
         this.hasChest = false;
         this.isTamed = false;

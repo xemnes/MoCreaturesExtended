@@ -113,7 +113,7 @@ public class MoCModelBigCat extends ModelBase {
     private float prevMouthAngle;
     private boolean isChested;
     private boolean diving;
-    private boolean isSitting;
+    protected boolean isSitting;
 
     public MoCModelBigCat() {
         this.textureWidth = 128;

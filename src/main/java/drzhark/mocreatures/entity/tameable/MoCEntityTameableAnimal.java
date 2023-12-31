@@ -231,7 +231,10 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
                 if (petData != null) {
                     petData.setInAmulet(this.getOwnerPetId(), true);
                 }
-                this.dropMyStuff();
+                if (!(this instanceof MoCEntityKitty)) {
+                    // bugfix for kitty
+                    this.dropMyStuff();
+                }
                 MoCTools.dropAmulet(this, 2, player);
                 this.isDead = true;
             }

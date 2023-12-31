@@ -60,13 +60,13 @@ public class MoCEntityScorpion extends MoCEntityMob {
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new MoCEntityScorpion.AIScorpionAttack(this));
+        this.tasks.addTask(4, new MoCEntityScorpion.AIScorpionAttack(this, 1.0D, true));
         this.tasks.addTask(5, new EntityAIWanderAvoidWater(this, 0.8D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new MoCEntityScorpion.AIScorpionTarget<>(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new MoCEntityScorpion.AIScorpionTarget<>(this, EntityIronGolem.class));
+        this.targetTasks.addTask(2, new MoCEntityScorpion.AIScorpionTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(3, new MoCEntityScorpion.AIScorpionTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -315,8 +315,8 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     static class AIScorpionAttack extends EntityAIAttackMelee {
-        public AIScorpionAttack(MoCEntityScorpion scorpion) {
-            super(scorpion, 1.0D, true);
+        public AIScorpionAttack(MoCEntityScorpion scorpion, double speed, boolean useLongMemory) {
+            super(scorpion, speed, useLongMemory);
         }
 
         @Override
@@ -338,8 +338,8 @@ public class MoCEntityScorpion extends MoCEntityMob {
     }
 
     static class AIScorpionTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
-        public AIScorpionTarget(MoCEntityScorpion scorpion, Class<T> classTarget) {
-            super(scorpion, classTarget, true);
+        public AIScorpionTarget(MoCEntityScorpion scorpion, Class<T> classTarget, boolean checkSight) {
+            super(scorpion, classTarget, checkSight);
         }
 
         @Override

@@ -43,11 +43,11 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new MoCEntityMiniGolem.AIGolemAttack(this));
+        this.tasks.addTask(2, new MoCEntityMiniGolem.AIGolemAttack(this, 1.0D, true));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new MoCEntityMiniGolem.AIGolemTarget<>(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new MoCEntityMiniGolem.AIGolemTarget<>(this, EntityIronGolem.class));
+        this.targetTasks.addTask(2, new MoCEntityMiniGolem.AIGolemTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(3, new MoCEntityMiniGolem.AIGolemTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -191,8 +191,8 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     }
 
     static class AIGolemAttack extends EntityAIAttackMelee {
-        public AIGolemAttack(MoCEntityMiniGolem golem) {
-            super(golem, 1.0D, true);
+        public AIGolemAttack(MoCEntityMiniGolem golem, double speed, boolean useLongMemory) {
+            super(golem, speed, useLongMemory);
         }
 
         @Override
@@ -214,8 +214,8 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
     }
 
     static class AIGolemTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
-        public AIGolemTarget(MoCEntityMiniGolem golem, Class<T> classTarget) {
-            super(golem, classTarget, true);
+        public AIGolemTarget(MoCEntityMiniGolem golem, Class<T> classTarget, boolean checkSight) {
+            super(golem, classTarget, checkSight);
         }
 
         @Override

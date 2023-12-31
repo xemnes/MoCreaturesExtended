@@ -36,12 +36,12 @@ public class MoCEntityManticore extends MoCEntityMob {
 
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(2, new MoCEntityManticore.AIManticoreAttack(this));
+        this.tasks.addTask(2, new MoCEntityManticore.AIManticoreAttack(this, 1.0D, false));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new MoCEntityManticore.AIManticoreTarget<>(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new MoCEntityManticore.AIManticoreTarget<>(this, EntityIronGolem.class));
+        this.targetTasks.addTask(2, new MoCEntityManticore.AIManticoreTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new MoCEntityManticore.AIManticoreTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -236,8 +236,8 @@ public class MoCEntityManticore extends MoCEntityMob {
     }
 
     static class AIManticoreAttack extends EntityAIAttackMelee {
-        public AIManticoreAttack(MoCEntityManticore manticore) {
-            super(manticore, 1.0D, true);
+        public AIManticoreAttack(MoCEntityManticore manticore, double speed, boolean useLongMemory) {
+            super(manticore, speed, useLongMemory);
         }
 
         @Override
@@ -259,8 +259,8 @@ public class MoCEntityManticore extends MoCEntityMob {
     }
 
     static class AIManticoreTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
-        public AIManticoreTarget(MoCEntityManticore manticore, Class<T> classTarget) {
-            super(manticore, classTarget, true);
+        public AIManticoreTarget(MoCEntityManticore manticore, Class<T> classTarget, boolean checkSight) {
+            super(manticore, classTarget, checkSight);
         }
 
         @Override

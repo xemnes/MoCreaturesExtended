@@ -39,11 +39,11 @@ public class MoCEntityOgre extends MoCEntityMob {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new MoCEntityOgre.AIOgreAttack(this));
+        this.tasks.addTask(2, new MoCEntityOgre.AIOgreAttack(this, 1.25D, false));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new MoCEntityOgre.AIOgreTarget<>(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new MoCEntityOgre.AIOgreTarget<>(this, EntityIronGolem.class));
+        this.targetTasks.addTask(2, new MoCEntityOgre.AIOgreTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new MoCEntityOgre.AIOgreTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -217,8 +217,8 @@ public class MoCEntityOgre extends MoCEntityMob {
     }
 
     static class AIOgreAttack extends EntityAIAttackMelee {
-        public AIOgreAttack(MoCEntityOgre ogre) {
-            super(ogre, 1.0D, true);
+        public AIOgreAttack(MoCEntityOgre ogre, double speed, boolean useLongMemory) {
+            super(ogre, speed, useLongMemory);
         }
 
         @Override
@@ -240,8 +240,8 @@ public class MoCEntityOgre extends MoCEntityMob {
     }
 
     static class AIOgreTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
-        public AIOgreTarget(MoCEntityOgre ogre, Class<T> classTarget) {
-            super(ogre, classTarget, true);
+        public AIOgreTarget(MoCEntityOgre ogre, Class<T> classTarget, boolean checkSight) {
+            super(ogre, classTarget, checkSight);
         }
 
         @Override

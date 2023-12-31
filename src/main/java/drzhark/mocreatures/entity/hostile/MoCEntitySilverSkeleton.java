@@ -9,12 +9,15 @@ import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
@@ -41,9 +44,11 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new MoCEntitySilverSkeleton.AISkeletonAttack(this, 1.0D, false));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new MoCEntitySilverSkeleton.AISkeletonTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new MoCEntitySilverSkeleton.AISkeletonTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -147,12 +152,42 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
         return MoCLootTables.SILVER_SKELETON;
     }
 
-    @Override
-    protected boolean isHarmedByDaylight() {
-        return true;
-    }
-
     public float getEyeHeight() {
         return this.height * 0.905F;
+    }
+    
+    static class AISkeletonAttack extends EntityAIAttackMelee {
+        public AISkeletonAttack(MoCEntitySilverSkeleton skeleton, double speed, boolean useLongMemory) {
+            super(skeleton, speed, useLongMemory);
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            float f = this.attacker.getBrightness();
+
+            if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
+                this.attacker.setAttackTarget(null);
+                return false;
+            } else {
+                return super.shouldContinueExecuting();
+            }
+        }
+
+        @Override
+        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
+            return 4.0F + attackTarget.width;
+        }
+    }
+
+    static class AISkeletonTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+        public AISkeletonTarget(MoCEntitySilverSkeleton skeleton, Class<T> classTarget, boolean checkSight) {
+            super(skeleton, classTarget, checkSight);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            float f = this.taskOwner.getBrightness();
+            return f < 0.5F && super.shouldExecute();
+        }
     }
 }

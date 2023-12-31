@@ -65,11 +65,11 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new MoCEntityGolem.AIGolemAttack(this));
+        this.tasks.addTask(2, new MoCEntityGolem.AIGolemAttack(this, 1.0D, true));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new MoCEntityGolem.AIGolemTarget<>(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new MoCEntityGolem.AIGolemTarget<>(this, EntityIronGolem.class));
+        this.targetTasks.addTask(2, new MoCEntityGolem.AIGolemTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(3, new MoCEntityGolem.AIGolemTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -799,8 +799,8 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     }
 
     static class AIGolemAttack extends EntityAIAttackMelee {
-        public AIGolemAttack(MoCEntityGolem golem) {
-            super(golem, 1.0D, true);
+        public AIGolemAttack(MoCEntityGolem golem, double speed, boolean useLongMemory) {
+            super(golem, speed, useLongMemory);
         }
 
         @Override
@@ -822,8 +822,8 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
     }
 
     static class AIGolemTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
-        public AIGolemTarget(MoCEntityGolem golem, Class<T> classTarget) {
-            super(golem, classTarget, true);
+        public AIGolemTarget(MoCEntityGolem golem, Class<T> classTarget, boolean checkSight) {
+            super(golem, classTarget, checkSight);
         }
 
         @Override

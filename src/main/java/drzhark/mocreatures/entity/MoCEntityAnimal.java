@@ -886,7 +886,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public boolean isMovementCeased() {
-        System.out.println(this+"Is sitting? "+this.getIsSitting());
         return this.getIsSitting() || this.isBeingRidden();
     }
 

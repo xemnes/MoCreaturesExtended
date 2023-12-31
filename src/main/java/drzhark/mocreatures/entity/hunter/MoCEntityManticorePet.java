@@ -74,6 +74,15 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
             return tameResult;
         }
 
+        final ItemStack stack = player.getHeldItem(hand);
+        System.out.println("STACK: ",stack.getItem(), "HAND: ",hand, "PLYR: ", player);
+        System.out.println("CHECKS: ",!stack.isEmpty(),getIsTamed(),(stack.getItem() == MoCItems.whip));
+        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
+            System.out.println("PROCESSED WHIP.");
+            setSitting(!getIsSitting());
+            return true;
+        }
+
         if (this.getIsRideable() && this.getIsAdult() && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
             if (!this.world.isRemote && player.startRiding(this)) {
                 player.rotationYaw = this.rotationYaw;
@@ -81,11 +90,6 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
                 setSitting(false);
             }
 
-            return true;
-        }
-        final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
-            setSitting(!getIsSitting());
             return true;
         }
 

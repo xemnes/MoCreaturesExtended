@@ -68,6 +68,11 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
     }
 
     @Override
+    public boolean getIsSitting() {
+        System.out.println("getIsSitting(): SITTING? "+ this.dataManager.get(SITTING));
+        return this.dataManager.get(SITTING);
+    }
+    @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
         final Boolean tameResult = this.processTameInteract(player, hand);
         if (tameResult != null) {

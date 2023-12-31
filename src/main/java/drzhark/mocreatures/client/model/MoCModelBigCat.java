@@ -696,7 +696,7 @@ public class MoCModelBigCat extends ModelBase {
         this.Tail2.rotateAngleY = interpolatedTailSwingYaw;
         // Save the current value for the next frame's interpolation
         this.prevTailSwingYaw = interpolatedTailSwingYaw;
-
+        System.out.println("SITTING? "+this.isSitting);
         if (this.isSitting) {
             stingYOffset = 17F;
             stingZOffset = -3F;

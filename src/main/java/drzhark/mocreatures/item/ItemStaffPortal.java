@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 
 public class ItemStaffPortal extends MoCItem {
 
@@ -82,6 +83,9 @@ public class ItemStaffPortal extends MoCItem {
                 stack.damageItem(1, player);
             } else {
                 //on the WyvernLair!
+                if (!FMLLaunchHandler.isDeobfuscatedEnvironment() && ((player.posX > 1.5D || player.posX < -1.5D) || (player.posZ > 2.5D || player.posZ < -2.5D))) {
+                    return EnumActionResult.FAIL;
+                }
                 readFromNBT(nbtcompound);
 
                 boolean foundSpawn = false;

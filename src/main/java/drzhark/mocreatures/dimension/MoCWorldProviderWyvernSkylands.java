@@ -4,8 +4,11 @@
 package drzhark.mocreatures.dimension;
 
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.dimension.biome.MoCBiomeProviderWyvernLair;
 import drzhark.mocreatures.dimension.biome.MoCBiomeProviderWyvernSkylands;
+import drzhark.mocreatures.dimension.chunk.MoCChunkGeneratorWyvernLair;
 import drzhark.mocreatures.dimension.chunk.MoCChunkProviderWyvernSkylands;
+import drzhark.mocreatures.init.MoCBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,6 +23,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,7 +34,7 @@ public class MoCWorldProviderWyvernSkylands extends WorldProviderSurface {
 
     @Override
     protected void init() {
-        this.biomeProvider = new MoCBiomeProviderWyvernSkylands(this.world);
+        this.biomeProvider = FMLLaunchHandler.isDeobfuscatedEnvironment() ? new MoCBiomeProviderWyvernSkylands(this.world) : new MoCBiomeProviderWyvernLair(MoCBiomes.wyvernIsles, 0.5F, 0.0F);
         this.hasSkyLight = true;
         setDimension(MoCreatures.wyvernSkylandsDimensionID);
         setCustomSky();
@@ -38,7 +42,7 @@ public class MoCWorldProviderWyvernSkylands extends WorldProviderSurface {
 
     @Override
     public IChunkGenerator createChunkGenerator() {
-        return new MoCChunkProviderWyvernSkylands(this.world);
+        return FMLLaunchHandler.isDeobfuscatedEnvironment() ? new MoCChunkProviderWyvernSkylands(this.world) : new MoCChunkGeneratorWyvernLair(this.world, false, this.world.getSeed());
     }
 
     private void setCustomSky() {
@@ -129,44 +133,52 @@ public class MoCWorldProviderWyvernSkylands extends WorldProviderSurface {
     @Override
     public boolean canCoordinateBeSpawn(int xPos, int zPos) {
         BlockPos pos = this.world.getTopSolidOrLiquidBlock(new BlockPos(xPos, 0, zPos));
-        IBlockState blockState = this.world.getBlockState(pos);
-        Block block = blockState.getBlock();
-        Material material = blockState.getMaterial();
-        return material.blocksMovement() && !block.isLeaves(blockState, this.world, pos) && !block.isFoliage(this.world, pos);
+        if (FMLLaunchHandler.isDeobfuscatedEnvironment()) {
+            IBlockState blockState = this.world.getBlockState(pos);
+            Block block = blockState.getBlock();
+            Material material = blockState.getMaterial();
+            return material.blocksMovement() && !block.isLeaves(blockState, this.world, pos) && !block.isFoliage(this.world, pos);
+        } else {
+            return this.world.getBlockState(pos).getMaterial().blocksMovement();
+        }
     }
 
     @Override
     public BlockPos getSpawnCoordinate() {
-        BiomeProvider biomeprovider = this.getBiomeProvider();
-        List<Biome> list = biomeprovider.getBiomesToSpawnIn();
-        Random random = new Random(this.getSeed());
-        BlockPos blockpos = biomeprovider.findBiomePosition(0, 0, 256, list, random);
-        int i = 8;
-        int j = 128;
-        int k = 8;
+        if (FMLLaunchHandler.isDeobfuscatedEnvironment()) {
+            BiomeProvider biomeprovider = this.getBiomeProvider();
+            List<Biome> list = biomeprovider.getBiomesToSpawnIn();
+            Random random = new Random(this.getSeed());
+            BlockPos blockpos = biomeprovider.findBiomePosition(0, 0, 256, list, random);
+            int i = 8;
+            int j = 128;
+            int k = 8;
 
-        if (blockpos != null) {
-            i = blockpos.getX();
-            k = blockpos.getZ();
-        } else {
-            MoCreatures.LOGGER.warn("Unable to find spawn biome");
-        }
-
-        int attempts = 0;
-        while (attempts < 1000) {
-            i += random.nextInt(64) - random.nextInt(64);
-            k += random.nextInt(64) - random.nextInt(64);
-
-            // Check for a valid spawn point
-            if (canCoordinateBeSpawn(i, k)) {
-                return this.world.getHeight(new BlockPos(i, j, k)).up();
+            if (blockpos != null) {
+                i = blockpos.getX();
+                k = blockpos.getZ();
+            } else {
+                MoCreatures.LOGGER.warn("Unable to find spawn biome");
             }
 
-            attempts++;
-        }
+            int attempts = 0;
+            while (attempts < 1000) {
+                i += random.nextInt(64) - random.nextInt(64);
+                k += random.nextInt(64) - random.nextInt(64);
 
-        // If no valid spawn point is found after 1000 attempts, return a default spawn point
-        return this.world.getHeight(new BlockPos(i, j, k)).up();
+                // Check for a valid spawn point
+                if (canCoordinateBeSpawn(i, k)) {
+                    return this.world.getHeight(new BlockPos(i, j, k)).up();
+                }
+
+                attempts++;
+            }
+
+            // If no valid spawn point is found after 1000 attempts, return a default spawn point
+            return this.world.getHeight(new BlockPos(i, j, k)).up();
+        } else {
+            return new BlockPos(0, 70, 0);
+        }
     }
 
     // No bed explosions allowed

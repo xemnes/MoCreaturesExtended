@@ -21,6 +21,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class MoCEntityThrowableRock extends Entity {
@@ -233,8 +234,12 @@ public class MoCEntityThrowableRock extends Entity {
 
     private Entity getMaster() {
         List<Entity> entityList = this.world.loadedEntityList;
-        for (Entity entity : entityList) {
-            if (entity.getEntityId() == getMasterID()) return entity;
+        Iterator<Entity> iterator = entityList.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+            if (entity.getEntityId() == getMasterID()) {
+                return entity;
+            }
         }
         return null;
     }

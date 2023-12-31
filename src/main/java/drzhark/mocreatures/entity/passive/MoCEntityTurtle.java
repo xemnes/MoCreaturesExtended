@@ -8,7 +8,6 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
-import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.material.Material;
@@ -20,7 +19,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -348,31 +346,6 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
         }
 
         return MoCLootTables.TURTLE;
-    }
-
-    // TODO: Remove this after the weapons get reworked
-    @Override
-    protected Item getDropItem() {
-        if (MoCreatures.proxy.easterEggs) {
-            if (getPetName().equals("Donatello") || getPetName().equals("donatello")) {
-                return MoCItems.bo;
-            }
-
-            if (getPetName().equals("Leonardo") || getPetName().equals("leonardo")) {
-                return MoCItems.katana;
-            }
-
-            if (getPetName().equals("Rafael") || getPetName().equals("rafael") || getPetName().equals("raphael") || getPetName().equals("Raphael")) {
-                return MoCItems.sai;
-            }
-
-            if (getPetName().equals("Michelangelo") || getPetName().equals("michelangelo") || getPetName().equals("Michaelangelo")
-                    || getPetName().equals("michaelangelo")) {
-                return MoCItems.nunchaku;
-            }
-        }
-
-        return null;
     }
 
     /**

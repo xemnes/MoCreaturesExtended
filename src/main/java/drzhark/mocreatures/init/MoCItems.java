@@ -111,14 +111,15 @@ public class MoCItems {
     public static final MoCItemFood venisonCooked = new MoCItemFood("venisoncooked", 8, 0.9F, true);
     public static final MoCItemFood venisonRaw = new MoCItemFood("venisonraw", 3, 0.4F, true);
     // Weapons
-    public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", Item.ToolMaterial.IRON);
-    public static final MoCItemSword sai = new MoCItemSword("sai", Item.ToolMaterial.IRON);
-    public static final MoCItemSword bo = new MoCItemSword("bo", Item.ToolMaterial.IRON);
-    public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
+    static ToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 501, 10.0F, 3.5F, 20).setRepairItem(new ItemStack(ancientSilverIngot));
+    public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", NINJA);
+    public static final MoCItemSword sai = new MoCItemSword("sai", NINJA);
+    public static final MoCItemSword bo = new MoCItemSword("bo", NINJA);
+    public static final MoCItemSword katana = new MoCItemSword("katana", NINJA);
     static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 1, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
     public static final MoCItemAxe sharkaxe = new MoCItemAxe("sharkaxe", SHARK, 9.5F, 1.0F);
-    static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 2, 304, 9.5F, 3.0F, 19);
+    static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 2, 404, 9.5F, 3.0F, 19).setRepairItem(new ItemStack(ancientSilverIngot));
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
     public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.1F);
     static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 2, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));

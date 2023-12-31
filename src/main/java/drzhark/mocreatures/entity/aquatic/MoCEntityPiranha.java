@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -27,8 +28,9 @@ public class MoCEntityPiranha extends MoCEntitySmallFish {
 
     @Override
     protected void initEntityAI() {
-        this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(4, new EntityAIFollowHerd(this, 0.6D, 4D, 20D, 1));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
 

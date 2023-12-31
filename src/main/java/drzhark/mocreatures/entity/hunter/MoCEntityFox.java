@@ -47,10 +47,10 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
         this.tasks.addTask(3, new EntityAIFleeFromPlayer(this, 1.0D, 4D));
         this.tasks.addTask(3, new EntityAIFollowOwnerPlayer(this, 0.8D, 2F, 10F));
         this.tasks.addTask(4, new EntityAIFollowAdult(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, true));
+        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, false));
     }
 
     @Override

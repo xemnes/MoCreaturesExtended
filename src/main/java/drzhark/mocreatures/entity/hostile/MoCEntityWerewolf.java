@@ -171,8 +171,8 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             ItemStack stack = entityplayer.getHeldItemMainhand();
             if (!stack.isEmpty()) {
-                if (stack.getItem() == MoCItems.silversword) {
-                    i = 10F;
+                if (stack.getItem() == MoCItems.silversword || stack.getItem() == MoCItems.silveraxe) {
+                    i = 10.0F;
                 } else if (stack.getItem() instanceof ItemSword) {
                     String swordMaterial = ((ItemSword) stack.getItem()).getToolMaterialName();
                     String swordName = stack.getItem().getTranslationKey();
@@ -182,7 +182,9 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 0.5F;
                     }
                 } else if (stack.getItem().getTranslationKey().toLowerCase().contains("silver")) {
-                    i = 6F;
+                    i = 6.0F;
+                } else if (stack.getItem() == MoCItems.bo || stack.getItem() == MoCItems.katana || stack.getItem() == MoCItems.nunchaku || stack.getItem() == MoCItems.sai){
+                	i = 7.0F;
                 } else {
                     i = Math.min(i * 0.5F, 4F);
                 }

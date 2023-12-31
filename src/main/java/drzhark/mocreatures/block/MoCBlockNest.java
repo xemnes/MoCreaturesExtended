@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class MoCBlockNest extends Block {
 
     public MoCBlockNest() {
-        super(Material.GRASS, MapColor.YELLOW);
+        super(Material.GRASS, MapColor.WOOD);
         this.setSoundType(SoundType.PLANT);
     }
     

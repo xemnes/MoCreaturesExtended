@@ -76,7 +76,6 @@ public class MoCEntityManticorePet extends MoCEntityBigCat {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
-            // TODO: Make Manticore stop moving, add orientation/model positioning
             setSitting(!getIsSitting());
             return true;
         }

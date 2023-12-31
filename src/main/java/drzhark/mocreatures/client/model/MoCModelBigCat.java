@@ -549,7 +549,6 @@ public class MoCModelBigCat extends ModelBase {
     }
 
     public void updateAnimationModifiers(Entity entity) {
-        System.out.println("Updating animation modifiers for "+entity);
         MoCEntityBigCat bigcat = (MoCEntityBigCat) entity;
         this.isFlyer = bigcat.isFlyer();
         this.isSaddled = bigcat.getIsRideable();
@@ -697,6 +696,7 @@ public class MoCModelBigCat extends ModelBase {
         this.Tail2.rotateAngleY = interpolatedTailSwingYaw;
         // Save the current value for the next frame's interpolation
         this.prevTailSwingYaw = interpolatedTailSwingYaw;
+
         if (this.isSitting) {
             stingYOffset = 17F;
             stingZOffset = -3F;

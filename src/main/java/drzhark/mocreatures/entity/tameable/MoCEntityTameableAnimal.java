@@ -232,7 +232,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
                     petData.setInAmulet(this.getOwnerPetId(), true);
                 }
                 if (!(this instanceof MoCEntityKitty)) {
-                    // bugfix for kitty
+                    // bugfix for Kitty, #91 - was dropping medallion when captured in amulet
                     this.dropMyStuff();
                 }
                 MoCTools.dropAmulet(this, 2, player);

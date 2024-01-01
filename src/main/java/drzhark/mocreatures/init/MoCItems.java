@@ -43,9 +43,6 @@ public class MoCItems {
     public static final MoCItem litterbox = new MoCItemLitterBox("kittylitter");
     public static final MoCItem woolball = new MoCItem("woolball");
     public static final MoCItem petfood = new MoCItem("petfood");
-    // Both disabled until we figure out what to do with them
-    //public static final MoCItem staffTeleport = new ItemStaffTeleport("staffteleport");
-    //public static final MoCItem builderHammer = new ItemBuilderHammer("builderhammer");
     public static final MoCItem hideCroc = new MoCItem("reptilehide");
     public static final MoCItem fur = new MoCItem("fur");
     public static final MoCItem essencedarkness = new MoCItem("essencedarkness");
@@ -90,7 +87,7 @@ public class MoCItems {
     public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
     public static final MoCItem firestoneChunk = new MoCItem("firestonechunk");
-    public static final MoCItemCrabClaw brackishClaw = new MoCItemCrabClaw("brackish_claw", 768, 15, 0.0F, 1, 2.0F);
+    //public static final MoCItemCrabClaw brackishClaw = new MoCItemCrabClaw("brackish_claw", 768, 15, 0.0F, 1, 2.0F);
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
@@ -218,8 +215,6 @@ public class MoCItems {
                     turtlecooked,
                     turtlesoup,
                     staffPortal,
-                    /*staffTeleport,
-                    builderHammer,*/
 
                     ancientSilverScrap,
                     ancientSilverIngot,
@@ -340,8 +335,8 @@ public class MoCItems {
                     scrollOfSale,
                     scrollOfOwner,
                     crabraw,
-                    crabcooked,
-                    brackishClaw
+                    crabcooked
+                    //brackishClaw
             ));
 
             final IForgeRegistry<Item> registry = event.getRegistry();

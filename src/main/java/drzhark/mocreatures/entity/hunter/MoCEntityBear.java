@@ -309,6 +309,9 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         return this.getIsAdult() && !this.isMovementCeased();
     }
 
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
     public boolean getIsStanding() {
         return this.standingCounter != 0;
     }

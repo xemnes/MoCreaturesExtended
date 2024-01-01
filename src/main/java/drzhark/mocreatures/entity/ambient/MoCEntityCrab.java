@@ -156,6 +156,9 @@ public class MoCEntityCrab extends MoCEntityTameableAnimal {
     }
 
     @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
+    @Override
     protected SoundEvent getDeathSound() {
         return null;
     }
@@ -165,3 +168,4 @@ public class MoCEntityCrab extends MoCEntityTameableAnimal {
         return null;
     }
 }
+

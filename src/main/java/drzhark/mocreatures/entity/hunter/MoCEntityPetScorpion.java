@@ -162,6 +162,9 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
+    @Override
     public void setRideable(boolean flag) {
         this.dataManager.set(RIDEABLE, flag);
     }

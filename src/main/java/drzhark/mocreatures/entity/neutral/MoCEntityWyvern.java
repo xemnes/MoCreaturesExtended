@@ -809,7 +809,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     @Override
     public void dropLegacyEgg() {
         int chance = MoCreatures.proxy.wyvernEggDropChance;
-        System.out.println("Chance: "+chance+" and type is "+getType());
         if (getType() == 5) { //mother wyverns drop eggs more frequently
             chance = MoCreatures.proxy.motherWyvernEggDropChance;
         }

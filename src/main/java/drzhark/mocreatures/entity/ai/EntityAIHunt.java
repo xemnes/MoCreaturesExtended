@@ -9,7 +9,6 @@ import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import java.util.UUID;
 
 public class EntityAIHunt<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
 
@@ -32,8 +31,8 @@ public class EntityAIHunt<T extends EntityLivingBase> extends EntityAINearestAtt
     @Override
     public boolean shouldExecute() {
         // Big Cat fix
-        UUID hunterOwner = ((MoCEntityTameableAnimal)this.hunter).getOwnerId();
-        System.out.println("Check before hunting. hunterOwner is "+hunterOwner);
-        return hunterOwner == null && ((MoCEntityAnimal) this.hunter).getIsHunting() && super.shouldExecute();
+        boolean hunterHasOwner = ((MoCEntityTameableAnimal)this.hunter).getIsTamed();
+        System.out.println("Check before hunting. hunterHasOwner is "+hunterHasOwner);
+        return !hunterHasOwner && ((MoCEntityAnimal) this.hunter).getIsHunting() && super.shouldExecute();
     }
 }

@@ -562,6 +562,9 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         return (this instanceof IMoCTameable) && getIsTamed();
     }
 
+    // used to drop eggs in a legacy fashion
+    public void dropLegacyEgg() {
+    }
     protected void dropMyStuff() {
     }
 
@@ -622,6 +625,15 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         return 0F;
     }
 
+    @Override
+    public void onDeath(DamageSource damagesource) {
+        if (!this.world.isRemote) {
+            dropMyStuff();
+            dropLegacyEgg();
+        }
+
+        super.onDeath(damagesource);
+    }
     @Override
     public boolean isNotScared() {
         return false;

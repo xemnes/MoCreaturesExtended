@@ -332,6 +332,9 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         return isInsideOfMaterial(Material.WATER);
     }
 
+    // used to drop eggs in a legacy fashion
+    public void dropLegacyEgg() {
+    }
     //used to drop armor, inventory, saddles, etc.
     public void dropMyStuff() {
     }
@@ -785,6 +788,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public void onDeath(DamageSource damagesource) {
         if (!this.world.isRemote) {
             dropMyStuff();
+            dropLegacyEgg();
         }
 
         super.onDeath(damagesource);

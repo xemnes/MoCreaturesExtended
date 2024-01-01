@@ -105,7 +105,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     }
 
     @Override
-    protected void dropFewItems(boolean flag, int x) {
+    public void dropLegacyEgg() {
         int i = this.rand.nextInt(100);
         if (i < 30) {
             int j = this.rand.nextInt(2);

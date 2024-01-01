@@ -39,10 +39,6 @@ public class MoCItemWhip extends MoCItem {
         return true;
     }
 
-    public ItemStack onItemRightClick2(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        return itemstack;
-    }
-
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         final ItemStack stack = player.getHeldItem(hand);
@@ -65,15 +61,22 @@ public class MoCItemWhip extends MoCItem {
                     MoCEntityBigCat entitybigcat = (MoCEntityBigCat) entity;
                     if (entitybigcat.getIsTamed()) {
                         entitybigcat.setSitting(!entitybigcat.getIsSitting());
+                        entitybigcat.setIsJumping(false);
+                        entitybigcat.getNavigator().clearPath();
+                        entitybigcat.setAttackTarget(null);
                     } else if ((worldIn.getDifficulty().getId() > 0) && entitybigcat.getIsAdult()) {
                         entitybigcat.setAttackTarget(player);
                     }
                 }
+
                 if (entity instanceof MoCEntityHorse) {
                     MoCEntityHorse entityhorse = (MoCEntityHorse) entity;
                     if (entityhorse.getIsTamed()) {
                         if (entityhorse.getRidingEntity() == null) {
                             entityhorse.setSitting(!entityhorse.getIsSitting());
+                            entityhorse.setIsJumping(false);
+                            entityhorse.getNavigator().clearPath();
+                            entityhorse.setAttackTarget(null);
                         } else if (entityhorse.isNightmare()) {
                             entityhorse.setNightmareInt(100);
                         } else if (entityhorse.sprintCounter == 0) {
@@ -86,6 +89,9 @@ public class MoCItemWhip extends MoCItem {
                     MoCEntityKitty entitykitty = (MoCEntityKitty) entity;
                     if ((entitykitty.getKittyState() > 2) && entitykitty.whipable()) {
                         entitykitty.setSitting(!entitykitty.getIsSitting());
+                        entitykitty.setIsJumping(false);
+                        entitykitty.getNavigator().clearPath();
+                        entitykitty.setAttackTarget(null);
                     }
                 }
 
@@ -93,6 +99,9 @@ public class MoCItemWhip extends MoCItem {
                     MoCEntityWyvern entitywyvern = (MoCEntityWyvern) entity;
                     if (entitywyvern.getIsTamed() && entitywyvern.getRidingEntity() == null && !entitywyvern.isOnAir()) {
                         entitywyvern.setSitting(!entitywyvern.getIsSitting());
+                        entitywyvern.setIsJumping(false);
+                        entitywyvern.getNavigator().clearPath();
+                        entitywyvern.setAttackTarget(null);
                     }
                 }
 
@@ -100,6 +109,9 @@ public class MoCItemWhip extends MoCItem {
                     MoCEntityPetScorpion petscorpion = (MoCEntityPetScorpion) entity;
                     if (petscorpion.getIsTamed() && petscorpion.getRidingEntity() == null) {
                         petscorpion.setSitting(!petscorpion.getIsSitting());
+                        petscorpion.setIsJumping(false);
+                        petscorpion.getNavigator().clearPath();
+                        petscorpion.setAttackTarget(null);
                     }
                 }
 
@@ -114,8 +126,12 @@ public class MoCItemWhip extends MoCItem {
                     //toggles hiding of tamed ostriches
                     if (entityostrich.getIsTamed() && entityostrich.getRidingEntity() == null) {
                         entityostrich.setHiding(!entityostrich.getHiding());
+                        entityostrich.setIsJumping(false);
+                        entityostrich.getNavigator().clearPath();
+                        entityostrich.setAttackTarget(null);
                     }
                 }
+
                 if (entity instanceof MoCEntityElephant) {
                     MoCEntityElephant entityelephant = (MoCEntityElephant) entity;
 

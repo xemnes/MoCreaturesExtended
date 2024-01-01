@@ -30,6 +30,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -104,7 +106,7 @@ public class MoCBlockLeaf extends BlockLeaves {
 
     @Override
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        List<ItemStack> list = new java.util.ArrayList<>();
+        List<ItemStack> list = new ArrayList<>();
         list.add(new ItemStack(this, 1, 0));
         return list;
     }

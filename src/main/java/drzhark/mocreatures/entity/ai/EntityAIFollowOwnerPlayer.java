@@ -76,8 +76,7 @@ public class EntityAIFollowOwnerPlayer extends EntityAIBase {
      */
     @Override
     public boolean shouldContinueExecuting() {
-        return !this.petPathfinder.noPath() && this.thePet.getDistanceSq(this.theOwner) > this.maxDist * this.maxDist
-                && !((IMoCEntity) this.thePet).getIsSitting();
+        return !this.petPathfinder.noPath() && this.thePet.getDistanceSq(this.theOwner) > this.maxDist * this.maxDist && !((IMoCEntity) this.thePet).getIsSitting();
     }
 
     /**

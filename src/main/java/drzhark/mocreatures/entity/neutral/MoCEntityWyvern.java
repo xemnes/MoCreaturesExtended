@@ -426,6 +426,9 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && (stack.getItem() == MoCItems.whip) && getIsTamed() && (!this.isBeingRidden())) {
             setSitting(!getIsSitting());
+            setIsJumping(false);
+            getNavigator().clearPath();
+            setAttackTarget(null);
             return true;
         }
 

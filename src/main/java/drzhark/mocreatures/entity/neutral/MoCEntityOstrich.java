@@ -555,6 +555,9 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         //makes the ostrich stay by hiding their heads
         if (!stack.isEmpty() && (stack.getItem() == MoCItems.whip) && getIsTamed() && (!this.isBeingRidden())) {
             setHiding(!getHiding());
+            setIsJumping(false);
+            getNavigator().clearPath();
+            setAttackTarget(null);
             return true;
         }
 

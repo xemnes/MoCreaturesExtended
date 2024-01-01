@@ -483,6 +483,9 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         }
         if (!stack.isEmpty() && getKittyState() > 2 && whipable() && stack.getItem() == MoCItems.whip) {
             setSitting(!getIsSitting());
+            setIsJumping(false);
+            getNavigator().clearPath();
+            setAttackTarget(null);
             return true;
         }
         if (stack.isEmpty() && getKittyState() > 2 && pickable()) {

@@ -448,6 +448,9 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
             setSitting(!getIsSitting());
+            setIsJumping(false);
+            getNavigator().clearPath();
+            setAttackTarget(null);
             return true;
         }
         if (!stack.isEmpty() && getIsTamed() && (MoCTools.isItemEdibleforCarnivores(stack.getItem()))) {

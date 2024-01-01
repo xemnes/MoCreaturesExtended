@@ -174,19 +174,17 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         }
         return MoCSoundEvents.ENTITY_HORSE_AMBIENT_UNDEAD;
     }
-    
+
     @Override
-	protected void playStepSound(BlockPos pos, Block blockIn) {
+    protected void playStepSound(BlockPos pos, Block blockIn) {
         if (!blockIn.getDefaultState().getMaterial().isLiquid()) {
             SoundType soundtype = blockIn.getSoundType();
 
             if (this.world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER) {
                 soundtype = Blocks.SNOW_LAYER.getSoundType();
-            }
-            else if (soundtype == SoundType.WOOD) {
+            } else if (soundtype == SoundType.WOOD) {
                 this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
-            }
-            else {
+            } else {
                 this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F, soundtype.getPitch());
             }
         }

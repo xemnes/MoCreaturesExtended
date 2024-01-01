@@ -15,13 +15,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(MoCConstants.MOD_ID)
 public class MoCSoundEvents {
 
-	/* Entity */
-	// Ambient
+    /* Entity */
+    // Ambient
     public static final SoundEvent ENTITY_BEE_AMBIENT;
     public static final SoundEvent ENTITY_BEE_HURT;
     public static final SoundEvent ENTITY_BEE_UPSET;
     //
-	public static final SoundEvent ENTITY_CRICKET_AMBIENT;
+    public static final SoundEvent ENTITY_CRICKET_AMBIENT;
     public static final SoundEvent ENTITY_CRICKET_CHIRP;
     public static final SoundEvent ENTITY_CRICKET_HURT;
     //
@@ -35,13 +35,13 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GRASSHOPPER_CHIRP;
     public static final SoundEvent ENTITY_GRASSHOPPER_FLY;
     public static final SoundEvent ENTITY_GRASSHOPPER_HURT;
-    
+
     // Aquatic
     public static final SoundEvent ENTITY_DOLPHIN_DEATH;
     public static final SoundEvent ENTITY_DOLPHIN_HURT;
     public static final SoundEvent ENTITY_DOLPHIN_AMBIENT;
     public static final SoundEvent ENTITY_DOLPHIN_UPSET;
-    
+
     // Hostile
     public static final SoundEvent ENTITY_GOLEM_AMBIENT;
     public static final SoundEvent ENTITY_GOLEM_DYING;
@@ -78,7 +78,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_WOLF_AMBIENT;
     public static final SoundEvent ENTITY_WOLF_DEATH;
     public static final SoundEvent ENTITY_WOLF_HURT;
-    
+
     // Hunter
     public static final SoundEvent ENTITY_BEAR_AMBIENT;
     public static final SoundEvent ENTITY_BEAR_DEATH;
@@ -113,7 +113,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_SNAKE_RATTLE;
     public static final SoundEvent ENTITY_SNAKE_SNAP;
     public static final SoundEvent ENTITY_SNAKE_SWIM;
-    
+
     // Neutral
     public static final SoundEvent ENTITY_ELEPHANT_AMBIENT_BABY;
     public static final SoundEvent ENTITY_ELEPHANT_AMBIENT;
@@ -157,7 +157,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_WYVERN_DEATH;
     public static final SoundEvent ENTITY_WYVERN_HURT;
     public static final SoundEvent ENTITY_WYVERN_WINGFLAP;
-    
+
     // Passive
     public static final SoundEvent ENTITY_BIRD_AMBIENT_BLACK;
     public static final SoundEvent ENTITY_BIRD_AMBIENT_BLUE;
@@ -204,7 +204,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_TURKEY_HURT;
     public static final SoundEvent ENTITY_TURTLE_ANGRY;
     public static final SoundEvent ENTITY_TURTLE_DEATH;
-    
+
     /* Entity (Legacy) */
     // Hostile
     public static final SoundEvent ENTITY_RAT_DEATH_LEGACY;
@@ -216,7 +216,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_WRAITH_AMBIENT_LEGACY;
     public static final SoundEvent ENTITY_WRAITH_DEATH_LEGACY;
     public static final SoundEvent ENTITY_WRAITH_HURT_LEGACY;
-    
+
     /* Generic */
     public static final SoundEvent ENTITY_GENERIC_ARMOR_ON;
     public static final SoundEvent ENTITY_GENERIC_ARMOR_OFF;
@@ -233,7 +233,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_VANISH;
     public static final SoundEvent ENTITY_GENERIC_WHIP;
     public static final SoundEvent ENTITY_GENERIC_WINGFLAP;
-    
+
     /* Music */
     // Record
     public static final SoundEvent ITEM_RECORD_SHUFFLING;
@@ -242,8 +242,8 @@ public class MoCSoundEvents {
         if (!Bootstrap.isRegistered()) {
             throw new RuntimeException("Accessed Sounds before Bootstrap!");
         } else {
-        	/* Entity */
-        	// Ambient
+            /* Entity */
+            // Ambient
             ENTITY_BEE_AMBIENT = createSoundEvent("bee");
             ENTITY_BEE_HURT = createSoundEvent("beehurt");
             ENTITY_BEE_UPSET = createSoundEvent("beeupset");
@@ -262,13 +262,13 @@ public class MoCSoundEvents {
             ENTITY_GRASSHOPPER_CHIRP = createSoundEvent("grasshopperchirp");
             ENTITY_GRASSHOPPER_FLY = createSoundEvent("grasshopperfly");
             ENTITY_GRASSHOPPER_HURT = createSoundEvent("grasshopperhurt");
-            
+
             // Aquatic
             ENTITY_DOLPHIN_AMBIENT = createSoundEvent("dolphin");
             ENTITY_DOLPHIN_DEATH = createSoundEvent("dolphindying");
             ENTITY_DOLPHIN_HURT = createSoundEvent("dolphinhurt");
             ENTITY_DOLPHIN_UPSET = createSoundEvent("dolphinupset");
-            
+
             // Hostile
             ENTITY_GOLEM_AMBIENT = createSoundEvent("golemgrunt");
             ENTITY_GOLEM_DYING = createSoundEvent("golemdying");
@@ -305,7 +305,7 @@ public class MoCSoundEvents {
             ENTITY_WRAITH_AMBIENT = createSoundEvent("wraith");
             ENTITY_WRAITH_DEATH = createSoundEvent("wraithdying");
             ENTITY_WRAITH_HURT = createSoundEvent("wraithhurt");
-            
+
             // Hunter
             ENTITY_BEAR_AMBIENT = createSoundEvent("beargrunt");
             ENTITY_BEAR_DEATH = createSoundEvent("beardeath");
@@ -340,7 +340,7 @@ public class MoCSoundEvents {
             ENTITY_SNAKE_RATTLE = createSoundEvent("snakerattle");
             ENTITY_SNAKE_SNAP = createSoundEvent("snakesnap");
             ENTITY_SNAKE_SWIM = createSoundEvent("snakeswim");
-            
+
             // Neutral
             ENTITY_ELEPHANT_AMBIENT_BABY = createSoundEvent("elephantcalf");
             ENTITY_ELEPHANT_AMBIENT = createSoundEvent("elephantgrunt");
@@ -384,7 +384,7 @@ public class MoCSoundEvents {
             ENTITY_WYVERN_DEATH = createSoundEvent("wyverndying");
             ENTITY_WYVERN_HURT = createSoundEvent("wyvernhurt");
             ENTITY_WYVERN_WINGFLAP = createSoundEvent("wyvernwingflap");
-            
+
             // Passive
             ENTITY_BIRD_AMBIENT_BLACK = createSoundEvent("birdblack");
             ENTITY_BIRD_AMBIENT_BLUE = createSoundEvent("birdblue");
@@ -432,7 +432,7 @@ public class MoCSoundEvents {
             //
             ENTITY_TURTLE_ANGRY = createSoundEvent("turtlehissing");
             ENTITY_TURTLE_DEATH = createSoundEvent("turtledying");
-            
+
             /* Entity (Legacy) */
             // Hostile
             ENTITY_RAT_DEATH_LEGACY = createSoundEvent("ratdyinglegacy");
@@ -444,7 +444,7 @@ public class MoCSoundEvents {
             ENTITY_WRAITH_AMBIENT_LEGACY = createSoundEvent("wraithlegacy");
             ENTITY_WRAITH_DEATH_LEGACY = createSoundEvent("wraithdyinglegacy");
             ENTITY_WRAITH_HURT_LEGACY = createSoundEvent("wraithhurtlegacy");
-            
+
             /* Generic */
             ENTITY_GENERIC_ARMOR_ON = createSoundEvent("armorput");
             ENTITY_GENERIC_ARMOR_OFF = createSoundEvent("armoroff");
@@ -461,7 +461,7 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_VANISH = createSoundEvent("vanish");
             ENTITY_GENERIC_WHIP = createSoundEvent("whip");
             ENTITY_GENERIC_WINGFLAP = createSoundEvent("wingflap");
-            
+
             /* Music */
             // Record
             ITEM_RECORD_SHUFFLING = createSoundEvent("shuffling");
@@ -484,8 +484,8 @@ public class MoCSoundEvents {
         @SubscribeEvent
         public static void registerSoundEvents(final RegistryEvent.Register<SoundEvent> event) {
             event.getRegistry().registerAll(
-            		/* Entity */
-            		// Ambient
+                    /* Entity */
+                    // Ambient
                     ENTITY_BEE_AMBIENT,
                     ENTITY_BEE_HURT,
                     ENTITY_BEE_UPSET,
@@ -504,14 +504,14 @@ public class MoCSoundEvents {
                     ENTITY_GRASSHOPPER_CHIRP,
                     ENTITY_GRASSHOPPER_FLY,
                     ENTITY_GRASSHOPPER_HURT,
-                    
-            		// Aquatic
+
+                    // Aquatic
                     ENTITY_DOLPHIN_AMBIENT,
                     ENTITY_DOLPHIN_DEATH,
                     ENTITY_DOLPHIN_HURT,
                     ENTITY_DOLPHIN_UPSET,
-                    
-            		// Hostile
+
+                    // Hostile
                     ENTITY_GOLEM_AMBIENT,
                     ENTITY_GOLEM_DYING,
                     ENTITY_GOLEM_HURT,
@@ -547,8 +547,8 @@ public class MoCSoundEvents {
                     ENTITY_WRAITH_AMBIENT,
                     ENTITY_WRAITH_DEATH,
                     ENTITY_WRAITH_HURT,
-                    
-            		// Hunter
+
+                    // Hunter
                     ENTITY_BEAR_AMBIENT,
                     ENTITY_BEAR_DEATH,
                     ENTITY_BEAR_HURT,
@@ -582,7 +582,7 @@ public class MoCSoundEvents {
                     ENTITY_SNAKE_RATTLE,
                     ENTITY_SNAKE_SNAP,
                     ENTITY_SNAKE_SWIM,
-                    
+
                     // Neutral
                     ENTITY_ELEPHANT_AMBIENT_BABY,
                     ENTITY_ELEPHANT_AMBIENT,
@@ -626,7 +626,7 @@ public class MoCSoundEvents {
                     ENTITY_WYVERN_DEATH,
                     ENTITY_WYVERN_HURT,
                     ENTITY_WYVERN_WINGFLAP,
-                    
+
                     // Passive
                     ENTITY_BIRD_AMBIENT_BLACK,
                     ENTITY_BIRD_AMBIENT_BLUE,
@@ -674,7 +674,7 @@ public class MoCSoundEvents {
                     //
                     ENTITY_TURTLE_ANGRY,
                     ENTITY_TURTLE_DEATH,
-                    
+
                     /* Entity (Legacy) */
                     ENTITY_RAT_DEATH_LEGACY,
                     //
@@ -685,7 +685,7 @@ public class MoCSoundEvents {
                     ENTITY_WRAITH_AMBIENT_LEGACY,
                     ENTITY_WRAITH_DEATH_LEGACY,
                     ENTITY_WRAITH_HURT_LEGACY,
-                    
+
                     /* Generic */
                     ENTITY_GENERIC_ARMOR_ON,
                     ENTITY_GENERIC_ARMOR_OFF,
@@ -702,7 +702,7 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_VANISH,
                     ENTITY_GENERIC_WHIP,
                     ENTITY_GENERIC_WINGFLAP,
-                    
+
                     /* Music */
                     // Record
                     ITEM_RECORD_SHUFFLING

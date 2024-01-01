@@ -506,9 +506,9 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.getType() > 64 && this.getType() < 68) return MoCSoundEvents.ENTITY_HORSE_DEATH_DONKEY;
         return MoCSoundEvents.ENTITY_HORSE_DEATH;
     }
-    
+
     @Override
-	protected void playStepSound(BlockPos pos, Block blockIn) {
+    protected void playStepSound(BlockPos pos, Block blockIn) {
         if (!blockIn.getDefaultState().getMaterial().isLiquid()) {
             SoundType soundtype = blockIn.getSoundType();
 
@@ -528,8 +528,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             }*/
             else if (soundtype == SoundType.WOOD) {
                 this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
-            }
-            else {
+            } else {
                 this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F, soundtype.getPitch());
             }
         }

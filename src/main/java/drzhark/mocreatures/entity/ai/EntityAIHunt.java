@@ -3,11 +3,23 @@
  */
 package drzhark.mocreatures.entity.ai;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class EntityAIHunt<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
 
@@ -29,6 +41,9 @@ public class EntityAIHunt<T extends EntityLivingBase> extends EntityAINearestAtt
 
     @Override
     public boolean shouldExecute() {
-        return ((MoCEntityAnimal) this.hunter).getIsHunting() && super.shouldExecute();
+        // Big Cat fix
+        UUID hunterOwner = ((MoCEntityTameableAnimal)this.hunter).getOwnerId();
+        System.out.println("Check before hunting. hunterOwner is "+hunterOwner);
+        return hunterOwner == null && ((MoCEntityAnimal) this.hunter).getIsHunting() && super.shouldExecute();
     }
 }

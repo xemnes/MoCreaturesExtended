@@ -6,7 +6,8 @@
 
 * Lead Developer, Codebase Cleanup, Spawn Logic, General Maintenance ~ ACGaming
 * Developer, Sound Artist, Language/Model Adjustments, General Maintenance ~ IcarussOne
-* QA Analyst & Testing, Entity Spawn Rules ~ xJon
+* Developer, General Maintenance ~ DemonLexe (Alexis Kaufman)
+* QA Analyst, Testing, Entity Spawn Rules ~ xJon
 
 **Legacy Team [v12.0.5 and below]:**
 
@@ -20,9 +21,9 @@
 - Filch Lizards from Primitive Mobs (with permission!) ~ Daveyx0
 - Some assets used from their texture repository ~ MCThe_Paragon (Malcolm Riley)
 - New Shark Model ~ Foreck
+- Donkey & Mule Texture Tweaks ~ Deino
 
-**Additional Contributors:**
+**Translators:**
 
 - French Translation ~ nocturni
-- German Translation ~ magiczocker10
-- Donkey & Mule Texture Tweaks ~ Deino
+- German Translation ~ magiczocker10, ACGaming

@@ -52,10 +52,10 @@ public class MoCEntityDuck extends MoCEntityAnimal {
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
-    // TODO: Fix death sound
+    // TODO: Add proper death sound event
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_DUCK_DEATH;
+        return MoCSoundEvents.ENTITY_DUCK_HURT;
     }
 
     @Override

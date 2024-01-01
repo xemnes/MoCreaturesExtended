@@ -352,8 +352,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     }
                 }
                 return null;
-            case 6:
-                return MoCSoundEvents.ENTITY_KITTY_LITTER;
             case 10:
                 return MoCSoundEvents.ENTITY_KITTY_AMBIENT_BABY;
             case 12:

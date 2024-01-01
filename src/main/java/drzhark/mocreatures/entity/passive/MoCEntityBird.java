@@ -256,12 +256,12 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_BIRD_DEATH;
+        return SoundEvents.ENTITY_GENERIC_HURT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_BIRD_HURT;
+        return SoundEvents.ENTITY_GENERIC_HURT;
     }
 
     @Override

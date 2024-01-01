@@ -201,7 +201,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getDeathSound() {
         if (getIsHumanForm()) {
-            return MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREWOLF_DEATH_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
+            return MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREHUMAN_DEATH_LEGACY : SoundEvents.ENTITY_GENERIC_HURT;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_DEATH;
         }
@@ -211,7 +211,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     protected SoundEvent getHurtSound(DamageSource source) {
         if (getIsHumanForm()) {
             if (!this.transforming)
-                return MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREWOLF_HURT_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
+                return MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREHUMAN_HURT_LEGACY : SoundEvents.ENTITY_GENERIC_HURT;
             return null;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_HURT;
@@ -267,7 +267,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                     this.posX -= 0.3D;
                 }
                 if (this.tcounter == 10) {
-                    MoCTools.playCustomSound(this, MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM_HUMAN : MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM);
+                    MoCTools.playCustomSound(this, MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM_LEGACY : MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM);
                 }
                 if (this.tcounter > 30) {
                     Transform();

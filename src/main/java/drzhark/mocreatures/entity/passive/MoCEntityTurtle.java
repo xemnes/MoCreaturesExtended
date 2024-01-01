@@ -196,8 +196,9 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
                                 setPathToEntity(entityitem, f);
                             }
                             if (f < 2.0F && this.deathTime == 0) {
+                            	// TODO: Add a turtle eating sound event
                                 entityitem.setDead();
-                                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_EATING);
+                                //MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_EATING);
                                 EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 24D);
                                 if (entityplayer != null) {
                                     MoCTools.tameWithName(entityplayer, this);
@@ -326,12 +327,12 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_TURTLE_HURT;
+        return MoCSoundEvents.ENTITY_GENERIC_CLANG;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return MoCSoundEvents.ENTITY_TURTLE_AMBIENT;
+        return null;
     }
 
     @Override

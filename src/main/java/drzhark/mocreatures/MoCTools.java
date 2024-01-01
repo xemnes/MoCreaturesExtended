@@ -210,7 +210,8 @@ public class MoCTools {
 
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
             bigSmack(entityattacker, entitytarget, 0.6F);
-            playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
+            // TODO: Add equip sound
+            //playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
         }
     }
 
@@ -223,7 +224,9 @@ public class MoCTools {
 
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
             bigSmack(entityattacker, entitytarget, 0.6F);
-            playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
+            
+            // TODO: Add equip sound
+            //playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
         }
     }
 

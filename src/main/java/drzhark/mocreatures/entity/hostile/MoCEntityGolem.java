@@ -144,7 +144,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
                 }
 
                 if (this.dCounter > 140) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_EXPLODE, 3F);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EXPLODE, 3F);
                     destroyGolem();
                 }
             }
@@ -238,13 +238,13 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
             byte myBlock = translateOre(Block.getIdFromBlock(state.getBlock()));
             byte slot = (byte) getRandomCubeAdj();
             if (slot != -1 && slot < 23 && myBlock != -1 && getGolemState() != 4) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_ATTACH, 3F);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_ATTACH, 3F);
                 int h = this.world.getDifficulty().getId();
                 this.setHealth(getHealth() + h);
                 if (getHealth() > getMaxHealth()) this.setHealth(getMaxHealth());
                 saveGolemCube(slot, myBlock);
             } else {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_HURT, 2F);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_CLANG, 2F);
                 if ((MoCTools.mobGriefing(this.world)) && (MoCreatures.proxy.golemDestroyBlocks)) {
                     EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)));
                     entityitem.setDefaultPickupDelay();
@@ -282,7 +282,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         }
 
         if (this.golemCubes[i + 1] != 30 && (i == 10 || i == 13)) x = i + 1;
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_SHOOT, 3F);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_LAUNCH, 3F);
         MoCTools.throwStone(this, entity, Block.getStateById(generateBlock(this.golemCubes[x])), 10D, 0.4D);
         saveGolemCube((byte) x, (byte) 30);
         this.tCounter = 0;
@@ -305,7 +305,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         if (!openChest() && !uncoveredChest && getGolemState() != 1) {
             int j = this.world.getDifficulty().getId();
             if (!this.world.isRemote && this.rand.nextInt(j) == 0) destroyRandomGolemCube();
-            else MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_HURT, 2F);
+            else MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_CLANG, 2F);
 
             Entity entity = damagesource.getTrueSource();
             if ((entity != this) && (this.world.getDifficulty().getId() > 0) && entity instanceof EntityLivingBase) {

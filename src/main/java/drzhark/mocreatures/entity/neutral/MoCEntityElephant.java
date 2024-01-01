@@ -281,7 +281,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         this.tuskUses += (byte) dmg;
         if ((this.getTusks() == 1 && this.tuskUses > 59) || (this.getTusks() == 2 && this.tuskUses > 250)
                 || (this.getTusks() == 3 && this.tuskUses > 1000)) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_HURT);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_CLANG);
             setTusks((byte) 0);
         }
     }

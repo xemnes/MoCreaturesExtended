@@ -367,6 +367,9 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     }
 
     @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
+    @Override
     public void updatePassenger(Entity passenger) {
         double dist = getSizeFactor() * (0.1D);
         double newPosX = this.posX + (dist * Math.sin(this.renderYawOffset / 57.29578F));

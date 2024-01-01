@@ -532,4 +532,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     public float getEyeHeight() {
         return this.height * 0.75F;
     }
+
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
 }

@@ -199,6 +199,9 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
     }
 
     @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
+    @Override
     public float getSizeFactor() {
         if (getIsAdult()) {
             return 0.9F;

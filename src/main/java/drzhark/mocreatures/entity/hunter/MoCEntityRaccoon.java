@@ -164,6 +164,9 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal {
         return this.getIsAdult() && !this.isMovementCeased();
     }
 
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
     public float getEyeHeight() {
         return this.height * 0.86F;
     }

@@ -420,4 +420,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     public float getEyeHeight() {
         return this.height * 0.525F;
     }
+
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
 }

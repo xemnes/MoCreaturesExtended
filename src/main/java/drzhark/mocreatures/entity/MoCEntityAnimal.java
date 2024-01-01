@@ -295,7 +295,8 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
                 }
             }
 
-            if (MoCreatures.proxy.enableHunters && this.isReadyToHunt() && !this.getIsHunting() && this.rand.nextInt(500) == 0) {
+            // TODO: Revert after done testing
+            if (MoCreatures.proxy.enableHunters && this.isReadyToHunt() && !this.getIsHunting() && this.rand.nextInt(10) == 0) {
                 setIsHunting(true);
             }
 

@@ -32,7 +32,6 @@ public class EntityAIHunt<T extends EntityLivingBase> extends EntityAINearestAtt
     public boolean shouldExecute() {
         // Big Cat fix
         boolean hunterHasOwner = ((MoCEntityTameableAnimal)this.hunter).getIsTamed();
-        System.out.println("Check before hunting. hunterHasOwner is "+hunterHasOwner);
         return !hunterHasOwner && ((MoCEntityAnimal) this.hunter).getIsHunting() && super.shouldExecute();
     }
 }

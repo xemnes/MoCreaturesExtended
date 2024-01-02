@@ -197,7 +197,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (this.attackCounter > 0 && ++this.attackCounter > 9) {
             this.attackCounter = 0;
         }
-        if (!this.world.isRemote && !getIsAdult() && getAge() < 80 && (this.rand.nextInt(300) == 0)) {
+        if (!this.world.isRemote && getBearState() != 3 && !getIsAdult() && getAge() < 80 && (this.rand.nextInt(300) == 0)) {
             setBearState(2); // randomly perform an idle sit
         }
         /*
@@ -209,7 +209,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (!this.world.isRemote && getBearState() == 2 && !this.getNavigator().noPath()) {
             setBearState(0);
         }
-        if (!this.world.isRemote && this.standingCounter > 0 && ++this.standingCounter > 100) {
+        if (!this.world.isRemote && this.standingCounter > 0 && ++this.standingCounter > 100 && getBearState() != 3) {
             this.standingCounter = 0;
             setBearState(0);
         }

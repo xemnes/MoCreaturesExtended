@@ -109,6 +109,10 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     }
 
     @Override
+    public boolean getIsSitting() {
+        return this.isMovementCeased();
+    }
+    @Override
     public boolean getIsRideable() {
         return this.dataManager.get(RIDEABLE);
     }
@@ -191,7 +195,6 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        System.out.println("BEAR STATE: "+getBearState());
         if (this.mouthCounter > 0 && ++this.mouthCounter > 20) {
             this.mouthCounter = 0;
         }

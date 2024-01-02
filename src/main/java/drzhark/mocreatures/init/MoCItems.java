@@ -29,7 +29,7 @@ public class MoCItems {
 
     public static final Set<Item> ITEMS = new HashSet<>();
     // Misc
-    public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.ITEM_RECORD_SHUFFLING);
+    public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.MUSIC_DISC_SHUFFLING);
     public static final MoCItem horsesaddle = new MoCItemHorseSaddle("horsesaddle");
     public static final MoCItem sharkteeth = new MoCItem("sharkteeth");
     public static final MoCItem haystack = new MoCItemHayStack("haystack");

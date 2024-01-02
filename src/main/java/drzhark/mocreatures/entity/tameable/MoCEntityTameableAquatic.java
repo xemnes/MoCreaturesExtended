@@ -225,7 +225,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
 
         if (!stack.isEmpty() && getIsTamed() && isMyHealFood(stack)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             if (!this.world.isRemote) {
                 this.setHealth(getMaxHealth());
             }

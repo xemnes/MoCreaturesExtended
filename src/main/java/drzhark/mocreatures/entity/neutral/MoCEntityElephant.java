@@ -314,7 +314,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == Items.CAKE) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             this.temper += 2;
             this.setHealth(getMaxHealth());
             if (!this.world.isRemote && !getIsAdult() && !getIsTamed() && this.temper >= 10) {
@@ -325,7 +325,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == MoCItems.sugarlump) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             this.temper += 1;
             this.setHealth(getMaxHealth());
             if (!this.world.isRemote && !getIsAdult() && !getIsTamed() && this.temper >= 10) {

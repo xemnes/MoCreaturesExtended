@@ -183,7 +183,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
         if (!stack.isEmpty() && (stack.getItem() == Items.GOLDEN_CARROT) && !getHasEaten()) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setHasEaten(true);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             return true;
         }
         if (this.getRidingEntity() == null) {

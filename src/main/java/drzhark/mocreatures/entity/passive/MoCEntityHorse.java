@@ -336,7 +336,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     private void drinkingHorse() {
         openMouth();
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINKING);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINK);
     }
 
     /**
@@ -389,7 +389,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
     private void eatingHorse() {
         openMouth();
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
     }
 
     @Override

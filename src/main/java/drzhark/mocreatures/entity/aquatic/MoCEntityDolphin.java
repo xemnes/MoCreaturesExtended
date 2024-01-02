@@ -280,7 +280,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
                 }
             }
 
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
 
             return true;
         }
@@ -290,7 +290,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
                 this.setHealth(getMaxHealth());
             }
             setHasEaten(true);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             return true;
         }
         if (!this.isBeingRidden()) {

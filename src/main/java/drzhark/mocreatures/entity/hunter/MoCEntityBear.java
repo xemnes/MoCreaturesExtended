@@ -232,7 +232,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
                 }
                 if (f < 2.0F && this.deathTime == 0) {
                     entityitem.setDead();
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
                     this.setHealth(getMaxHealth());
                 }
 
@@ -293,7 +293,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
     protected void eatingAnimal() {
         openMouth();
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
     }
 
     @Override
@@ -337,7 +337,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (!stack.isEmpty() && getIsTamed() && (MoCTools.isItemEdibleforCarnivores(stack.getItem()))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             this.setHealth(getMaxHealth());
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             setIsHunting(false);
             setHasEaten(true);
             return true;

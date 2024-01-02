@@ -547,7 +547,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
 
             openMouth();
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             setFertile(true);
             return true;
         }
@@ -573,7 +573,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             } else {
                 transform(6);
             }
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINKING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINK);
             return true;
         }
 
@@ -589,7 +589,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             } else {
                 transform(7);
             }
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINKING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINK);
             return true;
         }
 
@@ -605,7 +605,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             } else {
                 transform(8);
             }
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINKING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINK);
             return true;
         }
 
@@ -621,7 +621,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             } else {
                 transform(5);
             }
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINKING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_DRINK);
             return true;
         }
         if (getIsTamed() && getIsChested() && (getType() > 1) && !stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(Blocks.WOOL)) {

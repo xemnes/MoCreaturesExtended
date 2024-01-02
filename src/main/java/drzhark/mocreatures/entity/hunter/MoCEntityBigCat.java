@@ -333,7 +333,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                     entityitem.setDead();
                     this.setHealth(getMaxHealth());
                     setHasEaten(true);
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
                 }
             }
         }
@@ -459,7 +459,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         if (!stack.isEmpty() && getIsTamed() && (MoCTools.isItemEdibleforCarnivores(stack.getItem()))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             this.setHealth(getMaxHealth());
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             setIsHunting(false);
             setHasEaten(true);
             return true;

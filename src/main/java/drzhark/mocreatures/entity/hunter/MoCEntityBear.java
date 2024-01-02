@@ -191,6 +191,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
+        System.out.println("BEAR STATE: "+getBearState());
         if (this.mouthCounter > 0 && ++this.mouthCounter > 20) {
             this.mouthCounter = 0;
         }
@@ -323,14 +324,30 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.standingCounter = 1;
     }
 
+    public void processBearWhipped() {
+        if (!this.isMovementCeased()) {
+            // Set to "SITTING via WHIP"
+            setBearState(3);
+        } else {
+            // Set to "on all fours"
+            setBearState(0);
+        }
+        setIsJumping(false);
+        getNavigator().clearPath();
+        setAttackTarget(null);
+    }
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        final ItemStack stack = player.getHeldItem(hand);
+        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
+            this.processBearWhipped();
+            return true;
+        }
         final Boolean tameResult = this.processTameInteract(player, hand);
         if (tameResult != null) {
             return tameResult;
         }
 
-        final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getAge() > 80)
                 && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
@@ -358,19 +375,6 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
             if (!this.world.isRemote) {
                 player.displayGUIChest(this.localchest);
             }
-            return true;
-        }
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
-            if (!this.isMovementCeased()) {
-                // Set to "SITTING via WHIP"
-                setBearState(3);
-            } else {
-                // Set to "on all fours"
-                setBearState(0);
-            }
-            setIsJumping(false);
-            getNavigator().clearPath();
-            setAttackTarget(null);
             return true;
         }
 

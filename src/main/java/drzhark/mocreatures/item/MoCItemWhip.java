@@ -140,18 +140,6 @@ public class MoCItemWhip extends MoCItem {
                         entityelephant.sprintCounter = 1;
                     }
                 }
-
-                if (entity instanceof MoCEntityBear) {
-                    MoCEntityBear entitybear = (MoCEntityBear) entity;
-
-                    if (entitybear.getIsTamed()) {
-                        if (entitybear.getBearState() == 0) {
-                            entitybear.setBearState(2);
-                        } else {
-                            entitybear.setBearState(0);
-                        }
-                    }
-                }
             }
             return EnumActionResult.SUCCESS;
         }

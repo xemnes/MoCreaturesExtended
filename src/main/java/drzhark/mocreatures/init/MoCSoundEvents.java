@@ -14,12 +14,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(MoCConstants.MOD_ID)
 public class MoCSoundEvents {
-
     /* Entity */
     // Ambient
     public static final SoundEvent ENTITY_BEE_AMBIENT;
     public static final SoundEvent ENTITY_BEE_HURT;
-    public static final SoundEvent ENTITY_BEE_UPSET;
+    public static final SoundEvent ENTITY_BEE_ANGRY;
     //
     public static final SoundEvent ENTITY_CRICKET_AMBIENT;
     public static final SoundEvent ENTITY_CRICKET_CHIRP;
@@ -31,7 +30,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_FLY_AMBIENT;
     public static final SoundEvent ENTITY_FLY_HURT;
     //
-    public static final SoundEvent ENTITY_GRASSHOPPER_AMBIENT; // TODO
+    public static final SoundEvent ENTITY_GRASSHOPPER_AMBIENT;
     public static final SoundEvent ENTITY_GRASSHOPPER_CHIRP;
     public static final SoundEvent ENTITY_GRASSHOPPER_FLY;
     public static final SoundEvent ENTITY_GRASSHOPPER_HURT;
@@ -40,13 +39,13 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_DOLPHIN_DEATH;
     public static final SoundEvent ENTITY_DOLPHIN_HURT;
     public static final SoundEvent ENTITY_DOLPHIN_AMBIENT;
-    public static final SoundEvent ENTITY_DOLPHIN_UPSET;
+    public static final SoundEvent ENTITY_DOLPHIN_ANGRY;
 
     // Hostile
-    public static final SoundEvent ENTITY_GOLEM_AMBIENT;
-    public static final SoundEvent ENTITY_GOLEM_DYING;
-    public static final SoundEvent ENTITY_GOLEM_HURT;
-    public static final SoundEvent ENTITY_GOLEM_WALK;
+    public static final SoundEvent ENTITY_BIG_GOLEM_AMBIENT;
+    public static final SoundEvent ENTITY_BIG_GOLEM_DEATH;
+    public static final SoundEvent ENTITY_BIG_GOLEM_HURT;
+    public static final SoundEvent ENTITY_BIG_GOLEM_STEP;
     //
     public static final SoundEvent ENTITY_HELL_RAT_AMBIENT;
     public static final SoundEvent ENTITY_HELL_RAT_DEATH;
@@ -61,7 +60,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_RAT_HURT;
     //
     public static final SoundEvent ENTITY_SCORPION_AMBIENT;
-    public static final SoundEvent ENTITY_SCORPION_CLAW;
+    public static final SoundEvent ENTITY_SCORPION_ATTACK;
     public static final SoundEvent ENTITY_SCORPION_DEATH;
     public static final SoundEvent ENTITY_SCORPION_HURT;
     public static final SoundEvent ENTITY_SCORPION_STING;
@@ -87,8 +86,8 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_CROCODILE_AMBIENT;
     public static final SoundEvent ENTITY_CROCODILE_DEATH;
     public static final SoundEvent ENTITY_CROCODILE_HURT;
-    public static final SoundEvent ENTITY_CROCODILE_JAWSNAP;
-    public static final SoundEvent ENTITY_CROCODILE_RESTING;
+    public static final SoundEvent ENTITY_CROCODILE_ATTACK;
+    public static final SoundEvent ENTITY_CROCODILE_REST;
     public static final SoundEvent ENTITY_CROCODILE_ROLL;
     //
     public static final SoundEvent ENTITY_FOX_AMBIENT;
@@ -111,7 +110,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_SNAKE_DEATH;
     public static final SoundEvent ENTITY_SNAKE_HURT;
     public static final SoundEvent ENTITY_SNAKE_RATTLE;
-    public static final SoundEvent ENTITY_SNAKE_SNAP;
+    public static final SoundEvent ENTITY_SNAKE_ATTACK;
     public static final SoundEvent ENTITY_SNAKE_SWIM;
 
     // Neutral
@@ -120,33 +119,32 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_ELEPHANT_DEATH;
     public static final SoundEvent ENTITY_ELEPHANT_HURT;
     //
-    public static final SoundEvent ENTITY_ENT_AMBIENT; // TODO
-    public static final SoundEvent ENTITY_ENT_DEATH; // TODO
-    public static final SoundEvent ENTITY_ENT_HURT; // TODO
+    public static final SoundEvent ENTITY_ENT_AMBIENT;
+    public static final SoundEvent ENTITY_ENT_DEATH;
+    public static final SoundEvent ENTITY_ENT_HURT;
     //
     public static final SoundEvent ENTITY_GOAT_AMBIENT;
     public static final SoundEvent ENTITY_GOAT_AMBIENT_BABY;
     public static final SoundEvent ENTITY_GOAT_AMBIENT_FEMALE;
     public static final SoundEvent ENTITY_GOAT_DEATH;
-    public static final SoundEvent ENTITY_GOAT_DIGG;
-    public static final SoundEvent ENTITY_GOAT_EATING;
+    public static final SoundEvent ENTITY_GOAT_DIG;
+    public static final SoundEvent ENTITY_GOAT_EAT;
     public static final SoundEvent ENTITY_GOAT_HURT;
-    public static final SoundEvent ENTITY_GOAT_SMACK;
     //
     public static final SoundEvent ENTITY_KITTY_AMBIENT;
     public static final SoundEvent ENTITY_KITTY_AMBIENT_BABY;
     public static final SoundEvent ENTITY_KITTY_ANGRY;
     public static final SoundEvent ENTITY_KITTY_DEATH;
     public static final SoundEvent ENTITY_KITTY_DEATH_BABY;
-    public static final SoundEvent ENTITY_KITTY_DRINKING;
-    public static final SoundEvent ENTITY_KITTY_EATING;
+    public static final SoundEvent ENTITY_KITTY_DRINK;
+    public static final SoundEvent ENTITY_KITTY_EAT;
     public static final SoundEvent ENTITY_KITTY_HUNGRY;
     public static final SoundEvent ENTITY_KITTY_HURT;
     public static final SoundEvent ENTITY_KITTY_HURT_BABY;
     public static final SoundEvent ENTITY_KITTY_PURR;
     public static final SoundEvent ENTITY_KITTY_TRAPPED;
-    public static final SoundEvent ENTITY_KITTYBED_POURINGMILK;
-    public static final SoundEvent ENTITY_KITTYBED_POURINGFOOD;
+    public static final SoundEvent ENTITY_KITTY_BED_POUR_FOOD;
+    public static final SoundEvent ENTITY_KITTY_BED_POUR_MILK;
     //
     public static final SoundEvent ENTITY_OSTRICH_AMBIENT;
     public static final SoundEvent ENTITY_OSTRICH_AMBIENT_BABY;
@@ -156,7 +154,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_WYVERN_AMBIENT;
     public static final SoundEvent ENTITY_WYVERN_DEATH;
     public static final SoundEvent ENTITY_WYVERN_HURT;
-    public static final SoundEvent ENTITY_WYVERN_WINGFLAP;
+    public static final SoundEvent ENTITY_WYVERN_WING_FLAP;
 
     // Passive
     public static final SoundEvent ENTITY_BIRD_AMBIENT_BLACK;
@@ -196,13 +194,15 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_MOUSE_DEATH;
     public static final SoundEvent ENTITY_MOUSE_HURT;
     //
-    public static final SoundEvent ENTITY_RABBIT_DEATH;
-    public static final SoundEvent ENTITY_RABBIT_HURT;
-    public static final SoundEvent ENTITY_RABBIT_LIFT;
+    public static final SoundEvent ENTITY_BUNNY_DEATH;
+    public static final SoundEvent ENTITY_BUNNY_HURT;
+    public static final SoundEvent ENTITY_BUNNY_LAND;
+    public static final SoundEvent ENTITY_BUNNY_LIFT;
     //
     public static final SoundEvent ENTITY_TURKEY_AMBIENT;
     public static final SoundEvent ENTITY_TURKEY_HURT;
-    public static final SoundEvent ENTITY_TURTLE_ANGRY;
+    //
+    public static final SoundEvent ENTITY_TURTLE_HISS;
     public static final SoundEvent ENTITY_TURTLE_DEATH;
 
     /* Entity (Legacy) */
@@ -223,20 +223,23 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_ATTACH;
     public static final SoundEvent ENTITY_GENERIC_CLANG;
     public static final SoundEvent ENTITY_GENERIC_DESTROY;
-    public static final SoundEvent ENTITY_GENERIC_DRINKING;
-    public static final SoundEvent ENTITY_GENERIC_EATING;
+    public static final SoundEvent ENTITY_GENERIC_DRINK;
+    public static final SoundEvent ENTITY_GENERIC_EAT;
+    public static final SoundEvent ENTITY_GENERIC_ENVENOM;
     public static final SoundEvent ENTITY_GENERIC_EXPLODE;
     public static final SoundEvent ENTITY_GENERIC_MAGIC_APPEAR;
+    public static final SoundEvent ENTITY_GENERIC_MAGIC_CONVERSION;
+    public static final SoundEvent ENTITY_GENERIC_MAGIC_CREEPY;
+    public static final SoundEvent ENTITY_GENERIC_MAGIC_ENCHANTED;
     public static final SoundEvent ENTITY_GENERIC_LAUNCH;
     public static final SoundEvent ENTITY_GENERIC_ROPING;
-    public static final SoundEvent ENTITY_GENERIC_TRANSFORM;
-    public static final SoundEvent ENTITY_GENERIC_VANISH;
-    public static final SoundEvent ENTITY_GENERIC_WHIP;
-    public static final SoundEvent ENTITY_GENERIC_WINGFLAP;
+    public static final SoundEvent ENTITY_GENERIC_SMACK;
+    public static final SoundEvent ENTITY_GENERIC_WHIP_COMMAND;
+    public static final SoundEvent ENTITY_GENERIC_WING_FLAP;
 
     /* Music */
     // Record
-    public static final SoundEvent ITEM_RECORD_SHUFFLING;
+    public static final SoundEvent MUSIC_DISC_SHUFFLING;
 
     static {
         if (!Bootstrap.isRegistered()) {
@@ -244,227 +247,230 @@ public class MoCSoundEvents {
         } else {
             /* Entity */
             // Ambient
-            ENTITY_BEE_AMBIENT = createSoundEvent("bee");
-            ENTITY_BEE_HURT = createSoundEvent("beehurt");
-            ENTITY_BEE_UPSET = createSoundEvent("beeupset");
+            ENTITY_BEE_AMBIENT = createSoundEvent("entity.bee.ambient");
+            ENTITY_BEE_HURT = createSoundEvent("entity.bee.hurt");
+            ENTITY_BEE_ANGRY = createSoundEvent("entity.bee.angry");
             //
-            ENTITY_CRICKET_AMBIENT = createSoundEvent("cricketambient");
-            ENTITY_CRICKET_CHIRP = createSoundEvent("cricketchirp");
-            ENTITY_CRICKET_HURT = createSoundEvent("crickethurt");
+            ENTITY_CRICKET_AMBIENT = createSoundEvent("entity.cricket.ambient");
+            ENTITY_CRICKET_CHIRP = createSoundEvent("entity.cricket.chirp");
+            ENTITY_CRICKET_HURT = createSoundEvent("entity.cricket.hurt");
             //
-            ENTITY_DRAGONFLY_AMBIENT = createSoundEvent("dragonfly");
-            ENTITY_DRAGONFLY_HURT = createSoundEvent("dragonflyhurt");
+            ENTITY_DRAGONFLY_AMBIENT = createSoundEvent("entity.dragonfly.ambient");
+            ENTITY_DRAGONFLY_HURT = createSoundEvent("entity.dragonfly.hurt");
             //
-            ENTITY_FLY_AMBIENT = createSoundEvent("fly");
-            ENTITY_FLY_HURT = createSoundEvent("flyhurt");
+            ENTITY_FLY_AMBIENT = createSoundEvent("entity.fly.ambient");
+            ENTITY_FLY_HURT = createSoundEvent("entity.fly.hurt");
             //
-            ENTITY_GRASSHOPPER_AMBIENT = createSoundEvent("grasshopperambient"); // TODO
-            ENTITY_GRASSHOPPER_CHIRP = createSoundEvent("grasshopperchirp");
-            ENTITY_GRASSHOPPER_FLY = createSoundEvent("grasshopperfly");
-            ENTITY_GRASSHOPPER_HURT = createSoundEvent("grasshopperhurt");
+            ENTITY_GRASSHOPPER_AMBIENT = createSoundEvent("entity.grasshopper.ambient"); // TODO
+            ENTITY_GRASSHOPPER_CHIRP = createSoundEvent("entity.grasshopper.chirp");
+            ENTITY_GRASSHOPPER_FLY = createSoundEvent("entity.grasshopper.fly");
+            ENTITY_GRASSHOPPER_HURT = createSoundEvent("entity.grasshopper.hurt");
 
             // Aquatic
-            ENTITY_DOLPHIN_AMBIENT = createSoundEvent("dolphin");
-            ENTITY_DOLPHIN_DEATH = createSoundEvent("dolphindying");
-            ENTITY_DOLPHIN_HURT = createSoundEvent("dolphinhurt");
-            ENTITY_DOLPHIN_UPSET = createSoundEvent("dolphinupset");
+            ENTITY_DOLPHIN_AMBIENT = createSoundEvent("entity.dolphin.ambient");
+            ENTITY_DOLPHIN_DEATH = createSoundEvent("entity.dolphin.death");
+            ENTITY_DOLPHIN_HURT = createSoundEvent("entity.dolphin.hurt");
+            ENTITY_DOLPHIN_ANGRY = createSoundEvent("entity.dolphin.angry");
 
             // Hostile
-            ENTITY_GOLEM_AMBIENT = createSoundEvent("golemgrunt");
-            ENTITY_GOLEM_DYING = createSoundEvent("golemdying");
-            ENTITY_GOLEM_HURT = createSoundEvent("golemhurt");
-            ENTITY_GOLEM_WALK = createSoundEvent("golemwalk");
+            ENTITY_BIG_GOLEM_AMBIENT = createSoundEvent("entity.big_golem.ambient");
+            ENTITY_BIG_GOLEM_DEATH = createSoundEvent("entity.big_golem.death");
+            ENTITY_BIG_GOLEM_HURT = createSoundEvent("entity.big_golem.hurt");
+            ENTITY_BIG_GOLEM_STEP = createSoundEvent("entity.big_golem.step");
             //
-            ENTITY_HELL_RAT_AMBIENT = createSoundEvent("hellratgrunt");
-            ENTITY_HELL_RAT_DEATH = createSoundEvent("hellratdying");
-            ENTITY_HELL_RAT_HURT = createSoundEvent("hellrathurt");
+            ENTITY_HELL_RAT_AMBIENT = createSoundEvent("entity.hell_rat.ambient");
+            ENTITY_HELL_RAT_DEATH = createSoundEvent("entity.hell_rat.death");
+            ENTITY_HELL_RAT_HURT = createSoundEvent("entity.hell_rat.hurt");
             //
-            ENTITY_OGRE_AMBIENT = createSoundEvent("ogre");
-            ENTITY_OGRE_DEATH = createSoundEvent("ogredying");
-            ENTITY_OGRE_HURT = createSoundEvent("ogrehurt");
+            ENTITY_OGRE_AMBIENT = createSoundEvent("entity.ogre.ambient");
+            ENTITY_OGRE_DEATH = createSoundEvent("entity.ogre.death");
+            ENTITY_OGRE_HURT = createSoundEvent("entity.ogre.hurt");
             //
-            ENTITY_RAT_AMBIENT = createSoundEvent("ratgrunt");
-            ENTITY_RAT_DEATH = createSoundEvent("ratdying");
-            ENTITY_RAT_HURT = createSoundEvent("rathurt");
+            ENTITY_RAT_AMBIENT = createSoundEvent("entity.rat.ambient");
+            ENTITY_RAT_DEATH = createSoundEvent("entity.rat.death");
+            ENTITY_RAT_HURT = createSoundEvent("entity.rat.hurt");
             //
-            ENTITY_SCORPION_AMBIENT = createSoundEvent("scorpiongrunt");
-            ENTITY_SCORPION_CLAW = createSoundEvent("scorpionclaw");
-            ENTITY_SCORPION_DEATH = createSoundEvent("scorpiondying");
-            ENTITY_SCORPION_HURT = createSoundEvent("scorpionhurt");
-            ENTITY_SCORPION_STING = createSoundEvent("scorpionsting");
+            ENTITY_SCORPION_AMBIENT = createSoundEvent("entity.scorpion.ambient");
+            ENTITY_SCORPION_ATTACK = createSoundEvent("entity.scorpion.attack");
+            ENTITY_SCORPION_DEATH = createSoundEvent("entity.scorpion.death");
+            ENTITY_SCORPION_HURT = createSoundEvent("entity.scorpion.hurt");
+            ENTITY_SCORPION_STING = createSoundEvent("entity.scorpion.sting");
             //
-            ENTITY_WEREWOLF_AMBIENT = createSoundEvent("werewolfgrunt");
-            ENTITY_WEREWOLF_DEATH = createSoundEvent("werewolfdying");
-            ENTITY_WEREWOLF_HURT = createSoundEvent("werewolfhurt");
-            ENTITY_WEREWOLF_TRANSFORM = createSoundEvent("weretransform");
+            ENTITY_WEREWOLF_AMBIENT = createSoundEvent("entity.werewolf.ambient");
+            ENTITY_WEREWOLF_DEATH = createSoundEvent("entity.werewolf.death");
+            ENTITY_WEREWOLF_HURT = createSoundEvent("entity.werewolf.hurt");
+            ENTITY_WEREWOLF_TRANSFORM = createSoundEvent("entity.werewolf.transform");
             //
-            ENTITY_WOLF_AMBIENT = createSoundEvent("wolfgrunt");
-            ENTITY_WOLF_DEATH = createSoundEvent("wolfdeath");
-            ENTITY_WOLF_HURT = createSoundEvent("wolfhurt");
+            ENTITY_WOLF_AMBIENT = createSoundEvent("entity.wolf.ambient");
+            ENTITY_WOLF_DEATH = createSoundEvent("entity.wolf.death");
+            ENTITY_WOLF_HURT = createSoundEvent("entity.wolf.hurt");
             //
-            ENTITY_WRAITH_AMBIENT = createSoundEvent("wraith");
-            ENTITY_WRAITH_DEATH = createSoundEvent("wraithdying");
-            ENTITY_WRAITH_HURT = createSoundEvent("wraithhurt");
+            ENTITY_WRAITH_AMBIENT = createSoundEvent("entity.wraith.ambient");
+            ENTITY_WRAITH_DEATH = createSoundEvent("entity.wraith.death");
+            ENTITY_WRAITH_HURT = createSoundEvent("entity.wraith.hurt");
 
             // Hunter
-            ENTITY_BEAR_AMBIENT = createSoundEvent("beargrunt");
-            ENTITY_BEAR_DEATH = createSoundEvent("beardeath");
-            ENTITY_BEAR_HURT = createSoundEvent("bearhurt");
+            ENTITY_BEAR_AMBIENT = createSoundEvent("entity.bear.ambient");
+            ENTITY_BEAR_DEATH = createSoundEvent("entity.bear.death");
+            ENTITY_BEAR_HURT = createSoundEvent("entity.bear.hurt");
             //
-            ENTITY_CROCODILE_AMBIENT = createSoundEvent("crocgrunt");
-            ENTITY_CROCODILE_DEATH = createSoundEvent("crocdying");
-            ENTITY_CROCODILE_HURT = createSoundEvent("crochurt");
-            ENTITY_CROCODILE_JAWSNAP = createSoundEvent("crocjawsnap");
-            ENTITY_CROCODILE_RESTING = createSoundEvent("crocresting");
-            ENTITY_CROCODILE_ROLL = createSoundEvent("crocroll");
+            ENTITY_CROCODILE_AMBIENT = createSoundEvent("entity.crocodile.ambient");
+            ENTITY_CROCODILE_DEATH = createSoundEvent("entity.crocodile.death");
+            ENTITY_CROCODILE_HURT = createSoundEvent("entity.crocodile.hurt");
+            ENTITY_CROCODILE_ATTACK = createSoundEvent("entity.crocodile.attack");
+            ENTITY_CROCODILE_REST = createSoundEvent("entity.crocodile.rest");
+            ENTITY_CROCODILE_ROLL = createSoundEvent("entity.crocodile.roll");
             //
-            ENTITY_FOX_AMBIENT = createSoundEvent("foxcall");
-            ENTITY_FOX_DEATH = createSoundEvent("foxdying");
-            ENTITY_FOX_HURT = createSoundEvent("foxhurt");
+            ENTITY_FOX_AMBIENT = createSoundEvent("entity.fox.ambient");
+            ENTITY_FOX_DEATH = createSoundEvent("entity.fox.death");
+            ENTITY_FOX_HURT = createSoundEvent("entity.fox.hurt");
             //
-            ENTITY_LION_AMBIENT = createSoundEvent("liongrunt");
-            ENTITY_LION_AMBIENT_BABY = createSoundEvent("cubgrunt");
-            ENTITY_LION_DEATH = createSoundEvent("liondeath");
-            ENTITY_LION_DEATH_BABY = createSoundEvent("cubdying");
-            ENTITY_LION_HURT = createSoundEvent("lionhurt");
-            ENTITY_LION_HURT_BABY = createSoundEvent("cubhurt");
+            ENTITY_LION_AMBIENT = createSoundEvent("entity.lion.ambient");
+            ENTITY_LION_AMBIENT_BABY = createSoundEvent("entity.lion.ambient_baby");
+            ENTITY_LION_DEATH = createSoundEvent("entity.lion.death");
+            ENTITY_LION_DEATH_BABY = createSoundEvent("entity.lion.death_baby");
+            ENTITY_LION_HURT = createSoundEvent("entity.lion.hurt");
+            ENTITY_LION_HURT_BABY = createSoundEvent("entity.lion.hurt_baby");
             //
-            ENTITY_RACCOON_AMBIENT = createSoundEvent("raccoongrunt");
-            ENTITY_RACCOON_DEATH = createSoundEvent("raccoondying");
-            ENTITY_RACCOON_HURT = createSoundEvent("raccoonhurt");
+            ENTITY_RACCOON_AMBIENT = createSoundEvent("entity.raccoon.ambient");
+            ENTITY_RACCOON_DEATH = createSoundEvent("entity.raccoon.death");
+            ENTITY_RACCOON_HURT = createSoundEvent("entity.raccoon.hurt");
             //
-            ENTITY_SNAKE_AMBIENT = createSoundEvent("snakehiss");
-            ENTITY_SNAKE_ANGRY = createSoundEvent("snakeupset");
-            ENTITY_SNAKE_DEATH = createSoundEvent("snakedying");
-            ENTITY_SNAKE_HURT = createSoundEvent("snakehurt");
-            ENTITY_SNAKE_RATTLE = createSoundEvent("snakerattle");
-            ENTITY_SNAKE_SNAP = createSoundEvent("snakesnap");
-            ENTITY_SNAKE_SWIM = createSoundEvent("snakeswim");
+            ENTITY_SNAKE_AMBIENT = createSoundEvent("entity.snake.ambient");
+            ENTITY_SNAKE_ANGRY = createSoundEvent("entity.snake.angry");
+            ENTITY_SNAKE_DEATH = createSoundEvent("entity.snake.death");
+            ENTITY_SNAKE_HURT = createSoundEvent("entity.snake.hurt");
+            ENTITY_SNAKE_RATTLE = createSoundEvent("entity.snake.rattle");
+            ENTITY_SNAKE_ATTACK = createSoundEvent("entity.snake.attack");
+            ENTITY_SNAKE_SWIM = createSoundEvent("entity.snake.swim");
 
             // Neutral
-            ENTITY_ELEPHANT_AMBIENT_BABY = createSoundEvent("elephantcalf");
-            ENTITY_ELEPHANT_AMBIENT = createSoundEvent("elephantgrunt");
-            ENTITY_ELEPHANT_DEATH = createSoundEvent("elephantdying");
-            ENTITY_ELEPHANT_HURT = createSoundEvent("elephanthurt");
+            ENTITY_ELEPHANT_AMBIENT_BABY = createSoundEvent("entity.elephant.ambient_baby");
+            ENTITY_ELEPHANT_AMBIENT = createSoundEvent("entity.elephant.ambient");
+            ENTITY_ELEPHANT_DEATH = createSoundEvent("entity.elephant.death");
+            ENTITY_ELEPHANT_HURT = createSoundEvent("entity.elephant.hurt");
             //
-            ENTITY_ENT_AMBIENT = createSoundEvent("entgrunt"); // TODO
-            ENTITY_ENT_DEATH = createSoundEvent("entdying"); // TODO
-            ENTITY_ENT_HURT = createSoundEvent("enthurt"); // TODO
+            ENTITY_ENT_AMBIENT = createSoundEvent("entity.ent.ambient"); // TODO
+            ENTITY_ENT_DEATH = createSoundEvent("entity.ent.death"); // TODO
+            ENTITY_ENT_HURT = createSoundEvent("entity.ent.hurt"); // TODO
             //
-            ENTITY_GOAT_AMBIENT = createSoundEvent("goatgrunt");
-            ENTITY_GOAT_AMBIENT_BABY = createSoundEvent("goatkid");
-            ENTITY_GOAT_AMBIENT_FEMALE = createSoundEvent("goatfemale");
-            ENTITY_GOAT_DEATH = createSoundEvent("goatdying");
-            ENTITY_GOAT_HURT = createSoundEvent("goathurt");
-            ENTITY_GOAT_DIGG = createSoundEvent("goatdigg");
-            ENTITY_GOAT_EATING = createSoundEvent("goateating");
-            ENTITY_GOAT_SMACK = createSoundEvent("goatsmack");
+            ENTITY_GOAT_AMBIENT = createSoundEvent("entity.goat.ambient");
+            ENTITY_GOAT_AMBIENT_BABY = createSoundEvent("entity.goat.ambient_baby");
+            ENTITY_GOAT_AMBIENT_FEMALE = createSoundEvent("entity.goat.ambient_female");
+            ENTITY_GOAT_DEATH = createSoundEvent("entity.goat.death");
+            ENTITY_GOAT_HURT = createSoundEvent("entity.goat.hurt");
+            ENTITY_GOAT_DIG = createSoundEvent("entity.goat.dig");
+            ENTITY_GOAT_EAT = createSoundEvent("entity.goat.eat");
             //
-            ENTITY_KITTY_AMBIENT = createSoundEvent("kittygrunt");
-            ENTITY_KITTY_AMBIENT_BABY = createSoundEvent("kittengrunt");
-            ENTITY_KITTY_ANGRY = createSoundEvent("kittyupset");
-            ENTITY_KITTY_DEATH = createSoundEvent("kittydying");
-            ENTITY_KITTY_DEATH_BABY = createSoundEvent("kittendying");
-            ENTITY_KITTY_DRINKING = createSoundEvent("kittyeatingm");
-            ENTITY_KITTY_EATING = createSoundEvent("kittyfood");
-            ENTITY_KITTY_HUNGRY = createSoundEvent("kittyeatingf");
-            ENTITY_KITTY_HURT = createSoundEvent("kittyhurt");
-            ENTITY_KITTY_HURT_BABY = createSoundEvent("kittenhurt");
-            ENTITY_KITTY_PURR = createSoundEvent("kittypurr");
-            ENTITY_KITTY_TRAPPED = createSoundEvent("kittytrapped");
-            ENTITY_KITTYBED_POURINGFOOD = createSoundEvent("pouringfood");
-            ENTITY_KITTYBED_POURINGMILK = createSoundEvent("pouringmilk");
+            ENTITY_KITTY_AMBIENT = createSoundEvent("entity.kitty.ambient");
+            ENTITY_KITTY_AMBIENT_BABY = createSoundEvent("entity.kitty.ambient_baby");
+            ENTITY_KITTY_ANGRY = createSoundEvent("entity.kitty.angry");
+            ENTITY_KITTY_DEATH = createSoundEvent("entity.kitty.death");
+            ENTITY_KITTY_DEATH_BABY = createSoundEvent("entity.kitty.death_baby");
+            ENTITY_KITTY_DRINK = createSoundEvent("entity.kitty.drink");
+            ENTITY_KITTY_EAT = createSoundEvent("entity.kitty.eat");
+            ENTITY_KITTY_HUNGRY = createSoundEvent("entity.kitty.hungry");
+            ENTITY_KITTY_HURT = createSoundEvent("entity.kitty.hurt");
+            ENTITY_KITTY_HURT_BABY = createSoundEvent("entity.kitty.hurt_baby");
+            ENTITY_KITTY_PURR = createSoundEvent("entity.kitty.purr");
+            ENTITY_KITTY_TRAPPED = createSoundEvent("entity.kitty.trapped");
+            ENTITY_KITTY_BED_POUR_FOOD = createSoundEvent("entity.kitty_bed.pour_food");
+            ENTITY_KITTY_BED_POUR_MILK = createSoundEvent("entity.kitty_bed.pour_milk");
             //
-            ENTITY_OSTRICH_AMBIENT = createSoundEvent("ostrichgrunt");
-            ENTITY_OSTRICH_AMBIENT_BABY = createSoundEvent("ostrichchick");
-            ENTITY_OSTRICH_DEATH = createSoundEvent("ostrichdying");
-            ENTITY_OSTRICH_HURT = createSoundEvent("ostrichhurt");
+            ENTITY_OSTRICH_AMBIENT = createSoundEvent("entity.ostrich.ambient");
+            ENTITY_OSTRICH_AMBIENT_BABY = createSoundEvent("entity.ostrich.ambient_baby");
+            ENTITY_OSTRICH_DEATH = createSoundEvent("entity.ostrich.death");
+            ENTITY_OSTRICH_HURT = createSoundEvent("entity.ostrich.hurt");
             //
-            ENTITY_WYVERN_AMBIENT = createSoundEvent("wyverngrunt");
-            ENTITY_WYVERN_DEATH = createSoundEvent("wyverndying");
-            ENTITY_WYVERN_HURT = createSoundEvent("wyvernhurt");
-            ENTITY_WYVERN_WINGFLAP = createSoundEvent("wyvernwingflap");
+            ENTITY_WYVERN_AMBIENT = createSoundEvent("entity.wyvern.ambient");
+            ENTITY_WYVERN_DEATH = createSoundEvent("entity.wyvern.death");
+            ENTITY_WYVERN_HURT = createSoundEvent("entity.wyvern.hurt");
+            ENTITY_WYVERN_WING_FLAP = createSoundEvent("entity.wyvern.wing_flap");
 
             // Passive
-            ENTITY_BIRD_AMBIENT_BLACK = createSoundEvent("birdblack");
-            ENTITY_BIRD_AMBIENT_BLUE = createSoundEvent("birdblue");
-            ENTITY_BIRD_AMBIENT_GREEN = createSoundEvent("birdgreen");
-            ENTITY_BIRD_AMBIENT_RED = createSoundEvent("birdred");
-            ENTITY_BIRD_AMBIENT_YELLOW = createSoundEvent("birdyellow");
-            ENTITY_BIRD_AMBIENT_WHITE = createSoundEvent("birdwhite");
+            ENTITY_BIRD_AMBIENT_BLACK = createSoundEvent("entity.bird.ambient_black");
+            ENTITY_BIRD_AMBIENT_BLUE = createSoundEvent("entity.bird.ambient_blue");
+            ENTITY_BIRD_AMBIENT_GREEN = createSoundEvent("entity.bird.ambient_green");
+            ENTITY_BIRD_AMBIENT_RED = createSoundEvent("entity.bird.ambient_red");
+            ENTITY_BIRD_AMBIENT_YELLOW = createSoundEvent("entity.bird.ambient_yellow");
+            ENTITY_BIRD_AMBIENT_WHITE = createSoundEvent("entity.bird.ambient_white");
             //
-            ENTITY_DEER_AMBIENT_BABY = createSoundEvent("deerbgrunt");
-            ENTITY_DEER_AMBIENT = createSoundEvent("deerfgrunt");
-            ENTITY_DEER_DEATH = createSoundEvent("deerdying");
-            ENTITY_DEER_HURT = createSoundEvent("deerhurt");
+            ENTITY_DEER_AMBIENT_BABY = createSoundEvent("entity.deer.ambient_baby");
+            ENTITY_DEER_AMBIENT = createSoundEvent("entity.deer.ambient");
+            ENTITY_DEER_DEATH = createSoundEvent("entity.deer.death");
+            ENTITY_DEER_HURT = createSoundEvent("entity.deer.hurt");
             //
-            ENTITY_DUCK_AMBIENT = createSoundEvent("duck");
-            ENTITY_DUCK_HURT = createSoundEvent("duckhurt");
+            ENTITY_DUCK_AMBIENT = createSoundEvent("entity.duck.ambient");
+            ENTITY_DUCK_HURT = createSoundEvent("entity.duck.hurt");
             //
-            ENTITY_HORSE_MAD = createSoundEvent("horsemad");
-            ENTITY_HORSE_AMBIENT = createSoundEvent("horsegrunt");
-            ENTITY_HORSE_AMBIENT_DONKEY = createSoundEvent("donkeygrunt");
-            ENTITY_HORSE_AMBIENT_GHOST = createSoundEvent("horsegruntghost");
-            ENTITY_HORSE_AMBIENT_UNDEAD = createSoundEvent("horsegruntundead");
-            ENTITY_HORSE_AMBIENT_ZEBRA = createSoundEvent("zebragrunt");
-            ENTITY_HORSE_ANGRY_GHOST = createSoundEvent("horsemadghost");
-            ENTITY_HORSE_ANGRY_UNDEAD = createSoundEvent("horsemadundead");
-            ENTITY_HORSE_DEATH = createSoundEvent("horsedying");
-            ENTITY_HORSE_DEATH_DONKEY = createSoundEvent("donkeydying");
-            ENTITY_HORSE_DEATH_GHOST = createSoundEvent("horsedyingghost");
-            ENTITY_HORSE_DEATH_UNDEAD = createSoundEvent("horsedyingundead");
-            ENTITY_HORSE_HURT = createSoundEvent("horsehurt");
-            ENTITY_HORSE_HURT_DONKEY = createSoundEvent("donkeyhurt");
-            ENTITY_HORSE_HURT_GHOST = createSoundEvent("horsehurtghost");
-            ENTITY_HORSE_HURT_UNDEAD = createSoundEvent("horsehurtundead");
-            ENTITY_HORSE_HURT_ZEBRA = createSoundEvent("zebrahurt");
+            ENTITY_HORSE_MAD = createSoundEvent("entity.horse.angry");
+            ENTITY_HORSE_AMBIENT = createSoundEvent("entity.horse.ambient");
+            ENTITY_HORSE_AMBIENT_DONKEY = createSoundEvent("entity.donkey.ambient");
+            ENTITY_HORSE_AMBIENT_GHOST = createSoundEvent("entity.horse.ambient_ghost");
+            ENTITY_HORSE_AMBIENT_UNDEAD = createSoundEvent("entity.horse.ambient_undead");
+            ENTITY_HORSE_AMBIENT_ZEBRA = createSoundEvent("entity.zebra.ambient");
+            ENTITY_HORSE_ANGRY_GHOST = createSoundEvent("entity.horse.angry_ghost");
+            ENTITY_HORSE_ANGRY_UNDEAD = createSoundEvent("entity.horse.angry_undead");
+            ENTITY_HORSE_DEATH = createSoundEvent("entity.horse.death");
+            ENTITY_HORSE_DEATH_DONKEY = createSoundEvent("entity.donkey.death");
+            ENTITY_HORSE_DEATH_GHOST = createSoundEvent("entity.horse.death_ghost");
+            ENTITY_HORSE_DEATH_UNDEAD = createSoundEvent("entity.horse.death_undead");
+            ENTITY_HORSE_HURT = createSoundEvent("entity.horse.hurt");
+            ENTITY_HORSE_HURT_DONKEY = createSoundEvent("entity.donkey.hurt");
+            ENTITY_HORSE_HURT_GHOST = createSoundEvent("entity.horse.hurt_ghost");
+            ENTITY_HORSE_HURT_UNDEAD = createSoundEvent("entity.horse.hurt_undead");
+            ENTITY_HORSE_HURT_ZEBRA = createSoundEvent("entity.zebra.hurt");
             //
-            ENTITY_MOUSE_AMBIENT = createSoundEvent("micegrunt");
-            ENTITY_MOUSE_DEATH = createSoundEvent("micedying");
-            ENTITY_MOUSE_HURT = createSoundEvent("micehurt");
+            ENTITY_MOUSE_AMBIENT = createSoundEvent("entity.mouse.ambient");
+            ENTITY_MOUSE_DEATH = createSoundEvent("entity.mouse.death");
+            ENTITY_MOUSE_HURT = createSoundEvent("entity.mouse.hurt");
             //
-            ENTITY_RABBIT_DEATH = createSoundEvent("rabbitdeath");
-            ENTITY_RABBIT_HURT = createSoundEvent("rabbithurt");
-            ENTITY_RABBIT_LIFT = createSoundEvent("rabbitlift");
+            ENTITY_BUNNY_DEATH = createSoundEvent("entity.bunny.death");
+            ENTITY_BUNNY_HURT = createSoundEvent("entity.bunny.hurt");
+            ENTITY_BUNNY_LAND = createSoundEvent("entity.bunny.land");
+            ENTITY_BUNNY_LIFT = createSoundEvent("entity.bunny.lift");
             //
-            ENTITY_TURKEY_AMBIENT = createSoundEvent("turkey");
-            ENTITY_TURKEY_HURT = createSoundEvent("turkeyhurt");
+            ENTITY_TURKEY_AMBIENT = createSoundEvent("entity.turkey.ambient");
+            ENTITY_TURKEY_HURT = createSoundEvent("entity.turkey.hurt");
             //
-            ENTITY_TURTLE_ANGRY = createSoundEvent("turtlehissing");
-            ENTITY_TURTLE_DEATH = createSoundEvent("turtledying");
+            ENTITY_TURTLE_HISS = createSoundEvent("entity.turtle.hiss");
+            ENTITY_TURTLE_DEATH = createSoundEvent("entity.turtle.death");
 
             /* Entity (Legacy) */
             // Hostile
-            ENTITY_RAT_DEATH_LEGACY = createSoundEvent("ratdyinglegacy");
+            ENTITY_RAT_DEATH_LEGACY = createSoundEvent("entity.rat.death_legacy");
             //
-            ENTITY_WEREHUMAN_DEATH_LEGACY = createSoundEvent("werehumandying");
-            ENTITY_WEREHUMAN_HURT_LEGACY = createSoundEvent("werehumanhurt");
-            ENTITY_WEREWOLF_TRANSFORM_LEGACY = createSoundEvent("werehumantransform");
+            ENTITY_WEREHUMAN_DEATH_LEGACY = createSoundEvent("entity.werehuman.death_legacy");
+            ENTITY_WEREHUMAN_HURT_LEGACY = createSoundEvent("entity.werehuman.hurt_legacy");
+            ENTITY_WEREWOLF_TRANSFORM_LEGACY = createSoundEvent("entity.werewolf.transform_legacy");
             //
-            ENTITY_WRAITH_AMBIENT_LEGACY = createSoundEvent("wraithlegacy");
-            ENTITY_WRAITH_DEATH_LEGACY = createSoundEvent("wraithdyinglegacy");
-            ENTITY_WRAITH_HURT_LEGACY = createSoundEvent("wraithhurtlegacy");
+            ENTITY_WRAITH_AMBIENT_LEGACY = createSoundEvent("entity.wraith.ambient_legacy");
+            ENTITY_WRAITH_DEATH_LEGACY = createSoundEvent("entity.wraith.death_legacy");
+            ENTITY_WRAITH_HURT_LEGACY = createSoundEvent("entity.wraith.hurt_legacy");
 
             /* Generic */
-            ENTITY_GENERIC_ARMOR_ON = createSoundEvent("armorput");
-            ENTITY_GENERIC_ARMOR_OFF = createSoundEvent("armoroff");
-            ENTITY_GENERIC_ATTACH = createSoundEvent("golemattach");
-            ENTITY_GENERIC_CLANG = createSoundEvent("turtlehurt");
-            ENTITY_GENERIC_DESTROY = createSoundEvent("destroy");
-            ENTITY_GENERIC_DRINKING = createSoundEvent("drinking");
-            ENTITY_GENERIC_EATING = createSoundEvent("eating");
-            ENTITY_GENERIC_EXPLODE = createSoundEvent("golemexplode");
-            ENTITY_GENERIC_LAUNCH = createSoundEvent("golemshoot");
-            ENTITY_GENERIC_MAGIC_APPEAR = createSoundEvent("appearmagic");
-            ENTITY_GENERIC_ROPING = createSoundEvent("roping");
-            ENTITY_GENERIC_TRANSFORM = createSoundEvent("transform");
-            ENTITY_GENERIC_VANISH = createSoundEvent("vanish");
-            ENTITY_GENERIC_WHIP = createSoundEvent("whip");
-            ENTITY_GENERIC_WINGFLAP = createSoundEvent("wingflap");
+            ENTITY_GENERIC_ARMOR_ON = createSoundEvent("entity.generic.armor_on");
+            ENTITY_GENERIC_ARMOR_OFF = createSoundEvent("entity.generic.armor_off");
+            ENTITY_GENERIC_ATTACH = createSoundEvent("entity.generic.attach");
+            ENTITY_GENERIC_CLANG = createSoundEvent("entity.generic.clang");
+            ENTITY_GENERIC_DESTROY = createSoundEvent("entity.generic.destroy");
+            ENTITY_GENERIC_DRINK = createSoundEvent("entity.generic.drink");
+            ENTITY_GENERIC_EAT = createSoundEvent("entity.generic.eat");
+            ENTITY_GENERIC_ENVENOM = createSoundEvent("entity.generic.envenom");
+            ENTITY_GENERIC_EXPLODE = createSoundEvent("entity.generic.explode");
+            ENTITY_GENERIC_LAUNCH = createSoundEvent("entity.generic.launch");
+            ENTITY_GENERIC_MAGIC_APPEAR = createSoundEvent("entity.generic.magic_appear");
+            ENTITY_GENERIC_MAGIC_CONVERSION = createSoundEvent("entity.generic.magic_conversion");
+            ENTITY_GENERIC_MAGIC_CREEPY = createSoundEvent("entity.generic.magic_creepy");
+            ENTITY_GENERIC_MAGIC_ENCHANTED = createSoundEvent("entity.generic.magic_sparkle");
+            ENTITY_GENERIC_ROPING = createSoundEvent("entity.generic.roping");
+            ENTITY_GENERIC_SMACK = createSoundEvent("entity.generic.smack");
+            ENTITY_GENERIC_WHIP_COMMAND = createSoundEvent("entity.generic.whip_command");
+            ENTITY_GENERIC_WING_FLAP = createSoundEvent("entity.generic.wing_flap");
 
             /* Music */
             // Record
-            ITEM_RECORD_SHUFFLING = createSoundEvent("shuffling");
+            MUSIC_DISC_SHUFFLING = createSoundEvent("music_disc.shuffling");
         }
     }
 
@@ -488,7 +494,7 @@ public class MoCSoundEvents {
                     // Ambient
                     ENTITY_BEE_AMBIENT,
                     ENTITY_BEE_HURT,
-                    ENTITY_BEE_UPSET,
+                    ENTITY_BEE_ANGRY,
                     //
                     ENTITY_CRICKET_AMBIENT,
                     ENTITY_CRICKET_CHIRP,
@@ -509,13 +515,13 @@ public class MoCSoundEvents {
                     ENTITY_DOLPHIN_AMBIENT,
                     ENTITY_DOLPHIN_DEATH,
                     ENTITY_DOLPHIN_HURT,
-                    ENTITY_DOLPHIN_UPSET,
+                    ENTITY_DOLPHIN_ANGRY,
 
                     // Hostile
-                    ENTITY_GOLEM_AMBIENT,
-                    ENTITY_GOLEM_DYING,
-                    ENTITY_GOLEM_HURT,
-                    ENTITY_GOLEM_WALK,
+                    ENTITY_BIG_GOLEM_AMBIENT,
+                    ENTITY_BIG_GOLEM_DEATH,
+                    ENTITY_BIG_GOLEM_HURT,
+                    ENTITY_BIG_GOLEM_STEP,
                     //
                     ENTITY_HELL_RAT_AMBIENT,
                     ENTITY_HELL_RAT_DEATH,
@@ -530,7 +536,7 @@ public class MoCSoundEvents {
                     ENTITY_RAT_HURT,
                     //
                     ENTITY_SCORPION_AMBIENT,
-                    ENTITY_SCORPION_CLAW,
+                    ENTITY_SCORPION_ATTACK,
                     ENTITY_SCORPION_DEATH,
                     ENTITY_SCORPION_HURT,
                     ENTITY_SCORPION_STING,
@@ -556,8 +562,8 @@ public class MoCSoundEvents {
                     ENTITY_CROCODILE_AMBIENT,
                     ENTITY_CROCODILE_DEATH,
                     ENTITY_CROCODILE_HURT,
-                    ENTITY_CROCODILE_JAWSNAP,
-                    ENTITY_CROCODILE_RESTING,
+                    ENTITY_CROCODILE_ATTACK,
+                    ENTITY_CROCODILE_REST,
                     ENTITY_CROCODILE_ROLL,
                     //
                     ENTITY_FOX_AMBIENT,
@@ -580,7 +586,7 @@ public class MoCSoundEvents {
                     ENTITY_SNAKE_DEATH,
                     ENTITY_SNAKE_HURT,
                     ENTITY_SNAKE_RATTLE,
-                    ENTITY_SNAKE_SNAP,
+                    ENTITY_SNAKE_ATTACK,
                     ENTITY_SNAKE_SWIM,
 
                     // Neutral
@@ -598,24 +604,23 @@ public class MoCSoundEvents {
                     ENTITY_GOAT_AMBIENT_FEMALE,
                     ENTITY_GOAT_DEATH,
                     ENTITY_GOAT_HURT,
-                    ENTITY_GOAT_DIGG,
-                    ENTITY_GOAT_EATING,
-                    ENTITY_GOAT_SMACK,
+                    ENTITY_GOAT_DIG,
+                    ENTITY_GOAT_EAT,
                     //
                     ENTITY_KITTY_AMBIENT,
                     ENTITY_KITTY_AMBIENT_BABY,
                     ENTITY_KITTY_ANGRY,
                     ENTITY_KITTY_DEATH,
                     ENTITY_KITTY_DEATH_BABY,
-                    ENTITY_KITTY_DRINKING,
-                    ENTITY_KITTY_EATING,
+                    ENTITY_KITTY_DRINK,
+                    ENTITY_KITTY_EAT,
                     ENTITY_KITTY_HUNGRY,
                     ENTITY_KITTY_HURT,
                     ENTITY_KITTY_HURT_BABY,
                     ENTITY_KITTY_PURR,
                     ENTITY_KITTY_TRAPPED,
-                    ENTITY_KITTYBED_POURINGFOOD,
-                    ENTITY_KITTYBED_POURINGMILK,
+                    ENTITY_KITTY_BED_POUR_FOOD,
+                    ENTITY_KITTY_BED_POUR_MILK,
                     //
                     ENTITY_OSTRICH_AMBIENT,
                     ENTITY_OSTRICH_AMBIENT_BABY,
@@ -625,7 +630,7 @@ public class MoCSoundEvents {
                     ENTITY_WYVERN_AMBIENT,
                     ENTITY_WYVERN_DEATH,
                     ENTITY_WYVERN_HURT,
-                    ENTITY_WYVERN_WINGFLAP,
+                    ENTITY_WYVERN_WING_FLAP,
 
                     // Passive
                     ENTITY_BIRD_AMBIENT_BLACK,
@@ -665,14 +670,15 @@ public class MoCSoundEvents {
                     ENTITY_MOUSE_DEATH,
                     ENTITY_MOUSE_HURT,
                     //
-                    ENTITY_RABBIT_DEATH,
-                    ENTITY_RABBIT_HURT,
-                    ENTITY_RABBIT_LIFT,
+                    ENTITY_BUNNY_DEATH,
+                    ENTITY_BUNNY_HURT,
+                    ENTITY_BUNNY_LAND,
+                    ENTITY_BUNNY_LIFT,
                     //
                     ENTITY_TURKEY_AMBIENT,
                     ENTITY_TURKEY_HURT,
                     //
-                    ENTITY_TURTLE_ANGRY,
+                    ENTITY_TURTLE_HISS,
                     ENTITY_TURTLE_DEATH,
 
                     /* Entity (Legacy) */
@@ -692,20 +698,23 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_ATTACH,
                     ENTITY_GENERIC_CLANG,
                     ENTITY_GENERIC_DESTROY,
-                    ENTITY_GENERIC_DRINKING,
-                    ENTITY_GENERIC_EATING,
+                    ENTITY_GENERIC_DRINK,
+                    ENTITY_GENERIC_EAT,
+                    ENTITY_GENERIC_ENVENOM,
                     ENTITY_GENERIC_EXPLODE,
                     ENTITY_GENERIC_LAUNCH,
                     ENTITY_GENERIC_MAGIC_APPEAR,
+                    ENTITY_GENERIC_MAGIC_CONVERSION,
+                    ENTITY_GENERIC_MAGIC_CREEPY,
+                    ENTITY_GENERIC_MAGIC_ENCHANTED,
                     ENTITY_GENERIC_ROPING,
-                    ENTITY_GENERIC_TRANSFORM,
-                    ENTITY_GENERIC_VANISH,
-                    ENTITY_GENERIC_WHIP,
-                    ENTITY_GENERIC_WINGFLAP,
+                    ENTITY_GENERIC_SMACK,
+                    ENTITY_GENERIC_WHIP_COMMAND,
+                    ENTITY_GENERIC_WING_FLAP,
 
                     /* Music */
                     // Record
-                    ITEM_RECORD_SHUFFLING
+                    MUSIC_DISC_SHUFFLING
             );
         }
     }

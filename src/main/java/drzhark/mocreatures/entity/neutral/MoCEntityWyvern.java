@@ -320,12 +320,12 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             this.wingFlapCounter = 0;
         }
         if (this.wingFlapCounter == 5 && !this.world.isRemote) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_WYVERN_WINGFLAP);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_WYVERN_WING_FLAP);
         }
 
         if (this.transformCounter > 0) {
             if (this.transformCounter == 40) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_TRANSFORM);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_CONVERSION);
             }
 
             if (++this.transformCounter > 100) {
@@ -930,7 +930,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
                 MoCEntityWyvern entitywyvern = new MoCEntityWyvern(this.world);
                 entitywyvern.setPosition(this.posX, this.posY, this.posZ);
                 this.world.spawnEntity(entitywyvern);
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_APPEAR);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_ENCHANTED);
 
                 entitywyvern.setOwnerId(this.getOwnerId());
                 entitywyvern.setTamed(true);

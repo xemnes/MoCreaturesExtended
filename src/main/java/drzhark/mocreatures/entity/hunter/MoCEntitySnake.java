@@ -329,7 +329,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 setfMouth(0.3F);
 
                 if (this.bodyswing < 0F) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SNAKE_SNAP);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SNAKE_ATTACK);
                     this.bodyswing = 2.5F;
                     setfMouth(0.0F);
                     setBiting(false);

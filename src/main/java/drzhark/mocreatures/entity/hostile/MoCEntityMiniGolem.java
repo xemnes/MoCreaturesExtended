@@ -163,22 +163,22 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
      */
     @Override
     protected void playStepSound(BlockPos pos, Block block) {
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_WALK);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_STEP);
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_GOLEM_DYING;
+        return MoCSoundEvents.ENTITY_BIG_GOLEM_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_GOLEM_HURT;
+        return MoCSoundEvents.ENTITY_BIG_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return MoCSoundEvents.ENTITY_GOLEM_AMBIENT;
+        return MoCSoundEvents.ENTITY_BIG_GOLEM_AMBIENT;
     }
 
     @Nullable

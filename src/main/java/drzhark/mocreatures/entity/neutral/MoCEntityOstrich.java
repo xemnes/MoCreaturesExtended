@@ -382,7 +382,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
 
         if (this.transformCounter > 0) {
             if (this.transformCounter == 40) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_TRANSFORM);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_CONVERSION);
             }
 
             if (++this.transformCounter > 100) {
@@ -928,7 +928,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             this.jumpCounter = 1;
         }
         if (this.jumpCounter == 0) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WINGFLAP);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WING_FLAP);
             this.jumpPending = true;
             this.jumpCounter = 1;
         }

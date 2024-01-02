@@ -865,7 +865,7 @@ public class MoCTools {
                     blockstate.getBlock().dropBlockAsItemWithChance(entity.world, pos, blockstate, 0.20F * strength, 1);
                     entity.world.setBlockToAir(pos);
                     if (entity.world.rand.nextInt(3) == 0) {
-                        playCustomSound(entity, MoCSoundEvents.ENTITY_GOLEM_WALK);
+                        playCustomSound(entity, MoCSoundEvents.ENTITY_BIG_GOLEM_STEP);
                         count++; //only counts recovered blocks
                     }
                 }

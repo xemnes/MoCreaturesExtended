@@ -148,12 +148,12 @@ public class MoCEntityKittyBed extends EntityLiving {
         if (!stack.isEmpty() && !getHasFood() && !getHasMilk()) {
             if (stack.getItem() == MoCItems.petfood) {
                 if (!player.capabilities.isCreativeMode) stack.shrink(1);
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGFOOD);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_BED_POUR_FOOD);
                 setHasMilk(false);
                 setHasFood(true);
             } else if (stack.getItem() == Items.MILK_BUCKET) {
                 player.setHeldItem(hand, new ItemStack(Items.BUCKET, 1));
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGMILK);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_BED_POUR_MILK);
                 setHasMilk(true);
                 setHasFood(false);
             }

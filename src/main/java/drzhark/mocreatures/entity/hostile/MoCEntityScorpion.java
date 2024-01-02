@@ -137,7 +137,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
     public boolean attackEntityAsMob(Entity entity) {
         // Claw Attack Sound
         if (this.poisontimer != 1) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SCORPION_CLAW);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SCORPION_ATTACK);
         }
         return super.attackEntityAsMob(entity);
     }

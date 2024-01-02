@@ -120,7 +120,7 @@ public class MoCEntityCrab extends MoCEntityTameableAnimal {
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
-        this.playSound(MoCSoundEvents.ENTITY_GOAT_SMACK, 1.0F, 2.0F);
+        this.playSound(MoCSoundEvents.ENTITY_GENERIC_SMACK, 1.0F, 2.0F);
         return super.attackEntityAsMob(entity);
     }
 
@@ -168,4 +168,3 @@ public class MoCEntityCrab extends MoCEntityTameableAnimal {
         return null;
     }
 }
-

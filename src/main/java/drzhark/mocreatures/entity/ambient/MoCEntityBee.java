@@ -50,7 +50,7 @@ public class MoCEntityBee extends MoCEntityInsect {
 
     private SoundEvent getMySound() {
         if (getAttackTarget() != null) {
-            return MoCSoundEvents.ENTITY_BEE_UPSET;
+            return MoCSoundEvents.ENTITY_BEE_ANGRY;
         }
         return MoCSoundEvents.ENTITY_BEE_AMBIENT;
     }

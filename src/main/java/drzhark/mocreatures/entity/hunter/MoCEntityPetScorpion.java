@@ -238,7 +238,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     public boolean attackEntityAsMob(Entity entity) {
         // Claw Attack Sound
         if (this.poisontimer != 1) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SCORPION_CLAW);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SCORPION_ATTACK);
         }
         return super.attackEntityAsMob(entity);
     }
@@ -273,7 +273,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         if (this.transformCounter > 0) {
             // Sound plays after this amount of time has passed during transformation
             if (this.transformCounter == 60) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_TRANSFORM);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_CONVERSION);
             }
 
             // Transformation completed

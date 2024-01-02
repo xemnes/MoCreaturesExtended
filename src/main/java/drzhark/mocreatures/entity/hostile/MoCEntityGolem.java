@@ -139,7 +139,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
                 if (this.dCounter < 80 && this.rand.nextInt(3) == 0) acquireRock(4);
 
                 if (this.dCounter == 120) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_DYING, 3F);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_DEATH, 3F);
                     MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageAnimation(this.getEntityId(), 1), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
                 }
 
@@ -351,7 +351,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         if (x != -1 && this.golemCubes[x] != 30) {
             Block block = Block.getBlockById(generateBlock(this.golemCubes[x]));
             saveGolemCube((byte) x, (byte) 30);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOLEM_HURT, 3F);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_HURT, 3F);
             if ((MoCTools.mobGriefing(this.world)) && (MoCreatures.proxy.golemDestroyBlocks)) {
                 EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, new ItemStack(block, 1, 0));
                 entityitem.setDefaultPickupDelay();
@@ -776,12 +776,12 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     @Override
     protected void playStepSound(BlockPos p_180429_1_, Block p_180429_2_) {
-        this.playSound(MoCSoundEvents.ENTITY_GOLEM_WALK, 1.0F, 1.0F);
+        this.playSound(MoCSoundEvents.ENTITY_BIG_GOLEM_STEP, 1.0F, 1.0F);
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_GOLEM_AMBIENT;
+        return MoCSoundEvents.ENTITY_BIG_GOLEM_HURT;
     }
 
     @Nullable

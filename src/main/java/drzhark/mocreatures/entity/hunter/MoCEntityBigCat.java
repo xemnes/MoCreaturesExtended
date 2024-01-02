@@ -237,7 +237,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 MoCEntityBigCat ghost = (MoCEntityBigCat) templiving;
                 ghost.setPosition(this.posX, this.posY, this.posZ);
                 this.world.spawnEntity(ghost);
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_APPEAR);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_ENCHANTED);
                 ghost.setOwnerId(this.getOwnerId());
                 ghost.setTamed(true);
                 EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 24D);
@@ -314,7 +314,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 this.wingFlapCounter = 0;
             }
             if (!this.world.isRemote && this.wingFlapCounter == 5) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WINGFLAP);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WING_FLAP);
             }
         }
 

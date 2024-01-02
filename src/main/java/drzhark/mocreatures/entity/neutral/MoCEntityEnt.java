@@ -308,7 +308,7 @@ public class MoCEntityEnt extends MoCEntityAnimal {
 
     @Override
     protected void applyEnchantments(EntityLivingBase entityLivingBaseIn, Entity entityIn) {
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_SMACK);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_SMACK);
         MoCTools.bigSmack(this, entityIn, 1F);
         super.applyEnchantments(entityLivingBaseIn, entityIn);
     }

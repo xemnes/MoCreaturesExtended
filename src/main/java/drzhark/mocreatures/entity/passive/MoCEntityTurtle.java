@@ -180,7 +180,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
                 EntityLivingBase entityliving = getBoogey(4D);
                 if ((entityliving != null) && canEntityBeSeen(entityliving)) {
                     if (!getIsHiding() && !isInWater()) {
-                        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_ANGRY);
+                        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_HISS);
                         setIsHiding(true);
                     }
 

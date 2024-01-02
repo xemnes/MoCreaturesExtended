@@ -233,7 +233,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
         {
             this.biteProgress += 0.1F;
             if (this.biteProgress == 0.4F) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_CROCODILE_JAWSNAP);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_CROCODILE_ATTACK);
             }
             if (this.biteProgress > 0.6F) {
 
@@ -336,7 +336,7 @@ public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         if (getIsSitting()) {
-            return MoCSoundEvents.ENTITY_CROCODILE_RESTING;
+            return MoCSoundEvents.ENTITY_CROCODILE_REST;
         }
         return MoCSoundEvents.ENTITY_CROCODILE_AMBIENT;
     }

@@ -280,7 +280,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
                         return;
                     }
                     if (f < 2.0F && this.deathTime == 0 && this.rand.nextInt(50) == 0) {
-                        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
+                        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EAT);
                         setEating(true);
 
                         entityitem.setDead();
@@ -332,7 +332,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         this.attacking = 30;
         if (entityIn instanceof MoCEntityGoat) {
             MoCTools.bigSmack(this, entityIn, 0.4F);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_SMACK);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_SMACK);
             if (this.rand.nextInt(3) == 0) {
                 calm();
                 ((MoCEntityGoat) entityIn).calm();
@@ -411,7 +411,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         if (getSwingLeg()) {
             this.movecount += 5;
             if (this.movecount == 30) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_DIGG);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_DIG);
             }
 
             if (this.movecount > 100) {
@@ -441,7 +441,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
             if (this.eatcount == 2) {
                 EntityPlayer entityplayer1 = this.world.getClosestPlayerToEntity(this, 3D);
                 if (entityplayer1 != null) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EAT);
                 }
             }
             if (this.eatcount > 25) {
@@ -533,7 +533,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         if (getIsTamed() && !stack.isEmpty() && (MoCTools.isItemEdible(stack.getItem()))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             this.setHealth(getMaxHealth());
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EAT);
             return true;
         }
 

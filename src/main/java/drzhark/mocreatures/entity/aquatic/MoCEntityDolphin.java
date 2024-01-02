@@ -247,7 +247,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
     @Override
     protected SoundEvent getAngrySound() {
-        return MoCSoundEvents.ENTITY_DOLPHIN_UPSET;
+        return MoCSoundEvents.ENTITY_DOLPHIN_ANGRY;
     }
 
     @Nullable

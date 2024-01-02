@@ -107,12 +107,8 @@ public class MoCEntityPandaBear extends MoCEntityBear {
 
             return true;
         }
-        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.whip) {
-            if (getBearState() == 0) {
-                setBearState(2);
-            } else {
-                setBearState(0);
-            }
+        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
+            this.processBearWhipped();
             return true;
         }
         if (this.getIsRideable() && this.getIsAdult() && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
@@ -143,7 +139,7 @@ public class MoCEntityPandaBear extends MoCEntityBear {
         /*
          * panda bears and cubs will sit down sometimes
          */
-        if (!this.world.isRemote && !getIsTamed() && this.rand.nextInt(300) == 0) {
+        if (!this.world.isRemote && getBearState() != 3 && !getIsTamed() && this.rand.nextInt(300) == 0) {
             setBearState(2);
         }
     }

@@ -98,11 +98,7 @@ public class MoCEntityPolarBear extends MoCEntityBear {
             return true;
         }
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
-            if (getBearState() == 0) {
-                setBearState(2);
-            } else {
-                setBearState(0);
-            }
+            this.processBearWhipped();
             return true;
         }
         if (this.getIsRideable() && this.getIsAdult() && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {

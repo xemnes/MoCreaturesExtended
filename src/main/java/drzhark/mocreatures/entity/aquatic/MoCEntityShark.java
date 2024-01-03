@@ -45,7 +45,8 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 1.0D, 30));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(3, new EntityAIHunt<>(this, EntityPlayer.class, false));
+        // Seems to cause a crash for some reason?
+        //this.targetTasks.addTask(3, new EntityAIHunt<>(this, EntityPlayer.class, false));
     }
 
     @Override

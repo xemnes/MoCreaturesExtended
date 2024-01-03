@@ -463,7 +463,7 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_MAGIC_APPEAR = createSoundEvent("entity.generic.magic_appear");
             ENTITY_GENERIC_MAGIC_CONVERSION = createSoundEvent("entity.generic.magic_conversion");
             ENTITY_GENERIC_MAGIC_CREEPY = createSoundEvent("entity.generic.magic_creepy");
-            ENTITY_GENERIC_MAGIC_ENCHANTED = createSoundEvent("entity.generic.magic_sparkle");
+            ENTITY_GENERIC_MAGIC_ENCHANTED = createSoundEvent("entity.generic.magic_enchanted");
             ENTITY_GENERIC_ROPING = createSoundEvent("entity.generic.roping");
             ENTITY_GENERIC_SMACK = createSoundEvent("entity.generic.smack");
             ENTITY_GENERIC_WHIP_COMMAND = createSoundEvent("entity.generic.whip_command");

@@ -689,9 +689,9 @@
   "entity.kitty.angry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:entity/kitty/upset1",
-      "mocreatures:entity/kitty/upset2",
-      "mocreatures:entity/kitty/upset3"
+      "mocreatures:entity/kitty/angry1",
+      "mocreatures:entity/kitty/angry2",
+      "mocreatures:entity/kitty/angry3"
     ]
   },
   "entity.lion.death": {
@@ -1148,7 +1148,7 @@
   "entity.wyvern.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:wyvern_dying"
+      "mocreatures:entity/wyvern/death"
     ]
   },
   "entity.wyvern.ambient": {

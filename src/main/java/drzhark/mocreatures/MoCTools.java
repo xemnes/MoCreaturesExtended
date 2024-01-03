@@ -1211,6 +1211,7 @@ public class MoCTools {
         // Get ID for entity that is currently riding player.
         NBTTagCompound tag = player.getEntityData();
         UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
+        System.out.println("Tags: "+animalID+ " vs " +player.getUniqueID());
         if (animalID == null || player.getUniqueID().equals(animalID)) {
             return null;
         }
@@ -1241,10 +1242,10 @@ public class MoCTools {
             double newPosZ = entity.posZ - (dist * Math.cos(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
             passenger.setPositionAndUpdate(newPosX, entity.posY + 2D, newPosZ);
             MoCTools.playCustomSound(passenger, SoundEvents.ENTITY_CHICKEN_EGG);
-        }
-        if (entity instanceof EntityPlayer) {
-            NBTTagCompound tag = entity.getEntityData();
-            tag.setUniqueId("MOCEntity_Riding_Player", entity.getUniqueID()); // set to self, because cannot set to null.
+            if (entity instanceof EntityPlayer) {
+                NBTTagCompound tag = entity.getEntityData();
+                tag.setUniqueId("MOCEntity_Riding_Player", entity.getUniqueID()); // set to self, because cannot set to null.
+            }
         }
     }
     public static void dismountSneakingPlayer(Entity entity) {

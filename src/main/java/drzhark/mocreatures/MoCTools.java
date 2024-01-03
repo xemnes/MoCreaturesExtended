@@ -1219,7 +1219,7 @@ public class MoCTools {
         System.out.println("PLAYER LEFT THE GAME carrying entity: "+entityRidingPlayer);
         if (IMoCTameable.class.isAssignableFrom(entityRidingPlayer.getClass())) {
             IMoCTameable mocEntity = (IMoCTameable) entityRidingPlayer;
-            if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity((Entity) mocEntity, player, true);
+            if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity(entityRidingPlayer, player, true);
             NBTTagCompound tag = player.getEntityData();
             tag.removeTag("MOCEntity_Riding_Player");
         }

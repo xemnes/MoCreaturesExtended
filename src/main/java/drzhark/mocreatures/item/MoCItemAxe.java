@@ -5,6 +5,7 @@ package drzhark.mocreatures.item;
 
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +47,7 @@ public class MoCItemAxe extends ItemAxe {
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if (MoCreatures.proxy.weaponEffects) {
-            int timer = 15; // In seconds
+            int timer = 10; // In seconds
             switch (this.specialWeaponType) {
                 case 1: // Poison 2
                     target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
@@ -78,19 +79,19 @@ public class MoCItemAxe extends ItemAxe {
         if (MoCreatures.proxy.weaponEffects) {
             switch (this.specialWeaponType) {
                 case 1: // Poison 2
-                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe1").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_dirt", 10));
                     break;
                 case 2: // Slowness
-                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe2").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_frost", 10));
                     break;
                 case 3: // Fire
-                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe3").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_fire", 10));
                     break;
                 case 4: // Weakness (Nausea for players)
-                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe4").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_cave", 10));
                     break;
                 case 5: // Wither (Blindness for players)
-                    tooltip.add(new TextComponentTranslation("info.mocreatures.stingaxe5").setStyle(new Style().setColor(TextFormatting.BLUE)).getFormattedText());
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_undead", 10));
                     break;
                 default:
                     break;

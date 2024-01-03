@@ -16,7 +16,7 @@ public class MoCItemLuckyArmor extends MoCItemArmor {
         super(name, materialIn, renderIndex, equipmentSlotIn);
         this.luck = luck;
     }
-    
+
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);

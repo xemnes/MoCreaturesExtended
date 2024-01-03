@@ -1211,7 +1211,6 @@ public class MoCTools {
         // Get ID for entity that is currently riding player.
         NBTTagCompound tag = player.getEntityData();
         UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
-        System.out.println("Tags: "+animalID+ " vs " +player.getUniqueID());
         if (animalID == null || player.getUniqueID().equals(animalID)) {
             return null;
         }

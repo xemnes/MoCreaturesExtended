@@ -104,6 +104,7 @@ public class MoCEventHooks {
                 if (mocEntity.getIsTamed() && mocEntity.getPetHealth() > 0 && !mocEntity.isRiderDisconnecting()) {
                     return;
                 }
+
                 if (mocEntity.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
                     MoCreatures.instance.mapData.removeOwnerPet(mocEntity, mocEntity.getOwnerPetId());
@@ -111,6 +112,7 @@ public class MoCEventHooks {
             }
         }
     }
+
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         EntityPlayer player = event.player;

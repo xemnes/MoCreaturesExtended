@@ -113,12 +113,15 @@ public class MoCEventHooks {
         }
     }
 
-    private Entity findTheCorrectEntity(World world, UUID theFinding){
+    private Entity findTheCorrectEntity(World world, UUID searchFor){
+        if (searchFor == null) {
+            return null;
+        }
         Entity entity = null;
         for(int i = 0; i < world.getLoadedEntityList().size(); i++){
             if(world.getLoadedEntityList().get(i) != null){
                 Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
-                if(entity2.getUniqueID().equals(theFinding)){
+                if(entity2.getUniqueID().equals(searchFor)){
                     entity = entity2;
                 }
             }
@@ -128,17 +131,18 @@ public class MoCEventHooks {
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         EntityPlayer player = event.player;
-        NBTTagCompound tag = player.getEntityData();
-        UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
         if (player.getRidingEntity() instanceof IMoCTameable) {
             IMoCTameable mocEntity = (IMoCTameable) player.getRidingEntity();
             mocEntity.setRiderDisconnecting(true);
         }
+        NBTTagCompound tag = player.getEntityData();
+        UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
         Entity entityRidingPlayer = findTheCorrectEntity(player.getEntityWorld(),animalID);
-        System.out.println("PLAYER LEFT THE GAME."+event.player+player.getRidingEntity()+animalID+entityRidingPlayer);
+        System.out.println("PLAYER LEFT THE GAME."+entityRidingPlayer);
         if (entityRidingPlayer instanceof MoCEntityAnimal) {
             MoCEntityAnimal mocEntity = (MoCEntityAnimal) entityRidingPlayer;
-            if (mocEntity.canRidePlayer() && mocEntity.isRiding()) MoCTools.dismountSneakingPlayer(mocEntity, true);
+            if (mocEntity.canRidePlayer()) MoCTools.dismountSneakingPlayer(player, mocEntity, true);
+            tag.removeTag("MOCEntity_Riding_Player");
         }
     }
 

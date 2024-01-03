@@ -1217,18 +1217,6 @@ public class MoCTools {
         return MoCTools.findTheCorrectEntity(player.getEntityWorld(),animalID);
     }
 
-    public static void dismountEntityRidingPlayer(EntityPlayer player) {
-        Entity entityRidingPlayer = MoCTools.getEntityRidingPlayer(player);
-        if (entityRidingPlayer == null) {
-            return;
-        }
-        System.out.println("PLAYER LEFT THE GAME carrying entity: "+entityRidingPlayer);
-        if (IMoCTameable.class.isAssignableFrom(entityRidingPlayer.getClass())) {
-            IMoCTameable mocEntity = (IMoCTameable) entityRidingPlayer;
-            if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity(entityRidingPlayer, player, true);
-        }
-    }
-
     public static void dismountPassengerFromEntity(Entity passenger, Entity entity, boolean force) {
         if (!force && (passenger == null || entity == null || passenger.getRidingEntity() == null)) {
             return;

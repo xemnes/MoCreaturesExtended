@@ -144,7 +144,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public boolean startRidingPlayer(EntityPlayer player) {
         boolean ret = super.startRiding(player);
         if (ret) {
-            System.out.println("ENTITY "+this.getUniqueID()+"is now riding on "+ player);
             NBTTagCompound tag = player.getEntityData();
             tag.setUniqueId("MOCEntity_Riding_Player", this.getUniqueID());
             return true;

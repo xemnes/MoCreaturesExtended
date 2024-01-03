@@ -1192,21 +1192,57 @@ public class MoCTools {
         source.readFromNBT(nbttagcompound);
     }
 
-    public static void dismountSneakingPlayer(Entity entity, Entity entityRidden, boolean force) {
-        System.out.println("RES@: "+entity+entityRidden);
-        if (entityRidden instanceof EntityLivingBase && (entityRidden.isSneaking() || force)) {
-            System.out.println("Forcing dismount for "+entity);
+    public static Entity findTheCorrectEntity(World world, UUID searchFor){
+        if (searchFor == null) {
+            return null;
+        }
+        Entity entity = null;
+        for(int i = 0; i < world.getLoadedEntityList().size(); i++){
+            if(world.getLoadedEntityList().get(i) != null){
+                Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
+                if(entity2.getUniqueID().equals(searchFor)){
+                    entity = entity2;
+                }
+            }
+        }
+        return entity;
+    }
+    public static Entity getEntityRidingPlayer(EntityPlayer player) {
+        // Get ID for entity that is currently riding player.
+        NBTTagCompound tag = player.getEntityData();
+        UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
+        return MoCTools.findTheCorrectEntity(player.getEntityWorld(),animalID);
+    }
+
+    public static void dismountEntityRidingPlayer(EntityPlayer player) {
+        Entity entityRidingPlayer = MoCTools.getEntityRidingPlayer(player);
+        System.out.println("PLAYER LEFT THE GAME carrying entity: "+entityRidingPlayer);
+        if (entityRidingPlayer instanceof MoCEntityAnimal) {
+            MoCEntityAnimal mocEntity = (MoCEntityAnimal) entityRidingPlayer;
+            if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity(mocEntity, player, true);
+            NBTTagCompound tag = player.getEntityData();
+            tag.removeTag("MOCEntity_Riding_Player");
+        }
+    }
+
+    public static void dismountPassengerFromEntity(Entity passenger, Entity entity, boolean force) {
+        if (passenger == null || entity == null) {
+            return;
+        }
+        System.out.println("I want "+passenger+" to dismount from "+entity);
+        if (force || (passenger instanceof EntityLivingBase && passenger.isSneaking())) {
+            System.out.println("Forcing dismount from "+entity+" for passenger "+passenger);
             entity.dismountRidingEntity();
             double dist = (-1.5D);
-            double newPosX = entityRidden.posX + (dist * Math.sin(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
-            double newPosZ = entityRidden.posZ - (dist * Math.cos(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
-            entity.setPositionAndUpdate(newPosX, entityRidden.posY + 2D, newPosZ);
+            double newPosX = passenger.posX + (dist * Math.sin(((EntityLivingBase) passenger).renderYawOffset / 57.29578F));
+            double newPosZ = passenger.posZ - (dist * Math.cos(((EntityLivingBase) passenger).renderYawOffset / 57.29578F));
+            entity.setPositionAndUpdate(newPosX, passenger.posY + 2D, newPosZ);
             MoCTools.playCustomSound(entity, SoundEvents.ENTITY_CHICKEN_EGG);
         }
     }
     public static void dismountSneakingPlayer(Entity entity) {
         if (!entity.isRiding()) return;
-        dismountSneakingPlayer(entity, entity.getRidingEntity(), false);
+        dismountPassengerFromEntity(entity.getRidingEntity(), entity, false);
     }
 
     public static boolean isInsideOfMaterial(Material material, Entity entity) {

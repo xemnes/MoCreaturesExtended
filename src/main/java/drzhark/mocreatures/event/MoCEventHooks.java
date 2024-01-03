@@ -112,38 +112,18 @@ public class MoCEventHooks {
             }
         }
     }
-
-    private Entity findTheCorrectEntity(World world, UUID searchFor){
-        if (searchFor == null) {
-            return null;
-        }
-        Entity entity = null;
-        for(int i = 0; i < world.getLoadedEntityList().size(); i++){
-            if(world.getLoadedEntityList().get(i) != null){
-                Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
-                if(entity2.getUniqueID().equals(searchFor)){
-                    entity = entity2;
-                }
-            }
-        }
-        return entity;
-    }
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         EntityPlayer player = event.player;
+
+        // Handles the ENTITY that the PLAYER is riding
         if (player.getRidingEntity() instanceof IMoCTameable) {
             IMoCTameable mocEntity = (IMoCTameable) player.getRidingEntity();
             mocEntity.setRiderDisconnecting(true);
         }
-        NBTTagCompound tag = player.getEntityData();
-        UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
-        Entity entityRidingPlayer = findTheCorrectEntity(player.getEntityWorld(),animalID);
-        System.out.println("PLAYER LEFT THE GAME."+entityRidingPlayer);
-        if (entityRidingPlayer instanceof MoCEntityAnimal) {
-            MoCEntityAnimal mocEntity = (MoCEntityAnimal) entityRidingPlayer;
-            if (mocEntity.canRidePlayer()) MoCTools.dismountSneakingPlayer(player, mocEntity, true);
-            tag.removeTag("MOCEntity_Riding_Player");
-        }
+
+        // Handles the ENTITY that is riding the PLAYER
+        MoCTools.dismountEntityRidingPlayer(player);
     }
 
     private BlockPos getSafeSpawnPos(EntityLivingBase entity, BlockPos near) {

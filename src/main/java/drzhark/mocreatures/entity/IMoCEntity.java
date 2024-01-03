@@ -95,4 +95,6 @@ public interface IMoCEntity {
     boolean getIsFlying();
 
     String getClazzString();
+
+    boolean startRidingPlayer();
 }

@@ -101,7 +101,6 @@ public class MoCEventHooks {
         if (!event.getEntity().world.isRemote) {
             if (IMoCTameable.class.isAssignableFrom(event.getEntityLiving().getClass())) {
                 IMoCTameable mocEntity = (IMoCTameable) event.getEntityLiving();
-                System.out.println("LIVINGDEATHEVENT: "+event+"ID: "+mocEntity.getOwnerPetId()+"ENTITY:"+mocEntity);
                 if (mocEntity.getIsTamed() && mocEntity.getPetHealth() > 0 && !mocEntity.isRiderDisconnecting()) {
                     return;
                 }

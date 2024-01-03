@@ -5,6 +5,7 @@ package drzhark.mocreatures.entity.tameable;
 
 import drzhark.mocreatures.entity.IMoCEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
@@ -46,5 +47,10 @@ public interface IMoCTameable extends IMoCEntity {
 
     int getGestationTime();
 
+    boolean startRidingPlayer(EntityPlayer player);
+
+    boolean canRidePlayer();
+
     void setGestationTime(int time);
+
 }

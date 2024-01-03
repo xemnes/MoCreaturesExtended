@@ -1230,7 +1230,7 @@ public class MoCTools {
     }
 
     public static void dismountPassengerFromEntity(Entity passenger, Entity entity, boolean force) {
-        if (passenger == null || entity == null || passenger.getRidingEntity() == null) {
+        if (!force && (passenger == null || entity == null || passenger.getRidingEntity() == null)) {
             return;
         }
         if (force || (passenger instanceof EntityLivingBase && entity.isSneaking())) {

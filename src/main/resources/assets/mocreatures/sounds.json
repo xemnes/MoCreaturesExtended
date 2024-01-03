@@ -2,920 +2,922 @@
   "entity.generic.magic_appear": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:appear"
+      "mocreatures:random/magic_appear"
     ]
   },
   "entity.generic.magic_enchanted": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:appear_magic"
+      "mocreatures:random/magic_enchanted"
     ]
   },
   "entity.generic.armor_off": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:armor_off"
+      "mocreatures:random/armor_off"
     ]
   },
   "entity.generic.armor_on": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:armor_put"
+      "mocreatures:random/armor_on"
     ]
   },
   "entity.bear.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bear_death"
+      "mocreatures:entity/bear/death"
     ]
   },
   "entity.bear.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bear_grunt1",
-      "mocreatures:bear_grunt2",
-      "mocreatures:bear_grunt3",
-      "mocreatures:bear_grunt4",
-      "mocreatures:bear_grunt5"
+      "mocreatures:entity/bear/idle1",
+      "mocreatures:entity/bear/idle2",
+      "mocreatures:entity/bear/idle3",
+      "mocreatures:entity/bear/idle4",
+      "mocreatures:entity/bear/idle5"
     ]
   },
   "entity.bear.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bear_hurt1",
-      "mocreatures:bear_hurt2"
+      "mocreatures:entity/bear/hurt1",
+      "mocreatures:entity/bear/hurt2"
     ]
   },
   "entity.bee.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bee_buzz1",
-      "mocreatures:bee_buzz2",
-      "mocreatures:bee_buzz3"
+      "mocreatures:entity/bee/idle1",
+      "mocreatures:entity/bee/idle2",
+      "mocreatures:entity/bee/idle3"
     ]
   },
   "entity.bee.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bee_hurt"
+      "mocreatures:entity/bee/hurt"
     ]
   },
   "entity.bee.angry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bee_upset"
+      "mocreatures:entity/bee/angry"
     ]
   },
   "entity.generic.attach": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:golem_attach"
+      "mocreatures:random/attach"
     ]
   },
   "entity.big_golem.death": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:golem_dying"
+      "mocreatures:entity/big_golem/death"
     ]
   },
   "entity.generic.explode": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:golem_explode"
+      "mocreatures:random/explode"
     ]
   },
   "entity.big_golem.ambient": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:golem_grunt1",
-      "mocreatures:golem_grunt2"
+      "mocreatures:entity/big_golem/idle1",
+      "mocreatures:entity/big_golem/idle2"
     ]
   },
   "entity.big_golem.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:golem_hurt"
+      "mocreatures:entity/big_golem/hurt"
     ]
   },
   "entity.generic.launch": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:golem_shoot1",
-      "mocreatures:golem_shoot2"
+      "mocreatures:random/launch1",
+      "mocreatures:random/launch2"
     ]
   },
   "entity.big_golem.step": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:golem_step"
+      "mocreatures:entity/big_golem/step"
     ]
   },
   "entity.bird.ambient_black": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bird_black1",
-      "mocreatures:bird_black2",
-      "mocreatures:bird_black3"
+      "mocreatures:entity/bird/crow/idle1",
+      "mocreatures:entity/bird/crow/idle2",
+      "mocreatures:entity/bird/crow/idle3"
     ]
   },
   "entity.bird.ambient_blue": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bird_blue1",
-      "mocreatures:bird_blue2",
-      "mocreatures:bird_blue3",
-      "mocreatures:bird_blue4"
+      "mocreatures:entity/bird/blue_grosbeak/idle1",
+      "mocreatures:entity/bird/blue_grosbeak/idle2",
+      "mocreatures:entity/bird/blue_grosbeak/idle3",
+      "mocreatures:entity/bird/blue_grosbeak/idle4"
     ]
   },
   "entity.bird.ambient_green": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bird_green1",
-      "mocreatures:bird_green2",
-      "mocreatures:bird_green3"
+      "mocreatures:entity/bird/parrot/idle1",
+      "mocreatures:entity/bird/parrot/idle2",
+      "mocreatures:entity/bird/parrot/idle3"
     ]
   },
   "entity.bird.ambient_red": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bird_red1",
-      "mocreatures:bird_red2",
-      "mocreatures:bird_red3",
-      "mocreatures:bird_red4",
-      "mocreatures:bird_red5"
+      "mocreatures:entity/bird/cardinal/idle1",
+      "mocreatures:entity/bird/cardinal/idle2",
+      "mocreatures:entity/bird/cardinal/idle3",
+      "mocreatures:entity/bird/cardinal/idle4",
+      "mocreatures:entity/bird/cardinal/idle5"
     ]
   },
   "entity.bird.ambient_white": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bird_white1"
+      "mocreatures:entity/bird/mourning_dove/idle1"
     ]
   },
   "entity.bird.ambient_yellow": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:bird_yellow1",
-      "mocreatures:bird_yellow2",
-      "mocreatures:bird_yellow3",
-      "mocreatures:bird_yellow4",
-      "mocreatures:bird_yellow5"
+      "mocreatures:entity/bird/canary/idle1",
+      "mocreatures:entity/bird/canary/idle2",
+      "mocreatures:entity/bird/canary/idle3",
+      "mocreatures:entity/bird/canary/idle4",
+      "mocreatures:entity/bird/canary/idle5"
     ]
   },
   "entity.cricket.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cricket_ambient"
+      "mocreatures:entity/cricket/idle"
     ]
   },
   "entity.cricket.chirp": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cricket_chirp1",
-      "mocreatures:cricket_chirp2",
-      "mocreatures:cricket_chirp3"
+      "mocreatures:entity/cricket/chirp1",
+      "mocreatures:entity/cricket/chirp2",
+      "mocreatures:entity/cricket/chirp3"
     ]
   },
   "entity.cricket.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cricket_hurt"
+      "mocreatures:entity/cricket/hurt"
     ]
   },
   "entity.crocodile.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:croc_dying"
+      "mocreatures:entity/crocodile/death"
     ]
   },
   "entity.crocodile.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:croc_grunt1",
-      "mocreatures:croc_grunt2",
-      "mocreatures:croc_grunt3"
+      "mocreatures:entity/crocodile/idle1",
+      "mocreatures:entity/crocodile/idle2",
+      "mocreatures:entity/crocodile/idle3",
+      "mocreatures:entity/crocodile/idle4"
     ]
   },
   "entity.crocodile.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:croc_hurt1",
-      "mocreatures:croc_hurt2",
-      "mocreatures:croc_hurt3"
+      "mocreatures:entity/crocodile/hurt1",
+      "mocreatures:entity/crocodile/hurt2",
+      "mocreatures:entity/crocodile/hurt3"
     ]
   },
   "entity.crocodile.attack": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:croc_jaw_snap1",
-      "mocreatures:croc_jaw_snap2"
+      "mocreatures:entity/crocodile/attack1",
+      "mocreatures:entity/crocodile/attack2"
     ]
   },
   "entity.crocodile.rest": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:croc_resting1",
-      "mocreatures:croc_resting2"
+      "mocreatures:entity/crocodile/rest1",
+      "mocreatures:entity/crocodile/rest2"
     ]
   },
   "entity.crocodile.roll": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:croc_roll"
+      "mocreatures:entity/crocodile/roll"
     ]
   },
   "entity.lion.death_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cub_dying"
+      "mocreatures:entity/lion/death_baby"
     ]
   },
   "entity.lion.ambient_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cub_grunt1",
-      "mocreatures:cub_grunt2",
-      "mocreatures:cub_grunt3",
-      "mocreatures:cub_grunt4",
-      "mocreatures:cub_grunt5"
+      "mocreatures:entity/lion/idle_baby1",
+      "mocreatures:entity/lion/idle_baby2",
+      "mocreatures:entity/lion/idle_baby3",
+      "mocreatures:entity/lion/idle_baby4",
+      "mocreatures:entity/lion/idle_baby5",
+      "mocreatures:entity/lion/idle_baby6"
     ]
   },
   "entity.lion.hurt_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:cub_hurt1",
-      "mocreatures:cub_hurt2",
-      "mocreatures:cub_hurt3"
+      "mocreatures:entity/lion/hurt_baby1",
+      "mocreatures:entity/lion/hurt_baby2",
+      "mocreatures:entity/lion/hurt_baby3"
     ]
   },
   "entity.deer.ambient_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:deer_fawn_grunt"
+      "mocreatures:entity/deer/idle_baby"
     ]
   },
   "entity.deer.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:deer_dying"
+      "mocreatures:entity/deer/death"
     ]
   },
   "entity.deer.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:deer_grunt"
+      "mocreatures:entity/deer/idle"
     ]
   },
   "entity.deer.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:deer_hurt"
+      "mocreatures:entity/deer/hurt"
     ]
   },
   "entity.generic.destroy": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:destroy"
+      "mocreatures:random/destroy"
     ]
   },
   "entity.dolphin.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:dolphin_call1",
-      "mocreatures:dolphin_call2",
-      "mocreatures:dolphin_call3",
-      "mocreatures:dolphin_call4",
-      "mocreatures:dolphin_call5",
-      "mocreatures:dolphin_call6"
+      "mocreatures:entity/dolphin/idle1",
+      "mocreatures:entity/dolphin/idle2",
+      "mocreatures:entity/dolphin/idle3",
+      "mocreatures:entity/dolphin/idle4",
+      "mocreatures:entity/dolphin/idle5",
+      "mocreatures:entity/dolphin/idle6"
     ]
   },
   "entity.dolphin.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:dolphin_dying1",
-      "mocreatures:dolphin_dying2",
-      "mocreatures:dolphin_dying3"
+      "mocreatures:entity/dolphin/death1",
+      "mocreatures:entity/dolphin/death2",
+      "mocreatures:entity/dolphin/death3"
     ]
   },
   "entity.dolphin.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:dolphin_hurt1",
-      "mocreatures:dolphin_hurt2"
+      "mocreatures:entity/dolphin/hurt1",
+      "mocreatures:entity/dolphin/hurt2"
     ]
   },
   "entity.dolphin.angry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:dolphin_upset"
+      "mocreatures:entity/dolphin/angry"
     ]
   },
   "entity.donkey.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:donkey_dying"
+      "mocreatures:entity/donkey/death"
     ]
   },
   "entity.donkey.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:donkey_grunt1",
-      "mocreatures:donkey_grunt2"
+      "mocreatures:entity/donkey/idle1",
+      "mocreatures:entity/donkey/idle2"
     ]
   },
   "entity.donkey.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:donkey_hurt"
+      "mocreatures:entity/donkey/hurt"
     ]
   },
   "entity.dragonfly.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:dragonfly_buzz"
+      "mocreatures:entity/dragonfly/idle"
     ]
   },
   "entity.dragonfly.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:dragonfly_hurt"
+      "mocreatures:entity/dragonfly/hurt"
     ]
   },
   "entity.generic.drink": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:drinking"
+      "mocreatures:random/drink"
     ]
   },
   "entity.duck.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:duck_quack1",
-      "mocreatures:duck_quack2",
-      "mocreatures:duck_quack3"
+      "mocreatures:entity/duck/idle1",
+      "mocreatures:entity/duck/idle2",
+      "mocreatures:entity/duck/idle3"
     ]
   },
   "entity.duck.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:duck_hurt1",
-      "mocreatures:duck_hurt2"
+      "mocreatures:entity/duck/hurt1",
+      "mocreatures:entity/duck/hurt2"
     ]
   },
   "entity.generic.eat": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:eating"
+      "mocreatures:random/eat"
     ]
   },
   "entity.elephant.ambient_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:elephant_calf1",
-      "mocreatures:elephant_calf2"
+      "mocreatures:entity/elephant/idle_baby1",
+      "mocreatures:entity/elephant/idle_baby2"
     ]
   },
   "entity.elephant.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:elephant_dying"
+      "mocreatures:entity/elephant/death"
     ]
   },
   "entity.elephant.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:elephant_grunt1",
-      "mocreatures:elephant_grunt2",
-      "mocreatures:elephant_grunt3",
-      "mocreatures:elephant_grunt4",
-      "mocreatures:elephant_grunt5",
-      "mocreatures:elephant_grunt6",
-      "mocreatures:elephant_grunt7",
-      "mocreatures:elephant_grunt8"
+      "mocreatures:entity/elephant/idle1",
+      "mocreatures:entity/elephant/idle2",
+      "mocreatures:entity/elephant/idle3",
+      "mocreatures:entity/elephant/idle4",
+      "mocreatures:entity/elephant/idle5",
+      "mocreatures:entity/elephant/idle6",
+      "mocreatures:entity/elephant/idle7",
+      "mocreatures:entity/elephant/idle8"
     ]
   },
   "entity.elephant.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:elephant_hurt1",
-      "mocreatures:elephant_hurt2"
+      "mocreatures:entity/elephant/hurt1",
+      "mocreatures:entity/elephant/hurt2"
     ]
   },
   "entity.fly.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:fly_buzz"
+      "mocreatures:entity/fly/idle"
     ]
   },
   "entity.fly.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:fly_hurt"
+      "mocreatures:entity/fly/hurt"
     ]
   },
   "entity.fox.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:fox_call1",
-      "mocreatures:fox_call2",
-      "mocreatures:fox_call3",
-      "mocreatures:fox_call4",
-      "mocreatures:fox_call5"
+      "mocreatures:entity/fox/idle1",
+      "mocreatures:entity/fox/idle2",
+      "mocreatures:entity/fox/idle3",
+      "mocreatures:entity/fox/idle4",
+      "mocreatures:entity/fox/idle5"
     ]
   },
   "entity.fox.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:fox_dying"
+      "mocreatures:entity/fox/death"
     ]
   },
   "entity.fox.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:fox_hurt1",
-      "mocreatures:fox_hurt2"
+      "mocreatures:entity/fox/hurt1",
+      "mocreatures:entity/fox/hurt2"
     ]
   },
   "entity.goat.dig": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_dig"
+      "mocreatures:entity/goat/dig"
     ]
   },
   "entity.goat.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_dying"
+      "mocreatures:entity/goat/death"
     ]
   },
   "entity.goat.eat": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_eating"
+      "mocreatures:entity/goat/eat"
     ]
   },
   "entity.goat.ambient_female": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_grunt_female"
+      "mocreatures:entity/goat/idle_female"
     ]
   },
   "entity.goat.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_grunt_male"
+      "mocreatures:entity/goat/idle"
     ]
   },
   "entity.goat.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_hurt"
+      "mocreatures:entity/goat/hurt"
     ]
   },
   "entity.goat.ambient_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_grunt_baby"
+      "mocreatures:entity/goat/idle_baby"
     ]
   },
   "entity.generic.smack": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:goat_smack"
+      "mocreatures:random/smack"
     ]
   },
   "entity.grasshopper.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:grasshopper_ambient"
+      "mocreatures:entity/grasshopper/idle"
     ]
   },
   "entity.grasshopper.chirp": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:grasshopper_chirp1",
-      "mocreatures:grasshopper_chirp2",
-      "mocreatures:grasshopper_chirp3"
+      "mocreatures:entity/grasshopper/chirp1",
+      "mocreatures:entity/grasshopper/chirp2",
+      "mocreatures:entity/grasshopper/chirp3"
     ]
   },
   "entity.grasshopper.fly": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:grasshopper_fly"
+      "mocreatures:entity/grasshopper/fly"
     ]
   },
   "entity.grasshopper.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:grasshopper_hurt"
+      "mocreatures:entity/grasshopper/hurt"
     ]
   },
   "entity.hell_rat.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:hell_rat_dying"
+      "mocreatures:entity/hell_rat/death"
     ]
   },
   "entity.hell_rat.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:hell_rat_grunt1",
-      "mocreatures:hell_rat_grunt2",
-      "mocreatures:hell_rat_grunt3",
-      "mocreatures:hell_rat_grunt4"
+      "mocreatures:entity/hell_rat/idle1",
+      "mocreatures:entity/hell_rat/idle2",
+      "mocreatures:entity/hell_rat/idle3",
+      "mocreatures:entity/hell_rat/idle4"
     ]
   },
   "entity.hell_rat.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:hell_rat_hurt1",
-      "mocreatures:hell_rat_hurt2"
+      "mocreatures:entity/hell_rat/hurt1",
+      "mocreatures:entity/hell_rat/hurt2"
     ]
   },
   "entity.horse.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_dying"
+      "mocreatures:entity/horse/death"
     ]
   },
   "entity.horse.death_ghost": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_dying_ghost"
+      "mocreatures:entity/horse/ghost/death"
     ]
   },
   "entity.horse.death_undead": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_dying_undead"
+      "mocreatures:entity/horse/undead/death"
     ]
   },
   "entity.horse.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_grunt1",
-      "mocreatures:horse_grunt2",
-      "mocreatures:horse_grunt3"
+      "mocreatures:entity/horse/idle1",
+      "mocreatures:entity/horse/idle2",
+      "mocreatures:entity/horse/idle3"
     ]
   },
   "entity.horse.ambient_ghost": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_grunt_ghost1",
-      "mocreatures:horse_grunt_ghost2",
-      "mocreatures:horse_grunt_ghost3"
+      "mocreatures:entity/horse/ghost/idle1",
+      "mocreatures:entity/horse/ghost/idle2",
+      "mocreatures:entity/horse/ghost/idle3"
     ]
   },
   "entity.horse.ambient_undead": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_grunt_undead1",
-      "mocreatures:horse_grunt_undead2"
+      "mocreatures:entity/horse/undead/idle1",
+      "mocreatures:entity/horse/undead/idle2"
     ]
   },
   "entity.horse.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_hurt1",
-      "mocreatures:horse_hurt2"
+      "mocreatures:entity/horse/hurt1",
+      "mocreatures:entity/horse/hurt2"
     ]
   },
   "entity.horse.hurt_ghost": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_hurt_ghost"
+      "mocreatures:entity/horse/ghost/hurt"
     ]
   },
   "entity.horse.hurt_undead": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_hurt_undead"
+      "mocreatures:entity/horse/undead/hurt"
     ]
   },
   "entity.horse.angry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_mad"
+      "mocreatures:entity/horse/angry"
     ]
   },
   "entity.horse.angry_ghost": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_mad_ghost"
+      "mocreatures:entity/horse/ghost/angry"
     ]
   },
   "entity.horse.angry_undead": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:horse_mad_undead"
+      "mocreatures:entity/horse/undead/angry"
     ]
   },
   "entity.kitty.death_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_baby_dying"
+      "mocreatures:entity/kitty/death_baby"
     ]
   },
   "entity.kitty.ambient_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_baby_grunt"
+      "mocreatures:entity/kitty/idle_baby"
     ]
   },
   "entity.kitty.hurt_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_baby_hurt1",
-      "mocreatures:kitty_baby_hurt2"
+      "mocreatures:entity/kitty/hurt_baby1",
+      "mocreatures:entity/kitty/hurt_baby2"
     ]
   },
   "entity.kitty.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_dying1",
-      "mocreatures:kitty_dying2"
+      "mocreatures:entity/kitty/death1",
+      "mocreatures:entity/kitty/death2"
     ]
   },
   "entity.kitty.eat": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_eating_fish"
+      "mocreatures:entity/kitty/eat"
     ]
   },
   "entity.kitty.drink": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_eating"
+      "mocreatures:entity/kitty/drink"
     ]
   },
   "entity.kitty.hungry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_food1",
-      "mocreatures:kitty_food2",
-      "mocreatures:kitty_food3",
-      "mocreatures:kitty_food4"
+      "mocreatures:entity/kitty/hungry1",
+      "mocreatures:entity/kitty/hungry2",
+      "mocreatures:entity/kitty/hungry3",
+      "mocreatures:entity/kitty/hungry4"
     ]
   },
   "entity.kitty.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_grunt1",
-      "mocreatures:kitty_grunt2"
+      "mocreatures:entity/kitty/idle1",
+      "mocreatures:entity/kitty/idle2"
     ]
   },
   "entity.kitty.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_hurt1",
-      "mocreatures:kitty_hurt2",
-      "mocreatures:kitty_hurt3"
+      "mocreatures:entity/kitty/hurt1",
+      "mocreatures:entity/kitty/hurt2",
+      "mocreatures:entity/kitty/hurt3"
     ]
   },
   "entity.kitty.purr": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_purr1",
-      "mocreatures:kitty_purr2"
+      "mocreatures:entity/kitty/purr1",
+      "mocreatures:entity/kitty/purr2"
     ]
   },
   "entity.kitty.trapped": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_trapped"
+      "mocreatures:entity/kitty/trapped"
     ]
   },
   "entity.kitty.angry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:kitty_upset1",
-      "mocreatures:kitty_upset2",
-      "mocreatures:kitty_upset3"
+      "mocreatures:entity/kitty/upset1",
+      "mocreatures:entity/kitty/upset2",
+      "mocreatures:entity/kitty/upset3"
     ]
   },
   "entity.lion.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:lion_death"
+      "mocreatures:entity/lion/death"
     ]
   },
   "entity.lion.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:lion_grunt1",
-      "mocreatures:lion_grunt2",
-      "mocreatures:lion_grunt3"
+      "mocreatures:entity/lion/idle1",
+      "mocreatures:entity/lion/idle2",
+      "mocreatures:entity/lion/idle3"
     ]
   },
   "entity.lion.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:lion_hurt1",
-      "mocreatures:lion_hurt2",
-      "mocreatures:lion_hurt3",
-      "mocreatures:lion_hurt4"
+      "mocreatures:entity/lion/hurt1",
+      "mocreatures:entity/lion/hurt2",
+      "mocreatures:entity/lion/hurt3",
+      "mocreatures:entity/lion/hurt4"
     ]
   },
   "entity.mouse.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:mice_dying1",
-      "mocreatures:mice_dying2"
+      "mocreatures:entity/mouse/death1",
+      "mocreatures:entity/mouse/death2"
     ]
   },
   "entity.mouse.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:mice_grunt1",
-      "mocreatures:mice_grunt2",
-      "mocreatures:mice_grunt3"
+      "mocreatures:entity/mouse/idle1",
+      "mocreatures:entity/mouse/idle2",
+      "mocreatures:entity/mouse/idle3"
     ]
   },
   "entity.mouse.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:mice_hurt1",
-      "mocreatures:mice_hurt2",
-      "mocreatures:mice_hurt3"
+      "mocreatures:entity/mouse/hurt1",
+      "mocreatures:entity/mouse/hurt2",
+      "mocreatures:entity/mouse/hurt3"
     ]
   },
   "entity.ogre.ambient": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:ogre_grunt1",
-      "mocreatures:ogre_grunt2",
-      "mocreatures:ogre_grunt3"
+      "mocreatures:entity/ogre/idle1",
+      "mocreatures:entity/ogre/idle2",
+      "mocreatures:entity/ogre/idle3"
     ]
   },
   "entity.ogre.death": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:ogre_dying"
+      "mocreatures:entity/ogre/death"
     ]
   },
   "entity.ogre.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:ogre_hurt"
+      "mocreatures:entity/ogre/hurt"
     ]
   },
   "entity.ostrich.ambient_baby": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:ostrich_grunt_chick"
+      "mocreatures:entity/ostrich/idle_baby"
     ]
   },
   "entity.ostrich.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:ostrich_dying"
+      "mocreatures:entity/ostrich/death"
     ]
   },
   "entity.ostrich.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:ostrich_grunt1",
-      "mocreatures:ostrich_grunt2"
+      "mocreatures:entity/ostrich/idle1",
+      "mocreatures:entity/ostrich/idle2"
     ]
   },
   "entity.ostrich.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:ostrich_hurt1",
-      "mocreatures:ostrich_hurt2"
+      "mocreatures:entity/ostrich/hurt1",
+      "mocreatures:entity/ostrich/hurt2"
     ]
   },
   "entity.kitty_bed.pour_food": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:pouring_food"
+      "mocreatures:entity/kitty/kitty_bed/pour_food"
     ]
   },
   "entity.kitty_bed.pour_milk": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:pouring_milk"
+      "mocreatures:entity/kitty/kitty_bed/pour_milk"
     ]
   },
   "entity.bunny.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rabbit_dying"
+      "mocreatures:entity/bunny/death"
     ]
   },
   "entity.bunny.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rabbit_hurt1",
-      "mocreatures:rabbit_hurt2"
+      "mocreatures:entity/bunny/hurt1",
+      "mocreatures:entity/bunny/hurt2"
     ]
   },
   "entity.bunny.land": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rabbit_land"
+      "mocreatures:entity/bunny/land"
     ]
   },
   "entity.bunny.lift": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rabbit_lift"
+      "mocreatures:entity/bunny/lift"
     ]
   },
   "entity.raccoon.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:raccoon_dying"
+      "mocreatures:entity/raccoon/death"
     ]
   },
   "entity.raccoon.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:raccoon_grunt1",
-      "mocreatures:raccoon_grunt2",
-      "mocreatures:raccoon_grunt3",
-      "mocreatures:raccoon_grunt4"
+      "mocreatures:entity/raccoon/idle1",
+      "mocreatures:entity/raccoon/idle2",
+      "mocreatures:entity/raccoon/idle3",
+      "mocreatures:entity/raccoon/idle4"
     ]
   },
   "entity.raccoon.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:raccoon_hurt1",
-      "mocreatures:raccoon_hurt2"
+      "mocreatures:entity/raccoon/hurt1",
+      "mocreatures:entity/raccoon/hurt2"
     ]
   },
   "entity.rat.death_legacy": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rat_dying_legacy"
+      "mocreatures:entity/rat/legacy/death"
     ]
   },
   "entity.rat.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rat_dying"
+      "mocreatures:entity/rat/death"
     ]
   },
   "entity.rat.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rat_grunt1",
-      "mocreatures:rat_grunt2",
-      "mocreatures:rat_grunt3",
-      "mocreatures:rat_grunt4"
+      "mocreatures:entity/rat/idle1",
+      "mocreatures:entity/rat/idle2",
+      "mocreatures:entity/rat/idle3",
+      "mocreatures:entity/rat/idle4"
     ]
   },
   "entity.rat.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:rat_hurt1",
-      "mocreatures:rat_hurt2"
+      "mocreatures:entity/rat/hurt1",
+      "mocreatures:entity/rat/hurt2"
     ]
   },
   "entity.generic.roping": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:roping"
+      "mocreatures:random/roping"
     ]
   },
   "entity.scorpion.attack": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:scorpion_claw"
+      "mocreatures:entity/scorpion/attack"
     ]
   },
   "entity.scorpion.death": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:scorpion_dying"
+      "mocreatures:entity/scorpion/death"
     ]
   },
   "entity.scorpion.ambient": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:scorpion_grunt1",
-      "mocreatures:scorpion_grunt2",
-      "mocreatures:scorpion_grunt3",
-      "mocreatures:scorpion_grunt4"
+      "mocreatures:entity/scorpion/idle1",
+      "mocreatures:entity/scorpion/idle2",
+      "mocreatures:entity/scorpion/idle3",
+      "mocreatures:entity/scorpion/idle4"
     ]
   },
   "entity.scorpion.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:scorpion_hurt"
+      "mocreatures:entity/scorpion/hurt"
     ]
   },
   "entity.scorpion.sting": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:scorpion_sting1",
-      "mocreatures:scorpion_sting2"
+      "mocreatures:entity/scorpion/sting1",
+      "mocreatures:entity/scorpion/sting2"
     ]
   },
   "music_disc.shuffling": {
     "category": "record",
     "sounds": [
       {
-        "name": "mocreatures:music/shuffling",
+        "name": "mocreatures:records/shuffling",
         "stream": true
       }
     ]
@@ -923,218 +925,224 @@
   "entity.snake.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_dying"
+      "mocreatures:entity/snake/death"
     ]
   },
   "entity.snake.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_hiss1",
-      "mocreatures:snake_hiss2"
+      "mocreatures:entity/snake/idle1",
+      "mocreatures:entity/snake/idle2"
     ]
   },
   "entity.snake.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_hurt"
+      "mocreatures:entity/snake/hurt"
     ]
   },
   "entity.snake.rattle": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_rattle1",
-      "mocreatures:snake_rattle2"
+      "mocreatures:entity/snake/rattle1",
+      "mocreatures:entity/snake/rattle2"
     ]
   },
   "entity.snake.attack": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_snap"
+      "mocreatures:entity/snake/attack"
     ]
   },
   "entity.snake.swim": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_swim"
+      "mocreatures:entity/snake/swim"
     ]
   },
   "entity.snake.angry": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:snake_upset1",
-      "mocreatures:snake_upset2"
+      "mocreatures:entity/snake/angry1",
+      "mocreatures:entity/snake/angry2"
     ]
   },
   "entity.generic.magic_conversion": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:transform"
+      "mocreatures:random/magic_conversion"
     ]
   },
   "entity.turkey.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:turkey_gobble1",
-      "mocreatures:turkey_gobble2"
+      "mocreatures:entity/turkey/idle1",
+      "mocreatures:entity/turkey/idle2"
     ]
   },
   "entity.turkey.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:turkey_hurt"
+      "mocreatures:entity/turkey/hurt"
     ]
   },
   "entity.turtle.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:turtle_dying"
+      "mocreatures:entity/turtle/death"
     ]
   },
   "entity.turtle.hiss": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:turtle_hissing"
+      "mocreatures:entity/turtle/hiss"
     ]
   },
   "entity.generic.clang": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:clang"
+      "mocreatures:random/clang"
     ]
   },
   "entity.generic.magic_creepy": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:vanish"
+      "mocreatures:random/magic_creepy"
     ]
   },
   "entity.werehuman.death_legacy": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werehuman_dying_legacy1",
-      "mocreatures:werehuman_dying_legacy2"
+      "mocreatures:entity/werehuman/legacy/death1",
+      "mocreatures:entity/werehuman/legacy/death2"
     ]
   },
   "entity.werehuman.hurt_legacy": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werehuman_hurt_legacy1",
-      "mocreatures:werehuman_hurt_legacy2"
+      "mocreatures:entity/werehuman/legacy/hurt1",
+      "mocreatures:entity/werehuman/legacy/hurt2"
     ]
   },
   "entity.werewolf.transform_legacy": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werewolf_transform_legacy1",
-      "mocreatures:werewolf_transform_legacy2",
-      "mocreatures:werewolf_transform_legacy3"
+      "mocreatures:entity/werewolf/legacy/transform1",
+      "mocreatures:entity/werewolf/legacy/transform2",
+      "mocreatures:entity/werewolf/legacy/transform3"
     ]
   },
   "entity.werewolf.transform": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werewolf_transform1",
-      "mocreatures:werewolf_transform2",
-      "mocreatures:werewolf_transform3"
+      "mocreatures:entity/werewolf/transform1",
+      "mocreatures:entity/werewolf/transform2",
+      "mocreatures:entity/werewolf/transform3"
     ]
   },
   "entity.werewolf.death": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werewolf_dying1",
-      "mocreatures:werewolf_dying2"
+      "mocreatures:entity/werewolf/death1",
+      "mocreatures:entity/werewolf/death2"
     ]
   },
   "entity.werewolf.ambient": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werewolf_grunt1",
-      "mocreatures:werewolf_grunt2",
-      "mocreatures:werewolf_grunt3",
-      "mocreatures:werewolf_grunt4"
+      "mocreatures:entity/werewolf/idle1",
+      "mocreatures:entity/werewolf/idle2",
+      "mocreatures:entity/werewolf/idle3",
+      "mocreatures:entity/werewolf/idle4"
     ]
   },
   "entity.werewolf.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:werewolf_hurt1",
-      "mocreatures:werewolf_hurt2"
+      "mocreatures:entity/werewolf/hurt1",
+      "mocreatures:entity/werewolf/hurt2"
     ]
   },
   "entity.generic.whip_command": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:whip"
+      "mocreatures:random/whip_command"
     ]
   },
   "entity.generic.wing_flap": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:wing_flap"
+      "mocreatures:random/wing_flap"
+    ]
+  },
+  "entity.generic.wing_flap_soft": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:random/wing_flap_soft"
     ]
   },
   "entity.wolf.death": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wild_wolf_death"
+      "mocreatures:entity/wolf/death"
     ]
   },
   "entity.wolf.ambient": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wild_wolf_grunt1",
-      "mocreatures:wild_wolf_grunt2",
-      "mocreatures:wild_wolf_grunt3"
+      "mocreatures:entity/wolf/idle1",
+      "mocreatures:entity/wolf/idle2",
+      "mocreatures:entity/wolf/idle3"
     ]
   },
   "entity.wolf.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wild_wolf_hurt1",
-      "mocreatures:wild_wolf_hurt2"
+      "mocreatures:entity/wolf/hurt1",
+      "mocreatures:entity/wolf/hurt2"
     ]
   },
   "entity.wraith.ambient": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraith_haunt1",
-      "mocreatures:wraith_haunt2",
-      "mocreatures:wraith_haunt3"
+      "mocreatures:entity/wraith/idle1",
+      "mocreatures:entity/wraith/idle2",
+      "mocreatures:entity/wraith/idle3"
     ]
   },
   "entity.wraith.death": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraith_dying"
+      "mocreatures:entity/wraith/death"
     ]
   },
   "entity.wraith.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraith_hurt1",
-      "mocreatures:wraith_hurt2"
+      "mocreatures:entity/wraith/hurt1",
+      "mocreatures:entity/wraith/hurt2"
     ]
   },
   "entity.wraith.ambient_legacy": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraith_haunt_legacy1",
-      "mocreatures:wraith_haunt_legacy2",
-      "mocreatures:wraith_haunt_legacy3"
+      "mocreatures:entity/wraith/legacy/idle1",
+      "mocreatures:entity/wraith/legacy/idle2",
+      "mocreatures:entity/wraith/legacy/idle3"
     ]
   },
   "entity.wraith.death_legacy": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraith_dying_legacy1",
-      "mocreatures:wraith_dying_legacy2"
+      "mocreatures:entity/wraith/legacy/death1",
+      "mocreatures:entity/wraith/legacy/death2"
     ]
   },
   "entity.wraith.hurt_legacy": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:wraith_hurt_legacy1",
-      "mocreatures:wraith_hurt_legacy2"
+      "mocreatures:entity/wraith/legacy/hurt1",
+      "mocreatures:entity/wraith/legacy/hurt2"
     ]
   },
   "entity.wyvern.death": {
@@ -1146,43 +1154,43 @@
   "entity.wyvern.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:wyvern_grunt1",
-      "mocreatures:wyvern_grunt2",
-      "mocreatures:wyvern_grunt3",
-      "mocreatures:wyvern_grunt4",
-      "mocreatures:wyvern_grunt5"
+      "mocreatures:entity/wyvern/idle1",
+      "mocreatures:entity/wyvern/idle2",
+      "mocreatures:entity/wyvern/idle3",
+      "mocreatures:entity/wyvern/idle4",
+      "mocreatures:entity/wyvern/idle5"
     ]
   },
   "entity.wyvern.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:wyvern_hurt1",
-      "mocreatures:wyvern_hurt2"
+      "mocreatures:entity/wyvern/hurt1",
+      "mocreatures:entity/wyvern/hurt2"
     ]
   },
   "entity.generic.envenom": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:wyvern_poison"
+      "mocreatures:random/envenom"
     ]
   },
   "entity.wyvern.wing_flap": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:wyvern_wing_flap"
+      "mocreatures:entity/wyvern/wing_flap"
     ]
   },
   "entity.zebra.ambient": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:zebra_grunt1",
-      "mocreatures:zebra_grunt2"
+      "mocreatures:entity/zebra/idle1",
+      "mocreatures:entity/zebra/idle2"
     ]
   },
   "entity.zebra.hurt": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:zebra_hurt"
+      "mocreatures:entity/zebra/hurt"
     ]
   }
 }

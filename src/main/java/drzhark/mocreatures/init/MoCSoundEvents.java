@@ -236,6 +236,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_SMACK;
     public static final SoundEvent ENTITY_GENERIC_WHIP_COMMAND;
     public static final SoundEvent ENTITY_GENERIC_WING_FLAP;
+    public static final SoundEvent ENTITY_GENERIC_WING_FLAP_SOFT;
 
     /* Music */
     // Record
@@ -467,6 +468,7 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_SMACK = createSoundEvent("entity.generic.smack");
             ENTITY_GENERIC_WHIP_COMMAND = createSoundEvent("entity.generic.whip_command");
             ENTITY_GENERIC_WING_FLAP = createSoundEvent("entity.generic.wing_flap");
+            ENTITY_GENERIC_WING_FLAP_SOFT = createSoundEvent("entity.generic.wing_flap_soft");
 
             /* Music */
             // Record
@@ -711,6 +713,7 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_SMACK,
                     ENTITY_GENERIC_WHIP_COMMAND,
                     ENTITY_GENERIC_WING_FLAP,
+                    ENTITY_GENERIC_WING_FLAP_SOFT,
 
                     /* Music */
                     // Record

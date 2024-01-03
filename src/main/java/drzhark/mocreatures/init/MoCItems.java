@@ -172,10 +172,10 @@ public class MoCItems {
     public static final MoCItemArmor scorpLegsUndead = new MoCItemArmor("scorplegsundead", scorpuARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor scorpBootsUndead = new MoCItemArmor("scorpbootsundead", scorpuARMOR, 4, EntityEquipmentSlot.FEET);
     static ArmorMaterial furARMOR = EnumHelper.addArmorMaterial("furARMOR", "furARMOR", 4, new int[]{1, 2, 2, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F).setRepairItem(new ItemStack(fur));
-    public static final MoCItemArmor chestFur = new MoCItemArmor("furchest", furARMOR, 4, EntityEquipmentSlot.CHEST);
-    public static final MoCItemArmor helmetFur = new MoCItemArmor("furhelmet", furARMOR, 4, EntityEquipmentSlot.HEAD);
-    public static final MoCItemArmor legsFur = new MoCItemArmor("furlegs", furARMOR, 4, EntityEquipmentSlot.LEGS);
-    public static final MoCItemArmor bootsFur = new MoCItemArmor("furboots", furARMOR, 4, EntityEquipmentSlot.FEET);
+    public static final MoCItemLuckyArmor chestFur = new MoCItemLuckyArmor("furchest", 0.5F, furARMOR, 4, EntityEquipmentSlot.CHEST);
+    public static final MoCItemLuckyArmor helmetFur = new MoCItemLuckyArmor("furhelmet", 0.5F, furARMOR, 4, EntityEquipmentSlot.HEAD);
+    public static final MoCItemLuckyArmor legsFur = new MoCItemLuckyArmor("furlegs", 0.5F, furARMOR, 4, EntityEquipmentSlot.LEGS);
+    public static final MoCItemLuckyArmor bootsFur = new MoCItemLuckyArmor("furboots", 0.5F, furARMOR, 4, EntityEquipmentSlot.FEET);
     static ArmorMaterial hideARMOR = EnumHelper.addArmorMaterial("hideARMOR", "hideARMOR", 8, new int[]{1, 3, 3, 1}, 18, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F).setRepairItem(new ItemStack(animalHide));
     public static final MoCItemArmor chestHide = new MoCItemArmor("hidechest", hideARMOR, 4, EntityEquipmentSlot.CHEST);
     public static final MoCItemArmor helmetHide = new MoCItemArmor("hidehelmet", hideARMOR, 4, EntityEquipmentSlot.HEAD);

@@ -1219,6 +1219,9 @@ public class MoCTools {
 
     public static void dismountEntityRidingPlayer(EntityPlayer player) {
         Entity entityRidingPlayer = MoCTools.getEntityRidingPlayer(player);
+        if (entityRidingPlayer == null) {
+            return;
+        }
         System.out.println("PLAYER LEFT THE GAME carrying entity: "+entityRidingPlayer);
         if (IMoCTameable.class.isAssignableFrom(entityRidingPlayer.getClass())) {
             IMoCTameable mocEntity = (IMoCTameable) entityRidingPlayer;

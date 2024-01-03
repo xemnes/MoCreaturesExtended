@@ -141,6 +141,16 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         return (this.getType() == 1);
     }
 
+    public boolean startRidingPlayer(EntityPlayer player) {
+        boolean ret = super.startRiding(player);
+        if (ret) {
+            System.out.println("ENTITY "+this.getUniqueID()+"is now riding on "+ player);
+            NBTTagCompound tag = player.getEntityData();
+            tag.setUniqueId("MOCEntity_Riding_Player", this.getUniqueID());
+            return true;
+        }
+        return false;
+    }
     @Override
     public boolean renderName() {
         return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().isEmpty() && (!this.isBeingRidden()) && (this.getRidingEntity() == null));

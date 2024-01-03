@@ -1192,10 +1192,10 @@ public class MoCTools {
         source.readFromNBT(nbttagcompound);
     }
 
-    public static void dismountSneakingPlayer(EntityLiving entity) {
+    public static void dismountSneakingPlayer(EntityLiving entity, boolean force) {
         if (!entity.isRiding()) return;
         Entity entityRidden = entity.getRidingEntity();
-        if (entityRidden instanceof EntityLivingBase && entityRidden.isSneaking()) {
+        if (entityRidden instanceof EntityLivingBase && (entityRidden.isSneaking() || force)) {
             entity.dismountRidingEntity();
             double dist = (-1.5D);
             double newPosX = entityRidden.posX + (dist * Math.sin(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
@@ -1203,6 +1203,9 @@ public class MoCTools {
             entity.setPositionAndUpdate(newPosX, entityRidden.posY + 2D, newPosZ);
             MoCTools.playCustomSound(entity, SoundEvents.ENTITY_CHICKEN_EGG);
         }
+    }
+    public static void dismountSneakingPlayer(EntityLiving entity) {
+        dismountSneakingPlayer(entity, false);
     }
 
     public static boolean isInsideOfMaterial(Material material, Entity entity) {

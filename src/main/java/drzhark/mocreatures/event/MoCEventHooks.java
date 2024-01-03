@@ -5,14 +5,18 @@ package drzhark.mocreatures.event;
 
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.MoCConstants;
+import drzhark.mocreatures.MoCTools;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetMapData;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -25,6 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.List;
+import java.util.UUID;
 
 public class MoCEventHooks {
 
@@ -96,10 +101,10 @@ public class MoCEventHooks {
         if (!event.getEntity().world.isRemote) {
             if (IMoCTameable.class.isAssignableFrom(event.getEntityLiving().getClass())) {
                 IMoCTameable mocEntity = (IMoCTameable) event.getEntityLiving();
+                System.out.println("LIVINGDEATHEVENT: "+event+"ID: "+mocEntity.getOwnerPetId()+"ENTITY:"+mocEntity);
                 if (mocEntity.getIsTamed() && mocEntity.getPetHealth() > 0 && !mocEntity.isRiderDisconnecting()) {
                     return;
                 }
-
                 if (mocEntity.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
                 {
                     MoCreatures.instance.mapData.removeOwnerPet(mocEntity, mocEntity.getOwnerPetId());
@@ -108,12 +113,32 @@ public class MoCEventHooks {
         }
     }
 
+    private Entity findTheCorrectEntity(World world, UUID theFinding){
+        Entity entity = null;
+        for(int i = 0; i < world.getLoadedEntityList().size(); i++){
+            if(world.getLoadedEntityList().get(i) != null){
+                Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
+                if(entity2.getUniqueID().equals(theFinding)){
+                    entity = entity2;
+                }
+            }
+        }
+        return entity;
+    }
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         EntityPlayer player = event.player;
+        NBTTagCompound tag = player.getEntityData();
+        UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
         if (player.getRidingEntity() instanceof IMoCTameable) {
             IMoCTameable mocEntity = (IMoCTameable) player.getRidingEntity();
             mocEntity.setRiderDisconnecting(true);
+        }
+        Entity entityRidingPlayer = findTheCorrectEntity(player.getEntityWorld(),animalID);
+        System.out.println("PLAYER LEFT THE GAME."+event.player+player.getRidingEntity()+animalID+entityRidingPlayer);
+        if (entityRidingPlayer instanceof MoCEntityAnimal) {
+            MoCEntityAnimal mocEntity = (MoCEntityAnimal) entityRidingPlayer;
+            if (mocEntity.canRidePlayer() && mocEntity.isRiding()) MoCTools.dismountSneakingPlayer(mocEntity, true);
         }
     }
 

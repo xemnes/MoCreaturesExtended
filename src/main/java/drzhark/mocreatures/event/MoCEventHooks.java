@@ -6,6 +6,7 @@ package drzhark.mocreatures.event;
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCTools;
+import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetMapData;
@@ -127,8 +128,8 @@ public class MoCEventHooks {
         Entity entityRidingPlayer = MoCTools.getEntityRidingPlayer(player);
         if (entityRidingPlayer != null) {
             // System.out.println("PLAYER LEFT THE GAME carrying entity: "+entityRidingPlayer);
-            if (IMoCTameable.class.isAssignableFrom(entityRidingPlayer.getClass())) {
-                IMoCTameable mocEntity = (IMoCTameable) entityRidingPlayer;
+            if (IMoCEntity.class.isAssignableFrom(entityRidingPlayer.getClass())) {
+                IMoCEntity mocEntity = (IMoCEntity) entityRidingPlayer;
                 if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity(entityRidingPlayer, player, true);
             }
         }

@@ -1047,6 +1047,20 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     }
 
     @Override
+    public boolean startRidingPlayer(EntityPlayer player) {
+        if (MoCTools.getEntityRidingPlayer(player) != null) {
+            return false; // Something is already riding this player.
+        }
+        boolean ret = super.startRiding(player);
+        if (ret) {
+            NBTTagCompound tag = player.getEntityData();
+            tag.setUniqueId("MOCEntity_Riding_Player", this.getUniqueID());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void setLeashHolder(Entity entityIn, boolean sendAttachNotification) {
         if (this.getIsTamed() && entityIn instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityIn;

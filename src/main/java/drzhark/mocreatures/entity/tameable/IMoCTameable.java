@@ -47,10 +47,6 @@ public interface IMoCTameable extends IMoCEntity {
 
     int getGestationTime();
 
-    boolean startRidingPlayer(EntityPlayer player);
-
-    boolean canRidePlayer();
-
     void setGestationTime(int time);
 
 }

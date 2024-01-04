@@ -110,6 +110,8 @@ public class MoCItems {
     // Weapons
     static ToolMaterial WHIP = EnumHelper.addToolMaterial("WHIP", 0, 184, 2.0F, 3.0F, 15).setRepairItem(new ItemStack(Items.LEATHER));
     public static final MoCItemWhip whip = new MoCItemWhip("whip", WHIP, 1.9F);
+    static ToolMaterial REPTILEWHIP = EnumHelper.addToolMaterial("REPTILEWHIP", 0, 234, 3.0F, 4.0F, 17).setRepairItem(new ItemStack(hideCroc));
+    public static final MoCItemWhip reptileWhip = new MoCItemWhip("reptile_whip", REPTILEWHIP, 1.9F);
     static ToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 501, 10.0F, 3.5F, 20).setRepairItem(new ItemStack(ancientSilverIngot));
     public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", NINJA);
     public static final MoCItemSword sai = new MoCItemSword("sai", NINJA);
@@ -201,7 +203,6 @@ public class MoCItems {
                     sugarlump,
                     mocegg,
                     bigcatclaw,
-                    whip,
                     medallion,
                     litterbox,
                     woolball,
@@ -223,6 +224,8 @@ public class MoCItems {
                     ancientSilverNugget,
                     firestoneChunk,
 
+                    whip,
+                    reptileWhip,
                     nunchaku,
                     sai,
                     bo,

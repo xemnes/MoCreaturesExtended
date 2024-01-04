@@ -489,4 +489,12 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     public boolean getIsGhost() {
         return false;
     }
+
+    /***
+     * Used to select Animals that can 'ride' the player. Like mice, snakes, turtles, birds
+     */
+    @Override
+    public boolean canRidePlayer() {
+        return false;
+    }
 }

@@ -1016,4 +1016,12 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         }
         super.setLeashHolder(entityIn, sendAttachNotification);
     }
+
+    /***
+     * Used to select Animals that can 'ride' the player. Like mice, snakes, turtles, birds
+     */
+    @Override
+    public boolean canRidePlayer() {
+        return false;
+    }
 }

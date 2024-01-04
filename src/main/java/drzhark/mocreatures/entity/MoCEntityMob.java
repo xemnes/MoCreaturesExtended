@@ -18,6 +18,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -487,6 +488,28 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
 
     @Override
     public boolean getIsGhost() {
+        return false;
+    }
+
+    /***
+     * Used to select Animals that can 'ride' the player. Like mice, snakes, turtles, birds
+     */
+    @Override
+    public boolean canRidePlayer() {
+        return false;
+    }
+
+    @Override
+    public boolean startRidingPlayer(EntityPlayer player) {
+        if (MoCTools.getEntityRidingPlayer(player) != null) {
+            return false; // Something is already riding this player.
+        }
+        boolean ret = super.startRiding(player);
+        if (ret) {
+            NBTTagCompound tag = player.getEntityData();
+            tag.setUniqueId("MOCEntity_Riding_Player", this.getUniqueID());
+            return true;
+        }
         return false;
     }
 }

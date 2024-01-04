@@ -475,7 +475,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         }
 
         if (this.getRidingEntity() == null && this.getAge() < 60 && !getIsAdult()) {
-            if (this.startRiding(player)) {
+            if (this.startRidingPlayer(player)) {
                 this.rotationYaw = player.rotationYaw;
                 if (!this.world.isRemote && !getIsTamed()) {
                     MoCTools.tameWithName(player, this);

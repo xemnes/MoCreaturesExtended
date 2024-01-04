@@ -487,7 +487,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             return true;
         }
         if (stack.isEmpty() && getKittyState() > 2 && pickable()) {
-            if (this.startRiding(player)) {
+            if (this.startRidingPlayer(player)) {
                 changeKittyState(15);
             }
             return true;

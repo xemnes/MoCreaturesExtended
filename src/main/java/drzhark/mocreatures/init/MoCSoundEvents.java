@@ -234,7 +234,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_LAUNCH;
     public static final SoundEvent ENTITY_GENERIC_ROPING;
     public static final SoundEvent ENTITY_GENERIC_SMACK;
-    public static final SoundEvent ENTITY_GENERIC_WHIP_COMMAND;
+    public static final SoundEvent ENTITY_GENERIC_WHIP;
     public static final SoundEvent ENTITY_GENERIC_WING_FLAP;
     public static final SoundEvent ENTITY_GENERIC_WING_FLAP_SOFT;
 
@@ -466,7 +466,7 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_MAGIC_ENCHANTED = createSoundEvent("entity.generic.magic_enchanted");
             ENTITY_GENERIC_ROPING = createSoundEvent("entity.generic.roping");
             ENTITY_GENERIC_SMACK = createSoundEvent("entity.generic.smack");
-            ENTITY_GENERIC_WHIP_COMMAND = createSoundEvent("entity.generic.whip_command");
+            ENTITY_GENERIC_WHIP = createSoundEvent("entity.generic.whip");
             ENTITY_GENERIC_WING_FLAP = createSoundEvent("entity.generic.wing_flap");
             ENTITY_GENERIC_WING_FLAP_SOFT = createSoundEvent("entity.generic.wing_flap_soft");
 
@@ -711,7 +711,7 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_MAGIC_ENCHANTED,
                     ENTITY_GENERIC_ROPING,
                     ENTITY_GENERIC_SMACK,
-                    ENTITY_GENERIC_WHIP_COMMAND,
+                    ENTITY_GENERIC_WHIP,
                     ENTITY_GENERIC_WING_FLAP,
                     ENTITY_GENERIC_WING_FLAP_SOFT,
 

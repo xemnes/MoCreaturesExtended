@@ -3,10 +3,10 @@
  */
 package drzhark.mocreatures.item;
 
+import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
-import drzhark.mocreatures.entity.hunter.MoCEntityBear;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
 import drzhark.mocreatures.entity.hunter.MoCEntityPetScorpion;
 import drzhark.mocreatures.entity.neutral.MoCEntityElephant;
@@ -16,27 +16,39 @@ import drzhark.mocreatures.entity.neutral.MoCEntityWyvern;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class MoCItemWhip extends MoCItem {
+import javax.annotation.Nullable;
 
-    public MoCItemWhip(String name) {
-        super(name);
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+public class MoCItemWhip extends MoCItemSword {
+    private float AttackSpeed;
+
+    public MoCItemWhip(String name, Item.ToolMaterial material, float attackSpeedIn) {
+        super(name, 0, material);
         this.maxStackSize = 1;
-        setMaxDamage(24);
-    }
-
-    @Override
-    public boolean isFull3D() {
-        return true;
+        setMaxDamage(181);
+        this.AttackSpeed = attackSpeedIn;
     }
 
     @Override
@@ -46,8 +58,8 @@ public class MoCItemWhip extends MoCItem {
         Block block1 = worldIn.getBlockState(pos.up()).getBlock();
         if (side != EnumFacing.DOWN && (block1 == Blocks.AIR) && (block != Blocks.AIR) && (block != Blocks.STANDING_SIGN)) {
             whipFX(worldIn, pos);
-            worldIn.playSound(player, pos, MoCSoundEvents.ENTITY_GENERIC_WHIP_COMMAND, SoundCategory.PLAYERS, 0.5F, 0.4F / ((itemRand.nextFloat() * 0.4F) + 0.8F));
-            stack.damageItem(1, player);
+            worldIn.playSound(player, pos, MoCSoundEvents.ENTITY_GENERIC_WHIP, SoundCategory.PLAYERS, 0.5F, 0.4F / ((itemRand.nextFloat() * 0.4F) + 0.8F));
+            stack.damageItem(2, player);
             List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(12D));
             for (Entity entity : list) {
                 if (entity instanceof MoCEntityAnimal) {
@@ -146,6 +158,12 @@ public class MoCItemWhip extends MoCItem {
         return EnumActionResult.FAIL;
     }
 
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        target.playSound(MoCSoundEvents.ENTITY_GENERIC_WHIP, 0.5F, 2.0F / ((itemRand.nextFloat() * 0.4F) + 0.8F));
+        return super.hitEntity(stack, target, attacker);
+    }
+
     public void whipFX(World world, BlockPos pos) {
         double d = pos.getX() + 0.5F;
         double d1 = pos.getY() + 1.0F;
@@ -162,5 +180,26 @@ public class MoCItemWhip extends MoCItem {
         world.spawnParticle(EnumParticleTypes.FLAME, d, d1 + d3, d2 + d4, 0.0D, 0.0D, 0.0D);
         world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d, d1, d2, 0.0D, 0.0D, 0.0D);
         world.spawnParticle(EnumParticleTypes.FLAME, d, d1, d2, 0.0D, 0.0D, 0.0D);
+    }
+
+    /**
+     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+     */
+    @Override
+    public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+        Multimap<String, AttributeModifier> multimap = HashMultimap.<String, AttributeModifier>create();
+
+        if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Damage modifier", (double) this.getAttackDamage(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Speed modifier", (double) this.AttackSpeed - 4.0D, 0));
+        }
+
+        return multimap;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".whip"));
     }
 }

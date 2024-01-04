@@ -7,6 +7,7 @@ import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.item.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -36,7 +37,6 @@ public class MoCItems {
     public static final MoCItemFood sugarlump = (MoCItemFood) new MoCItemFood("sugarlump", 1, 0.1F, false, 12).setPotionEffect(new PotionEffect(MobEffects.NAUSEA, 4 * 20, 0), 0.15F);
     public static final MoCItem mocegg = new MoCItemEgg("mocegg");
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
-    public static final MoCItem whip = new MoCItemWhip("whip");
     public static final MoCItem staffPortal = new ItemStaffPortal("staffportal");
     public static final MoCItem medallion = new MoCItem("medallion");
     public static final MoCItemKittyBed[] kittybed = new MoCItemKittyBed[16];
@@ -108,6 +108,8 @@ public class MoCItems {
     public static final MoCItemFood venisonCooked = new MoCItemFood("venisoncooked", 8, 0.9F, true);
     public static final MoCItemFood venisonRaw = new MoCItemFood("venisonraw", 3, 0.4F, true);
     // Weapons
+    static ToolMaterial WHIP = EnumHelper.addToolMaterial("WHIP", 0, 204, 2.0F, 3.0F, 15).setRepairItem(new ItemStack(Items.LEATHER));
+    public static final MoCItemWhip whip = new MoCItemWhip("whip", WHIP, 1.9F);
     static ToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 501, 10.0F, 3.5F, 20).setRepairItem(new ItemStack(ancientSilverIngot));
     public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", NINJA);
     public static final MoCItemSword sai = new MoCItemSword("sai", NINJA);

@@ -1063,10 +1063,10 @@
       "mocreatures:entity/werewolf/hurt2"
     ]
   },
-  "entity.generic.whip_command": {
+  "entity.generic.whip": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:random/whip_command"
+      "mocreatures:random/whip"
     ]
   },
   "entity.generic.wing_flap": {

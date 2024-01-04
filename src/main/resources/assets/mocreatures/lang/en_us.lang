@@ -370,3 +370,4 @@ info.mocreatures.sting_weapon_dirt=Inflicts Poison II on the target for %d secon
 info.mocreatures.sting_weapon_fire=Burns the target for %d seconds
 info.mocreatures.sting_weapon_frost=Inflicts Slowness on the target for %d seconds
 info.mocreatures.sting_weapon_undead=Inflicts Wither on the target (Blindness on players) for %d seconds
+info.mocreatures.whip=All tamed MoC mobs within a range of 10 blocks will automatically sit when the ground is right-clicked

@@ -60,6 +60,8 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     private int mountCount;
     private boolean updateDivingDepth = false;
     private double divingDepth;
+    private int huntingCounter;
+    private int followPlayerCounter;
 
     protected MoCEntityAquatic(World world) {
         super(world);
@@ -375,6 +377,16 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
                     setAdult(true);
                 }
             }
+            
+            if (MoCreatures.proxy.enableHunters && this.isReadyToHunt() && !this.getIsHunting() && this.rand.nextInt(500) == 0) {
+                setIsHunting(true);
+            } else if (!this.getIsHunting() && this.isReadyToFollowOwnerPlayer() && !this.getIsFollowingOwnerPlayer() && this.rand.nextInt(500) == 0) {
+                setIsFollowingOwnerPlayer(true);
+            }
+
+            if (getIsHunting() && ++this.huntingCounter > 50) {
+                setIsHunting(false);
+            }
 
             this.getNavigator().onUpdateNavigation();
 
@@ -643,6 +655,14 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     public boolean canAttackTarget(EntityLivingBase entity) {
         return false;
     }
+    
+    public boolean isReadyToHunt() {
+        return false;
+    }
+    
+    public boolean isReadyToFollowOwnerPlayer() {
+        return false;
+    }
 
     @Override
     public boolean canBeLeashedTo(EntityPlayer player) {
@@ -772,6 +792,30 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
                     MoCTools.tameWithName((EntityPlayer) passenger, (IMoCTameable) this);
                 }
             }
+        }
+    }
+    
+    public boolean getIsHunting() {
+        return this.huntingCounter != 0;
+    }
+
+    public void setIsHunting(boolean flag) {
+        if (flag) {
+            this.huntingCounter = this.rand.nextInt(30) + 1;
+        } else {
+            this.huntingCounter = 0;
+        }
+    }
+    
+    public boolean getIsFollowingOwnerPlayer() {
+        return this.followPlayerCounter != 0;
+    }
+    
+    public void setIsFollowingOwnerPlayer(boolean flag) {
+        if (flag) {
+            this.followPlayerCounter = this.rand.nextInt(30) + 1;
+        } else {
+            this.followPlayerCounter = 0;
         }
     }
 

@@ -328,6 +328,11 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
     }
 
     @Override
+    public boolean shouldRenderNameAndHealth() {
+        return getIsTamed() && (!this.isBeingRidden()) && (this.getRidingEntity() == null);
+    }
+
+    @Override
     public void makeEntityJump() {
         //TODO
     }

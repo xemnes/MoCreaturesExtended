@@ -101,6 +101,11 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     @Override
+    public boolean shouldRenderNameAndHealth() {
+        return getIsTamed() && (!this.isBeingRidden()) && (this.getRidingEntity() == null);
+    }
+
+    @Override
     public boolean getIsAdult() {
         return this.dataManager.get(ADULT);
     }

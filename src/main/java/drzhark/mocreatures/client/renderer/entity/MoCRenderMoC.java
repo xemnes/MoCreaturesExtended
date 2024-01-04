@@ -39,7 +39,7 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
         IMoCEntity entityMoC = (IMoCEntity) entity;
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entityMoC.getPetName().isEmpty());
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        if (entityMoC.getIsTamed()) {
+        if (entityMoC.shouldRenderNameAndHealth()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f5 = ((Entity) entityMoC).getDistance(this.renderManager.renderViewEntity);

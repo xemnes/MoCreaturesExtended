@@ -528,6 +528,11 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     }
 
     @Override
+    public boolean shouldRenderNameAndHealth() {
+        return getIsTamed() && (!this.isBeingRidden()) && (this.getRidingEntity() == null);
+    }
+
+    @Override
     public void makeEntityDive() {
         this.divePending = true;
     }

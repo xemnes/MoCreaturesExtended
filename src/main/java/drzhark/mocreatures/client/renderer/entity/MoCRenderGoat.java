@@ -52,7 +52,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
         super.doRender(entitygoat, d, d1, d2, f, f1);
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitygoat.getPetName()).isEmpty();
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        if (entitygoat.getIsTamed()) {
+        if (entitygoat.shouldRenderNameAndHealth()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitygoat.getDistance(this.renderManager.renderViewEntity);

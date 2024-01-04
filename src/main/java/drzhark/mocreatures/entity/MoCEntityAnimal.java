@@ -185,6 +185,11 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     }
 
     @Override
+    public boolean shouldRenderNameAndHealth() {
+        return getIsTamed() && (!this.isBeingRidden()) && (this.getRidingEntity() == null);
+    }
+
+    @Override
     public int getOwnerPetId() {
         return 0;
     }

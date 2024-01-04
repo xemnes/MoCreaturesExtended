@@ -25,6 +25,8 @@ public interface IMoCEntity {
 
     boolean getIsTamed();
 
+    boolean shouldRenderNameAndHealth();
+
     boolean getIsAdult();
 
     boolean getIsGhost();

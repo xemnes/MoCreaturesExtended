@@ -4,6 +4,7 @@
 package drzhark.mocreatures.entity;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.UUID;
@@ -95,4 +96,7 @@ public interface IMoCEntity {
     boolean getIsFlying();
 
     String getClazzString();
+    boolean startRidingPlayer(EntityPlayer player);
+
+    boolean canRidePlayer();
 }

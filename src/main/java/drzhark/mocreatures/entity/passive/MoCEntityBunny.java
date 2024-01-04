@@ -187,7 +187,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
             return true;
         }
         if (this.getRidingEntity() == null) {
-            if (this.startRiding(player)) {
+            if (this.startRidingPlayer(player)) {
                 this.rotationYaw = player.rotationYaw;
                 if (!getIsTamed() && !this.world.isRemote) {
                     MoCTools.tameWithName(player, this);

@@ -5,14 +5,18 @@ package drzhark.mocreatures.event;
 
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.MoCConstants;
+import drzhark.mocreatures.MoCTools;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetMapData;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -25,6 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.List;
+import java.util.UUID;
 
 public class MoCEventHooks {
 
@@ -111,9 +116,21 @@ public class MoCEventHooks {
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         EntityPlayer player = event.player;
+
+        // Handles the ENTITY that the PLAYER is riding
         if (player.getRidingEntity() instanceof IMoCTameable) {
             IMoCTameable mocEntity = (IMoCTameable) player.getRidingEntity();
             mocEntity.setRiderDisconnecting(true);
+        }
+
+        // Handles the ENTITY that is riding the PLAYER
+        Entity entityRidingPlayer = MoCTools.getEntityRidingPlayer(player);
+        if (entityRidingPlayer != null) {
+            // System.out.println("PLAYER LEFT THE GAME carrying entity: "+entityRidingPlayer);
+            if (IMoCTameable.class.isAssignableFrom(entityRidingPlayer.getClass())) {
+                IMoCTameable mocEntity = (IMoCTameable) entityRidingPlayer;
+                if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity(entityRidingPlayer, player, true);
+            }
         }
     }
 

@@ -1192,17 +1192,53 @@ public class MoCTools {
         source.readFromNBT(nbttagcompound);
     }
 
-    public static void dismountSneakingPlayer(EntityLiving entity) {
-        if (!entity.isRiding()) return;
-        Entity entityRidden = entity.getRidingEntity();
-        if (entityRidden instanceof EntityLivingBase && entityRidden.isSneaking()) {
-            entity.dismountRidingEntity();
-            double dist = (-1.5D);
-            double newPosX = entityRidden.posX + (dist * Math.sin(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
-            double newPosZ = entityRidden.posZ - (dist * Math.cos(((EntityLivingBase) entityRidden).renderYawOffset / 57.29578F));
-            entity.setPositionAndUpdate(newPosX, entityRidden.posY + 2D, newPosZ);
-            MoCTools.playCustomSound(entity, SoundEvents.ENTITY_CHICKEN_EGG);
+    public static Entity findTheCorrectEntity(World world, UUID searchFor){
+        if (searchFor == null) {
+            return null;
         }
+        Entity entity = null;
+        for(int i = 0; i < world.getLoadedEntityList().size(); i++){
+            if(world.getLoadedEntityList().get(i) != null){
+                Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
+                if(entity2.getUniqueID().equals(searchFor)){
+                    entity = entity2;
+                }
+            }
+        }
+        return entity;
+    }
+    public static Entity getEntityRidingPlayer(EntityPlayer player) {
+        // Get ID for entity that is currently riding player.
+        NBTTagCompound tag = player.getEntityData();
+        UUID animalID = tag.getUniqueId("MOCEntity_Riding_Player");
+        if (animalID == null || player.getUniqueID().equals(animalID)) {
+            return null;
+        }
+        return MoCTools.findTheCorrectEntity(player.getEntityWorld(),animalID);
+    }
+
+    public static void dismountPassengerFromEntity(Entity passenger, Entity entity, boolean force) {
+        if (!force && (passenger == null || entity == null || passenger.getRidingEntity() == null)) {
+            return;
+        }
+        if (force || (passenger instanceof EntityLivingBase && entity.isSneaking())) {
+            System.out.println("Forcing dismount from "+entity+" for passenger "+passenger);
+            passenger.dismountRidingEntity();
+            double dist = (-1.5D);
+            double newPosX = entity.posX + (dist * Math.sin(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
+            double newPosZ = entity.posZ - (dist * Math.cos(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
+            passenger.setPositionAndUpdate(newPosX, entity.posY + 2D, newPosZ);
+            MoCTools.playCustomSound(passenger, SoundEvents.ENTITY_CHICKEN_EGG);
+            if (entity instanceof EntityPlayer) {
+                NBTTagCompound tag = entity.getEntityData();
+                tag.setUniqueId("MOCEntity_Riding_Player", entity.getUniqueID()); // set to self, because cannot set to null.
+            }
+        }
+    }
+    public static void dismountSneakingPlayer(Entity entity) {
+        // Entity is riding the player.
+        if (!entity.isRiding()) return;
+        dismountPassengerFromEntity(entity, entity.getRidingEntity(),false);
     }
 
     public static boolean isInsideOfMaterial(Material material, Entity entity) {

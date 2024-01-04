@@ -108,7 +108,7 @@ public class MoCItems {
     public static final MoCItemFood venisonCooked = new MoCItemFood("venisoncooked", 8, 0.9F, true);
     public static final MoCItemFood venisonRaw = new MoCItemFood("venisonraw", 3, 0.4F, true);
     // Weapons
-    static ToolMaterial WHIP = EnumHelper.addToolMaterial("WHIP", 0, 204, 2.0F, 3.0F, 15).setRepairItem(new ItemStack(Items.LEATHER));
+    static ToolMaterial WHIP = EnumHelper.addToolMaterial("WHIP", 0, 184, 2.0F, 3.0F, 15).setRepairItem(new ItemStack(Items.LEATHER));
     public static final MoCItemWhip whip = new MoCItemWhip("whip", WHIP, 1.9F);
     static ToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 501, 10.0F, 3.5F, 20).setRepairItem(new ItemStack(ancientSilverIngot));
     public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", NINJA);

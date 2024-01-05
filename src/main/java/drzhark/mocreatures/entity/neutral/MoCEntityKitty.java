@@ -507,6 +507,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     }
 
 
+    // Called when an Entity is dismounted from riding on the Player's head.
     @Override
     public void onStopRidingPlayer() {
         // Stopped riding player, reset state to Idle.

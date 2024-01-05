@@ -1067,7 +1067,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
 
     @Override
     public void onStopRidingPlayer() {
-        // Do nothing
+        // Called when an Entity is dismounted from riding on the Player's head.
     }
 
     @Override

@@ -1043,4 +1043,9 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
         }
         return false;
     }
+
+    @Override
+    public void onStopRidingPlayer() {
+        // Called when an Entity is dismounted from riding on the Player's head.
+    }
 }

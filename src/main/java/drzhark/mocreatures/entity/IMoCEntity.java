@@ -100,5 +100,7 @@ public interface IMoCEntity {
     String getClazzString();
     boolean startRidingPlayer(EntityPlayer player);
 
+    void onStopRidingPlayer();
+
     boolean canRidePlayer();
 }

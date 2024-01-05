@@ -1066,6 +1066,11 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     }
 
     @Override
+    public void onStopRidingPlayer() {
+        // Called when an Entity is dismounted from riding on the Player's head.
+    }
+
+    @Override
     public void setLeashHolder(Entity entityIn, boolean sendAttachNotification) {
         if (this.getIsTamed() && entityIn instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityIn;

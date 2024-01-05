@@ -38,7 +38,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
     private static final DataParameter<Boolean> IS_UPSIDE_DOWN = EntityDataManager.createKey(MoCEntityTurtle.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> IS_HIDING = EntityDataManager.createKey(MoCEntityTurtle.class, DataSerializers.BOOLEAN);
 
-    private static final float TURTLE_ARMOR = 10.0F;
+    private static final float TURTLE_ARMOR = 4.0F;
     private boolean isSwinging;
     private boolean twistright;
     private int flopcounter;
@@ -232,7 +232,8 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
             return super.attackEntityFrom(damagesource, i);
         }
         if (getIsHiding()) {
-            boolean flag = super.attackEntityFrom(damagesource, Math.max(TURTLE_ARMOR-i,0));
+            float dmg = Math.max(i-TURTLE_ARMOR,0.5F);
+            boolean flag = super.attackEntityFrom(damagesource, dmg);
             if (this.rand.nextInt(10) == 0) {
                 flipflop(true);
             }

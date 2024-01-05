@@ -90,7 +90,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
     @Override
     protected void keyTyped(char c, int i) {
         if (i == 14) { // Handle Backspace Key
-            this.nameToSet = this.nameToSet.substring(0, this.nameToSet.length() - 1);
+            this.nameToSet = this.nameToSet.substring(0, Math.max(this.nameToSet.length() - 1, 0));
         } else if (ChatAllowedCharacters.isAllowedCharacter(c)) {
             this.nameToSet = this.nameToSet + c;
         }

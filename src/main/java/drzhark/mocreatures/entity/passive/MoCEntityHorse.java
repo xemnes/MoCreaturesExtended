@@ -503,7 +503,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.isUndead()) return MoCSoundEvents.ENTITY_HORSE_DEATH_UNDEAD;
         if (this.getIsGhost()) return MoCSoundEvents.ENTITY_HORSE_DEATH_GHOST;
         if (this.getType() == 60 || this.getType() == 61) return MoCSoundEvents.ENTITY_HORSE_HURT_ZEBRA;
-        if (this.getType() > 64 && this.getType() < 68) return MoCSoundEvents.ENTITY_HORSE_DEATH_DONKEY;
+        if (this.getType() > 64 && this.getType() < 68) return SoundEvents.ENTITY_DONKEY_DEATH;
         return MoCSoundEvents.ENTITY_HORSE_DEATH;
     }
 
@@ -590,7 +590,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.isUndead()) return MoCSoundEvents.ENTITY_HORSE_HURT_UNDEAD;
         if (this.getIsGhost()) return MoCSoundEvents.ENTITY_HORSE_HURT_GHOST;
         if (this.getType() == 60 || this.getType() == 61) return MoCSoundEvents.ENTITY_HORSE_HURT_ZEBRA;
-        if (this.getType() > 64 && this.getType() < 68) return MoCSoundEvents.ENTITY_HORSE_HURT_DONKEY;
+        if (this.getType() > 64 && this.getType() < 68) return SoundEvents.ENTITY_DONKEY_HURT;
 
         return MoCSoundEvents.ENTITY_HORSE_HURT;
     }
@@ -603,7 +603,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.isUndead()) return MoCSoundEvents.ENTITY_HORSE_AMBIENT_UNDEAD;
         if (this.getIsGhost()) return MoCSoundEvents.ENTITY_HORSE_AMBIENT_GHOST;
         if (this.getType() == 60 || this.getType() == 61) return MoCSoundEvents.ENTITY_HORSE_AMBIENT_ZEBRA;
-        if (this.getType() > 64 && this.getType() < 68) return MoCSoundEvents.ENTITY_HORSE_HURT_DONKEY;
+        if (this.getType() > 64 && this.getType() < 68) return SoundEvents.ENTITY_DONKEY_AMBIENT;
 
         return MoCSoundEvents.ENTITY_HORSE_AMBIENT;
     }
@@ -618,8 +618,8 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.isUndead()) return MoCSoundEvents.ENTITY_HORSE_ANGRY_UNDEAD;
         if (this.getIsGhost()) return MoCSoundEvents.ENTITY_HORSE_ANGRY_GHOST;
         if (this.getType() == 60 || this.getType() == 61) return MoCSoundEvents.ENTITY_HORSE_HURT_ZEBRA;
-        if (this.getType() > 64 && this.getType() < 68) return MoCSoundEvents.ENTITY_HORSE_HURT_DONKEY;
-        return MoCSoundEvents.ENTITY_HORSE_MAD;
+        if (this.getType() > 64 && this.getType() < 68) return SoundEvents.ENTITY_DONKEY_ANGRY;
+        return SoundEvents.ENTITY_HORSE_ANGRY;
     }
 
     public float calculateMaxHealth() {
@@ -1907,7 +1907,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
              */
             if ((this.sprintCounter > 0 && this.sprintCounter < 150) && isUnicorned() && this.isBeingRidden()) {
                 MoCTools.buckleMobs(this, 2D, this.world);
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_HORSE_MAD);
+                MoCTools.playCustomSound(this, SoundEvents.ENTITY_HORSE_ANGRY);
             }
 
             if (isFlyer() && !getIsTamed() && this.rand.nextInt(100) == 0 && !isMovementCeased() && !getIsSitting())

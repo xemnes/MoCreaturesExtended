@@ -172,20 +172,17 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_DUCK_AMBIENT;
     public static final SoundEvent ENTITY_DUCK_HURT;
     //
-    public static final SoundEvent ENTITY_HORSE_MAD;
+    public static final SoundEvent ENTITY_HORSE_ANGRY;
     public static final SoundEvent ENTITY_HORSE_AMBIENT;
-    public static final SoundEvent ENTITY_HORSE_AMBIENT_DONKEY;
     public static final SoundEvent ENTITY_HORSE_AMBIENT_GHOST;
     public static final SoundEvent ENTITY_HORSE_AMBIENT_UNDEAD;
     public static final SoundEvent ENTITY_HORSE_AMBIENT_ZEBRA;
     public static final SoundEvent ENTITY_HORSE_ANGRY_GHOST;
     public static final SoundEvent ENTITY_HORSE_ANGRY_UNDEAD;
     public static final SoundEvent ENTITY_HORSE_DEATH;
-    public static final SoundEvent ENTITY_HORSE_DEATH_DONKEY;
     public static final SoundEvent ENTITY_HORSE_DEATH_GHOST;
     public static final SoundEvent ENTITY_HORSE_DEATH_UNDEAD;
     public static final SoundEvent ENTITY_HORSE_HURT;
-    public static final SoundEvent ENTITY_HORSE_HURT_DONKEY;
     public static final SoundEvent ENTITY_HORSE_HURT_GHOST;
     public static final SoundEvent ENTITY_HORSE_HURT_UNDEAD;
     public static final SoundEvent ENTITY_HORSE_HURT_ZEBRA;
@@ -404,20 +401,17 @@ public class MoCSoundEvents {
             ENTITY_DUCK_AMBIENT = createSoundEvent("entity.duck.ambient");
             ENTITY_DUCK_HURT = createSoundEvent("entity.duck.hurt");
             //
-            ENTITY_HORSE_MAD = createSoundEvent("entity.horse.angry");
+            ENTITY_HORSE_ANGRY = createSoundEvent("entity.horse.angry");
             ENTITY_HORSE_AMBIENT = createSoundEvent("entity.horse.ambient");
-            ENTITY_HORSE_AMBIENT_DONKEY = createSoundEvent("entity.donkey.ambient");
             ENTITY_HORSE_AMBIENT_GHOST = createSoundEvent("entity.horse.ambient_ghost");
             ENTITY_HORSE_AMBIENT_UNDEAD = createSoundEvent("entity.horse.ambient_undead");
             ENTITY_HORSE_AMBIENT_ZEBRA = createSoundEvent("entity.zebra.ambient");
             ENTITY_HORSE_ANGRY_GHOST = createSoundEvent("entity.horse.angry_ghost");
             ENTITY_HORSE_ANGRY_UNDEAD = createSoundEvent("entity.horse.angry_undead");
             ENTITY_HORSE_DEATH = createSoundEvent("entity.horse.death");
-            ENTITY_HORSE_DEATH_DONKEY = createSoundEvent("entity.donkey.death");
             ENTITY_HORSE_DEATH_GHOST = createSoundEvent("entity.horse.death_ghost");
             ENTITY_HORSE_DEATH_UNDEAD = createSoundEvent("entity.horse.death_undead");
             ENTITY_HORSE_HURT = createSoundEvent("entity.horse.hurt");
-            ENTITY_HORSE_HURT_DONKEY = createSoundEvent("entity.donkey.hurt");
             ENTITY_HORSE_HURT_GHOST = createSoundEvent("entity.horse.hurt_ghost");
             ENTITY_HORSE_HURT_UNDEAD = createSoundEvent("entity.horse.hurt_undead");
             ENTITY_HORSE_HURT_ZEBRA = createSoundEvent("entity.zebra.hurt");
@@ -650,20 +644,17 @@ public class MoCSoundEvents {
                     ENTITY_DUCK_AMBIENT,
                     ENTITY_DUCK_HURT,
                     //
-                    ENTITY_HORSE_MAD,
+                    ENTITY_HORSE_ANGRY,
                     ENTITY_HORSE_AMBIENT,
-                    ENTITY_HORSE_AMBIENT_DONKEY,
                     ENTITY_HORSE_AMBIENT_GHOST,
                     ENTITY_HORSE_AMBIENT_UNDEAD,
                     ENTITY_HORSE_AMBIENT_ZEBRA,
                     ENTITY_HORSE_ANGRY_GHOST,
                     ENTITY_HORSE_ANGRY_UNDEAD,
                     ENTITY_HORSE_DEATH,
-                    ENTITY_HORSE_DEATH_DONKEY,
                     ENTITY_HORSE_DEATH_GHOST,
                     ENTITY_HORSE_DEATH_UNDEAD,
                     ENTITY_HORSE_HURT,
-                    ENTITY_HORSE_HURT_DONKEY,
                     ENTITY_HORSE_HURT_GHOST,
                     ENTITY_HORSE_HURT_UNDEAD,
                     ENTITY_HORSE_HURT_ZEBRA,

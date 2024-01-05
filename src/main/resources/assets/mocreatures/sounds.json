@@ -311,25 +311,6 @@
       "mocreatures:entity/dolphin/angry"
     ]
   },
-  "entity.donkey.death": {
-    "category": "neutral",
-    "sounds": [
-      "mocreatures:entity/donkey/death"
-    ]
-  },
-  "entity.donkey.ambient": {
-    "category": "neutral",
-    "sounds": [
-      "mocreatures:entity/donkey/idle1",
-      "mocreatures:entity/donkey/idle2"
-    ]
-  },
-  "entity.donkey.hurt": {
-    "category": "neutral",
-    "sounds": [
-      "mocreatures:entity/donkey/hurt"
-    ]
-  },
   "entity.dragonfly.ambient": {
     "category": "neutral",
     "sounds": [

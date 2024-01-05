@@ -517,4 +517,9 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         }
         return false;
     }
+
+    @Override
+    public void onStopRidingPlayer() {
+        // Do nothing
+    }
 }

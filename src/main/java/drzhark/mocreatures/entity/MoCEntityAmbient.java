@@ -542,4 +542,9 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         }
         return false;
     }
+
+    @Override
+    public void onStopRidingPlayer() {
+        // Do nothing
+    }
 }

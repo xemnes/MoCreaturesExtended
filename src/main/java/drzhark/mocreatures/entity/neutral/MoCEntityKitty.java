@@ -486,16 +486,14 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             setAttackTarget(null);
             return true;
         }
-        if (stack.isEmpty() && getKittyState() > 2 && pickable()) {
+        // Can be picked up, then pick it up
+        if (getKittyState() > 2 && pickable()) {
             if (this.startRidingPlayer(player)) {
                 changeKittyState(15);
             }
             return true;
         }
-        if (stack.isEmpty() && getKittyState() == 15) {
-            changeKittyState(7);
-            return true;
-        }
+        // Roped and not on player
         if (getKittyState() == 14 && this.getRidingEntity() != null) {
             changeKittyState(7);
             return true;
@@ -508,6 +506,12 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         return getIsSitting() || getKittyState() == 6 || (getKittyState() == 16 && getOnTree()) || getKittyState() == 12 || getKittyState() == 17 || getKittyState() == 14 || getKittyState() == 20 || getKittyState() == 23;
     }
 
+
+    @Override
+    public void onStopRidingPlayer() {
+        // Stopped riding player, reset state to Idle.
+        changeKittyState(7);
+    }
     @Override
     public boolean isOnLadder() {
         return this.isBesideClimbableBlock();

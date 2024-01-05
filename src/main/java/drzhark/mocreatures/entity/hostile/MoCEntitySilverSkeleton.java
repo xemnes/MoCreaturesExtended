@@ -55,7 +55,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
-        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(11.0D);
+        getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
     }

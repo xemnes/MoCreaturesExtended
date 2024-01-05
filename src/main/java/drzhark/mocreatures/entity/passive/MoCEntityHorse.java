@@ -2141,9 +2141,9 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (getType() == 0) {
             if (this.rand.nextInt(5) == 0) setAdult(false);
             int j = this.rand.nextInt(100);
-            if (j <= (33)) setType(6);
-            else if (j <= (66)) setType(7);
-            else if (j <= (99)) setType(8);
+            if (j <= (32)) setType(6);
+            else if (j <= (65)) setType(7);
+            else if (j <= (98)) setType(8);
             else setType(60);// zebra
         }
     }

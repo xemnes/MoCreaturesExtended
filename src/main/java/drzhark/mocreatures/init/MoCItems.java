@@ -65,7 +65,7 @@ public class MoCItems {
     public static final MoCItem heartfire = new MoCItem("heartfire");
     public static final MoCItem heartundead = new MoCItem("heartundead");
     public static final MoCItem unicornhorn = new MoCItem("unicornhorn");
-    public static final MoCItem horsearmorcrystal = new MoCItem("horsearmorcrystal");
+    public static final MoCItem horsearmorcrystal = (MoCItem) new MoCItem("horsearmorcrystal", 0, true).setMaxStackSize(1);
     public static final MoCItem animalHide = new MoCItem("hide");
     public static final MoCItem chitinCave = new MoCItem("chitinblack");
     public static final MoCItem chitinFrost = new MoCItem("chitinfrost");

@@ -79,7 +79,7 @@ item.hideboots.name=Hide Shoes
 item.hidechest.name=Hide Tunic
 item.hidehelmet.name=Hide Cap
 item.hidelegs.name=Hide Pants
-item.horsearmorcrystal.name=Crystal Mount Armor
+item.horsearmorcrystal.name=Crystal Horse Armor
 item.horsesaddle.name=Crafted Saddle
 item.katana.name=Ninja Katana
 item.key.name=Key
@@ -114,7 +114,7 @@ item.mocegg.23.name=Orange Snake Egg
 item.mocegg.24.name=Green Snake Egg
 item.mocegg.25.name=Coral Snake Egg
 item.mocegg.26.name=Cobra Snake Egg
-item.mocegg.27.name=Rattle Snake Egg
+item.mocegg.27.name=Rattlesnake Egg
 item.mocegg.28.name=Python Snake Egg
 item.mocegg.3.name=Light Blue Fish Egg
 item.mocegg.30.name=Ostrich Egg
@@ -360,6 +360,7 @@ msg.mocreatures.egg=Egg hatching soon! KEEP WATCH! The hatched creature located 
 msg.mocreatures.foreignpet=This pet does not belong to you.
 
 # INFO
+info.mocreatures.horsearmorcrystal=Only equipable by certain rare horse breeds
 info.mocreatures.setbonus=Set Bonus:
 info.mocreatures.setbonusscorp1=Permanent Health Boost II
 info.mocreatures.setbonusscorp2=Permanent Resistance

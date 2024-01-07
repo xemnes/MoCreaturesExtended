@@ -263,7 +263,7 @@ public class MoCProxy implements IGuiHandler {
         this.armorSetEffects = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ArmorSetEffects", true, "Applies potion effects when wearing full scorpion armor sets.").getBoolean(true);
         this.attackHorses = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackHorses", false, "Allows creatures to attack horses.").getBoolean(false);
         this.attackWolves = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "AttackWolves", false, "Allows creatures to attack wolves.").getBoolean(false);
-        this.craftableSaddles = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "CraftableSaddles", true, "Adds a recipe to craft saddles.").getBoolean(true);
+        this.craftableSaddles = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "CraftableSaddles", true, "Adds a recipe to craft saddles.").getBoolean(true);
         this.debug = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "Debug", false, "Turns on verbose logging.").getBoolean(false);
         this.destroyDrops = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "DestroyDrops", false, "Destroys animal drops when not killed by a player.").getBoolean(false);
         this.easterEggs = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasterEggs", true, "Not for the more serious lore friendly players.").getBoolean(true);

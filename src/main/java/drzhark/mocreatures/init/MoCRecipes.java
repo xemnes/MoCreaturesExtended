@@ -4,6 +4,7 @@
 package drzhark.mocreatures.init;
 
 import drzhark.mocreatures.MoCConstants;
+import drzhark.mocreatures.MoCreatures;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.registries.IForgeRegistry;
 
 @ObjectHolder(MoCConstants.MOD_ID)
 public class MoCRecipes {
@@ -37,6 +40,13 @@ public class MoCRecipes {
 
         @SubscribeEvent
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
+            IForgeRegistry<IRecipe> registry = event.getRegistry();
+
+            // Configurable craftable saddle recipe
+            if (MoCreatures.proxy.craftableSaddles) {
+                registry.register(new ShapedOreRecipe(null, Items.SADDLE, "###", "#*#", "* *", '#', Items.LEATHER, '*', Items.IRON_INGOT)
+                        .setRegistryName(MoCConstants.MOD_ID, "crafted_saddle"));
+            }
 
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.ancientOre), new ItemStack(Items.DYE, 3, 15), 0.2F);
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.cobbledDeepWyvstone), new ItemStack(MoCBlocks.deepWyvstone), 0.1F);

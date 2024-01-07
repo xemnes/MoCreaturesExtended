@@ -352,7 +352,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         }
 
         if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getAge() > 80)
-                && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+                && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;

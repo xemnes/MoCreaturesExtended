@@ -432,7 +432,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if (!stack.isEmpty() && !getIsRideable() && getAge() > 90 && this.getIsTamed() && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+        if (!stack.isEmpty() && !getIsRideable() && getAge() > 90 && this.getIsTamed() && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;

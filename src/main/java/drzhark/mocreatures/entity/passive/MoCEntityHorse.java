@@ -1263,7 +1263,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         if (this.getType() == 60 && !getIsTamed() && isZebraRunning()) return false;
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && !getIsRideable() && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+        if (!stack.isEmpty() && !getIsRideable() && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;

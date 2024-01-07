@@ -536,7 +536,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        if (getIsTamed() && (getType() > 1) && !stack.isEmpty() && !getIsRideable() && (stack.getItem() == MoCItems.horsesaddle || stack.getItem() instanceof ItemSaddle)) {
+        if (getIsTamed() && (getType() > 1) && !stack.isEmpty() && !getIsRideable() && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             setRideable(true);

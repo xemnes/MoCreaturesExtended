@@ -162,7 +162,7 @@ public class MoCTools {
         if (!entity.getIsRideable() || world.isRemote) {
             return;
         }
-        dropCustomItem(entity, world, new ItemStack(MoCItems.horsesaddle, 1));
+        dropCustomItem(entity, world, new ItemStack(Items.SADDLE, 1));
         entity.setRideable(false);
     }
 

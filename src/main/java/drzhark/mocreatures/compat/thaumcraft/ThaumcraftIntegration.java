@@ -92,7 +92,6 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.fishnet), new AspectList().add(Aspect.BEAST, 26).add(Aspect.WATER, 3).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.fishnetfull), new AspectList().add(Aspect.BEAST, 26).add(Aspect.WATER, 3).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.fur), new AspectList().add(Aspect.BEAST, 6).add(Aspect.PROTECT, 4));
-        proxy.registerObjectTag(new ItemStack(MoCItems.horsesaddle), new AspectList().add(Aspect.METAL, 5).add(Aspect.BEAST, 10).add(Aspect.MOTION, 10).add(Aspect.ORDER, 5).add(Aspect.CRAFT, 1));
         proxy.registerObjectTag(new ItemStack(MoCItems.heartdarkness), new AspectList().add(Aspect.DARKNESS, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.heartfire), new AspectList().add(Aspect.FIRE, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.heartundead), new AspectList().add(Aspect.UNDEAD, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));

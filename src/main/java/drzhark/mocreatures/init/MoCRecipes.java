@@ -44,7 +44,7 @@ public class MoCRecipes {
 
             // Configurable craftable saddle recipe
             if (MoCreatures.proxy.craftableSaddles) {
-                registry.register(new ShapedOreRecipe(null, Items.SADDLE, "###", "#*#", "* *", '#', Items.LEATHER, '*', Items.IRON_INGOT)
+                registry.register(new ShapedOreRecipe(null, Items.SADDLE, "###", "#*#", "* *", '#', "leather", '*', "ingotIron")
                         .setRegistryName(MoCConstants.MOD_ID, "crafted_saddle"));
             }
 

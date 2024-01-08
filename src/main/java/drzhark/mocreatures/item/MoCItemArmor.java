@@ -90,6 +90,12 @@ public class MoCItemArmor extends ItemArmor {
         if (itemstack.getItem() == MoCItems.scorpLegsUndead) {
             tempArmorTexture = "scorpu_2.png";
         }
+        if ((itemstack.getItem() == MoCItems.helmetSilver) || (itemstack.getItem() == MoCItems.chestSilver) || (itemstack.getItem() == MoCItems.bootsSilver)) {
+            tempArmorTexture = "silver_1.png";
+        }
+        if (itemstack.getItem() == MoCItems.legsSilver) {
+            tempArmorTexture = "silver_2.png";
+        }
 
         return MoCreatures.proxy.getArmorTexture(tempArmorTexture).toString();
     }

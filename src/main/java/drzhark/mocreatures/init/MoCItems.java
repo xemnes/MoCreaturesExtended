@@ -184,7 +184,11 @@ public class MoCItems {
     public static final MoCItemArmor helmetHide = new MoCItemArmor("hidehelmet", hideARMOR, 4, EntityEquipmentSlot.HEAD);
     public static final MoCItemArmor legsHide = new MoCItemArmor("hidelegs", hideARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor bootsHide = new MoCItemArmor("hideboots", hideARMOR, 4, EntityEquipmentSlot.FEET);
-    static ArmorMaterial silverARMOR = EnumHelper.addArmorMaterial("silverARMOR", "silverARMOR", 15, new int[]{2, 6, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F); // unused
+    static ArmorMaterial silverARMOR = EnumHelper.addArmorMaterial("silverARMOR", "silverARMOR", 15, new int[]{2, 6, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F);
+    public static final MoCItemArmor chestSilver = new MoCItemArmor("ancient_silver_chestplate", silverARMOR, 4, EntityEquipmentSlot.CHEST);
+    public static final MoCItemArmor helmetSilver = new MoCItemArmor("ancient_silver_helmet", silverARMOR, 4, EntityEquipmentSlot.HEAD);
+    public static final MoCItemArmor legsSilver = new MoCItemArmor("ancient_silver_leggings", silverARMOR, 4, EntityEquipmentSlot.LEGS);
+    public static final MoCItemArmor bootsSilver = new MoCItemArmor("ancient_silver_boots", silverARMOR, 4, EntityEquipmentSlot.FEET);
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
     public static class RegistrationHandler {
@@ -220,6 +224,10 @@ public class MoCItems {
                     ancientSilverScrap,
                     ancientSilverIngot,
                     ancientSilverNugget,
+                    chestSilver,
+                    helmetSilver,
+                    legsSilver,
+                    bootsSilver,
                     firestoneChunk,
 
                     whip,

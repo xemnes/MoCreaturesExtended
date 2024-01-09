@@ -42,6 +42,16 @@ public class MoCRecipes {
         public static void registerRecipes(final RegistryEvent.Register<IRecipe> event) {
             IForgeRegistry<IRecipe> registry = event.getRegistry();
 
+            // Configurable horse armor recipes
+            if (MoCreatures.proxy.craftableHorseArmor) {
+                registry.register(new ShapedOreRecipe(null, Items.DIAMOND_HORSE_ARMOR, "  #", "#*#", "###", '#', "gemDiamond", '*', "wool")
+                        .setRegistryName(MoCConstants.MOD_ID, "diamond_horse_armor"));
+                registry.register(new ShapedOreRecipe(null, Items.GOLDEN_HORSE_ARMOR, "  #", "#*#", "###", '#', "ingotGold", '*', "wool")
+                        .setRegistryName(MoCConstants.MOD_ID, "golden_horse_armor"));
+                registry.register(new ShapedOreRecipe(null, Items.IRON_HORSE_ARMOR, "  #", "#*#", "###", '#', "ingotIron", '*', "wool")
+                        .setRegistryName(MoCConstants.MOD_ID, "iron_horse_armor"));
+            }
+
             // Configurable craftable saddle recipe
             if (MoCreatures.proxy.craftableSaddles) {
                 registry.register(new ShapedOreRecipe(null, Items.SADDLE, "###", "#*#", "* *", '#', "leather", '*', "ingotIron")

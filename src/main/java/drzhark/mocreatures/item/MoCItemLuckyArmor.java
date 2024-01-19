@@ -7,9 +7,13 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
+
+import java.util.UUID;
+
 import com.google.common.collect.Multimap;
 
 public class MoCItemLuckyArmor extends MoCItemArmor {
+    protected static final UUID LUCK_MODIFIER = UUID.fromString("F34BB326-D435-4B63-8254-0B6CB57A8E6F");
     public float luck;
 
     public MoCItemLuckyArmor(String name, float luck, ItemArmor.ArmorMaterial materialIn, int renderIndex, EntityEquipmentSlot equipmentSlotIn) {
@@ -19,12 +23,12 @@ public class MoCItemLuckyArmor extends MoCItemArmor {
 
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+        super.getItemAttributeModifiers(equipmentSlot);
+
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
         if (equipmentSlot == this.armorType) {
-            multimap.put(SharedMonsterAttributes.ARMOR.getName(), new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Armor modifier", (double) this.damageReduceAmount, 0));
-            multimap.put(SharedMonsterAttributes.ARMOR_TOUGHNESS.getName(), new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Armor toughness", (double) this.toughness, 0));
-            multimap.put(SharedMonsterAttributes.LUCK.getName(), new AttributeModifier(ARMOR_MODIFIERS[equipmentSlot.getIndex()], "Armor luck", (double) this.luck, 0));
+            multimap.put(SharedMonsterAttributes.LUCK.getName(), new AttributeModifier(LUCK_MODIFIER, "Armor luck", (double) this.luck, 0));
         }
 
         return multimap;

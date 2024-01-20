@@ -4,23 +4,24 @@
 package drzhark.mocreatures;
 
 import com.mojang.authlib.GameProfile;
-import drzhark.mocreatures.event.MoCEventHooksClient;
-import drzhark.mocreatures.init.MoCCreativeTabs;
 import drzhark.mocreatures.client.MoCKeyHandler;
-import drzhark.mocreatures.network.command.CommandMoCPets;
-import drzhark.mocreatures.network.command.CommandMoCSpawn;
-import drzhark.mocreatures.network.command.CommandMoCTP;
-import drzhark.mocreatures.network.command.CommandMoCreatures;
 import drzhark.mocreatures.compat.CompatHandler;
 import drzhark.mocreatures.compat.datafixes.BlockIDFixer;
 import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
+import drzhark.mocreatures.compat.datafixes.ItemIDFixer;
 import drzhark.mocreatures.dimension.MoCWorldProviderWyvernSkylands;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetMapData;
 import drzhark.mocreatures.event.MoCEventHooks;
+import drzhark.mocreatures.event.MoCEventHooksClient;
 import drzhark.mocreatures.event.MoCEventHooksTerrain;
+import drzhark.mocreatures.init.MoCCreativeTabs;
 import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.network.MoCMessageHandler;
+import drzhark.mocreatures.network.command.CommandMoCPets;
+import drzhark.mocreatures.network.command.CommandMoCSpawn;
+import drzhark.mocreatures.network.command.CommandMoCTP;
+import drzhark.mocreatures.network.command.CommandMoCreatures;
 import drzhark.mocreatures.proxy.MoCProxy;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
@@ -99,6 +100,7 @@ public class MoCreatures {
         ModFixs modFixer = FMLCommonHandler.instance().getDataFixer().init(MoCConstants.MOD_ID, MoCConstants.DATAFIXER_VERSION);
         modFixer.registerFix(FixTypes.BLOCK_ENTITY, new BlockIDFixer());
         modFixer.registerFix(FixTypes.ENTITY, new EntityIDFixer());
+        modFixer.registerFix(FixTypes.ITEM_INSTANCE, new ItemIDFixer());
     }
 
     @EventHandler

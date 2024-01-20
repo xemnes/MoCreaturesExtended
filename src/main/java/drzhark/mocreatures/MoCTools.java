@@ -52,7 +52,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.*;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.Chunk;
@@ -224,7 +227,7 @@ public class MoCTools {
 
             entitytarget.attackEntityFrom(DamageSource.causeMobDamage(entityattacker), 2);
             bigSmack(entityattacker, entitytarget, 0.6F);
-            
+
             // TODO: Add equip sound
             //playCustomSound(entityattacker, MoCSoundEvents.ENTITY_GENERIC_TUD);
         }
@@ -707,30 +710,30 @@ public class MoCTools {
 
         // Cave Scorpion Armor Set Effect - Night Vision
         if (boots == MoCItems.scorpBootsCave && legs == MoCItems.scorpLegsCave && plate == MoCItems.scorpPlateCave && helmet == MoCItems.scorpHelmetCave) {
-            player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, false));
             return;
         }
 
         // Fire Scorpion Armor Set Effect - Fire Resistance
         if (boots == MoCItems.scorpBootsNether && legs == MoCItems.scorpLegsNether && plate == MoCItems.scorpPlateNether && helmet == MoCItems.scorpHelmetNether) {
-            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 0, true, false));
             return;
         }
 
         // Frost Scorpion Armor Set Effect - Resistance
         if (boots == MoCItems.scorpBootsFrost && legs == MoCItems.scorpLegsFrost && plate == MoCItems.scorpPlateFrost && helmet == MoCItems.scorpHelmetFrost) {
-            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 300, 0, true, false));
             return;
         }
 
         // Dirt Scorpion Armor Set Effect - Health Boost
         if (boots == MoCItems.scorpBootsDirt && legs == MoCItems.scorpLegsDirt && plate == MoCItems.scorpPlateDirt && helmet == MoCItems.scorpHelmetDirt) {
-            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1));
+            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1, true, false));
         }
 
         // Undead Scorpion Armor Set Effect - Strength
         if (boots == MoCItems.scorpBootsUndead && legs == MoCItems.scorpLegsUndead && plate == MoCItems.scorpPlateUndead && helmet == MoCItems.scorpHelmetUndead) {
-            player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0));
+            player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0, true, false));
         }
     }
 
@@ -1192,21 +1195,22 @@ public class MoCTools {
         source.readFromNBT(nbttagcompound);
     }
 
-    public static Entity findTheCorrectEntity(World world, UUID searchFor){
+    public static Entity findTheCorrectEntity(World world, UUID searchFor) {
         if (searchFor == null) {
             return null;
         }
         Entity entity = null;
-        for(int i = 0; i < world.getLoadedEntityList().size(); i++){
-            if(world.getLoadedEntityList().get(i) != null){
+        for (int i = 0; i < world.getLoadedEntityList().size(); i++) {
+            if (world.getLoadedEntityList().get(i) != null) {
                 Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
-                if(entity2.getUniqueID().equals(searchFor)){
+                if (entity2.getUniqueID().equals(searchFor)) {
                     entity = entity2;
                 }
             }
         }
         return entity;
     }
+
     public static Entity getEntityRidingPlayer(EntityPlayer player) {
         // Get ID for entity that is currently riding player.
         NBTTagCompound tag = player.getEntityData();
@@ -1214,7 +1218,7 @@ public class MoCTools {
         if (animalID == null || player.getUniqueID().equals(animalID)) {
             return null;
         }
-        return MoCTools.findTheCorrectEntity(player.getEntityWorld(),animalID);
+        return MoCTools.findTheCorrectEntity(player.getEntityWorld(), animalID);
     }
 
     public static void dismountPassengerFromEntity(Entity passenger, Entity entity, boolean force) {
@@ -1222,7 +1226,7 @@ public class MoCTools {
             return;
         }
         if (force || (passenger instanceof EntityLivingBase && entity.isSneaking())) {
-            System.out.println("Forcing dismount from "+entity+" for passenger "+passenger);
+            System.out.println("Forcing dismount from " + entity + " for passenger " + passenger);
             passenger.dismountRidingEntity();
             double dist = (-1.5D);
             double newPosX = entity.posX + (dist * Math.sin(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
@@ -1233,15 +1237,16 @@ public class MoCTools {
                 NBTTagCompound tag = entity.getEntityData();
                 tag.setUniqueId("MOCEntity_Riding_Player", entity.getUniqueID()); // set to self, because cannot set to null.
                 if (IMoCEntity.class.isAssignableFrom(passenger.getClass())) {
-                    ((IMoCEntity)passenger).onStopRidingPlayer();
+                    ((IMoCEntity) passenger).onStopRidingPlayer();
                 }
             }
         }
     }
+
     public static void dismountSneakingPlayer(Entity entity) {
         // Entity is riding the player.
         if (!entity.isRiding()) return;
-        dismountPassengerFromEntity(entity, entity.getRidingEntity(),false);
+        dismountPassengerFromEntity(entity, entity.getRidingEntity(), false);
     }
 
     public static boolean isInsideOfMaterial(Material material, Entity entity) {

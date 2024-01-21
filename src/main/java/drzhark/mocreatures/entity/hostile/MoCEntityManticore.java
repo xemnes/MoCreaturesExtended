@@ -125,7 +125,7 @@ public class MoCEntityManticore extends MoCEntityMob {
             }*/
 
             if (!this.world.isRemote && this.wingFlapCounter == 5) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WING_FLAP);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_FLAP);
             }
         }
 

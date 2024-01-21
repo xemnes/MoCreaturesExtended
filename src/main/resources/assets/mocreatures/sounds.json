@@ -1050,16 +1050,16 @@
       "mocreatures:random/whip"
     ]
   },
-  "entity.generic.wing_flap": {
+  "entity.generic.flap": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:random/wing_flap"
+      "mocreatures:random/flap"
     ]
   },
-  "entity.generic.wing_flap_soft": {
+  "entity.generic.flap_soft": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:random/wing_flap_soft"
+      "mocreatures:random/flap_soft"
     ]
   },
   "entity.wolf.death": {
@@ -1155,10 +1155,27 @@
       "mocreatures:random/envenom"
     ]
   },
-  "entity.wyvern.wing_flap": {
+  "entity.generic.whoosh": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:entity/wyvern/wing_flap"
+      "mocreatures:random/whoosh"
+    ]
+  },
+  "entity.wyvern.flap": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/wyvern/flap1",
+      "mocreatures:entity/wyvern/flap2",
+      "mocreatures:entity/wyvern/flap3",
+      "mocreatures:entity/wyvern/flap4",
+      "mocreatures:entity/wyvern/flap5",
+      "mocreatures:entity/wyvern/flap6"
+    ]
+  },
+  "entity.wyvern.step": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/wyvern/step"
     ]
   },
   "entity.zebra.ambient": {

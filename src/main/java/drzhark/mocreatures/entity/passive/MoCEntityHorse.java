@@ -1842,7 +1842,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (this.wingFlapCounter > 0 && ++this.wingFlapCounter > 20) this.wingFlapCounter = 0;
             if (this.wingFlapCounter != 0 && this.wingFlapCounter % 5 == 0 && this.world.isRemote) StarFX();
             if (this.wingFlapCounter == 5 && !this.world.isRemote)
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WING_FLAP);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_FLAP);
         }
 
         if (isUndead() && (this.getType() < 26) && getIsAdult() && (this.rand.nextInt(20) == 0)) {

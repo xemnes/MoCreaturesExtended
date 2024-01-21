@@ -314,7 +314,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
                 this.wingFlapCounter = 0;
             }
             if (!this.world.isRemote && this.wingFlapCounter == 5) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WING_FLAP);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_FLAP_SOFT);
             }
         }
 

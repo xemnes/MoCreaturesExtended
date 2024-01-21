@@ -928,7 +928,7 @@ public class MoCEntityOstrich extends MoCEntityTameableAnimal {
             this.jumpCounter = 1;
         }
         if (this.jumpCounter == 0) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_WING_FLAP);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_FLAP);
             this.jumpPending = true;
             this.jumpCounter = 1;
         }

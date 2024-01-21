@@ -15,6 +15,7 @@ import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -320,7 +321,7 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             this.wingFlapCounter = 0;
         }
         if (this.wingFlapCounter == 5 && !this.world.isRemote) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_WYVERN_WING_FLAP);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_WYVERN_FLAP);
         }
 
         if (this.transformCounter > 0) {
@@ -628,6 +629,11 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
     protected SoundEvent getAmbientSound() {
         openMouth();
         return MoCSoundEvents.ENTITY_WYVERN_AMBIENT;
+    }
+    
+    @Override
+    protected void playStepSound(BlockPos pos, Block block) {
+        this.playSound(MoCSoundEvents.ENTITY_WYVERN_STEP, 0.4F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F + 1.0F);
     }
 
     @Nullable

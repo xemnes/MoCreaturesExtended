@@ -153,8 +153,9 @@ public class MoCSoundEvents {
     //
     public static final SoundEvent ENTITY_WYVERN_AMBIENT;
     public static final SoundEvent ENTITY_WYVERN_DEATH;
+    public static final SoundEvent ENTITY_WYVERN_FLAP;
     public static final SoundEvent ENTITY_WYVERN_HURT;
-    public static final SoundEvent ENTITY_WYVERN_WING_FLAP;
+    public static final SoundEvent ENTITY_WYVERN_STEP;
 
     // Passive
     public static final SoundEvent ENTITY_BIRD_AMBIENT_BLACK;
@@ -224,6 +225,8 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_EAT;
     public static final SoundEvent ENTITY_GENERIC_ENVENOM;
     public static final SoundEvent ENTITY_GENERIC_EXPLODE;
+    public static final SoundEvent ENTITY_GENERIC_FLAP;
+    public static final SoundEvent ENTITY_GENERIC_FLAP_SOFT;
     public static final SoundEvent ENTITY_GENERIC_MAGIC_APPEAR;
     public static final SoundEvent ENTITY_GENERIC_MAGIC_CONVERSION;
     public static final SoundEvent ENTITY_GENERIC_MAGIC_CREEPY;
@@ -232,8 +235,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_ROPING;
     public static final SoundEvent ENTITY_GENERIC_SMACK;
     public static final SoundEvent ENTITY_GENERIC_WHIP;
-    public static final SoundEvent ENTITY_GENERIC_WING_FLAP;
-    public static final SoundEvent ENTITY_GENERIC_WING_FLAP_SOFT;
+    public static final SoundEvent ENTITY_GENERIC_WHOOSH;
 
     /* Music */
     // Record
@@ -382,8 +384,9 @@ public class MoCSoundEvents {
             //
             ENTITY_WYVERN_AMBIENT = createSoundEvent("entity.wyvern.ambient");
             ENTITY_WYVERN_DEATH = createSoundEvent("entity.wyvern.death");
+            ENTITY_WYVERN_FLAP = createSoundEvent("entity.wyvern.flap");
             ENTITY_WYVERN_HURT = createSoundEvent("entity.wyvern.hurt");
-            ENTITY_WYVERN_WING_FLAP = createSoundEvent("entity.wyvern.wing_flap");
+            ENTITY_WYVERN_STEP = createSoundEvent("entity.wyvern.step");
 
             // Passive
             ENTITY_BIRD_AMBIENT_BLACK = createSoundEvent("entity.bird.ambient_black");
@@ -453,6 +456,8 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_EAT = createSoundEvent("entity.generic.eat");
             ENTITY_GENERIC_ENVENOM = createSoundEvent("entity.generic.envenom");
             ENTITY_GENERIC_EXPLODE = createSoundEvent("entity.generic.explode");
+            ENTITY_GENERIC_FLAP = createSoundEvent("entity.generic.flap");
+            ENTITY_GENERIC_FLAP_SOFT = createSoundEvent("entity.generic.flap_soft");
             ENTITY_GENERIC_LAUNCH = createSoundEvent("entity.generic.launch");
             ENTITY_GENERIC_MAGIC_APPEAR = createSoundEvent("entity.generic.magic_appear");
             ENTITY_GENERIC_MAGIC_CONVERSION = createSoundEvent("entity.generic.magic_conversion");
@@ -461,8 +466,7 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_ROPING = createSoundEvent("entity.generic.roping");
             ENTITY_GENERIC_SMACK = createSoundEvent("entity.generic.smack");
             ENTITY_GENERIC_WHIP = createSoundEvent("entity.generic.whip");
-            ENTITY_GENERIC_WING_FLAP = createSoundEvent("entity.generic.wing_flap");
-            ENTITY_GENERIC_WING_FLAP_SOFT = createSoundEvent("entity.generic.wing_flap_soft");
+            ENTITY_GENERIC_WHOOSH = createSoundEvent("entity.generic.whoosh");
 
             /* Music */
             // Record
@@ -625,8 +629,9 @@ public class MoCSoundEvents {
                     //
                     ENTITY_WYVERN_AMBIENT,
                     ENTITY_WYVERN_DEATH,
+                    ENTITY_WYVERN_FLAP,
                     ENTITY_WYVERN_HURT,
-                    ENTITY_WYVERN_WING_FLAP,
+                    ENTITY_WYVERN_STEP,
 
                     // Passive
                     ENTITY_BIRD_AMBIENT_BLACK,
@@ -695,6 +700,8 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_EAT,
                     ENTITY_GENERIC_ENVENOM,
                     ENTITY_GENERIC_EXPLODE,
+                    ENTITY_GENERIC_FLAP,
+                    ENTITY_GENERIC_FLAP_SOFT,
                     ENTITY_GENERIC_LAUNCH,
                     ENTITY_GENERIC_MAGIC_APPEAR,
                     ENTITY_GENERIC_MAGIC_CONVERSION,
@@ -703,8 +710,7 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_ROPING,
                     ENTITY_GENERIC_SMACK,
                     ENTITY_GENERIC_WHIP,
-                    ENTITY_GENERIC_WING_FLAP,
-                    ENTITY_GENERIC_WING_FLAP_SOFT,
+                    ENTITY_GENERIC_WHOOSH,
 
                     /* Music */
                     // Record

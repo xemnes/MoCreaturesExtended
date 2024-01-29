@@ -365,7 +365,7 @@ msg.mocreatures.foreignpet=This pet does not belong to you.
 # INFO
 info.mocreatures.horsearmorcrystal=Only equipable by certain rare horse breeds
 info.mocreatures.setbonus=Set Bonus:
-info.mocreatures.setbonusscorp1=Permanent Health Boost II
+info.mocreatures.setbonusscorp1=Permanent Absorption II
 info.mocreatures.setbonusscorp2=Permanent Resistance
 info.mocreatures.setbonusscorp3=Permanent Fire Resistance
 info.mocreatures.setbonusscorp4=Permanent Night Vision

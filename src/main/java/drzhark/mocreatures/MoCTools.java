@@ -726,9 +726,9 @@ public class MoCTools {
             return;
         }
 
-        // Dirt Scorpion Armor Set Effect - Health Boost
+        // Dirt Scorpion Armor Set Effect - Absorption
         if (boots == MoCItems.scorpBootsDirt && legs == MoCItems.scorpLegsDirt && plate == MoCItems.scorpPlateDirt && helmet == MoCItems.scorpHelmetDirt) {
-            player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 300, 1, true, false));
+            player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 300, 1, true, false));
         }
 
         // Undead Scorpion Armor Set Effect - Strength

@@ -45,7 +45,9 @@ public class MoCItems {
     public static final MoCItem hideCroc = new MoCItem("reptilehide");
     public static final MoCItem fur = new MoCItem("fur");
     public static final MoCItem essencedarkness = new MoCItem("essencedarkness");
+    public static final MoCItem essenceEternal = new MoCItem("essence_eternal");
     public static final MoCItem essencefire = new MoCItem("essencefire");
+    public static final MoCItem essenceIce = new MoCItem("essence_ice");
     public static final MoCItem essenceundead = new MoCItem("essenceundead");
     public static final MoCItem essencelight = new MoCItem("essencelight");
     public static final MoCItem amuletbone = new MoCItemHorseAmulet("amuletbone");
@@ -61,7 +63,9 @@ public class MoCItems {
     public static final MoCItem petamulet = new MoCItemPetAmulet("petamulet", 1);
     public static final MoCItem petamuletfull = new MoCItemPetAmulet("petamuletfull", 1);
     public static final MoCItem heartdarkness = new MoCItem("heartdarkness");
+    public static final MoCItem heartEternal = new MoCItem("heart_eternal");
     public static final MoCItem heartfire = new MoCItem("heartfire");
+    public static final MoCItem heartIce = new MoCItem("heart_ice");
     public static final MoCItem heartundead = new MoCItem("heartundead");
     public static final MoCItem unicornhorn = new MoCItem("unicornhorn");
     public static final MoCItem horsearmorcrystal = (MoCItem) new MoCItem("horsearmorcrystal", 0, true).setMaxStackSize(1);
@@ -242,7 +246,9 @@ public class MoCItems {
                     silveraxe,
 
                     essencedarkness,
+                    essenceEternal,
                     essencefire,
+                    essenceIce,
                     essenceundead,
                     essencelight,
 
@@ -265,7 +271,9 @@ public class MoCItems {
                     bootsFur,
 
                     heartdarkness,
+                    heartEternal,
                     heartfire,
+                    heartIce,
                     heartundead,
                     ostrichraw,
                     ostrichcooked,

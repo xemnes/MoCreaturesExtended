@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/essence_lightness"
+    "layer0": "mocreatures:items/heart_ice"
   }
 }

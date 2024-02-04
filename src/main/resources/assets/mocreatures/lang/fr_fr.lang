@@ -357,7 +357,7 @@ msg.mocreatures.foreignpet=Cet animal de compagnie ne vous appartient pas.
 
 # INFO
 info.mocreatures.setbonus=Bonus d'ensemble:
-info.mocreatures.setbonusscorp1=Absorption II permanente
+info.mocreatures.setbonusscorp1=Speed II permanente
 info.mocreatures.setbonusscorp2=Résistance permanente
 info.mocreatures.setbonusscorp3=Résistance au feu permanente
 info.mocreatures.setbonusscorp4=Nyctalopie permanente

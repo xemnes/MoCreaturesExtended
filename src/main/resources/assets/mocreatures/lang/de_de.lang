@@ -359,7 +359,7 @@ msg.mocreatures.foreignpet=Dieses Haustier gehört dir nicht.
 
 # INFO
 #info.mocreatures.setbonus=Set Bonus:
-info.mocreatures.setbonusscorp1=Permanente Absorption II
+info.mocreatures.setbonusscorp1=Permanente Speed II
 info.mocreatures.setbonusscorp2=Permanente Resistenz
 info.mocreatures.setbonusscorp3=Permanenter Feuerschutz
 info.mocreatures.setbonusscorp4=Permanente Nachtsicht

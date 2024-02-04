@@ -708,7 +708,7 @@ public class MoCTools {
         Item plate = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).getItem(); // Chestplate
         Item helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem(); // Helmet
 
-        // Cave Scorpion Armor Set Effect - Night Vision
+        // Dark Scorpion Armor Set Effect - Night Vision
         if (boots == MoCItems.scorpBootsCave && legs == MoCItems.scorpLegsCave && plate == MoCItems.scorpPlateCave && helmet == MoCItems.scorpHelmetCave) {
             player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, false));
             return;
@@ -726,9 +726,9 @@ public class MoCTools {
             return;
         }
 
-        // Dirt Scorpion Armor Set Effect - Absorption
+        // Earth Scorpion Armor Set Effect - Speed II
         if (boots == MoCItems.scorpBootsDirt && legs == MoCItems.scorpLegsDirt && plate == MoCItems.scorpPlateDirt && helmet == MoCItems.scorpHelmetDirt) {
-            player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 300, 1, true, false));
+            player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 1, true, false));
         }
 
         // Undead Scorpion Armor Set Effect - Strength

@@ -122,24 +122,31 @@ public class MoCItems {
     public static final MoCItemSword katana = new MoCItemSword("katana", NINJA);
     static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 1, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
+    public static final MoCItemMattock sharkMattock = new MoCItemMattock("shark_mattock", SHARK, 4.5F, 1.2F);
     public static final MoCItemAxe sharkaxe = new MoCItemAxe("sharkaxe", SHARK, 9.5F, 1.0F);
     static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 2, 404, 9.5F, 3.0F, 19).setRepairItem(new ItemStack(ancientSilverIngot));
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
+    public static final MoCItemMattock silverMattock = new MoCItemMattock("ancient_silver_mattock", SILVER, 6.0F, 1.3F);
     public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.1F);
     static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 2, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", SCORPC, 4);
+    public static final MoCItemMattock scorpMattockCave = new MoCItemMattock("scorp_mattock_dark", SCORPC, 4.5F, 1.2F, 4);
     public static final MoCItemAxe scorpAxeCave = new MoCItemAxe("scorpaxecave", SCORPC, 9.5F, 1.0F, 4);
     static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 2, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
     public static final MoCItemSword scorpSwordFrost = new MoCItemSword("scorpswordfrost", SCORPF, 2);
+    public static final MoCItemMattock scorpMattockFrost = new MoCItemMattock("scorp_mattock_frost", SCORPF, 4.5F, 1.2F, 2);
     public static final MoCItemAxe scorpAxeFrost = new MoCItemAxe("scorpaxefrost", SCORPF, 9.5F, 1.0F, 2);
     static ToolMaterial SCORPN = EnumHelper.addToolMaterial("SCORPN", 2, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinNether));
     public static final MoCItemSword scorpSwordNether = new MoCItemSword("scorpswordnether", SCORPN, 3);
+    public static final MoCItemMattock scorpMattockNether = new MoCItemMattock("scorp_mattock_fire", SCORPN, 4.5F, 1.2F, 3);
     public static final MoCItemAxe scorpAxeNether = new MoCItemAxe("scorpaxenether", SCORPN, 9.5F, 1.0F, 3);
     static ToolMaterial SCORPD = EnumHelper.addToolMaterial("SCORPD", 2, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitin));
     public static final MoCItemSword scorpSwordDirt = new MoCItemSword("scorpsworddirt", SCORPD, 1);
+    public static final MoCItemMattock scorpMattockDirt = new MoCItemMattock("scorp_mattock_earth", SCORPD, 4.5F, 1.2F, 1);
     public static final MoCItemAxe scorpAxeDirt = new MoCItemAxe("scorpaxedirt", SCORPD, 9.5F, 1.0F, 1);
     static ToolMaterial SCORPU = EnumHelper.addToolMaterial("SCORPU", 2, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinUndead));
     public static final MoCItemSword scorpSwordUndead = new MoCItemSword("scorpswordundead", SCORPU, 5);
+    public static final MoCItemMattock scorpMattockUndead = new MoCItemMattock("scorp_mattock_undead", SCORPU, 4.5F, 1.2F, 5);
     public static final MoCItemAxe scorpAxeUndead = new MoCItemAxe("scorpaxeundead", SCORPU, 9.5F, 1.0F, 5);
     static ToolMaterial STING = EnumHelper.addToolMaterial("STING", 0, 8, 6.0F, 0.0F, 5);
     public static final MoCItemWeapon scorpStingCave = new MoCItemWeapon("scorpstingcave", STING, 4);
@@ -241,8 +248,10 @@ public class MoCItems {
                     bo,
                     katana,
                     sharksword,
+                    sharkMattock,
                     sharkaxe,
                     silversword,
+                    silverMattock,
                     silveraxe,
 
                     essencedarkness,
@@ -304,14 +313,19 @@ public class MoCItems {
                     chitinUndead,
 
                     scorpSwordCave,
+                    scorpMattockCave,
                     scorpAxeCave,
                     scorpSwordDirt,
+                    scorpMattockDirt,
                     scorpAxeDirt,
                     scorpSwordNether,
+                    scorpMattockNether,
                     scorpAxeNether,
                     scorpSwordFrost,
+                    scorpMattockFrost,
                     scorpAxeFrost,
                     scorpSwordUndead,
+                    scorpMattockUndead,
                     scorpAxeUndead,
 
                     scorpHelmetCave,

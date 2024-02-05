@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
 
-    public static final String[] fishNames = {"Anchovy", "Angelfish", "Angler", "Clownfish", "Goldfish", "Hippo Tang", "Mandarinfish"};
+    public static final String[] fishNames = {"Anchovy", "Angelfish", "Anglerfish", "Clownfish", "Goldfish", "Hippo Tang", "Mandarinfish"};
 
     public MoCEntitySmallFish(World world) {
         super(world);

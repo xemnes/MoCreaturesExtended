@@ -31,7 +31,7 @@ import java.util.List;
 
 public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
-    public static final String[] fishNames = {"Blue", "Orange", "Light Blue", "Lime", "Green", "Purple", "Yellow", "Cyan", "Striped", "Red"};
+    public static final String[] fishNames = {"Blue", "Regal Blue", "Orange White Stripe", "Light Blue", "Green Yellow", "Green", "Purple", "Yellow", "Orange Blue Stripe", "Black White", "Red"};
     private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.createKey(MoCEntityFishy.class, DataSerializers.BOOLEAN);
     public int gestationtime;
 

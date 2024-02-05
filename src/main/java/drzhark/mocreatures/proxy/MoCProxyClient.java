@@ -3,18 +3,20 @@
  */
 package drzhark.mocreatures.proxy;
 
-import drzhark.mocreatures.client.renderer.fx.MoCEntityFXStar;
-import drzhark.mocreatures.client.renderer.fx.MoCEntityFXUndead;
-import drzhark.mocreatures.client.renderer.fx.MoCEntityFXVacuum;
-import drzhark.mocreatures.client.renderer.fx.MoCEntityFXVanish;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.client.gui.MoCGUIEntityNamer;
 import drzhark.mocreatures.client.model.*;
 import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat1;
 import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat2;
+import drzhark.mocreatures.client.model.legacy.MoCLegacyModelShark;
 import drzhark.mocreatures.client.renderer.entity.*;
 import drzhark.mocreatures.client.renderer.entity.legacy.MoCLegacyRenderBigCat;
+import drzhark.mocreatures.client.renderer.entity.legacy.MoCLegacyRenderShark;
+import drzhark.mocreatures.client.renderer.fx.MoCEntityFXStar;
+import drzhark.mocreatures.client.renderer.fx.MoCEntityFXUndead;
+import drzhark.mocreatures.client.renderer.fx.MoCEntityFXVacuum;
+import drzhark.mocreatures.client.renderer.fx.MoCEntityFXVanish;
 import drzhark.mocreatures.client.renderer.texture.MoCTextures;
 import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.entity.ambient.*;
@@ -108,7 +110,6 @@ public class MoCProxyClient extends MoCProxy {
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityWerewolf.class, new MoCRenderWerewolf(new MoCModelWerehuman(), new MoCModelWerewolf(), 0.7F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFilchLizard.class, new MoCRenderFilchLizard(new MoCModelFilchLizard(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFox.class, new MoCRenderMoC(new MoCModelFox(), 0.5F));
-        RenderingRegistry.registerEntityRenderingHandler(MoCEntityShark.class, new MoCRenderShark(new MoCModelShark(), 0.6F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityDolphin.class, new MoCRenderDolphin(new MoCModelDolphin(), 0.6F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityFishy.class, new MoCRenderMoC(new MoCModelFishy(), 0.1F));
         RenderingRegistry.registerEntityRenderingHandler(MoCEntityEgg.class, new MoCRenderEgg(new MoCModelEgg(), 0.0F));
@@ -193,6 +194,11 @@ public class MoCProxyClient extends MoCProxy {
             RenderingRegistry.registerEntityRenderingHandler(MoCEntityPanther.class, new MoCRenderMoC(new MoCModelBigCat(), 0.5F));
             RenderingRegistry.registerEntityRenderingHandler(MoCEntityPanthger.class, new MoCRenderMoC(new MoCModelBigCat(), 0.5F));
             RenderingRegistry.registerEntityRenderingHandler(MoCEntityTiger.class, new MoCRenderMoC(new MoCModelBigCat(), 0.5F));
+        }
+        if (MoCreatures.proxy.legacySharkModel) {
+            RenderingRegistry.registerEntityRenderingHandler(MoCEntityShark.class, new MoCLegacyRenderShark(new MoCLegacyModelShark(), 0.6F));
+        } else {
+            RenderingRegistry.registerEntityRenderingHandler(MoCEntityShark.class, new MoCRenderShark(new MoCModelShark(), 0.6F));
         }
     }
 

@@ -59,6 +59,13 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
     }
 
     @Override
+    public ResourceLocation getTexture() {
+        if (MoCreatures.proxy.legacyBigCatModels)
+            return MoCreatures.proxy.getModelTexture("shark_legacy.png");
+        return MoCreatures.proxy.getModelTexture("shark.png");
+    }
+
+    @Override
     protected void entityInit() {
         super.entityInit();
     }

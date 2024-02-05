@@ -438,7 +438,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             }
             return false;
         }
-        if (getKittyState() == 7 && !stack.isEmpty() && (stack.getItem() == Items.CAKE || stack.getItem() == Items.FISH || stack.getItem() == Items.COOKED_FISH)) {
+        if (getKittyState() == 7 && !stack.isEmpty() && (stack.getItem() == Items.FISH || stack.getItem() == Items.COOKED_FISH)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_EAT);
             this.setHealth(getMaxHealth());
@@ -460,14 +460,14 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             }
             return true;
         }
-        if (getKittyState() == 13 && !stack.isEmpty() && stack.getItem() == Items.FISH || stack.getItem() == Items.COOKED_FISH) {
+        if (getKittyState() == 13 && !stack.isEmpty() && (stack.getItem() == Items.FISH || stack.getItem() == Items.COOKED_FISH)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_EAT);
             this.setHealth(getMaxHealth());
             changeKittyState(7);
             return true;
         }
-        if (!stack.isEmpty() && getKittyState() > 2 && stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK) {
+        if (!stack.isEmpty() && getKittyState() > 2 && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.NAME_TAG)) {
             if (!this.world.isRemote) {
                 MoCTools.tameWithName(player, this);
             }
@@ -513,6 +513,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         // Stopped riding player, reset state to Idle.
         changeKittyState(7);
     }
+
     @Override
     public boolean isOnLadder() {
         return this.isBesideClimbableBlock();
@@ -642,7 +643,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                         break;
                     }
                     MoCEntityLitterBox litterBox = (MoCEntityLitterBox) getKittyStuff(this, 18D, true);
-                    if ((litterBox == null) || (litterBox.isBeingRidden()) || litterBox.getUsedLitter()) {
+                    if (litterBox == null || litterBox.isBeingRidden() || litterBox.getUsedLitter()) {
                         break;
                     }
                     float f6 = litterBox.getDistance(this);
@@ -818,7 +819,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                     break;
                 case 11: // Looking for player holding wool ball
                     EntityPlayer player1 = this.world.getClosestPlayerToEntity(this, 18D);
-                    if ((player1 == null) || (this.rand.nextInt(10) != 0)) {
+                    if (player1 == null || this.rand.nextInt(10) != 0) {
                         break;
                     }
                     ItemStack stack1 = player1.inventory.getCurrentItem();

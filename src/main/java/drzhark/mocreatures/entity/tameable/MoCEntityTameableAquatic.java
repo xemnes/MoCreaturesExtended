@@ -188,8 +188,7 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         //changes name
-        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed()
-                && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK || stack.getItem() == Items.NAME_TAG)) {
+        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.NAME_TAG)) {
             return MoCTools.tameWithName(player, this);
         }
 

@@ -172,7 +172,7 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
             return true;
         }
         //changes name
-        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.BOOK || stack.getItem() == Items.NAME_TAG)) {
+        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.NAME_TAG)) {
             return MoCTools.tameWithName(player, this);
         }
         //sets it free, untamed

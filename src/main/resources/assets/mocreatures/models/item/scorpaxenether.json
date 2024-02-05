@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "mocreatures:items/scorp_axe_fire"
+    "layer0": "mocreatures:items/fire_scorpion_axe"
   }
 }

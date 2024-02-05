@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/scorp_boots_dark"
+    "layer0": "mocreatures:items/dark_scorpion_boots"
   }
 }

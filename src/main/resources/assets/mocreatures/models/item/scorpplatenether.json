@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/scorp_plate_fire"
+    "layer0": "mocreatures:items/fire_scorpion_chestplate"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/scorp_plate_dark"
+    "layer0": "mocreatures:items/dark_scorpion_chestplate"
   }
 }

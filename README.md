@@ -5,7 +5,7 @@
 **Extended Team [v12.1.0 and upwards]:**
 
 * Lead Developer, Codebase Cleanup, Spawn Logic, General Maintenance ~ ACGaming
-* Developer, Sound Artist, Language/Model Adjustments, General Maintenance ~ IcarussOne
+* Developer, Sound/Texture Artist, Language/Model Adjustments, General Maintenance ~ IcarussOne
 * Developer, General Maintenance ~ DemonLexe (Alexis Kaufman)
 * QA Analyst, Testing, Entity Spawn Rules ~ xJon
 

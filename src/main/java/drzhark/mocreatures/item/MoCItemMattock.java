@@ -48,6 +48,7 @@ public class MoCItemMattock extends ItemPickaxe {
         this.setCreativeTab(MoCreatures.tabMoC);
         this.setRegistryName(MoCConstants.MOD_ID, name);
         this.setTranslationKey(name);
+        this.attackSpeed = -4.0F + speed;
     }
 
     public MoCItemMattock(String name, Item.ToolMaterial material, float damage, float speed, int damageType) {

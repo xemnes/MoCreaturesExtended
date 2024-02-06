@@ -1541,7 +1541,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             MoCTools.playCustomSound(this, SoundEvents.ENTITY_CHICKEN_EGG);
             return true;
         }
-        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.haystack)) {
+        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == Item.getItemFromBlock(Blocks.HAY_BLOCK))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setSitting(true);
             eatingHorse();

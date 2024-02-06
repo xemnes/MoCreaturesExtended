@@ -32,7 +32,6 @@ public class MoCItems {
     // Misc
     public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.MUSIC_DISC_SHUFFLING);
     public static final MoCItem sharkteeth = new MoCItem("sharkteeth");
-    public static final MoCItem haystack = new MoCItemHayStack("haystack");
     public static final MoCItemFood sugarlump = (MoCItemFood) new MoCItemFood("sugarlump", 1, 0.1F, false, 12).setPotionEffect(new PotionEffect(MobEffects.NAUSEA, 4 * 20, 0), 0.15F);
     public static final MoCItem mocegg = new MoCItemEgg("mocegg");
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
@@ -212,7 +211,6 @@ public class MoCItems {
         public static void registerItems(final RegistryEvent.Register<Item> event) {
             List<Item> items = new ArrayList<>(Arrays.asList(
                     sharkteeth,
-                    haystack,
                     sugarlump,
                     mocegg,
                     bigcatclaw,

@@ -713,7 +713,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     @Override
     public boolean isMyHealFood(ItemStack stack) {
         return !stack.isEmpty()
-                && (stack.getItem() == Items.BAKED_POTATO || stack.getItem() == Items.BREAD || stack.getItem() == MoCItems.haystack);
+                && (stack.getItem() == Items.BAKED_POTATO || stack.getItem() == Items.BREAD || stack.getItem() == Item.getItemFromBlock(Blocks.HAY_BLOCK));
     }
 
     @Override

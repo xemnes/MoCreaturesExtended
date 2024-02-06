@@ -20,7 +20,9 @@ public class ItemIDFixer implements IFixableData {
     private static final Map<ResourceLocation, ResourceLocation> ITEM_NAME_MAPPINGS = new HashMap<>();
 
     static {
+        ITEM_NAME_MAPPINGS.put(new ResourceLocation(MoCConstants.MOD_ID, "haystack"), new ResourceLocation("minecraft", "hay_block"));
         ITEM_NAME_MAPPINGS.put(new ResourceLocation(MoCConstants.MOD_ID, "horsesaddle"), new ResourceLocation("minecraft", "saddle"));
+        ITEM_NAME_MAPPINGS.put(new ResourceLocation(MoCConstants.MOD_ID, "scrollofowner"), new ResourceLocation(MoCConstants.MOD_ID, "scrolloffreedom"));
     }
 
     public ItemIDFixer() {

@@ -159,18 +159,6 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        //before ownership check
-        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfOwner && MoCreatures.proxy.enableResetOwnership && MoCTools.isThisPlayerAnOP(player)) {
-            if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            if (!this.world.isRemote) {
-                if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
-                {
-                    MoCreatures.instance.mapData.removeOwnerPet(this, this.getOwnerPetId());
-                }
-                this.setOwnerId(null);
-            }
-            return true;
-        }
         //changes name
         if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfRenaming) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);

@@ -51,7 +51,6 @@ public class CommandMoCreatures extends CommandBase {
         commands.add("/moc easybreeding <boolean>");
         commands.add("/moc elephantbulldozer <boolean>");
         commands.add("/moc enableownership <boolean>");
-        commands.add("/moc enableresetownerscroll <boolean>");
         commands.add("/moc fireogrechance <int>");
         commands.add("/moc fireogrestrength <float>");
         commands.add("/moc frequency <entity> <int>");
@@ -88,7 +87,6 @@ public class CommandMoCreatures extends CommandBase {
         tabCompletionStrings.add("easybreeding");
         tabCompletionStrings.add("elephantbulldozer");
         tabCompletionStrings.add("enableownership");
-        tabCompletionStrings.add("enableresetownerscroll");
         tabCompletionStrings.add("fireogrechance");
         tabCompletionStrings.add("fireogrestrength");
         tabCompletionStrings.add("forcedespawns");

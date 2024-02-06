@@ -166,20 +166,6 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         final ItemStack stack = player.getHeldItem(hand);
-        //before ownership check
-        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfOwner && MoCreatures.proxy.enableResetOwnership
-                && MoCTools.isThisPlayerAnOP(player)) {
-            if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            if (!this.world.isRemote) {
-                if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
-                {
-                    MoCreatures.instance.mapData.removeOwnerPet(this, this.getOwnerPetId());
-                }
-                this.setOwnerId(null);
-
-            }
-            return true;
-        }
         //if the player interacting is not the owner, do nothing!
         if (MoCreatures.proxy.enableOwnership && getOwnerId() != null
                 && !player.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP(player)) {

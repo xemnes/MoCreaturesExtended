@@ -166,20 +166,6 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
             return super.processInteract(player, hand);
         }
 
-        //before ownership check
-        if (getIsTamed() && stack.getItem() == MoCItems.scrollOfOwner && MoCreatures.proxy.enableResetOwnership
-                && MoCTools.isThisPlayerAnOP(player)) {
-            if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            if (!this.world.isRemote) {
-                if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
-                {
-                    MoCreatures.instance.mapData.removeOwnerPet(this, this.getOwnerPetId());
-                }
-                this.setOwnerId(null);
-
-            }
-            return true;
-        }
         //if the player interacting is not the owner, do nothing!
         if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
                 && !player.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP(player)) {

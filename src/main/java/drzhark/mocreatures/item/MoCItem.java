@@ -3,10 +3,6 @@
  */
 package drzhark.mocreatures.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCItems;
@@ -20,11 +16,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class MoCItem extends Item {
-    protected String Tooltip = null;
+import javax.annotation.Nullable;
+import java.util.List;
 
-    public MoCItem() {
-    }
+public class MoCItem extends Item {
+    protected String tooltip = null;
 
     public MoCItem(String name) {
         this(name, 0, false);
@@ -36,7 +32,7 @@ public class MoCItem extends Item {
         this.setTranslationKey(name);
 
         if (hasTooltip) {
-            this.Tooltip = "info." + MoCConstants.MOD_ID + "." + name;
+            this.tooltip = "info." + MoCConstants.MOD_ID + "." + name;
         }
     }
 
@@ -51,8 +47,8 @@ public class MoCItem extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> list, ITooltipFlag flag) {
-        if (Tooltip != null) {
-            list.add(TextFormatting.WHITE + I18n.format(Tooltip));
+        if (tooltip != null) {
+            list.add(TextFormatting.WHITE + I18n.format(tooltip));
         }
     }
 }

@@ -83,10 +83,9 @@ public class MoCItems {
     public static final MoCItem elephantGarment = new MoCItem("elephantgarment");
     public static final MoCItem elephantHowdah = new MoCItem("elephanthowdah");
     public static final MoCItem mammothPlatform = new MoCItem("mammothplatform");
-    public static final MoCItem scrollOfFreedom = new MoCItem("scrolloffreedom");
-    public static final MoCItem scrollOfSale = new MoCItem("scrollofsale");
-    public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
-    public static final MoCItem scrollOfRenaming = new MoCItem("scrollofrenaming");
+    public static final MoCItem scrollOfFreedom = new MoCItem("scrolloffreedom", 0, true);
+    public static final MoCItem scrollOfSale = new MoCItem("scrollofsale", 0, true);
+    public static final MoCItem scrollOfRenaming = new MoCItem("scrollofrenaming", 0, true);
     public static final MoCItem ancientSilverScrap = new MoCItem("ancientsilverscrap");
     public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
@@ -367,7 +366,6 @@ public class MoCItems {
 
                     scrollOfFreedom,
                     scrollOfSale,
-                    scrollOfOwner,
                     scrollOfRenaming,
                     crabraw,
                     crabcooked

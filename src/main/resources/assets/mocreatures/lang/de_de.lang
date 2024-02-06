@@ -214,7 +214,6 @@ item.scorpswordfrost.name=Frostskorpionstachelklinge
 item.scorpswordnether.name=Feuerskorpionstachelklinge
 item.scorpswordundead.name=Untotenskorpionstachelklinge
 item.scrolloffreedom.name=Schriftrolle der Freiheit
-item.scrollofowner.name=Schriftrolle zum Zurücksetzen des Besitzers
 item.scrollofsale.name=Schriftrolle des Verkaufs
 item.scrollofrenaming.name=Schriftrolle des Neubenennens
 item.sharkaxe.name=Haifischaxt
@@ -359,8 +358,11 @@ msg.mocreatures.egg=Ei schlüpft bald! GIB ACHT! Die geschlüpfte Kreatur, die s
 msg.mocreatures.foreignpet=Dieses Haustier gehört dir nicht.
 
 # INFO
-#info.mocreatures.setbonus=Set Bonus:
-info.mocreatures.setbonusscorp1=Permanente Speed II
+info.mocreatures.scrolloffreedom=Klicke mit der rechten Maustaste auf ein eigenes Haustier, um es zu befreien und wieder wild werden zu lassen
+info.mocreatures.scrollofsale=Klicke mit der rechten Maustaste auf ein eigenes Haustier, um es auf die nächste Person zu übertragen, die es umbenennt
+info.mocreatures.scrollofrenaming=Klicke mit der rechten Maustaste auf ein eigenes Haustier, um es umzubenennen
+info.mocreatures.setbonus=Rüstungssatz-Bonus:
+info.mocreatures.setbonusscorp1=Permanente Schnelligkeit II
 info.mocreatures.setbonusscorp2=Permanente Resistenz
 info.mocreatures.setbonusscorp3=Permanenter Feuerschutz
 info.mocreatures.setbonusscorp4=Permanente Nachtsicht
@@ -370,3 +372,4 @@ info.mocreatures.sting_weapon_dirt=Fügt dem Ziel %d Sekunden lang Gift II zu
 info.mocreatures.sting_weapon_fire=Verbrennt das Ziel für %d Sekunden
 info.mocreatures.sting_weapon_frost=Fügt dem Ziel %d Sekunden lang Langsamkeit zu
 info.mocreatures.sting_weapon_undead=Fügt dem Ziel %d Sekunden lang Verdorrung (Blindheit bei Spielern) zu
+info.mocreatures.whip=Alle gezähmten MoC-Mobs in einem Umkreis von 10 Blöcken setzen sich automatisch, wenn der Boden mit der rechten Maustaste angeklickt wird

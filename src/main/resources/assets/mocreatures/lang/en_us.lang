@@ -228,7 +228,6 @@ item.scorpswordfrost.name=Frost Scorpion Blade
 item.scorpswordnether.name=Fire Scorpion Blade
 item.scorpswordundead.name=Undead Scorpion Blade
 item.scrolloffreedom.name=Scroll of Freedom
-item.scrollofowner.name=Scroll of Reset Owner
 item.scrollofsale.name=Scroll of Sale
 item.scrollofrenaming.name=Scroll of Renaming
 item.sharkaxe.name=Shark Axe
@@ -375,6 +374,9 @@ msg.mocreatures.egg=Egg hatching soon! KEEP WATCH! The hatched creature located 
 msg.mocreatures.foreignpet=This pet does not belong to you.
 
 # INFO
+info.mocreatures.scrolloffreedom=Right-click on an owned pet to set it free from ownership and have it become wild again
+info.mocreatures.scrollofsale=Right-click on an owned pet to transfer ownership to the next person who renames it
+info.mocreatures.scrollofrenaming=Right-click on an owned pet to rename it
 info.mocreatures.horsearmorcrystal=Only equipable by certain rare horse breeds
 info.mocreatures.setbonus=Set Bonus:
 info.mocreatures.setbonusscorp1=Permanent Speed II

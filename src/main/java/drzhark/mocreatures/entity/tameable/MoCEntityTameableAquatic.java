@@ -18,7 +18,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -188,12 +187,13 @@ public class MoCEntityTameableAquatic extends MoCEntityAquatic implements IMoCTa
         }
 
         //changes name
-        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.NAME_TAG)) {
+        if (!this.world.isRemote && !stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfRenaming) {
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return MoCTools.tameWithName(player, this);
         }
 
         //sets it free, untamed
-        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollFreedom) {
+        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.scrollOfFreedom) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found

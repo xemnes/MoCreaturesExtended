@@ -467,11 +467,9 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
             changeKittyState(7);
             return true;
         }
-        if (!stack.isEmpty() && getKittyState() > 2 && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.NAME_TAG)) {
-            if (!this.world.isRemote) {
-                MoCTools.tameWithName(player, this);
-            }
-            return true;
+        if (!stack.isEmpty() && getKittyState() > 2 && stack.getItem() == MoCItems.scrollOfRenaming) {
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
+            return MoCTools.tameWithName(player, this);
         }
         if (!stack.isEmpty() && getKittyState() > 2 && pickable() && stack.getItem() == Items.LEAD) {
             if (this.startRidingPlayer(player)) {

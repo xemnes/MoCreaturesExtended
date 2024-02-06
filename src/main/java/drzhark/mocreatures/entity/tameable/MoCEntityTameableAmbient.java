@@ -187,12 +187,13 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         }
 
         //changes name
-        if (!this.world.isRemote && getIsTamed() && (stack.getItem() == MoCItems.medallion || stack.getItem() == Items.NAME_TAG)) {
+        if (!this.world.isRemote && getIsTamed() && stack.getItem() == MoCItems.scrollOfRenaming) {
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             return MoCTools.tameWithName(player, this);
         }
 
         //sets it free, untamed
-        if (getIsTamed() && stack.getItem() == MoCItems.scrollFreedom) {
+        if (getIsTamed() && stack.getItem() == MoCItems.scrollOfFreedom) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 if (this.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found

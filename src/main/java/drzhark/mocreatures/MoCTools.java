@@ -1200,9 +1200,9 @@ public class MoCTools {
             return null;
         }
         Entity entity = null;
-        for (int i = 0; i < world.getLoadedEntityList().size(); i++) {
-            if (world.getLoadedEntityList().get(i) != null) {
-                Entity entity2 = (Entity) world.getLoadedEntityList().get(i);
+        for (int i = 0; i < world.loadedEntityList.size(); i++) {
+            if (world.loadedEntityList.get(i) != null) {
+                Entity entity2 = world.loadedEntityList.get(i);
                 if (entity2.getUniqueID().equals(searchFor)) {
                     entity = entity2;
                 }

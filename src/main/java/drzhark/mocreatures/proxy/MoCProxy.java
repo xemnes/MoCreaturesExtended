@@ -63,9 +63,9 @@ public class MoCProxy implements IGuiHandler {
     public boolean foggyWyvernLair;
     public boolean golemDestroyBlocks;
     public boolean legacyBigCatModels;
-    public boolean legacySharkModel;
     public boolean legacyBunnyTextures;
     public boolean legacyRatDeathSound;
+    public boolean legacySharkModel;
     public boolean legacyWerehumanSounds;
     public boolean legacyWraithSounds;
     public boolean legacyWyvernLairSky;
@@ -73,6 +73,8 @@ public class MoCProxy implements IGuiHandler {
     public boolean staticLitter;
     public boolean verboseEntityNames;
     public boolean weaponEffects;
+    public boolean worldGenSpawningCreatures;
+    public boolean worldGenSpawningWaterCreatures;
     public boolean worldInitDone = false;
     public double spawnMultiplier;
     public float ogreCaveStrength;
@@ -278,9 +280,9 @@ public class MoCProxy implements IGuiHandler {
         this.golemDestroyBlocks = this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "GolemDestroyBlocks", true, "Allows big golems to break blocks.").getBoolean(true);
         this.kittyVillageChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KittyVillageChance", 15, "The percentage for kitties spawning in village chunks.").getInt();
         this.legacyBigCatModels = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigCatModels", false, "Enables simple big cat models and textures like in legacy versions.").getBoolean(false);
-        this.legacySharkModel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacySharkModel", false, "Enables the simple shark model and texture like in legacy versions.").getBoolean(false);
         this.legacyBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.legacyRatDeathSound = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyRatDeathSound", false, "Enables legacy rat death sound.").getBoolean(false);
+        this.legacySharkModel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacySharkModel", false, "Enables the simple shark model and texture like in legacy versions.").getBoolean(false);
         this.legacyWerehumanSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyWerehumanSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);
         this.legacyWraithSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyWraithSounds", false, "Enables legacy wraith sounds.").getBoolean(false);
         this.legacyWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "LegacyWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
@@ -299,6 +301,8 @@ public class MoCProxy implements IGuiHandler {
         this.staticLitter = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticLitter", true, "Makes the kitty litter box not pushable.").getBoolean(true);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
         this.weaponEffects = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "WeaponEffects", true, "Applies potion effects when dealing damage with scorpion weapons.").getBoolean(true);
+        this.worldGenSpawningCreatures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WorldGenSpawningCreatures", true, "Enables custom creature spawning during world generation. Disable this when facing spawning issues with entities from other mods.").getBoolean(true);
+        this.worldGenSpawningWaterCreatures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WorldGenSpawningWaterCreatures", true, "Enables custom water creature spawning during world generation. Disable this when facing spawning issues with entities from other mods.").getBoolean(true);
         this.wyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17, "The dimension ID of the wyvern lair.").getInt();
         this.wyvernEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WyvernEggDropChance", 33, "The percentage for wyverns to drop an egg.").getInt();
 

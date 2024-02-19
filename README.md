@@ -22,6 +22,7 @@
 - Some assets used from their texture repository ~ MCThe_Paragon (Malcolm Riley)
 - New Shark Model ~ Foreck
 - Donkey & Mule Texture Tweaks ~ Deino
+- Kitty Textures ~ Paulu2015
 
 **Translators:**
 

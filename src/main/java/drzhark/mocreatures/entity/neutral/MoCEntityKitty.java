@@ -92,7 +92,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     @Override
     public void selectType() {
         if (getType() == 0) {
-            setType(this.rand.nextInt(9) + 1);
+            setType(this.rand.nextInt(11) + 1);
         }
     }
 
@@ -115,6 +115,10 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
                 return MoCreatures.proxy.getModelTexture("kitty_orange_tabby.png");
             case 9:
                 return MoCreatures.proxy.getModelTexture("kitty_cream_dark.png");
+            case 10:
+                return MoCreatures.proxy.getModelTexture("kitty_gray_tabby.png");
+            case 11:
+                return MoCreatures.proxy.getModelTexture("kitty_yellow_tabby.png");
             default:
                 return MoCreatures.proxy.getModelTexture("kitty_cream.png");
         }

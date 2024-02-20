@@ -256,7 +256,7 @@ item.woolball.name=Pelotte de laine
 # ENTITIES
 entity.mocreatures:anchovy.name=Anchois
 entity.mocreatures:angelfish.name=Poisson-ange
-entity.mocreatures:angelfish.verbose=Poisson-ange carpe
+entity.mocreatures:angelfish.verbose.name=Poisson-ange carpe
 entity.mocreatures:angler.name=Poisson lanterne
 entity.mocreatures:ant.name=Fourmi
 entity.mocreatures:bass.name=Poisson bar

@@ -10,7 +10,7 @@ import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-// Courtesy of SokyranTheDragon
+// Courtesy of SokyranTheDragon for most entries
 public class IndustrialForegoingIntegration {
 
     public static ItemStack[] getBasicProteinGeneratorEntries() {
@@ -25,9 +25,15 @@ public class IndustrialForegoingIntegration {
                 new ItemStack(MoCItems.ostrichcooked),
                 new ItemStack(MoCItems.turtleraw),
                 new ItemStack(MoCItems.turtlecooked),
+                new ItemStack(MoCItems.venisonRaw),
+                new ItemStack(MoCItems.venisonCooked),
+                new ItemStack(MoCItems.duckRaw),
+                new ItemStack(MoCItems.duckCooked),
                 new ItemStack(MoCItems.heartdarkness),
                 new ItemStack(MoCItems.heartfire),
-                new ItemStack(MoCItems.heartundead)
+                new ItemStack(MoCItems.heartundead),
+                new ItemStack(MoCItems.heartIce),
+                new ItemStack(MoCItems.heartEternal)
         };
     }
 

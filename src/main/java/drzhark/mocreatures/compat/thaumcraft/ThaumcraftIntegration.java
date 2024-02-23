@@ -21,21 +21,29 @@ public class ThaumcraftIntegration {
     @SubscribeEvent
     public static void registerAspects(AspectRegistryEvent event) {
         AspectEventProxy proxy = event.register;
+
         // Blocks
         proxy.registerObjectTag(new ItemStack(MoCBlocks.ancientOre), new AspectList().add(Aspect.DEATH, 15).add(Aspect.EARTH, 5));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.carvedSilverSandstone), new AspectList().add(Aspect.EARTH, 15).add(Aspect.ENTROPY, 15).add(Aspect.ORDER, 1).add(Aspect.CRYSTAL, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbledDeepWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.cobbledWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.deepWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.firestone), new AspectList().add(Aspect.FIRE, 30).add(Aspect.LIGHT, 15));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.gleamingGlass), new AspectList().add(Aspect.CRYSTAL, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.mossyCobbledDeepWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 3).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.mossyCobbledWyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 3).add(Aspect.ENTROPY, 1).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.silverSand), new AspectList().add(Aspect.EARTH, 5).add(Aspect.ENTROPY, 5).add(Aspect.CRYSTAL, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.silverSandstone), new AspectList().add(Aspect.EARTH, 15).add(Aspect.ENTROPY, 15).add(Aspect.CRYSTAL, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.smoothSilverSandstone), new AspectList().add(Aspect.EARTH, 15).add(Aspect.ENTROPY, 15).add(Aspect.ORDER, 1).add(Aspect.CRYSTAL, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvdirt), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvgrass), new AspectList().add(Aspect.EARTH, 5).add(Aspect.PLANT, 2).add(Aspect.AURA, 1));
+        proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvernNestBlock), new AspectList().add(Aspect.PLANT, 10).add(Aspect.BEAST, 10).add(Aspect.LIFE, 5));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodLog), new AspectList().add(Aspect.PLANT, 20).add(Aspect.AURA, 5));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodPlanks), new AspectList().add(Aspect.PLANT, 3).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvwoodSapling), new AspectList().add(Aspect.PLANT, 15).add(Aspect.AURA, 5));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.wyvstone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.AURA, 1));
         proxy.registerObjectTag(new ItemStack(MoCBlocks.tallWyvgrass), new AspectList().add(Aspect.PLANT, 5).add(Aspect.AIR, 1).add(Aspect.AURA, 1));
+
         // Items - Armor
         proxy.registerObjectTag(new ItemStack(MoCItems.helmetCroc), new AspectList().add(Aspect.BEAST, 30).add(Aspect.PROTECT, 8).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.plateCroc), new AspectList().add(Aspect.BEAST, 46).add(Aspect.PROTECT, 20).add(Aspect.CRAFT, 6));
@@ -85,7 +93,9 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.chitinNether), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.FIRE, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.chitinUndead), new AspectList().add(Aspect.PROTECT, 5).add(Aspect.BEAST, 5).add(Aspect.ENTROPY, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencedarkness), new AspectList().add(Aspect.DARKNESS, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
+        proxy.registerObjectTag(new ItemStack(MoCItems.essenceEternal), new AspectList().add(Aspect.SOUL, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencefire), new AspectList().add(Aspect.FIRE, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
+        proxy.registerObjectTag(new ItemStack(MoCItems.essenceIce), new AspectList().add(Aspect.COLD, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essencelight), new AspectList().add(Aspect.AURA, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.essenceundead), new AspectList().add(Aspect.UNDEAD, 15).add(Aspect.ALCHEMY, 3).add(Aspect.EXCHANGE, 3).add(Aspect.BEAST, 6));
         proxy.registerObjectTag(new ItemStack(MoCItems.firestoneChunk), new AspectList().add(Aspect.FIRE, 10).add(Aspect.LIGHT, 5));
@@ -93,35 +103,54 @@ public class ThaumcraftIntegration {
         proxy.registerObjectTag(new ItemStack(MoCItems.fishnetfull), new AspectList().add(Aspect.BEAST, 26).add(Aspect.WATER, 3).add(Aspect.CRAFT, 3));
         proxy.registerObjectTag(new ItemStack(MoCItems.fur), new AspectList().add(Aspect.BEAST, 6).add(Aspect.PROTECT, 4));
         proxy.registerObjectTag(new ItemStack(MoCItems.heartdarkness), new AspectList().add(Aspect.DARKNESS, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.heartEternal), new AspectList().add(Aspect.SOUL, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.heartfire), new AspectList().add(Aspect.FIRE, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.heartIce), new AspectList().add(Aspect.COLD, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.heartundead), new AspectList().add(Aspect.UNDEAD, 10).add(Aspect.LIFE, 5).add(Aspect.EXCHANGE, 1).add(Aspect.BEAST, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.hideCroc), new AspectList().add(Aspect.BEAST, 6).add(Aspect.PROTECT, 7));
         proxy.registerObjectTag(new ItemStack(MoCItems.petamulet), new AspectList().add(Aspect.MOTION, 10).add(Aspect.DESIRE, 14).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.petamuletfull), new AspectList().add(Aspect.MOTION, 10).add(Aspect.DESIRE, 14).add(Aspect.BEAST, 15).add(Aspect.VOID, 15));
         proxy.registerObjectTag(new ItemStack(MoCItems.recordshuffle), new AspectList().add(Aspect.SENSES, 15).add(Aspect.DESIRE, 10).add(Aspect.AIR, 5).add(Aspect.BEAST, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.sharkteeth), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 2).add(Aspect.WATER, 1));
+        proxy.registerObjectTag(new ItemStack(MoCItems.sugarlump), new AspectList().add(Aspect.PLANT, 10).add(Aspect.WATER, 6).add(Aspect.DESIRE, 2).add(Aspect.ENERGY, 2).add(Aspect.AIR, 2));
         proxy.registerObjectTag(new ItemStack(MoCItems.tusksDiamond), new AspectList().add(Aspect.CRYSTAL, 56).add(Aspect.DESIRE, 56).add(Aspect.BEAST, 5).add(Aspect.AVERSION, 20));
         proxy.registerObjectTag(new ItemStack(MoCItems.tusksIron), new AspectList().add(Aspect.METAL, 56).add(Aspect.BEAST, 5).add(Aspect.AVERSION, 16));
         proxy.registerObjectTag(new ItemStack(MoCItems.tusksWood), new AspectList().add(Aspect.PLANT, 11).add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8));
         proxy.registerObjectTag(new ItemStack(MoCItems.unicornhorn), new AspectList().add(Aspect.AURA, 3).add(Aspect.BEAST, 5).add(Aspect.LIFE, 5).add(Aspect.AVERSION, 3));
         // Items - Tools
-        proxy.registerObjectTag(new ItemStack(MoCItems.bo), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.PLANT, 10));
-        proxy.registerObjectTag(new ItemStack(MoCItems.katana), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.METAL, 22));
-        proxy.registerObjectTag(new ItemStack(MoCItems.nunchaku), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.METAL, 22));
-        proxy.registerObjectTag(new ItemStack(MoCItems.sai), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.METAL, 22));
+        proxy.registerObjectTag(new ItemStack(MoCItems.bo), new AspectList().add(Aspect.AVERSION, 25).add(Aspect.METAL, 24));
+        proxy.registerObjectTag(new ItemStack(MoCItems.katana), new AspectList().add(Aspect.AVERSION, 25).add(Aspect.METAL, 24));
+        proxy.registerObjectTag(new ItemStack(MoCItems.nunchaku), new AspectList().add(Aspect.AVERSION, 25).add(Aspect.METAL, 24));
+        proxy.registerObjectTag(new ItemStack(MoCItems.sai), new AspectList().add(Aspect.AVERSION, 25).add(Aspect.METAL, 24));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingCave), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.MOTION, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingDirt), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.DEATH, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingFrost), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.TRAP, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingNether), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.FIRE, 5));
         proxy.registerObjectTag(new ItemStack(MoCItems.scorpStingUndead), new AspectList().add(Aspect.BEAST, 5).add(Aspect.AVERSION, 8).add(Aspect.DARKNESS, 5));
-        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordCave), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.MOTION, 10).add(Aspect.AVERSION, 12));
-        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordDirt), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.DEATH, 10).add(Aspect.AVERSION, 12));
-        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordFrost), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.TRAP, 10).add(Aspect.AVERSION, 12));
-        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordNether), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.FIRE, 10).add(Aspect.AVERSION, 12));
-        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordUndead), new AspectList().add(Aspect.CRYSTAL, 16).add(Aspect.DESIRE, 16).add(Aspect.DARKNESS, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordCave), new AspectList().add(Aspect.BEAST, 16).add(Aspect.DESIRE, 16).add(Aspect.MOTION, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordDirt), new AspectList().add(Aspect.BEAST, 16).add(Aspect.DESIRE, 16).add(Aspect.DEATH, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordFrost), new AspectList().add(Aspect.BEAST, 16).add(Aspect.DESIRE, 16).add(Aspect.TRAP, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordNether), new AspectList().add(Aspect.BEAST, 16).add(Aspect.DESIRE, 16).add(Aspect.FIRE, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpSwordUndead), new AspectList().add(Aspect.BEAST, 16).add(Aspect.DESIRE, 16).add(Aspect.DARKNESS, 10).add(Aspect.AVERSION, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpAxeCave), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.MOTION, 12).add(Aspect.AVERSION, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpAxeDirt), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.DEATH, 12).add(Aspect.AVERSION, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpAxeFrost), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.TRAP, 12).add(Aspect.AVERSION, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpAxeNether), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.FIRE, 12).add(Aspect.AVERSION, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpAxeUndead), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.DARKNESS, 12).add(Aspect.AVERSION, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpMattockCave), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.MOTION, 12).add(Aspect.TOOL, 16));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpMattockDirt), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.DEATH, 12).add(Aspect.TOOL, 16));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpMattockFrost), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.TRAP, 12).add(Aspect.TOOL, 16));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpMattockNether), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.FIRE, 12).add(Aspect.TOOL, 16));
+        proxy.registerObjectTag(new ItemStack(MoCItems.scorpMattockUndead), new AspectList().add(Aspect.BEAST, 20).add(Aspect.DESIRE, 20).add(Aspect.DARKNESS, 12).add(Aspect.TOOL, 16));
         proxy.registerObjectTag(new ItemStack(MoCItems.sharksword), new AspectList().add(Aspect.AVERSION, 12).add(Aspect.PLANT, 8).add(Aspect.BEAST, 12));
+        proxy.registerObjectTag(new ItemStack(MoCItems.sharkaxe), new AspectList().add(Aspect.AVERSION, 15).add(Aspect.PLANT, 10).add(Aspect.BEAST, 14));
+        proxy.registerObjectTag(new ItemStack(MoCItems.sharkMattock), new AspectList().add(Aspect.TOOL, 15).add(Aspect.PLANT, 10).add(Aspect.BEAST, 14));
         proxy.registerObjectTag(new ItemStack(MoCItems.silversword), new AspectList().add(Aspect.AVERSION, 20).add(Aspect.METAL, 22).add(Aspect.DEATH, 12));
-        proxy.registerObjectTag(new ItemStack(MoCItems.whip), new AspectList().add(Aspect.METAL, 5).add(Aspect.BEAST, 15).add(Aspect.ORDER, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.silveraxe), new AspectList().add(Aspect.AVERSION, 24).add(Aspect.METAL, 33).add(Aspect.DEATH, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.silverMattock), new AspectList().add(Aspect.TOOL, 24).add(Aspect.METAL, 33).add(Aspect.DEATH, 15));
+        proxy.registerObjectTag(new ItemStack(MoCItems.whip), new AspectList().add(Aspect.AVERSION, 5).add(Aspect.BEAST, 15).add(Aspect.ORDER, 5));
+        proxy.registerObjectTag(new ItemStack(MoCItems.reptileWhip), new AspectList().add(Aspect.AVERSION, 7).add(Aspect.BEAST, 20).add(Aspect.ORDER, 5));
+
         // Entities - Animals
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "blackbear", new AspectList().add(Aspect.BEAST, 15).add(Aspect.EARTH, 15).add(Aspect.AVERSION, 10));
         ThaumcraftApi.registerEntityTag(MoCConstants.MOD_PREFIX + "bird", new AspectList().add(Aspect.BEAST, 5).add(Aspect.AIR, 5).add(Aspect.FLIGHT, 5));

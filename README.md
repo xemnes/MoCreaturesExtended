@@ -23,7 +23,7 @@
 - Most of the Thaumcraft aspects taken from their Mo' Creatures Aspects script ~ Rozmir
 - New Shark Model ~ Foreck
 - Donkey & Mule Texture Tweaks ~ Deino
-- Kitty Textures ~ Paulu2015
+- Extra Kitty Textures ~ Paulu2015
 
 **Translators:**
 

@@ -16,12 +16,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
@@ -127,6 +131,7 @@ public class MoCItems {
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
     public static final MoCItemMattock silverMattock = new MoCItemMattock("ancient_silver_mattock", SILVER, 6.0F, 1.3F);
     public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.1F);
+    public static final MoCItemBow silverBow = new MoCItemBow("ancient_silver_bow", 720, 1.3F, 1.2F, 0.8F, 0.8F, Ingredient.fromStacks(new ItemStack(ancientSilverIngot)));
     static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 3, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", SCORPC, 4);
     public static final MoCItemMattock scorpMattockCave = new MoCItemMattock("dark_scorpion_mattock", SCORPC, 4.5F, 1.2F, 4);
@@ -199,6 +204,13 @@ public class MoCItems {
     public static final MoCItemArmor helmetSilver = new MoCItemArmor("ancient_silver_helmet", silverARMOR, 4, EntityEquipmentSlot.HEAD);
     public static final MoCItemArmor legsSilver = new MoCItemArmor("ancient_silver_leggings", silverARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor bootsSilver = new MoCItemArmor("ancient_silver_boots", silverARMOR, 4, EntityEquipmentSlot.FEET);
+    
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public static void registerRenders(final ModelRegistryEvent modelRegistryEvent) {
+    	// All bow items go here
+    	ModelLoader.setCustomModelResourceLocation(silverBow, 0, new ModelResourceLocation(silverBow.delegate.name(), "inventory"));
+    }
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
     public static class RegistrationHandler {
@@ -251,6 +263,7 @@ public class MoCItems {
                     silversword,
                     silverMattock,
                     silveraxe,
+                    silverBow,
 
                     essencedarkness,
                     essenceEternal,

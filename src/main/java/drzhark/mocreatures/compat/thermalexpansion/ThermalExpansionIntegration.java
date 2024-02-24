@@ -42,6 +42,7 @@ public class ThermalExpansionIntegration {
         SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.katana), new ItemStack(MoCItems.ancientSilverIngot), 1);
         SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.nunchaku), new ItemStack(MoCItems.ancientSilverIngot), 1);
         SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.sai), new ItemStack(MoCItems.ancientSilverIngot), 1);
+        SmelterManager.addRecycleRecipe(energy, new ItemStack(MoCItems.silverBow), new ItemStack(MoCItems.ancientSilverIngot), 1);
 
         // Pulverizer
         energy = 3000;

@@ -1,0 +1,6 @@
+{
+    "parent": "mocreatures:item/ancient_silver_bow",
+    "textures": {
+        "layer0": "mocreatures:items/ancient_silver_bow_pulling_2"
+    }
+}

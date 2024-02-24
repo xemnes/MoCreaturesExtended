@@ -33,7 +33,7 @@ public class MoCRecipes {
                 event.setBurnTime(2400); // 12 items
             } else if (event.getItemStack().getItem() == MoCItems.heartfire) {
                 event.setBurnTime(3200); // 16 items
-            } else if (event.getItemStack().getItem() == MoCItems.sharkaxe | event.getItemStack().getItem() == MoCItems.sharksword) {
+            } else if (event.getItemStack().getItem() == MoCItems.sharkMattock || event.getItemStack().getItem() == MoCItems.sharkaxe || event.getItemStack().getItem() == MoCItems.sharksword) {
                 event.setBurnTime(200); // 1 item
             }
         }
@@ -76,6 +76,11 @@ public class MoCRecipes {
             GameRegistry.addSmelting(MoCItems.mocegg, new ItemStack(MoCItems.omelet), 0.35F);
             GameRegistry.addSmelting(MoCItems.ostrichraw, new ItemStack(MoCItems.ostrichcooked), 0.35F);
             GameRegistry.addSmelting(MoCItems.rawTurkey, new ItemStack(MoCItems.cookedTurkey), 0.35F);
+            GameRegistry.addSmelting(MoCItems.helmetSilver, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
+            GameRegistry.addSmelting(MoCItems.chestSilver, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
+            GameRegistry.addSmelting(MoCItems.legsSilver, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
+            GameRegistry.addSmelting(MoCItems.bootsSilver, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
+            GameRegistry.addSmelting(MoCItems.silverMattock, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
             GameRegistry.addSmelting(MoCItems.silveraxe, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
             GameRegistry.addSmelting(MoCItems.silversword, new ItemStack(MoCItems.ancientSilverNugget), 0.25F);
             GameRegistry.addSmelting(MoCItems.turtleraw, new ItemStack(MoCItems.turtlecooked), 0.35F);

@@ -41,10 +41,11 @@ public class MoCItemBow extends ItemBow {
         this.inaccuracy = inaccuracy;
         this.repairMaterial = repairMaterial;
         this.addPropertyOverride(new ResourceLocation("pull"), (ItemStack bow, World world, EntityLivingBase entity) -> {
-            if (entity == null)
-                return 0;
+            if (entity == null) {
+            	return 0.0F;
+            }
 
-            float drawTime = 20 * drawTimeMult;
+            float drawTime = 20.0F * drawTimeMult;
 
             return (this.getMaxItemUseDuration(bow) - entity.getItemInUseCount()) / drawTime;
         });
@@ -110,7 +111,7 @@ public class MoCItemBow extends ItemBow {
                         world.spawnEntity(entityArrow);
                     }
 
-                    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1, 1 / (itemRand.nextFloat() * 0.4F + 1.2F) + arrowVelocity * 0.5F);
+                    world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + arrowVelocity * 0.5F);
 
                     if (!arrowInfinite && !player.capabilities.isCreativeMode) {
                     	stack.shrink(1);

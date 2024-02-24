@@ -62,7 +62,7 @@ public class MoCEventHooksClient {
              * is that we change the hardcoded value of 20.0F to
              * whatever drawTime is.
              */
-            float drawTime = 20 * ((MoCItemBow) eventItem).drawTimeMult;
+            float drawTime = 20.0F * ((MoCItemBow) eventItem).drawTimeMult;
             float customBow = itemUseCount / drawTime;
 
             if (customBow > 1.0F) {

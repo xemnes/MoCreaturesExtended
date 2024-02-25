@@ -80,6 +80,17 @@ repositories {
             includeGroup 'curse.maven'
         }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
     mavenLocal() // Must be last for caching to work
 }
 
@@ -98,6 +109,7 @@ dependencies {
     implementation rfg.deobf("curse.maven:thaumcraft-223628:2629023")
     implementation rfg.deobf("curse.maven:thermal-expansion-69163:2926431")
     implementation rfg.deobf("curse.maven:thermal-foundation-222880:2926428")
+    implementation rfg.deobf("maven.modrinth:crossbow:1.1.0")
     implementation "curse.maven:industrial-foregoing-266515:2745324"
     implementation "curse.maven:just-enough-resources-jer-240630:4440936"
     implementation "curse.maven:morph-229080:2995522"

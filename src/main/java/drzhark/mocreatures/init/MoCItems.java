@@ -30,8 +30,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
 
+// TODO: Rework item registration to be like block registration
 public class MoCItems {
-
     public static final Set<Item> ITEMS = new HashSet<>();
     // Misc
     public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.MUSIC_DISC_SHUFFLING);

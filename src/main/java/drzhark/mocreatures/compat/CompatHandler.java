@@ -8,14 +8,18 @@ import com.buuz135.industrial.api.extractor.ExtractorEntry;
 import com.buuz135.industrial.api.recipe.ProteinReactorEntry;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.compat.crossbow.CrossbowIntegration;
+import drzhark.mocreatures.compat.crossbow.item.MoCItemCrossbow;
 import drzhark.mocreatures.compat.futuremc.FutureMCIntegration;
 import drzhark.mocreatures.compat.industrialforegoing.IndustrialForegoingIntegration;
 import drzhark.mocreatures.compat.jer.JERIntegration;
 import drzhark.mocreatures.compat.morph.MorphIntegration;
 import drzhark.mocreatures.compat.thaumcraft.ThaumcraftIntegration;
 import drzhark.mocreatures.compat.thermalexpansion.ThermalExpansionIntegration;
+import drzhark.mocreatures.init.MoCItems;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -81,6 +85,15 @@ public class CompatHandler {
     }
 
     @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+    	// TODO: Clean-up once item registration is reworked
+        // jbredwards' Crossbow Backport
+        /*if (Loader.isModLoaded("crossbow")) event.getRegistry().registerAll(
+                MoCItems.setup(new MoCItemCrossbow(788, Ingredient.fromStacks(new ItemStack(MoCItems.ancientSilverIngot))), "ancient_silver_crossbow")
+        );*/
+    }
+
+    @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         if (Loader.isModLoaded("futuremc")) FutureMCIntegration.addRecipes();
         if (Loader.isModLoaded("thermalexpansion")) ThermalExpansionIntegration.addRecipes();
@@ -96,8 +109,6 @@ public class CompatHandler {
             for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
-        // Jbredwards' Crossbow Backport
-        if (Loader.isModLoaded("crossbow")) CrossbowIntegration.init(); // TODO
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
         if (Loader.isModLoaded("jeresources")) JERIntegration.init();
     }

@@ -7,6 +7,7 @@ import com.buuz135.industrial.api.IndustrialForegoingHelper;
 import com.buuz135.industrial.api.extractor.ExtractorEntry;
 import com.buuz135.industrial.api.recipe.ProteinReactorEntry;
 import drzhark.mocreatures.MoCConstants;
+import drzhark.mocreatures.compat.crossbow.CrossbowIntegration;
 import drzhark.mocreatures.compat.futuremc.FutureMCIntegration;
 import drzhark.mocreatures.compat.industrialforegoing.IndustrialForegoingIntegration;
 import drzhark.mocreatures.compat.jer.JERIntegration;
@@ -95,6 +96,8 @@ public class CompatHandler {
             for (ExtractorEntry entry : IndustrialForegoingIntegration.getLatexEntries())
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
+        // Jbredwards' Crossbow Backport
+        if (Loader.isModLoaded("crossbow")) CrossbowIntegration.init(); // TODO
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
         if (Loader.isModLoaded("jeresources")) JERIntegration.init();
     }

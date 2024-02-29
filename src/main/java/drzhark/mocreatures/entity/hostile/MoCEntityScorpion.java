@@ -7,6 +7,7 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.hunter.MoCEntityPetScorpion;
+import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
@@ -18,6 +19,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -49,8 +51,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
         this.poisontimer = 0;
         this.getType = type;
 
-        // Fire and Undead Scorpions won't spawn with babies
-        if (!this.world.isRemote && getType != 3 && getType != 5) {
+        if (!this.world.isRemote) {
             setHasBabies(this.getIsAdult() && this.rand.nextInt(4) == 0);
         }
         experienceValue = 5;
@@ -230,17 +231,47 @@ public class MoCEntityScorpion extends MoCEntityMob {
     public void onDeath(DamageSource damagesource) {
         super.onDeath(damagesource);
 
-        if (!this.world.isRemote && getIsAdult() && getHasBabies()) {
-            int k = this.rand.nextInt(5);
-            for (int i = 0; i < k; i++) {
-                MoCEntityPetScorpion entityscorpy = new MoCEntityPetScorpion(this.world);
-                entityscorpy.setPosition(this.posX, this.posY, this.posZ);
-                entityscorpy.setAdult(false);
-                entityscorpy.setAge(20);
-                entityscorpy.setType(getType);
-                this.world.spawnEntity(entityscorpy);
-                MoCTools.playCustomSound(entityscorpy, SoundEvents.ENTITY_SLIME_SQUISH);
+        if (!this.world.isRemote && getIsAdult()) {
+            if (getHasBabies()) {
+                int k = this.rand.nextInt(5);
+                for (int i = 0; i < k; i++) {
+                    MoCEntityScorpion babyScorpion;
+                    switch (this.getType) {
+                        case 2:
+                            babyScorpion = new MoCEntityCaveScorpion(this.world);
+                            break;
+                        case 3:
+                            babyScorpion = new MoCEntityFireScorpion(this.world);
+                            break;
+                        case 4:
+                            babyScorpion = new MoCEntityFrostScorpion(this.world);
+                            break;
+                        case 5:
+                            babyScorpion = new MoCEntityUndeadScorpion(this.world);
+                            break;
+                        default:
+                            babyScorpion = new MoCEntityDirtScorpion(this.world);
+                            break;
+                    }
+                    babyScorpion.setPosition(this.posX, this.posY, this.posZ);
+                    babyScorpion.setAdult(false);
+                    babyScorpion.setAge(20);
+                    babyScorpion.setType(this.getType);
+                    this.world.spawnEntity(babyScorpion);
+                    MoCTools.playCustomSound(babyScorpion, SoundEvents.ENTITY_SLIME_SQUISH);
+                }
             }
+            dropLegacyEgg();
+        }
+    }
+
+    public void dropLegacyEgg() {
+        int chance = MoCreatures.proxy.scorpionEggDropChance;
+        if (getHasBabies()) {
+            chance = MoCreatures.proxy.motherScorpionEggDropChance;
+        }
+        if (this.rand.nextInt(100) < chance) {
+            entityDropItem(new ItemStack(MoCItems.mocegg, 1, this.getType + 40), 0.0F);
         }
     }
 

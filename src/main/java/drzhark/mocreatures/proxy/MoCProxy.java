@@ -84,10 +84,12 @@ public class MoCProxy implements IGuiHandler {
     public int kittyVillageChance;
     public int maxOPTamed;
     public int maxTamed;
+    public int motherScorpionEggDropChance;
     public int motherWyvernEggDropChance;
     public int ostrichEggDropChance;
     public int particleFX;
     public int rareItemDropChance;
+    public int scorpionEggDropChance;
     public int wyvernDimension;
     public int wyvernEggDropChance;
     public short ogreAttackRange;
@@ -288,6 +290,7 @@ public class MoCProxy implements IGuiHandler {
         this.legacyWyvernLairSky = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "LegacyWyvernLairSky", false, "Enables legacy wyvern lair sky.").getBoolean(false);
         this.maxOPTamed = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "MaxTamedPerOP", 20, "Maximum tamed creatures an OP can have. Requires EnableOwnership to be enabled.").getInt();
         this.maxTamed = this.mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "MaxTamedPerPlayer", 10, "Maximum tamed creatures a player can have. Requires EnableOwnership to be enabled.").getInt();
+        this.motherScorpionEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "MotherScorpionEggDropChance", 33, "The percentage for mother scorpions to drop an egg.").getInt();
         this.motherWyvernEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "MotherWyvernEggDropChance", 66, "The percentage for mother wyverns to drop an egg.").getInt();
         this.ogreAttackRange = (short) this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "OgreAttackRange", 12, "The block radius where ogres 'smell' players.").getInt();
         this.ogreCaveStrength = Float.parseFloat(this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "CaveOgreStrength", 2.5F, "The block destruction radius of cave ogres.").getString());
@@ -296,6 +299,7 @@ public class MoCProxy implements IGuiHandler {
         this.ostrichEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "OstrichEggDropChance", 3, "The percentage for ostriches to drop an egg.").getInt();
         this.particleFX = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "ParticleFX", 3, "The density of MoCreatures particle effects.").getInt();
         this.rareItemDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "RareItemDropChance", 25, "The percentage for certain creatures to drop a rare item when killed. Most creatures use loot tables and can be configured with a loot table editor instead.").getInt();
+        this.scorpionEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ScorpionEggDropChance", 17, "The percentage for scorpions to drop an egg.").getInt();
         this.spawnMultiplier = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "SpawnMultiplier", 2.0D, "Multiplier for entity spawns during world generation.").getDouble(2.0D);
         this.staticBed = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticBed", true, "Makes the kitty bed not pushable.").getBoolean(true);
         this.staticLitter = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticLitter", true, "Makes the kitty litter box not pushable.").getBoolean(true);

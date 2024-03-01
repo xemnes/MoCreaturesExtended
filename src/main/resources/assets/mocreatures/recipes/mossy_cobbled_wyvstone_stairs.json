@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mocreatures:mossy_cobbled_wyvstone"
+    }
+  },
+  "result": {
+    "item": "mocreatures:mossy_cobbled_wyvstone_stairs",
+    "count": 4
+  }
+}

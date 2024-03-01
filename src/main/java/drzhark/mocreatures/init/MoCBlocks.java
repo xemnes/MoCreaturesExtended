@@ -47,6 +47,10 @@ public class MoCBlocks {
     public static Block cobbledDeepWyvstone;
     @GameRegistry.ObjectHolder("cobbled_deep_wyvstone_stairs")
     public static MoCBlockStairs cobbledDeepWyvstoneStairs;
+    @GameRegistry.ObjectHolder("deep_wyvwstone_button")
+    public static MoCBlockStairs deepWyvwstoneButton;
+    @GameRegistry.ObjectHolder("deep_wyvstone_pressure_plate")
+    public static MoCBlockStairs deepWyvstonePressurePlate;
     @GameRegistry.ObjectHolder("deep_wyvstone")
     public static Block deepWyvstone;
     @GameRegistry.ObjectHolder("deep_wyvstone_stairs")
@@ -85,6 +89,10 @@ public class MoCBlocks {
     public static MoCBlockOre wyvernLapisOre;
     @GameRegistry.ObjectHolder("wyvern_nest_block")
     public static MoCBlockNest wyvernNestBlock;
+    @GameRegistry.ObjectHolder("wyvwstone_button")
+    public static MoCBlockStairs wyvwstoneButton;
+    @GameRegistry.ObjectHolder("wyvstone_pressure_plate")
+    public static MoCBlockStairs wyvstonePressurePlate;
     @GameRegistry.ObjectHolder("wyvstone")
     public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvstone_stairs")
@@ -93,8 +101,12 @@ public class MoCBlocks {
     public static Block wyvgrass;
     @GameRegistry.ObjectHolder("wyvdirt")
     public static Block wyvdirt;
+    @GameRegistry.ObjectHolder("wyvwood_button")
+    public static MoCBlockStairs wyvwoodButton;
     @GameRegistry.ObjectHolder("wyvwood_leaves")
     public static Block wyvwoodLeaves;
+    @GameRegistry.ObjectHolder("wyvwood_pressure_plate")
+    public static MoCBlockStairs wyvwoodPressurePlate;
     @GameRegistry.ObjectHolder("wyvwood_sapling")
     public static Block wyvwoodSapling;
     @GameRegistry.ObjectHolder("wyvwood_log")
@@ -113,8 +125,12 @@ public class MoCBlocks {
                 setup(new MoCBlockRock(MapColor.STONE), "cobbled_deep_wyvstone").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "cobbled_deep_wyvstone_stairs").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "wyvstone").setHardness(1.5F).setResistance(10.0F),
+                setup(new MoCBlockButtonStone(), "wyvstone_button"),
+                setup(new MoCBlockPressurePlateStone(MapColor.STONE), "wyvstone_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "wyvstone_stairs").setHardness(1.5F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "deep_wyvstone").setHardness(3.0F).setResistance(10.0F),
+                setup(new MoCBlockButtonStone(), "deep_wyvstone_button"),
+                setup(new MoCBlockPressurePlateStone(MapColor.STONE), "deep_wyvstone_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "deep_wyvstone_stairs").setHardness(3.0F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "mossy_cobbled_wyvstone").setHardness(2.0F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "mossy_cobbled_wyvstone_stairs").setHardness(2.0F).setResistance(10.0F),
@@ -140,6 +156,8 @@ public class MoCBlocks {
                 setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
                 setup(new MoCBlockPlanks(MapColor.DIAMOND, true), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F),
+                setup(new MoCBlockButtonWood(), "wyvwood_button"),
+                setup(new MoCBlockPressurePlateWood(MapColor.DIAMOND), "wyvwood_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockPlanks(MapColor.DIAMOND, true).getDefaultState(), true), "wyvwood_stairs").setHardness(2.0F).setResistance(5.0F),
                 setup(new MoCBlockNest(), "wyvern_nest_block").setHardness(0.5F)
         );

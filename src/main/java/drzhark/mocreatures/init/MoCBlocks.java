@@ -50,7 +50,7 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("deep_wyvstone")
     public static Block deepWyvstone;
     @GameRegistry.ObjectHolder("deep_wyvstone_stairs")
-    public static Block deepWyvstoneStairs;
+    public static MoCBlockStairs deepWyvstoneStairs;
     @GameRegistry.ObjectHolder("firestone")
     public static Block firestone;
     @GameRegistry.ObjectHolder("gleaming_glass")
@@ -58,17 +58,17 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone")
     public static Block mossyCobbledWyvstone;
     @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone_stairs")
-    public static Block mossyCobbledWyvstoneStairs;
+    public static MoCBlockStairs mossyCobbledWyvstoneStairs;
     @GameRegistry.ObjectHolder("mossy_cobbled_deep_wyvstone")
     public static Block mossyCobbledDeepWyvstone;
     @GameRegistry.ObjectHolder("mossy_cobbled_deep_wyvstone_stairs")
-    public static Block mossyCobbledDeepWyvstoneStairs;
+    public static MoCBlockStairs mossyCobbledDeepWyvstoneStairs;
     @GameRegistry.ObjectHolder("silver_sand")
     public static Block silverSand;
     @GameRegistry.ObjectHolder("silver_sandstone")
     public static Block silverSandstone;
     @GameRegistry.ObjectHolder("silver_sandstone_stairs")
-    public static Block silverSandstoneStairs;
+    public static MoCBlockStairs silverSandstoneStairs;
     @GameRegistry.ObjectHolder("smooth_silver_sandstone")
     public static Block smoothSilverSandstone;
     @GameRegistry.ObjectHolder("tall_wyvgrass")
@@ -88,7 +88,7 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("wyvstone")
     public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvstone_stairs")
-    public static Block wyvstoneStairs;
+    public static MoCBlockStairs wyvstoneStairs;
     @GameRegistry.ObjectHolder("wyvgrass")
     public static Block wyvgrass;
     @GameRegistry.ObjectHolder("wyvdirt")
@@ -102,7 +102,7 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("wyvwood_planks")
     public static Block wyvwoodPlanks;
     @GameRegistry.ObjectHolder("wyvwood_stairs")
-    public static Block wyvwoodPlanksStairs;
+    public static MoCBlockStairs wyvwoodPlanksStairs;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {

@@ -8,7 +8,6 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.entity.item.MoCEntityEgg;
 import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCLootTables;
@@ -104,8 +103,14 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         if (this.transformCounter != 0 && this.transformType != 0) {
             String newText;
             switch (this.transformType) {
+                case 2: // Cave Scorpion
+                    newText = saddle ? "scorpion_cave_saddled.png" : "scorpion_cave.png";
+                    break;
                 case 3: // Fire Scorpion
                     newText = saddle ? "scorpion_fire_saddled.png" : "scorpion_fire.png";
+                    break;
+                case 4: // Frost Scorpion
+                    newText = saddle ? "scorpion_frost_saddled.png" : "scorpion_frost.png";
                     break;
                 case 5: // Undead Scorpion
                     newText = saddle ? "scorpion_undead_saddled.png" : "scorpion_undead.png";
@@ -162,7 +167,9 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+    public boolean isReadyToFollowOwnerPlayer() {
+        return !this.isMovementCeased();
+    }
 
     @Override
     public void setRideable(boolean flag) {
@@ -426,6 +433,18 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
         // Transformations
         if (!stack.isEmpty() && this.getIsTamed() && !this.isBeingRidden() && !this.isRiding() && this.transformCounter < 1) {
+            // Cave Scorpion (Essence of Darkness)
+            if (stack.getItem() == MoCItems.essencedarkness && this.getType() != 2) {
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
+                if (stack.isEmpty()) {
+                    player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
+                } else {
+                    player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
+                }
+
+                transform(2);
+                return true;
+            }
 
             // Fire Scorpion (Essence of Fire)
             if (stack.getItem() == MoCItems.essencefire && this.getType() != 3) {
@@ -437,6 +456,19 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
                 }
 
                 transform(3);
+                return true;
+            }
+
+            // Frost Scorpion (Essence of Ice)
+            if (stack.getItem() == MoCItems.essenceIce && this.getType() != 4) {
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
+                if (stack.isEmpty()) {
+                    player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
+                } else {
+                    player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
+                }
+
+                transform(4);
                 return true;
             }
 
@@ -452,26 +484,6 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
                 transform(5);
                 return true;
             }
-        }
-
-        if (!stack.isEmpty() && this.getIsTamed() && !this.isBeingRidden() && !this.isRiding() && stack.getItem() == MoCItems.essencedarkness) {
-            if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
-            } else {
-                player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
-            }
-            this.setHealth(getMaxHealth());
-            if (!this.world.isRemote) {
-                int i = getType() + 40;
-                MoCEntityEgg entityegg = new MoCEntityEgg(this.world, i);
-                entityegg.setPosition(player.posX, player.posY, player.posZ);
-                player.world.spawnEntity(entityegg);
-                entityegg.motionY += this.world.rand.nextFloat() * 0.05F;
-                entityegg.motionX += (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.3F;
-                entityegg.motionZ += (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.3F;
-            }
-            return true;
         }
 
         if (this.getRidingEntity() == null && this.getAge() < 60 && !getIsAdult()) {

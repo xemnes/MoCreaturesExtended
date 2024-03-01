@@ -24,6 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+// TODO: Fix hitbox
 public class MoCEntityEgg extends EntityLiving {
 
     public int eggType;

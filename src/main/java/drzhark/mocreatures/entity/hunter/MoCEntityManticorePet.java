@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
+// TODO: Make it comaptible with essences
 public class MoCEntityManticorePet extends MoCEntityBigCat {
 
     public MoCEntityManticorePet(World world) {

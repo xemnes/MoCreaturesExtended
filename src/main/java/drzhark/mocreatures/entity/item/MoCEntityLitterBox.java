@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+// TODO: Fix hitbox
 public class MoCEntityLitterBox extends EntityLiving {
 
     private static final DataParameter<Boolean> PICKED_UP = EntityDataManager.createKey(MoCEntityLitterBox.class, DataSerializers.BOOLEAN);

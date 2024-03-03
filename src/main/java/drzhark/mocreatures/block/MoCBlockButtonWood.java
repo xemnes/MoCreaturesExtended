@@ -8,6 +8,7 @@ import net.minecraft.block.SoundType;
 
 public class MoCBlockButtonWood extends BlockButtonWood {
     public MoCBlockButtonWood() {
+    	super();
         this.setSoundType(SoundType.WOOD);
         this.setHardness(0.5F);
         this.setHarvestLevel("axe", 0);

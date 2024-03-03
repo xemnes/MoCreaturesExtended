@@ -44,18 +44,24 @@ public class MoCBlocks {
     public static Block cobbledWyvstone;
     @GameRegistry.ObjectHolder("cobbled_wyvstone_stairs")
     public static MoCBlockStairs cobbledWyvstoneStairs;
+    @GameRegistry.ObjectHolder("cobbled_wyvstone_wall")
+    public static MoCBlockWall cobbledWyvstoneWall;
     @GameRegistry.ObjectHolder("cobbled_deep_wyvstone")
     public static Block cobbledDeepWyvstone;
     @GameRegistry.ObjectHolder("cobbled_deep_wyvstone_stairs")
     public static MoCBlockStairs cobbledDeepWyvstoneStairs;
+    @GameRegistry.ObjectHolder("cobbled_deep_wyvstone_wall")
+    public static MoCBlockWall cobbledDeepWyvstoneWall;
+    @GameRegistry.ObjectHolder("deep_wyvstone")
+    public static Block deepWyvstone;
     @GameRegistry.ObjectHolder("deep_wyvwstone_button")
     public static MoCBlockButtonStone deepWyvwstoneButton;
     @GameRegistry.ObjectHolder("deep_wyvstone_pressure_plate")
     public static MoCBlockPressurePlateStone deepWyvstonePressurePlate;
-    @GameRegistry.ObjectHolder("deep_wyvstone")
-    public static Block deepWyvstone;
     @GameRegistry.ObjectHolder("deep_wyvstone_stairs")
     public static MoCBlockStairs deepWyvstoneStairs;
+    @GameRegistry.ObjectHolder("deep_wyvstone_wall")
+    public static MoCBlockWall deepWyvstoneWall;
     @GameRegistry.ObjectHolder("firestone")
     public static Block firestone;
     @GameRegistry.ObjectHolder("gleaming_glass")
@@ -64,16 +70,22 @@ public class MoCBlocks {
     public static Block mossyCobbledWyvstone;
     @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone_stairs")
     public static MoCBlockStairs mossyCobbledWyvstoneStairs;
+    @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone_wall")
+    public static MoCBlockWall mossyCobbledWyvstoneWall;
     @GameRegistry.ObjectHolder("mossy_cobbled_deep_wyvstone")
     public static Block mossyCobbledDeepWyvstone;
     @GameRegistry.ObjectHolder("mossy_cobbled_deep_wyvstone_stairs")
     public static MoCBlockStairs mossyCobbledDeepWyvstoneStairs;
+    @GameRegistry.ObjectHolder("mossy_cobbled_deep_wyvstone_wall")
+    public static MoCBlockWall mossyCobbledDeepWyvstoneWall;
     @GameRegistry.ObjectHolder("silver_sand")
     public static Block silverSand;
     @GameRegistry.ObjectHolder("silver_sandstone")
     public static Block silverSandstone;
     @GameRegistry.ObjectHolder("silver_sandstone_stairs")
     public static MoCBlockStairs silverSandstoneStairs;
+    @GameRegistry.ObjectHolder("silver_sandstone_wall")
+    public static MoCBlockWall silverSandstoneWall;
     @GameRegistry.ObjectHolder("smooth_silver_sandstone")
     public static Block smoothSilverSandstone;
     @GameRegistry.ObjectHolder("tall_wyvgrass")
@@ -90,14 +102,16 @@ public class MoCBlocks {
     public static MoCBlockOre wyvernLapisOre;
     @GameRegistry.ObjectHolder("wyvern_nest_block")
     public static MoCBlockNest wyvernNestBlock;
+    @GameRegistry.ObjectHolder("wyvstone")
+    public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvwstone_button")
     public static MoCBlockButtonStone wyvwstoneButton;
     @GameRegistry.ObjectHolder("wyvstone_pressure_plate")
     public static MoCBlockPressurePlateStone wyvstonePressurePlate;
-    @GameRegistry.ObjectHolder("wyvstone")
-    public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvstone_stairs")
     public static MoCBlockStairs wyvstoneStairs;
+    @GameRegistry.ObjectHolder("wyvstone_wall")
+    public static MoCBlockWall wyvstoneWall;
     @GameRegistry.ObjectHolder("wyvgrass")
     public static Block wyvgrass;
     @GameRegistry.ObjectHolder("wyvdirt")
@@ -127,24 +141,31 @@ public class MoCBlocks {
                 setup(new MoCBlockMetal(MapColor.IRON), "ancient_silver_block").setHardness(3.0F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "cobbled_wyvstone").setHardness(2.0F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "cobbled_wyvstone_stairs").setHardness(2.0F).setResistance(10.0F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "cobbled_wyvstone_wall").setHardness(2.0F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "cobbled_deep_wyvstone").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "cobbled_deep_wyvstone_stairs").setHardness(3.5F).setResistance(10.0F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "cobbled_deep_wyvstone_wall").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "wyvstone").setHardness(1.5F).setResistance(10.0F),
                 setup(new MoCBlockButtonStone(), "wyvstone_button"),
                 setup(new MoCBlockPressurePlateStone(MapColor.STONE), "wyvstone_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "wyvstone_stairs").setHardness(1.5F).setResistance(10.0F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "wyvstone_wall").setHardness(1.5F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "deep_wyvstone").setHardness(3.0F).setResistance(10.0F),
                 setup(new MoCBlockButtonStone(), "deep_wyvstone_button"),
                 setup(new MoCBlockPressurePlateStone(MapColor.STONE), "deep_wyvstone_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "deep_wyvstone_stairs").setHardness(3.0F).setResistance(10.0F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "deep_wyvstone_wall").setHardness(3.0F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "mossy_cobbled_wyvstone").setHardness(2.0F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "mossy_cobbled_wyvstone_stairs").setHardness(2.0F).setResistance(10.0F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "mossy_cobbled_wyvstone_wall").setHardness(2.0F).setResistance(10.0F),
                 setup(new MoCBlockRock(MapColor.STONE), "mossy_cobbled_deep_wyvstone").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "mossy_cobbled_deep_wyvstone_stairs").setHardness(3.5F).setResistance(10.0F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "mossy_cobbled_deep_wyvstone_wall").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockGlass(), "gleaming_glass").setHardness(0.4F),
                 setup(new MoCBlockSand(MapColor.CLAY), "silver_sand").setHardness(0.6F),
                 setup(new MoCBlockRock(MapColor.CLAY), "silver_sandstone").setHardness(1.2F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.CLAY).getDefaultState(), false), "silver_sandstone_stairs").setHardness(1.2F),
+                setup(new MoCBlockWall(new MoCBlockRock(MapColor.CLAY), false), "silver_sandstone_wall").setHardness(1.2F),
                 setup(new MoCBlockRock(MapColor.CLAY), "carved_silver_sandstone").setHardness(1.2F),
                 setup(new MoCBlockRock(MapColor.CLAY), "smooth_silver_sandstone").setHardness(1.2F),
                 setup(new MoCBlockOre(MapColor.STONE), "ancient_ore").setHardness(3.0F).setResistance(5.0F),
@@ -186,9 +207,17 @@ public class MoCBlocks {
                 ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
             }
         }
-        
-        // All doors, fence gates, and slabs go here
+
+        // All doors, fence gates, slabs, and walls go here
         ModelLoader.setCustomStateMapper(wyvwoodFenceGate, (new StateMap.Builder()).ignore(MoCBlockFenceGateWood.POWERED).build());
+
+        ModelLoader.setCustomStateMapper(cobbledWyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
+        ModelLoader.setCustomStateMapper(cobbledDeepWyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
+        ModelLoader.setCustomStateMapper(deepWyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
+        ModelLoader.setCustomStateMapper(mossyCobbledWyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
+        ModelLoader.setCustomStateMapper(mossyCobbledDeepWyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
+        ModelLoader.setCustomStateMapper(silverSandstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
+        ModelLoader.setCustomStateMapper(wyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());
     }
 
     @Nonnull

@@ -11,6 +11,7 @@ import drzhark.mocreatures.block.MoCBlockSapling.EnumWoodType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -48,9 +49,9 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("cobbled_deep_wyvstone_stairs")
     public static MoCBlockStairs cobbledDeepWyvstoneStairs;
     @GameRegistry.ObjectHolder("deep_wyvwstone_button")
-    public static MoCBlockStairs deepWyvwstoneButton;
+    public static MoCBlockButtonStone deepWyvwstoneButton;
     @GameRegistry.ObjectHolder("deep_wyvstone_pressure_plate")
-    public static MoCBlockStairs deepWyvstonePressurePlate;
+    public static MoCBlockPressurePlateStone deepWyvstonePressurePlate;
     @GameRegistry.ObjectHolder("deep_wyvstone")
     public static Block deepWyvstone;
     @GameRegistry.ObjectHolder("deep_wyvstone_stairs")
@@ -90,9 +91,9 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("wyvern_nest_block")
     public static MoCBlockNest wyvernNestBlock;
     @GameRegistry.ObjectHolder("wyvwstone_button")
-    public static MoCBlockStairs wyvwstoneButton;
+    public static MoCBlockButtonStone wyvwstoneButton;
     @GameRegistry.ObjectHolder("wyvstone_pressure_plate")
-    public static MoCBlockStairs wyvstonePressurePlate;
+    public static MoCBlockPressurePlateStone wyvstonePressurePlate;
     @GameRegistry.ObjectHolder("wyvstone")
     public static Block wyvstone;
     @GameRegistry.ObjectHolder("wyvstone_stairs")
@@ -102,11 +103,15 @@ public class MoCBlocks {
     @GameRegistry.ObjectHolder("wyvdirt")
     public static Block wyvdirt;
     @GameRegistry.ObjectHolder("wyvwood_button")
-    public static MoCBlockStairs wyvwoodButton;
+    public static MoCBlockButtonWood wyvwoodButton;
+    @GameRegistry.ObjectHolder("wyvwood_fence")
+    public static MoCBlockFenceWood wyvwoodFence;
+    @GameRegistry.ObjectHolder("wyvwood_fence_gate")
+    public static MoCBlockFenceGateWood wyvwoodFenceGate;
     @GameRegistry.ObjectHolder("wyvwood_leaves")
     public static Block wyvwoodLeaves;
     @GameRegistry.ObjectHolder("wyvwood_pressure_plate")
-    public static MoCBlockStairs wyvwoodPressurePlate;
+    public static MoCBlockPressurePlateWood wyvwoodPressurePlate;
     @GameRegistry.ObjectHolder("wyvwood_sapling")
     public static Block wyvwoodSapling;
     @GameRegistry.ObjectHolder("wyvwood_log")
@@ -157,6 +162,8 @@ public class MoCBlocks {
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
                 setup(new MoCBlockPlanks(MapColor.DIAMOND, true), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F),
                 setup(new MoCBlockButtonWood(), "wyvwood_button"),
+                setup(new MoCBlockFenceWood(MapColor.DIAMOND, true), "wyvwood_fence"),
+                setup(new MoCBlockFenceGateWood(MapColor.DIAMOND, true), "wyvwood_fence_gate"),
                 setup(new MoCBlockPressurePlateWood(MapColor.DIAMOND), "wyvwood_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockPlanks(MapColor.DIAMOND, true).getDefaultState(), true), "wyvwood_stairs").setHardness(2.0F).setResistance(5.0F),
                 setup(new MoCBlockNest(), "wyvern_nest_block").setHardness(0.5F)
@@ -179,6 +186,9 @@ public class MoCBlocks {
                 ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "normal"));
             }
         }
+        
+        // All doors, fence gates, and slabs go here
+        ModelLoader.setCustomStateMapper(wyvwoodFenceGate, (new StateMap.Builder()).ignore(MoCBlockFenceGateWood.POWERED).build());
     }
 
     @Nonnull

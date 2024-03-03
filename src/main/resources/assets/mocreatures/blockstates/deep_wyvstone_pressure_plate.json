@@ -1,14 +1,26 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "textures": {
-            "texture": "mocreatures:blocks/stone_wyvern_deep"
-        }
-     },
-    "variants": {
-        "normal": [{"model": "pressure_plate_up"}],
-		"inventory": [{"model": "pressure_plate_up"}],
-        "powered=false": {"model": "pressure_plate_up"},
-        "powered=true": {"model": "pressure_plate_down"}
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "texture": "mocreatures:blocks/stone_wyvern_deep"
     }
+  },
+  "variants": {
+    "normal": [
+      {
+        "model": "pressure_plate_up"
+      }
+    ],
+    "inventory": [
+      {
+        "model": "pressure_plate_up"
+      }
+    ],
+    "powered=false": {
+      "model": "pressure_plate_up"
+    },
+    "powered=true": {
+      "model": "pressure_plate_down"
+    }
+  }
 }

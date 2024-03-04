@@ -26,7 +26,7 @@ public class MoCBlockDoorWood extends BlockDoor {
         this.setHardness(3.0F);
         this.setHarvestLevel("axe", 0);
         this.mapColor = mapColor;
-        //this.enableStats = false;
+        this.enableStats = false;
     }
 
     @Override

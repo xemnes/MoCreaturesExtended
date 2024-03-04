@@ -127,16 +127,16 @@ public class MoCBlocks {
     public static MoCBlockFenceGateWood wyvwoodFenceGate;
     @GameRegistry.ObjectHolder("wyvwood_leaves")
     public static Block wyvwoodLeaves;
-    @GameRegistry.ObjectHolder("wyvwood_pressure_plate")
-    public static MoCBlockPressurePlateWood wyvwoodPressurePlate;
-    @GameRegistry.ObjectHolder("wyvwood_sapling")
-    public static Block wyvwoodSapling;
     @GameRegistry.ObjectHolder("wyvwood_log")
     public static Block wyvwoodLog;
     @GameRegistry.ObjectHolder("wyvwood_planks")
     public static Block wyvwoodPlanks;
+    @GameRegistry.ObjectHolder("wyvwood_sapling")
+    public static Block wyvwoodSapling;
     @GameRegistry.ObjectHolder("wyvwood_stairs")
     public static MoCBlockStairs wyvwoodPlanksStairs;
+    @GameRegistry.ObjectHolder("wyvwood_trapdoor")
+    public static MoCBlockTrapdoorWood wyvwoodTrapdoor;
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -191,6 +191,7 @@ public class MoCBlocks {
                 setup(new MoCBlockFenceGateWood(MapColor.DIAMOND, true), "wyvwood_fence_gate"),
                 setup(new MoCBlockPressurePlateWood(MapColor.DIAMOND), "wyvwood_pressure_plate"),
                 setup(new MoCBlockStairs(new MoCBlockPlanks(MapColor.DIAMOND, true).getDefaultState(), true), "wyvwood_stairs").setHardness(2.0F).setResistance(5.0F),
+                setup(new MoCBlockTrapdoorWood(MapColor.DIAMOND), "wyvwood_trapdoor"),
                 setup(new MoCBlockNest(), "wyvern_nest_block").setHardness(0.5F)
         );
     }
@@ -200,7 +201,7 @@ public class MoCBlocks {
         final IForgeRegistry<Item> registry = event.getRegistry();
         ForgeRegistries.BLOCKS.getValues().stream()
                 .filter(block -> block.getRegistryName().getNamespace().equals(MoCConstants.MOD_ID))
-                .filter(block -> !(block instanceof BlockDoor))
+                .filter(block -> !(block instanceof BlockDoor)) // Doors should not have an item block registered
                 .forEach(block -> registry.register(setup(new ItemBlock(block), block.getRegistryName())));
     }
 

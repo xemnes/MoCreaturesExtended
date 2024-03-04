@@ -9,6 +9,7 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.block.*;
 import drzhark.mocreatures.block.MoCBlockSapling.EnumWoodType;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
@@ -118,6 +119,8 @@ public class MoCBlocks {
     public static Block wyvdirt;
     @GameRegistry.ObjectHolder("wyvwood_button")
     public static MoCBlockButtonWood wyvwoodButton;
+    @GameRegistry.ObjectHolder("wyvwood_door")
+    public static MoCBlockDoorWood wyvwoodDoor;
     @GameRegistry.ObjectHolder("wyvwood_fence")
     public static MoCBlockFenceWood wyvwoodFence;
     @GameRegistry.ObjectHolder("wyvwood_fence_gate")
@@ -183,6 +186,7 @@ public class MoCBlocks {
                 setup(new MoCBlockTallGrass(MapColor.LIGHT_BLUE_STAINED_HARDENED_CLAY, false), "tall_wyvgrass").setHardness(0.0F),
                 setup(new MoCBlockPlanks(MapColor.DIAMOND, true), "wyvwood_planks").setHardness(2.0F).setResistance(5.0F),
                 setup(new MoCBlockButtonWood(), "wyvwood_button"),
+                setup(new MoCBlockDoorWood(MapColor.DIAMOND), "wyvwood_door"),
                 setup(new MoCBlockFenceWood(MapColor.DIAMOND, true), "wyvwood_fence"),
                 setup(new MoCBlockFenceGateWood(MapColor.DIAMOND, true), "wyvwood_fence_gate"),
                 setup(new MoCBlockPressurePlateWood(MapColor.DIAMOND), "wyvwood_pressure_plate"),
@@ -196,6 +200,7 @@ public class MoCBlocks {
         final IForgeRegistry<Item> registry = event.getRegistry();
         ForgeRegistries.BLOCKS.getValues().stream()
                 .filter(block -> block.getRegistryName().getNamespace().equals(MoCConstants.MOD_ID))
+                .filter(block -> !(block instanceof BlockDoor))
                 .forEach(block -> registry.register(setup(new ItemBlock(block), block.getRegistryName())));
     }
 
@@ -209,6 +214,8 @@ public class MoCBlocks {
         }
 
         // All doors, fence gates, slabs, and walls go here
+        ModelLoader.setCustomStateMapper(wyvwoodDoor, (new StateMap.Builder()).ignore(MoCBlockDoorWood.POWERED).build());
+
         ModelLoader.setCustomStateMapper(wyvwoodFenceGate, (new StateMap.Builder()).ignore(MoCBlockFenceGateWood.POWERED).build());
 
         ModelLoader.setCustomStateMapper(cobbledWyvstoneWall, (new StateMap.Builder()).ignore(MoCBlockWall.VARIANT).build());

@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
+// NOTE: Wooden pressure plates are not flammable in vanilla
 public class MoCBlockPressurePlateWood extends BlockPressurePlate {
     private final MapColor mapColor;
 

@@ -12,6 +12,5 @@ public class MoCBlockButtonStone extends BlockButtonStone {
         this.setSoundType(SoundType.STONE);
         this.setHardness(0.5F);
         this.setHarvestLevel("pickaxe", 0);
-        this.setResistance(0.5F);
     }
 }

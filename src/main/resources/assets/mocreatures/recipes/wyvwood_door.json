@@ -1,0 +1,17 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XX",
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "mocreatures:wyvwood_planks"
+    }
+  },
+  "result": {
+    "item": "mocreatures:wyvwood_door",
+    "count": 3
+  }
+}

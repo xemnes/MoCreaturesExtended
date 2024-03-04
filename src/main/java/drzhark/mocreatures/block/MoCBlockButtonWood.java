@@ -6,6 +6,7 @@ package drzhark.mocreatures.block;
 import net.minecraft.block.BlockButtonWood;
 import net.minecraft.block.SoundType;
 
+// NOTE: Wooden buttons are not flammable in vanilla
 public class MoCBlockButtonWood extends BlockButtonWood {
     public MoCBlockButtonWood() {
     	super();

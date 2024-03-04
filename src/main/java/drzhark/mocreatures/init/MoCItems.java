@@ -94,6 +94,8 @@ public class MoCItems {
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
     public static final MoCItem firestoneChunk = new MoCItem("firestonechunk");
     //public static final MoCItemCrabClaw brackishClaw = new MoCItemCrabClaw("brackish_claw", 768, 15, 0.0F, 1, 2.0F);
+    // Doors - These need to be registered alongside the blocks
+    public static final MoCItemDoor wyvwoodDoor = new MoCItemDoor(MoCBlocks.wyvwoodDoor, "wyvwood_door");
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
@@ -204,12 +206,12 @@ public class MoCItems {
     public static final MoCItemArmor helmetSilver = new MoCItemArmor("ancient_silver_helmet", silverARMOR, 4, EntityEquipmentSlot.HEAD);
     public static final MoCItemArmor legsSilver = new MoCItemArmor("ancient_silver_leggings", silverARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor bootsSilver = new MoCItemArmor("ancient_silver_boots", silverARMOR, 4, EntityEquipmentSlot.FEET);
-    
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void registerRenders(final ModelRegistryEvent modelRegistryEvent) {
-    	// All bow items go here
-    	ModelLoader.setCustomModelResourceLocation(silverBow, 0, new ModelResourceLocation(silverBow.delegate.name(), "inventory"));
+        // All bow items go here
+        ModelLoader.setCustomModelResourceLocation(silverBow, 0, new ModelResourceLocation(silverBow.delegate.name(), "inventory"));
     }
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
@@ -301,6 +303,7 @@ public class MoCItems {
                     horsearmorcrystal,
                     mysticPear,
                     recordshuffle,
+                    wyvwoodDoor,
 
                     animalHide,
                     rawTurkey,

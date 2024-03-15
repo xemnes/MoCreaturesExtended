@@ -6,20 +6,20 @@ package drzhark.mocreatures.event;
 import com.google.common.primitives.Ints;
 import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.MoCEntityAnimal;
-import drzhark.mocreatures.entity.MoCEntityData;
-import drzhark.mocreatures.entity.tameable.MoCPetMapData;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.tameable.IMoCTameable;
+import drzhark.mocreatures.entity.IMoCEntity;
+import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.MoCPetMapData;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEntitySpawner;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -30,7 +30,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MoCEventHooks {
 
@@ -66,15 +65,17 @@ public class MoCEventHooks {
             if (data == null) return;
             World world = event.getWorld();
             List<Integer> dimensionIDs = Ints.asList(data.getDimensions());
-            if (!dimensionIDs.contains(world.provider.getDimension()) || data.getFrequency() <= 0 || !data.getCanSpawn())
+            if (!data.getCanSpawn() || data.getFrequency() <= 0 || !dimensionIDs.contains(world.provider.getDimension()))
                 return;
             if (event.getRand().nextInt(100) < MoCreatures.proxy.kittyVillageChance) {
                 BlockPos pos = new BlockPos(event.getChunkX() * 16, 100, event.getChunkZ() * 16);
                 MoCEntityKitty kitty = new MoCEntityKitty(world);
                 BlockPos spawnPos = getSafeSpawnPos(kitty, pos.add(8, 0, 8));
-                if (spawnPos == null) return;
+                if (spawnPos == null || !WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntityLiving.SpawnPlacementType.ON_GROUND, world, spawnPos))
+                    return;
                 kitty.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(kitty)), null);
                 kitty.setPosition(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+                if (!kitty.getCanSpawnHere()) return;
                 world.spawnEntity(kitty);
             }
         }

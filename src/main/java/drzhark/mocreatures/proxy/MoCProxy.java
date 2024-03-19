@@ -305,8 +305,8 @@ public class MoCProxy implements IGuiHandler {
         this.staticLitter = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "StaticLitter", true, "Makes the kitty litter box not pushable.").getBoolean(true);
         this.verboseEntityNames = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "VerboseEntityNames", false, "Enables detailed names for creatures, describing their species.").getBoolean(false);
         this.weaponEffects = this.mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "WeaponEffects", true, "Applies potion effects when dealing damage with scorpion weapons.").getBoolean(true);
-        this.worldGenSpawningCreatures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WorldGenSpawningCreatures", true, "Enables custom creature spawning during world generation. Disable this when facing spawning issues with entities from other mods.").getBoolean(true);
-        this.worldGenSpawningWaterCreatures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WorldGenSpawningWaterCreatures", true, "Enables custom water creature spawning during world generation. Disable this when facing spawning issues with entities from other mods.").getBoolean(true);
+        this.worldGenSpawningCreatures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WorldGenSpawningCreatures", false, "Enables custom creature spawning during world generation. Increases the presence of regular creatures.").getBoolean(false);
+        this.worldGenSpawningWaterCreatures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WorldGenSpawningWaterCreatures", false, "Enables custom water creature spawning during world generation. Increases the presence of water creatures.").getBoolean(false);
         this.wyvernDimension = this.mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17, "The dimension ID of the wyvern lair.").getInt();
         this.wyvernEggDropChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "WyvernEggDropChance", 33, "The percentage for wyverns to drop an egg.").getInt();
 

@@ -10,7 +10,9 @@ import drzhark.mocreatures.block.*;
 import drzhark.mocreatures.block.MoCBlockSapling.EnumWoodType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
@@ -67,6 +69,8 @@ public class MoCBlocks {
     public static Block firestone;
     @GameRegistry.ObjectHolder("gleaming_glass")
     public static Block gleamingGlass;
+    @GameRegistry.ObjectHolder("gleaming_glass_pane")
+    public static Block gleamingGlassPane;
     @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone")
     public static Block mossyCobbledWyvstone;
     @GameRegistry.ObjectHolder("mossy_cobbled_wyvstone_stairs")
@@ -164,7 +168,8 @@ public class MoCBlocks {
                 setup(new MoCBlockRock(MapColor.STONE), "mossy_cobbled_deep_wyvstone").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.STONE).getDefaultState(), false), "mossy_cobbled_deep_wyvstone_stairs").setHardness(3.5F).setResistance(10.0F),
                 setup(new MoCBlockWall(new MoCBlockRock(MapColor.STONE), false), "mossy_cobbled_deep_wyvstone_wall").setHardness(3.5F).setResistance(10.0F),
-                setup(new MoCBlockGlass(), "gleaming_glass").setHardness(0.4F),
+                setup(new MoCBlockGlass(true), "gleaming_glass").setHardness(0.4F),
+                setup(new MoCBlockPane(Material.GLASS, SoundType.GLASS, false, true), "gleaming_glass_pane").setHardness(0.4F),
                 setup(new MoCBlockSand(MapColor.CLAY), "silver_sand").setHardness(0.6F),
                 setup(new MoCBlockRock(MapColor.CLAY), "silver_sandstone").setHardness(1.2F),
                 setup(new MoCBlockStairs(new MoCBlockRock(MapColor.CLAY).getDefaultState(), false), "silver_sandstone_stairs").setHardness(1.2F),

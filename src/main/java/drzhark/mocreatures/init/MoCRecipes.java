@@ -94,6 +94,9 @@ public class MoCRecipes {
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledDeepWyvstone));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledWyvstone));
             OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.wyvdirt));
+            OreDictionary.registerOre("doorWood", new ItemStack(MoCBlocks.wyvwoodDoor));
+            OreDictionary.registerOre("fenceWood", new ItemStack(MoCBlocks.wyvwoodFence));
+            OreDictionary.registerOre("fenceGateWood", new ItemStack(MoCBlocks.wyvwoodFenceGate));
             OreDictionary.registerOre("grass", new ItemStack(MoCBlocks.wyvgrass));
             OreDictionary.registerOre("logWood", new ItemStack(MoCBlocks.wyvwoodLog));
             OreDictionary.registerOre("oreDiamond", new ItemStack(MoCBlocks.wyvernDiamondOre));
@@ -101,13 +104,18 @@ public class MoCRecipes {
             OreDictionary.registerOre("oreGold", new ItemStack(MoCBlocks.wyvernGoldOre));
             OreDictionary.registerOre("oreIron", new ItemStack(MoCBlocks.wyvernIronOre));
             OreDictionary.registerOre("oreLapis", new ItemStack(MoCBlocks.wyvernLapisOre));
+            OreDictionary.registerOre("paneGlass", new ItemStack(MoCBlocks.gleamingGlassPane));
+            OreDictionary.registerOre("paneGlassColorless", new ItemStack(MoCBlocks.gleamingGlassPane));
             OreDictionary.registerOre("plankWood", new ItemStack(MoCBlocks.wyvwoodPlanks));
             OreDictionary.registerOre("sand", new ItemStack(MoCBlocks.silverSand));
             OreDictionary.registerOre("sandstone", new ItemStack(MoCBlocks.carvedSilverSandstone));
             OreDictionary.registerOre("sandstone", new ItemStack(MoCBlocks.silverSandstone));
             OreDictionary.registerOre("sandstone", new ItemStack(MoCBlocks.smoothSilverSandstone));
+            //OreDictionary.registerOre("slabWood", new ItemStack(MoCBlocks.wyvwoodPlanks));
+            OreDictionary.registerOre("stairWood", new ItemStack(MoCBlocks.wyvwoodPlanksStairs));
             OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.deepWyvstone));
             OreDictionary.registerOre("stone", new ItemStack(MoCBlocks.wyvstone));
+            OreDictionary.registerOre("trapdoorWood", new ItemStack(MoCBlocks.wyvwoodTrapdoor));
             OreDictionary.registerOre("treeLeaves", new ItemStack(MoCBlocks.wyvwoodLeaves));
             OreDictionary.registerOre("treeSapling", new ItemStack(MoCBlocks.wyvwoodSapling));
 
@@ -117,6 +125,9 @@ public class MoCRecipes {
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinNether);
             OreDictionary.registerOre("chitinScorpion", MoCItems.chitinUndead);
             OreDictionary.registerOre("egg", new ItemStack(MoCItems.mocegg, 1, OreDictionary.WILDCARD_VALUE));
+            OreDictionary.registerOre("hide", MoCItems.animalHide);
+            OreDictionary.registerOre("hide", MoCItems.hideCroc);
+            OreDictionary.registerOre("hideSmall", Items.RABBIT_HIDE);
             OreDictionary.registerOre("ingotSilver", MoCItems.ancientSilverIngot);
             OreDictionary.registerOre("nuggetSilver", MoCItems.ancientSilverNugget);
             OreDictionary.registerOre("record", MoCItems.recordshuffle);

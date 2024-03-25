@@ -28,9 +28,11 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ModFixs;
@@ -39,10 +41,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -106,6 +106,26 @@ public class MoCreatures {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         CompatHandler.postInit();
+    }
+
+    @EventHandler
+    public void loadComplete(FMLLoadCompleteEvent event) {
+        if (MoCreatures.proxy.debug) {
+            for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
+                for (Biome.SpawnListEntry entry : biome.getSpawnableList(EnumCreatureType.CREATURE)) {
+                    LOGGER.info("Creature is spawnable in biome " + biome.biomeName + ": " + entry.entityClass);
+                }
+                for (Biome.SpawnListEntry entry : biome.getSpawnableList(EnumCreatureType.WATER_CREATURE)) {
+                    LOGGER.info("Water Creature is spawnable in biome " + biome.biomeName + ": " + entry.entityClass);
+                }
+                for (Biome.SpawnListEntry entry : biome.getSpawnableList(EnumCreatureType.MONSTER)) {
+                    LOGGER.info("Monster is spawnable in biome " + biome.biomeName + ": " + entry.entityClass);
+                }
+                for (Biome.SpawnListEntry entry : biome.getSpawnableList(EnumCreatureType.AMBIENT)) {
+                    LOGGER.info("Ambient is spawnable in biome " + biome.biomeName + ": " + entry.entityClass);
+                }
+            }
+        }
     }
 
     @EventHandler

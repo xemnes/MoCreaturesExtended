@@ -3,11 +3,12 @@
  */
 package drzhark.mocreatures.client;
 
-import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.IMoCEntity;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageEntityDive;
 import drzhark.mocreatures.network.message.MoCMessageEntityJump;
+import drzhark.mocreatures.proxy.MoCProxyClient;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -43,8 +44,8 @@ public class MoCKeyHandler {
             Keyboard.enableRepeatEvents(true); // allow holding down key. Fixes flying
         }
 
-        boolean kbJump = MoCProxyClient.mc.gameSettings.keyBindJump.getKeyCode() >= 0 ? Keyboard.isKeyDown(MoCProxyClient.mc.gameSettings.keyBindJump.getKeyCode()) : keyPressed == MoCProxyClient.mc.gameSettings.keyBindJump.getKeyCode();
-        boolean kbDive = diveBinding.getKeyCode() >= 0 ? Keyboard.isKeyDown(diveBinding.getKeyCode()) : keyPressed == diveBinding.getKeyCode();
+        boolean kbJump = MoCProxyClient.mc.gameSettings.keyBindJump.getKeyCode() >= 0 ? GameSettings.isKeyDown(MoCProxyClient.mc.gameSettings.keyBindJump) : keyPressed == MoCProxyClient.mc.gameSettings.keyBindJump.getKeyCode();
+        boolean kbDive = diveBinding.getKeyCode() >= 0 ? GameSettings.isKeyDown(diveBinding) : keyPressed == diveBinding.getKeyCode();
 
         /*
          * this avoids double jumping

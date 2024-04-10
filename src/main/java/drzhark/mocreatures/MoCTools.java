@@ -815,7 +815,7 @@ public class MoCTools {
         }
 
         storedCreature.setOwnerId(ep.getUniqueID()); // ALWAYS SET OWNER. Required for our new pet save system.
-        if (MoCreatures.proxy.alwaysNamePets) {
+        if (MoCreatures.proxy.alwaysNamePets && ep instanceof EntityPlayerMP) {
             MoCMessageHandler.INSTANCE.sendTo(new MoCMessageNameGUI(((Entity) storedCreature).getEntityId()), (EntityPlayerMP) ep);
         }
         storedCreature.setTamed(true);

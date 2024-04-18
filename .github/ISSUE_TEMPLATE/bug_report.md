@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+This is the repository of Mo' Creatures Extended exclusively for 1.12.2, requests to port the mod to other versions will be declined. Please do not report any issues from other forks or unofficial ports of Mo' Creatures that have nothing to do with Extended, they will immediately be closed and marked as invalid.
+
 **If you are making an issue regarding entity spawns, please attempt the following before reporting:**
 1. Adjust the frequency values inside `MoCreatures.cfg`.
 2. Utilize the Spawn Caps tweak in the [Universal Tweaks](https://www.curseforge.com/minecraft/mc-mods/universal-tweaks) mod to further increase entity spawn caps.

@@ -574,11 +574,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (BiomeDictionary.hasType(currentbiome, Type.MAGICAL)) {
-                // dark green
-                setType(1);
-            }
-
             if (BiomeDictionary.hasType(currentbiome, Type.PLAINS)) {
                 // dark green or coral or spotted
                 if (l < 3) {
@@ -634,6 +629,11 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 } else {
                     setType(1);
                 }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.MAGICAL)) {
+                // dark green
+                setType(1);
             }
 
             if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY))) {

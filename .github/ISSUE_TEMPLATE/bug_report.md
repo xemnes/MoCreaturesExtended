@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Report something that is not working in the mod
+title: ''
+labels: bug
+assignees: ''
+
+---
+
 **If you are making an issue regarding entity spawns, please attempt the following before reporting:**
 1. Adjust the frequency values inside `MoCreatures.cfg`.
 2. Utilize the Spawn Caps tweak in the [Universal Tweaks](https://www.curseforge.com/minecraft/mc-mods/universal-tweaks) mod to further increase entity spawn caps.

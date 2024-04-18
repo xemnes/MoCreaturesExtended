@@ -580,6 +580,17 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
+            if (BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) {
+                // python or spotted or rattlesnake
+                if (l < 4) {
+                    setType(8);
+                } else if (l < 8) {
+                    setType(2);
+                } else {
+                    setType(7);
+                }
+            }
+
             if (BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
                 // dark green or spotted
                 if (l < 5) {
@@ -601,16 +612,23 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             }
 
             if (BiomeDictionary.hasType(currentbiome, Type.JUNGLE)) {
-                // bright green or bright orange or cobra or dark green
-                if (l < 4) {
+                // bright green or bright orange or cobra or python or dark green
+                if (l < 3) {
                     setType(4);
-                } else if (l < 6) {
+                } else if (l < 5) {
                     setType(3);
-                } else if (l < 8) {
+                } else if (l < 7) {
                     setType(6);
+                } else if (l < 9) {
+                    setType(8);
                 } else {
                     setType(1);
                 }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.MAGICAL)) {
+                // dark green
+                setType(1);
             }
 
             if (BiomeDictionary.hasType(currentbiome, MoCEntities.WYVERN_LAIR)) {
@@ -626,12 +644,8 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (BiomeDictionary.hasType(currentbiome, Type.MAGICAL)) {
-                // dark green
-                setType(1);
-            }
-
-            if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY))) {
+            if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY) && !(BiomeDictionary.hasType(currentbiome, Type.SAVANNA)))) {
+                // spotted
                 setType(2);
             }
         } catch (Exception ignored) {

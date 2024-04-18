@@ -574,12 +574,26 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) || BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
+            if (BiomeDictionary.hasType(currentbiome, Type.MAGICAL)) {
+                // dark green
+                setType(1);
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.PLAINS)) {
                 // dark green or coral or spotted
                 if (l < 3) {
                     setType(1);
                 } else if (l < 5) {
                     setType(5);
+                } else {
+                    setType(2);
+                }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
+                // dark green or spotted
+                if (l < 5) {
+                    setType(1);
                 } else {
                     setType(2);
                 }

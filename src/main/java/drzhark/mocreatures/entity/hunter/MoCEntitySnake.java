@@ -99,11 +99,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected boolean canDespawn() {
-        return this.world.provider.getDimension() != MoCreatures.proxy.wyvernDimension;
-    }
-
-    @Override
     public void selectType() {
         checkSpawningBiome();
         // snake types:

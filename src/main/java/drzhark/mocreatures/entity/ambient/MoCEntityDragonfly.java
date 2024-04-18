@@ -41,11 +41,6 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
     }
 
     @Override
-    protected boolean canDespawn() {
-        return this.world.provider.getDimension() != MoCreatures.proxy.wyvernDimension;
-    }
-
-    @Override
     public void selectType() {
         if (getType() == 0) {
             setType(this.rand.nextInt(4) + 1);

@@ -1085,9 +1085,11 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
 
     @Override
     public void setDead() {
-        if (this.world.isRemote || getKittyState() <= 2 || getHealth() <= 0) {
-            super.setDead();
+        // Server check required to prevent tamed entities from being duplicated on client-side
+        if (!this.world.isRemote && (getKittyState() > 2) && (getHealth() > 0)) {
+            return;
         }
+        super.setDead();
     }
 
     public void swingArm() {

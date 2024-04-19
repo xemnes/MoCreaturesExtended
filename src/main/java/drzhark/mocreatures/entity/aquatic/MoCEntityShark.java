@@ -148,10 +148,11 @@ public class MoCEntityShark extends MoCEntityTameableAquatic {
 
     @Override
     public void setDead() {
-        if (!this.world.isRemote && getIsTamed() && (getHealth() > 0)) {
-        } else {
-            super.setDead();
+        // Server check required to prevent tamed entities from being duplicated on client-side
+        if (!this.world.isRemote && (getIsTamed()) && (getHealth() > 0)) {
+            return;
         }
+        super.setDead();
     }
 
     public boolean isMyHealFood(Item item1) {

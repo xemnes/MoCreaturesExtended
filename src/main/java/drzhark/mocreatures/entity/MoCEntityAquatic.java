@@ -488,31 +488,6 @@ public abstract class MoCEntityAquatic extends EntityCreature implements IMoCEnt
     public void performAnimation(int attackType) {
     }
 
-    /**
-     * Makes the entity despawn if requirements are reached changed to the
-     * entities now last longer
-     */
-    @Override
-    protected void despawnEntity() {
-        EntityPlayer var1 = this.world.getClosestPlayerToEntity(this, -1.0D);
-        if (var1 != null) {
-            double var2 = var1.posX - this.posX;
-            double var4 = var1.posY - this.posY;
-            double var6 = var1.posZ - this.posZ;
-            double var8 = var2 * var2 + var4 * var4 + var6 * var6;
-
-            if (this.canDespawn() && var8 > 16384.0D) {
-                this.setDead();
-            }
-            //changed from 600
-            if (this.idleTime > 1800 && this.rand.nextInt(800) == 0 && var8 > 1024.0D && this.canDespawn()) {
-                this.setDead();
-            } else if (var8 < 1024.0D) {
-                this.idleTime = 0;
-            }
-        }
-    }
-
     public float getMoveSpeed() {
         return 0.7F;
     }

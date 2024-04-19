@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-This is the repository of Mo' Creatures Extended exclusively for 1.12.2, requests to port the mod to other versions will be declined. Please do not report any issues from other forks or unofficial ports of Mo' Creatures that have nothing to do with Extended, they will immediately be closed and marked as invalid.
+This is the repository of Mo' Creatures Extended exclusively for 1.12.2 and is not affiliated with other forks or other unofficial ports of Mo' Creatures. Please do not report any bugs originating from other forks or unofficial ports of Mo' Creatures, they will immediately be closed and marked as invalid.
 
 If you are making an issue regarding entity spawns, please attempt the following before reporting:
 

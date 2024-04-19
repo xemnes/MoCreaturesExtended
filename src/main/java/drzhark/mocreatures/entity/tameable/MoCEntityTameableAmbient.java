@@ -134,11 +134,12 @@ public class MoCEntityTameableAmbient extends MoCEntityAmbient implements IMoCTa
         }
 
         //if the player interacting is not the owner, do nothing!
-        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
-                && !player.getUniqueID().equals(this.getOwnerId())) {
-            ITextComponent message = new TextComponentTranslation("msg.mocreatures.foreignpet");
-            message.getStyle().setColor(TextFormatting.RED);
-            player.sendMessage(message);
+        if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !player.getUniqueID().equals(this.getOwnerId())) {
+            if (!this.world.isRemote) {
+                ITextComponent message = new TextComponentTranslation("msg.mocreatures.foreignpet");
+                message.getStyle().setColor(TextFormatting.RED);
+                player.sendMessage(message);
+            }
             return false;
         }
 

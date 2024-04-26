@@ -1,8 +1,0 @@
-{
-    "parent": "block/half_slab",
-    "textures": {
-        "bottom": "mocreatures:blocks/stone_wyvern_deep",
-        "top": "mocreatures:blocks/stone_wyvern_deep",
-        "side": "mocreatures:blocks/stone_wyvern_deep"
-    }
-}

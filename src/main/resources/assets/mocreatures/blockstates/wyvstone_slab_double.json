@@ -1,7 +1,14 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "mocreatures:blocks/stone_wyvern"
+    }
+  },
   "variants": {
     "variant=default": {
-      "model": "mocreatures:stone_wyvern"
+      "model": "cube_all"
     }
   }
 }

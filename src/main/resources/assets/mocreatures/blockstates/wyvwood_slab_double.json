@@ -1,7 +1,14 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "mocreatures:blocks/wood_planks_wyvwood"
+    }
+  },
   "variants": {
     "variant=default": {
-      "model": "mocreatures:wyvwood_slab_double"
+      "model": "cube_all"
     }
   }
 }

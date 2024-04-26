@@ -1,10 +1,23 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "particle": "mocreatures:blocks/mossy_cobblestone_wyvern_deep",
+      "bottom": "mocreatures:blocks/mossy_cobblestone_wyvern_deep",
+      "top": "mocreatures:blocks/mossy_cobblestone_wyvern_deep",
+      "side": "mocreatures:blocks/mossy_cobblestone_wyvern_deep"
+    }
+  },
   "variants": {
     "half=bottom,variant=default": {
-      "model": "mocreatures:mossy_cobbled_deep_wyvstone_slab_bottom"
+      "model": "half_slab"
     },
     "half=top,variant=default": {
-      "model": "mocreatures:mossy_cobbled_deep_wyvstone_slab_top"
+      "model": "upper_slab"
+    },
+    "normal": {
+      "model": "half_slab"
     }
   }
 }

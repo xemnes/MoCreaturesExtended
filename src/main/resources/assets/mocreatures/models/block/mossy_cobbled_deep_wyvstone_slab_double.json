@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "mocreatures:blocks/mossy_cobblestone_wyvern_deep",
-        "side": "mocreatures:blocks/mossy_cobblestone_wyvern_deep"
-    }
-}

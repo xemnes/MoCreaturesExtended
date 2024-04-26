@@ -1,7 +1,14 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "mocreatures:blocks/mossy_cobblestone_wyvern_deep"
+    }
+  },
   "variants": {
     "variant=default": {
-      "model": "mocreatures:mossy_cobbled_deep_wyvstone_slab_double"
+      "model": "cube_all"
     }
   }
 }

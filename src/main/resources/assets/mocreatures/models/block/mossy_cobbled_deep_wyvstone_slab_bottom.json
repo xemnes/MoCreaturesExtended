@@ -1,8 +1,0 @@
-{
-    "parent": "block/half_slab",
-    "textures": {
-        "bottom": "mocreatures:blocks/mossy_cobblestone_wyvern_deep",
-        "top": "mocreatures:blocks/mossy_cobblestone_wyvern_deep",
-        "side": "mocreatures:blocks/mossy_cobblestone_wyvern_deep"
-    }
-}

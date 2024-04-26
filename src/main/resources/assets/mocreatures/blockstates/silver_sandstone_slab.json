@@ -1,11 +1,23 @@
 {
   "forge_marker": 1,
+  "defaults": {
+    "model": "sandstone_normal",
+    "textures": {
+      "particle": "mocreatures:blocks/sandstone_silver_normal",
+      "bottom": "mocreatures:blocks/sandstone_silver_bottom",
+      "top": "mocreatures:blocks/sandstone_silver_top",
+      "side": "mocreatures:blocks/sandstone_silver_normal"
+    }
+  },
   "variants": {
     "half=bottom,variant=default": {
-      "model": "mocreatures:silver_sandstone_slab_bottom"
+      "model": "half_slab"
     },
     "half=top,variant=default": {
-      "model": "mocreatures:silver_sandstone_slab_top"
+      "model": "upper_slab"
+    },
+    "normal": {
+      "model": "half_slab"
     }
   }
 }

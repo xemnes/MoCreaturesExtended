@@ -1,10 +1,23 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "particle": "mocreatures:blocks/wood_planks_wyvwood",
+      "bottom": "mocreatures:blocks/wood_planks_wyvwood",
+      "top": "mocreatures:blocks/wood_planks_wyvwood",
+      "side": "mocreatures:blocks/wood_planks_wyvwood"
+    }
+  },
   "variants": {
     "half=bottom,variant=default": {
-      "model": "mocreatures:wyvwood_slab_bottom"
+      "model": "half_slab"
     },
     "half=top,variant=default": {
-      "model": "mocreatures:wyvwood_slab_top"
+      "model": "upper_slab"
+    },
+    "normal": {
+      "model": "half_slab"
     }
   }
 }

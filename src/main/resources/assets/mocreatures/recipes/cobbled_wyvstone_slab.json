@@ -1,0 +1,15 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mocreatures:cobbled_wyvstone"
+    }
+  },
+  "result": {
+    "item": "mocreatures:cobbled_wyvstone_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "mocreatures:blocks/cobblestone_wyvern_deep",
+        "side": "mocreatures:blocks/cobblestone_wyvern_deep"
+    }
+}

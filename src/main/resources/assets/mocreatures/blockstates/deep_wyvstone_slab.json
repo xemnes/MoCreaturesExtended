@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "mocreatures:deep_wyvstone_slab_bottom"
+    },
+    "half=top,variant=default": {
+      "model": "mocreatures:deep_wyvstone_slab_top"
+    }
+  }
+}

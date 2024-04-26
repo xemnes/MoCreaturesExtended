@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "mocreatures:mossy_cobbled_deep_wyvstone_slab_bottom"
+    },
+    "half=top,variant=default": {
+      "model": "mocreatures:mossy_cobbled_deep_wyvstone_slab_top"
+    }
+  }
+}

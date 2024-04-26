@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "mocreatures:blocks/wood_planks_wyvwood",
+        "side": "mocreatures:blocks/wood_planks_wyvwood"
+    }
+}

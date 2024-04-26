@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "variant=default": {
+      "model": "mocreatures:mossy_cobbled_wyvstone_slab_double"
+    }
+  }
+}

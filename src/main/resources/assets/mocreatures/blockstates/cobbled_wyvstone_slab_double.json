@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "variant=default": {
+      "model": "mocreatures:cobbled_wyvstone_slab_double"
+    }
+  }
+}

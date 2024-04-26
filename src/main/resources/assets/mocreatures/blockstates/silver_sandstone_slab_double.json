@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "variant=default": {
+      "model": "mocreatures:silver_sandstone_slab_double"
+    }
+  }
+}

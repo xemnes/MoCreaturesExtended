@@ -61,7 +61,7 @@ tile.mocreatures.wyvwood_pressure_plate.name=Wyvwood Pressure Plate
 tile.mocreatures.wyvwood_sapling.name=Wyvwood Sapling
 tile.mocreatures.wyvwood_slab.name=Wyvwood Slab
 tile.mocreatures.wyvwood_stairs.name=Wyvwood Stairs
-tile.mocreatures.wyvwood_trapdoor.name=Wyvwood Trapdoor [WIP]
+tile.mocreatures.wyvwood_trapdoor.name=Wyvwood Trapdoor
 
 # ITEMS
 item.amuletbone.name=Bone Amulet
@@ -288,7 +288,7 @@ item.venisoncooked.name=Cooked Venison
 item.venisonraw.name=Raw Venison
 item.whip.name=Whip
 item.woolball.name=Wool Ball
-item.wyvwood_door.name=Wyvwood Door [WIP]
+item.wyvwood_door.name=Wyvwood Door
 
 # ENTITIES
 entity.mocreatures:anchovy.name=Anchovy

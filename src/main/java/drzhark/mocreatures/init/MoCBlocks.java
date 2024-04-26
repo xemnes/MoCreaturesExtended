@@ -266,6 +266,7 @@ public class MoCBlocks {
         registry.register(setup(new ItemSlab(deepWyvstoneSlab, deepWyvstoneSlab, deepWyvstoneSlabDouble), deepWyvstoneSlab.getRegistryName()));
         registry.register(setup(new ItemSlab(mossyCobbledDeepWyvstoneSlab, mossyCobbledDeepWyvstoneSlab, mossyCobbledDeepWyvstoneSlabDouble), mossyCobbledDeepWyvstoneSlab.getRegistryName()));
         registry.register(setup(new ItemSlab(mossyCobbledWyvstoneSlab, mossyCobbledWyvstoneSlab, mossyCobbledWyvstoneSlabDouble), mossyCobbledWyvstoneSlab.getRegistryName()));
+        registry.register(setup(new ItemSlab(wyvstoneSlab, wyvstoneSlab, wyvstoneSlabDouble), wyvstoneSlab.getRegistryName()));
         registry.register(setup(new ItemSlab(wyvwoodSlab, wyvwoodSlab, wyvwoodSlabDouble), wyvwoodSlab.getRegistryName()));
     }
 

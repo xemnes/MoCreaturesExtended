@@ -18,6 +18,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenShrub;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -65,7 +66,7 @@ public class MoCBiomeWyvernIsles extends Biome {
     public void decorate(World world, Random random, BlockPos pos) {
         super.decorate(world, random, pos);
 
-        if (random.nextInt(100) == 0) {
+        if (FMLLaunchHandler.isDeobfuscatedEnvironment() && random.nextInt(100) == 0) {
             int i = random.nextInt(16) + 8;
             int j = random.nextInt(16) + 8;
             BlockPos blockpos = world.getHeight(pos.add(i, 0, j));

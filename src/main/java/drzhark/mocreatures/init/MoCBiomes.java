@@ -21,12 +21,14 @@ public class MoCBiomes {
     public static Biome wyvernIsles = new MoCBiomeWyvernIsles(new BiomeProperties("Wyvern Isles")
             .setBaseHeight(1.0F)
             .setHeightVariation(0.5F)
+            .setRainfall(0.0F)
             .setTemperature(0.25F)
             .setWaterColor(0x775757));
 
     public static Biome wyvernDesertIsles = new MoCBiomeWyvernIslesDesert(new BiomeProperties("Shifting Sands")
             .setBaseHeight(0.3F)
             .setHeightVariation(0.2F)
+            .setRainfall(0.0F)
             .setTemperature(0.4F)
             .setWaterColor(0x775757));
 

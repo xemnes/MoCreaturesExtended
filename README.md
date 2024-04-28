@@ -27,5 +27,6 @@
 
 **Translators:**
 
-- French Translation ~ nocturni
-- German Translation ~ magiczocker10, ACGaming
+- European Spanish ~ ESTEBAN1303YT
+- French ~ nocturni
+- German ~ magiczocker10, ACGaming

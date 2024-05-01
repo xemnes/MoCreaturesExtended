@@ -6,8 +6,11 @@ package drzhark.mocreatures.entity.aquatic;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
 import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -163,5 +166,20 @@ public class MoCEntityMediumFish extends MoCEntityTameableAquatic {
 
     public float getEyeHeight() {
         return this.height * 0.775F;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_FLOP;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_FISH_HURT;
+    }
+
+    @Override
+    protected SoundEvent getSwimSound() {
+        return MoCSoundEvents.ENTITY_FISH_SWIM;
     }
 }

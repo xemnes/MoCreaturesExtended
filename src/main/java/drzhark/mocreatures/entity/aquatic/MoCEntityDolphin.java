@@ -249,6 +249,11 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     protected SoundEvent getAngrySound() {
         return MoCSoundEvents.ENTITY_DOLPHIN_ANGRY;
     }
+    
+    @Override
+    protected SoundEvent getSwimSound() {
+        return MoCSoundEvents.ENTITY_FISH_SWIM;
+    }
 
     @Nullable
     protected ResourceLocation getLootTable() {

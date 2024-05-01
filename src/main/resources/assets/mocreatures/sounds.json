@@ -395,6 +395,55 @@
       "mocreatures:entity/fly/hurt"
     ]
   },
+  "entity.filch_lizard.hiss": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/filch_lizard/hiss1",
+      "mocreatures:entity/filch_lizard/hiss2"
+    ]
+  },
+  "entity.filch_lizard.death": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/filch_lizard/death"
+    ]
+  },
+  "entity.fish.death_vicious": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/fish/vicious/death"
+    ]
+  },
+  "entity.fish.flop": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/fish/flop1",
+      "mocreatures:entity/fish/flop2",
+      "mocreatures:entity/fish/flop3",
+      "mocreatures:entity/fish/flop4"
+    ]
+  },
+  "entity.fish.hurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/fish/hurt1",
+      "mocreatures:entity/fish/hurt2",
+      "mocreatures:entity/fish/hurt3",
+      "mocreatures:entity/fish/hurt4"
+    ]
+  },
+  "entity.fish.swim": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/fish/swim1",
+      "mocreatures:entity/fish/swim2",
+      "mocreatures:entity/fish/swim3",
+      "mocreatures:entity/fish/swim4",
+      "mocreatures:entity/fish/swim5",
+      "mocreatures:entity/fish/swim6",
+      "mocreatures:entity/fish/swim7"
+    ]
+  },
   "entity.fox.ambient": {
     "category": "neutral",
     "sounds": [

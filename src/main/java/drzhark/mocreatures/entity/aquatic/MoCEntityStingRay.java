@@ -6,6 +6,7 @@ package drzhark.mocreatures.entity.aquatic;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.init.MoCLootTables;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.entity.Entity;
@@ -13,6 +14,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
@@ -98,5 +100,9 @@ public class MoCEntityStingRay extends MoCEntityRay {
 
     public float getEyeHeight() {
         return this.height * 0.86F;
+    }
+    
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_DEATH_VICIOUS;
     }
 }

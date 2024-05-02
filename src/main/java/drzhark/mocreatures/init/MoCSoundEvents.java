@@ -177,6 +177,7 @@ public class MoCSoundEvents {
     //
     public static final SoundEvent ENTITY_DUCK_AMBIENT;
     public static final SoundEvent ENTITY_DUCK_HURT;
+    public static final SoundEvent ENTITY_DUCK_STEP;
     //
     public static final SoundEvent ENTITY_FILCH_LIZARD_HISS;
     public static final SoundEvent ENTITY_FILCH_LIZARD_DEATH;
@@ -222,6 +223,10 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_WRAITH_AMBIENT_LEGACY;
     public static final SoundEvent ENTITY_WRAITH_DEATH_LEGACY;
     public static final SoundEvent ENTITY_WRAITH_HURT_LEGACY;
+    
+    // Passive
+    public static final SoundEvent ENTITY_DUCK_AMBIENT_LEGACY;
+    public static final SoundEvent ENTITY_DUCK_HURT_LEGACY;
 
     /* Generic */
     public static final SoundEvent ENTITY_GENERIC_ARMOR_ON;
@@ -416,6 +421,7 @@ public class MoCSoundEvents {
             //
             ENTITY_DUCK_AMBIENT = createSoundEvent("entity.duck.ambient");
             ENTITY_DUCK_HURT = createSoundEvent("entity.duck.hurt");
+            ENTITY_DUCK_STEP = createSoundEvent("entity.duck.step");
             //
             ENTITY_FILCH_LIZARD_HISS = createSoundEvent("entity.filch_lizard.hiss");
             ENTITY_FILCH_LIZARD_DEATH = createSoundEvent("entity.filch_lizard.death");
@@ -461,6 +467,10 @@ public class MoCSoundEvents {
             ENTITY_WRAITH_AMBIENT_LEGACY = createSoundEvent("entity.wraith.ambient_legacy");
             ENTITY_WRAITH_DEATH_LEGACY = createSoundEvent("entity.wraith.death_legacy");
             ENTITY_WRAITH_HURT_LEGACY = createSoundEvent("entity.wraith.hurt_legacy");
+            
+            // Passive
+            ENTITY_DUCK_AMBIENT_LEGACY = createSoundEvent("entity.duck.ambient_legacy");
+            ENTITY_DUCK_HURT_LEGACY = createSoundEvent("entity.duck.hurt_legacy");
 
             /* Generic */
             ENTITY_GENERIC_ARMOR_ON = createSoundEvent("entity.generic.armor_on");
@@ -669,6 +679,7 @@ public class MoCSoundEvents {
                     //
                     ENTITY_DUCK_AMBIENT,
                     ENTITY_DUCK_HURT,
+                    ENTITY_DUCK_STEP,
                     //
                     ENTITY_FILCH_LIZARD_HISS,
                     ENTITY_FILCH_LIZARD_DEATH,
@@ -704,6 +715,7 @@ public class MoCSoundEvents {
                     ENTITY_TURTLE_DEATH,
 
                     /* Entity (Legacy) */
+                    // Hostile
                     ENTITY_RAT_DEATH_LEGACY,
                     //
                     ENTITY_WEREHUMAN_DEATH_LEGACY,
@@ -713,6 +725,10 @@ public class MoCSoundEvents {
                     ENTITY_WRAITH_AMBIENT_LEGACY,
                     ENTITY_WRAITH_DEATH_LEGACY,
                     ENTITY_WRAITH_HURT_LEGACY,
+                    
+                    // Passive
+                    ENTITY_DUCK_AMBIENT_LEGACY,
+                    ENTITY_DUCK_HURT_LEGACY,
 
                     /* Generic */
                     ENTITY_GENERIC_ARMOR_ON,

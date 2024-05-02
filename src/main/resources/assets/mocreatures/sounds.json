@@ -337,11 +337,37 @@
       "mocreatures:entity/duck/idle3"
     ]
   },
+  "entity.duck.ambient_legacy": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/duck/legacy/idle1",
+      "mocreatures:entity/duck/legacy/idle2",
+      "mocreatures:entity/duck/legacy/idle3"
+    ]
+  },
   "entity.duck.hurt": {
     "category": "neutral",
     "sounds": [
       "mocreatures:entity/duck/hurt1",
       "mocreatures:entity/duck/hurt2"
+    ]
+  },
+  "entity.duck.hurt_legacy": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/duck/legacy/hurt1",
+      "mocreatures:entity/duck/legacy/hurt2"
+    ]
+  },
+  "entity.duck.step": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/duck/step1",
+      "mocreatures:entity/duck/step2",
+      "mocreatures:entity/duck/step3",
+      "mocreatures:entity/duck/step4",
+      "mocreatures:entity/duck/step5",
+      "mocreatures:entity/duck/step6"
     ]
   },
   "entity.generic.eat": {
@@ -875,16 +901,16 @@
       "mocreatures:entity/raccoon/hurt2"
     ]
   },
-  "entity.rat.death_legacy": {
-    "category": "neutral",
-    "sounds": [
-      "mocreatures:entity/rat/legacy/death"
-    ]
-  },
   "entity.rat.death": {
     "category": "neutral",
     "sounds": [
       "mocreatures:entity/rat/death"
+    ]
+  },
+  "entity.rat.death_legacy": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/rat/legacy/death"
     ]
   },
   "entity.rat.ambient": {
@@ -1140,19 +1166,6 @@
       "mocreatures:entity/wraith/idle3"
     ]
   },
-  "entity.wraith.death": {
-    "category": "hostile",
-    "sounds": [
-      "mocreatures:entity/wraith/death"
-    ]
-  },
-  "entity.wraith.hurt": {
-    "category": "hostile",
-    "sounds": [
-      "mocreatures:entity/wraith/hurt1",
-      "mocreatures:entity/wraith/hurt2"
-    ]
-  },
   "entity.wraith.ambient_legacy": {
     "category": "hostile",
     "sounds": [
@@ -1161,11 +1174,24 @@
       "mocreatures:entity/wraith/legacy/idle3"
     ]
   },
+  "entity.wraith.death": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/wraith/death"
+    ]
+  },
   "entity.wraith.death_legacy": {
     "category": "hostile",
     "sounds": [
       "mocreatures:entity/wraith/legacy/death1",
       "mocreatures:entity/wraith/legacy/death2"
+    ]
+  },
+  "entity.wraith.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/wraith/hurt1",
+      "mocreatures:entity/wraith/hurt2"
     ]
   },
   "entity.wraith.hurt_legacy": {

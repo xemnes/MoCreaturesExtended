@@ -72,16 +72,44 @@
       "mocreatures:random/attach"
     ]
   },
+  "entity.generic.explode": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:random/explode"
+    ]
+  },
+  "entity.generic.launch": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:random/launch1",
+      "mocreatures:random/launch2"
+    ]
+  },
+  "entity.big_golem.attach": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/big_golem/attach1",
+      "mocreatures:entity/big_golem/attach2",
+      "mocreatures:entity/big_golem/attach3"
+    ]
+  },
+  "entity.big_golem.clang": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/big_golem/clang1",
+      "mocreatures:entity/big_golem/clang2"
+    ]
+  },
   "entity.big_golem.death": {
     "category": "hostile",
     "sounds": [
       "mocreatures:entity/big_golem/death"
     ]
   },
-  "entity.generic.explode": {
-    "category": "neutral",
+  "entity.big_golem.death_legacy": {
+    "category": "hostile",
     "sounds": [
-      "mocreatures:random/explode"
+      "mocreatures:entity/big_golem/legacy/death"
     ]
   },
   "entity.big_golem.ambient": {
@@ -94,20 +122,30 @@
   "entity.big_golem.hurt": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:entity/big_golem/hurt"
+      "mocreatures:entity/big_golem/hurt1",
+      "mocreatures:entity/big_golem/hurt2",
+      "mocreatures:entity/big_golem/hurt3",
+      "mocreatures:entity/big_golem/hurt4"
     ]
   },
-  "entity.generic.launch": {
-    "category": "neutral",
+  "entity.big_golem.hurt_legacy": {
+    "category": "hostile",
     "sounds": [
-      "mocreatures:random/launch1",
-      "mocreatures:random/launch2"
+      "mocreatures:entity/big_golem/legacy/hurt"
     ]
   },
   "entity.big_golem.step": {
     "category": "hostile",
     "sounds": [
-      "mocreatures:entity/big_golem/step"
+      "mocreatures:entity/big_golem/step1",
+      "mocreatures:entity/big_golem/step2",
+      "mocreatures:entity/big_golem/step3"
+    ]
+  },
+  "entity.big_golem.step_legacy": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/big_golem/legacy/step"
     ]
   },
   "entity.bird.ambient_black": {

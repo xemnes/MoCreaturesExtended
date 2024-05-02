@@ -65,6 +65,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean legacyBigCatModels;
     public boolean legacyBunnyTextures;
     public boolean legacyDuckSounds;
+    public boolean legacyGolemSounds;
     public boolean legacyRatDeathSound;
     public boolean legacySharkModel;
     public boolean legacyWerehumanSounds;
@@ -285,6 +286,7 @@ public class MoCProxy implements IGuiHandler {
         this.legacyBigCatModels = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigCatModels", false, "Enables simple big cat models and textures like in legacy versions.").getBoolean(false);
         this.legacyBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.legacyDuckSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyDuckSounds", false, "Enables legacy duck sounds.").getBoolean(false);
+        this.legacyGolemSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyGolemSounds", false, "Enables legacy golem sounds.").getBoolean(false);
         this.legacyRatDeathSound = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyRatDeathSound", false, "Enables legacy rat death sound.").getBoolean(false);
         this.legacySharkModel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacySharkModel", false, "Enables the simple shark model and texture like in legacy versions.").getBoolean(false);
         this.legacyWerehumanSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyWerehumanSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);

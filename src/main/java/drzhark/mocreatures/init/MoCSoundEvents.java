@@ -43,6 +43,8 @@ public class MoCSoundEvents {
 
     // Hostile
     public static final SoundEvent ENTITY_BIG_GOLEM_AMBIENT;
+    public static final SoundEvent ENTITY_BIG_GOLEM_ATTACH;
+    public static final SoundEvent ENTITY_BIG_GOLEM_CLANG;
     public static final SoundEvent ENTITY_BIG_GOLEM_DEATH;
     public static final SoundEvent ENTITY_BIG_GOLEM_HURT;
     public static final SoundEvent ENTITY_BIG_GOLEM_STEP;
@@ -214,6 +216,10 @@ public class MoCSoundEvents {
 
     /* Entity (Legacy) */
     // Hostile
+    public static final SoundEvent ENTITY_BIG_GOLEM_DEATH_LEGACY;
+    public static final SoundEvent ENTITY_BIG_GOLEM_HURT_LEGACY;
+    public static final SoundEvent ENTITY_BIG_GOLEM_STEP_LEGACY;
+    //
     public static final SoundEvent ENTITY_RAT_DEATH_LEGACY;
     //
     public static final SoundEvent ENTITY_WEREHUMAN_DEATH_LEGACY;
@@ -287,6 +293,8 @@ public class MoCSoundEvents {
 
             // Hostile
             ENTITY_BIG_GOLEM_AMBIENT = createSoundEvent("entity.big_golem.ambient");
+            ENTITY_BIG_GOLEM_ATTACH = createSoundEvent("entity.big_golem.attach");
+            ENTITY_BIG_GOLEM_CLANG = createSoundEvent("entity.big_golem.clang");
             ENTITY_BIG_GOLEM_DEATH = createSoundEvent("entity.big_golem.death");
             ENTITY_BIG_GOLEM_HURT = createSoundEvent("entity.big_golem.hurt");
             ENTITY_BIG_GOLEM_STEP = createSoundEvent("entity.big_golem.step");
@@ -458,6 +466,10 @@ public class MoCSoundEvents {
 
             /* Entity (Legacy) */
             // Hostile
+            ENTITY_BIG_GOLEM_DEATH_LEGACY = createSoundEvent("entity.big_golem.death_legacy");
+            ENTITY_BIG_GOLEM_HURT_LEGACY = createSoundEvent("entity.big_golem.hurt_legacy");
+            ENTITY_BIG_GOLEM_STEP_LEGACY = createSoundEvent("entity.big_golem.step_legacy");
+            //
             ENTITY_RAT_DEATH_LEGACY = createSoundEvent("entity.rat.death_legacy");
             //
             ENTITY_WEREHUMAN_DEATH_LEGACY = createSoundEvent("entity.werehuman.death_legacy");
@@ -545,6 +557,8 @@ public class MoCSoundEvents {
 
                     // Hostile
                     ENTITY_BIG_GOLEM_AMBIENT,
+                    ENTITY_BIG_GOLEM_ATTACH,
+                    ENTITY_BIG_GOLEM_CLANG,
                     ENTITY_BIG_GOLEM_DEATH,
                     ENTITY_BIG_GOLEM_HURT,
                     ENTITY_BIG_GOLEM_STEP,
@@ -716,6 +730,10 @@ public class MoCSoundEvents {
 
                     /* Entity (Legacy) */
                     // Hostile
+                    ENTITY_BIG_GOLEM_DEATH_LEGACY,
+                    ENTITY_BIG_GOLEM_HURT_LEGACY,
+                    ENTITY_BIG_GOLEM_STEP_LEGACY,
+                    //
                     ENTITY_RAT_DEATH_LEGACY,
                     //
                     ENTITY_WEREHUMAN_DEATH_LEGACY,

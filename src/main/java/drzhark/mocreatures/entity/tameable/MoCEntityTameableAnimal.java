@@ -342,24 +342,6 @@ public class MoCEntityTameableAnimal extends MoCEntityAnimal implements IMoCTame
         return false;
     }
 
-    // Override to fix heart animation on clients
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void handleStatusUpdate(byte par1) {
-        if (par1 == 2) {
-            this.limbSwingAmount = 1.5F;
-            this.hurtResistantTime = this.maxHurtResistantTime;
-            this.hurtTime = (this.maxHurtTime = 10);
-            this.attackedAtYaw = 0.0F;
-            playSound(getHurtSound(DamageSource.GENERIC), getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            attackEntityFrom(DamageSource.GENERIC, 0.0F);
-        } else if (par1 == 3) {
-            playSound(getDeathSound(), getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            setHealth(0.0F);
-            onDeath(DamageSource.GENERIC);
-        }
-    }
-
     @Override
     public float getPetHealth() {
         return this.getHealth();

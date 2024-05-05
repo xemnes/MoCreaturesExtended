@@ -63,9 +63,10 @@ public class MoCProxy implements IGuiHandler {
     public boolean foggyWyvernLair;
     public boolean golemDestroyBlocks;
     public boolean legacyBigCatModels;
+    public boolean legacyBigGolemSounds;
     public boolean legacyBunnyTextures;
     public boolean legacyDuckSounds;
-    public boolean legacyGolemSounds;
+    public boolean legacyMiniGolemSounds;
     public boolean legacyRatDeathSound;
     public boolean legacySharkModel;
     public boolean legacyWerehumanSounds;
@@ -284,9 +285,10 @@ public class MoCProxy implements IGuiHandler {
         this.golemDestroyBlocks = this.mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "GolemDestroyBlocks", true, "Allows big golems to break blocks.").getBoolean(true);
         this.kittyVillageChance = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "KittyVillageChance", 15, "The percentage for kitties spawning in village chunks.").getInt();
         this.legacyBigCatModels = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigCatModels", false, "Enables simple big cat models and textures like in legacy versions.").getBoolean(false);
+        this.legacyBigGolemSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBigGolemSounds", false, "Enables legacy big golem sounds.").getBoolean(false);
         this.legacyBunnyTextures = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyBunnyTextures", false, "Enables simple bunny textures like in legacy versions.").getBoolean(false);
         this.legacyDuckSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyDuckSounds", false, "Enables legacy duck sounds.").getBoolean(false);
-        this.legacyGolemSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyGolemSounds", false, "Enables legacy golem sounds.").getBoolean(false);
+        this.legacyMiniGolemSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyMiniGolemSounds", false, "Enables legacy mini golem sounds.").getBoolean(false);
         this.legacyRatDeathSound = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyRatDeathSound", false, "Enables legacy rat death sound.").getBoolean(false);
         this.legacySharkModel = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacySharkModel", false, "Enables the simple shark model and texture like in legacy versions.").getBoolean(false);
         this.legacyWerehumanSounds = this.mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "LegacyWerehumanSounds", false, "Enables legacy human werewolf sounds.").getBoolean(false);

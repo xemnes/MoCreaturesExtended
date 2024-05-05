@@ -4,6 +4,7 @@
 package drzhark.mocreatures.entity.hostile;
 
 import drzhark.mocreatures.MoCTools;
+import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.item.MoCEntityThrowableRock;
 import drzhark.mocreatures.init.MoCLootTables;
@@ -15,6 +16,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -160,25 +162,29 @@ public class MoCEntityMiniGolem extends MoCEntityMob {
 
     /**
      * Plays step sound at given x, y, z for the entity
-     */
+     */  
     @Override
-    protected void playStepSound(BlockPos pos, Block block) {
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_STEP_LEGACY);
+    protected void playStepSound(BlockPos p_180429_1_, Block p_180429_2_) {
+        if (MoCreatures.proxy.legacyMiniGolemSounds) {
+            this.playSound(MoCSoundEvents.ENTITY_GENERIC_STOMP, 1.0F, 1.0F);
+        } else {
+            this.playSound(SoundEvents.ENTITY_IRONGOLEM_STEP, 1.0F, 1.0F);
+        }
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_BIG_GOLEM_DEATH_LEGACY;
+        return MoCreatures.proxy.legacyMiniGolemSounds ? MoCSoundEvents.ENTITY_BIG_GOLEM_HURT_LEGACY : MoCSoundEvents.ENTITY_MINI_GOLEM_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_BIG_GOLEM_HURT_LEGACY;
+        return MoCreatures.proxy.legacyMiniGolemSounds ? MoCSoundEvents.ENTITY_BIG_GOLEM_HURT_LEGACY : MoCSoundEvents.ENTITY_MINI_GOLEM_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return MoCSoundEvents.ENTITY_BIG_GOLEM_AMBIENT;
+        return MoCreatures.proxy.legacyMiniGolemSounds ? MoCSoundEvents.ENTITY_BIG_GOLEM_AMBIENT : null;
     }
 
     @Nullable

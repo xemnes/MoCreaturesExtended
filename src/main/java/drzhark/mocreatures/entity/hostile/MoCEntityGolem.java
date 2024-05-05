@@ -139,7 +139,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
                 if (this.dCounter < 80 && this.rand.nextInt(3) == 0) acquireRock(4);
 
                 if (this.dCounter == 120) {
-                    if (MoCreatures.proxy.legacyGolemSounds) {
+                    if (MoCreatures.proxy.legacyBigGolemSounds) {
                         MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_DEATH_LEGACY, 1.0F);
                     } else {
                         MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_DEATH, 1.0F);
@@ -355,7 +355,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
         if (x != -1 && this.golemCubes[x] != 30) {
             Block block = Block.getBlockById(generateBlock(this.golemCubes[x]));
             saveGolemCube((byte) x, (byte) 30);
-            if (MoCreatures.proxy.legacyGolemSounds) {
+            if (MoCreatures.proxy.legacyBigGolemSounds) {
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_HURT_LEGACY, 1.0F);
             } else {
                 MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_BIG_GOLEM_HURT, 1.0F);
@@ -784,8 +784,8 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     @Override
     protected void playStepSound(BlockPos p_180429_1_, Block p_180429_2_) {
-        if (MoCreatures.proxy.legacyGolemSounds) {
-            this.playSound(MoCSoundEvents.ENTITY_BIG_GOLEM_STEP_LEGACY, 1.0F, 1.0F);
+        if (MoCreatures.proxy.legacyBigGolemSounds) {
+            this.playSound(MoCSoundEvents.ENTITY_GENERIC_STOMP, 1.0F, 1.0F);
         } else {
             this.playSound(MoCSoundEvents.ENTITY_BIG_GOLEM_STEP, 1.0F, 1.0F);
         }
@@ -793,7 +793,7 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCreatures.proxy.legacyGolemSounds ? MoCSoundEvents.ENTITY_BIG_GOLEM_HURT_LEGACY : MoCSoundEvents.ENTITY_BIG_GOLEM_HURT;
+        return MoCreatures.proxy.legacyBigGolemSounds ? MoCSoundEvents.ENTITY_BIG_GOLEM_HURT_LEGACY : MoCSoundEvents.ENTITY_BIG_GOLEM_HURT;
     }
 
     @Nullable

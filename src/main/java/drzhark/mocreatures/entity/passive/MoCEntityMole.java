@@ -239,17 +239,17 @@ public class MoCEntityMole extends MoCEntityTameableAnimal {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_BUNNY_DEATH;
+        return MoCSoundEvents.ENTITY_MOLE_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_BUNNY_HURT;
+        return MoCSoundEvents.ENTITY_MOLE_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return null;
+        return MoCSoundEvents.ENTITY_MOLE_AMBIENT;
     }
 
     @Nullable

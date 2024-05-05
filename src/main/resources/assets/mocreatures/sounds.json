@@ -142,12 +142,6 @@
       "mocreatures:entity/big_golem/step3"
     ]
   },
-  "entity.big_golem.step_legacy": {
-    "category": "hostile",
-    "sounds": [
-      "mocreatures:entity/big_golem/legacy/step"
-    ]
-  },
   "entity.bird.ambient_black": {
     "category": "neutral",
     "sounds": [
@@ -365,6 +359,12 @@
     "category": "neutral",
     "sounds": [
       "mocreatures:random/drink"
+    ]
+  },
+  "entity.generic.stomp": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:random/stomp"
     ]
   },
   "entity.duck.ambient": {
@@ -811,11 +811,39 @@
       "mocreatures:entity/lion/hurt4"
     ]
   },
-  "entity.mouse.death": {
+  "entity.mini_golem.death": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/mini_golem/death"
+    ]
+  },
+  "entity.mini_golem.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/mini_golem/hurt"
+    ]
+  },
+  "entity.mole.death": {
     "category": "neutral",
     "sounds": [
-      "mocreatures:entity/mouse/death1",
-      "mocreatures:entity/mouse/death2"
+      "mocreatures:entity/mole/death"
+    ]
+  },
+  "entity.mole.hurt": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/mole/hurt1",
+      "mocreatures:entity/mole/hurt2"
+    ]
+  },
+  "entity.mole.ambient": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/mole/idle1",
+      "mocreatures:entity/mole/idle2",
+      "mocreatures:entity/mole/idle3",
+      "mocreatures:entity/mole/idle4",
+      "mocreatures:entity/mole/idle5"
     ]
   },
   "entity.mouse.ambient": {
@@ -824,6 +852,13 @@
       "mocreatures:entity/mouse/idle1",
       "mocreatures:entity/mouse/idle2",
       "mocreatures:entity/mouse/idle3"
+    ]
+  },
+  "entity.mouse.death": {
+    "category": "neutral",
+    "sounds": [
+      "mocreatures:entity/mouse/death1",
+      "mocreatures:entity/mouse/death2"
     ]
   },
   "entity.mouse.hurt": {

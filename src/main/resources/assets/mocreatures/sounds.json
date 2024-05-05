@@ -1042,6 +1042,47 @@
       "mocreatures:entity/scorpion/sting2"
     ]
   },
+  "entity.silver_skeleton.attack": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/silver_skeleton/attack1",
+      "mocreatures:entity/silver_skeleton/attack2"
+    ]
+  },
+  "entity.silver_skeleton.death": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/silver_skeleton/death1",
+      "mocreatures:entity/silver_skeleton/death2",
+      "mocreatures:entity/silver_skeleton/death3"
+    ]
+  },
+  "entity.silver_skeleton.ambient": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/silver_skeleton/idle1",
+      "mocreatures:entity/silver_skeleton/idle2",
+      "mocreatures:entity/silver_skeleton/idle3"
+    ]
+  },
+  "entity.silver_skeleton.hurt": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/silver_skeleton/hurt1",
+      "mocreatures:entity/silver_skeleton/hurt2",
+      "mocreatures:entity/silver_skeleton/hurt3",
+      "mocreatures:entity/silver_skeleton/hurt4"
+    ]
+  },
+  "entity.silver_skeleton.step": {
+    "category": "hostile",
+    "sounds": [
+      "mocreatures:entity/silver_skeleton/step1",
+      "mocreatures:entity/silver_skeleton/step2",
+      "mocreatures:entity/silver_skeleton/step3",
+      "mocreatures:entity/silver_skeleton/step4"
+    ]
+  },
   "music_disc.shuffling": {
     "category": "record",
     "sounds": [

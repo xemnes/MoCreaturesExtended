@@ -3,8 +3,10 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
+import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.init.MoCLootTables;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.Block;
@@ -19,7 +21,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -109,6 +110,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
 
     @Override
     public boolean attackEntityAsMob(Entity entityIn) {
+    	MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SILVER_SKELETON_ATTACK);
         startAttackAnimation();
         return super.attackEntityAsMob(entityIn);
     }
@@ -123,17 +125,17 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SKELETON_DEATH;
+        return MoCSoundEvents.ENTITY_SILVER_SKELETON_DEATH;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_SKELETON_HURT;
+        return MoCSoundEvents.ENTITY_SILVER_SKELETON_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SKELETON_AMBIENT;
+        return MoCSoundEvents.ENTITY_SILVER_SKELETON_AMBIENT;
     }
 
     @Override
@@ -141,10 +143,9 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    // TODO: Add unique step sound
     @Override
     protected void playStepSound(BlockPos pos, Block block) {
-        this.playSound(SoundEvents.ENTITY_SKELETON_STEP, 0.15F, 1.0F);
+        this.playSound(MoCSoundEvents.ENTITY_SILVER_SKELETON_STEP, 0.3F, 1.0F);
     }
 
     @Nullable

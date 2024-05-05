@@ -53,6 +53,9 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_HELL_RAT_DEATH;
     public static final SoundEvent ENTITY_HELL_RAT_HURT;
     //
+    public static final SoundEvent ENTITY_MINI_GOLEM_DEATH;
+    public static final SoundEvent ENTITY_MINI_GOLEM_HURT;
+    //
     public static final SoundEvent ENTITY_OGRE_AMBIENT;
     public static final SoundEvent ENTITY_OGRE_DEATH;
     public static final SoundEvent ENTITY_OGRE_HURT;
@@ -66,6 +69,12 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_SCORPION_DEATH;
     public static final SoundEvent ENTITY_SCORPION_HURT;
     public static final SoundEvent ENTITY_SCORPION_STING;
+    //
+    public static final SoundEvent ENTITY_SILVER_SKELETON_AMBIENT;
+    public static final SoundEvent ENTITY_SILVER_SKELETON_ATTACK;
+    public static final SoundEvent ENTITY_SILVER_SKELETON_DEATH;
+    public static final SoundEvent ENTITY_SILVER_SKELETON_HURT;
+    public static final SoundEvent ENTITY_SILVER_SKELETON_STEP;
     //
     public static final SoundEvent ENTITY_WEREWOLF_AMBIENT;
     public static final SoundEvent ENTITY_WEREWOLF_DEATH;
@@ -204,6 +213,10 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_HORSE_HURT_UNDEAD;
     public static final SoundEvent ENTITY_HORSE_HURT_ZEBRA;
     //
+    public static final SoundEvent ENTITY_MOLE_AMBIENT;
+    public static final SoundEvent ENTITY_MOLE_DEATH;
+    public static final SoundEvent ENTITY_MOLE_HURT;
+    //
     public static final SoundEvent ENTITY_MOUSE_AMBIENT;
     public static final SoundEvent ENTITY_MOUSE_DEATH;
     public static final SoundEvent ENTITY_MOUSE_HURT;
@@ -218,7 +231,6 @@ public class MoCSoundEvents {
     // Hostile
     public static final SoundEvent ENTITY_BIG_GOLEM_DEATH_LEGACY;
     public static final SoundEvent ENTITY_BIG_GOLEM_HURT_LEGACY;
-    public static final SoundEvent ENTITY_BIG_GOLEM_STEP_LEGACY;
     //
     public static final SoundEvent ENTITY_RAT_DEATH_LEGACY;
     //
@@ -253,6 +265,7 @@ public class MoCSoundEvents {
     public static final SoundEvent ENTITY_GENERIC_LAUNCH;
     public static final SoundEvent ENTITY_GENERIC_ROPING;
     public static final SoundEvent ENTITY_GENERIC_SMACK;
+    public static final SoundEvent ENTITY_GENERIC_STOMP;
     public static final SoundEvent ENTITY_GENERIC_WHIP;
     public static final SoundEvent ENTITY_GENERIC_WHOOSH;
 
@@ -299,6 +312,9 @@ public class MoCSoundEvents {
             ENTITY_BIG_GOLEM_HURT = createSoundEvent("entity.big_golem.hurt");
             ENTITY_BIG_GOLEM_STEP = createSoundEvent("entity.big_golem.step");
             //
+            ENTITY_MINI_GOLEM_DEATH = createSoundEvent("entity.mini_golem.death");
+            ENTITY_MINI_GOLEM_HURT = createSoundEvent("entity.mini_golem.hurt");
+            //
             ENTITY_HELL_RAT_AMBIENT = createSoundEvent("entity.hell_rat.ambient");
             ENTITY_HELL_RAT_DEATH = createSoundEvent("entity.hell_rat.death");
             ENTITY_HELL_RAT_HURT = createSoundEvent("entity.hell_rat.hurt");
@@ -316,6 +332,12 @@ public class MoCSoundEvents {
             ENTITY_SCORPION_DEATH = createSoundEvent("entity.scorpion.death");
             ENTITY_SCORPION_HURT = createSoundEvent("entity.scorpion.hurt");
             ENTITY_SCORPION_STING = createSoundEvent("entity.scorpion.sting");
+            //
+            ENTITY_SILVER_SKELETON_AMBIENT = createSoundEvent("entity.silver_skeleton.ambient");
+            ENTITY_SILVER_SKELETON_ATTACK = createSoundEvent("entity.silver_skeleton.attack");
+            ENTITY_SILVER_SKELETON_DEATH = createSoundEvent("entity.silver_skeleton.death");
+            ENTITY_SILVER_SKELETON_HURT = createSoundEvent("entity.silver_skeleton.hurt");
+            ENTITY_SILVER_SKELETON_STEP = createSoundEvent("entity.silver_skeleton.step");
             //
             ENTITY_WEREWOLF_AMBIENT = createSoundEvent("entity.werewolf.ambient");
             ENTITY_WEREWOLF_DEATH = createSoundEvent("entity.werewolf.death");
@@ -454,6 +476,10 @@ public class MoCSoundEvents {
             ENTITY_HORSE_HURT_UNDEAD = createSoundEvent("entity.horse.hurt_undead");
             ENTITY_HORSE_HURT_ZEBRA = createSoundEvent("entity.zebra.hurt");
             //
+            ENTITY_MOLE_AMBIENT = createSoundEvent("entity.mole.ambient");
+            ENTITY_MOLE_DEATH = createSoundEvent("entity.mole.death");
+            ENTITY_MOLE_HURT = createSoundEvent("entity.mole.hurt");
+            //
             ENTITY_MOUSE_AMBIENT = createSoundEvent("entity.mouse.ambient");
             ENTITY_MOUSE_DEATH = createSoundEvent("entity.mouse.death");
             ENTITY_MOUSE_HURT = createSoundEvent("entity.mouse.hurt");
@@ -468,7 +494,6 @@ public class MoCSoundEvents {
             // Hostile
             ENTITY_BIG_GOLEM_DEATH_LEGACY = createSoundEvent("entity.big_golem.death_legacy");
             ENTITY_BIG_GOLEM_HURT_LEGACY = createSoundEvent("entity.big_golem.hurt_legacy");
-            ENTITY_BIG_GOLEM_STEP_LEGACY = createSoundEvent("entity.big_golem.step_legacy");
             //
             ENTITY_RAT_DEATH_LEGACY = createSoundEvent("entity.rat.death_legacy");
             //
@@ -503,6 +528,7 @@ public class MoCSoundEvents {
             ENTITY_GENERIC_MAGIC_ENCHANTED = createSoundEvent("entity.generic.magic_enchanted");
             ENTITY_GENERIC_ROPING = createSoundEvent("entity.generic.roping");
             ENTITY_GENERIC_SMACK = createSoundEvent("entity.generic.smack");
+            ENTITY_GENERIC_STOMP = createSoundEvent("entity.generic.stomp");
             ENTITY_GENERIC_WHIP = createSoundEvent("entity.generic.whip");
             ENTITY_GENERIC_WHOOSH = createSoundEvent("entity.generic.whoosh");
 
@@ -563,6 +589,9 @@ public class MoCSoundEvents {
                     ENTITY_BIG_GOLEM_HURT,
                     ENTITY_BIG_GOLEM_STEP,
                     //
+                    ENTITY_MINI_GOLEM_DEATH,
+                    ENTITY_MINI_GOLEM_HURT,
+                    //
                     ENTITY_HELL_RAT_AMBIENT,
                     ENTITY_HELL_RAT_DEATH,
                     ENTITY_HELL_RAT_HURT,
@@ -580,6 +609,12 @@ public class MoCSoundEvents {
                     ENTITY_SCORPION_DEATH,
                     ENTITY_SCORPION_HURT,
                     ENTITY_SCORPION_STING,
+                    //
+                    ENTITY_SILVER_SKELETON_AMBIENT,
+                    ENTITY_SILVER_SKELETON_ATTACK,
+                    ENTITY_SILVER_SKELETON_DEATH,
+                    ENTITY_SILVER_SKELETON_HURT,
+                    ENTITY_SILVER_SKELETON_STEP,
                     //
                     ENTITY_WEREWOLF_AMBIENT,
                     ENTITY_WEREWOLF_DEATH,
@@ -718,6 +753,10 @@ public class MoCSoundEvents {
                     ENTITY_HORSE_HURT_UNDEAD,
                     ENTITY_HORSE_HURT_ZEBRA,
                     //
+                    ENTITY_MOLE_AMBIENT,
+                    ENTITY_MOLE_DEATH,
+                    ENTITY_MOLE_HURT,
+                    //
                     ENTITY_MOUSE_AMBIENT,
                     ENTITY_MOUSE_DEATH,
                     ENTITY_MOUSE_HURT,
@@ -732,7 +771,6 @@ public class MoCSoundEvents {
                     // Hostile
                     ENTITY_BIG_GOLEM_DEATH_LEGACY,
                     ENTITY_BIG_GOLEM_HURT_LEGACY,
-                    ENTITY_BIG_GOLEM_STEP_LEGACY,
                     //
                     ENTITY_RAT_DEATH_LEGACY,
                     //
@@ -767,6 +805,7 @@ public class MoCSoundEvents {
                     ENTITY_GENERIC_MAGIC_ENCHANTED,
                     ENTITY_GENERIC_ROPING,
                     ENTITY_GENERIC_SMACK,
+                    ENTITY_GENERIC_STOMP,
                     ENTITY_GENERIC_WHIP,
                     ENTITY_GENERIC_WHOOSH,
 

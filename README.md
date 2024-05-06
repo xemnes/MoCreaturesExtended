@@ -27,6 +27,6 @@
 
 **Translators:**
 
-- European Spanish ~ ESTEBAN1303YT
 - French ~ nocturni
 - German ~ magiczocker10, ACGaming
+- Spanish ~ ESTEBAN1303YT

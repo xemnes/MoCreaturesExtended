@@ -18,7 +18,7 @@
 **Special Thanks:**
 
 - Project Setup, Bugfixes, Turkey Breeding ~ Dockter
-- Filch Lizards from Primitive Mobs (with permission!) ~ Daveyx0
+- Filch Lizards from [Primitive Mobs](https://www.curseforge.com/minecraft/mc-mods/primitive-mobs) (with permission!) ~ Daveyx0
 - Some assets used from their [texture repository](https://github.com/malcolmriley/unused-textures) ~ MCThe_Paragon (Malcolm Riley)
 - Thaumcraft aspects from their [Mo' Creatures Aspects](https://www.curseforge.com/minecraft/customization/mo-creatures-aspects) script ~ Rozmir
 - New Shark Model ~ Foreck

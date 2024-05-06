@@ -19,8 +19,8 @@
 
 - Project Setup, Bugfixes, Turkey Breeding ~ Dockter
 - Filch Lizards from Primitive Mobs (with permission!) ~ Daveyx0
-- Some assets used from their texture repository ~ MCThe_Paragon (Malcolm Riley)
-- Most of the Thaumcraft aspects taken from their Mo' Creatures Aspects script ~ Rozmir
+- Some assets used from their [texture repository](https://github.com/malcolmriley/unused-textures) ~ MCThe_Paragon (Malcolm Riley)
+- Thaumcraft aspects from their [Mo' Creatures Aspects](https://www.curseforge.com/minecraft/customization/mo-creatures-aspects) script ~ Rozmir
 - New Shark Model ~ Foreck
 - Donkey & Mule Texture Tweaks ~ Deino
 - Extra Kitty Textures ~ Paulu2015

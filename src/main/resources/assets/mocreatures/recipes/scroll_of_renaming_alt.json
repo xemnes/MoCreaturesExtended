@@ -7,14 +7,6 @@
       "ore": "paper"
     },
     {
-      "type": "forge:ore_dict",
-      "ore": "dyeBlack"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "feather"
-    },
-    {
       "item": "minecraft:writable_book"
     }
   ],

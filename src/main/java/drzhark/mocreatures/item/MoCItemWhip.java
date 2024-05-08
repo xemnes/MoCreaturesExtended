@@ -47,7 +47,6 @@ public class MoCItemWhip extends MoCItemSword {
     public MoCItemWhip(String name, Item.ToolMaterial material, float attackSpeedIn) {
         super(name, 0, material);
         this.maxStackSize = 1;
-        setMaxDamage(181);
         this.AttackSpeed = attackSpeedIn;
     }
 

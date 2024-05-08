@@ -58,6 +58,7 @@ public class MoCItemWhip extends MoCItemSword {
         if (side != EnumFacing.DOWN && (block1 == Blocks.AIR) && (block != Blocks.AIR) && (block != Blocks.STANDING_SIGN)) {
             whipFX(worldIn, pos);
             worldIn.playSound(player, pos, MoCSoundEvents.ENTITY_GENERIC_WHIP, SoundCategory.PLAYERS, 0.5F, 0.4F / ((itemRand.nextFloat() * 0.4F) + 0.8F));
+            player.getCooldownTracker().setCooldown(this, 20);
             stack.damageItem(2, player);
             List<Entity> list = worldIn.getEntitiesWithinAABBExcludingEntity(player, player.getEntityBoundingBox().grow(12D));
             for (Entity entity : list) {

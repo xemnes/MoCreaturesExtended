@@ -35,6 +35,11 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
     }
+    
+    @Override
+    public void selectType() {
+    	setType(1);
+    }
 
     @Nullable
     protected ResourceLocation getLootTable() {
@@ -70,5 +75,11 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
             entityLivingBaseIn.setFire(this.burningTime);
         }
         super.applyEnchantments(entityLivingBaseIn, entityIn);
+    }
+    
+    // TODO: Overhaul this
+    @Override
+    public ResourceLocation getTexture() {
+    	return MoCreatures.proxy.getModelTexture(MoCreatures.proxy.alphaWraithEyes ? "wraith_flame_alpha.png" : "wraith_flame.png");
     }
 }

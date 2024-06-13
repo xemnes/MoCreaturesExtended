@@ -20,7 +20,7 @@ import org.lwjgl.input.Mouse;
 
 public class MoCKeyHandler {
 
-    static KeyBinding diveBinding = new KeyBinding("MoCreatures Dive", Keyboard.KEY_Z, "key.categories.movement");
+    static KeyBinding diveBinding = new KeyBinding("Flying Mount Dive (Mo' Creatures)", Keyboard.KEY_Z, "key.categories.movement");
 
     public MoCKeyHandler() {
         ClientRegistry.registerKeyBinding(diveBinding);

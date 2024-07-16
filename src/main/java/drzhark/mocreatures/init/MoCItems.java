@@ -92,6 +92,8 @@ public class MoCItems {
     public static final MoCItem ancientSilverScrap = new MoCItem("ancientsilverscrap");
     public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
+    public static final MoCItem fineSilverIngot = new MoCItem("fine_silver_ingot");
+    public static final MoCItem fineSilverNugget = new MoCItem("fine_silver_nugget");
     public static final MoCItem firestoneChunk = new MoCItem("firestonechunk");
     //public static final MoCItemCrabClaw brackishClaw = new MoCItemCrabClaw("brackish_claw", 768, 15, 0.0F, 1, 2.0F);
     // Doors - These need to be registered alongside the blocks
@@ -247,6 +249,8 @@ public class MoCItems {
                     ancientSilverScrap,
                     ancientSilverIngot,
                     ancientSilverNugget,
+                    fineSilverIngot,
+                    fineSilverNugget,
                     helmetSilver,
                     chestSilver,
                     legsSilver,

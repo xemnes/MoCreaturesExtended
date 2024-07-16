@@ -79,6 +79,8 @@ public class MoCBlocks {
     public static MoCBlockStairs deepWyvstoneStairs;
     @GameRegistry.ObjectHolder("deep_wyvstone_wall")
     public static MoCBlockWall deepWyvstoneWall;
+    @GameRegistry.ObjectHolder("fine_silver_block")
+    public static Block fineSilverBlock;
     @GameRegistry.ObjectHolder("firestone")
     public static Block firestone;
     @GameRegistry.ObjectHolder("gleaming_glass")
@@ -192,6 +194,7 @@ public class MoCBlocks {
                 setup(new MoCBlockLeaf(MapColor.DIAMOND, true, 100), "wyvwood_leaves").setHardness(0.2F).setLightOpacity(1),
                 setup(new MoCBlockLog(MapColor.CYAN_STAINED_HARDENED_CLAY, true), "wyvwood_log").setHardness(2.0F),
                 setup(new MoCBlockMetal(MapColor.IRON), "ancient_silver_block").setHardness(3.0F).setResistance(10.0F),
+                setup(new MoCBlockMetal(MapColor.CLAY), "fine_silver_block").setHardness(3.0F).setResistance(10.0F),
                 setup(new MoCBlockNest(), "wyvern_nest_block").setHardness(0.5F),
                 setup(new MoCBlockOre(MapColor.STONE), "ancient_ore").setHardness(3.0F).setResistance(5.0F),
                 setup(new MoCBlockOre(MapColor.STONE), "wyvern_diamond_ore").setHardness(4.5F).setResistance(5.0F),

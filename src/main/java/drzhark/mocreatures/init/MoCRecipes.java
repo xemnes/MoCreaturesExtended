@@ -70,6 +70,8 @@ public class MoCRecipes {
             GameRegistry.addSmelting(new ItemStack(MoCBlocks.wyvwoodLog), new ItemStack(Items.COAL, 1, 1), 0.15F);
 
             GameRegistry.addSmelting(MoCItems.ancientSilverScrap, new ItemStack(MoCItems.ancientSilverIngot), 1.0F);
+            GameRegistry.addSmelting(MoCItems.ancientSilverIngot, new ItemStack(MoCItems.fineSilverIngot), 1.0F);
+            GameRegistry.addSmelting(MoCItems.ancientSilverNugget, new ItemStack(MoCItems.fineSilverNugget), 0.1F);
             GameRegistry.addSmelting(MoCItems.crabraw, new ItemStack(MoCItems.crabcooked), 0.35F);
             GameRegistry.addSmelting(MoCItems.duckRaw, new ItemStack(MoCItems.duckCooked), 0.35F);
             GameRegistry.addSmelting(MoCItems.ratRaw, new ItemStack(MoCItems.ratCooked), 0.35F);
@@ -90,7 +92,7 @@ public class MoCRecipes {
 
             OreDictionary.registerOre("blockGlass", new ItemStack(MoCBlocks.gleamingGlass));
             OreDictionary.registerOre("blockGlassColorless", new ItemStack(MoCBlocks.gleamingGlass));
-            OreDictionary.registerOre("blockSilver", new ItemStack(MoCBlocks.ancientSilverBlock));
+            OreDictionary.registerOre("blockSilver", new ItemStack(MoCBlocks.fineSilverBlock));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledDeepWyvstone));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledWyvstone));
             OreDictionary.registerOre("dirt", new ItemStack(MoCBlocks.wyvdirt));
@@ -129,8 +131,8 @@ public class MoCRecipes {
             OreDictionary.registerOre("hide", MoCItems.animalHide);
             OreDictionary.registerOre("hide", MoCItems.hideCroc);
             OreDictionary.registerOre("hideSmall", Items.RABBIT_HIDE);
-            OreDictionary.registerOre("ingotSilver", MoCItems.ancientSilverIngot);
-            OreDictionary.registerOre("nuggetSilver", MoCItems.ancientSilverNugget);
+            OreDictionary.registerOre("ingotSilver", MoCItems.fineSilverIngot);
+            OreDictionary.registerOre("nuggetSilver", MoCItems.fineSilverNugget);
             OreDictionary.registerOre("record", MoCItems.recordshuffle);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingCave);
             OreDictionary.registerOre("stingerScorpion", MoCItems.scorpStingDirt);

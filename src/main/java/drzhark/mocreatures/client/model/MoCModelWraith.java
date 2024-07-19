@@ -21,17 +21,17 @@ public class MoCModelWraith extends ModelBiped {
         textureWidth = 64;
         textureHeight = 40;
         this.bipedHead = new ModelRenderer(this, 0, 0);
-        this.bipedHead.addBox(-4F, -8F, -4F, 8, 8, 8, 0.0F);
+        this.bipedHead.addBox(-4.0F, -4.0F, -4.0F, 8, 8, 8, 0.0F);
         this.bipedHead.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.bipedBody = new ModelRenderer(this, 16, 16);
-        this.bipedBody.addBox(-4.0F, 0.0F, -2.0F, 8, 20, 4, 0.0F);
+        this.bipedBody.addBox(-4.0F, 4.0F, -2.0F, 8, 20, 4, 0.0F);
         this.bipedBody.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.bipedRightArm = new ModelRenderer(this, 40, 16);
-        this.bipedRightArm.addBox(-3.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
+        this.bipedRightArm.addBox(-2.75F, -2.0F, 2.0F, 4, 12, 4, 0.0F);
         this.bipedRightArm.setRotationPoint(-5.0F, 2.0F, 0.0F);
         this.bipedLeftArm = new ModelRenderer(this, 40, 16);
         this.bipedLeftArm.mirror = true;
-        this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, 0.0F);
+        this.bipedLeftArm.addBox(-1.25F, -2.0F, 2.0F, 4, 12, 4, 0.0F);
         this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
     }
 

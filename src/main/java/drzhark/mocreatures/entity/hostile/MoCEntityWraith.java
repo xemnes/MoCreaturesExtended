@@ -36,7 +36,7 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     public MoCEntityWraith(World world) {
         super(world);
         this.collidedVertically = false;
-        setSize(0.6F, 2.0F);
+        setSize(0.6F, 1.75F);
         experienceValue = 5;
     }
 
@@ -173,6 +173,6 @@ public class MoCEntityWraith extends MoCEntityMob//MoCEntityFlyerMob
     }
 
     public float getEyeHeight() {
-        return this.height * 0.86F;
+        return this.height * 0.84F;
     }
 }

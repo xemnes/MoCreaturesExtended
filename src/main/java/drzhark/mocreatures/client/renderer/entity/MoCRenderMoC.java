@@ -6,6 +6,8 @@ package drzhark.mocreatures.client.renderer.entity;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.IMoCEntity;
+import drzhark.mocreatures.entity.MoCEntityAmbient;
+import drzhark.mocreatures.entity.ambient.MoCEntityCrab;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,6 +34,15 @@ public class MoCRenderMoC<T extends EntityLiving> extends RenderLiving<T> {
     @Override
     public void doRender(T entity, double d, double d1, double d2, float f, float f1) {
         doRenderMoC(entity, d, d1, d2, f, f1);
+    }
+
+    @Override
+    protected float getDeathMaxRotation(EntityLiving entity) {
+        if (entity instanceof MoCEntityAmbient || entity instanceof MoCEntityCrab) {
+            return 180.0F;
+        }
+
+        return 90.0F;
     }
 
     public void doRenderMoC(T entity, double d, double d1, double d2, float f, float f1) {

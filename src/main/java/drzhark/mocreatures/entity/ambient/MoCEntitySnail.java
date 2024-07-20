@@ -143,4 +143,9 @@ public class MoCEntitySnail extends MoCEntityAmbient {
     @Override
     public void jump() {
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

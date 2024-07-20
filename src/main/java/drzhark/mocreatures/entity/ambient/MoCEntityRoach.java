@@ -89,4 +89,9 @@ public class MoCEntityRoach extends MoCEntityInsect {
     protected ResourceLocation getLootTable() {
         return MoCLootTables.ROACH;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

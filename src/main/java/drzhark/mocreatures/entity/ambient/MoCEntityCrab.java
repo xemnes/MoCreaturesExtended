@@ -167,4 +167,9 @@ public class MoCEntityCrab extends MoCEntityTameableAnimal {
     protected SoundEvent getHurtSound(DamageSource source) {
         return null;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

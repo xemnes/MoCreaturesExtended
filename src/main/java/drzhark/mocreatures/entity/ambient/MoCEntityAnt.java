@@ -145,4 +145,9 @@ public class MoCEntityAnt extends MoCEntityAmbient {
     public float getEyeHeight() {
         return 0.1F;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

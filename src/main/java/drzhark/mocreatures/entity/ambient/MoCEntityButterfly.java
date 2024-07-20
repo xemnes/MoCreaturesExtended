@@ -124,4 +124,9 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     public float getEyeHeight() {
         return 0.1F;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

@@ -127,4 +127,9 @@ public class MoCEntityGrasshopper extends MoCEntityInsect {
     public float getEyeHeight() {
         return 0.15F;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

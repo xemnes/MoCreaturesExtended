@@ -107,4 +107,9 @@ public class MoCEntityBee extends MoCEntityInsect {
     public boolean isFlyer() {
         return true;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

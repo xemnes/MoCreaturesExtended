@@ -18,8 +18,7 @@ import javax.annotation.Nullable;
 public class MoCEntityCricket extends MoCEntityAmbient {
 
     private int jumpCounter;
-    private int soundCounter;
-
+    
     public MoCEntityCricket(World world) {
         super(world);
         setSize(0.4F, 0.3F);
@@ -113,5 +112,10 @@ public class MoCEntityCricket extends MoCEntityAmbient {
     @Override
     public float getEyeHeight() {
         return 0.15F;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

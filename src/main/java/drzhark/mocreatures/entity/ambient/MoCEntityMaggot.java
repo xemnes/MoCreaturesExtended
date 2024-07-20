@@ -66,4 +66,9 @@ public class MoCEntityMaggot extends MoCEntityAmbient {
     public float getEyeHeight() {
         return this.height * 0.45F;
     }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
+    }
 }

@@ -39,20 +39,18 @@ import java.util.Set;
 public class MoCItemMattock extends ItemPickaxe {
     private int specialWeaponType = 0;
 
-    public MoCItemMattock(String name, Item.ToolMaterial material, float damage, float speed) {
-        this(name, 0, material, damage, speed);
+    public MoCItemMattock(Item.ToolMaterial material, float damage, float speed) {
+        this(0, material, damage, speed);
     }
 
-    public MoCItemMattock(String name, int meta, Item.ToolMaterial material, float damage, float speed) {
+    public MoCItemMattock(int meta, Item.ToolMaterial material, float damage, float speed) {
         super(material);
         this.setCreativeTab(MoCreatures.tabMoC);
-        this.setRegistryName(MoCConstants.MOD_ID, name);
-        this.setTranslationKey(name);
         this.attackSpeed = -4.0F + speed;
     }
 
-    public MoCItemMattock(String name, Item.ToolMaterial material, float damage, float speed, int damageType) {
-        this(name, material, damage, speed);
+    public MoCItemMattock(Item.ToolMaterial material, float damage, float speed, int damageType) {
+        this(material, damage, speed);
         this.specialWeaponType = damageType;
     }
 

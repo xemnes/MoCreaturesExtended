@@ -41,16 +41,16 @@ public class MoCItemWeapon extends MoCItem {
     private final float attackDamage;
     private int specialWeaponType = 0;
 
-    public MoCItemWeapon(String name, Item.ToolMaterial par2ToolMaterial) {
-        super(name);
+    public MoCItemWeapon(Item.ToolMaterial par2ToolMaterial) {
+        super();
         this.material = par2ToolMaterial;
         this.maxStackSize = 1;
         this.setMaxDamage(par2ToolMaterial.getMaxUses());
         this.attackDamage = 3F + par2ToolMaterial.getAttackDamage();
     }
 
-    public MoCItemWeapon(String name, ToolMaterial par2ToolMaterial, int damageType) {
-        this(name, par2ToolMaterial);
+    public MoCItemWeapon(ToolMaterial par2ToolMaterial, int damageType) {
+        this(par2ToolMaterial);
         this.specialWeaponType = damageType;
     }
 

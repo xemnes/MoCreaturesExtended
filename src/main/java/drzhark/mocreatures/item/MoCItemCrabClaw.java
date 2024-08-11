@@ -34,7 +34,7 @@ public class MoCItemCrabClaw extends MoCItem {
     public final float toughness;
     
     public MoCItemCrabClaw(String name, int durability, int enchantability, float toughness, int armor, float reach) {
-        super();
+        super(name);
         this.setMaxDamage(durability);
         this.maxStackSize = 1;
         this.armor = armor;

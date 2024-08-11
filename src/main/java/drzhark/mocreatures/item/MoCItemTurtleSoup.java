@@ -12,13 +12,13 @@ import javax.annotation.Nullable;
 
 public class MoCItemTurtleSoup extends MoCItemFood {
 
-    public MoCItemTurtleSoup(int j) {
-        super(j);
+    public MoCItemTurtleSoup(String name, int j) {
+        super(name, j);
         this.maxStackSize = 1;
     }
 
-    public MoCItemTurtleSoup(int j, float f, boolean flag) {
-        super(j, f, flag);
+    public MoCItemTurtleSoup(String name, int j, float f, boolean flag) {
+        super(name, j, f, flag);
         this.maxStackSize = 1;
     }
 

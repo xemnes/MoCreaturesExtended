@@ -25,9 +25,11 @@ import java.util.List;
 
 public class MoCItemArmor extends ItemArmor {
 
-    public MoCItemArmor(ItemArmor.ArmorMaterial materialIn, int renderIndex, EntityEquipmentSlot equipmentSlotIn) {
+    public MoCItemArmor(String name, ItemArmor.ArmorMaterial materialIn, int renderIndex, EntityEquipmentSlot equipmentSlotIn) {
         super(materialIn, renderIndex, equipmentSlotIn);
         this.setCreativeTab(MoCreatures.tabMoC);
+        this.setRegistryName(MoCConstants.MOD_ID, name);
+        this.setTranslationKey(name);
     }
 
     @Override

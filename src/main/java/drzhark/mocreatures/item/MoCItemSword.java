@@ -26,17 +26,19 @@ public class MoCItemSword extends ItemSword {
 
     private int specialWeaponType = 0;
 
-    public MoCItemSword(Item.ToolMaterial material) {
-        this(0, material);
+    public MoCItemSword(String name, Item.ToolMaterial material) {
+        this(name, 0, material);
     }
 
-    public MoCItemSword(int meta, Item.ToolMaterial material) {
+    public MoCItemSword(String name, int meta, Item.ToolMaterial material) {
         super(material);
         this.setCreativeTab(MoCreatures.tabMoC);
+        this.setRegistryName(MoCConstants.MOD_ID, name);
+        this.setTranslationKey(name);
     }
 
-    public MoCItemSword(Item.ToolMaterial material, int damageType) {
-        this(material);
+    public MoCItemSword(String name, Item.ToolMaterial material, int damageType) {
+        this(name, material);
         this.specialWeaponType = damageType;
     }
 

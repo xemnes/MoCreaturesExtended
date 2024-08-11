@@ -24,8 +24,8 @@ import java.util.List;
 
 public class MoCItemPetAmuletNew extends MoCItem {
 
-    public MoCItemPetAmuletNew() {
-        super();
+    public MoCItemPetAmuletNew(String name) {
+        super(name);
         this.maxStackSize = 1;
     }
 

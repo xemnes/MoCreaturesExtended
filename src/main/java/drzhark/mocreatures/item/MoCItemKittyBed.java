@@ -17,12 +17,12 @@ public class MoCItemKittyBed extends MoCItem {
 
     private int sheetType;
 
-    public MoCItemKittyBed() {
-        super();
+    public MoCItemKittyBed(String name) {
+        super(name);
     }
 
-    public MoCItemKittyBed(int type) {
-        this();
+    public MoCItemKittyBed(String name, int type) {
+        this(name);
         this.sheetType = type;
     }
 

@@ -31,8 +31,8 @@ public class ItemStaffPortal extends MoCItem {
     private int portalPosZ;
     private int portalDimension;
 
-    public ItemStaffPortal() {
-        super();
+    public ItemStaffPortal(String name) {
+        super(name);
         this.maxStackSize = 1;
         setMaxDamage(3);
     }

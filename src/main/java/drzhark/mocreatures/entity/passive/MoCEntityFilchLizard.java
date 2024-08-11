@@ -8,6 +8,7 @@ import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.init.MoCLootTables;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -23,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -38,6 +40,7 @@ import java.util.List;
 import java.util.Set;
 
 // Courtesy of Daveyx0, permission given
+// TODO: More code cleanup
 public class MoCEntityFilchLizard extends MoCEntityAnimal {
 
     protected ItemStack[] stealItems;
@@ -195,6 +198,16 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
         }
         return arrayOfItems;
     }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FILCH_LIZARD_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_FILCH_LIZARD_HISS;
+    }   
 
     // Sneaky...
     @Override
@@ -206,7 +219,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
         return MoCLootTables.FILCH_LIZARD;
     }
 
-    static class AIAvoidWhenNasty extends EntityAIAvoidEntity {
+    static class AIAvoidWhenNasty extends EntityAIAvoidEntity<MoCEntityFilchLizard> {
         public AIAvoidWhenNasty(EntityCreature theEntityIn, Class classToAvoidIn, float avoidDistanceIn, double farSpeedIn, double nearSpeedIn) {
             super(theEntityIn, classToAvoidIn, avoidDistanceIn, farSpeedIn, nearSpeedIn);
         }

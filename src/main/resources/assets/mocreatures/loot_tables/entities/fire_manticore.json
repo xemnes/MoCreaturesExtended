@@ -88,8 +88,8 @@
         },
         {
           "condition": "random_chance_with_looting",
-          "chance": 0.04,
-          "looting_multiplier": 0.01
+          "chance": 0.15,
+          "looting_multiplier": 0.02
         }
       ],
       "name": "heart",
@@ -109,8 +109,8 @@
         },
         {
           "condition": "random_chance_with_looting",
-          "chance": 0.075,
-          "looting_multiplier": 0.01
+          "chance": 0.15,
+          "looting_multiplier": 0.02
         }
       ],
       "name": "sting",
@@ -130,8 +130,8 @@
         },
         {
           "condition": "random_chance_with_looting",
-          "chance": 0.04,
-          "looting_multiplier": 0.01
+          "chance": 0.15,
+          "looting_multiplier": 0.02
         }
       ],
       "name": "egg",

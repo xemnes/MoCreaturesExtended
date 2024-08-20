@@ -1065,7 +1065,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
             return true;
         } else {
             TextComponentTranslation msg = new TextComponentTranslation("msg.mocreatures.petnotreadytorideplayer");
-            msg.setStyle(msg.getStyle().setColor(TextFormatting.GOLD));
             player.sendStatusMessage(msg, true);
         }
         return false;

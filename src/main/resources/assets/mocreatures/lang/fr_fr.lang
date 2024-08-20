@@ -371,7 +371,7 @@ msg.mocreatures.compat.cms1=Mo' Creatures Extended se sert des fonctions de spaw
 msg.mocreatures.compat.cms2=Veuillez s'il vous plaît retirer Custom Mob Spawner afin d'éviter un impact négatif sur votre jeu.
 msg.mocreatures.egg=L'œuf va bientôt éclore! CONTINUEZ DE LE SURVEILLER! La créature éclose localisé en %s, %s, %s sera perdue si vous partez trop loin!
 msg.mocreatures.foreignpet=Cet animal de compagnie ne vous appartient pas.
-msg.mocreatures.petnotreadytorideplayer=J'y suis presque! Votre animal a besoin de %s tiques supplémentaires avant d’être prêt à vous rejoindre.
+msg.mocreatures.petnotreadytorideplayer=J'y suis presque! Votre animal a besoin de plus de temps avant d’être prêt à vous rejoindre.
 
 # INFO
 info.mocreatures.scrolloffreedom=Faire clic-droit sur un animal de compagnie apprivoisé le libérera et le rendra de nouveau sauvage

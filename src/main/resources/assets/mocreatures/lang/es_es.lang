@@ -408,7 +408,7 @@ msg.mocreatures.compat.cms1=Mo' Creatures Extended esta hecho en conjunto con la
 msg.mocreatures.compat.cms2=Por favor considera remover el Custom Mob Spawner para evitar un impacto negativo en la jugabilidad.
 msg.mocreatures.egg=Huevo eclosionando pronto! MANTENLO VIGILADO! La criatura por nacer esta ubicada en %s, %s, %s se perdera si abandonas el area.
 msg.mocreatures.foreignpet=Esta mascota no te pertenece.
-msg.mocreatures.petnotreadytorideplayer=¡Casi llegamos! Tu mascota necesita %s garrapatas más antes de estar lista para unirse a ti.
+msg.mocreatures.petnotreadytorideplayer=¡Casi llegamos! Su mascota necesita más tiempo antes de estar lista para unirse a usted.
 
 # INFO
 info.mocreatures.scrolloffreedom=Haga clic derecho en una mascota con dueño para liberarla de la propiedad y hacer que vuelva a ser salvaje

@@ -411,7 +411,7 @@ msg.mocreatures.compat.cms1=Mo' Creatures Extended is built around the vanilla s
 msg.mocreatures.compat.cms2=Please consider removing Custom Mob Spawner to avoid negative impact on gameplay.
 msg.mocreatures.egg=Egg hatching soon! KEEP WATCH! The hatched creature located at %s, %s, %s will be lost if you leave the area.
 msg.mocreatures.foreignpet=This pet does not belong to you.
-msg.mocreatures.petnotreadytorideplayer=Almost there! Your pet needs %s more ticks before it’s ready to join you.
+msg.mocreatures.petnotreadytorideplayer=Almost there! Your pet needs more time before it’s ready to join you.
 
 # INFO
 info.mocreatures.scrolloffreedom=Right-click on an owned pet to set it free from ownership and have it become wild again

@@ -286,7 +286,7 @@ msg.mocreatures.compat.cms1=Mo' Creatures Extended разработан вокр
 msg.mocreatures.compat.cms2=Рассмотрите возможность удаления Custom Mob Spawner, чтобы избежать негативного воздействия на игровой процесс.
 msg.mocreatures.egg=Скоро вылупление яйца! СЛЕДИТЕ! Если вы покинете область, существо, вылупившееся в координатах %s, %s, %s, будет потеряно.
 msg.mocreatures.foreignpet=Этот питомец вам не принадлежит.
-msg.mocreatures.petnotreadytorideplayer=Почти готово! Вашему питомцу нужно ещё %s тик(-ов), чтобы быть готовым присоединиться к вам.
+msg.mocreatures.petnotreadytorideplayer=Почти там! Вашему питомцу нужно больше времени, прежде чем он будет готов присоединиться к вам.
 
 # INFO
 info.mocreatures.scrolloffreedom=Щелкните правой кнопкой мыши на своем питомце, чтобы освободить его от владения и сделать диким снова.

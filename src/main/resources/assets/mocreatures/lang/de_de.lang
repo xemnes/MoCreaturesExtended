@@ -355,6 +355,7 @@ msg.mocreatures.compat.cms1=Mo' Creatures Extended basiert auf dem Vanilla-Spawn
 msg.mocreatures.compat.cms2=Bitte bedenke „Custom Mob Spawner“ zu entfernen, um negative Auswirkungen auf das Gameplay zu vermeiden.
 msg.mocreatures.egg=Ei schlüpft bald! GIB ACHT! Die geschlüpfte Kreatur, die sich bei %s, %s, %s befindet, wird verloren gehen, wenn du das Gebiet verlässt.
 msg.mocreatures.foreignpet=Dieses Haustier gehört dir nicht.
+msg.mocreatures.petnotreadytorideplayer=Bijna daar! Uw huisdier heeft meer tijd nodig voordat hij klaar is om met u mee te gaan.
 
 # INFO
 info.mocreatures.scrolloffreedom=Klicke mit der rechten Maustaste auf ein eigenes Haustier, um es zu befreien und wieder wild werden zu lassen

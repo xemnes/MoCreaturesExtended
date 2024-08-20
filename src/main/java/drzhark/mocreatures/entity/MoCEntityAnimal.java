@@ -35,6 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -1061,6 +1062,8 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
             NBTTagCompound tag = player.getEntityData();
             tag.setUniqueId("MOCEntity_Riding_Player", this.getUniqueID());
             return true;
+        } else {
+            player.sendStatusMessage(new TextComponentTranslation("msg.mocreatures.petnotreadytorideplayer"), true);
         }
         return false;
     }

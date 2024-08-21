@@ -1228,10 +1228,7 @@ public class MoCTools {
         if (force || (passenger instanceof EntityLivingBase && entity.isSneaking())) {
             System.out.println("Forcing dismount from " + entity + " for passenger " + passenger);
             passenger.dismountRidingEntity();
-            double dist = (-1.5D);
-            double newPosX = entity.posX + (dist * Math.sin(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
-            double newPosZ = entity.posZ - (dist * Math.cos(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
-            passenger.setPositionAndUpdate(newPosX, entity.posY + 2D, newPosZ);
+            passenger.setPositionAndUpdate(entity.posX, entity.posY + 1D, entity.posZ);
             MoCTools.playCustomSound(passenger, SoundEvents.ENTITY_CHICKEN_EGG);
             if (entity instanceof EntityPlayer) {
                 NBTTagCompound tag = entity.getEntityData();

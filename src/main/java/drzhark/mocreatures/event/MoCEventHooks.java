@@ -70,7 +70,7 @@ public class MoCEventHooks {
             if (event.getRand().nextInt(100) < MoCreatures.proxy.kittyVillageChance) {
                 BlockPos pos = new BlockPos(event.getChunkX() * 16, 100, event.getChunkZ() * 16);
                 MoCEntityKitty kitty = new MoCEntityKitty(world);
-                BlockPos spawnPos = MoCTools.getSafeMobPos(kitty, pos.add(8, 0, 8), true);
+                BlockPos spawnPos = getSafeSpawnPos(kitty, pos.add(8, 0, 8));
                 if (spawnPos == null || !WorldEntitySpawner.canCreatureTypeSpawnAtLocation(EntityLiving.SpawnPlacementType.ON_GROUND, world, spawnPos))
                     return;
                 kitty.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(kitty)), null);
@@ -134,5 +134,25 @@ public class MoCEventHooks {
                 if (mocEntity.canRidePlayer()) MoCTools.dismountPassengerFromEntity(entityRidingPlayer, player, true);
             }
         }
+    }
+
+    private BlockPos getSafeSpawnPos(EntityLivingBase entity, BlockPos near) {
+        int radius = 6;
+        int maxTries = 24;
+        BlockPos testing;
+        for (int i = 0; i < maxTries; i++) {
+            int x = near.getX() + entity.getEntityWorld().rand.nextInt(radius * 2) - radius;
+            int z = near.getZ() + entity.getEntityWorld().rand.nextInt(radius * 2) - radius;
+            int y = entity.getEntityWorld().getHeight(x, z) + 16;
+            testing = new BlockPos(x, y, z);
+            while (entity.getEntityWorld().isAirBlock(testing) && testing.getY() > 0) {
+                testing = testing.down(1);
+            }
+            IBlockState iblockstate = entity.getEntityWorld().getBlockState(testing);
+            if (iblockstate.canEntitySpawn(entity)) {
+                return testing.up(1);
+            }
+        }
+        return null;
     }
 }

@@ -141,29 +141,6 @@ public class MoCTools {
     }
 
     /**
-     * Finds a safe location to put entities when they are dismounted from a player's head, or being spawned into the world through other means.
-     */
-    public static BlockPos getSafeMobPos(EntityLivingBase entity, BlockPos near, Boolean addHeight) {
-        int radius = 6;
-        int maxTries = 24;
-        BlockPos testing;
-        for (int i = 0; i < maxTries; i++) {
-            int x = near.getX() + entity.getEntityWorld().rand.nextInt(radius * 2) - radius;
-            int z = near.getZ() + entity.getEntityWorld().rand.nextInt(radius * 2) - radius;
-            int y = entity.getEntityWorld().getHeight(x, z) + (addHeight ? 16 : 0);
-            testing = new BlockPos(x, y, z);
-            while (entity.getEntityWorld().isAirBlock(testing) && testing.getY() > 0) {
-                testing = testing.down(1);
-            }
-            IBlockState iblockstate = entity.getEntityWorld().getBlockState(testing);
-            if (iblockstate.canEntitySpawn(entity)) {
-                return testing.up(1);
-            }
-        }
-        return null;
-    }
-
-    /**
      * spawns tiny slimes
      */
     public static void spawnSlimes(World world, Entity entity) {
@@ -1251,15 +1228,7 @@ public class MoCTools {
         if (force || (passenger instanceof EntityLivingBase && entity.isSneaking())) {
             System.out.println("Forcing dismount from " + entity + " for passenger " + passenger);
             passenger.dismountRidingEntity();
-            double dist = (-1.5D);
-            double newPosX = entity.posX + (dist * Math.sin(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
-            double newPosZ = entity.posZ - (dist * Math.cos(((EntityLivingBase) entity).renderYawOffset / 57.29578F));
-            BlockPos safeSpawnPos = getSafeMobPos((EntityLivingBase) passenger, new BlockPos(newPosX, entity.posY, newPosZ), false);
-            if (safeSpawnPos != null) {
-                passenger.setPositionAndUpdate(safeSpawnPos.getX(), safeSpawnPos.getY() + 1D, safeSpawnPos.getZ());
-            } else {
-                passenger.setPositionAndUpdate(entity.posX, entity.posY + 1D, entity.posZ);
-            }
+            passenger.setPositionAndUpdate(entity.posX, entity.posY + 1D, entity.posZ);
             MoCTools.playCustomSound(passenger, SoundEvents.ENTITY_CHICKEN_EGG);
             if (entity instanceof EntityPlayer) {
                 NBTTagCompound tag = entity.getEntityData();

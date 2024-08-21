@@ -11,16 +11,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.UUID;
+import java.util.*;
 
 public class MoCPetData {
 
     @SuppressWarnings("unused")
     private final UUID ownerUniqueId;
     private final BitSet idMap = new BitSet(Long.SIZE << 4);
-    private final ArrayList<Integer> usedPetIds = new ArrayList<>();
+    private final Set<Integer> usedPetIds = new HashSet<>();
     private NBTTagCompound ownerData = new NBTTagCompound();
     private NBTTagList tamedList = new NBTTagList();
 

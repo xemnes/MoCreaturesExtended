@@ -237,7 +237,8 @@ public abstract class MoCEntityMob extends EntityMob implements IMoCEntity {
         if (!this.world.isRemote && getIsTamed()) {
             MoCMessageHandler.INSTANCE.sendToAllAround(new MoCMessageHealth(this.getEntityId(), this.getHealth()), new TargetPoint(this.world.provider.getDimensionType().getId(), this.posX, this.posY, this.posZ, 64));
         }
-        return super.attackEntityFrom(damagesource, i);
+        Entity entity = damagesource.getTrueSource();
+        return (this.isBeingRidden() && entity != null && this.isRidingOrBeingRiddenBy(entity)) ? false : super.attackEntityFrom(damagesource, i);
     }
 
     /**

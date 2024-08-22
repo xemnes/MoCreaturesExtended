@@ -8,6 +8,7 @@ import drzhark.mocreatures.*;
 import drzhark.mocreatures.config.MoCConfigCategory;
 import drzhark.mocreatures.config.MoCConfiguration;
 import drzhark.mocreatures.config.MoCProperty;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
 import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetData;
@@ -55,6 +56,7 @@ public class CommandMoCreatures extends CommandBase {
         commands.add("/moc fireogrestrength <float>");
         commands.add("/moc frequency <entity> <int>");
         commands.add("/moc golemdestroyblocks <boolean>");
+        commands.add("/moc growup <petid>");
         commands.add("/moc tamed");
         commands.add("/moc tamed <playername>");
         commands.add("/moc maxchunk <entity> <int>");
@@ -92,6 +94,7 @@ public class CommandMoCreatures extends CommandBase {
         tabCompletionStrings.add("forcedespawns");
         tabCompletionStrings.add("frequency");
         tabCompletionStrings.add("golemdestroyblocks");
+        tabCompletionStrings.add("growup");
         tabCompletionStrings.add("tamed");
         tabCompletionStrings.add("maxchunk");
         tabCompletionStrings.add("maxspawn");
@@ -348,6 +351,56 @@ public class CommandMoCreatures extends CommandBase {
             sender.sendMessage(new TextComponentTranslation(TextFormatting.RED + "Could not find player "
                     + TextFormatting.GREEN + par2 + TextFormatting.RED
                     + ". Please verify the player is online and/or name was entered correctly."));
+        } else if (command.equalsIgnoreCase("growup") && args.length == 2) {
+            int petId;
+            try {
+                petId = Integer.parseInt(par2);
+            } catch (NumberFormatException e) {
+                petId = -1;
+            }
+            String playername = sender.getName();
+            EntityPlayerMP player =
+                    FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(playername);
+            if (player == null) {
+                return;
+            }
+            // search for tamed entity in mocreatures.dat
+            MoCPetData ownerPetData = MoCreatures.instance.mapData.getPetData(player.getUniqueID());
+            if (ownerPetData != null) {
+                boolean found = false;
+                for (int i = 0; i < ownerPetData.getTamedList().tagCount(); i++) {
+                    NBTTagCompound nbt = ownerPetData.getTamedList().getCompoundTagAt(i);
+                    if (nbt.hasKey("PetId") && nbt.getInteger("PetId") == petId) {
+                        String petName = nbt.getString("Name");
+                        WorldServer world = DimensionManager.getWorld(nbt.getInteger("Dimension"));
+                        for (int j = 0; j < world.loadedEntityList.size(); j++) {
+                            Entity entity = world.loadedEntityList.get(j);
+                            if (MoCEntityAnimal.class.isAssignableFrom(entity.getClass())) {
+                                MoCEntityAnimal mocreature = (MoCEntityAnimal) entity;
+                                if (mocreature.getOwnerPetId() == petId) {
+                                    found = true;
+                                    if (mocreature.getIsAdult()) {
+                                        sender.sendMessage(new TextComponentTranslation("Pet " + TextFormatting.GREEN
+                                                + petId + TextFormatting.WHITE + " named " +  TextFormatting.GREEN + petName + TextFormatting.WHITE + " is already an adult."));
+                                    } else {
+                                        // force the pet to grow up, bypassing the normal growth process
+                                        mocreature.setAge(mocreature.getMaxAge());
+                                        sender.sendMessage(new TextComponentTranslation("Pet " + TextFormatting.GREEN
+                                                + petId + TextFormatting.WHITE + " named " +  TextFormatting.GREEN + petName + TextFormatting.WHITE + " has been grown up."));
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                }
+                if (!found) {
+                    sender.sendMessage(new TextComponentTranslation("Tamed entity with ID " + TextFormatting.GREEN + petId + TextFormatting.WHITE + "could not be located."));
+                }
+            } else {
+                sender.sendMessage(new TextComponentTranslation("Tamed entity with ID " + TextFormatting.GREEN + petId + TextFormatting.WHITE + "could not be located."));
+            }
         }
         // START ENTITY FREQUENCY/BIOME SECTION
         else if (args.length >= 2

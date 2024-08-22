@@ -43,7 +43,7 @@ minecraft {
     mcpMappingVersion = '39'
 
     // Set username here, the UUID will be looked up automatically
-    username = 'Developer'
+    username = System.properties['moc_extended_dev.name'] ?: 'Developer'
 
     // Add any additional tweaker classes here
     // extraTweakClasses.add('org.spongepowered.asm.launch.MixinTweaker')
@@ -194,14 +194,20 @@ idea {
             runConfigurations {
                 "1. Run Client"(Gradle) {
                     taskNames = ["runClient"]
+                    jvmArgs = "-Dmoc_extended_dev.name=Developer"
                 }
-                "2. Run Server"(Gradle) {
+                "2. Run Second Client"(Gradle) {
+                    taskNames = ["runClient"]
+                    jvmArgs = "-Dmoc_extended_dev.name=Developer2"
+                }
+                "3. Run Server"(Gradle) {
                     taskNames = ["runServer"]
                 }
-                "3. Run Obfuscated Client"(Gradle) {
+                "4. Run Obfuscated Client"(Gradle) {
                     taskNames = ["runObfClient"]
+                    jvmArgs = "-Dmoc_extended_dev.name=DeveloperObf"
                 }
-                "4. Run Obfuscated Server"(Gradle) {
+                "5. Run Obfuscated Server"(Gradle) {
                     taskNames = ["runObfServer"]
                 }
             }

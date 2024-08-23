@@ -201,7 +201,7 @@ public class MoCEntityFilchLizard extends MoCEntityAnimal {
     
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCreatures.proxy.legacyFilchLizardSounds ? SoundEvents.ENTITY_GENERIC_HURT : MoCSoundEvents.ENTITY_FILCH_LIZARD_DEATH;
+        return MoCreatures.proxy.legacyFilchLizardSounds ? SoundEvents.ENTITY_GENERIC_DEATH : MoCSoundEvents.ENTITY_FILCH_LIZARD_DEATH;
     }
 
     @Override

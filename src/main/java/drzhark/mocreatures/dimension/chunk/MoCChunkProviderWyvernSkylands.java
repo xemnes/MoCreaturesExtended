@@ -30,24 +30,14 @@ public class MoCChunkProviderWyvernSkylands implements IChunkGenerator {
     public Chunk generateChunk(int chunkX, int chunkZ) {
         ChunkPrimer chunkPrimer = new ChunkPrimer();
         MoCOffsetChunkPrimer offsetPrimer = new MoCOffsetChunkPrimer(chunkPrimer, 64);
-
         terrainGenerator.generate(chunkX, chunkZ, offsetPrimer);
-
         Chunk chunk = new Chunk(world, chunkPrimer, chunkX, chunkZ);
-
         chunk.generateSkylightMap();
-
         return chunk;
     }
 
     @Override
     public void populate(int chunkX, int chunkZ) {
-        int x = chunkX * 16;
-        int z = chunkZ * 16;
-
-        BlockPos blockPos = new BlockPos(x, 0, z);
-        Biome biome = world.getBiome(blockPos.add(16, 0, 16));
-
         terrainGenerator.populate(chunkX, chunkZ);
     }
 

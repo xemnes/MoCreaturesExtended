@@ -56,12 +56,12 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
     private double[] getNoiseArray(int xOffset, int yOffset, int zOffset, int xSize, int ySize, int zSize) {
         double[] noiseArray = new double[xSize * ySize * zSize];
 
-        double hScale = 684.41200000000003D * 2D;
-        double vScale = 684.41200000000003D;
+        double hScale = 684.412D;
+        double vScale = 684.412D;
 
         double[] terrainNoiseArray1 = terrainNoise1.generateNoiseOctaves(null, xOffset, yOffset, zOffset, xSize, ySize, zSize, hScale, vScale, hScale);
         double[] terrainNoiseArray2 = terrainNoise2.generateNoiseOctaves(null, xOffset, yOffset, zOffset, xSize, ySize, zSize, hScale, vScale, hScale);
-        double[] terrainNoiseArray3 = terrainNoise3.generateNoiseOctaves(null, xOffset, yOffset, zOffset, xSize, ySize, zSize, hScale / 80D, vScale / 160D, hScale / 80D);
+        double[] terrainNoiseArray3 = terrainNoise3.generateNoiseOctaves(null, xOffset, yOffset, zOffset, xSize, ySize, zSize, hScale / 128D, vScale / 160D, hScale / 128D);
 
         int index = 0;
         for (int x = 0; x < xSize; x++) {
@@ -106,28 +106,27 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
                     double noiseOffset3 = noiseArray[((i1 + 1) * 3 + j1) * 33 + k1];
                     double noiseOffset4 = noiseArray[((i1 + 1) * 3 + (j1 + 1)) * 33 + k1];
 
-                    double noiseIncreaseScale = 0.25D;
-                    double noiseIncrease1 = (noiseArray[(i1 * 3 + j1) * 33 + (k1 + 1)] - noiseOffset1) * noiseIncreaseScale;
-                    double noiseIncrease2 = (noiseArray[(i1 * 3 + (j1 + 1)) * 33 + (k1 + 1)] - noiseOffset2) * noiseIncreaseScale;
-                    double noiseIncrease3 = (noiseArray[((i1 + 1) * 3 + j1) * 33 + (k1 + 1)] - noiseOffset3) * noiseIncreaseScale;
-                    double noiseIncrease4 = (noiseArray[((i1 + 1) * 3 + (j1 + 1)) * 33 + (k1 + 1)] - noiseOffset4) * noiseIncreaseScale;
+                    double[] noiseIncreases = {
+                            (noiseArray[(i1 * 3 + j1) * 33 + (k1 + 1)] - noiseOffset1) * 0.25D,
+                            (noiseArray[(i1 * 3 + (j1 + 1)) * 33 + (k1 + 1)] - noiseOffset2) * 0.25D,
+                            (noiseArray[((i1 + 1) * 3 + j1) * 33 + (k1 + 1)] - noiseOffset3) * 0.25D,
+                            (noiseArray[((i1 + 1) * 3 + (j1 + 1)) * 33 + (k1 + 1)] - noiseOffset4) * 0.25D
+                    };
 
                     for (int l1 = 0; l1 < 4; l1++) {
-                        double noiseIncrease2Scale = 0.125D;
                         double noiseValue1 = noiseOffset1;
                         double noiseValue2 = noiseOffset2;
 
-                        double noiseIncrease21 = (noiseOffset3 - noiseOffset1) * noiseIncrease2Scale;
-                        double noiseIncrease22 = (noiseOffset4 - noiseOffset2) * noiseIncrease2Scale;
+                        double noiseIncrease21 = (noiseOffset3 - noiseOffset1) * 0.125D;
+                        double noiseIncrease22 = (noiseOffset4 - noiseOffset2) * 0.125D;
 
                         for (int i2 = 0; i2 < 8; i2++) {
                             int x = j1 * 8;
                             int y = k1 * 4 + l1;
                             int z = i2 + i1 * 8;
 
-                            double terrainDensityIncreaseScale = 0.125D;
                             double terrainDensity = noiseValue1;
-                            double terrainDensityIncrease = (noiseValue2 - noiseValue1) * terrainDensityIncreaseScale;
+                            double terrainDensityIncrease = (noiseValue2 - noiseValue1) * 0.125D;
 
                             for (int j2 = 0; j2 < 8; j2++) {
                                 primer.setBlockState(z, y, x, terrainDensity > 0.0D ? MoCBlocks.wyvstone.getDefaultState() : Blocks.AIR.getDefaultState());
@@ -140,10 +139,10 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
                             noiseValue2 += noiseIncrease22;
                         }
 
-                        noiseOffset1 += noiseIncrease1;
-                        noiseOffset2 += noiseIncrease2;
-                        noiseOffset3 += noiseIncrease3;
-                        noiseOffset4 += noiseIncrease4;
+                        noiseOffset1 += noiseIncreases[0];
+                        noiseOffset2 += noiseIncreases[1];
+                        noiseOffset3 += noiseIncreases[2];
+                        noiseOffset4 += noiseIncreases[3];
                     }
                 }
             }
@@ -153,7 +152,7 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
     private void replaceBiomeBlocks(int xChunk, int zChunk, ChunkPrimer primer, Biome[] biomes) {
         double scale = 0.03125D;
 
-        double[] biomeBlocksNoiseArray = biomeBlocksNoise.generateNoiseOctaves(new double[256], xChunk * 16, zChunk * 16, 0, 16, 16, 1, scale * 2D, scale * 2D, scale * 2D);
+        double[] biomeBlocksNoiseArray = biomeBlocksNoise.generateNoiseOctaves(new double[256], xChunk * 16, zChunk * 16, 0, 16, 16, 1, scale, scale, scale);
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -166,17 +165,18 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
 
                 for (int y = 127; y >= 0; y--) {
                     Block block = primer.getBlockState(x, y, z).getBlock();
-                    if (block == Blocks.AIR) biomeBlocksLeft = -1;
-                    else if (block == MoCBlocks.wyvstone) {
+
+                    if (block == Blocks.AIR) {
+                        biomeBlocksLeft = -1;
+                    } else if (block == MoCBlocks.wyvstone) {
                         if (biomeBlocksLeft == -1) {
                             if (biomeBlocksNoiseValue <= 0) {
                                 topBlock = Blocks.AIR;
                                 fillerBlock = MoCBlocks.wyvstone;
                             }
-
                             biomeBlocksLeft = biomeBlocksNoiseValue;
 
-                            primer.setBlockState(x, y, z, y >= 0 ? topBlock.getDefaultState() : fillerBlock.getDefaultState());
+                            primer.setBlockState(x, y, z, topBlock.getDefaultState());
                         } else if (biomeBlocksLeft > 0) {
                             biomeBlocksLeft--;
                             primer.setBlockState(x, y, z, fillerBlock.getDefaultState());
@@ -197,9 +197,7 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
         BlockFalling.fallInstantly = true;
 
         BlockPos chunkWorldPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-
         Biome biome = world.getBiome(chunkWorldPos.add(16, 0, 16));
-
         Random populateRandom = new Random(world.getSeed());
         populateRandom.setSeed(chunkX * ((populateRandom.nextLong() / 2L) * 2L + 1L) + chunkZ * ((populateRandom.nextLong() / 2L) * 2L + 1L) ^ world.getSeed());
 
@@ -247,18 +245,8 @@ public class MoCTerrainGeneratorWyvernSkylands extends MoCTerrainGenerator {
         }
 
         int treeNoiseValue = (int) ((treeNoise.getValue(chunkWorldPos.getX() * 0.5D, chunkWorldPos.getZ() * 0.5D) / 8D + populateRandom.nextDouble() * 4D + 4D) / 3D);
-
-        int numTrees = 0;
-
+        int numTrees = Math.max(0, treeNoiseValue / 2);
         if (populateRandom.nextInt(10) == 0) numTrees++;
-
-        if (biome == Biomes.FOREST) numTrees += treeNoiseValue + 5;
-        if (biome == Biomes.FOREST_HILLS) numTrees += treeNoiseValue + 5;
-        if (biome == Biomes.BIRCH_FOREST) numTrees += treeNoiseValue + 2;
-        if (biome == Biomes.TAIGA) numTrees += treeNoiseValue + 5;
-        if (biome == Biomes.DESERT) numTrees -= 20;
-        if (biome == Biomes.COLD_TAIGA) numTrees -= 20;
-        if (biome == Biomes.PLAINS) numTrees -= 20;
 
         for (int i = 0; i < numTrees; i++) {
             BlockPos xzPos = chunkWorldPos.add(populateRandom.nextInt(16) + 8, 0, populateRandom.nextInt(16) + 8);

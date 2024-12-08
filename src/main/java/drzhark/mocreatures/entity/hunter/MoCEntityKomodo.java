@@ -3,16 +3,14 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIHunt;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
@@ -20,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -37,6 +36,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
     private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityKomodo.class, DataSerializers.BOOLEAN);
@@ -47,36 +48,41 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
     public MoCEntityKomodo(World world) {
         super(world);
-        setSize(1.6F, 0.5F);
+        setSize(1.25F, 0.9F);
         this.texture = "komodo_dragon.png";
         setTamed(false);
         setAdult(true);
         this.stepHeight = 1.0F;
 
-        if (this.rand.nextInt(6) == 0) {
+        // TODO: Make hitboxes adjust depending on size
+        /*if (this.rand.nextInt(6) == 0) {
             setAge(30 + this.rand.nextInt(40));
         } else {
             setAge(90 + this.rand.nextInt(20));
-        }
+        }*/
+        setAge(90);
+        experienceValue = 5;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.1D));
         this.tasks.addTask(3, new EntityAIFleeFromPlayer(this, 1.1D, 4D));
-        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(7, new EntityAIWanderMoC2(this, 0.9D));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, true));
-        this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        //this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityAnimal.class, false));
+        this.targetTasks.addTask(3, new EntityAIHunt<>(this, EntityPlayer.class, false));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(5.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.5D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.18D);
     }
 
@@ -95,6 +101,11 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     public boolean getIsRideable() {
         return this.dataManager.get(RIDEABLE);
+    }
+
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override
@@ -203,7 +214,7 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && getIsTamed() && (getAge() > 90 || getIsAdult()) && !getIsRideable()
-                && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+                && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
@@ -348,5 +359,9 @@ public class MoCEntityKomodo extends MoCEntityTameableAnimal {
     @Override
     public boolean isSwimming() {
         return this.isInWater();
+    }
+
+    public float getEyeHeight() {
+        return !this.isMovementCeased() ? this.height * 0.7F : this.height * 0.365F;
     }
 }

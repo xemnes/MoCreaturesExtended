@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " S*",
+    "I *",
+    " S*"
+  ],
+  "key": {
+    "S": {
+      "item": "mocreatures:ancientsilveringot"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "*": {
+      "type": "forge:ore_dict",
+      "ore": "string"
+    }
+  },
+  "result": {
+    "item": "mocreatures:ancient_silver_bow"
+  }
+}

@@ -3,14 +3,14 @@
  */
 package drzhark.mocreatures.network;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.network.message.*;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.gui.MoCGUIEntityNamer;
 import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.entity.hostile.MoCEntityGolem;
 import drzhark.mocreatures.entity.hostile.MoCEntityOgre;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import drzhark.mocreatures.network.message.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -70,7 +70,7 @@ public class MoCMessageHandler {
         public void run() {
             if (this.message instanceof MoCMessageAnimation) {
                 MoCMessageAnimation message = (MoCMessageAnimation) this.message;
-                List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
+                List<Entity> entList = MoCProxyClient.mc.player.world.loadedEntityList;
                 for (Entity ent : entList) {
                     if (ent.getEntityId() == message.entityId && ent instanceof IMoCEntity) {
                         ((IMoCEntity) ent).performAnimation(message.animationType);
@@ -79,7 +79,7 @@ public class MoCMessageHandler {
                 }
             } else if (this.message instanceof MoCMessageAppear) {
                 MoCMessageAppear message = (MoCMessageAppear) this.message;
-                List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
+                List<Entity> entList = MoCProxyClient.mc.player.world.loadedEntityList;
                 for (Entity ent : entList) {
                     if (ent.getEntityId() == message.entityId && ent instanceof MoCEntityHorse) {
                         ((MoCEntityHorse) ent).MaterializeFX();
@@ -88,15 +88,15 @@ public class MoCMessageHandler {
                 }
             } else if (this.message instanceof MoCMessageAttachedEntity) {
                 MoCMessageAttachedEntity message = (MoCMessageAttachedEntity) this.message;
-                Entity var2 = MoCClientProxy.mc.player.world.getEntityByID(message.sourceEntityId);
-                Entity var3 = MoCClientProxy.mc.player.world.getEntityByID(message.targetEntityId);
+                Entity var2 = MoCProxyClient.mc.player.world.getEntityByID(message.sourceEntityId);
+                Entity var3 = MoCProxyClient.mc.player.world.getEntityByID(message.targetEntityId);
 
                 if (var2 != null) {
                     var2.startRiding(var3);
                 }
             } else if (this.message instanceof MoCMessageExplode) {
                 MoCMessageExplode message = (MoCMessageExplode) this.message;
-                List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
+                List<Entity> entList = MoCProxyClient.mc.player.world.loadedEntityList;
                 for (Entity ent : entList) {
                     if (ent.getEntityId() == message.entityId && ent instanceof MoCEntityOgre) {
                         ((MoCEntityOgre) ent).performDestroyBlastAttack();
@@ -105,7 +105,7 @@ public class MoCMessageHandler {
                 }
             } else if (this.message instanceof MoCMessageHealth) {
                 MoCMessageHealth message = (MoCMessageHealth) this.message;
-                List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
+                List<Entity> entList = MoCProxyClient.mc.player.world.loadedEntityList;
                 for (Entity ent : entList) {
                     if (ent.getEntityId() == message.entityId && ent instanceof EntityLiving) {
                         ((EntityLiving) ent).setHealth(message.health);
@@ -116,7 +116,7 @@ public class MoCMessageHandler {
                 MoCMessageHeart message = (MoCMessageHeart) this.message;
                 Entity entity = null;
                 while (entity == null) {
-                    entity = MoCClientProxy.mc.player.world.getEntityByID(message.entityId);
+                    entity = MoCProxyClient.mc.player.world.getEntityByID(message.entityId);
                     if (entity != null) {
                         if (entity instanceof IMoCTameable) {
                             ((IMoCTameable) entity).spawnHeart();
@@ -125,7 +125,7 @@ public class MoCMessageHandler {
                 }
             } else if (this.message instanceof MoCMessageShuffle) {
                 MoCMessageShuffle message = (MoCMessageShuffle) this.message;
-                List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
+                List<Entity> entList = MoCProxyClient.mc.player.world.loadedEntityList;
                 for (Entity ent : entList) {
                     if (ent.getEntityId() == message.entityId && ent instanceof MoCEntityHorse) {
                         if (message.flag) {
@@ -138,13 +138,13 @@ public class MoCMessageHandler {
                 }
             } else if (this.message instanceof MoCMessageTwoBytes) {
                 MoCMessageTwoBytes message = (MoCMessageTwoBytes) this.message;
-                Entity ent = MoCClientProxy.mc.player.world.getEntityByID(message.entityId);
+                Entity ent = MoCProxyClient.mc.player.world.getEntityByID(message.entityId);
                 if (ent instanceof MoCEntityGolem) {
                     ((MoCEntityGolem) ent).saveGolemCube(message.slot, message.value);
                 }
             } else if (this.message instanceof MoCMessageVanish) {
                 MoCMessageVanish message = (MoCMessageVanish) this.message;
-                List<Entity> entList = MoCClientProxy.mc.player.world.loadedEntityList;
+                List<Entity> entList = MoCProxyClient.mc.player.world.loadedEntityList;
                 for (Entity ent : entList) {
                     if (ent.getEntityId() == message.entityId && ent instanceof MoCEntityHorse) {
                         ((MoCEntityHorse) ent).setVanishC((byte) 1);
@@ -153,8 +153,8 @@ public class MoCMessageHandler {
                 }
             } else if (this.message instanceof MoCMessageNameGUI) {
                 MoCMessageNameGUI message = (MoCMessageNameGUI) this.message;
-                Entity entity = MoCClientProxy.mc.player.world.getEntityByID(message.entityId);
-                MoCClientProxy.mc.displayGuiScreen(new MoCGUIEntityNamer(((IMoCEntity) entity), ((IMoCEntity) entity).getPetName()));
+                Entity entity = MoCProxyClient.mc.player.world.getEntityByID(message.entityId);
+                MoCProxyClient.mc.displayGuiScreen(new MoCGUIEntityNamer(((IMoCEntity) entity), ((IMoCEntity) entity).getPetName()));
             }
         }
     }

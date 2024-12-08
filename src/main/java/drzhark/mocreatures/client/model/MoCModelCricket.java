@@ -32,9 +32,6 @@ public class MoCModelCricket extends ModelBase {
     ModelRenderer LegLeftB;
     ModelRenderer LegRight;
     ModelRenderer LegRightB;
-    ModelRenderer LeftWing;
-    ModelRenderer RightWing;
-    ModelRenderer FoldedWings;
 
     public MoCModelCricket() {
         this.textureWidth = 32;
@@ -122,21 +119,6 @@ public class MoCModelCricket extends ModelBase {
         this.LegRightB.addBox(0F, 0F, -1F, 0, 3, 2);
         this.LegRightB.setRotationPoint(-1.5F, 23F, 2.9F);
         setRotation(this.LegRightB, 1.249201F, 0F, 0F);
-
-        this.LeftWing = new ModelRenderer(this, 0, 30);
-        this.LeftWing.addBox(0F, 0F, -1F, 6, 0, 2);
-        this.LeftWing.setRotationPoint(0F, 20.9F, -1F);
-        setRotation(this.LeftWing, 0F, -0.1919862F, 0F);
-
-        this.RightWing = new ModelRenderer(this, 0, 28);
-        this.RightWing.addBox(-6F, 0F, -1F, 6, 0, 2);
-        this.RightWing.setRotationPoint(0F, 20.9F, -1F);
-        setRotation(this.RightWing, 0F, 0.1919862F, 0F);
-
-        this.FoldedWings = new ModelRenderer(this, 0, 26);
-        this.FoldedWings.addBox(0F, 0F, -1F, 6, 0, 2);
-        this.FoldedWings.setRotationPoint(0F, 20.9F, -2F);
-        setRotation(this.FoldedWings, 0F, -1.570796F, 0F);
     }
 
     @Override
@@ -159,7 +141,6 @@ public class MoCModelCricket extends ModelBase {
             this.ThighRight.render(f5);
             this.LegLeft.render(f5);
             this.LegRight.render(f5);
-            this.FoldedWings.render(f5);
 
         } else {
             this.ThighLeftB.render(f5);
@@ -171,8 +152,6 @@ public class MoCModelCricket extends ModelBase {
             float transparency = 0.6F;
             GlStateManager.blendFunc(770, 771);
             GlStateManager.color(0.8F, 0.8F, 0.8F, transparency);
-            this.LeftWing.render(f5);
-            this.RightWing.render(f5);
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
@@ -192,9 +171,6 @@ public class MoCModelCricket extends ModelBase {
         float frontLegAdj = 0F;
 
         if (isFlying) {
-            float WingRot = MathHelper.cos((f2 * 2.0F)) * 0.7F;
-            this.RightWing.rotateAngleZ = WingRot;
-            this.LeftWing.rotateAngleZ = -WingRot;
             legMov = (f1 * 1.5F);
             legMovB = legMov;
             frontLegAdj = 1.4F;

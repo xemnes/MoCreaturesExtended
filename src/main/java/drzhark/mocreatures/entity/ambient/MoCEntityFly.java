@@ -3,13 +3,10 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityInsect;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -18,6 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityFly extends MoCEntityInsect {
 
     private int soundCount;// = 50;
@@ -25,12 +24,6 @@ public class MoCEntityFly extends MoCEntityInsect {
     public MoCEntityFly(World world) {
         super(world);
         this.texture = "fly.png";
-    }
-
-    @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
     }
 
     @Override
@@ -79,5 +72,10 @@ public class MoCEntityFly extends MoCEntityInsect {
             return 0.2F;
         }
         return 0.12F;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

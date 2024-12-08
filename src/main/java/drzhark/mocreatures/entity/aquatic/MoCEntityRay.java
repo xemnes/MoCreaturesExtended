@@ -3,10 +3,13 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class MoCEntityRay extends MoCEntityTameableAquatic {
@@ -108,5 +111,20 @@ public class MoCEntityRay extends MoCEntityTameableAquatic {
 
     public boolean isMantaRay() {
         return false;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_FLOP;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_FISH_HURT;
+    }
+
+    @Override
+    protected SoundEvent getSwimSound() {
+        return MoCSoundEvents.ENTITY_FISH_SWIM;
     }
 }

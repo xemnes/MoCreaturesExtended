@@ -3,12 +3,9 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
-import net.minecraft.entity.ai.EntityAIFollow;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,18 +15,14 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityButterfly extends MoCEntityInsect {
 
     private int fCounter;
 
     public MoCEntityButterfly(World world) {
         super(world);
-    }
-
-    @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
     }
 
     @Override
@@ -130,5 +123,10 @@ public class MoCEntityButterfly extends MoCEntityInsect {
     @Override
     public float getEyeHeight() {
         return 0.1F;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

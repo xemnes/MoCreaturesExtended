@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/chitinundead"
+    "layer0": "mocreatures:items/chitin_undead"
   }
 }

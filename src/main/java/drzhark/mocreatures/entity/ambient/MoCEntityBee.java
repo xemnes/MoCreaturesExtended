@@ -7,15 +7,12 @@
 
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityInsect;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIFollow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -25,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityBee extends MoCEntityInsect {
 
     private int soundCount;
@@ -32,12 +31,6 @@ public class MoCEntityBee extends MoCEntityInsect {
     public MoCEntityBee(World world) {
         super(world);
         this.texture = "bee.png";
-    }
-
-    @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
     }
 
     @Override
@@ -57,7 +50,7 @@ public class MoCEntityBee extends MoCEntityInsect {
 
     private SoundEvent getMySound() {
         if (getAttackTarget() != null) {
-            return MoCSoundEvents.ENTITY_BEE_UPSET;
+            return MoCSoundEvents.ENTITY_BEE_ANGRY;
         }
         return MoCSoundEvents.ENTITY_BEE_AMBIENT;
     }
@@ -80,11 +73,6 @@ public class MoCEntityBee extends MoCEntityInsect {
     @Override
     public int getTalkInterval() {
         return 2000;
-    }
-
-    @Override
-    protected float getSoundVolume() {
-        return 0.1F;
     }
 
     @Override
@@ -118,5 +106,10 @@ public class MoCEntityBee extends MoCEntityInsect {
     @Override
     public boolean isFlyer() {
         return true;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

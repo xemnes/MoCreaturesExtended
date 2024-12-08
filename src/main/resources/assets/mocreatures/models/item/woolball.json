@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/woolball"
+    "layer0": "mocreatures:items/wool_ball"
   }
 }

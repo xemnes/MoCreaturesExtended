@@ -1,0 +1,12 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "mocreatures:sugarlump"
+    }
+  ],
+  "result": {
+    "item": "minecraft:sugar",
+    "count": 4
+  }
+}

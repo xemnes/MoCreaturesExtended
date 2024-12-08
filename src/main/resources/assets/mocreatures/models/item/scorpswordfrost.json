@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "mocreatures:items/scorpswordfrost"
+    "layer0": "mocreatures:items/frost_scorpion_sword"
   }
 }

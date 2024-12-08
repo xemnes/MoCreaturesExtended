@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.compat.datafixes;
 
 import drzhark.mocreatures.MoCConstants;
@@ -60,7 +63,7 @@ public class EntityIDFixer implements IFixableData {
     }
 
     @SubscribeEvent
-    public void missingMapping(MissingMappings<EntityEntry> event) {
+    public void missingEntityMapping(MissingMappings<EntityEntry> event) {
         ResourceLocation scorpion = new ResourceLocation(MoCConstants.MOD_ID, "scorpion");
         ResourceLocation manticore = new ResourceLocation(MoCConstants.MOD_ID, "manticore");
         for (MissingMappings.Mapping<EntityEntry> entry : event.getAllMappings()) {

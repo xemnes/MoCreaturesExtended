@@ -3,21 +3,21 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityInsect;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.ai.EntityAIFollow;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityDragonfly extends MoCEntityInsect {
 
@@ -29,20 +29,15 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
     }
 
     @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
     }
 
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
         if (this.world.provider.getDimension() == MoCreatures.proxy.wyvernDimension) this.enablePersistence();
         return super.onInitialSpawn(difficulty, par1EntityLivingData);
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        return this.world.provider.getDimension() != MoCreatures.proxy.wyvernDimension;
     }
 
     @Override
@@ -105,5 +100,10 @@ public class MoCEntityDragonfly extends MoCEntityInsect {
             return 0.25F;
         }
         return 0.12F;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

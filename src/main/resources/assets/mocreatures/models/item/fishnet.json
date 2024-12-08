@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mocreatures:items/fishnet"
+    "layer0": "mocreatures:items/fish_net"
   }
 }

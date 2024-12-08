@@ -3,15 +3,14 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.hunter.MoCEntityBear;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -20,11 +19,21 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityPandaBear extends MoCEntityBear {
 
     public MoCEntityPandaBear(World world) {
         super(world);
         setSize(0.8F, 1.05F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override
@@ -51,18 +60,8 @@ public class MoCEntityPandaBear extends MoCEntityBear {
     }
 
     @Override
-    public float calculateMaxHealth() {
-        return 20;
-    }
-
-    @Override
     public boolean isReadyToHunt() {
         return false;
-    }
-
-    @Override
-    public int getAttackStrength() {
-        return 1;
     }
 
     @Override
@@ -108,12 +107,8 @@ public class MoCEntityPandaBear extends MoCEntityBear {
 
             return true;
         }
-        if (!stack.isEmpty() && getIsTamed() && stack.getItem() == MoCItems.whip) {
-            if (getBearState() == 0) {
-                setBearState(2);
-            } else {
-                setBearState(0);
-            }
+        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
+            this.processBearWhipped();
             return true;
         }
         if (this.getIsRideable() && this.getIsAdult() && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
@@ -144,7 +139,7 @@ public class MoCEntityPandaBear extends MoCEntityBear {
         /*
          * panda bears and cubs will sit down sometimes
          */
-        if (!this.world.isRemote && !getIsTamed() && this.rand.nextInt(300) == 0) {
+        if (!this.world.isRemote && getBearState() != 3 && !getIsTamed() && this.rand.nextInt(300) == 0) {
             setBearState(2);
         }
     }

@@ -1,25 +1,20 @@
 {
-  "type": "forge:ore_shaped",
-  "pattern": [
-    "SXS",
-    "G#G",
-    " X "
-  ],
-  "key": {
-    "X": {
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
       "item": "minecraft:bread"
     },
-    "#": {
+    {
+      "item": "minecraft:pumpkin_seeds"
+    },
+    {
       "item": "mocreatures:ratcooked"
     },
-    "G": {
+    {
       "item": "minecraft:tallgrass",
       "data": 1
-    },
-    "S": {
-      "item": "minecraft:pumpkin_seeds"
     }
-  },
+  ],
   "result": {
     "item": "mocreatures:ratburger"
   }

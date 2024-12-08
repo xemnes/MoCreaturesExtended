@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_pressure_plate"
+    },
+    {
+      "item": "mocreatures:deep_wyvstone"
+    }
+  ],
+  "result": {
+    "item": "mocreatures:deep_wyvstone_pressure_plate"
+  }
+}

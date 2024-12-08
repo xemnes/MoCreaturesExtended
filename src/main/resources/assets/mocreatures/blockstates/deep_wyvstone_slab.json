@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "particle": "mocreatures:blocks/stone_wyvern_deep",
+      "bottom": "mocreatures:blocks/stone_wyvern_deep",
+      "top": "mocreatures:blocks/stone_wyvern_deep",
+      "side": "mocreatures:blocks/stone_wyvern_deep"
+    }
+  },
+  "variants": {
+    "half=bottom,variant=default": {
+      "model": "half_slab"
+    },
+    "half=top,variant=default": {
+      "model": "upper_slab"
+    },
+    "normal": {
+      "model": "half_slab"
+    }
+  }
+}

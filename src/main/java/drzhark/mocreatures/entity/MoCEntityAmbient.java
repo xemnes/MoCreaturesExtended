@@ -5,33 +5,24 @@ package drzhark.mocreatures.entity;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.ai.PathNavigateFlyer;
-import drzhark.mocreatures.entity.item.MoCEntityEgg;
-import drzhark.mocreatures.entity.item.MoCEntityKittyBed;
-import drzhark.mocreatures.entity.item.MoCEntityLitterBox;
-import drzhark.mocreatures.entity.passive.MoCEntityHorse;
-import net.minecraft.block.material.Material;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.*;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.Path;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 import java.util.UUID;
@@ -45,13 +36,12 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
 
     protected String texture;
     protected boolean riderIsDisconnecting;
-    protected PathNavigate navigatorFlyer;
 
-    public MoCEntityAmbient(World world) {
+    protected MoCEntityAmbient(World world) {
         super(world);
-        this.navigatorFlyer = new PathNavigateFlyer(this, world);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public String getName() {
         String entityString = EntityList.getEntityString(this);
@@ -107,8 +97,12 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
 
     @Override
     public boolean renderName() {
-        return MoCreatures.proxy.getDisplayPetName()
-                && (getPetName() != null && !getPetName().equals("") && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+        return MoCreatures.proxy.getDisplayPetName() && (getPetName() != null && !getPetName().isEmpty() && (!this.isBeingRidden()) && (this.getRidingEntity() == null));
+    }
+
+    @Override
+    public boolean shouldRenderNameAndHealth() {
+        return getIsTamed() && (!this.isBeingRidden()) && (this.getRidingEntity() == null);
     }
 
     @Override
@@ -160,15 +154,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         return null;
     }
 
-    @Override
-    protected boolean canDespawn() {
-        if (MoCreatures.proxy.forceDespawns) {
-            return !getIsTamed();
-        } else {
-            return false;
-        }
-    }
-
     /**
      * called in getCanSpawnHere to make sure the right type of creature spawns
      * in the right biome i.e. snakes, rays, bears, BigCats and later wolves,
@@ -177,21 +162,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     @Override
     public boolean checkSpawningBiome() {
         return true;
-    }
-
-    protected EntityLivingBase getClosestEntityLiving(Entity entity, double d) {
-        double d1 = -1D;
-        EntityLivingBase entityliving = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
-        for (Entity entity1 : list) {
-            if (entitiesToIgnore(entity1)) continue;
-            double d2 = entity1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-            if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1)) && ((EntityLivingBase) entity1).canEntityBeSeen(entity)) {
-                d1 = d2;
-                entityliving = (EntityLivingBase) entity1;
-            }
-        }
-        return entityliving;
     }
 
     @Override
@@ -206,17 +176,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     public boolean swimmerEntity() {
-        return false;
-    }
-
-    public boolean isSwimming() {
-        return isInsideOfMaterial(Material.WATER);
-    }
-
-    /**
-     * Used to breed
-     */
-    public boolean isMyAphrodisiac(Item item1) {
         return false;
     }
 
@@ -242,40 +201,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     @Override
     public boolean canBreatheUnderwater() {
         return swimmerEntity();
-    }
-
-    public EntityItem getClosestItem(Entity entity, double d, ItemStack item, ItemStack item1) {
-        double d1 = -1D;
-        EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
-        for (Entity entity1 : list) {
-            if (!(entity1 instanceof EntityItem)) continue;
-            EntityItem entityitem1 = (EntityItem) entity1;
-            if ((entityitem1.getItem() != item) && (entityitem1.getItem() != item1)) continue;
-            double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-            if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1))) {
-                d1 = d2;
-                entityitem = entityitem1;
-            }
-        }
-
-        return entityitem;
-    }
-
-    public EntityItem getClosestEntityItem(Entity entity, double d) {
-        double d1 = -1D;
-        EntityItem entityitem = null;
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(d));
-        for (Entity entity1 : list) {
-            if (!(entity1 instanceof EntityItem)) continue;
-            EntityItem entityitem1 = (EntityItem) entity1;
-            double d2 = entityitem1.getDistanceSq(entity.posX, entity.posY, entity.posZ);
-            if (((d < 0.0D) || (d2 < (d * d))) && ((d1 == -1D) || (d2 < d1))) {
-                d1 = d2;
-                entityitem = entityitem1;
-            }
-        }
-        return entityitem;
     }
 
     public void faceLocation(int i, int j, int k, float f) {
@@ -320,61 +245,13 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         }
     }
 
-    /**
-     * Called to make ridden entities pass on collision to rider
-     */
-    public void Riding() {
-        if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
-            EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
-            List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));
-            for (Entity entity : list) {
-                if (entity.isDead) continue;
-                entity.onCollideWithPlayer(entityplayer);
-                if (!(entity instanceof EntityMob)) continue;
-                float f = getDistance(entity);
-                if ((f < 2.0F)) {
-                    this.rand.nextInt(10);
-                }
-            }
-            if (entityplayer.isSneaking()) {
-                if (!this.world.isRemote) {
-                    entityplayer.dismountRidingEntity();
-                }
-            }
-        }
-    }
-
-    protected void getPathOrWalkableBlock(Entity entity, float f) {
-        Path pathentity = this.navigator.getPathToPos(entity.getPosition());
-        if ((pathentity == null) && (f > 8F)) {
-            int i = MathHelper.floor(entity.posX) - 2;
-            int j = MathHelper.floor(entity.posZ) - 2;
-            int k = MathHelper.floor(entity.getEntityBoundingBox().minY);
-            for (int l = 0; l <= 4; l++) {
-                for (int i1 = 0; i1 <= 4; i1++) {
-                    BlockPos pos = new BlockPos(i, j, k);
-                    if (((l < 1) || (i1 < 1) || (l > 3) || (i1 > 3)) && this.world.getBlockState(pos.add(l, -1, i1)).isNormalCube()
-                            && !this.world.getBlockState(pos.add(l, 0, i1)).isNormalCube()
-                            && !this.world.getBlockState(pos.add(l, 1, i1)).isNormalCube()) {
-                        setLocationAndAngles((i + l) + 0.5F, k, (j + i1) + 0.5F, this.rotationYaw, this.rotationPitch);
-                        return;
-                    }
-                }
-            }
-        } else {
-            this.navigator.setPath(pathentity, 1D);
-        }
-    }
-
     @Override
     public boolean getCanSpawnHere() {
         boolean willSpawn;
-        boolean debug = false;
-        willSpawn = this.world.checkNoEntityCollision(this.getEntityBoundingBox())
-                && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).size() == 0
-                && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
+        boolean debug = MoCreatures.proxy.debug;
+        willSpawn = this.world.canSeeSky(new BlockPos(this)) && this.world.checkNoEntityCollision(this.getEntityBoundingBox()) && this.world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty() && !this.world.containsAnyLiquid(this.getEntityBoundingBox());
         if (willSpawn && debug)
-            System.out.println("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
+            MoCreatures.LOGGER.info("Ambient: " + this.getName() + " at: " + this.getPosition() + " State: " + this.world.getBlockState(this.getPosition()) + " biome: " + MoCTools.biomeName(world, getPosition()));
         return willSpawn;
     }
 
@@ -399,35 +276,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     /**
-     * Used for flyer mounts, to calculate fall speed
-     */
-    protected double myFallSpeed() {
-        return 0.6D;
-    }
-
-    /**
-     * flyer mounts Y thrust
-     */
-    protected double flyerThrust() {
-        return 0.3D;
-    }
-
-    /**
-     * flyer deceleration on Z and X axis
-     */
-    protected float flyerFriction() {
-        return 0.91F;
-    }
-
-    /**
-     * Alternative flyer mount movement, when true, the player only controls
-     * frequency of wing flaps
-     */
-    protected boolean selfPropelledFlyer() {
-        return false;
-    }
-
-    /**
      * Sets a flag that will make the Entity "jump" in the next onGround
      * moveEntity update
      */
@@ -442,100 +290,13 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
         return false;
     }
 
-    /**
-     * How difficult is the creature to be tamed? the Higher the number, the
-     * more difficult
-     */
-    public int getMaxTemper() {
-        return 100;
-    }
-
-    /**
-     * mount speed
-     */
-    public double getCustomSpeed() {
-        return 0.8D;
-    }
-
-    /**
-     * mount jumping power
-     */
-    public double getCustomJump() {
-        return 0.4D;
-    }
-
-    /**
-     * sound played when an untamed mount buckles rider
-     */
-    protected SoundEvent getAngrySound() {
-        return null;
-    }
-
     @Override
     public void makeEntityDive() {
-    }
-
-    /**
-     * Is this a rideable entity?
-     */
-    public boolean rideableEntity() {
-        return false;
     }
 
     @Override
     public int nameYOffset() {
         return -80;
-    }
-
-    /**
-     * fixes bug with entities following a player carrying wheat
-     */
-    protected Entity findPlayerToAttack() {
-        return null;
-    }
-
-    public void repelMobs(Entity entity1, Double dist, World world) {
-        List<Entity> list = world.getEntitiesWithinAABBExcludingEntity(entity1, entity1.getEntityBoundingBox().grow(dist, 4D, dist));
-        for (Entity entity : list) {
-            if (!(entity instanceof EntityMob)) continue;
-            EntityMob entitymob = (EntityMob) entity;
-            entitymob.setAttackTarget(null);
-            entitymob.getNavigator().clearPath();
-        }
-    }
-
-    public void faceItem(int i, int j, int k, float f) {
-        double d = i - this.posX;
-        double d1 = k - this.posZ;
-        double d2 = j - this.posY;
-        double d3 = MathHelper.sqrt((d * d) + (d1 * d1));
-        float f1 = (float) ((Math.atan2(d1, d) * 180D) / 3.1415927410125728D) - 90F;
-        float f2 = (float) ((Math.atan2(d2, d3) * 180D) / 3.1415927410125728D);
-        this.rotationPitch = -adjustRotation(this.rotationPitch, f2, f);
-        this.rotationYaw = adjustRotation(this.rotationYaw, f1, f);
-    }
-
-    public float adjustRotation(float f, float f1, float f2) {
-        float f3;
-        for (f3 = f1 - f; f3 < -180F; f3 += 360F) {
-        }
-        for (; f3 >= 180F; f3 -= 360F) {
-        }
-        if (f3 > f2) {
-            f3 = f2;
-        }
-        if (f3 < -f2) {
-            f3 = -f2;
-        }
-        return f + f3;
-    }
-
-    public boolean isFlyingAlone() {
-        return false;
-    }
-
-    public float getMoveSpeed() {
-        return 0.7F;
     }
 
     /**
@@ -548,27 +309,13 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     /**
      * Used to follow the player carrying the item
      */
+    @SuppressWarnings("unused")
     public boolean isMyFavoriteFood(ItemStack par1ItemStack) {
         return false;
     }
 
-    @SuppressWarnings("unused")
-    private void followPlayer() {
-        EntityPlayer entityplayer1 = this.world.getClosestPlayerToEntity(this, 24D);
-        if (entityplayer1 == null) {
-            return;
-        }
-
-        ItemStack itemstack1 = entityplayer1.inventory.getCurrentItem();
-        if (isMyFavoriteFood(itemstack1)) {
-            this.getNavigator().tryMoveToEntityLiving(entityplayer1, 1D);
-        }
-    }
-
     public boolean isOnAir() {
-        return (this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 0.2D), MathHelper
-                .floor(this.posZ))) && this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper
-                .floor(this.posY - 1.2D), MathHelper.floor(this.posZ))));
+        return (this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 0.2D), MathHelper.floor(this.posZ))) && this.world.isAirBlock(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY - 1.2D), MathHelper.floor(this.posZ))));
     }
 
     @Override
@@ -586,11 +333,6 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     }
 
     public void setRideable(boolean b) {
-    }
-
-    public boolean entitiesToIgnore(Entity entity) {
-        if ((!(entity instanceof EntityLiving)) || (entity instanceof EntityMob)) return true;
-        return entity instanceof MoCEntityKittyBed || entity instanceof MoCEntityLitterBox || this.getIsTamed() && entity instanceof MoCEntityAnimal && ((MoCEntityAnimal) entity).getIsTamed() || entity instanceof EntityWolf && !MoCreatures.proxy.attackWolves || entity instanceof MoCEntityHorse && !MoCreatures.proxy.attackHorses || entity.width > this.width && entity.height > this.height || entity instanceof MoCEntityEgg;
     }
 
     @Override
@@ -772,11 +514,37 @@ public abstract class MoCEntityAmbient extends EntityCreature implements IMoCEnt
     public void setLeashHolder(Entity entityIn, boolean sendAttachNotification) {
         if (this.getIsTamed() && entityIn instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer) entityIn;
-            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null
-                    && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
+            if (MoCreatures.proxy.enableOwnership && this.getOwnerId() != null && !entityplayer.getUniqueID().equals(this.getOwnerId()) && !MoCTools.isThisPlayerAnOP((entityplayer))) {
                 return;
             }
         }
         super.setLeashHolder(entityIn, sendAttachNotification);
+    }
+
+    /***
+     * Used to select Animals that can 'ride' the player. Like mice, snakes, turtles, birds
+     */
+    @Override
+    public boolean canRidePlayer() {
+        return false;
+    }
+
+    @Override
+    public boolean startRidingPlayer(EntityPlayer player) {
+        if (MoCTools.getEntityRidingPlayer(player) != null) {
+            return false; // Something is already riding this player.
+        }
+        boolean ret = super.startRiding(player);
+        if (ret) {
+            NBTTagCompound tag = player.getEntityData();
+            tag.setUniqueId("MOCEntity_Riding_Player", this.getUniqueID());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onStopRidingPlayer() {
+        // Called when an Entity is dismounted from riding on the Player's head.
     }
 }

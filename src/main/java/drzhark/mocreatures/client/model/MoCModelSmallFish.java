@@ -9,7 +9,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class MoCModelSmallFish extends ModelBase {
 
     ModelRenderer BodyFlat;
@@ -74,6 +77,8 @@ public class MoCModelSmallFish extends ModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        float scale = 0.0715F;
+
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5);
         MoCEntitySmallFish smallFish = (MoCEntitySmallFish) entity;
@@ -82,16 +87,17 @@ public class MoCModelSmallFish extends ModelBase {
         float zOffset = smallFish.getAdjustedZOffset();
         GlStateManager.pushMatrix();
         GlStateManager.translate(xOffset, yOffset, zOffset);
-        this.BodyFlat.render(f5);
-        this.BodyRomboid.render(f5);
-        this.MidBodyFin.render(f5);
-        this.UpperFinA.render(f5);
-        this.UpperFinB.render(f5);
-        this.UpperFinC.render(f5);
-        this.LowerFinA.render(f5);
-        this.LowerFinB.render(f5);
-        this.LowerFinC.render(f5);
-        this.Tail.render(f5);
+        GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
+        this.BodyFlat.render(scale);
+        this.BodyRomboid.render(scale);
+        this.MidBodyFin.render(scale);
+        this.UpperFinA.render(scale);
+        this.UpperFinB.render(scale);
+        this.UpperFinC.render(scale);
+        this.LowerFinA.render(scale);
+        this.LowerFinB.render(scale);
+        this.LowerFinC.render(scale);
+        this.Tail.render(scale);
         GlStateManager.popMatrix();
     }
 

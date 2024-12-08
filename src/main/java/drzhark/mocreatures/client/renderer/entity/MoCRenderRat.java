@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.hostile.MoCEntityRat;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
 
     public MoCRenderRat(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
     }
 
     @Override
@@ -32,13 +32,14 @@ public class MoCRenderRat<T extends MoCEntityRat> extends RenderLiving<T> {
 
     @Override
     protected void preRenderCallback(T entityrat, float f) {
-        if (entityrat.climbing()) {
+        if (entityrat.isOnLadder()) {
             rotateAnimal(entityrat);
         }
     }
 
     protected void rotateAnimal(T entityrat) {
-        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90.0F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(0.0F, 0.4F, 0.0F);
     }
 
     protected void stretch(T entityrat) {

@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mocreatures:fine_silver_ingot"
+    }
+  },
+  "result": {
+    "item": "mocreatures:fine_silver_block"
+  }
+}

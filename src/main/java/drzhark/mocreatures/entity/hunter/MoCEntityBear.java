@@ -4,17 +4,19 @@
 package drzhark.mocreatures.entity.hunter;
 
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
+import drzhark.mocreatures.entity.inventory.MoCAnimalChest;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import drzhark.mocreatures.inventory.MoCAnimalChest;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
@@ -33,6 +35,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
@@ -53,7 +56,8 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         setSize(1.2F, 1.5F);
         setAge(55);
         setAdult(this.rand.nextInt(4) != 0);
-        this.stepHeight = 1.0F;
+        stepHeight = 1.0F;
+        experienceValue = 5;
     }
 
     @Override
@@ -62,20 +66,19 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.0D));
         this.tasks.addTask(3, new EntityAIFollowOwnerPlayer(this, 1D, 2F, 10F));
         this.tasks.addTask(4, new EntityAIFollowAdult(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, true));
-        this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        //this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityAnimal.class, false));
+        this.targetTasks.addTask(3, new EntityAIHunt<>(this, EntityPlayer.class, false));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0D);
     }
 
     /**
@@ -92,7 +95,10 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     }
 
     /**
-     * 0 - bear is on fours 1 - standing 2 - sitting
+     * 0 - bear is on fours (IDLE)
+     * 1 - standing (IDLE)
+     * 2 - sitting (IDLE)
+     * 3 - sitting (FORCED via WHIP)
      */
     public int getBearState() {
         return this.dataManager.get(BEAR_STATE);
@@ -102,6 +108,10 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.dataManager.set(BEAR_STATE, i);
     }
 
+    @Override
+    public boolean getIsSitting() {
+        return this.isMovementCeased();
+    }
     @Override
     public boolean getIsRideable() {
         return this.dataManager.get(RIDEABLE);
@@ -129,10 +139,6 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
     @Override
     public void selectType() {
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
-        this.setHealth(getMaxHealth());
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getAttackStrength());
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(getAttackRange());
         if (getIsAdult()) {
             setAge(getMaxAge());
         }
@@ -146,22 +152,9 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         return 1.0F;
     }
 
-    public float calculateMaxHealth() {
-        return 30;
-    }
-
-    /**
-     * Returns the distance at which the bear attacks prey
-     */
-    public double getAttackRange() {
-        return 8D;
-    }
-
-    /**
-     * The damage the bear does
-     */
-    public int getAttackStrength() {
-        return 2;
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     @Override
@@ -171,11 +164,11 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
     }
 
     /**
-     * Checks if entity is sitting.
+     * Checks if entity is sitting (IDLE or FORCED via WHIP).
      */
     @Override
     public boolean isMovementCeased() {
-        return getBearState() == 2;
+        return getBearState() == 2 || getBearState() == 3;
     }
 
     @Override
@@ -208,19 +201,19 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (this.attackCounter > 0 && ++this.attackCounter > 9) {
             this.attackCounter = 0;
         }
-        if (!this.world.isRemote && !getIsAdult() && getAge() < 80 && (this.rand.nextInt(300) == 0)) {
-            setBearState(2);
+        if (!this.world.isRemote && getBearState() != 3 && !getIsAdult() && getAge() < 80 && (this.rand.nextInt(300) == 0)) {
+            setBearState(2); // randomly perform an idle sit
         }
         /*
-         * Sitting non tamed bears will resume on fours stance every now and then
+         * Sitting bears will resume on fours stance every now and then, if not sat via WHIP
          */
-        if (!this.world.isRemote && getBearState() == 2 && !getIsTamed() && this.rand.nextInt(800) == 0) {
+        if (!this.world.isRemote && getBearState() == 2 && this.rand.nextInt(800) == 0) {
             setBearState(0);
         }
-        if (!this.world.isRemote && getBearState() == 2 && !getIsTamed() && !this.getNavigator().noPath()) {
+        if (!this.world.isRemote && getBearState() == 2 && !this.getNavigator().noPath()) {
             setBearState(0);
         }
-        if (!this.world.isRemote && this.standingCounter > 0 && ++this.standingCounter > 100) {
+        if (!this.world.isRemote && this.standingCounter > 0 && ++this.standingCounter > 100 && getBearState() != 3) {
             this.standingCounter = 0;
             setBearState(0);
         }
@@ -228,7 +221,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
          * Standing if close to a vulnerable player
          */
         if (!this.world.isRemote && !getIsTamed() && getIsStanding()
-                && getBearState() != 2 && getIsAdult() && (this.rand.nextInt(200) == 0) && shouldAttackPlayers()) {
+                && !this.isMovementCeased() && getIsAdult() && (this.rand.nextInt(200) == 0) && shouldAttackPlayers()) {
             EntityPlayer entityplayer1 = this.world.getClosestPlayerToEntity(this, 4D);
             if ((entityplayer1 != null && this.canEntityBeSeen(entityplayer1) && !entityplayer1.capabilities.disableDamage)) {
                 this.setStand();
@@ -236,7 +229,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
             }
         }
         //TODO move to AI
-        if (!this.world.isRemote && getType() == 3 && (this.deathTime == 0) && getBearState() != 2) {
+        if (!this.world.isRemote && getType() == 3 && (this.deathTime == 0) && !this.isMovementCeased()) {
             EntityItem entityitem = getClosestItem(this, 12D, Items.REEDS, Items.SUGAR);
             if (entityitem != null) {
 
@@ -246,7 +239,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
                 }
                 if (f < 2.0F && this.deathTime == 0) {
                     entityitem.setDead();
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
                     this.setHealth(getMaxHealth());
                 }
 
@@ -275,6 +268,12 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         openMouth();
         return MoCSoundEvents.ENTITY_BEAR_AMBIENT;
     }
+    
+    // TODO: Add unique sound event
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_POLAR_BEAR_STEP, 0.15F, 1.0F);
+    }
 
     private void openMouth() {
         this.mouthCounter = 1;
@@ -301,12 +300,12 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
     protected void eatingAnimal() {
         openMouth();
-        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
     }
 
     @Override
     public double getCustomSpeed() {
-        if (getBearState() == 2) {
+        if (this.isMovementCeased()) {
             return 0D;
         }
         return super.getCustomSpeed();
@@ -317,6 +316,9 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         return this.getIsAdult() && !this.isMovementCeased();
     }
 
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
     public boolean getIsStanding() {
         return this.standingCounter != 0;
     }
@@ -325,16 +327,32 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         this.standingCounter = 1;
     }
 
+    public void processBearWhipped() {
+        if (!this.isMovementCeased()) {
+            // Set to "SITTING via WHIP"
+            setBearState(3);
+        } else {
+            // Set to "on all fours"
+            setBearState(0);
+        }
+        setIsJumping(false);
+        getNavigator().clearPath();
+        setAttackTarget(null);
+    }
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand) {
+        final ItemStack stack = player.getHeldItem(hand);
+        if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
+            this.processBearWhipped();
+            return true;
+        }
         final Boolean tameResult = this.processTameInteract(player, hand);
         if (tameResult != null) {
             return tameResult;
         }
 
-        final ItemStack stack = player.getHeldItem(hand);
-        if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && (getAge() > 80)
-                && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+        if (!stack.isEmpty() && getIsTamed() && !getIsRideable() && getIsAdult()
+                && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
@@ -342,7 +360,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
         if (!stack.isEmpty() && getIsTamed() && (MoCTools.isItemEdibleforCarnivores(stack.getItem()))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             this.setHealth(getMaxHealth());
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             setIsHunting(false);
             setHasEaten(true);
             return true;

@@ -4,13 +4,14 @@
 package drzhark.mocreatures.entity.passive;
 
 import com.google.common.collect.Sets;
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIMateMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIPanic;
@@ -20,11 +21,12 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -48,20 +50,12 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
         this.tasks.addTask(3, new EntityAITempt(this, 1.0D, false, TEMPTATION_ITEMS));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-
-        Item soyBeanItem = GameRegistry.makeItemStack("almura:food/food/soybean", 0, 1, null).getItem();
-        Item cornItem = GameRegistry.makeItemStack("almura:food/food/corn", 0, 1, null).getItem();
-
-        if (soyBeanItem != ItemStack.EMPTY.getItem())
-            TEMPTATION_ITEMS.add(soyBeanItem);
-        if (cornItem != ItemStack.EMPTY.getItem())
-            TEMPTATION_ITEMS.add(cornItem);
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
@@ -104,6 +98,12 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return MoCSoundEvents.ENTITY_TURKEY_AMBIENT;
+    }
+    
+    // TODO: Add unique sound event
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }
 
     @Nullable
@@ -225,8 +225,8 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
             super.handleStatusUpdate(id);
         }
     }
-    
+
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.945F;
     }
 }

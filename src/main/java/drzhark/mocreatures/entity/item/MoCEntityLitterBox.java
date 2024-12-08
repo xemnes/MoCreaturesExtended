@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+// TODO: Fix hitbox
 public class MoCEntityLitterBox extends EntityLiving {
 
     private static final DataParameter<Boolean> PICKED_UP = EntityDataManager.createKey(MoCEntityLitterBox.class, DataSerializers.BOOLEAN);
@@ -174,7 +175,7 @@ public class MoCEntityLitterBox extends EntityLiving {
             setUsedLitter(false);
             this.litterTime = 0;
         }
-        if (this.isRiding()) MoCTools.dismountSneakingPlayer(this);
+        if (this.isRiding()) MoCTools.dismountPassengerFromEntity(this, this.getRidingEntity(), false);
     }
 
     @Override

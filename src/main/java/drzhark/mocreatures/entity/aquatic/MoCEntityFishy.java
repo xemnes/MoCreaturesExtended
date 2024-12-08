@@ -3,14 +3,15 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageHeart;
 import net.minecraft.block.material.Material;
@@ -22,25 +23,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
-    public static final String[] fishNames = {"Blue", "Orange", "Light Blue", "Lime", "Green", "Purple", "Yellow", "Cyan", "Striped", "Red"};
+    public static final String[] fishNames = {"Blue", "Regal Blue", "Orange White Stripe", "Light Blue", "Green Yellow", "Green", "Purple", "Yellow", "Orange Blue Stripe", "Black White", "Red"};
     private static final DataParameter<Boolean> HAS_EATEN = EntityDataManager.createKey(MoCEntityFishy.class, DataSerializers.BOOLEAN);
     public int gestationtime;
 
     public MoCEntityFishy(World world) {
         super(world);
-        setSize(0.3F, 0.3F);
+        setSize(0.5f, 0.3f);
         setAdult(true);
-        setAge(50 + this.rand.nextInt(50));
+        //setAge(50 + this.rand.nextInt(50));
+        setAge(100);
     }
 
     @Override
@@ -53,7 +56,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
     }
 
@@ -105,16 +108,11 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
     }
 
     @Override
-    protected void dropFewItems(boolean flag, int x) {
+    public void dropLegacyEgg() {
         int i = this.rand.nextInt(100);
-        if (i < 70) {
-            //entityDropItem(new ItemStack(Items.FISH, 1, 0), 0.0F);
-        } else {
+        if (i < 30) {
             int j = this.rand.nextInt(2);
-            for (int k = 0; k < j; k++) {
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, getType()), 0.0F);
-            }
-
+            entityDropItem(new ItemStack(MoCItems.mocegg, j, getType()), 0.0F);
         }
     }
 
@@ -252,7 +250,7 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
 
     @Override
     public float getSizeFactor() {
-        return getAge() * 0.01F;
+        return getAge() * 0.006F;
     }
 
     @Override
@@ -269,5 +267,24 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
             return 0.2F;
         }
         return -0.5F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.65F;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_FLOP;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_FISH_HURT;
+    }
+
+    @Override
+    protected SoundEvent getSwimSound() {
+        return MoCSoundEvents.ENTITY_FISH_SWIM;
     }
 }

@@ -35,6 +35,8 @@ public class MoCModelFishy extends ModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        float scale = 0.0865F;
+
         setRotationAngles(f, f1, f2, f3, f4, f5);
         MoCEntityFishy smallFish = (MoCEntityFishy) entity;
         float yOffset = smallFish.getAdjustedYOffset();
@@ -42,8 +44,8 @@ public class MoCModelFishy extends ModelBase {
         float zOffset = smallFish.getAdjustedZOffset();
         GlStateManager.pushMatrix();
         GlStateManager.translate(xOffset, yOffset, zOffset);
-        this.Body.render(f5);
-        this.Tail.render(f5);
+        this.Body.render(scale);
+        this.Tail.render(scale);
         GlStateManager.popMatrix();
     }
 

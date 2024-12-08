@@ -24,7 +24,7 @@ public class MoCMessageEntityDive implements IMessage, IMessageHandler<MoCMessag
 
     @Override
     public IMessage onMessage(MoCMessageEntityDive message, MessageContext ctx) {
-        if (ctx.getServerHandler().player.getRidingEntity() != null && ctx.getServerHandler().player.getRidingEntity() instanceof IMoCEntity) {
+        if (ctx.getServerHandler().player.getRidingEntity() instanceof IMoCEntity) {
             ((IMoCEntity) ctx.getServerHandler().player.getRidingEntity()).makeEntityDive();
         }
         return null;

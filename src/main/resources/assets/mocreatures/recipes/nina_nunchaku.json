@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " SS",
+    "S S",
+    "H H"
+  ],
+  "key": {
+    "S": {
+      "item": "mocreatures:ancientsilveringot"
+    },
+    "H": {
+      "item": "mocreatures:hide"
+    }
+  },
+  "result": {
+    "item": "mocreatures:nunchaku"
+  }
+}

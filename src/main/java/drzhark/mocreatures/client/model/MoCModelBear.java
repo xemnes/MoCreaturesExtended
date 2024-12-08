@@ -534,7 +534,7 @@ public class MoCModelBear extends ModelBase {
             this.BLegRR1.render(f5);
             this.BLegRR2.render(f5);
             this.BLegRR3.render(f5);
-        } else if (bearstate == 2) { //sited
+        } else if (bearstate == 2 || bearstate == 3) { //sited
             if (openMouth) {
                 this.CMouthOpen.render(f5);
             } else {
@@ -664,7 +664,7 @@ public class MoCModelBear extends ModelBase {
             this.BLegRL1.rotateAngleX = -0.5235988F + RLegRotX;
             this.BLegRL2.rotateAngleX = RLegRotX;
             this.BLegRL3.rotateAngleX = RLegRotX;
-        } else if (this.bearstate == 2) {
+        } else if (this.bearstate == 2 || this.bearstate == 3) {
             this.CHead.rotateAngleX = 0.1502636F + XAngle;
             this.CHead.rotateAngleY = YAngle;
 

@@ -4,24 +4,29 @@
 package drzhark.mocreatures.entity.aquatic;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
 
-    public static final String[] fishNames = {"Anchovy", "Angelfish", "Angler", "Clownfish", "Goldfish", "Hippotang", "Manderin"};
+    public static final String[] fishNames = {"Anchovy", "Angelfish", "Anglerfish", "Clownfish", "Goldfish", "Hippo Tang", "Mandarinfish"};
 
     public MoCEntitySmallFish(World world) {
         super(world);
-        setSize(0.3F, 0.3F);
-        setAge(70 + this.rand.nextInt(30));
+        setSize(0.5f, 0.3f);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(70 + this.rand.nextInt(30));
+        setAge(100);
     }
 
     public static MoCEntitySmallFish createEntity(World world, int type) {
@@ -190,5 +195,24 @@ public class MoCEntitySmallFish extends MoCEntityTameableAquatic {
             return 0.1F;
         }
         return 0F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.45F;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_FLOP;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return MoCSoundEvents.ENTITY_FISH_HURT;
+    }
+
+    @Override
+    protected SoundEvent getSwimSound() {
+        return MoCSoundEvents.ENTITY_FISH_SWIM;
     }
 }

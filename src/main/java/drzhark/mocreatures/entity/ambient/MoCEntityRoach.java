@@ -3,20 +3,20 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.entity.MoCEntityInsect;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.EntityAIFollow;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityRoach extends MoCEntityInsect {
 
@@ -29,7 +29,12 @@ public class MoCEntityRoach extends MoCEntityInsect {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAIFleeFromEntityMoC(this, entity -> !(entity instanceof MoCEntityCrab) && (entity.height > 0.3F || entity.width > 0.3F), 6.0F, 0.8D, 1.3D));
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
     }
 
     @Override
@@ -72,16 +77,21 @@ public class MoCEntityRoach extends MoCEntityInsect {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+        return MoCSoundEvents.ENTITY_GRASSHOPPER_HURT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+        return MoCSoundEvents.ENTITY_GRASSHOPPER_HURT;
     }
 
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.ROACH;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

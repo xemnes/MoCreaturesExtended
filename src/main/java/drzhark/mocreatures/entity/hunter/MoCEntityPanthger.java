@@ -3,22 +3,32 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityPanthger extends MoCEntityBigCat {
 
     public MoCEntityPanthger(World world) {
         super(world);
+        setSize(1.225F, 1.2225F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.5D);
     }
 
     @Override
@@ -81,21 +91,6 @@ public class MoCEntityPanthger extends MoCEntityBigCat {
     }
 
     @Override
-    public float calculateMaxHealth() {
-        return 30F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 7D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 10D;
-    }
-
-    @Override
     public int getMaxAge() {
         return 115;
     }
@@ -109,5 +104,9 @@ public class MoCEntityPanthger extends MoCEntityBigCat {
             return false;
         }
         return entity.height < 1.5F && entity.width < 1.5F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

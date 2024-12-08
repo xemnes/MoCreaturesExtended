@@ -3,14 +3,13 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -18,10 +17,21 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityLiger extends MoCEntityBigCat {
 
     public MoCEntityLiger(World world) {
         super(world);
+        setSize(1.35F, 1.43525F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
     }
 
     @Override
@@ -95,21 +105,6 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     }
 
     @Override
-    public float calculateMaxHealth() {
-        return 35F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 8D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 10D;
-    }
-
-    @Override
     public int getMaxAge() {
         return 135;
     }
@@ -128,5 +123,9 @@ public class MoCEntityLiger extends MoCEntityBigCat {
     @Override
     public boolean isFlyer() {
         return this.getType() == 2;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

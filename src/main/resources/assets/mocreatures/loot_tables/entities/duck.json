@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "minecraft:chicken",
+          "name": "mocreatures:duckraw",
           "weight": 1,
           "functions": [
             {

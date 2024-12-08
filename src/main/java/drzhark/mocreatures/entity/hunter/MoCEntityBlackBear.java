@@ -3,25 +3,35 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
 import drzhark.mocreatures.entity.neutral.MoCEntityPandaBear;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityBlackBear extends MoCEntityBear {
 
     public MoCEntityBlackBear(World world) {
         super(world);
+        setSize(0.85F, 1.175F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override
@@ -55,11 +65,10 @@ public class MoCEntityBlackBear extends MoCEntityBear {
         return 6D * factor;
     }
 
-    @Override
-    public int getAttackStrength() {
+    /*public int getAttackStrength() {
         int factor = (this.world.getDifficulty().getId());
         return 2 * factor;
-    }
+    }*/
 
     @Override
     public boolean shouldAttackPlayers() {
@@ -90,11 +99,7 @@ public class MoCEntityBlackBear extends MoCEntityBear {
             return true;
         }
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
-            if (getBearState() == 0) {
-                setBearState(2);
-            } else {
-                setBearState(0);
-            }
+            this.processBearWhipped();
             return true;
         }
         if (this.getIsRideable() && this.getIsAdult() && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
@@ -132,5 +137,9 @@ public class MoCEntityBlackBear extends MoCEntityBear {
     @Override
     public boolean compatibleMate(Entity mate) {
         return mate instanceof MoCEntityPandaBear;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.76F;
     }
 }

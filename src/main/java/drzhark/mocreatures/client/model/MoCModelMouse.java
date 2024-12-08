@@ -27,39 +27,39 @@ public class MoCModelMouse extends ModelBase {
 
     public MoCModelMouse() {
         this.Head = new ModelRenderer(this, 0, 0);
-        this.Head.addBox(-1.5F, -1F, -6F, 3, 4, 6, 0.0F);
-        this.Head.setRotationPoint(0.0F, 19F, -9F);
+        this.Head.addBox(-1.5F, -1.0F, -6.0F, 3, 4, 6, 0.0F);
+        this.Head.setRotationPoint(0.0F, 19F, -6.0F);
         this.EarR = new ModelRenderer(this, 16, 26);
-        this.EarR.addBox(-3.5F, -3F, -2F, 3, 3, 1, 0.0F);
-        this.EarR.setRotationPoint(0.0F, 19F, -9F);
+        this.EarR.addBox(-3.5F, -3.0F, -1.0F, 3, 3, 1, 0.0F);
+        this.EarR.setRotationPoint(0.0F, 19.0F, -6.0F);
         this.EarL = new ModelRenderer(this, 24, 26);
-        this.EarL.addBox(0.5F, -3F, -1F, 3, 3, 1, 0.0F);
-        this.EarL.setRotationPoint(0.0F, 19F, -10F);
+        this.EarL.addBox(0.5F, -3.0F, -1.0F, 3, 3, 1, 0.0F);
+        this.EarL.setRotationPoint(0.0F, 19F, -6.0F);
         this.WhiskerR = new ModelRenderer(this, 20, 20);
-        this.WhiskerR.addBox(-4.5F, -1F, -7F, 3, 3, 1, 0.0F);
-        this.WhiskerR.setRotationPoint(0.0F, 19F, -9F);
+        this.WhiskerR.addBox(-4.5F, -1.0F, -7.0F, 3, 3, 1, 0.0F);
+        this.WhiskerR.setRotationPoint(0.0F, 19.0F, -6.0F);
         this.WhiskerL = new ModelRenderer(this, 24, 20);
-        this.WhiskerL.addBox(1.5F, -1F, -6F, 3, 3, 1, 0.0F);
-        this.WhiskerL.setRotationPoint(0.0F, 19F, -9F);
+        this.WhiskerL.addBox(1.5F, -1.0F, -6.0F, 3, 3, 1, 0.0F);
+        this.WhiskerL.setRotationPoint(0.0F, 19.0F, -6.0F);
         this.Tail = new ModelRenderer(this, 56, 0);
-        this.Tail.addBox(-0.5F, 0.0F, -1F, 1, 14, 1, 0.0F);
-        this.Tail.setRotationPoint(0.0F, 20F, 3F);
+        this.Tail.addBox(-0.5F, 0.0F, -1.0F, 1, 14, 1, 0.0F);
+        this.Tail.setRotationPoint(0.0F, 20.0F, 6.0F);
         this.Tail.rotateAngleX = 1.570796F;
         this.FrontL = new ModelRenderer(this, 0, 18);
-        this.FrontL.addBox(-2F, 0.0F, -3F, 2, 1, 4, 0.0F);
-        this.FrontL.setRotationPoint(3F, 23F, -7F);
+        this.FrontL.addBox(-2.0F, 0.0F, -3.0F, 2, 1, 4, 0.0F);
+        this.FrontL.setRotationPoint(3.0F, 23.0F, -4.0F);
         this.FrontR = new ModelRenderer(this, 0, 18);
-        this.FrontR.addBox(0.0F, 0.0F, -3F, 2, 1, 4, 0.0F);
-        this.FrontR.setRotationPoint(-3F, 23F, -7F);
+        this.FrontR.addBox(0.0F, 0.0F, -3.0F, 2, 1, 4, 0.0F);
+        this.FrontR.setRotationPoint(-3.0F, 23.0F, -4.0F);
         this.RearL = new ModelRenderer(this, 0, 18);
-        this.RearL.addBox(-2F, 0.0F, -4F, 2, 1, 4, 0.0F);
-        this.RearL.setRotationPoint(4F, 23F, 2.0F);
+        this.RearL.addBox(-2.0F, 0.0F, -4.0F, 2, 1, 4, 0.0F);
+        this.RearL.setRotationPoint(3.0F, 23.0F, 5.0F);
         this.RearR = new ModelRenderer(this, 0, 18);
-        this.RearR.addBox(0.0F, 0.0F, -4F, 2, 1, 4, 0.0F);
-        this.RearR.setRotationPoint(-4F, 23F, 2.0F);
+        this.RearR.addBox(0.0F, 0.0F, -4.0F, 2, 1, 4, 0.0F);
+        this.RearR.setRotationPoint(-3.0F, 23.0F, 5.0F);
         this.BodyF = new ModelRenderer(this, 20, 0);
-        this.BodyF.addBox(-3F, -3F, -7F, 6, 6, 12, 0.0F);
-        this.BodyF.setRotationPoint(0.0F, 20F, -2F);
+        this.BodyF.addBox(-3.0F, -3.0F, -7.0F, 6, 6, 12, 0.0F);
+        this.BodyF.setRotationPoint(0.0F, 20.0F, 1.0F);
     }
 
     @Override

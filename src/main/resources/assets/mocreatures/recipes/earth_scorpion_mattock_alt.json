@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SCC",
+    "CGP"
+  ],
+  "key": {
+    "S": {
+      "item": "mocreatures:scorpstingdirt",
+      "data": 32767
+    },
+    "G": {
+      "item": "minecraft:golden_hoe",
+      "data": 32767
+    },
+    "P": {
+      "item": "minecraft:golden_pickaxe",
+      "data": 32767
+    },
+    "C": {
+      "item": "mocreatures:chitin"
+    }
+  },
+  "result": {
+    "item": "mocreatures:earth_scorpion_mattock"
+  }
+}

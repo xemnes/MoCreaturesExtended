@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mocreatures:gleaming_glass"
+    }
+  },
+  "result": {
+    "item": "mocreatures:gleaming_glass_pane",
+    "count": 16
+  }
+}

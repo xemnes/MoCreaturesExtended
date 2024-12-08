@@ -3,12 +3,12 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityGoldFish extends MoCEntitySmallFish {
 

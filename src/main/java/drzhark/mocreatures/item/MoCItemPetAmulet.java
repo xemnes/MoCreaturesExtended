@@ -4,11 +4,11 @@
 package drzhark.mocreatures.item;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.MoCPetData;
+import drzhark.mocreatures.entity.tameable.MoCPetData;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
 import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;

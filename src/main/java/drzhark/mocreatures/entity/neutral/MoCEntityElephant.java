@@ -5,12 +5,12 @@ package drzhark.mocreatures.entity.neutral;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.inventory.MoCAnimalChest;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import drzhark.mocreatures.inventory.MoCAnimalChest;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.block.Block;
@@ -82,13 +82,15 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         if (!this.world.isRemote) {
             setAdult(this.rand.nextInt(4) != 0);
         }
+
+        experienceValue = 10;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(4, new EntityAIFollowAdult(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     }
@@ -96,10 +98,11 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 
     @Override
@@ -160,6 +163,11 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             default:
                 return MoCreatures.proxy.getModelTexture("elephant_african.png");
         }
+    }
+
+    @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
     }
 
     public float calculateMaxHealth() {
@@ -273,7 +281,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         this.tuskUses += (byte) dmg;
         if ((this.getTusks() == 1 && this.tuskUses > 59) || (this.getTusks() == 2 && this.tuskUses > 250)
                 || (this.getTusks() == 3 && this.tuskUses > 1000)) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_TURTLE_HURT);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_CLANG);
             setTusks((byte) 0);
         }
     }
@@ -306,7 +314,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == Items.CAKE) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             this.temper += 2;
             this.setHealth(getMaxHealth());
             if (!this.world.isRemote && !getIsAdult() && !getIsTamed() && this.temper >= 10) {
@@ -317,7 +325,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && !getIsTamed() && !getIsAdult() && stack.getItem() == MoCItems.sugarlump) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             this.temper += 1;
             this.setHealth(getMaxHealth());
             if (!this.world.isRemote && !getIsAdult() && !getIsTamed() && this.temper >= 10) {
@@ -705,7 +713,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     @Override
     public boolean isMyHealFood(ItemStack stack) {
         return !stack.isEmpty()
-                && (stack.getItem() == Items.BAKED_POTATO || stack.getItem() == Items.BREAD || stack.getItem() == MoCItems.haystack);
+                && (stack.getItem() == Items.BAKED_POTATO || stack.getItem() == Items.BREAD || stack.getItem() == Item.getItemFromBlock(Blocks.HAY_BLOCK));
     }
 
     @Override
@@ -714,7 +722,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
     }
 
     @Override
-    public void Riding() {
+    public void riding() {
         if ((this.isBeingRidden()) && (this.getRidingEntity() instanceof EntityPlayer)) {
             EntityPlayer entityplayer = (EntityPlayer) this.getRidingEntity();
             List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox().grow(1.0D, 0.0D, 1.0D));

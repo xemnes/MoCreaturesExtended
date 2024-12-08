@@ -4,7 +4,8 @@
 package drzhark.mocreatures.entity.ai;
 
 import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.MoCEntityAnimal;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -52,6 +53,9 @@ public class EntityAIFollowOwnerPlayer extends EntityAIBase {
         if (((IMoCEntity) this.thePet).getIsSitting()) {
             return false;
         }
+        if (!((MoCEntityAnimal) this.thePet).getIsFollowingOwnerPlayer()) {
+            return false;
+        }
 
         UUID ownerUniqueId = ((IMoCTameable) this.thePet).getOwnerId();
         if (ownerUniqueId == null) {
@@ -76,8 +80,7 @@ public class EntityAIFollowOwnerPlayer extends EntityAIBase {
      */
     @Override
     public boolean shouldContinueExecuting() {
-        return !this.petPathfinder.noPath() && this.thePet.getDistanceSq(this.theOwner) > this.maxDist * this.maxDist
-                && !((IMoCEntity) this.thePet).getIsSitting();
+        return !this.petPathfinder.noPath() && this.thePet.getDistanceSq(this.theOwner) > this.maxDist * this.maxDist && !((IMoCEntity) this.thePet).getIsSitting();
     }
 
     /**

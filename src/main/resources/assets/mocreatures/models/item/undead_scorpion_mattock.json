@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "mocreatures:items/undead_scorpion_mattock"
+  }
+}

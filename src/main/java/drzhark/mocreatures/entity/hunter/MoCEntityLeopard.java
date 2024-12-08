@@ -3,14 +3,13 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -21,10 +20,21 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityLeopard extends MoCEntityBigCat {
 
     public MoCEntityLeopard(World world) {
         super(world);
+        setSize(1.165F, 1.01F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
     }
 
     @Override
@@ -135,21 +145,6 @@ public class MoCEntityLeopard extends MoCEntityBigCat {
     }
 
     @Override
-    public float calculateMaxHealth() {
-        return 25F;
-    }
-
-    @Override
-    public double calculateAttackDmg() {
-        return 5D;
-    }
-
-    @Override
-    public double getAttackRange() {
-        return 6D;
-    }
-
-    @Override
     public int getMaxAge() {
         return 95;
     }
@@ -165,8 +160,7 @@ public class MoCEntityLeopard extends MoCEntityBigCat {
         return entity.height < 1.3F && entity.width < 1.3F;
     }
 
-    @Override
-    public float getMoveSpeed() {
-        return 1.6F;
+    public float getEyeHeight() {
+        return this.height * 0.92F;
     }
 }

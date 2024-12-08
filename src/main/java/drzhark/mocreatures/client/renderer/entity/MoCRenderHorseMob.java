@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelHorseMob;
 import drzhark.mocreatures.entity.hostile.MoCEntityHorseMob;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderHorseMob extends RenderLiving<MoCEntityHorseMob> {
 
     public MoCRenderHorseMob(MoCModelHorseMob modelbase) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, 0.5F);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, 0.5F);
 
     }
 

@@ -3,16 +3,15 @@
  */
 package drzhark.mocreatures.entity.neutral;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFollowAdult;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -23,6 +22,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -31,8 +31,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityGoat extends MoCEntityTameableAnimal {
 
@@ -65,7 +68,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 1.0D));
         this.tasks.addTask(4, new EntityAIFollowAdult(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
     }
@@ -73,9 +76,10 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.5D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
@@ -276,7 +280,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
                         return;
                     }
                     if (f < 2.0F && this.deathTime == 0 && this.rand.nextInt(50) == 0) {
-                        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
+                        MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EAT);
                         setEating(true);
 
                         entityitem.setDead();
@@ -328,7 +332,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         this.attacking = 30;
         if (entityIn instanceof MoCEntityGoat) {
             MoCTools.bigSmack(this, entityIn, 0.4F);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_SMACK);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_SMACK);
             if (this.rand.nextInt(3) == 0) {
                 calm();
                 ((MoCEntityGoat) entityIn).calm();
@@ -407,7 +411,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         if (getSwingLeg()) {
             this.movecount += 5;
             if (this.movecount == 30) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_DIGG);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_DIG);
             }
 
             if (this.movecount > 100) {
@@ -437,7 +441,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
             if (this.eatcount == 2) {
                 EntityPlayer entityplayer1 = this.world.getClosestPlayerToEntity(this, 3D);
                 if (entityplayer1 != null) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EAT);
                 }
             }
             if (this.eatcount > 25) {
@@ -529,11 +533,12 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         if (getIsTamed() && !stack.isEmpty() && (MoCTools.isItemEdible(stack.getItem()))) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             this.setHealth(getMaxHealth());
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GOAT_EAT);
             return true;
         }
 
         if (!getIsTamed() && !stack.isEmpty() && MoCTools.isItemEdible(stack.getItem())) {
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 MoCTools.tameWithName(player, this);
             }
@@ -583,6 +588,12 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     protected SoundEvent getDeathSound() {
         return MoCSoundEvents.ENTITY_GOAT_DEATH;
     }
+    
+    // TODO: Add unique step sound
+    @Override
+    protected void playStepSound(BlockPos pos, Block block) {
+        this.playSound(SoundEvents.ENTITY_SHEEP_STEP, 0.15F, 1.0F);
+    }
 
     @Nullable
     protected ResourceLocation getLootTable() {
@@ -604,6 +615,6 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
     }
 
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.945F;
     }
 }

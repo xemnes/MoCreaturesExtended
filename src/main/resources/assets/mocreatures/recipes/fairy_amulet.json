@@ -12,8 +12,7 @@
       "ore": "nuggetGold"
     },
     "#": {
-      "type": "forge:ore_dict",
-      "ore": "dustBlaze"
+      "item": "minecraft:blaze_powder"
     },
     "Z": {
       "item": "mocreatures:unicornhorn"

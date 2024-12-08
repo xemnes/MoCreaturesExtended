@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "mocreatures:scrollofrenaming",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "paper"
+    },
+    {
+      "item": "minecraft:writable_book"
+    }
+  ],
+  "result": {
+    "item": "mocreatures:scrollofrenaming"
+  }
+}

@@ -26,32 +26,32 @@ public class MoCModelFox extends ModelBase {
     public MoCModelFox() {
         byte byte0 = 8;
         this.Body = new ModelRenderer(this, 0, 0);
-        this.Body.addBox(0.0F, 0.0F, 0.0F, 6, 6, 12, 0.0F);
+        this.Body.addBox(1.0F, 0.0F, 0.0F, 6, 6, 12, 0.0F);
         this.Body.setRotationPoint(-4F, 10F, -6F);
         this.Head = new ModelRenderer(this, 0, 20);
-        this.Head.addBox(-3F, -3F, -4F, 6, 6, 4, 0.0F);
+        this.Head.addBox(-2F, -3F, -4F, 6, 6, 4, 0.0F);
         this.Head.setRotationPoint(-1F, 11F, -6F);
         this.Snout = new ModelRenderer(this, 20, 20);
-        this.Snout.addBox(-1F, 1.0F, -7F, 2, 2, 4, 0.0F);
+        this.Snout.addBox(0.0F, 1.0F, -7F, 2, 2, 4, 0.0F);
         this.Snout.setRotationPoint(-1F, 11F, -6F);
         this.Ears = new ModelRenderer(this, 50, 20);
-        this.Ears.addBox(-3F, -6F, -2F, 6, 4, 1, 0.0F);
+        this.Ears.addBox(-2F, -6F, -2F, 6, 4, 1, 0.0F);
         this.Ears.setRotationPoint(-1F, 11F, -6F);
         this.Tail = new ModelRenderer(this, 32, 20);
-        this.Tail.addBox(-5F, -5F, -2F, 3, 3, 8, 0.0F);
+        this.Tail.addBox(-4F, -5F, -2F, 3, 3, 8, 0.0F);
         this.Tail.setRotationPoint(2.5F, 15F, 5F);
         this.Tail.rotateAngleX = -0.5235988F;
         this.Leg1 = new ModelRenderer(this, 0, 0);
-        this.Leg1.addBox(-2F, 0.0F, -2F, 3, byte0, 3, 0.0F);
+        this.Leg1.addBox(-1F, 0.0F, -2F, 3, byte0, 3, 0.0F);
         this.Leg1.setRotationPoint(-2F, 24 - byte0, 5F);
         this.Leg2 = new ModelRenderer(this, 0, 0);
-        this.Leg2.addBox(-2F, 0.0F, -2F, 3, byte0, 3, 0.0F);
+        this.Leg2.addBox(-1F, 0.0F, -2F, 3, byte0, 3, 0.0F);
         this.Leg2.setRotationPoint(1.0F, 24 - byte0, 5F);
         this.Leg3 = new ModelRenderer(this, 0, 0);
-        this.Leg3.addBox(-2F, 0.0F, -2F, 3, byte0, 3, 0.0F);
+        this.Leg3.addBox(-1F, 0.0F, -2F, 3, byte0, 3, 0.0F);
         this.Leg3.setRotationPoint(-2F, 24 - byte0, -4F);
         this.Leg4 = new ModelRenderer(this, 0, 0);
-        this.Leg4.addBox(-2F, 0.0F, -2F, 3, byte0, 3, 0.0F);
+        this.Leg4.addBox(-1F, 0.0F, -2F, 3, byte0, 3, 0.0F);
         this.Leg4.setRotationPoint(1.0F, 24 - byte0, -4F);
     }
 

@@ -30,17 +30,19 @@ public class MoCRenderMouse extends MoCRenderMoC<MoCEntityMouse> {
 
     @Override
     protected void preRenderCallback(MoCEntityMouse entitymouse, float f) {
+        // When mice are picked up
         if (entitymouse.upsideDown()) {
             upsideDown(entitymouse);
-
         }
-        if (entitymouse.climbing()) {
+
+        if (entitymouse.isOnLadder()) {
             rotateAnimal(entitymouse);
         }
     }
 
     protected void rotateAnimal(MoCEntityMouse entitymouse) {
-        GlStateManager.rotate(90F, -1F, 0.0F, 0.0F);
+        GlStateManager.rotate(90.0F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(0.0F, 0.4F, 0.0F);
     }
 
     protected void stretch(MoCEntityMouse entitymouse) {
@@ -49,9 +51,8 @@ public class MoCRenderMouse extends MoCRenderMoC<MoCEntityMouse> {
     }
 
     protected void upsideDown(MoCEntityMouse entitymouse) {
-        GlStateManager.rotate(-90F, -1F, 0.0F, 0.0F);
-        //GlStateManager.translate(-0.55F, 0F, -0.7F);
-        GlStateManager.translate(-0.55F, 0F, 0F);
+        GlStateManager.rotate(-90.0F, -1.0F, 0.0F, 0.0F);
+        GlStateManager.translate(-0.55F, 0.0F, 0.0F);
     }
 
     @Override

@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.MoCModelGoat;
 import drzhark.mocreatures.entity.neutral.MoCEntityGoat;
 import net.minecraft.client.gui.FontRenderer;
@@ -24,7 +24,7 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     float depth = 0F;
 
     public MoCRenderGoat(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
         this.tempGoat = (MoCModelGoat) modelbase;
     }
 
@@ -37,7 +37,6 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
     protected void preRenderCallback(MoCEntityGoat entitygoat, float f) {
         GlStateManager.translate(0.0F, this.depth, 0.0F);
         stretch(entitygoat);
-
     }
 
     @Override
@@ -50,11 +49,10 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
         this.tempGoat.earMov = entitygoat.earMovement();
         this.tempGoat.tailMov = entitygoat.tailMovement();
         this.tempGoat.eatMov = entitygoat.mouthMovement();
-
         super.doRender(entitygoat, d, d1, d2, f, f1);
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitygoat.getPetName()).isEmpty();
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        if (entitygoat.renderName()) {
+        if (entitygoat.shouldRenderNameAndHealth()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitygoat.getDistance(this.renderManager.renderViewEntity);
@@ -119,7 +117,6 @@ public class MoCRenderGoat extends RenderLiving<MoCEntityGoat> {
                 GlStateManager.popMatrix();
             }
         }
-
     }
 
     protected void stretch(MoCEntityGoat entitygoat) {

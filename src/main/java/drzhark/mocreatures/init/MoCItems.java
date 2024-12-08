@@ -7,6 +7,7 @@ import drzhark.mocreatures.MoCConstants;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.item.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -15,40 +16,41 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.*;
 
+// TODO: Rework item registration to be like block registration
 public class MoCItems {
-
     public static final Set<Item> ITEMS = new HashSet<>();
     // Misc
-    public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.ITEM_RECORD_SHUFFLING);
-    public static final MoCItem horsesaddle = new MoCItemHorseSaddle("horsesaddle");
+    public static final MoCItemRecord recordshuffle = new MoCItemRecord("recordshuffle", MoCSoundEvents.MUSIC_DISC_SHUFFLING);
     public static final MoCItem sharkteeth = new MoCItem("sharkteeth");
-    public static final MoCItem haystack = new MoCItemHayStack("haystack");
-    public static final MoCItemSugarLump sugarlump = new MoCItemSugarLump("sugarlump");
+    public static final MoCItemFood sugarlump = (MoCItemFood) new MoCItemFood("sugarlump", 1, 0.1F, false, 12).setPotionEffect(new PotionEffect(MobEffects.NAUSEA, 4 * 20, 0), 0.15F);
     public static final MoCItem mocegg = new MoCItemEgg("mocegg");
     public static final MoCItem bigcatclaw = new MoCItem("bigcatclaw");
-    public static final MoCItem whip = new MoCItemWhip("whip");
     public static final MoCItem staffPortal = new ItemStaffPortal("staffportal");
-    public static final MoCItem staffTeleport = new ItemStaffTeleport("staffteleport");
     public static final MoCItem medallion = new MoCItem("medallion");
     public static final MoCItemKittyBed[] kittybed = new MoCItemKittyBed[16];
     public static final MoCItem litterbox = new MoCItemLitterBox("kittylitter");
     public static final MoCItem woolball = new MoCItem("woolball");
     public static final MoCItem petfood = new MoCItem("petfood");
-    public static final MoCItem builderHammer = new ItemBuilderHammer("builderhammer");
     public static final MoCItem hideCroc = new MoCItem("reptilehide");
     public static final MoCItem fur = new MoCItem("fur");
     public static final MoCItem essencedarkness = new MoCItem("essencedarkness");
+    public static final MoCItem essenceEternal = new MoCItem("essence_eternal");
     public static final MoCItem essencefire = new MoCItem("essencefire");
+    public static final MoCItem essenceIce = new MoCItem("essence_ice");
     public static final MoCItem essenceundead = new MoCItem("essenceundead");
     public static final MoCItem essencelight = new MoCItem("essencelight");
     public static final MoCItem amuletbone = new MoCItemHorseAmulet("amuletbone");
@@ -64,10 +66,12 @@ public class MoCItems {
     public static final MoCItem petamulet = new MoCItemPetAmulet("petamulet", 1);
     public static final MoCItem petamuletfull = new MoCItemPetAmulet("petamuletfull", 1);
     public static final MoCItem heartdarkness = new MoCItem("heartdarkness");
+    public static final MoCItem heartEternal = new MoCItem("heart_eternal");
     public static final MoCItem heartfire = new MoCItem("heartfire");
+    public static final MoCItem heartIce = new MoCItem("heart_ice");
     public static final MoCItem heartundead = new MoCItem("heartundead");
     public static final MoCItem unicornhorn = new MoCItem("unicornhorn");
-    public static final MoCItem horsearmorcrystal = new MoCItem("horsearmorcrystal");
+    public static final MoCItem horsearmorcrystal = (MoCItem) new MoCItem("horsearmorcrystal", 0, true).setMaxStackSize(1);
     public static final MoCItem animalHide = new MoCItem("hide");
     public static final MoCItem chitinCave = new MoCItem("chitinblack");
     public static final MoCItem chitinFrost = new MoCItem("chitinfrost");
@@ -82,16 +86,25 @@ public class MoCItems {
     public static final MoCItem elephantGarment = new MoCItem("elephantgarment");
     public static final MoCItem elephantHowdah = new MoCItem("elephanthowdah");
     public static final MoCItem mammothPlatform = new MoCItem("mammothplatform");
-    public static final MoCItem scrollFreedom = new MoCItem("scrolloffreedom");
-    public static final MoCItem scrollOfSale = new MoCItem("scrollofsale");
-    public static final MoCItem scrollOfOwner = new MoCItem("scrollofowner");
+    public static final MoCItem scrollOfFreedom = new MoCItem("scrolloffreedom", 0, true);
+    public static final MoCItem scrollOfSale = new MoCItem("scrollofsale", 0, true);
+    public static final MoCItem scrollOfRenaming = new MoCItem("scrollofrenaming", 0, true);
     public static final MoCItem ancientSilverScrap = new MoCItem("ancientsilverscrap");
     public static final MoCItem ancientSilverIngot = new MoCItem("ancientsilveringot");
     public static final MoCItem ancientSilverNugget = new MoCItem("ancientsilvernugget");
+    public static final MoCItem fineSilverIngot = new MoCItem("fine_silver_ingot");
+    public static final MoCItem fineSilverNugget = new MoCItem("fine_silver_nugget");
+    public static final MoCItem firestoneChunk = new MoCItem("firestonechunk");
+    //public static final MoCItemCrabClaw brackishClaw = new MoCItemCrabClaw("brackish_claw", 768, 15, 0.0F, 1, 2.0F);
+    // Doors - These need to be registered alongside the blocks
+    public static final MoCItemDoor wyvwoodDoor = new MoCItemDoor(MoCBlocks.wyvwoodDoor, "wyvwood_door");
     // Food
     public static final MoCItemFood cookedTurkey = new MoCItemFood("turkeycooked", 7, 0.8F, true);
     public static final MoCItemFood crabraw = (MoCItemFood) new MoCItemFood("crabraw", 2, 0.1F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
-    public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 6, 0.8F, true);
+    public static final MoCItemFood crabcooked = new MoCItemFood("crabcooked", 4, 0.6F, true);
+    public static final MoCItemFood duckCooked = new MoCItemFood("duckcooked", 6, 0.7F, true);
+    public static final MoCItemFood duckRaw = new MoCItemFood("duckraw", 2, 0.4F, true);
+    public static final MoCItemFood mysticPear = new MoCItemFood("mysticpear", 4, 0.8F, false, 16).setAlwaysEdible();
     public static final MoCItemFood omelet = new MoCItemFood("omelet", 3, 0.5F, false);
     public static final MoCItemFood ostrichraw = (MoCItemFood) new MoCItemFood("ostrichraw", 3, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 30 * 20, 0), 0.8F);
     public static final MoCItemFood ostrichcooked = new MoCItemFood("ostrichcooked", 7, 0.8F, true);
@@ -105,24 +118,44 @@ public class MoCItems {
     public static final MoCItemFood venisonCooked = new MoCItemFood("venisoncooked", 8, 0.9F, true);
     public static final MoCItemFood venisonRaw = new MoCItemFood("venisonraw", 3, 0.4F, true);
     // Weapons
-    public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", Item.ToolMaterial.IRON);
-    public static final MoCItemSword sai = new MoCItemSword("sai", Item.ToolMaterial.IRON);
-    public static final MoCItemSword bo = new MoCItemSword("bo", Item.ToolMaterial.IRON);
-    public static final MoCItemSword katana = new MoCItemSword("katana", Item.ToolMaterial.IRON);
-    static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 0, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
+    static ToolMaterial WHIP = EnumHelper.addToolMaterial("WHIP", 0, 184, 2.0F, 3.0F, 15).setRepairItem(new ItemStack(Items.LEATHER));
+    public static final MoCItemWhip whip = new MoCItemWhip("whip", WHIP, 1.9F);
+    static ToolMaterial REPTILEWHIP = EnumHelper.addToolMaterial("REPTILEWHIP", 0, 224, 3.0F, 4.0F, 17).setRepairItem(new ItemStack(hideCroc));
+    public static final MoCItemWhip reptileWhip = new MoCItemWhip("reptile_whip", REPTILEWHIP, 1.9F);
+    static ToolMaterial NINJA = EnumHelper.addToolMaterial("NINJA", 3, 501, 10.0F, 3.5F, 20).setRepairItem(new ItemStack(ancientSilverIngot));
+    public static final MoCItemSword nunchaku = new MoCItemSword("nunchaku", NINJA);
+    public static final MoCItemSword sai = new MoCItemSword("sai", NINJA);
+    public static final MoCItemSword bo = new MoCItemSword("bo", NINJA);
+    public static final MoCItemSword katana = new MoCItemSword("katana", NINJA);
+    static ToolMaterial SHARK = EnumHelper.addToolMaterial("SHARK", 1, 161, 7.0F, 2.5F, 15).setRepairItem(new ItemStack(sharkteeth));
     public static final MoCItemSword sharksword = new MoCItemSword("sharksword", SHARK);
-    static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 0, 304, 9.5F, 3.0F, 19);
+    public static final MoCItemMattock sharkMattock = new MoCItemMattock("shark_mattock", SHARK, 4.5F, 1.2F);
+    public static final MoCItemAxe sharkaxe = new MoCItemAxe("sharkaxe", SHARK, 9.5F, 1.0F);
+    static ToolMaterial SILVER = EnumHelper.addToolMaterial("SILVER", 3, 404, 9.5F, 3.0F, 19).setRepairItem(new ItemStack(ancientSilverIngot));
     public static final MoCItemSword silversword = new MoCItemSword("silversword", SILVER);
-    static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
+    public static final MoCItemMattock silverMattock = new MoCItemMattock("ancient_silver_mattock", SILVER, 6.0F, 1.3F);
+    public static final MoCItemAxe silveraxe = new MoCItemAxe("silveraxe", SILVER, 10.0F, 1.1F);
+    public static final MoCItemBow silverBow = new MoCItemBow("ancient_silver_bow", 720, 1.3F, 1.2F, 0.8F, 0.8F, Ingredient.fromStacks(new ItemStack(ancientSilverIngot)));
+    static ToolMaterial SCORPC = EnumHelper.addToolMaterial("SCORPC", 3, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinCave));
     public static final MoCItemSword scorpSwordCave = new MoCItemSword("scorpswordcave", SCORPC, 4);
-    static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
+    public static final MoCItemMattock scorpMattockCave = new MoCItemMattock("dark_scorpion_mattock", SCORPC, 4.5F, 1.2F, 4);
+    public static final MoCItemAxe scorpAxeCave = new MoCItemAxe("scorpaxecave", SCORPC, 9.5F, 1.0F, 4);
+    static ToolMaterial SCORPF = EnumHelper.addToolMaterial("SCORPF", 3, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinFrost));
     public static final MoCItemSword scorpSwordFrost = new MoCItemSword("scorpswordfrost", SCORPF, 2);
-    static ToolMaterial SCORPN = EnumHelper.addToolMaterial("SCORPN", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinNether));
+    public static final MoCItemMattock scorpMattockFrost = new MoCItemMattock("frost_scorpion_mattock", SCORPF, 4.5F, 1.2F, 2);
+    public static final MoCItemAxe scorpAxeFrost = new MoCItemAxe("scorpaxefrost", SCORPF, 9.5F, 1.0F, 2);
+    static ToolMaterial SCORPN = EnumHelper.addToolMaterial("SCORPN", 3, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinNether));
     public static final MoCItemSword scorpSwordNether = new MoCItemSword("scorpswordnether", SCORPN, 3);
-    static ToolMaterial SCORPD = EnumHelper.addToolMaterial("SCORPD", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitin));
+    public static final MoCItemMattock scorpMattockNether = new MoCItemMattock("fire_scorpion_mattock", SCORPN, 4.5F, 1.2F, 3);
+    public static final MoCItemAxe scorpAxeNether = new MoCItemAxe("scorpaxenether", SCORPN, 9.5F, 1.0F, 3);
+    static ToolMaterial SCORPD = EnumHelper.addToolMaterial("SCORPD", 3, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitin));
     public static final MoCItemSword scorpSwordDirt = new MoCItemSword("scorpsworddirt", SCORPD, 1);
-    static ToolMaterial SCORPU = EnumHelper.addToolMaterial("SCORPU", 0, 351, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinUndead));
+    public static final MoCItemMattock scorpMattockDirt = new MoCItemMattock("earth_scorpion_mattock", SCORPD, 4.5F, 1.2F, 1);
+    public static final MoCItemAxe scorpAxeDirt = new MoCItemAxe("scorpaxedirt", SCORPD, 9.5F, 1.0F, 1);
+    static ToolMaterial SCORPU = EnumHelper.addToolMaterial("SCORPU", 3, 371, 7.5F, 2.5F, 16).setRepairItem(new ItemStack(chitinUndead));
     public static final MoCItemSword scorpSwordUndead = new MoCItemSword("scorpswordundead", SCORPU, 5);
+    public static final MoCItemMattock scorpMattockUndead = new MoCItemMattock("undead_scorpion_mattock", SCORPU, 4.5F, 1.2F, 5);
+    public static final MoCItemAxe scorpAxeUndead = new MoCItemAxe("scorpaxeundead", SCORPU, 9.5F, 1.0F, 5);
     static ToolMaterial STING = EnumHelper.addToolMaterial("STING", 0, 8, 6.0F, 0.0F, 5);
     public static final MoCItemWeapon scorpStingCave = new MoCItemWeapon("scorpstingcave", STING, 4);
     public static final MoCItemWeapon scorpStingFrost = new MoCItemWeapon("scorpstingfrost", STING, 2);
@@ -161,16 +194,27 @@ public class MoCItems {
     public static final MoCItemArmor scorpLegsUndead = new MoCItemArmor("scorplegsundead", scorpuARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor scorpBootsUndead = new MoCItemArmor("scorpbootsundead", scorpuARMOR, 4, EntityEquipmentSlot.FEET);
     static ArmorMaterial furARMOR = EnumHelper.addArmorMaterial("furARMOR", "furARMOR", 4, new int[]{1, 2, 2, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F).setRepairItem(new ItemStack(fur));
-    public static final MoCItemArmor chestFur = new MoCItemArmor("furchest", furARMOR, 4, EntityEquipmentSlot.CHEST);
-    public static final MoCItemArmor helmetFur = new MoCItemArmor("furhelmet", furARMOR, 4, EntityEquipmentSlot.HEAD);
-    public static final MoCItemArmor legsFur = new MoCItemArmor("furlegs", furARMOR, 4, EntityEquipmentSlot.LEGS);
-    public static final MoCItemArmor bootsFur = new MoCItemArmor("furboots", furARMOR, 4, EntityEquipmentSlot.FEET);
+    public static final MoCItemLuckyArmor chestFur = new MoCItemLuckyArmor("furchest", 0.5F, furARMOR, 4, EntityEquipmentSlot.CHEST);
+    public static final MoCItemLuckyArmor helmetFur = new MoCItemLuckyArmor("furhelmet", 0.5F, furARMOR, 4, EntityEquipmentSlot.HEAD);
+    public static final MoCItemLuckyArmor legsFur = new MoCItemLuckyArmor("furlegs", 0.5F, furARMOR, 4, EntityEquipmentSlot.LEGS);
+    public static final MoCItemLuckyArmor bootsFur = new MoCItemLuckyArmor("furboots", 0.5F, furARMOR, 4, EntityEquipmentSlot.FEET);
     static ArmorMaterial hideARMOR = EnumHelper.addArmorMaterial("hideARMOR", "hideARMOR", 8, new int[]{1, 3, 3, 1}, 18, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F).setRepairItem(new ItemStack(animalHide));
     public static final MoCItemArmor chestHide = new MoCItemArmor("hidechest", hideARMOR, 4, EntityEquipmentSlot.CHEST);
     public static final MoCItemArmor helmetHide = new MoCItemArmor("hidehelmet", hideARMOR, 4, EntityEquipmentSlot.HEAD);
     public static final MoCItemArmor legsHide = new MoCItemArmor("hidelegs", hideARMOR, 4, EntityEquipmentSlot.LEGS);
     public static final MoCItemArmor bootsHide = new MoCItemArmor("hideboots", hideARMOR, 4, EntityEquipmentSlot.FEET);
-    static ArmorMaterial silverARMOR = EnumHelper.addArmorMaterial("silverARMOR", "silverARMOR", 15, new int[]{2, 6, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F); // unused
+    static ArmorMaterial silverARMOR = EnumHelper.addArmorMaterial("silverARMOR", "silverARMOR", 15, new int[]{2, 6, 5, 2}, 22, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.5F);
+    public static final MoCItemArmor chestSilver = new MoCItemArmor("ancient_silver_chestplate", silverARMOR, 4, EntityEquipmentSlot.CHEST);
+    public static final MoCItemArmor helmetSilver = new MoCItemArmor("ancient_silver_helmet", silverARMOR, 4, EntityEquipmentSlot.HEAD);
+    public static final MoCItemArmor legsSilver = new MoCItemArmor("ancient_silver_leggings", silverARMOR, 4, EntityEquipmentSlot.LEGS);
+    public static final MoCItemArmor bootsSilver = new MoCItemArmor("ancient_silver_boots", silverARMOR, 4, EntityEquipmentSlot.FEET);
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public static void registerRenders(final ModelRegistryEvent modelRegistryEvent) {
+        // All bow items go here
+        ModelLoader.setCustomModelResourceLocation(silverBow, 0, new ModelResourceLocation(silverBow.delegate.name(), "inventory"));
+    }
 
     @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
     public static class RegistrationHandler {
@@ -182,20 +226,17 @@ public class MoCItems {
         @SubscribeEvent
         public static void registerItems(final RegistryEvent.Register<Item> event) {
             List<Item> items = new ArrayList<>(Arrays.asList(
-                    horsesaddle,
                     sharkteeth,
-                    haystack,
                     sugarlump,
                     mocegg,
                     bigcatclaw,
-                    whip,
                     medallion,
                     litterbox,
                     woolball,
                     petfood,
                     hideCroc,
-                    plateCroc,
                     helmetCroc,
+                    plateCroc,
                     legsCroc,
                     bootsCroc,
                     fur,
@@ -204,22 +245,36 @@ public class MoCItems {
                     turtlecooked,
                     turtlesoup,
                     staffPortal,
-                    staffTeleport,
-                    builderHammer,
 
                     ancientSilverScrap,
                     ancientSilverIngot,
                     ancientSilverNugget,
+                    fineSilverIngot,
+                    fineSilverNugget,
+                    helmetSilver,
+                    chestSilver,
+                    legsSilver,
+                    bootsSilver,
+                    firestoneChunk,
 
+                    whip,
+                    reptileWhip,
                     nunchaku,
                     sai,
                     bo,
                     katana,
                     sharksword,
+                    sharkMattock,
+                    sharkaxe,
                     silversword,
+                    silverMattock,
+                    silveraxe,
+                    silverBow,
 
                     essencedarkness,
+                    essenceEternal,
                     essencefire,
+                    essenceIce,
                     essenceundead,
                     essencelight,
 
@@ -236,25 +291,31 @@ public class MoCItems {
                     petamulet,
                     petamuletfull,
 
-                    chestFur,
                     helmetFur,
+                    chestFur,
                     legsFur,
                     bootsFur,
 
                     heartdarkness,
+                    heartEternal,
                     heartfire,
+                    heartIce,
                     heartundead,
                     ostrichraw,
                     ostrichcooked,
                     unicornhorn,
                     horsearmorcrystal,
+                    mysticPear,
                     recordshuffle,
+                    wyvwoodDoor,
 
                     animalHide,
                     rawTurkey,
                     cookedTurkey,
-                    chestHide,
+                    duckRaw,
+                    duckCooked,
                     helmetHide,
+                    chestHide,
                     legsHide,
                     bootsHide,
                     ratRaw,
@@ -270,25 +331,35 @@ public class MoCItems {
                     chitinUndead,
 
                     scorpSwordCave,
+                    scorpMattockCave,
+                    scorpAxeCave,
                     scorpSwordDirt,
+                    scorpMattockDirt,
+                    scorpAxeDirt,
                     scorpSwordNether,
+                    scorpMattockNether,
+                    scorpAxeNether,
                     scorpSwordFrost,
+                    scorpMattockFrost,
+                    scorpAxeFrost,
                     scorpSwordUndead,
+                    scorpMattockUndead,
+                    scorpAxeUndead,
 
                     scorpHelmetCave,
                     scorpPlateCave,
                     scorpLegsCave,
                     scorpBootsCave,
-                    scorpPlateDirt,
                     scorpHelmetDirt,
+                    scorpPlateDirt,
                     scorpLegsDirt,
                     scorpBootsDirt,
-                    scorpPlateNether,
                     scorpHelmetNether,
+                    scorpPlateNether,
                     scorpLegsNether,
                     scorpBootsNether,
-                    scorpPlateFrost,
                     scorpHelmetFrost,
+                    scorpPlateFrost,
                     scorpLegsFrost,
                     scorpBootsFrost,
                     scorpHelmetUndead,
@@ -311,11 +382,12 @@ public class MoCItems {
                     elephantHowdah,
                     mammothPlatform,
 
-                    scrollFreedom,
+                    scrollOfFreedom,
                     scrollOfSale,
-                    scrollOfOwner,
+                    scrollOfRenaming,
                     crabraw,
                     crabcooked
+                    //brackishClaw
             ));
 
             final IForgeRegistry<Item> registry = event.getRegistry();

@@ -8,14 +8,12 @@
     "url": "https://github.com/ACGaming/MoCreaturesExtended",
     "authorList": [
       "DrZhark",
-      "BloodShot",
-      "BlockDaddy",
-      "Dockter",
       "ACGaming",
-      "xJon",
-      "Icaruss1"
+      "IcarussOne",
+      "DemonLexe (Alexis Kaufman)",
+      "xJon"
     ],
-    "credits": "Authored by DrZhark. Coding, AI, animations: DrZhark. Models, textures: BlockDaddy, DrZhark, MCThe_Paragon. SMP coding: Bloodshot, DrZhark.",
-    "logoFile": "assets/moclogo.png"
+    "credits": "\n \u00A7eExtended Team [v12.1.0 and upwards]:\n [*] ACGaming - Lead Developer\n [*] IcarussOne - Developer & Sound/Texture Artist\n [*] DemonLexe (Alexis Kaufman) - Developer\n [*] xJon - QA Analyst & Tester\n \u00A7eLegacy Team [v12.0.5 and below]:\n [*] DrZhark - Author & Lead Developer\n [*] BlockDaddy - Model & Texture Artist\n [*] Bloodshot - Coder\n \u00A76Special Thanks:\n [*] Dockter - Initial Project Setup, Bugfixes, and Turkey Breeding\n [*] Daveyx0 - Filch Lizards from Primitive Mobs (with permission!)\n [*] MCThe_Paragon (Malcolm Riley) - Some assets used from their texture repository\n [*] Rozmir - Thaumcraft aspects from their Mo' Creatures Aspects script\n [*] Foreck - New Shark Model\n [*] Deino - Tweaked Donkey & Mule Textures\n [*] Paulu2015 - Extra Kitty Textures\n \u00A7dTranslators:\n [*] nocturni - French\n [*] magiczocker10, ACGaming - German\n [*] ESTEBAN1303YT - Spanish",
+    "logoFile": "moclogo.png"
   }
 ]

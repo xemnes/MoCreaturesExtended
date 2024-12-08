@@ -3,14 +3,12 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.*;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -31,11 +29,13 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityFox extends MoCEntityTameableAnimal {
 
     public MoCEntityFox(World world) {
         super(world);
-        setSize(0.6F, 0.7F);
+        setSize(0.7F, 0.85F);
         setAge(this.rand.nextInt(15) + 50);
         setAdult(this.rand.nextInt(3) != 0);
     }
@@ -47,18 +47,18 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
         this.tasks.addTask(3, new EntityAIFleeFromPlayer(this, 1.0D, 4D));
         this.tasks.addTask(3, new EntityAIFollowOwnerPlayer(this, 0.8D, 2F, 10F));
         this.tasks.addTask(4, new EntityAIFollowAdult(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(6, new EntityAIWanderMoC2(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, true));
+        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, false));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
     }
 
@@ -199,10 +199,17 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
     }
 
     @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
+
+    @Override
     public float getSizeFactor() {
         if (getIsAdult()) {
             return 0.9F;
         }
         return 0.9F * getAge() * 0.01F;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.86F;
     }
 }

@@ -3,14 +3,20 @@
  */
 package drzhark.mocreatures.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
-public class MoCBlockDirt extends MoCBlock {
+public class MoCBlockDirt extends Block {
 
-    public MoCBlockDirt(String name) {
-        super(name, Material.GROUND);
-        setTickRandomly(true);
+    public MoCBlockDirt(MapColor mapColor) {
+        super(Material.GROUND, mapColor);
         this.setSoundType(SoundType.GROUND);
+        this.setHarvestLevel("shovel", 0);
+    }
+
+    public MoCBlockDirt(Material material, MapColor mapColor) {
+        super(material, mapColor);
     }
 }

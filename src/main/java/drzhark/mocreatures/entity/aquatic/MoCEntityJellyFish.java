@@ -3,20 +3,23 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
@@ -25,8 +28,10 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
 
     public MoCEntityJellyFish(World world) {
         super(world);
-        setSize(0.3F, 0.5F);
-        setAge(50 + (this.rand.nextInt(50)));
+        setSize(0.45F, 0.575F);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(50 + (this.rand.nextInt(50)));
+        setAge(100);
     }
 
     @Override
@@ -44,7 +49,7 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     @Override
     public void selectType() {
         if (getType() == 0) {
-            setType(this.rand.nextInt(5) + 1);
+            setType(this.rand.nextInt(12) + 1);
         }
     }
 
@@ -114,6 +119,16 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
         }
     }
 
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_SLIME_ATTACK;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_SLIME_ATTACK;
+    }
+
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.JELLYFISH;
@@ -145,5 +160,9 @@ public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
     @Override
     protected boolean canBeTrappedInNet() {
         return true;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.85F;
     }
 }

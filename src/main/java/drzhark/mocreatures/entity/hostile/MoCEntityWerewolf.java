@@ -3,17 +3,18 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
@@ -47,15 +49,18 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         this.transforming = false;
         this.tcounter = 0;
         setHumanForm(true);
+        experienceValue = 10;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -63,7 +68,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.5D);
     }
 
     @Override
@@ -166,8 +171,8 @@ public class MoCEntityWerewolf extends MoCEntityMob {
             EntityPlayer entityplayer = (EntityPlayer) entity;
             ItemStack stack = entityplayer.getHeldItemMainhand();
             if (!stack.isEmpty()) {
-                if (stack.getItem() == MoCItems.silversword) {
-                    i = 10F;
+                if (stack.getItem() == MoCItems.silversword || stack.getItem() == MoCItems.silveraxe || stack.getItem() == MoCItems.silverMattock) {
+                    i = 10.0F;
                 } else if (stack.getItem() instanceof ItemSword) {
                     String swordMaterial = ((ItemSword) stack.getItem()).getToolMaterialName();
                     String swordName = stack.getItem().getTranslationKey();
@@ -177,7 +182,9 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                         i = ((ItemSword) stack.getItem()).getAttackDamage() * 0.5F;
                     }
                 } else if (stack.getItem().getTranslationKey().toLowerCase().contains("silver")) {
-                    i = 6F;
+                    i = 6.0F;
+                } else if (stack.getItem() == MoCItems.bo || stack.getItem() == MoCItems.katana || stack.getItem() == MoCItems.nunchaku || stack.getItem() == MoCItems.sai){
+                	i = 7.0F;
                 } else {
                     i = Math.min(i * 0.5F, 4F);
                 }
@@ -194,7 +201,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     @Override
     protected SoundEvent getDeathSound() {
         if (getIsHumanForm()) {
-            return MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_DEATH_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
+            return MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREHUMAN_DEATH_LEGACY : SoundEvents.ENTITY_GENERIC_HURT;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_DEATH;
         }
@@ -204,7 +211,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
     protected SoundEvent getHurtSound(DamageSource source) {
         if (getIsHumanForm()) {
             if (!this.transforming)
-                return MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_HURT_HUMAN : SoundEvents.ENTITY_GENERIC_HURT;
+                return MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREHUMAN_HURT_LEGACY : SoundEvents.ENTITY_GENERIC_HURT;
             return null;
         } else {
             return MoCSoundEvents.ENTITY_WEREWOLF_HURT;
@@ -260,7 +267,7 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                     this.posX -= 0.3D;
                 }
                 if (this.tcounter == 10) {
-                    MoCTools.playCustomSound(this, MoCreatures.proxy.humanWerewolfSounds ? MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM_HUMAN : MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM);
+                    MoCTools.playCustomSound(this, MoCreatures.proxy.legacyWerehumanSounds ? MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM_LEGACY : MoCSoundEvents.ENTITY_WEREWOLF_TRANSFORM);
                 }
                 if (this.tcounter > 30) {
                     Transform();
@@ -276,6 +283,11 @@ public class MoCEntityWerewolf extends MoCEntityMob {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
     }
 
     private void Transform() {

@@ -29,9 +29,11 @@ public class MoCRenderScorpion extends MoCRenderMoC<MoCEntityScorpion> {
 
     @Override
     protected void preRenderCallback(MoCEntityScorpion entityscorpion, float f) {
+        /* TODO: Fix rider rotation
         if (entityscorpion.isOnLadder()) {
             rotateAnimal(entityscorpion);
         }
+        */
 
         if (!entityscorpion.getIsAdult()) {
             stretch(entityscorpion);

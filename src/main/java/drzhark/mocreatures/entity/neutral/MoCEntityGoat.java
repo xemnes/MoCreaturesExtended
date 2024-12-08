@@ -538,6 +538,7 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
         }
 
         if (!getIsTamed() && !stack.isEmpty() && MoCTools.isItemEdible(stack.getItem())) {
+            if (!player.capabilities.isCreativeMode) stack.shrink(1);
             if (!this.world.isRemote) {
                 MoCTools.tameWithName(player, this);
             }

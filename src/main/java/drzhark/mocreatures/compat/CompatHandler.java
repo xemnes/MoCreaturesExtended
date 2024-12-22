@@ -12,6 +12,7 @@ import drzhark.mocreatures.compat.jer.JERIntegration;
 import drzhark.mocreatures.compat.morph.MorphIntegration;
 import drzhark.mocreatures.compat.thaumcraft.ThaumcraftIntegration;
 import drzhark.mocreatures.compat.thermalexpansion.ThermalExpansionIntegration;
+import drzhark.mocreatures.compat.tinkers.TinkersConstructIntegration;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -89,6 +90,14 @@ public class CompatHandler {
     }
 
     public static void preInit() {
+        if (Loader.isModLoaded("tconstruct")) {
+            TinkersConstructIntegration.preInit();
+
+            // Only load Construct's Armory if Tinkers' Construct is also loaded
+            if (Loader.isModLoaded("conarm")) {
+                //ConstructsArmoryIntegration.preInit();
+            }
+        }
     }
 
     public static void init() {
@@ -99,6 +108,7 @@ public class CompatHandler {
                 IndustrialForegoingHelper.addWoodToLatex(entry);
         }
         if (Loader.isModLoaded("thaumcraft")) MinecraftForge.EVENT_BUS.register(ThaumcraftIntegration.class);
+        if (Loader.isModLoaded("tconstruct")) TinkersConstructIntegration.init();
         if (Loader.isModLoaded("jeresources")) JERIntegration.init();
     }
 

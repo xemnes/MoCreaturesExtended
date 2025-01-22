@@ -1,5 +1,6 @@
 package drzhark.mocreatures.compat.tinkers.traits;
 
+import drzhark.mocreatures.MoCConstants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,7 +13,7 @@ public class TraitStingFire extends AbstractTrait {
     protected final float damage;
 
     public TraitStingFire(float damage) {
-        super("fire_sting", 0xC62B13);
+        super(MoCConstants.MOD_ID + "." + "fire_sting", 0xC62B13);
 
         this.damage = damage;
     }

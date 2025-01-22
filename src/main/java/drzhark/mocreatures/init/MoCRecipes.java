@@ -92,6 +92,7 @@ public class MoCRecipes {
 
             OreDictionary.registerOre("blockGlass", new ItemStack(MoCBlocks.gleamingGlass));
             OreDictionary.registerOre("blockGlassColorless", new ItemStack(MoCBlocks.gleamingGlass));
+            OreDictionary.registerOre("blockAncientSilver", new ItemStack(MoCBlocks.ancientSilverBlock));
             OreDictionary.registerOre("blockSilver", new ItemStack(MoCBlocks.fineSilverBlock));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledDeepWyvstone));
             OreDictionary.registerOre("cobblestone", new ItemStack(MoCBlocks.cobbledWyvstone));
@@ -131,6 +132,8 @@ public class MoCRecipes {
             OreDictionary.registerOre("hide", MoCItems.animalHide);
             OreDictionary.registerOre("hide", MoCItems.hideCroc);
             OreDictionary.registerOre("hideSmall", Items.RABBIT_HIDE);
+            OreDictionary.registerOre("ingotAncientSilver", MoCItems.ancientSilverIngot);
+            OreDictionary.registerOre("nuggetAncientSilver", MoCItems.ancientSilverNugget);
             OreDictionary.registerOre("ingotSilver", MoCItems.fineSilverIngot);
             OreDictionary.registerOre("nuggetSilver", MoCItems.fineSilverNugget);
             OreDictionary.registerOre("record", MoCItems.recordshuffle);

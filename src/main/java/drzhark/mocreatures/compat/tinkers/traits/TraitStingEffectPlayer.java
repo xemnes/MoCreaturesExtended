@@ -32,7 +32,7 @@ public class TraitStingEffectPlayer extends AbstractTrait {
             data.attack += damage;
             TagUtil.setToolTag(rootCompound, data.get());
         }
-        
+
         super.applyEffect(rootCompound, modifierTag);
     }
 

@@ -432,19 +432,30 @@ info.mocreatures.sting_weapon_undead=Inflicts Wither on the target (Blindness on
 info.mocreatures.whip=All tamed MoC mobs within a range of 10 blocks will automatically sit when the ground is right-clicked
 
 # TINKERS CONSTRUCT
-material.earth_chitin.name=Earth Chitin
-material.dark_chitin.name=Dark Chitin
-material.frost_chitin.name=Frost Chitin
-material.fire_chitin.name=Fire Chitin
-material.undead_chitin.name=Undead Chitin
+fluid.mocreatures.ancient_silver.name=Molten Ancient Silver
 
-modifier.dark_sting.name=Sting of Darkness
-modifier.dark_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool weakens enemies (or nauseates players) on hit and deals increased damage.
-modifier.earth_sting.name=Sting of Earth
-modifier.earth_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool poisons enemies on hit and deals increased damage.
-modifier.frost_sting.name=Sting of Frost
-modifier.frost_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool slows enemies on hit and deals increased damage.
-modifier.fire_sting.name=Sting of Fire
-modifier.fire_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool sets enemies on fire and deals increased damage.
-modifier.undead_sting.name=Sting of Undead
-modifier.undead_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool withers enemies (or blinds players) on hit and deals increased damage.
+material.mocreatures.ancient_silver.name=Ancient Silver
+material.mocreatures.big_cat_claw.name=Big Cat Claw
+material.mocreatures.earth_chitin.name=Earth Chitin
+material.mocreatures.dark_chitin.name=Dark Chitin
+material.mocreatures.frost_chitin.name=Frost Chitin
+material.mocreatures.fire_chitin.name=Fire Chitin
+material.mocreatures.shark_tooth.name=Shark Tooth
+material.mocreatures.undead_chitin.name=Undead Chitin
+
+modifier.mocreatures.big_game_hunter.name=Big Game Hunter
+modifier.mocreatures.big_game_hunter.desc=Â§oFine sportsmanship!Â§r\nYour tool deals +50% damage to all animals.
+modifier.mocreatures.dark_sting.name=Sting of Darkness
+modifier.mocreatures.dark_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool weakens enemies (or nauseates players) on hit and deals increased damage.
+modifier.mocreatures.earth_sting.name=Sting of Earth
+modifier.mocreatures.earth_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool poisons enemies on hit and deals increased damage.
+modifier.mocreatures.frost_sting.name=Sting of Frost
+modifier.mocreatures.frost_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool slows enemies on hit and deals increased damage.
+modifier.mocreatures.fire_sting.name=Sting of Fire
+modifier.mocreatures.fire_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool sets enemies on fire and deals increased damage.
+modifier.mocreatures.sea_predator.name=Sea Predator
+modifier.mocreatures.sea_predator.desc=Â§oThere's a shark in the pond!Â§r\nYour tool deals +40% damage to all aquatic creatures or while you're under rain or in water.
+modifier.mocreatures.speed_demon.name=Speed Demon
+modifier.mocreatures.speed_demon.desc=Â§oSpeedrunning!Â§r\nBonus damage is dealt while running.
+modifier.mocreatures.undead_sting.name=Sting of Undead
+modifier.mocreatures.undead_sting.desc=Â§oElemental Scorpions!Â§r\nYour tool withers enemies (or blinds players) on hit and deals increased damage.

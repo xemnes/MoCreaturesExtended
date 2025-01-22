@@ -1,33 +1,34 @@
 package drzhark.mocreatures.compat.tinkers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.compat.tinkers.traits.TraitBigGameHunter;
-import drzhark.mocreatures.compat.tinkers.traits.TraitSeaPredator;
-import drzhark.mocreatures.compat.tinkers.traits.TraitSpeedDemon;
-import drzhark.mocreatures.compat.tinkers.traits.TraitStingEffect;
-import drzhark.mocreatures.compat.tinkers.traits.TraitStingEffectPlayer;
-import drzhark.mocreatures.compat.tinkers.traits.TraitStingFire;
+import drzhark.mocreatures.compat.tinkers.traits.*;
 import drzhark.mocreatures.init.MoCItems;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
-import slimeknights.tconstruct.library.materials.BowMaterialStats;
-import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
-import slimeknights.tconstruct.library.materials.HandleMaterialStats;
-import slimeknights.tconstruct.library.materials.HeadMaterialStats;
-import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.materials.MaterialTypes;
+import slimeknights.tconstruct.library.materials.*;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.HarvestLevels;
 import slimeknights.tconstruct.smeltery.block.BlockMolten;
 import slimeknights.tconstruct.tools.TinkerTraits;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
 public class TinkersConstructIntegration {
     public static final Material ANCIENT_SILVER = new Material(MoCConstants.MOD_ID + "." + "ancient_silver", 0x8E8F93);
     public static final Material BIG_CAT_CLAW = new Material(MoCConstants.MOD_ID + "." + "big_cat_claw", 0xBBA56C);
@@ -49,15 +50,15 @@ public class TinkersConstructIntegration {
 
     public static final FluidMolten ANCIENT_SILVER_FLUID = new FluidMolten("ancient_silver", 0x9D9FA3, FluidMolten.ICON_MetalStill, FluidMolten.ICON_MetalFlowing);
 
-    public static List<ItemBlock> blocks = new ArrayList<ItemBlock>();
+    public static final List<ItemBlock> ITEM_BLOCKS = new ArrayList<>();
 
+    // TODO: Return bucket when picked from JEI
     public static void registerFluid(Fluid fluid) {
         fluid.setUnlocalizedName(MoCConstants.MOD_ID + "." + fluid.getName());
-        FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
-        BlockMolten block = new BlockMolten(fluid);
-        block.setRegistryName(MoCConstants.MOD_ID, "molten_" + fluid.getName());
-        blocks.add((ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        BlockMolten blockMolten = (BlockMolten) new BlockMolten(fluid).setRegistryName(MoCConstants.MOD_ID, "molten_" + fluid.getName());
+        ITEM_BLOCKS.add((ItemBlock) new ItemBlock(blockMolten).setRegistryName(blockMolten.getRegistryName()));
+        ForgeRegistries.BLOCKS.register(blockMolten);
     }
 
     public static void preInit() {
@@ -174,5 +175,21 @@ public class TinkersConstructIntegration {
         ANCIENT_SILVER.setRepresentativeItem(MoCItems.ancientSilverIngot);
         ANCIENT_SILVER.setFluid(ANCIENT_SILVER_FLUID);
         ANCIENT_SILVER.setCraftable(false).setCastable(true);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
+        for (ItemBlock itemBlock : ITEM_BLOCKS) {
+            if (itemBlock.getBlock() instanceof BlockMolten) {
+                ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));
+                ModelLoader.setCustomStateMapper(itemBlock.getBlock(), new StateMapperBase() {
+                    @Override
+                    public ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                        return new ModelResourceLocation(itemBlock.getRegistryName(), "normal");
+                    }
+                });
+            }
+        }
     }
 }

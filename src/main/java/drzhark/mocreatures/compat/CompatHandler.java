@@ -114,5 +114,6 @@ public class CompatHandler {
 
     public static void postInit() {
         if (Loader.isModLoaded("morph")) MorphIntegration.mapAbilities();
+        if (Loader.isModLoaded("tconstruct")) TinkersConstructIntegration.postInit();
     }
 }

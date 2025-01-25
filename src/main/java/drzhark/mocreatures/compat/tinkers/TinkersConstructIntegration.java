@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.*;
@@ -72,7 +73,7 @@ public class TinkersConstructIntegration {
                 new BowMaterialStats(0.9F, 0.7F, 0.0F));
         DARK_CHITIN.addTrait(DARK_STING, MaterialTypes.HEAD);
         DARK_CHITIN.addTrait(TinkerTraits.fractured);
-        TinkerRegistry.integrate(DARK_CHITIN).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(DARK_CHITIN)).preInit();
 
         TinkerRegistry.addMaterialStats(EARTH_CHITIN,
                 new HeadMaterialStats(300, 6.0F, 3.5F, HarvestLevels.OBSIDIAN),
@@ -81,7 +82,7 @@ public class TinkersConstructIntegration {
                 new BowMaterialStats(0.9F, 0.7F, 0.0F));
         EARTH_CHITIN.addTrait(EARTH_STING, MaterialTypes.HEAD);
         EARTH_CHITIN.addTrait(TinkerTraits.fractured);
-        TinkerRegistry.integrate(EARTH_CHITIN).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(EARTH_CHITIN)).preInit();
 
         TinkerRegistry.addMaterialStats(FIRE_CHITIN,
                 new HeadMaterialStats(300, 6.0F, 3.5F, HarvestLevels.OBSIDIAN),
@@ -90,7 +91,7 @@ public class TinkersConstructIntegration {
                 new BowMaterialStats(0.9F, 0.7F, 0.0F));
         FIRE_CHITIN.addTrait(FIRE_STING, MaterialTypes.HEAD);
         FIRE_CHITIN.addTrait(TinkerTraits.fractured);
-        TinkerRegistry.integrate(FIRE_CHITIN).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(FIRE_CHITIN)).preInit();
 
         TinkerRegistry.addMaterialStats(FROST_CHITIN,
                 new HeadMaterialStats(300, 6.0F, 3.5F, HarvestLevels.OBSIDIAN),
@@ -99,7 +100,7 @@ public class TinkersConstructIntegration {
                 new BowMaterialStats(0.9F, 0.7F, 0.0F));
         FROST_CHITIN.addTrait(FROST_STING, MaterialTypes.HEAD);
         FROST_CHITIN.addTrait(TinkerTraits.fractured);
-        TinkerRegistry.integrate(FROST_CHITIN).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(FROST_CHITIN)).preInit();
 
         TinkerRegistry.addMaterialStats(UNDEAD_CHITIN,
                 new HeadMaterialStats(300, 6.0F, 3.5F, HarvestLevels.OBSIDIAN),
@@ -108,7 +109,7 @@ public class TinkersConstructIntegration {
                 new BowMaterialStats(0.9F, 0.7F, 0.0F));
         UNDEAD_CHITIN.addTrait(UNDEAD_STING, MaterialTypes.HEAD);
         UNDEAD_CHITIN.addTrait(TinkerTraits.fractured);
-        TinkerRegistry.integrate(UNDEAD_CHITIN).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(UNDEAD_CHITIN)).preInit();
 
         TinkerRegistry.addMaterialStats(BIG_CAT_CLAW,
                 new HeadMaterialStats(140, 5.5F, 3.0F, HarvestLevels.IRON),
@@ -118,7 +119,7 @@ public class TinkersConstructIntegration {
         BIG_CAT_CLAW.addTrait(BIG_GAME_HUNTER, MaterialTypes.HEAD);
         BIG_CAT_CLAW.addTrait(TinkerTraits.crude2, MaterialTypes.HEAD);
         BIG_CAT_CLAW.addTrait(TinkerTraits.crude);
-        TinkerRegistry.integrate(BIG_CAT_CLAW).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(BIG_CAT_CLAW)).preInit();
 
         TinkerRegistry.addMaterialStats(SHARK_TOOTH,
                 new HeadMaterialStats(150, 5.5F, 4.0F, HarvestLevels.IRON),
@@ -128,7 +129,7 @@ public class TinkersConstructIntegration {
         SHARK_TOOTH.addTrait(SEA_PREDATOR, MaterialTypes.HEAD);
         SHARK_TOOTH.addTrait(TinkerTraits.aquadynamic, MaterialTypes.HEAD);
         SHARK_TOOTH.addTrait(TinkerTraits.aquadynamic);
-        TinkerRegistry.integrate(SHARK_TOOTH).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(SHARK_TOOTH)).preInit();
 
         TinkerRegistry.addMaterialStats(ANCIENT_SILVER,
                 new HeadMaterialStats(404, 7.05F, 6.0F, HarvestLevels.OBSIDIAN),
@@ -138,7 +139,7 @@ public class TinkersConstructIntegration {
         ANCIENT_SILVER.addTrait(SPEED_DEMON, MaterialTypes.HEAD);
         ANCIENT_SILVER.addTrait(TinkerTraits.heavy, MaterialTypes.HEAD);
         ANCIENT_SILVER.addTrait(TinkerTraits.heavy);
-        TinkerRegistry.integrate(ANCIENT_SILVER, ANCIENT_SILVER_FLUID).preInit();
+        TinkerRegistry.integrate(new MaterialIntegration(ANCIENT_SILVER, ANCIENT_SILVER_FLUID, "AncientSilver")).toolforge().preInit();
     }
 
     public static void init() {
@@ -175,6 +176,15 @@ public class TinkersConstructIntegration {
         ANCIENT_SILVER.setRepresentativeItem(MoCItems.ancientSilverIngot);
         ANCIENT_SILVER.setFluid(ANCIENT_SILVER_FLUID);
         ANCIENT_SILVER.setCraftable(false).setCastable(true);
+    }
+    
+    public static void postInit() {
+    	// Smeltery stuff goes here
+    	/*TinkerRegistry.registerMelting("blockAncientSilver", ANCIENT_SILVER_FLUID, Material.VALUE_Block);
+    	TinkerRegistry.registerMelting("ingotAncientSilver", ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
+    	TinkerRegistry.registerMelting("nuggetAncientSilver", ANCIENT_SILVER_FLUID, Material.VALUE_Nugget);
+    	
+    	TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);*/
     }
 
     @SideOnly(Side.CLIENT)

@@ -12,6 +12,7 @@ import drzhark.mocreatures.compat.jer.JERIntegration;
 import drzhark.mocreatures.compat.morph.MorphIntegration;
 import drzhark.mocreatures.compat.thaumcraft.ThaumcraftIntegration;
 import drzhark.mocreatures.compat.thermalexpansion.ThermalExpansionIntegration;
+import drzhark.mocreatures.compat.tinkers.ConstructsArmoryIntegration;
 import drzhark.mocreatures.compat.tinkers.TinkersConstructIntegration;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -95,7 +96,7 @@ public class CompatHandler {
 
             // Only load Construct's Armory if Tinkers' Construct is also loaded
             if (Loader.isModLoaded("conarm")) {
-                //ConstructsArmoryIntegration.preInit();
+                ConstructsArmoryIntegration.preInit();
             }
         }
     }

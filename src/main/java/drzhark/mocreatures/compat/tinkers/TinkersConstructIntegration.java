@@ -180,11 +180,7 @@ public class TinkersConstructIntegration {
     
     public static void postInit() {
     	// Smeltery stuff goes here
-    	/*TinkerRegistry.registerMelting("blockAncientSilver", ANCIENT_SILVER_FLUID, Material.VALUE_Block);
-    	TinkerRegistry.registerMelting("ingotAncientSilver", ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
-    	TinkerRegistry.registerMelting("nuggetAncientSilver", ANCIENT_SILVER_FLUID, Material.VALUE_Nugget);
-    	
-    	TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);*/
+    	TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
     }
 
     @SideOnly(Side.CLIENT)

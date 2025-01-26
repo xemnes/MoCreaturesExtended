@@ -9,6 +9,7 @@ import drzhark.mocreatures.compat.CompatHandler;
 import drzhark.mocreatures.compat.datafixes.BlockIDFixer;
 import drzhark.mocreatures.compat.datafixes.EntityIDFixer;
 import drzhark.mocreatures.compat.datafixes.ItemIDFixer;
+import drzhark.mocreatures.compat.tinkers.TinkersConstructIntegration;
 import drzhark.mocreatures.dimension.MoCWorldProviderWyvernSkylands;
 import drzhark.mocreatures.entity.MoCEntityData;
 import drzhark.mocreatures.entity.tameable.MoCPetMapData;
@@ -37,6 +38,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -80,6 +82,9 @@ public class MoCreatures {
         if (!isServer()) {
             MinecraftForge.EVENT_BUS.register(new MoCEventHooksClient());
             MinecraftForge.EVENT_BUS.register(new MoCKeyHandler());
+            if (Loader.isModLoaded("tconstruct")) {
+                MinecraftForge.EVENT_BUS.register(new TinkersConstructIntegration());
+            }
         }
         MoCEntities.registerEntities();
         CompatHandler.preInit();

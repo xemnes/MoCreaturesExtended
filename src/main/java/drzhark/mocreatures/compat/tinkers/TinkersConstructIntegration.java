@@ -12,11 +12,8 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
@@ -29,7 +26,6 @@ import slimeknights.tconstruct.tools.TinkerTraits;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
 public class TinkersConstructIntegration {
     // These materials are used universally between tools and armor
     public static final Material ANCIENT_SILVER = new Material(MoCConstants.MOD_ID + "." + "ancient_silver", 0x8E8F93);
@@ -185,9 +181,8 @@ public class TinkersConstructIntegration {
         TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
     }
 
-    @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event) {
+    public void registerModels(ModelRegistryEvent event) {
         for (ItemBlock itemBlock : ITEM_BLOCKS) {
             if (itemBlock.getBlock() instanceof BlockMolten) {
                 ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(itemBlock.getRegistryName(), "normal"));

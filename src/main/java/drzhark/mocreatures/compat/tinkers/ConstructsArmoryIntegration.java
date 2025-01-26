@@ -68,6 +68,15 @@ public class ConstructsArmoryIntegration {
         ArmorMaterials.addArmorTrait(TinkersConstructIntegration.UNDEAD_CHITIN, ArmorTraits.spiny, ArmorMaterialType.CORE);
         ArmorMaterials.addArmorTrait(TinkersConstructIntegration.UNDEAD_CHITIN, ArmorTraits.spiny, ArmorMaterialType.PLATES);
         ArmorMaterials.addArmorTrait(TinkersConstructIntegration.UNDEAD_CHITIN, ArmorTraits.spiny, ArmorMaterialType.TRIM);
+        
+        TinkerRegistry.addMaterialStats(TinkersConstructIntegration.BIG_CAT_CLAW,
+                new CoreMaterialStats(10.0F, 4.0F),
+                new PlatesMaterialStats(0.9F, 2.0F, 1.0F),
+                new TrimMaterialStats(3.6F));
+        ArmorMaterials.addArmorTrait(TinkersConstructIntegration.BIG_CAT_CLAW, ArmorTraits.skeletal, ArmorMaterialType.CORE);
+        ArmorMaterials.addArmorTrait(TinkersConstructIntegration.BIG_CAT_CLAW, ArmorTraits.mundane2, ArmorMaterialType.CORE);
+        ArmorMaterials.addArmorTrait(TinkersConstructIntegration.BIG_CAT_CLAW, ArmorTraits.mundane, ArmorMaterialType.PLATES);
+        ArmorMaterials.addArmorTrait(TinkersConstructIntegration.BIG_CAT_CLAW, ArmorTraits.mundane, ArmorMaterialType.TRIM);
 
         TinkerRegistry.addMaterialStats(TinkersConstructIntegration.SHARK_TOOTH,
                 new CoreMaterialStats(11.0F, 4.0F),

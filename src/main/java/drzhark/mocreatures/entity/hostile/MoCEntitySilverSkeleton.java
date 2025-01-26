@@ -55,7 +55,7 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(35.0D);
         getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(14.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
@@ -118,9 +118,10 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
     @Override
     public float getAIMoveSpeed() {
         if (isSprinting()) {
-            return 0.35F;
+            return 0.425F;
         }
-        return 0.2F;
+        
+        return 0.25F;
     }
 
     @Override
@@ -172,11 +173,6 @@ public class MoCEntitySilverSkeleton extends MoCEntityMob {
             } else {
                 return super.shouldContinueExecuting();
             }
-        }
-
-        @Override
-        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return 4.0F + attackTarget.width;
         }
     }
 

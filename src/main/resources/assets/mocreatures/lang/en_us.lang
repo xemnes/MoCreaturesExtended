@@ -432,6 +432,8 @@ info.mocreatures.sting_weapon_undead=Inflicts Wither on the target (Blindness on
 info.mocreatures.whip=All tamed MoC mobs within a range of 10 blocks will automatically sit when the ground is right-clicked
 
 # TINKERS CONSTRUCT
+fluid.mocreatures.ancient_silver=Molten Ancient Silver
+
 fluid.mocreatures.ancient_silver.name=Molten Ancient Silver
 
 material.mocreatures.ancient_silver.name=Ancient Silver

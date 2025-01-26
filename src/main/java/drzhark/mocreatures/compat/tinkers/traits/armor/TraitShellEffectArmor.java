@@ -17,13 +17,15 @@ public class TraitShellEffectArmor extends AbstractArmorTrait {
     protected final float chance;
     protected final Potion playerEffect;
     protected final Potion targetEffect;
+    protected final int amplifier;
 
-    public TraitShellEffectArmor(String identifier, int color, float chance, Potion playerEffect, Potion targetEffect) {
+    public TraitShellEffectArmor(String identifier, int color, float chance, Potion playerEffect, Potion targetEffect, int amplifier) {
         super(identifier, color);
 
         this.chance = chance;
         this.playerEffect = playerEffect;
         this.targetEffect = targetEffect;
+        this.amplifier = amplifier;
     }
 
     @Override
@@ -35,10 +37,10 @@ public class TraitShellEffectArmor extends AbstractArmorTrait {
 
             // Inflict negative effect on the target (15 seconds) and inflict positive effect on the wielder (30 seconds)
             if (!player.world.isRemote) {
-                ((EntityLivingBase) source.getTrueSource()).addPotionEffect(new PotionEffect(targetEffect, 15 * 20, 0));
+                ((EntityLivingBase) source.getTrueSource()).addPotionEffect(new PotionEffect(targetEffect, 15 * 20, amplifier));
 
                 if (player instanceof EntityPlayer) {
-                    player.addPotionEffect(new PotionEffect(playerEffect, 30 * 20, 0));
+                    player.addPotionEffect(new PotionEffect(playerEffect, 30 * 20, amplifier));
                     TinkerTools.proxy.spawnEffectParticle(ParticleEffect.Type.HEART_ARMOR, player, (int) damage);
                 }
             }

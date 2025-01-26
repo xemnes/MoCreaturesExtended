@@ -13,12 +13,14 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 public class TraitStingEffect extends AbstractTrait {
     protected final float damage;
     protected final Potion effect;
+    protected final int amplifier;
 
-    public TraitStingEffect(String identifier, int color, float damage, Potion effect) {
+    public TraitStingEffect(String identifier, int color, float damage, Potion effect, int amplifier) {
         super(identifier, color);
 
         this.damage = damage;
         this.effect = effect;
+        this.amplifier = amplifier;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class TraitStingEffect extends AbstractTrait {
     @Override
     public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
         if (wasHit && target.isEntityAlive()) {
-            target.addPotionEffect(new PotionEffect(effect, 20 * 5));
+            target.addPotionEffect(new PotionEffect(effect, 20 * 5, amplifier));
         }
     }
 }

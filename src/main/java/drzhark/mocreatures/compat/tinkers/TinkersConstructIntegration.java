@@ -44,9 +44,9 @@ public class TinkersConstructIntegration {
     // These traits are for tools and not armor
     public static final AbstractTrait BIG_GAME_HUNTER = new TraitBigGameHunter(0.5F);
     public static final AbstractTrait DARK_STING = new TraitStingEffectPlayer(MoCConstants.MOD_ID + "." + "dark_sting", 0x535A6B, 1.5F, MobEffects.WEAKNESS, MobEffects.NAUSEA);
-    public static final AbstractTrait EARTH_STING = new TraitStingEffect(MoCConstants.MOD_ID + "." + "earth_sting", 0xF37A07, 1.5F, MobEffects.POISON);
+    public static final AbstractTrait EARTH_STING = new TraitStingEffect(MoCConstants.MOD_ID + "." + "earth_sting", 0xF37A07, 1.5F, MobEffects.POISON, 1);
     public static final AbstractTrait FIRE_STING = new TraitStingFire(MoCConstants.MOD_ID + "." + "fire_sting", 0xC62B13, 1.5F);
-    public static final AbstractTrait FROST_STING = new TraitStingEffect(MoCConstants.MOD_ID + "." + "frost_sting", 0x1B7A87, 1.5F, MobEffects.SLOWNESS);
+    public static final AbstractTrait FROST_STING = new TraitStingEffect(MoCConstants.MOD_ID + "." + "frost_sting", 0x1B7A87, 1.5F, MobEffects.SLOWNESS, 0);
     public static final AbstractTrait SEA_PREDATOR = new TraitSeaPredator(0.4F);
     public static final AbstractTrait SPEED_DEMON = new TraitSpeedDemon(5.0F);
     public static final AbstractTrait UNDEAD_STING = new TraitStingEffectPlayer(MoCConstants.MOD_ID + "." + "undead_sting", 0x92B859, 1.5F, MobEffects.WITHER, MobEffects.BLINDNESS);

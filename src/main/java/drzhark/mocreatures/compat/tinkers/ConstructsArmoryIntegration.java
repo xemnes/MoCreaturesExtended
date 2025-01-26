@@ -13,12 +13,12 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 
 public class ConstructsArmoryIntegration {
     // These traits are for armor and not tools
-    public static final AbstractArmorTrait DARK_SHELL_ARMOR = new TraitShellEffectPlayerArmor(MoCConstants.MOD_ID + "." + "dark_shell", 0x535A6B, 0.065F, MobEffects.NIGHT_VISION,
+    public static final AbstractArmorTrait DARK_SHELL_ARMOR = new TraitShellEffectPlayerArmor(MoCConstants.MOD_ID + "." + "dark_shell", 0x535A6B, 0.0625F, MobEffects.NIGHT_VISION,
             MobEffects.WEAKNESS, MobEffects.NAUSEA);
-    public static final AbstractArmorTrait EARTH_SHELL_ARMOR = new TraitShellEffectArmor(MoCConstants.MOD_ID + "." + "earth_shell", 0xF37A07, 0.065F, MobEffects.SPEED, MobEffects.POISON);
-    public static final AbstractArmorTrait FIRE_SHELL_ARMOR = new TraitShellFireArmor(MoCConstants.MOD_ID + "." + "fire_shell", 0xC62B13, 0.065F, MobEffects.FIRE_RESISTANCE);
-    public static final AbstractArmorTrait FROST_SHELL_ARMOR = new TraitShellEffectArmor(MoCConstants.MOD_ID + "." + "frost_shell", 0x1B7A87, 0.065F, MobEffects.RESISTANCE, MobEffects.SLOWNESS);
-    public static final AbstractArmorTrait UNDEAD_SHELL_ARMOR = new TraitShellEffectPlayerArmor(MoCConstants.MOD_ID + "." + "undead_shell", 0x92B859, 0.065F, MobEffects.STRENGTH,
+    public static final AbstractArmorTrait EARTH_SHELL_ARMOR = new TraitShellEffectArmor(MoCConstants.MOD_ID + "." + "earth_shell", 0xF37A07, 0.0625F, MobEffects.SPEED, MobEffects.POISON, 1);
+    public static final AbstractArmorTrait FIRE_SHELL_ARMOR = new TraitShellFireArmor(MoCConstants.MOD_ID + "." + "fire_shell", 0xC62B13, 0.0625F, MobEffects.FIRE_RESISTANCE);
+    public static final AbstractArmorTrait FROST_SHELL_ARMOR = new TraitShellEffectArmor(MoCConstants.MOD_ID + "." + "frost_shell", 0x1B7A87, 0.0625F, MobEffects.RESISTANCE, MobEffects.SLOWNESS, 0);
+    public static final AbstractArmorTrait UNDEAD_SHELL_ARMOR = new TraitShellEffectPlayerArmor(MoCConstants.MOD_ID + "." + "undead_shell", 0x92B859, 0.0625F, MobEffects.STRENGTH,
             MobEffects.WITHER, MobEffects.BLINDNESS);
     public static final AbstractArmorTrait THRESHER_ARMOR = new TraitThresherArmor();
 

@@ -232,11 +232,6 @@ public class MoCEntityOgre extends MoCEntityMob {
                 return super.shouldContinueExecuting();
             }
         }
-
-        @Override
-        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return 4.0F + attackTarget.width;
-        }
     }
 
     static class AIOgreTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {

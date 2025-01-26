@@ -826,11 +826,6 @@ public class MoCEntityGolem extends MoCEntityMob implements IEntityAdditionalSpa
                 return super.shouldContinueExecuting();
             }
         }
-
-        @Override
-        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return 4.0F + attackTarget.width;
-        }
     }
 
     static class AIGolemTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {

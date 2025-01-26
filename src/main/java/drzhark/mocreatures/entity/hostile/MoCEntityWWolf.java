@@ -234,11 +234,6 @@ public class MoCEntityWWolf extends MoCEntityMob {
                 return super.shouldContinueExecuting();
             }
         }
-
-        @Override
-        protected double getAttackReachSqr(EntityLivingBase attackTarget) {
-            return 4.0F + attackTarget.width;
-        }
     }
 
     static class AIWolfTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {

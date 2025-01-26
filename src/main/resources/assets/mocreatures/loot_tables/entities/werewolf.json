@@ -104,7 +104,7 @@
         {
           "condition": "random_chance_with_looting",
           "chance": 0.075,
-          "looting_multiplier": 0.01
+          "looting_multiplier": 0.025
         }
       ],
       "name": "heart",
@@ -124,8 +124,8 @@
         },
         {
           "condition": "random_chance_with_looting",
-          "chance": 0.075,
-          "looting_multiplier": 0.01
+          "chance": 0.1,
+          "looting_multiplier": 0.02
         }
       ],
       "name": "apple",

@@ -3,24 +3,34 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityGrizzlyBear extends MoCEntityBear {
 
     public MoCEntityGrizzlyBear(World world) {
         super(world);
+        setSize(1.125F, 1.57F);
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
     @Override
@@ -46,11 +56,6 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
         return 120;
     }
 
-    @Override
-    public float calculateMaxHealth() {
-        return 40;
-    }
-
     public double getAttackRange() {
         int factor = 1;
         if (this.world.getDifficulty().getId() > 1) {
@@ -59,11 +64,10 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
         return 6D * factor;
     }
 
-    @Override
-    public int getAttackStrength() {
+    /*public int getAttackStrength() {
         int factor = (this.world.getDifficulty().getId());
         return 3 * factor;
-    }
+    }*/
 
     @Override
     public boolean shouldAttackPlayers() {
@@ -93,11 +97,7 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
             return true;
         }
         if (!stack.isEmpty() && getIsTamed() && (stack.getItem() == MoCItems.whip)) {
-            if (getBearState() == 0) {
-                setBearState(2);
-            } else {
-                setBearState(0);
-            }
+            this.processBearWhipped();
             return true;
         }
         if (this.getIsRideable() && this.getIsAdult() && (!this.getIsChested() || !player.isSneaking()) && !this.isBeingRidden()) {
@@ -134,5 +134,9 @@ public class MoCEntityGrizzlyBear extends MoCEntityBear {
     @Override
     public boolean compatibleMate(Entity mate) {
         return mate instanceof MoCEntityGrizzlyBear;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.76F;
     }
 }

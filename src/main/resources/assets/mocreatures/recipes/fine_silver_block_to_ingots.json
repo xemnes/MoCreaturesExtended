@@ -1,0 +1,12 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "mocreatures:fine_silver_block"
+    }
+  ],
+  "result": {
+    "item": "mocreatures:fine_silver_ingot",
+    "count": 9
+  }
+}

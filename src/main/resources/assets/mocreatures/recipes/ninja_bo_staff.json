@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " W ",
+    "RSR",
+    " W "
+  ],
+  "key": {
+    "S": {
+      "item": "mocreatures:ancientsilveringot"
+    },
+    "R": {
+      "item": "mocreatures:reptilehide"
+    },
+    "W": {
+      "type": "forge:ore_dict",
+      "ore": "logWood"
+    }
+  },
+  "result": {
+    "item": "mocreatures:bo"
+  }
+}

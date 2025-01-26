@@ -3,21 +3,19 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.entity.hunter.MoCEntityBear;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
 import drzhark.mocreatures.entity.passive.MoCEntityHorse;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
@@ -34,9 +32,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCEntityWWolf extends MoCEntityMob {
 
@@ -47,14 +44,17 @@ public class MoCEntityWWolf extends MoCEntityMob {
         super(world);
         setSize(0.8F, 1.1F);
         setAdult(true);
+        experienceValue = 5;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new MoCEntityWWolf.AIWolfAttack(this, 1.0D, false));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new MoCEntityWWolf.AIWolfTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new MoCEntityWWolf.AIWolfTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -62,7 +62,7 @@ public class MoCEntityWWolf extends MoCEntityMob {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.5D);
     }
 
     @Override
@@ -125,6 +125,11 @@ public class MoCEntityWWolf extends MoCEntityMob {
         }
         selectType();
         return true;
+    }
+
+    @Override
+    public boolean getCanSpawnHere() {
+        return super.getCanSpawnHere() && this.world.canSeeSky(new BlockPos(this));
     }
 
     //TODO move this
@@ -210,6 +215,36 @@ public class MoCEntityWWolf extends MoCEntityMob {
     }
 
     public float getEyeHeight() {
-        return this.height * 0.98F;
+        return this.height * 0.945F;
+    }
+
+    static class AIWolfAttack extends EntityAIAttackMelee {
+        public AIWolfAttack(MoCEntityWWolf wolf, double speed, boolean useLongMemory) {
+            super(wolf, speed, useLongMemory);
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            float f = this.attacker.getBrightness();
+
+            if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
+                this.attacker.setAttackTarget(null);
+                return false;
+            } else {
+                return super.shouldContinueExecuting();
+            }
+        }
+    }
+
+    static class AIWolfTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+        public AIWolfTarget(MoCEntityWWolf wolf, Class<T> classTarget, boolean checkSight) {
+            super(wolf, classTarget, checkSight);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            float f = this.taskOwner.getBrightness();
+            return f < 0.5F && super.shouldExecute();
+        }
     }
 }

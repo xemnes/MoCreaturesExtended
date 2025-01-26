@@ -13,10 +13,8 @@ import drzhark.mocreatures.network.message.MoCMessageExplode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -35,22 +33,24 @@ public class MoCEntityOgre extends MoCEntityMob {
     public MoCEntityOgre(World world) {
         super(world);
         setSize(1.8F, 3.05F);
+        experienceValue = 12;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new MoCEntityOgre.AIOgreAttack(this, 1.25D, false));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new MoCEntityOgre.AIOgreTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new MoCEntityOgre.AIOgreTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(calculateMaxHealth());
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
     }
 
     @Override
@@ -58,10 +58,6 @@ public class MoCEntityOgre extends MoCEntityMob {
         if (getType() == 0) {
             setType(this.rand.nextInt(2) + 1);
         }
-    }
-
-    public float calculateMaxHealth() {
-        return 35F;
     }
 
     @Override
@@ -218,5 +214,35 @@ public class MoCEntityOgre extends MoCEntityMob {
 
     public float getEyeHeight() {
         return this.height * 0.91F;
+    }
+
+    static class AIOgreAttack extends EntityAIAttackMelee {
+        public AIOgreAttack(MoCEntityOgre ogre, double speed, boolean useLongMemory) {
+            super(ogre, speed, useLongMemory);
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            float f = this.attacker.getBrightness();
+
+            if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
+                this.attacker.setAttackTarget(null);
+                return false;
+            } else {
+                return super.shouldContinueExecuting();
+            }
+        }
+    }
+
+    static class AIOgreTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T> {
+        public AIOgreTarget(MoCEntityOgre ogre, Class<T> classTarget, boolean checkSight) {
+            super(ogre, classTarget, checkSight);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            float f = this.taskOwner.getBrightness();
+            return f < 0.5F && super.shouldExecute();
+        }
     }
 }

@@ -5,11 +5,11 @@ package drzhark.mocreatures.entity.hunter;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIHunt;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCEntities;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
@@ -22,6 +22,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -67,17 +68,19 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         this.bodyswing = 2F;
         this.movInt = this.rand.nextInt(10);
         setAge(50 + this.rand.nextInt(50));
+        experienceValue = 3;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(2, new EntityAIPanicMoC(this, 0.8D));
         this.tasks.addTask(3, new EntityAIFleeFromPlayer(this, 0.8D, 4D));
-        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIWanderMoC2(this, 0.8D, 30));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        //this.targetTasks.addTask(1, new EntityAIHunt<>(this, EntityAnimal.class, true));
-        this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        //this.targetTasks.addTask(2, new EntityAIHunt<>(this, EntityAnimal.class, false));
+        this.targetTasks.addTask(3, new EntityAIHunt<>(this, EntityPlayer.class, false));
     }
 
     @Override
@@ -85,7 +88,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         super.applyEntityAttributes();
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
         this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
@@ -93,11 +96,6 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData par1EntityLivingData) {
         if (this.world.provider.getDimension() == MoCreatures.proxy.wyvernDimension) this.enablePersistence();
         return super.onInitialSpawn(difficulty, par1EntityLivingData);
-    }
-
-    @Override
-    protected boolean canDespawn() {
-        return this.world.provider.getDimension() != MoCreatures.proxy.wyvernDimension;
     }
 
     @Override
@@ -141,6 +139,11 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     }
 
     @Override
+    protected int getExperiencePoints(EntityPlayer player) {
+        return experienceValue;
+    }
+
+    @Override
     public void fall(float f, float f1) {
     }
 
@@ -173,7 +176,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
         }
 
         if (this.getRidingEntity() == null) {
-            if (this.startRiding(player)) {
+            if (this.startRidingPlayer(player)) {
                 this.rotationYaw = player.rotationYaw;
             }
 
@@ -321,7 +324,7 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 setfMouth(0.3F);
 
                 if (this.bodyswing < 0F) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SNAKE_SNAP);
+                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SNAKE_ATTACK);
                     this.bodyswing = 2.5F;
                     setfMouth(0.0F);
                     setBiting(false);
@@ -491,13 +494,10 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
     }
 
     @Override
-    protected void dropFewItems(boolean flag, int x) {
+    public void dropLegacyEgg() {
         if (getAge() > 60) {
             int j = this.rand.nextInt(3);
-            for (int l = 0; l < j; l++) {
-
-                entityDropItem(new ItemStack(MoCItems.mocegg, 1, getType() + 20), 0.0F);
-            }
+            entityDropItem(new ItemStack(MoCItems.mocegg, j, getType() + 20), 0.0F);
         }
     }
 
@@ -569,12 +569,32 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (BiomeDictionary.hasType(currentbiome, Type.PLAINS) || BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
+            if (BiomeDictionary.hasType(currentbiome, Type.PLAINS)) {
                 // dark green or coral or spotted
                 if (l < 3) {
                     setType(1);
                 } else if (l < 5) {
                     setType(5);
+                } else {
+                    setType(2);
+                }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.SAVANNA)) {
+                // python or spotted or rattlesnake
+                if (l < 4) {
+                    setType(8);
+                } else if (l < 8) {
+                    setType(2);
+                } else {
+                    setType(7);
+                }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.FOREST)) {
+                // dark green or spotted
+                if (l < 5) {
+                    setType(1);
                 } else {
                     setType(2);
                 }
@@ -592,16 +612,23 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
             }
 
             if (BiomeDictionary.hasType(currentbiome, Type.JUNGLE)) {
-                // bright green or bright orange or cobra or dark green
-                if (l < 4) {
+                // bright green or bright orange or cobra or python or dark green
+                if (l < 3) {
                     setType(4);
-                } else if (l < 6) {
+                } else if (l < 5) {
                     setType(3);
-                } else if (l < 8) {
+                } else if (l < 7) {
                     setType(6);
+                } else if (l < 9) {
+                    setType(8);
                 } else {
                     setType(1);
                 }
+            }
+
+            if (BiomeDictionary.hasType(currentbiome, Type.MAGICAL)) {
+                // dark green
+                setType(1);
             }
 
             if (BiomeDictionary.hasType(currentbiome, MoCEntities.WYVERN_LAIR)) {
@@ -617,7 +644,8 @@ public class MoCEntitySnake extends MoCEntityTameableAnimal {
                 }
             }
 
-            if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY))) {
+            if (getType() == 7 && !(BiomeDictionary.hasType(currentbiome, Type.SANDY) && !(BiomeDictionary.hasType(currentbiome, Type.SAVANNA)))) {
+                // spotted
                 setType(2);
             }
         } catch (Exception ignored) {

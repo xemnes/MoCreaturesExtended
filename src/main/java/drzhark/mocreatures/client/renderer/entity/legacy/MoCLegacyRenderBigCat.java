@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity.legacy;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat1;
 import drzhark.mocreatures.client.model.legacy.MoCLegacyModelBigCat2;
 import drzhark.mocreatures.entity.hunter.MoCEntityBigCat;
@@ -25,7 +25,7 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
     public MoCLegacyModelBigCat2 bigcat1;
 
     public MoCLegacyRenderBigCat(MoCLegacyModelBigCat2 modelbigcat2, MoCLegacyModelBigCat1 modelbigcat1, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbigcat2, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbigcat2, f);
         this.addLayer(new LayerMoCBigCat(this));
         this.bigcat1 = modelbigcat2;
     }
@@ -41,7 +41,7 @@ public class MoCLegacyRenderBigCat extends RenderLiving<MoCEntityBigCat> {
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitybigcat.getPetName()).isEmpty();
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
 
-        if (entitybigcat.renderName()) {
+        if (entitybigcat.shouldRenderNameAndHealth()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f5 = entitybigcat.getDistance(this.renderManager.renderViewEntity);

@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:wooden_pressure_plate"
+    },
+    {
+      "item": "mocreatures:wyvwood_planks"
+    }
+  ],
+  "result": {
+    "item": "mocreatures:wyvwood_pressure_plate"
+  }
+}

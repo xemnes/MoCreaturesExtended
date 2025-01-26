@@ -1,20 +1,13 @@
 itemGroup.MoCreaturesTab=DrZhark's Mo'Creatures Extended
 
 # BLOCKS
-tile.MoCDirt.ogre_lair.name=Земля логова огра
-tile.MoCDirt.wyvern_lair.name=Земля логова виверны
-tile.MoCGrass.ogre_lair.name=Трава логова огра
-tile.MoCGrass.wyvern_lair.name=Трава логова виверны
-tile.MoCLeaves.ogre_lair.name=Листва логова огра
-tile.MoCLeaves.wyvern_lair.name=Листва логова виверны
-tile.MoCLog.ogre_lair.name=Древесина логова огра
-tile.MoCLog.wyvern_lair.name=Древесина логова виверны
-tile.MoCStone.ogre_lair.name=Камень логова огра
-tile.MoCStone.wyvern_lair.name=Камень логова виверны
-tile.MoCTallGrass.ogre_lair.name=Высокая трава логова огра
-tile.MoCTallGrass.wyvern_lair.name=Высокая трава логова виверны
-tile.MoCWoodPlank.ogre_lair.name=Доски логова огра
-tile.MoCWoodPlank.wyvern_lair.name=Доски логова виверны
+tile.mocreatures.wyvdirt.name=Земля логова виверны
+tile.mocreatures.wyvgrass.name=Трава логова виверны
+tile.mocreatures.wyvwood_leaves.name=Листва логова виверны
+tile.mocreatures.wyvwood_log.name=Древесина логова виверны
+tile.mocreatures.wyvstone.name=Камень логова виверны
+tile.mocreatures.tall_wyvgrass.name=Высокая трава логова виверны
+tile.mocreatures.wyvwood_planks.name=Доски логова виверны
 
 # ITEMS
 item.amuletbone.name=Костный амулет
@@ -49,7 +42,6 @@ item.furboots.name=Меховые ботинки
 item.furchest.name=Меховая кираса
 item.furhelmet.name=Меховой шлем
 item.furlegs.name=Меховые поножи
-item.haystack.name=Стог сена
 item.heartdarkness.name=Сердце тьмы
 item.heartfire.name=Сердце огня
 item.heartundead.name=Сердце нежити
@@ -59,7 +51,6 @@ item.hidechest.name=Кираса из шкуры
 item.hidehelmet.name=Шлем из шкуры
 item.hidelegs.name=Поножи из шкуры
 item.horsearmorcrystal.name=Кристальная горная броня
-item.horsesaddle.name=Сделанное седло
 item.katana.name=Катана
 item.key.name=Ключ
 item.kittybed.name=Кошачья кровать
@@ -181,7 +172,6 @@ item.scorpsworddirt.name=Меч земляного скорпиона
 item.scorpswordfrost.name=Меч морозного скорпиона
 item.scorpswordnether.name=Меч скорпиона Нижнего мира
 item.scrolloffreedom.name=Свиток свободы
-item.scrollofowner.name=Свиток сброса владельца
 item.scrollofsale.name=Свиток продажи
 item.sharksword.name=Акулий меч
 item.sharkteeth.name=Акулий зуб
@@ -285,3 +275,33 @@ entity.mocreatures:wildhorse.name=Дикая лошадь
 entity.mocreatures:wraith.name=Призрак
 entity.mocreatures:wwolf.name=Оборотень
 entity.mocreatures:wyvern.name=Виверна
+
+# MESSAGES
+msg.mocreatures.bed1=Вы обдумываете это, но решаете не спать.
+msg.mocreatures.bed2=Кровать кажется холодной на ощупь.
+msg.mocreatures.bed3=Вас охватывает чувство срочности. Вы не можете здесь спать.
+msg.mocreatures.bed4=По крайней мере, она не взрывается.
+msg.mocreatures.compat.cms=Обнаружен Custom Mob Spawner!
+msg.mocreatures.compat.cms1=Mo' Creatures Extended разработан вокруг стандартного спавнера, Custom Mob Spawner больше не нужен.
+msg.mocreatures.compat.cms2=Рассмотрите возможность удаления Custom Mob Spawner, чтобы избежать негативного воздействия на игровой процесс.
+msg.mocreatures.egg=Скоро вылупление яйца! СЛЕДИТЕ! Если вы покинете область, существо, вылупившееся в координатах %s, %s, %s, будет потеряно.
+msg.mocreatures.foreignpet=Этот питомец вам не принадлежит.
+msg.mocreatures.petnotreadytorideplayer=Держитесь крепче! Вашему питомцу нужна быстрая передышка.
+
+# INFO
+info.mocreatures.scrolloffreedom=Щелкните правой кнопкой мыши на своем питомце, чтобы освободить его от владения и сделать диким снова.
+info.mocreatures.scrollofsale=Щелкните правой кнопкой мыши на своем питомце, чтобы передать его другому владельцу при следующем переименовании.
+info.mocreatures.scrollofrenaming=Щелкните правой кнопкой мыши на своем питомце, чтобы переименовать его.
+info.mocreatures.horsearmorcrystal=Может быть надето только на определённые редкие породы лошадей.
+info.mocreatures.setbonus=Бонус комплекта:
+info.mocreatures.setbonusscorp1=Постоянная Скорость II
+info.mocreatures.setbonusscorp2=Постоянное Сопротивление
+info.mocreatures.setbonusscorp3=Постоянная Огнестойкость
+info.mocreatures.setbonusscorp4=Постоянное Ночное Зрение
+info.mocreatures.setbonusscorp5=Постоянная Сила
+info.mocreatures.sting_weapon_cave=Накладывает Слабость на цель (Тошноту на игроков) на %d секунд
+info.mocreatures.sting_weapon_dirt=Накладывает Отравление II на цель на %d секунд
+info.mocreatures.sting_weapon_fire=Поджигает цель на %d секунд
+info.mocreatures.sting_weapon_frost=Накладывает Замедление на цель на %d секунд
+info.mocreatures.sting_weapon_undead=Накладывает Иссушение на цель (Слепоту на игроков) на %d секунд
+info.mocreatures.whip=Все приручённые мобы MoC в радиусе 10 блоков автоматически сядут, если щёлкнуть правой кнопкой мыши по земле

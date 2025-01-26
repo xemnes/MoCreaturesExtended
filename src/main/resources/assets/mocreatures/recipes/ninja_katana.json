@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " S ",
+    " S ",
+    "HSH"
+  ],
+  "key": {
+    "S": {
+      "item": "mocreatures:ancientsilveringot"
+    },
+    "H": {
+      "item": "mocreatures:hide"
+    }
+  },
+  "result": {
+    "item": "mocreatures:katana"
+  }
+}

@@ -3,11 +3,10 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
 import net.minecraft.entity.Entity;
@@ -15,8 +14,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityStingRay extends MoCEntityRay {
 
@@ -25,14 +27,16 @@ public class MoCEntityStingRay extends MoCEntityRay {
 
     public MoCEntityStingRay(World world) {
         super(world);
-        setSize(1.2F, 0.5F);
-        setAge(50 + (this.rand.nextInt(40)));
+        setSize(0.7F, 0.3F);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(50 + (this.rand.nextInt(40)));
+        setAge(90);
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10D);
+        getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
     }
 
     @Override
@@ -92,5 +96,13 @@ public class MoCEntityStingRay extends MoCEntityRay {
             }
         }
         return false;
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.86F;
+    }
+    
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_DEATH_VICIOUS;
     }
 }

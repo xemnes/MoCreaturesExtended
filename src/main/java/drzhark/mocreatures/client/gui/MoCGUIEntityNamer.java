@@ -4,9 +4,9 @@
 package drzhark.mocreatures.client.gui;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.IMoCEntity;
-import drzhark.mocreatures.entity.IMoCTameable;
+import drzhark.mocreatures.entity.tameable.IMoCTameable;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageUpdatePetName;
 import net.minecraft.client.gui.GuiButton;
@@ -25,8 +25,8 @@ import java.io.IOException;
 @SideOnly(Side.CLIENT)
 public class MoCGUIEntityNamer extends GuiScreen {
 
-    private static final TextureManager textureManager = MoCClientProxy.mc.getTextureManager();
-    private static final ResourceLocation TEXTURE_MOCNAME = MoCreatures.proxy.getGuiTexture("mocname.png");
+    private static final TextureManager textureManager = MoCProxyClient.mc.getTextureManager();
+    private static final ResourceLocation TEXTURE_MOCNAME = MoCreatures.proxy.getGuiTexture("pet_naming.png");
     private final IMoCEntity namedEntity;
     protected String screenTitle;
     protected int xSize;
@@ -47,7 +47,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
     public void initGui() {
         this.buttonList.clear();
         Keyboard.enableRepeatEvents(true);
-        this.buttonList.add(new GuiButton(0, (this.width / 2) - 100, (this.height / 4) + 120, "Done")); //1.5
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, (this.height - (this.ySize + 16)) / 2 + 150, "Done"));
     }
 
     public void updateName() {
@@ -61,7 +61,7 @@ public class MoCGUIEntityNamer extends GuiScreen {
         if (!guibutton.enabled) {
             return;
         }
-        if ((guibutton.id == 0) && (this.nameToSet != null) && (!this.nameToSet.equals(""))) {
+        if (guibutton.id == 0 && this.nameToSet != null) {
             updateName();
         }
     }
@@ -74,29 +74,24 @@ public class MoCGUIEntityNamer extends GuiScreen {
         int l = (this.width - this.xSize) / 2;
         int i1 = (this.height - (this.ySize + 16)) / 2;
         drawTexturedModalRect(l, i1, 0, 0, this.xSize, this.ySize);
-        drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 100, 0xffffff);
-        drawCenteredString(this.fontRenderer, this.nameToSet, this.width / 2, 120, 0xffffff);
+        drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, (this.height - (this.ySize + 16)) / 2 + 29, 0xffffff);
+        drawCenteredString(this.fontRenderer, this.nameToSet + "_", this.width / 2, (this.height - (this.ySize + 16)) / 2 + 74, 0xffffff);
         super.drawScreen(i, j, f);
     }
 
     @Override
     public void handleKeyboardInput() throws IOException {
-        if (Keyboard.getEventKeyState()) {
-            if (Keyboard.getEventKey() == 28) // Handle Enter Key
-            {
-                updateName();
-            }
+        if (Keyboard.getEventKeyState() && Keyboard.getEventKey() == 28) { // Handle Enter Key
+            updateName();
         }
         super.handleKeyboardInput();
     }
 
     @Override
     protected void keyTyped(char c, int i) {
-        if ((i == 14) && (this.nameToSet.length() > 0)) {
-            this.nameToSet = this.nameToSet.substring(0, this.nameToSet.length() - 1);
-        }
-        if (!ChatAllowedCharacters.isAllowedCharacter(c) || (this.nameToSet.length() >= 15)) {
-        } else {
+        if (i == 14) { // Handle Backspace Key
+            this.nameToSet = this.nameToSet.substring(0, Math.max(this.nameToSet.length() - 1, 0));
+        } else if (ChatAllowedCharacters.isAllowedCharacter(c)) {
             this.nameToSet = this.nameToSet + c;
         }
     }

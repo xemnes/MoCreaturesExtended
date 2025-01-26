@@ -3,15 +3,14 @@
  */
 package drzhark.mocreatures.entity.hunter;
 
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
-import drzhark.mocreatures.entity.item.MoCEntityEgg;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
 import drzhark.mocreatures.init.MoCItems;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageAnimation;
@@ -44,7 +43,7 @@ import javax.annotation.Nullable;
 
 public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
-    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BYTE);
+    private static final DataParameter<Boolean> CLIMBING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> RIDEABLE = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> HAS_BABIES = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> IS_SITTING = EntityDataManager.createKey(MoCEntityPetScorpion.class, DataSerializers.BOOLEAN);
@@ -104,8 +103,14 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         if (this.transformCounter != 0 && this.transformType != 0) {
             String newText;
             switch (this.transformType) {
+                case 2: // Cave Scorpion
+                    newText = saddle ? "scorpion_cave_saddled.png" : "scorpion_cave.png";
+                    break;
                 case 3: // Fire Scorpion
                     newText = saddle ? "scorpion_fire_saddled.png" : "scorpion_fire.png";
+                    break;
+                case 4: // Frost Scorpion
+                    newText = saddle ? "scorpion_frost_saddled.png" : "scorpion_frost.png";
                     break;
                 case 5: // Undead Scorpion
                     newText = saddle ? "scorpion_undead_saddled.png" : "scorpion_undead.png";
@@ -155,10 +160,15 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataManager.register(CLIMBING, (byte) 0);
+        this.dataManager.register(CLIMBING, Boolean.FALSE);
         this.dataManager.register(HAS_BABIES, Boolean.FALSE);
         this.dataManager.register(IS_SITTING, Boolean.FALSE);
         this.dataManager.register(RIDEABLE, Boolean.FALSE);
+    }
+
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() {
+        return !this.isMovementCeased();
     }
 
     @Override
@@ -224,27 +234,18 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
     }
 
     public boolean isBesideClimbableBlock() {
-        return (this.dataManager.get(CLIMBING) & 1) != 0;
+        return this.dataManager.get(CLIMBING);
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
-        byte b0 = this.dataManager.get(CLIMBING);
-
-        if (climbing) {
-            b0 = (byte) (b0 | 1);
-        } else {
-            b0 = (byte) (b0 & -2);
-        }
-
-        this.dataManager.set(CLIMBING, b0);
+        this.dataManager.set(CLIMBING, climbing);
     }
-
 
     @Override
     public boolean attackEntityAsMob(Entity entity) {
         // Claw Attack Sound
         if (this.poisontimer != 1) {
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SCORPION_CLAW);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_SCORPION_ATTACK);
         }
         return super.attackEntityAsMob(entity);
     }
@@ -279,7 +280,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
         if (this.transformCounter > 0) {
             // Sound plays after this amount of time has passed during transformation
             if (this.transformCounter == 60) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_TRANSFORM);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_MAGIC_CONVERSION);
             }
 
             // Transformation completed
@@ -416,7 +417,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
         final ItemStack stack = player.getHeldItem(hand);
         if (!stack.isEmpty() && getIsAdult() && !getIsRideable()
-                && (stack.getItem() instanceof ItemSaddle || stack.getItem() == MoCItems.horsesaddle)) {
+                && (stack.getItem() instanceof ItemSaddle)) {
             if (!player.capabilities.isCreativeMode) stack.shrink(1);
             setRideable(true);
             return true;
@@ -424,11 +425,26 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
         if (!stack.isEmpty() && (stack.getItem() == MoCItems.whip) && getIsTamed() && (!this.isBeingRidden())) {
             setSitting(!getIsSitting());
+            setIsJumping(false);
+            getNavigator().clearPath();
+            setAttackTarget(null);
             return true;
         }
 
         // Transformations
         if (!stack.isEmpty() && this.getIsTamed() && !this.isBeingRidden() && !this.isRiding() && this.transformCounter < 1) {
+            // Cave Scorpion (Essence of Darkness)
+            if (stack.getItem() == MoCItems.essencedarkness && this.getType() != 2) {
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
+                if (stack.isEmpty()) {
+                    player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
+                } else {
+                    player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
+                }
+
+                transform(2);
+                return true;
+            }
 
             // Fire Scorpion (Essence of Fire)
             if (stack.getItem() == MoCItems.essencefire && this.getType() != 3) {
@@ -440,6 +456,19 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
                 }
 
                 transform(3);
+                return true;
+            }
+
+            // Frost Scorpion (Essence of Ice)
+            if (stack.getItem() == MoCItems.essenceIce && this.getType() != 4) {
+                if (!player.capabilities.isCreativeMode) stack.shrink(1);
+                if (stack.isEmpty()) {
+                    player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
+                } else {
+                    player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
+                }
+
+                transform(4);
                 return true;
             }
 
@@ -457,28 +486,8 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
             }
         }
 
-        if (!stack.isEmpty() && this.getIsTamed() && !this.isBeingRidden() && !this.isRiding() && stack.getItem() == MoCItems.essencedarkness) {
-            if (!player.capabilities.isCreativeMode) stack.shrink(1);
-            if (stack.isEmpty()) {
-                player.setHeldItem(hand, new ItemStack(Items.GLASS_BOTTLE));
-            } else {
-                player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
-            }
-            this.setHealth(getMaxHealth());
-            if (!this.world.isRemote) {
-                int i = getType() + 40;
-                MoCEntityEgg entityegg = new MoCEntityEgg(this.world, i);
-                entityegg.setPosition(player.posX, player.posY, player.posZ);
-                player.world.spawnEntity(entityegg);
-                entityegg.motionY += this.world.rand.nextFloat() * 0.05F;
-                entityegg.motionX += (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.3F;
-                entityegg.motionZ += (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.3F;
-            }
-            return true;
-        }
-
         if (this.getRidingEntity() == null && this.getAge() < 60 && !getIsAdult()) {
-            if (this.startRiding(player)) {
+            if (this.startRidingPlayer(player)) {
                 this.rotationYaw = player.rotationYaw;
                 if (!this.world.isRemote && !getIsTamed()) {
                     MoCTools.tameWithName(player, this);

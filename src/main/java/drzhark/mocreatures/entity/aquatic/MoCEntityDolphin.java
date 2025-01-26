@@ -3,12 +3,12 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAquatic;
 import drzhark.mocreatures.entity.ai.EntityAIPanicMoC;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAquatic;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import drzhark.mocreatures.network.MoCMessageHandler;
 import drzhark.mocreatures.network.message.MoCMessageHeart;
@@ -30,10 +30,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-
-import javax.annotation.Nullable;
 
 public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
@@ -43,8 +42,11 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
     public MoCEntityDolphin(World world) {
         super(world);
-        setSize(1.5F, 0.8F);
-        setAge(60 + this.rand.nextInt(100));
+        setSize(1.3F, 0.605F);
+        setAdult(true);
+        // TODO: Make hitboxes adjust depending on size
+        //setAge(60 + this.rand.nextInt(100));
+        setAge(120);
     }
 
     @Override
@@ -56,10 +58,10 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(15.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.5D);
     }
 
     @Override
@@ -244,8 +246,13 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     }
 
     @Override
-    protected SoundEvent getUpsetSound() {
-        return MoCSoundEvents.ENTITY_DOLPHIN_UPSET;
+    protected SoundEvent getAngrySound() {
+        return MoCSoundEvents.ENTITY_DOLPHIN_ANGRY;
+    }
+    
+    @Override
+    protected SoundEvent getSwimSound() {
+        return MoCSoundEvents.ENTITY_FISH_SWIM;
     }
 
     @Nullable
@@ -278,7 +285,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
                 }
             }
 
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
 
             return true;
         }
@@ -288,7 +295,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
                 this.setHealth(getMaxHealth());
             }
             setHasEaten(true);
-            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EATING);
+            MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GENERIC_EAT);
             return true;
         }
         if (!this.isBeingRidden()) {
@@ -325,7 +332,7 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
             if ((!this.isBeingRidden()) && (this.deathTime == 0) && (!getIsTamed() || getIsHungry())) {
                 EntityItem entityitem = getClosestFish(this, 12D);
                 if (entityitem != null) {
-                    MoveToNextEntity(entityitem);
+                    moveToNextEntity(entityitem);
                     EntityItem entityitem1 = getClosestFish(this, 2D);
                     if ((this.rand.nextInt(20) == 0) && (entityitem1 != null) && (this.deathTime == 0)) {
 
@@ -407,10 +414,11 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
 
     @Override
     public void setDead() {
-        if (!this.world.isRemote && getIsTamed() && (getHealth() > 0)) {
-        } else {
-            super.setDead();
+        // Server check required to prevent tamed entities from being duplicated on client-side
+        if (!this.world.isRemote && (getIsTamed()) && (getHealth() > 0)) {
+            return;
         }
+        super.setDead();
     }
 
     @Override
@@ -459,5 +467,9 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
     @Override
     public double getMountedYOffset() {
         return this.getAge() * 0.01F * (this.height * 0.3D);
+    }
+
+    public float getEyeHeight() {
+        return this.height * 0.315F;
     }
 }

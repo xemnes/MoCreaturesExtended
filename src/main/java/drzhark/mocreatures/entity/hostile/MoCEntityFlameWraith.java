@@ -3,9 +3,8 @@
  */
 package drzhark.mocreatures.entity.hostile;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
+import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -16,21 +15,30 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
 
     protected int burningTime;
 
     public MoCEntityFlameWraith(World world) {
         super(world);
-        this.texture = "flame_wraith.png";
+        this.texture = MoCreatures.proxy.alphaWraithEyes ? "wraith_flame_alpha.png" : "wraith_flame.png";
         this.isImmuneToFire = true;
         this.burningTime = 30;
+        experienceValue = 7;
     }
 
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+    }
+    
+    @Override
+    public void selectType() {
+    	setType(1);
     }
 
     @Nullable
@@ -67,5 +75,11 @@ public class MoCEntityFlameWraith extends MoCEntityWraith implements IMob {
             entityLivingBaseIn.setFire(this.burningTime);
         }
         super.applyEnchantments(entityLivingBaseIn, entityIn);
+    }
+    
+    // TODO: Overhaul this
+    @Override
+    public ResourceLocation getTexture() {
+    	return MoCreatures.proxy.getModelTexture(MoCreatures.proxy.alphaWraithEyes ? "wraith_flame_alpha.png" : "wraith_flame.png");
     }
 }

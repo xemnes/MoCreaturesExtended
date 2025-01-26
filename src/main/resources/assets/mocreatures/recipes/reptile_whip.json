@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "#X#",
+    "X X",
+    "# Z"
+  ],
+  "key": {
+    "X": {
+      "item": "mocreatures:reptilehide"
+    },
+    "#": {
+      "item": "mocreatures:bigcatclaw"
+    },
+    "Z": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "mocreatures:reptile_whip"
+  }
+}

@@ -3,12 +3,14 @@
  */
 package drzhark.mocreatures.entity.aquatic;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.init.MoCLootTables;
+import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityAngler extends MoCEntitySmallFish {
 
@@ -25,5 +27,9 @@ public class MoCEntityAngler extends MoCEntitySmallFish {
     @Nullable
     protected ResourceLocation getLootTable() {
         return MoCLootTables.ANGLERFISH;
+    }
+    
+    protected SoundEvent getDeathSound() {
+        return MoCSoundEvents.ENTITY_FISH_DEATH_VICIOUS;
     }
 }

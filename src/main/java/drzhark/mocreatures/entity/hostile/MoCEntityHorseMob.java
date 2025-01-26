@@ -8,15 +8,21 @@ import drzhark.mocreatures.MoCreatures;
 import drzhark.mocreatures.entity.MoCEntityMob;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class MoCEntityHorseMob extends MoCEntityMob {
 
     public int mouthCounter;
@@ -37,14 +44,17 @@ public class MoCEntityHorseMob extends MoCEntityMob {
     public MoCEntityHorseMob(World world) {
         super(world);
         setSize(1.3964844F, 1.6F);
+        experienceValue = 5;
     }
 
     @Override
     protected void initEntityAI() {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityIronGolem.class, true));
     }
 
     @Override
@@ -52,7 +62,7 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
     }
 
     @Override
@@ -163,6 +173,21 @@ public class MoCEntityHorseMob extends MoCEntityMob {
             stand();
         }
         return MoCSoundEvents.ENTITY_HORSE_AMBIENT_UNDEAD;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        if (!blockIn.getDefaultState().getMaterial().isLiquid()) {
+            SoundType soundtype = blockIn.getSoundType();
+
+            if (this.world.getBlockState(pos.up()).getBlock() == Blocks.SNOW_LAYER) {
+                soundtype = Blocks.SNOW_LAYER.getSoundType();
+            } else if (soundtype == SoundType.WOOD) {
+                this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+            } else {
+                this.playSound(SoundEvents.ENTITY_HORSE_STEP, soundtype.getVolume() * 0.15F, soundtype.getPitch());
+            }
+        }
     }
 
     public boolean isOnAir() {
@@ -394,7 +419,8 @@ public class MoCEntityHorseMob extends MoCEntityMob {
         passenger.rotationYaw = this.rotationYaw;
     }
 
+    // Adjusted to avoid most of the roof suffocation for now
     public float getEyeHeight() {
-        return this.height;
+        return this.height * 0.9F;
     }
 }

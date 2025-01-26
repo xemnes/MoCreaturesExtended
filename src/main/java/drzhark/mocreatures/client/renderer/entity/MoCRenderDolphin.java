@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.entity;
 
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.aquatic.MoCEntityDolphin;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBase;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
 
     public MoCRenderDolphin(ModelBase modelbase, float f) {
-        super(MoCClientProxy.mc.getRenderManager(), modelbase, f);
+        super(MoCProxyClient.mc.getRenderManager(), modelbase, f);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
         boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitydolphin.getPetName().isEmpty());
         boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
         //boolean flag2 = MoCreatures.proxy.getdisplayPetIcons();
-        if (entitydolphin.renderName()) {
+        if (entitydolphin.shouldRenderNameAndHealth()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitydolphin.getDistance(this.renderManager.renderViewEntity);
@@ -98,7 +98,7 @@ public class MoCRenderDolphin extends RenderLiving<MoCEntityDolphin> {
 
     public void doRender2(MoCEntityDolphin entitydolphin, double d, double d1, double d2, float f, float f1) {
         super.doRender(entitydolphin, d, d1, d2, f, f1);
-        if (entitydolphin.renderName()) {
+        if (entitydolphin.shouldRenderNameAndHealth()) {
             float f2 = 1.6F;
             float f3 = 0.01666667F * f2;
             float f4 = entitydolphin.getDistance(this.renderManager.renderViewEntity);

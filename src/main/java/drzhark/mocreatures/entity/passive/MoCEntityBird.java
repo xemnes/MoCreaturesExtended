@@ -3,14 +3,15 @@
  */
 package drzhark.mocreatures.entity.passive;
 
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityTameableAnimal;
 import drzhark.mocreatures.entity.ai.EntityAIFleeFromEntityMoC;
 import drzhark.mocreatures.entity.ai.EntityAIFollowOwnerPlayer;
 import drzhark.mocreatures.entity.ai.EntityAIWanderMoC2;
+import drzhark.mocreatures.entity.tameable.MoCEntityTameableAnimal;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -21,6 +22,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -78,7 +80,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
     }
 
@@ -254,12 +256,12 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_BIRD_DEATH;
+        return SoundEvents.ENTITY_GENERIC_HURT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_BIRD_HURT;
+        return SoundEvents.ENTITY_GENERIC_HURT;
     }
 
     @Override
@@ -281,6 +283,12 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
         } else {
             return MoCSoundEvents.ENTITY_BIRD_AMBIENT_RED;
         }
+    }
+    
+    // TODO: Add unique sound event
+    @Override
+    protected void playStepSound(BlockPos pos, Block blockIn) {
+        this.playSound(SoundEvents.ENTITY_PARROT_STEP, 0.15F, 1.0F);
     }
 
     @Nullable
@@ -317,7 +325,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             return false;
         }
         if (this.getRidingEntity() == null) {
-            if (this.startRiding(player)) {
+            if (this.startRidingPlayer(player)) {
                 this.rotationYaw = player.rotationYaw;
             }
 
@@ -327,6 +335,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
         return super.processInteract(player, hand);
     }
 
+    // TODO: Add updated flap ai based on vanilla's parrot
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
@@ -461,10 +470,11 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
 
     @Override
     public void setDead() {
-        if (!this.world.isRemote && getIsTamed() && (this.getHealth() > 0)) {
-        } else {
-            super.setDead();
+        // Server check required to prevent tamed entities from being duplicated on client-side
+        if (!this.world.isRemote && (getIsTamed()) && (getHealth() > 0)) {
+            return;
         }
+        super.setDead();
     }
 
     private void WingFlap() {
@@ -523,4 +533,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
     public float getEyeHeight() {
         return this.height * 0.75F;
     }
+
+    @Override
+    public boolean isReadyToFollowOwnerPlayer() { return !this.isMovementCeased(); }
 }

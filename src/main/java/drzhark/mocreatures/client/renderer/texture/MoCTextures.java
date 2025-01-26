@@ -4,7 +4,7 @@
 package drzhark.mocreatures.client.renderer.texture;
 
 import drzhark.mocreatures.MoCConstants;
-import drzhark.mocreatures.MoCProxy;
+import drzhark.mocreatures.proxy.MoCProxy;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.util.ResourceLocation;
 

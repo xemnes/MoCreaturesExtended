@@ -3,35 +3,33 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
-import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
-import drzhark.mocreatures.entity.MoCEntityInsect;
+import drzhark.mocreatures.entity.MoCEntityAmbient;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import net.minecraft.entity.ai.EntityAIFollow;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 
-public class MoCEntityCricket extends MoCEntityInsect {
+import javax.annotation.Nullable;
+
+public class MoCEntityCricket extends MoCEntityAmbient {
 
     private int jumpCounter;
-    private int soundCounter;
-
+    
     public MoCEntityCricket(World world) {
         super(world);
-        this.texture = "cricketa.png";
+        setSize(0.4F, 0.3F);
     }
 
     @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
     }
 
     @Override
@@ -49,9 +47,9 @@ public class MoCEntityCricket extends MoCEntityInsect {
     @Override
     public ResourceLocation getTexture() {
         if (getType() == 1) {
-            return MoCreatures.proxy.getModelTexture("cricket_bright_green.png");
+            return MoCreatures.proxy.getModelTexture("cricket_light_brown.png");
         } else {
-            return MoCreatures.proxy.getModelTexture("cricket_green.png");
+            return MoCreatures.proxy.getModelTexture("cricket_brown.png");
         }
     }
 
@@ -59,23 +57,18 @@ public class MoCEntityCricket extends MoCEntityInsect {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
-            if (getIsFlying() || !this.onGround) {
-                EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5D);
-                if (ep != null && --this.soundCounter == -1) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_CRICKET_FLY);
-                    this.soundCounter = 10;
-                }
-            } else if (!DimensionManager.getWorld(0).isDaytime()) {
-                EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 12D);
-                if (ep != null && --this.soundCounter == -1) {
-                    MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_CRICKET_AMBIENT);
-                    this.soundCounter = 20;
-                }
-            }
-
             if (this.jumpCounter > 0 && ++this.jumpCounter > 30) {
                 this.jumpCounter = 0;
             }
+        }
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        if (!world.isDaytime()) {
+            return world.rand.nextDouble() <= 0.1D ? MoCSoundEvents.ENTITY_CRICKET_AMBIENT : null;
+        } else {
+            return world.rand.nextDouble() <= 0.1D ? MoCSoundEvents.ENTITY_CRICKET_CHIRP : null;
         }
     }
 
@@ -109,11 +102,6 @@ public class MoCEntityCricket extends MoCEntityInsect {
     }
 
     @Override
-    public boolean isFlyer() {
-        return true;
-    }
-
-    @Override
     public float getAIMoveSpeed() {
         if (getIsFlying()) {
             return 0.12F;
@@ -124,5 +112,10 @@ public class MoCEntityCricket extends MoCEntityInsect {
     @Override
     public float getEyeHeight() {
         return 0.15F;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

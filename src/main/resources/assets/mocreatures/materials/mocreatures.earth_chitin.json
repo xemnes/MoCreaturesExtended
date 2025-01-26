@@ -1,0 +1,9 @@
+{
+  "type": "multicolor",
+  "suffix": "contrast",
+  "parameters": {
+    "dark": "F37A07",
+    "mid": "F37A07",
+    "bright": "F37A07"
+  }
+}

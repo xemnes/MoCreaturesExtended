@@ -1,3 +1,6 @@
+/*
+ * GNU GENERAL PUBLIC LICENSE Version 3
+ */
 package drzhark.mocreatures.compat.industrialforegoing;
 
 import com.buuz135.industrial.api.extractor.ExtractorEntry;
@@ -7,7 +10,7 @@ import drzhark.mocreatures.init.MoCItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-// Courtesy of SokyranTheDragon
+// Courtesy of SokyranTheDragon for most entries
 public class IndustrialForegoingIntegration {
 
     public static ItemStack[] getBasicProteinGeneratorEntries() {
@@ -22,16 +25,21 @@ public class IndustrialForegoingIntegration {
                 new ItemStack(MoCItems.ostrichcooked),
                 new ItemStack(MoCItems.turtleraw),
                 new ItemStack(MoCItems.turtlecooked),
+                new ItemStack(MoCItems.venisonRaw),
+                new ItemStack(MoCItems.venisonCooked),
+                new ItemStack(MoCItems.duckRaw),
+                new ItemStack(MoCItems.duckCooked),
                 new ItemStack(MoCItems.heartdarkness),
                 new ItemStack(MoCItems.heartfire),
-                new ItemStack(MoCItems.heartundead)
+                new ItemStack(MoCItems.heartundead),
+                new ItemStack(MoCItems.heartIce),
+                new ItemStack(MoCItems.heartEternal)
         };
     }
 
     public static ExtractorEntry[] getLatexEntries() {
         return new ExtractorEntry[]{
-                new ExtractorEntry(new ItemStack(MoCBlocks.mocLog, 1, 0), new FluidStack(FluidsRegistry.LATEX, 1)),
-                new ExtractorEntry(new ItemStack(MoCBlocks.mocLog, 1, 1), new FluidStack(FluidsRegistry.LATEX, 1))
+                new ExtractorEntry(new ItemStack(MoCBlocks.wyvwoodLog), new FluidStack(FluidsRegistry.LATEX, 1)),
         };
     }
 }

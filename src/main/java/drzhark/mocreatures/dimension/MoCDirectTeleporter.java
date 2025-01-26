@@ -3,6 +3,7 @@
  */
 package drzhark.mocreatures.dimension;
 
+import drzhark.mocreatures.dimension.worldgen.MoCWorldGenPortal;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +35,7 @@ public class MoCDirectTeleporter extends Teleporter {
         MoCWorldGenPortal myPortal = new MoCWorldGenPortal(Blocks.QUARTZ_BLOCK, 2, Blocks.QUARTZ_STAIRS, 0, Blocks.QUARTZ_BLOCK, 1, Blocks.QUARTZ_BLOCK, 0);
         for (int i = 0; i < 14; i++) {
             if (!this.portalDone) {
-                int randPosY = 58 + i;//par2Random.nextInt(8);
+                int randPosY = 58 + i;
                 this.portalDone = myPortal.generate(par1World, par2Random, new BlockPos(0, randPosY, 0));
             }
         }

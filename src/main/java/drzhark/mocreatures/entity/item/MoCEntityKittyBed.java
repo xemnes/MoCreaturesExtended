@@ -5,6 +5,7 @@ package drzhark.mocreatures.entity.item;
 
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.MoCreatures;
+import drzhark.mocreatures.entity.neutral.MoCEntityKitty;
 import drzhark.mocreatures.init.MoCItems;
 import drzhark.mocreatures.init.MoCSoundEvents;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+// TODO: Fix hitbox
 public class MoCEntityKittyBed extends EntityLiving {
 
     private static final DataParameter<Boolean> HAS_MILK = EntityDataManager.createKey(MoCEntityKittyBed.class, DataSerializers.BOOLEAN);
@@ -147,12 +149,12 @@ public class MoCEntityKittyBed extends EntityLiving {
         if (!stack.isEmpty() && !getHasFood() && !getHasMilk()) {
             if (stack.getItem() == MoCItems.petfood) {
                 if (!player.capabilities.isCreativeMode) stack.shrink(1);
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGFOOD);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_BED_POUR_FOOD);
                 setHasMilk(false);
                 setHasFood(true);
             } else if (stack.getItem() == Items.MILK_BUCKET) {
                 player.setHeldItem(hand, new ItemStack(Items.BUCKET, 1));
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTYBED_POURINGMILK);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_KITTY_BED_POUR_MILK);
                 setHasMilk(true);
                 setHasFood(false);
             }
@@ -188,15 +190,18 @@ public class MoCEntityKittyBed extends EntityLiving {
         if (this.onGround) {
             setPickedUp(false);
         }
-        if (!this.world.isRemote && (getHasMilk() || getHasFood()) && this.isBeingRidden()) {
-            this.milkLevel += 0.003F;
-            if (this.milkLevel > 2.0F) {
-                this.milkLevel = 0.0F;
-                setHasMilk(false);
-                setHasFood(false);
+        if (!this.world.isRemote && (getHasMilk() || getHasFood()) && this.isBeingRidden() && getPassengers().get(0) instanceof MoCEntityKitty) {
+            MoCEntityKitty kitty = (MoCEntityKitty) getPassengers().get(0);
+            if (kitty.getKittyState() != 12) {
+                this.milkLevel += 0.003F;
+                if (this.milkLevel > 2.0F) {
+                    this.milkLevel = 0.0F;
+                    setHasMilk(false);
+                    setHasFood(false);
+                }
             }
         }
-        if (this.isRiding()) MoCTools.dismountSneakingPlayer(this);
+        if (this.isRiding()) MoCTools.dismountPassengerFromEntity(this, this.getRidingEntity(), false);
     }
 
     @Override

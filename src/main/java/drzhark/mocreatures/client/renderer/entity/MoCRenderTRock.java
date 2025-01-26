@@ -3,7 +3,7 @@
  */
 package drzhark.mocreatures.client.renderer.entity;
 
-import drzhark.mocreatures.client.MoCClientProxy;
+import drzhark.mocreatures.proxy.MoCProxyClient;
 import drzhark.mocreatures.entity.item.MoCEntityThrowableRock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class MoCRenderTRock extends Render<Entity> {
 
     public MoCRenderTRock() {
-        super(MoCClientProxy.mc.getRenderManager());
+        super(MoCProxyClient.mc.getRenderManager());
         this.shadowSize = 0.5F;
     }
 

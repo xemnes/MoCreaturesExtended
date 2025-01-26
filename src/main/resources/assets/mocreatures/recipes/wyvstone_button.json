@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_button"
+    },
+    {
+      "item": "mocreatures:wyvstone"
+    }
+  ],
+  "result": {
+    "item": "mocreatures:wyvstone_button"
+  }
+}

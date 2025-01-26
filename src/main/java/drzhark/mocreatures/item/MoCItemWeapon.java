@@ -4,9 +4,14 @@
 package drzhark.mocreatures.item;
 
 import com.google.common.collect.Multimap;
+
+import drzhark.mocreatures.MoCConstants;
+import drzhark.mocreatures.MoCreatures;
 import net.minecraft.block.BlockWeb;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,7 +19,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -22,10 +26,14 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class MoCItemWeapon extends MoCItem {
 
@@ -61,25 +69,27 @@ public class MoCItemWeapon extends MoCItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        int timer = 10; // In seconds
-        switch (this.specialWeaponType) {
-            case 1: // Poison 2
-                target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
-                break;
-            case 2: // Slowness
-                target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
-                break;
-            case 3: // Fire
-                target.setFire(timer);
-                break;
-            case 4: // Weakness (Nausea for players)
-                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
-                break;
-            case 5: // Wither (Blindness for players)
-                target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.BLINDNESS : MobEffects.WITHER, timer * 20, 0));
-                break;
-            default:
-                break;
+        if (MoCreatures.proxy.weaponEffects) {
+            int timer = 15; // In seconds
+            switch (this.specialWeaponType) {
+                case 1: // Poison 2
+                    target.addPotionEffect(new PotionEffect(MobEffects.POISON, timer * 20, 1));
+                    break;
+                case 2: // Slowness
+                    target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, timer * 20, 0));
+                    break;
+                case 3: // Fire
+                    target.setFire(timer);
+                    break;
+                case 4: // Weakness (Nausea for players)
+                    target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.NAUSEA : MobEffects.WEAKNESS, timer * 20, 0));
+                    break;
+                case 5: // Wither (Blindness for players)
+                    target.addPotionEffect(new PotionEffect(target instanceof EntityPlayer ? MobEffects.BLINDNESS : MobEffects.WITHER, timer * 20, 0));
+                    break;
+                default:
+                    break;
+            }
         }
 
         stack.damageItem(1, attacker);
@@ -89,32 +99,6 @@ public class MoCItemWeapon extends MoCItem {
     public boolean onBlockDestroyed(ItemStack par1ItemStack, int par2, int par3, int par4, int par5, EntityLiving par6EntityLiving) {
         par1ItemStack.damageItem(2, par6EntityLiving);
         return true;
-    }
-
-    /**
-     * Returns True is the item is renderer in full 3D when held.
-     */
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isFull3D() {
-        return true;
-    }
-
-    /**
-     * returns the action that specifies what animation to play when the items
-     * are being used
-     */
-    @Override
-    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-        return EnumAction.BLOCK;
-    }
-
-    /**
-     * How long it takes to use or consume an item
-     */
-    @Override
-    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-        return 72000;
     }
 
     /**
@@ -184,5 +168,31 @@ public class MoCItemWeapon extends MoCItem {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, 0));
         }
         return multimap;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if (MoCreatures.proxy.weaponEffects) {
+            switch (this.specialWeaponType) {
+                case 1: // Poison 2
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_dirt", 15));
+                    break;
+                case 2: // Slowness
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_frost", 15));
+                    break;
+                case 3: // Fire
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_fire", 15));
+                    break;
+                case 4: // Weakness (Nausea for players)
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_cave", 15));
+                    break;
+                case 5: // Wither (Blindness for players)
+                    tooltip.add(TextFormatting.BLUE + I18n.format("info." + MoCConstants.MOD_ID + ".sting_weapon_undead", 15));
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

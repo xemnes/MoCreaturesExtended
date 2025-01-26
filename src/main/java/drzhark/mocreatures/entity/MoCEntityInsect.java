@@ -4,10 +4,10 @@
 package drzhark.mocreatures.entity;
 
 import drzhark.mocreatures.MoCTools;
-import drzhark.mocreatures.entity.ai.EntityAIWanderAvoidWaterFlyingMoC;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIWanderAvoidWaterFlying;
 import net.minecraft.entity.ai.EntityFlyHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathNavigate;
@@ -19,7 +19,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
     private int climbCounter;
 
-    public MoCEntityInsect(World world) {
+    protected MoCEntityInsect(World world) {
         super(world);
         setSize(0.4F, 0.3F);
         this.moveHelper = new EntityFlyHelper(this);
@@ -36,11 +36,10 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
 
     @Override
     protected PathNavigate createNavigator(World worldIn) {
-        PathNavigateFlying pathnavigateflying = new PathNavigateFlying(this, worldIn);
-        pathnavigateflying.setCanOpenDoors(false);
-        pathnavigateflying.setCanFloat(true);
-        pathnavigateflying.setCanEnterDoors(true);
-        return pathnavigateflying;
+        PathNavigateFlying pathNavigateFlying = new PathNavigateFlying(this, worldIn);
+        pathNavigateFlying.setCanEnterDoors(true);
+        pathNavigateFlying.setCanFloat(true);
+        return pathNavigateFlying;
     }
 
     @Override
@@ -51,12 +50,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     @Override
     protected void initEntityAI() {
         super.initEntityAI();
-        this.tasks.addTask(2, new EntityAIWanderAvoidWaterFlyingMoC(this, 1.0D));
-    }
-
-    @Override
-    public boolean isFlyingAlone() {
-        return getIsFlying();
+        this.tasks.addTask(0, new EntityAIWanderAvoidWaterFlying(this, 0.8D));
     }
 
     @Override
@@ -73,7 +67,7 @@ public abstract class MoCEntityInsect extends MoCEntityAmbient {
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        if (!getIsFlying() && this.motionY < 0.0D) {
+        if (!this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
 

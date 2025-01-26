@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sandstone_normal",
+    "textures": {
+      "particle": "mocreatures:blocks/sandstone_silver_normal",
+      "bottom": "mocreatures:blocks/sandstone_silver_bottom",
+      "top": "mocreatures:blocks/sandstone_silver_top",
+      "side": "mocreatures:blocks/sandstone_silver_normal"
+    }
+  },
+  "variants": {
+    "variant=default": {
+      "model": "sandstone_normal"
+    }
+  }
+}

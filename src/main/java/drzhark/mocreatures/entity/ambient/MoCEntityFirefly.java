@@ -3,18 +3,18 @@
  */
 package drzhark.mocreatures.entity.ambient;
 
-import javax.annotation.Nullable;
-
-import drzhark.mocreatures.MoCLootTables;
 import drzhark.mocreatures.MoCTools;
 import drzhark.mocreatures.entity.MoCEntityInsect;
+import drzhark.mocreatures.init.MoCLootTables;
 import drzhark.mocreatures.init.MoCSoundEvents;
-import net.minecraft.entity.ai.EntityAIFollow;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class MoCEntityFirefly extends MoCEntityInsect {
 
@@ -26,9 +26,9 @@ public class MoCEntityFirefly extends MoCEntityInsect {
     }
 
     @Override
-    protected void initEntityAI() {
-        super.initEntityAI();
-        this.tasks.addTask(3, new EntityAIFollow(this, 1.0D, 14.0F, 28.0F));
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MoCEntityFirefly extends MoCEntityInsect {
         if (!this.world.isRemote) {
             EntityPlayer ep = this.world.getClosestPlayerToEntity(this, 5D);
             if (ep != null && getIsFlying() && --this.soundCount == -1) {
-                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_CRICKET_FLY);
+                MoCTools.playCustomSound(this, MoCSoundEvents.ENTITY_GRASSHOPPER_FLY);
                 this.soundCount = 20;
             }
         }
@@ -46,12 +46,12 @@ public class MoCEntityFirefly extends MoCEntityInsect {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+        return MoCSoundEvents.ENTITY_GRASSHOPPER_HURT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return MoCSoundEvents.ENTITY_CRICKET_HURT;
+        return MoCSoundEvents.ENTITY_GRASSHOPPER_HURT;
     }
 
     @Nullable
@@ -75,5 +75,10 @@ public class MoCEntityFirefly extends MoCEntityInsect {
     @Override
     public float getEyeHeight() {
         return 0.15F;
+    }
+    
+    @Override
+    public int getMaxSpawnedInChunk() {
+        return 4;
     }
 }

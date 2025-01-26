@@ -459,3 +459,19 @@ modifier.mocreatures.speed_demon.name=Speed Demon
 modifier.mocreatures.speed_demon.desc=§oSpeedrunning!§r\nBonus damage is dealt while running.
 modifier.mocreatures.undead_sting.name=Sting of Undead
 modifier.mocreatures.undead_sting.desc=§oElemental Scorpions!§r\nYour tool withers enemies (or blinds players) on hit and deals increased damage.
+
+# CONSTRUCT'S ARMORY
+modifier.mocreatures.thresher_armor.name=Thresher
+modifier.mocreatures.thresher_armor.desc=§oHoly Mackerel!§r\nDamages attackers on contact based on durability and provides extra protection from all aquatic creatures.
+modifier.mocreatures.thresher_armor.extra.damage=Thresher Damage: +%s
+modifier.mocreatures.thresher_armor.extra.protection=Vs Aquatic: +%s
+modifier.mocreatures.dark_shell_armor.name=Shell of Darkness
+modifier.mocreatures.dark_shell_armor.desc=§oDodge this!§r\nThere is a small chance for damage to be ignored entirely, you'll also temporarily gain Night Vision while your target is weakened (or nauseated for player targets).
+modifier.mocreatures.earth_shell_armor.name=Shell of Earth
+modifier.mocreatures.earth_shell_armor.desc=§oDodge this!§r\nThere is a small chance for damage to be ignored entirely, you'll also temporarily gain Speed while your target is poisoned.
+modifier.mocreatures.fire_shell_armor.name=Shell of Fire
+modifier.mocreatures.fire_shell_armor.desc=§oDodge this!§r\nThere is a small chance for damage to be ignored entirely, you'll also temporarily gain Fire Resistance while your target is set on fire.
+modifier.mocreatures.frost_shell_armor.name=Shell of Frost
+modifier.mocreatures.frost_shell_armor.desc=§oDodge this!§r\nThere is a small chance for damage to be ignored entirely, you'll also temporarily gain Resistance while your target is slowed.
+modifier.mocreatures.undead_shell_armor.name=Shell of Undead
+modifier.mocreatures.undead_shell_armor.desc=§oDodge this!§r\nThere is a small chance for damage to be ignored entirely, you'll also temporarily gain Strength while your target is withered (or blinded for player targets).

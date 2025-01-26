@@ -31,6 +31,7 @@ import java.util.List;
 
 @Mod.EventBusSubscriber(modid = MoCConstants.MOD_ID)
 public class TinkersConstructIntegration {
+    // These materials are used universally between tools and armor
     public static final Material ANCIENT_SILVER = new Material(MoCConstants.MOD_ID + "." + "ancient_silver", 0x8E8F93);
     public static final Material BIG_CAT_CLAW = new Material(MoCConstants.MOD_ID + "." + "big_cat_claw", 0xBBA56C);
     public static final Material DARK_CHITIN = new Material(MoCConstants.MOD_ID + "." + "dark_chitin", 0x535A6B);
@@ -40,10 +41,11 @@ public class TinkersConstructIntegration {
     public static final Material SHARK_TOOTH = new Material(MoCConstants.MOD_ID + "." + "shark_tooth", 0xB7B699);
     public static final Material UNDEAD_CHITIN = new Material(MoCConstants.MOD_ID + "." + "undead_chitin", 0x92B859);
 
+    // These traits are for tools and not armor
     public static final AbstractTrait BIG_GAME_HUNTER = new TraitBigGameHunter(0.5F);
     public static final AbstractTrait DARK_STING = new TraitStingEffectPlayer(MoCConstants.MOD_ID + "." + "dark_sting", 0x535A6B, 1.5F, MobEffects.WEAKNESS, MobEffects.NAUSEA);
     public static final AbstractTrait EARTH_STING = new TraitStingEffect(MoCConstants.MOD_ID + "." + "earth_sting", 0xF37A07, 1.5F, MobEffects.POISON);
-    public static final AbstractTrait FIRE_STING = new TraitStingFire(1.5F);
+    public static final AbstractTrait FIRE_STING = new TraitStingFire(MoCConstants.MOD_ID + "." + "fire_sting", 0xC62B13, 1.5F);
     public static final AbstractTrait FROST_STING = new TraitStingEffect(MoCConstants.MOD_ID + "." + "frost_sting", 0x1B7A87, 1.5F, MobEffects.SLOWNESS);
     public static final AbstractTrait SEA_PREDATOR = new TraitSeaPredator(0.4F);
     public static final AbstractTrait SPEED_DEMON = new TraitSpeedDemon(5.0F);
@@ -177,10 +179,10 @@ public class TinkersConstructIntegration {
         ANCIENT_SILVER.setFluid(ANCIENT_SILVER_FLUID);
         ANCIENT_SILVER.setCraftable(false).setCastable(true);
     }
-    
+
     public static void postInit() {
-    	// Smeltery stuff goes here
-    	TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
+        // Smeltery stuff goes here
+        TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
     }
 
     @SideOnly(Side.CLIENT)

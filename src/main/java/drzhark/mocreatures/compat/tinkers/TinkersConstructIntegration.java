@@ -14,6 +14,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.fluid.FluidMolten;
@@ -181,6 +183,7 @@ public class TinkersConstructIntegration {
         TinkerRegistry.registerMelting(MoCItems.ancientSilverScrap, ANCIENT_SILVER_FLUID, Material.VALUE_Ingot);
     }
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent event) {
         for (ItemBlock itemBlock : ITEM_BLOCKS) {
